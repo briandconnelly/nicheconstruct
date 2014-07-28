@@ -1,4 +1,3 @@
-niche_hike
-==========
+# Genetic Niche Hiking Model
 
-Genetic Niche Hiking Model
+yay!
