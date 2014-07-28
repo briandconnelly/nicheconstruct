@@ -2,6 +2,8 @@
 
 import numpy as np
 
+import genome
+
 
 class Population(object):
     """Represent a population within a metapopulation
@@ -66,7 +68,7 @@ class Population(object):
         elif self.initialize.lower() == 'random':
             popsize = np.random.random_integers(low=0, high=self.capacity_min,
                                                 size=2**(self.genome_length + 1))
-            pop_probs = 1.0*popsize / sum(popsize)
+            pop_probs = 1.0*popsize / np.sum(popsize)
             self.abundances = np.random.multinomial(popsize, pop_probs)
 
         self.delta = np.zeros(2**(self.genome_length + 1), dtype=np.uint32)
@@ -115,30 +117,24 @@ class Population(object):
 
         mutants = np.zeros(2**(self.genome_length + 1), dtype=np.uint32)
 
-        for genotype in population:
+        for i in range(len(self.abundances)):
             # For each individual of that genotype, generate a mask, apply it,
             # and if it's different, add it to the mutants pile
 
+            for j in range(self.abundances[i]):
+                mutate_loci = np.append(np.random.binomial(n=1,
+                                                           p=self.prod_mutation_rate,
+                                                           size=1),
+                                        np.random.binomial(n=1,
+                                                           p=self.mutation_rate,
+                                                           size=self.genome_length))
+            
+                mask = genome.bitstring_as_base10(mutate_loci)
 
-            # TODO: mutate mask technique?
-
-
-            # TODO: use self._mut_probs to figure out which loci to mutate
-            # TODO: draw from a multinomial to get a mutation mask
-            # TODO: XOR the genotype with the mutation mask
-
-            mutate_loci = np.random.binomial(n=1, p=self.mutation_rate,
-                                             size=self.genome_length)
-            mutate_loci = np.insert(mutate_loci, 0,
-                                    np.random.binomial(n=1,
-                                                       p=self.prod_mutation_rate,
-                                                       size=1))
-
-            #len(np.insert(q, 0, 99)) - to prepend a 99
-            # TODO: create a mask of bits to mutate
-            # TODO: XOR the genotype with the mutation mask
-            x = 21
-
+                if mask > 0:
+                    mutant_genome = i ^ mask
+                    self.abundances[i] -= 1
+                    self.abundances[mutant_genome] += 1
 
 
     def select_migrants(self, migration_rate):
