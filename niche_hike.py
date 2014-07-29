@@ -85,9 +85,9 @@ def main():
     cfg_out = os.path.join(data_dir, 'configuration.cfg')
     with open(cfg_out, 'wb') as configfile:
         info = "# GNH Configuration\n# Generated: {when}\n# Command: "\
-                "{cmd}\n\n".format(when=datetime.datetime.now().strftime("%Y-%m-%d"\
-                                                                         " (%H:%M:%S)"),
+                "{cmd}\n\n".format(when=datetime.datetime.now().isoformat(),
                                    cmd=' '.join(sys.argv))
+
         configfile.write(info)
         config.write(configfile)
 
@@ -97,12 +97,10 @@ def main():
     for t in range(config.getint(section='Simulation', option='num_cycles')):
         m.migrate()
         m.cycle()
-        m.write_popsize()
-        m.write_fitness()
-        m.write_producerpct()
 
         if not args.quiet:
-            print(t)
+            msg = "[{t}] Size: {s}, Producers: {p:.1%}".format(t=t, s=len(m), p=m.prop_producers())
+            print(msg)
 
 
 if __name__ == "__main__":

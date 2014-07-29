@@ -4,9 +4,9 @@ import csv
 
 class PopSizeOutput(object):
 
-    def __init__(self, metapopulation, filename='popsize.csv'):
+    def __init__(self, metapopulation, filename='popsize.csv', delimiter=','):
         self.metapopulation = metapopulation
-        self.writer = csv.writer(open(filename, 'wb'))
+        self.writer = csv.writer(open(filename, 'wb'), delimiter=delimiter)
         self.writer.writerow(['Time', 'Population', 'Size'])
 
     def update(self, time):

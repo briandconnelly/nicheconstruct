@@ -128,6 +128,8 @@ class Metapopulation(object):
                                            option='genome_length')
         base_fitness = self.config.getfloat(section='Population',
                                             option='base_fitness')
+        production_cost = self.config.getfloat(section='Population',
+                                               option='production_cost')
         exponential = self.config.getboolean(section='Population',
                                              option='fitness_exponential')
         avg_effect = self.config.getfloat(section='Population',
@@ -141,19 +143,26 @@ class Metapopulation(object):
         if exponential:
             effects = np.random.exponential(scale=avg_effect,
                                             size=genome_length)
-
         else:
             effects = np.random.uniform(low=min_effect,
                                         high=2*avg_effect-min_effect,
                                         size=genome_length)
 
-        landscape = np.ones(2**(genome_length + 1)) * base_fitness
+        effects = np.append(0, effects)
 
-        # Set the social bit to 0 (no fitness effect)
-        #landscape[ZZZ] = 0
+        landscape = np.zeros(2**(genome_length + 1))
 
-        # TODO: build the landscape
-        
+        for i in range(2**(genome_length + 1)):
+            genotype = genome.base10_as_bitarray(i)
+            genotype = np.append(np.zeros(len(effects) - len(genotype)),
+                                 genotype)
+            landscape[i] = sum(genotype * effects) + base_fitness
+
+        # Add in the cost of production
+        np_genomes = np.arange(start=0, stop=2**genome_length)
+        landscape[np_genomes] += production_cost
+
+        return landscape/sum(landscape)
 
 
     def get_mutation_probabilities(self):
@@ -277,13 +286,19 @@ class Metapopulation(object):
         return sum([d['population'].size() for n, d in self.topology.nodes_iter(data=True)])
 
     def __len__(self):
+        """Return the length of a Metapopulation
+
+        We'll define the length of a metapopulation as its size, so len(metapop)
+        returns the number of individuals in all populations of Metapopulation
+        metapop
+        """
         return self.size()
 
     def num_producers(self):
         """Return the number of producers in the metapopulation"""
         return sum([d['population'].num_producers() for n, d in self.topology.nodes_iter(data=True)])
 
-    def pop_producers(self):
+    def prop_producers(self):
         """Get the proportion of producers in the metapopulation"""
         metapopsize = self.size()
 

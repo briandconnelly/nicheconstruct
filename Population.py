@@ -102,17 +102,27 @@ class Population(object):
 
 
     def grow(self):
-        """Grow the population to carrying capacity"""
+        """Grow the population to carrying capacity
+        
+        The final population size is determined based on the proportion of
+        producers present. This population is determined by drawing from a
+        multinomial with the probability of each genotype proportional to its
+        abundance times its fitness.
+        """
+
+        landscape = self.metapopulation.fitness_landscape
 
         final_size = self.capacity_min + \
                 (self.capacity_max - self.capacity_min) * \
                 self.prop_producers()
 
-        # TODO: get fitnesses of each genotype, normalize. PROBS
-        PROBS=0.1
+        grow_probs = self.abundances * landscape
 
-        self.abundances = np.random.multinomial(n=final_size, pvals=PROBS,
-                                                size=1)[0]
+        if sum(grow_probs) > 0:
+            norm_grow_probs = grow_probs/sum(grow_probs)
+            self.abundances = np.random.multinomial(final_size, norm_grow_probs,
+                                                    1)[0]
+
 
     def mutate(self):
         """Mutate a Population
