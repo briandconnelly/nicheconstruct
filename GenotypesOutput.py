@@ -26,6 +26,7 @@ class GenotypesOutput(object):
         
         for i in range(2**(self.genome_length+1)):
             isprod = genome.is_producer(i, self.genome_length)
-            self.writer.writerow([time, i, av[i], isprod])
+            genotype = i & 2**(self.genome_length)-1
+            self.writer.writerow([time, genotype, av[i], isprod])
 
 
