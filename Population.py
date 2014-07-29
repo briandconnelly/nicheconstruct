@@ -105,9 +105,11 @@ class Population(object):
         """Grow the population to carrying capacity"""
 
         final_size = self.capacity_min + \
-                (self.capacity_max - self.capacity_min) * prop_producers()
+                (self.capacity_max - self.capacity_min) * \
+                self.prop_producers()
 
         # TODO: get fitnesses of each genotype, normalize. PROBS
+        PROBS=0.1
 
         self.abundances = np.random.multinomial(n=final_size, pvals=PROBS,
                                                 size=1)[0]
@@ -115,26 +117,14 @@ class Population(object):
     def mutate(self):
         """Mutate a Population"""
 
-        mutants = np.zeros(2**(self.genome_length + 1), dtype=np.uint32)
+        mutated_population = np.zeros(2**(self.genome_length + 1), dtype=np.uint32)
 
         for i in range(len(self.abundances)):
-            # For each individual of that genotype, generate a mask, apply it,
-            # and if it's different, add it to the mutants pile
+            mutated_population += np.random.multinomial(self.abundances[i],
+                                                        self.metapopulation.mutation_probs[i],
+                                                        size=1)[0]
 
-            for j in range(self.abundances[i]):
-                mutate_loci = np.append(np.random.binomial(n=1,
-                                                           p=self.prod_mutation_rate,
-                                                           size=1),
-                                        np.random.binomial(n=1,
-                                                           p=self.mutation_rate,
-                                                           size=self.genome_length))
-            
-                mask = genome.bitstring_as_base10(mutate_loci)
-
-                if mask > 0:
-                    mutant_genome = i ^ mask
-                    self.abundances[i] -= 1
-                    self.abundances[mutant_genome] += 1
+        self.abundances = mutated_population
 
 
     def select_migrants(self, migration_rate):
@@ -204,5 +194,10 @@ class Population(object):
 
     def prop_producers(self):
         """Get the proportion of producers"""
-        return 1.0 * self.num_producers() / self.size()
+        popsize = self.size()
+        
+        if popsize == 0:
+            return 0
+        else:
+            return 1.0 * self.num_producers() / popsize
 

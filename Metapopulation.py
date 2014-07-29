@@ -3,6 +3,7 @@
 import networkx as nx
 import numpy as np
 
+import genome
 import Population
 import topology
 
@@ -81,6 +82,10 @@ class Metapopulation(object):
 
             self.topology = nx.complete_graph(n=size)
 
+
+        # Store the probabilities of mutations between all pairs of genotypes
+        self.mutation_probs = self.get_mutation_probabilities()
+
         # Create each of the populations
         for n, d in self.topology.nodes_iter(data=True):
             d['population'] = Population.Population(metapopulation=self, config=config)
@@ -91,6 +96,26 @@ class Metapopulation(object):
         res = "Metapopulation: Size {s}, {p:.1%} producers".format(s=self.size(),
                                                                 p=self.prop_producers())
         return res
+
+    def get_mutation_probabilities(self):
+        """Get a table of probabilities among all pairs of genotypes"""
+
+        genome_length = self.config.getint(section='Population',
+                                           option='genome_length')
+        mutation_rate = self.config.getfloat(section='Population',
+                                             option='mutation_rate')
+
+        # Get the pairwise Hamming distance for all genotypes
+        # NOTE: this doesn't differentiate between producer-nonproducer
+        # mutations
+        hamming_v = np.vectorize(genome.hamming_distance)
+        genotypes = np.arange(start=0, stop=2**(genome_length+1))
+        xx, yy = np.meshgrid(genotypes, genotypes)
+        hamming_distances = hamming_v(xx, yy)
+
+        return np.power(1-mutation_rate, genome_length+1-hamming_distances) * \
+                np.power(mutation_rate, hamming_distances)
+
 
     def dilute(self, stochastic=True):
         """Dilute the metapopulation
@@ -181,7 +206,12 @@ class Metapopulation(object):
 
     def prop_producers(self):
         """Get the proportion of producers in the metapopulation"""
-        return 1.0 * self.num_producers() / self.size()
+        metapopsize = self.size()
+
+        if metapopsize == 0:
+            return 0
+        else:
+            return 1.0 * self.num_producers() / self.size()
 
     def write_popsize(self):
         #TODO
