@@ -115,7 +115,15 @@ class Population(object):
                                                 size=1)[0]
 
     def mutate(self):
-        """Mutate a Population"""
+        """Mutate a Population
+        
+        Each genotype mutates to another with probability inversely proportional
+        to the Hamming distance (# different bits in binary representation)
+        between them. The distances between all pairs of genotypes is
+        pre-calculated at the beginning of a run and stored in
+        metapopulation.mutation_probs.
+        
+        """
 
         mutated_population = np.zeros(2**(self.genome_length + 1), dtype=np.uint32)
 
@@ -172,6 +180,9 @@ class Population(object):
 
     def size(self):
         """Get the size of the population"""
+        return np.sum(self.abundances)
+
+    def __len__(self):
         return np.sum(self.abundances)
 
     def is_empty(self):

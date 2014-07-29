@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import os
+
 import networkx as nx
 import numpy as np
 
@@ -8,11 +10,16 @@ import Population
 import topology
 
 
+import FitnessOutput
+import PopSizeOutput
+import ProducerOutput
+
 class Metapopulation(object):
 
     def __init__(self, config):
         """Initialize a Metapopulation object"""
         self.config = config
+        self.time = 0
 
         self.migration_rate = self.config.getfloat(section='Metapopulation',
                                                    option='migration_rate')
@@ -86,10 +93,24 @@ class Metapopulation(object):
         # Store the probabilities of mutations between all pairs of genotypes
         self.mutation_probs = self.get_mutation_probabilities()
 
+        # Create the fitness landscape
+        self.fitness_landscape = self.build_fitness_landscape()
+
         # Create each of the populations
         for n, d in self.topology.nodes_iter(data=True):
             d['population'] = Population.Population(metapopulation=self, config=config)
 
+
+        data_dir = self.config.get(section='Simulation', option='data_dir')
+        self.out_popsize = PopSizeOutput.PopSizeOutput(metapopulation=self,
+                                                       filename=os.path.join(data_dir,
+                                                                            'popsize.csv'))
+        self.out_fitness = FitnessOutput.FitnessOutput(metapopulation=self,
+                                                       filename=os.path.join(data_dir,
+                                                                             'fitness.csv'))
+        self.out_producers = ProducerOutput.ProducerOutput(metapopulation=self,
+                                                           filename=os.path.join(data_dir,
+                                                                                 'producers.csv'))
 
     def __repr__(self):
         """Return a string representation of the Metapopulation object"""
@@ -97,8 +118,57 @@ class Metapopulation(object):
                                                                 p=self.prop_producers())
         return res
 
+    def build_fitness_landscape(self):
+        """Build a fitness landscape
+
+        TODO documentation
+        """
+
+        genome_length = self.config.getint(section='Population',
+                                           option='genome_length')
+        base_fitness = self.config.getfloat(section='Population',
+                                            option='base_fitness')
+        exponential = self.config.getboolean(section='Population',
+                                             option='fitness_exponential')
+        avg_effect = self.config.getfloat(section='Population',
+                                          option='fitness_avg_effect')
+        min_effect = self.config.getfloat(section='Population',
+                                          option='fitness_min_effect')
+
+        assert genome_length > 0
+        assert base_fitness >= 0
+
+        if exponential:
+            effects = np.random.exponential(scale=avg_effect,
+                                            size=genome_length)
+
+        else:
+            effects = np.random.uniform(low=min_effect,
+                                        high=2*avg_effect-min_effect,
+                                        size=genome_length)
+
+        landscape = np.ones(2**(genome_length + 1)) * base_fitness
+
+        # Set the social bit to 0 (no fitness effect)
+        #landscape[ZZZ] = 0
+
+        # TODO: build the landscape
+        
+
+
     def get_mutation_probabilities(self):
-        """Get a table of probabilities among all pairs of genotypes"""
+        """Get a table of probabilities among all pairs of genotypes
+        
+        This works by first generating the Hamming distances between all of the
+        possible genotypes. These distances are then used to calculate the
+        probabilities of mutating by:
+
+            (1-mu)^(#matching bits) * mu^(#different bits)
+
+        Where #matching bits is the genome length - Hamming distance and
+        #different bits is the Hamming distance.
+        
+        """
 
         genome_length = self.config.getint(section='Population',
                                            option='genome_length')
@@ -192,6 +262,12 @@ class Metapopulation(object):
         self.grow()
         self.mutate()
 
+        self.out_popsize.update(time=self.time)
+        self.out_fitness.update(time=self.time)
+        self.out_producers.update(time=self.time)
+
+        self.time += 1
+
     def size(self):
         """Return the size of the metapopulation
 
@@ -200,11 +276,14 @@ class Metapopulation(object):
         """
         return sum([d['population'].size() for n, d in self.topology.nodes_iter(data=True)])
 
+    def __len__(self):
+        return self.size()
+
     def num_producers(self):
         """Return the number of producers in the metapopulation"""
         return sum([d['population'].num_producers() for n, d in self.topology.nodes_iter(data=True)])
 
-    def prop_producers(self):
+    def pop_producers(self):
         """Get the proportion of producers in the metapopulation"""
         metapopsize = self.size()
 
@@ -212,16 +291,4 @@ class Metapopulation(object):
             return 0
         else:
             return 1.0 * self.num_producers() / self.size()
-
-    def write_popsize(self):
-        #TODO
-        pass
-
-    def write_fitness(self):
-        #TODO
-        pass
-
-    def write_producerpct(self):
-        #TODO
-        pass
 

@@ -68,6 +68,7 @@ def main():
     if config.has_option(section='Simulation', option='data_dir'):
         data_dir = config.get(section='Simulation', option='data_dir')
     else:
+        config.set(section='Simulation', option='data_dir', value='data')
         data_dir = 'data'
 
     # If the data directory already exists, rename it to data_dir with the
