@@ -99,7 +99,7 @@ def main():
         m.cycle()
 
         if not args.quiet:
-            msg = "[{t}] Size: {s}, Producers: {p:.1%}".format(t=t, s=len(m), p=m.prop_producers())
+            msg = "[{t}] {m}".format(t=t, m=m)
             print(msg)
 
 

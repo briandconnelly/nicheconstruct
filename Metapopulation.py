@@ -10,9 +10,8 @@ import Population
 import topology
 
 
-import FitnessOutput
-import PopSizeOutput
-import ProducerOutput
+import DemographicsOutput
+import GenotypesOutput
 
 class Metapopulation(object):
 
@@ -102,20 +101,21 @@ class Metapopulation(object):
 
 
         data_dir = self.config.get(section='Simulation', option='data_dir')
-        self.out_popsize = PopSizeOutput.PopSizeOutput(metapopulation=self,
+        self.out_demographics = DemographicsOutput.DemographicsOutput(metapopulation=self,
                                                        filename=os.path.join(data_dir,
-                                                                            'popsize.csv'))
-        self.out_fitness = FitnessOutput.FitnessOutput(metapopulation=self,
+                                                                            'demographics.csv'))
+        self.out_genotypes = GenotypesOutput.GenotypesOutput(metapopulation=self,
                                                        filename=os.path.join(data_dir,
-                                                                             'fitness.csv'))
-        self.out_producers = ProducerOutput.ProducerOutput(metapopulation=self,
-                                                           filename=os.path.join(data_dir,
-                                                                                 'producers.csv'))
-
+                                                                            'genotypes.csv'))
     def __repr__(self):
         """Return a string representation of the Metapopulation object"""
-        res = "Metapopulation: Size {s}, {p:.1%} producers".format(s=self.size(),
-                                                                p=self.prop_producers())
+        prop_producers = self.prop_producers()
+
+        if prop_producers == 'NA':
+            res = "Metapopulation: Size {s}, NA% producers".format(s=self.size())
+        else:
+            res = "Metapopulation: Size {s}, {p:.1%} producers".format(s=self.size(),
+                                                                    p=self.prop_producers())
         return res
 
     def build_fitness_landscape(self):
@@ -239,15 +239,16 @@ class Metapopulation(object):
             # Migrate everything to one neighboring population
             if single_dest:
                 migrants = pop.select_migrants(migration_rate=self.migration_rate)
-                dest_index = np.random.choice(range(len(self.topology)))
-                dest = self.topology.node[self.topology.nodes()[dest_index]]['population']
-                dest.add_immigrants(migrants)
+                neighbor_index = np.random.choice(self.topology.neighbors(n))
+                neighbor = self.topology.node[neighbor_index]['population']
+                neighbor.add_immigrants(migrants)
                 pop.remove_emigrants(migrants)
             # Distribute the migrants among the neighboring populations
             else:
                 num_neighbors = self.topology.degree(n)
-                for neighbor in self.topology.neighbors(n):
+                for neighbor_node in self.topology.neighbors(n):
                     migrants = pop.select_migrants(migration_rate=self.migration_rate/num_neighbors)
+                    neighbor = self.topology.node[neighbor_node]['population']
                     neighbor.add_immigrants(migrants)
                     pop.remove_emigrants(migrants)
 
@@ -271,9 +272,8 @@ class Metapopulation(object):
         self.grow()
         self.mutate()
 
-        self.out_popsize.update(time=self.time)
-        self.out_fitness.update(time=self.time)
-        self.out_producers.update(time=self.time)
+        self.out_demographics.update(time=self.time)
+        self.out_genotypes.update(time=self.time)
 
         self.time += 1
 
@@ -283,7 +283,7 @@ class Metapopulation(object):
         The size of the metapopulation is the sum of the sizes of the
         subpopulations
         """
-        return sum([d['population'].size() for n, d in self.topology.nodes_iter(data=True)])
+        return sum([len(d['population']) for n, d in self.topology.nodes_iter(data=True)])
 
     def __len__(self):
         """Return the length of a Metapopulation
@@ -303,7 +303,7 @@ class Metapopulation(object):
         metapopsize = self.size()
 
         if metapopsize == 0:
-            return 0
+            return 'NA'
         else:
             return 1.0 * self.num_producers() / self.size()
 

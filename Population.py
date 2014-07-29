@@ -62,14 +62,8 @@ class Population(object):
         # Create an empty population
         if self.initialize.lower() == 'empty':
             self.empty()
-
-        # Randomly create a population. Both the population size and the
-        # distribution of abundances are chosen at random.
         elif self.initialize.lower() == 'random':
-            popsize = np.random.random_integers(low=0, high=self.capacity_min,
-                                                size=2**(self.genome_length + 1))
-            pop_probs = 1.0*popsize / np.sum(popsize)
-            self.abundances = np.random.multinomial(popsize, pop_probs)
+            self.randomize()
 
         self.delta = np.zeros(2**(self.genome_length + 1), dtype=np.uint32)
 
@@ -83,6 +77,12 @@ class Population(object):
         """Empty a population"""
         self.abundances = np.zeros(2**(self.genome_length + 1), dtype=np.uint32)
 
+    def randomize(self):
+        """Create a random population"""
+        self.abundances = np.random.random_integers(low=0,
+                                                    high=self.capacity_min,
+                                                    size=2**(self.genome_length+1))
+
 
     def dilute(self, stochastic=True):
         """Dilute a population
@@ -94,11 +94,21 @@ class Population(object):
         by the dilution factor and rounded down.
 
         """
+        if self.is_empty():
+            return
+
+        pre = any(self.abundances < 0)
+
         if stochastic:
             self.abundances = np.random.binomial(self.abundances,
                                                  self.dilution_factor)
         else:
             self.abundances = np.floor(self.abundances * self.dilution_factor).astype(np.uint32)
+
+        post = any(self.abundances < 0)
+
+        if post:
+            print("Abundances after dilution negative!!!!", pre)
 
 
     def grow(self):
@@ -109,6 +119,9 @@ class Population(object):
         multinomial with the probability of each genotype proportional to its
         abundance times its fitness.
         """
+
+        if self.is_empty():
+            return
 
         landscape = self.metapopulation.fitness_landscape
 
@@ -135,6 +148,9 @@ class Population(object):
         
         """
 
+        if self.is_empty():
+            return
+
         mutated_population = np.zeros(2**(self.genome_length + 1), dtype=np.uint32)
 
         for i in range(len(self.abundances)):
@@ -155,7 +171,9 @@ class Population(object):
 
         assert migration_rate >= 0 and migration_rate <= 1
 
-        return np.random.binomial(self.abundances, migration_rate)
+        migrants = np.random.binomial(self.abundances, migration_rate)
+
+        return migrants
 
     def remove_emigrants(self, emigrants):
         """Remove emigrants from the population
@@ -165,7 +183,7 @@ class Population(object):
         counts are placed in a temporary area until census() is called.
 
         """
-        self.delta = self.delta - emigrants
+        self.delta -= emigrants
 
     def add_immigrants(self, immigrants):
         """Add immigrants to the population
@@ -175,7 +193,7 @@ class Population(object):
         a temporary area until census() is called.
 
         """
-        self.delta = self.delta + immigrants
+        self.delta += immigrants
 
     def census(self):
         """Update the population's abundances after migration
@@ -185,7 +203,22 @@ class Population(object):
         immigrants and removes emigrants to/from the abundances.
                                     
         """
-        self.abundances = self.abundances + self.delta
+
+        pre = any(self.abundances < 0)
+        if pre:
+            print("Initial census abundance negative")
+            print(self.abundances)
+            print(self.delta)
+            print('-----------')
+
+        self.abundances += self.delta
+
+        post = any(self.abundances < 0)
+        if post:
+            print("Post census abundance negative. Pre-census was", pre)
+            print("Delta:",self.delta)
+            print(self.abundances)
+            print('-----------')
         self.delta = np.zeros(2**(self.genome_length + 1), dtype=np.uint32)
 
     def size(self):
@@ -218,7 +251,18 @@ class Population(object):
         popsize = self.size()
         
         if popsize == 0:
-            return 0
+            return 'NA'
         else:
             return 1.0 * self.num_producers() / popsize
+
+    def average_fitness(self):
+        """Get the average fitness in the population"""
+
+        popsize = self.size()
+        landscape = self.metapopulation.fitness_landscape
+
+        if popsize == 0:
+            return 'NA'
+        else:
+            return sum(self.abundances * landscape)/popsize
 
