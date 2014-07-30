@@ -87,6 +87,9 @@ def main():
         info = "# GNH Configuration\n# Generated: {when}\n# Command: "\
                 "{cmd}\n\n".format(when=datetime.datetime.now().isoformat(),
                                    cmd=' '.join(sys.argv))
+
+        # SHA-1 checksum
+        # hashlib.sha1(open('analyze_genome.R').read()).hexdigest()
         configfile.write(info)
         config.write(configfile)
 

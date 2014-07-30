@@ -21,11 +21,14 @@ class Metapopulation(object):
 
         self.migration_rate = self.config.getfloat(section='Metapopulation',
                                                    option='migration_rate')
+        self.migration_dest = self.config.getfloat(section='Metapopulation',
+                                                   option='migration_dest')
         self.topology_type = self.config.get(section='Metapopulation',
                                              option='topology')
 
 
         assert self.migration_rate >= 0 and self.migration_rate <= 1
+        assert self.migration_dest in ['single', 'neighbors']
         assert self.topology_type is not None, 'Topology must be specified'
         assert self.topology_type in ['moore', 'vonneumann', 'smallworld',
                                       'complete']
@@ -246,14 +249,14 @@ class Metapopulation(object):
             pop = d['population']
 
             # Migrate everything to one neighboring population
-            if single_dest:
+            if self.migration_dest.lower() == 'single':
                 migrants = pop.select_migrants(migration_rate=self.migration_rate)
                 neighbor_index = np.random.choice(self.topology.neighbors(n))
                 neighbor = self.topology.node[neighbor_index]['population']
                 neighbor.add_immigrants(migrants)
                 pop.remove_emigrants(migrants)
             # Distribute the migrants among the neighboring populations
-            else:
+            elif self.migration_dest.lower() == 'neighbors':
                 num_neighbors = self.topology.degree(n)
                 for neighbor_node in self.topology.neighbors(n):
                     migrants = pop.select_migrants(migration_rate=self.migration_rate/num_neighbors)
