@@ -204,21 +204,7 @@ class Population(object):
                                     
         """
 
-        pre = any(self.abundances < 0)
-        if pre:
-            print("Initial census abundance negative")
-            print(self.abundances)
-            print(self.delta)
-            print('-----------')
-
         self.abundances += self.delta
-
-        post = any(self.abundances < 0)
-        if post:
-            print("Post census abundance negative. Pre-census was", pre)
-            print("Delta:",self.delta)
-            print(self.abundances)
-            print('-----------')
         self.delta = np.zeros(2**(self.genome_length + 1), dtype=np.uint32)
 
     def size(self):

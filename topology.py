@@ -60,7 +60,6 @@ def vonneumann_lattice(rows, columns, periodic=False):
     """
     return nx.grid_2d_graph(m=columns, n=rows, periodic=periodic)
 
-
 def topology_smallworld(size, neighbors, edgeprob):
     assert size > 0
     assert neighbors >= 0

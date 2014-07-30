@@ -8,10 +8,9 @@ import numpy as np
 import genome
 import Population
 import topology
-
-
 import DemographicsOutput
 import GenotypesOutput
+
 
 class Metapopulation(object):
 
@@ -99,6 +98,16 @@ class Metapopulation(object):
         for n, d in self.topology.nodes_iter(data=True):
             d['population'] = Population.Population(metapopulation=self, config=config)
 
+            if n == 0:
+                # TODO: all coops
+                genome_length = self.config.getint(section='Population',
+                                                   option='genome_length')
+                d['population'].abundances[2**genome_length] = self.config.getint('Population',
+                                                                   'capacity_max')
+
+            if n == len(self.topology)-1:
+                d['population'].abundances[0] = self.config.getint('Population',
+                                                                   'capacity_min')
 
         data_dir = self.config.get(section='Simulation', option='data_dir')
         self.out_demographics = DemographicsOutput.DemographicsOutput(metapopulation=self,

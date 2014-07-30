@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 
+import bz2
 import csv
 
 import Population
 
 class DemographicsOutput(object):
 
-    def __init__(self, metapopulation, filename='demographics.csv', delimiter=','):
+    def __init__(self, metapopulation, filename='demographics.csv.bz2', delimiter=','):
         self.metapopulation = metapopulation
-        self.writer = csv.writer(open(filename, 'wb'), delimiter=delimiter)
+        self.writer = csv.writer(bz2.BZ2File(filename, 'wb'), delimiter=delimiter)
 
         self.writer.writerow(['Time', 'Population', 'Size', 'Producers',
                               'PropProducers', 'NonProducers',

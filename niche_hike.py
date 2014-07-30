@@ -87,7 +87,6 @@ def main():
         info = "# GNH Configuration\n# Generated: {when}\n# Command: "\
                 "{cmd}\n\n".format(when=datetime.datetime.now().isoformat(),
                                    cmd=' '.join(sys.argv))
-
         configfile.write(info)
         config.write(configfile)
 
@@ -95,7 +94,6 @@ def main():
     m = Metapopulation.Metapopulation(config=config)
 
     for t in range(config.getint(section='Simulation', option='num_cycles')):
-        m.migrate()
         m.cycle()
 
         if not args.quiet:
