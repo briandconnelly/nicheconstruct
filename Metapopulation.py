@@ -21,8 +21,8 @@ class Metapopulation(object):
 
         self.migration_rate = self.config.getfloat(section='Metapopulation',
                                                    option='migration_rate')
-        self.migration_dest = self.config.getfloat(section='Metapopulation',
-                                                   option='migration_dest')
+        self.migration_dest = self.config.get(section='Metapopulation',
+                                              option='migration_dest')
         self.topology_type = self.config.get(section='Metapopulation',
                                              option='topology')
 
