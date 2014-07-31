@@ -123,13 +123,27 @@ class Metapopulation(object):
                 d['population'].abundances[0] = self.config.getint('Population',
                                                                    'capacity_min')
 
+
         data_dir = self.config.get(section='Simulation', option='data_dir')
-        self.out_demographics = DemographicsOutput.DemographicsOutput(metapopulation=self,
-                                                       filename=os.path.join(data_dir,
-                                                                            'demographics.csv.bz2'))
-        self.out_genotypes = GenotypesOutput.GenotypesOutput(metapopulation=self,
-                                                       filename=os.path.join(data_dir,
-                                                                            'genotypes.csv.bz2'))
+        self.log_demographics = self.config.getboolean(section='Simulation',
+                                                       option='log_demographics')
+        self.log_genotypes = self.config.getboolean(section='Simulation',
+                                                    option='log_genotypes')
+
+        # log_objects is a list of any logging objects used by this simulation
+        self.log_objects = []
+
+        if self.log_demographics:
+            out_demographics = DemographicsOutput.DemographicsOutput(metapopulation=self,
+                                                       filename=os.path.join(data_dir, 'demographics.csv.bz2'))
+
+            self.log_objects.append(out_demographics)
+
+        if self.log_genotypes:
+            out_genotypes = GenotypesOutput.GenotypesOutput(metapopulation=self,
+                                                            filename=os.path.join(data_dir, 'genotypes.csv.bz2'))
+            self.log_objects.append(out_genotypes)
+
     def __repr__(self):
         """Return a string representation of the Metapopulation object"""
         prop_producers = self.prop_producers()
@@ -295,8 +309,7 @@ class Metapopulation(object):
         self.grow()
         self.mutate()
 
-        self.out_demographics.update(time=self.time)
-        self.out_genotypes.update(time=self.time)
+        self.write_logfiles()
 
         self.time += 1
 
@@ -329,4 +342,11 @@ class Metapopulation(object):
             return 'NA'
         else:
             return 1.0 * self.num_producers() / self.size()
+
+
+    def write_logfiles(self):
+        """Write any log files"""
+
+        for l in self.log_objects:
+            l.update(time=self.time)
 
