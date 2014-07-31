@@ -7,6 +7,7 @@ import datetime
 import os
 import shutil
 import sys
+import warnings
 
 import numpy as np
 
@@ -71,12 +72,18 @@ def main():
         config.set(section='Simulation', option='data_dir', value='data')
         data_dir = 'data'
 
-    # If the data directory already exists, rename it to data_dir with the
-    # current date and time appended to it. Then create the data dir.
+
+    # If the data_dir already exists, append the current date and time to
+    # data_dir, and use that. Afterwards, create the directory.
     if os.path.exists(data_dir):
-        newname = data_dir + '-' + datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-        shutil.move(data_dir, newname)
-        print('Moved previous data directory to {d}'.format(d=newname))
+        newname = '{o}-{d}'.format(o=data_dir,
+                                   d=datetime.datetime.now().strftime("%Y%m%d%H%M%S"))
+        msg = '{d} already exists. Using {new} instead'.format(d=data_dir,
+                                                               new=newname)
+        warnings.warn(msg)
+
+        data_dir = newname
+        config.set(section='Simulation', option='data_dir', value=data_dir)
 
     os.mkdir(data_dir)
 

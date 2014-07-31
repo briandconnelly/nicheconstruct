@@ -34,13 +34,13 @@ class Metapopulation(object):
                                       'complete']
 
         if self.topology_type.lower() == 'moore':
-            width = self.config.getint(section='Metapopulation',
+            width = self.config.getint(section='MooreTopology',
                                        option='width')
-            height = self.config.getint(section='Metapopulation',
+            height = self.config.getint(section='MooreTopology',
                                         option='height')
-            periodic = self.config.getboolean(section='Metapopulation',
+            periodic = self.config.getboolean(section='MooreTopology',
                                               option='periodic')
-            radius = self.config.getint(section='Metapopulation',
+            radius = self.config.getint(section='MooreTopology',
                                         option='radius')
 
             assert width > 0
@@ -52,11 +52,11 @@ class Metapopulation(object):
                                                    periodic=periodic)
 
         elif self.topology_type.lower() == 'vonneumann':
-            width = self.config.getint(section='Metapopulation',
+            width = self.config.getint(section='VonNeumannTopology',
                                        option='width')
-            height = self.config.getint(section='Metapopulation',
+            height = self.config.getint(section='VonNeumannTopology',
                                         option='height')
-            periodic = self.config.getboolean(section='Metapopulation',
+            periodic = self.config.getboolean(section='VonNeumannTopology',
                                               option='periodic')
 
             assert width > 0
@@ -67,11 +67,11 @@ class Metapopulation(object):
                                                         periodic=periodic)
 
         elif self.topology_type.lower() == 'smallworld':
-            size = self.config.getint(section='Metapopulation',
+            size = self.config.getint(section='SmallWorldTopology',
                                       option='size')
-            neighbors = self.config.getint(section='Metapopulation',
+            neighbors = self.config.getint(section='SmallWorldTopology',
                                            option='neighbors')
-            edgeprob = self.config.getint(section='Metapopulation',
+            edgeprob = self.config.getint(section='SmallWorldTopology',
                                           option='edgeprob')
             seed = self.config.getint(section='Simulation', option='seed')
 
@@ -83,7 +83,7 @@ class Metapopulation(object):
                                                 edgeprob=edgeprob, seed=seed)
 
         elif self.topology_type.lower() == 'complete':
-            size = self.config.getint(section='Metapopulation',
+            size = self.config.getint(section='CompleteTopology',
                                       option='size')
 
             assert size > 0
@@ -93,6 +93,10 @@ class Metapopulation(object):
 
         export_topology = self.config.getboolean(section='Simulation',
                                                  option='export_topology')
+
+        # Export the structure of the topology, allowing the topology to be
+        # re-created. This is especially useful for randomly-generated
+        # topologies.
         if export_topology:
             data_dir = self.config.get(section='Simulation', option='data_dir')
             nx.write_gml(self.topology, os.path.join(data_dir, 'topology.gml'))
@@ -122,10 +126,10 @@ class Metapopulation(object):
         data_dir = self.config.get(section='Simulation', option='data_dir')
         self.out_demographics = DemographicsOutput.DemographicsOutput(metapopulation=self,
                                                        filename=os.path.join(data_dir,
-                                                                            'demographics.csv'))
+                                                                            'demographics.csv.bz2'))
         self.out_genotypes = GenotypesOutput.GenotypesOutput(metapopulation=self,
                                                        filename=os.path.join(data_dir,
-                                                                            'genotypes.csv'))
+                                                                            'genotypes.csv.bz2'))
     def __repr__(self):
         """Return a string representation of the Metapopulation object"""
         prop_producers = self.prop_producers()
