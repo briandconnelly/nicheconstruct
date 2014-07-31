@@ -116,6 +116,8 @@ def main():
             msg = "[{t}] {m}".format(t=t, m=m)
             print(msg)
 
+    m.cleanup()
+
 
 if __name__ == "__main__":
     main()

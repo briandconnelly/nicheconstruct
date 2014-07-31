@@ -350,3 +350,7 @@ class Metapopulation(object):
         for l in self.log_objects:
             l.update(time=self.time)
 
+
+    def cleanup(self):
+        for l in self.log_objects:
+            l.close()

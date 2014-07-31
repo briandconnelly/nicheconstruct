@@ -5,19 +5,21 @@ import csv
 
 import numpy as np
 
+import OutputWriter
 import Population
 import genome
 
 
-class GenotypesOutput(object):
+class GenotypesOutput(OutputWriter.OutputWriter):
 
     def __init__(self, metapopulation, filename='demographics.csv.bz2', delimiter=','):
-        self.metapopulation = metapopulation
+
+        super(GenotypesOutput, self).__init__(metapopulation=metapopulation,
+                                              filename=filename,
+                                              delimiter=delimiter)
 
         self.genome_length = self.metapopulation.config.getint(section='Population',
                                            option='genome_length')
-
-        self.writer = csv.writer(bz2.BZ2File(filename, 'wb'), delimiter=delimiter)
 
         self.writer.writerow(['Time', 'Genotype', 'AvgAbundance', 'IsProducer'])
 
