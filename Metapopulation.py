@@ -73,13 +73,14 @@ class Metapopulation(object):
                                            option='neighbors')
             edgeprob = self.config.getint(section='Metapopulation',
                                           option='edgeprob')
+            seed = self.config.getint(section='Simulation', option='seed')
 
             assert size > 0
             assert neighbors >= 0
             assert edgeprob >= 0 and edgeprob <= 1
 
             self.topology = topology_smallworld(size=size, neighbors=neighbors,
-                                                edgeprob=edgeprob)
+                                                edgeprob=edgeprob, seed=seed)
 
         elif self.topology_type.lower() == 'complete':
             size = self.config.getint(section='Metapopulation',

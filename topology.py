@@ -57,14 +57,21 @@ def vonneumann_lattice(rows, columns, periodic=False):
         The number of columns to be in the graph
     *periodic*
         Prevent edge effects using periodic boundaries
-
     """
-    return nx.grid_2d_graph(m=columns, n=rows, periodic=periodic)
 
-def topology_smallworld(size, neighbors, edgeprob):
+    if seed:
+        return nx.grid_2d_graph(m=columns, n=rows, periodic=periodic, seed=seed)
+    else:
+        return nx.grid_2d_graph(m=columns, n=rows, periodic=periodic)
+
+def topology_smallworld(size, neighbors, edgeprob, seed=None):
     assert size > 0
     assert neighbors >= 0
     assert edgeprob >= 0 and edgeprob <= 1
 
-    return nx.newman_watts_strogatz_graph(n=size, k=neighbors, p=edgeprob)
+    if seed:
+        return nx.newman_watts_strogatz_graph(n=size, k=neighbors, p=edgeprob,
+                                              seed=seed)
+    else:
+        return nx.newman_watts_strogatz_graph(n=size, k=neighbors, p=edgeprob)
 
