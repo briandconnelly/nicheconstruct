@@ -22,7 +22,13 @@ def moore_lattice(rows, columns, radius=1, periodic=False):
 
     """
     G = nx.empty_graph()
-    G.name = "Moore Lattice"
+    G.name = "Moore Lattice: {r} rows, {c} columns, radius={rx}".format(r=rows,
+                                                                        c=columns,
+                                                                        rx=radius)
+    
+    if periodic:
+        G.name += ' with periodoc boundaries' 
+
     G.add_nodes_from(list(range(rows * columns)))
 
     for n in G.nodes():
@@ -44,6 +50,7 @@ def moore_lattice(rows, columns, radius=1, periodic=False):
 
     return G
 
+
 def vonneumann_lattice(rows, columns, periodic=False):
     """ Return the 2d lattice graph of rows x columns nodes, each connected to
     its nearest 4 neighbors.  Optional argument periodic=True will connect
@@ -59,19 +66,31 @@ def vonneumann_lattice(rows, columns, periodic=False):
         Prevent edge effects using periodic boundaries
     """
 
-    if seed:
-        return nx.grid_2d_graph(m=columns, n=rows, periodic=periodic, seed=seed)
-    else:
-        return nx.grid_2d_graph(m=columns, n=rows, periodic=periodic)
+    g = nx.grid_2d_graph(m=columns, n=rows, periodic=periodic)
+    g = nx.convert_node_labels_to_integers(g)
+    g.name = "VonNeumann Lattice: {r} rows, {c} columns".format(r=rows,
+                                                                c=columns)
 
-def topology_smallworld(size, neighbors, edgeprob, seed=None):
+    if periodic:
+        g.name += ' with periodic boundaries'
+
+    return g
+
+
+def smallworld(size, neighbors, edgeprob, seed=None):
     assert size > 0
     assert neighbors >= 0
     assert edgeprob >= 0 and edgeprob <= 1
 
     if seed:
-        return nx.newman_watts_strogatz_graph(n=size, k=neighbors, p=edgeprob,
-                                              seed=seed)
+        g = nx.newman_watts_strogatz_graph(n=size, k=neighbors, p=edgeprob,
+                                           seed=seed)
+
     else:
-        return nx.newman_watts_strogatz_graph(n=size, k=neighbors, p=edgeprob)
+        g = nx.newman_watts_strogatz_graph(n=size, k=neighbors, p=edgeprob)
+
+    g.name = 'Small World network: {s} nodes, {n} neighbors, ' \
+             '{p} edge probability'.format(s=size, n=neighbors, p=edgeprob)
+
+    return g
 
