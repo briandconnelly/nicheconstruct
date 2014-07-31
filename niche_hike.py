@@ -4,6 +4,7 @@
 import argparse
 import ConfigParser
 import datetime
+import getpass
 import os
 import shutil
 import sys
@@ -13,9 +14,13 @@ import numpy as np
 
 import Metapopulation
 
+__version__ = '0.1.1'
+
 def parse_arguments():
     """Parse command line arguments"""
-    parser = argparse.ArgumentParser(description='Run a GNH simluation')
+
+    parser = argparse.ArgumentParser(prog='niche_hike.ph',
+                                     description='Run a GNH simluation')
     parser.add_argument('--config', '-c', metavar='FILE', help='Configuration '\
                         'file to use (default: gnh.cfg)', default='gnh.cfg',
                         dest='configfile', type=argparse.FileType('r'))
@@ -28,6 +33,8 @@ def parse_arguments():
                         'pseudorandom number generator seed', type=int)
     parser.add_argument('--quiet', '-q', action='store_true', default=False,
                        help='Suppress output messages')
+    parser.add_argument('--version', action='version', version=__version__)
+
     args = parser.parse_args()
 
     return args
@@ -88,16 +95,15 @@ def main():
     os.mkdir(data_dir)
 
 
-    # Write the configuration file
+    # Write the configuration file and some additional information
     cfg_out = os.path.join(data_dir, 'configuration.cfg')
     with open(cfg_out, 'wb') as configfile:
-        info = "# GNH Configuration\n# Generated: {when}\n# Command: "\
-                "{cmd}\n\n".format(when=datetime.datetime.now().isoformat(),
-                                   cmd=' '.join(sys.argv))
-
-        # SHA-1 checksum
-        # hashlib.sha1(open('analyze_genome.R').read()).hexdigest()
-        configfile.write(info)
+        configfile.write('# GNH Configuration\n')
+        configfile.write('# Generated: {when} by {who}\n'.format(when=datetime.datetime.now().isoformat(),
+                                                                 who=getpass.getuser()))
+        configfile.write('# niche_hike.py version {v}\n'.format(v=__version__))
+        configfile.write('# Command: {cmd}\n'.format(cmd=' '.join(sys.argv)))
+        configfile.write('# {line}\n\n'.format(line='-'*77))
         config.write(configfile)
 
 
