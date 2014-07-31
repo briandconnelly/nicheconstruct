@@ -56,16 +56,15 @@ class Metapopulation(object):
                                        option='width')
             height = self.config.getint(section='Metapopulation',
                                         option='height')
-            radius = self.config.getint(section='Metapopulation',
-                                        option='radius')
+            periodic = self.config.getboolean(section='Metapopulation',
+                                              option='periodic')
 
             assert width > 0
             assert height > 0
-            assert radius > 0
 
-            self.topology = topology_vonneumann_latice(rows=height,
-                                                       columns=width,
-                                                       periodic=periodic)
+            self.topology = topology.vonneumann_lattice(rows=height,
+                                                        columns=width,
+                                                        periodic=periodic)
 
         elif self.topology_type.lower() == 'smallworld':
             size = self.config.getint(section='Metapopulation',
@@ -89,6 +88,13 @@ class Metapopulation(object):
             assert size > 0
 
             self.topology = nx.complete_graph(n=size)
+
+
+        export_topology = self.config.getboolean(section='Simulation',
+                                                 option='export_topology')
+        if export_topology:
+            data_dir = self.config.get(section='Simulation', option='data_dir')
+            nx.write_gml(self.topology, os.path.join(data_dir, 'topology.gml'))
 
 
         # Store the probabilities of mutations between all pairs of genotypes

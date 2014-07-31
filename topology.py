@@ -22,6 +22,7 @@ def moore_lattice(rows, columns, radius=1, periodic=False):
 
     """
     G = nx.empty_graph()
+    G.name = "Moore Lattice"
     G.add_nodes_from(list(range(rows * columns)))
 
     for n in G.nodes():
