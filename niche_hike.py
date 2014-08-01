@@ -10,6 +10,7 @@ import shutil
 import sys
 import warnings
 
+import networkx as nx
 import numpy as np
 
 import Metapopulation
@@ -85,8 +86,8 @@ def main():
     if os.path.exists(data_dir):
         newname = '{o}-{d}'.format(o=data_dir,
                                    d=datetime.datetime.now().strftime("%Y%m%d%H%M%S"))
-        msg = '{d} already exists. Using {new} instead'.format(d=data_dir,
-                                                               new=newname)
+        msg = '{d} already exists. Using {new} instead.'.format(d=data_dir,
+                                                                new=newname)
         warnings.warn(msg)
 
         data_dir = newname
@@ -101,7 +102,10 @@ def main():
         configfile.write('# GNH Configuration\n')
         configfile.write('# Generated: {when} by {who}\n'.format(when=datetime.datetime.now().isoformat(),
                                                                  who=getpass.getuser()))
-        configfile.write('# niche_hike.py version {v}\n'.format(v=__version__))
+        configfile.write('# niche_hike.py version: {v}\n'.format(v=__version__))
+        configfile.write('# Python version: {v}\n'.format(v= ".".join(map(str, sys.version_info[:3]))))
+        configfile.write('# NumPy version: {v}\n'.format(v=np.version.version))
+        configfile.write('# NetworkX version: {v}\n'.format(v=nx.__version__))
         configfile.write('# Command: {cmd}\n'.format(cmd=' '.join(sys.argv)))
         configfile.write('# {line}\n\n'.format(line='-'*77))
         config.write(configfile)
