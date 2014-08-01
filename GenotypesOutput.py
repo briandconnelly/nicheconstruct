@@ -12,7 +12,7 @@ import genome
 
 class GenotypesOutput(OutputWriter.OutputWriter):
 
-    def __init__(self, metapopulation, filename='demographics.csv.bz2', delimiter=','):
+    def __init__(self, metapopulation, filename='genotypes.csv.bz2', delimiter=','):
 
         super(GenotypesOutput, self).__init__(metapopulation=metapopulation,
                                               filename=filename,
