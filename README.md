@@ -61,4 +61,25 @@ TODO
 
 ## Result Data
 
-TODO
+### Uncompressing the Data Files
+
+To save space, the resulting data files are compressed. To open these files in Python:
+
+```python
+import bz2
+import csv
+
+reader = csv.reader(bz2.BZ2File('demographics.csv.bz2', 'r'))
+for row in reader:
+    print(row)
+```
+
+The decompression is done transparently in R:
+
+```r
+mydata <- read.csv('demographics.csv.bz2')
+```
+
+Otherwise, they can be opened by double clicking on them in Finder (Mac),
+running bunzip2 (Mac/Linux), or opening with [7-Zip](http://www.7-zip.org/)
+(Windows).
