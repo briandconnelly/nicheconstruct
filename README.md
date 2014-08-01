@@ -81,5 +81,6 @@ mydata <- read.csv('demographics.csv.bz2')
 ```
 
 Otherwise, they can be opened by double clicking on them in Finder (Mac),
-running bunzip2 (Mac/Linux), or opening with [7-Zip](http://www.7-zip.org/)
-(Windows).
+running `bunzip2 <filename>` (Mac/Linux), or opening with
+[7-Zip](http://www.7-zip.org/) (Windows).
+
