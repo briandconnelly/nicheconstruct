@@ -1,6 +1,6 @@
 # Genetic Niche Hiking Model
 
-## Prerequisites
+## Dependiencies
 
 * Python 2.7
 * [NumPy](http://www.numpy.org) 1.8.0 or later
