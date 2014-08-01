@@ -1,5 +1,11 @@
 # Genetic Niche Hiking Model
 
+## Prerequisites
+
+* Python 2.7
+* [NumPy](http://www.numpy.org) 1.8.0 or later
+* [NetworkX](https://networkx.github.io/)
+
 
 ## Running the Model
 
