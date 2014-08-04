@@ -185,7 +185,7 @@ class Metapopulation(object):
                                         high=2*avg_effect-min_effect,
                                         size=genome_length)
 
-        effects = np.append(0, effects)
+        effects = np.append(-1.0*production_cost, effects)
 
         landscape = np.zeros(2**(genome_length + 1))
 
@@ -193,11 +193,7 @@ class Metapopulation(object):
             genotype = genome.base10_as_bitarray(i)
             genotype = np.append(np.zeros(len(effects) - len(genotype)),
                                  genotype)
-            landscape[i] = sum(genotype * effects) + base_fitness
-
-        # Add in the cost of production
-        np_genomes = np.arange(start=0, stop=2**genome_length)
-        landscape[np_genomes] += production_cost
+            landscape[i] = sum(genotype * effects) + (base_fitness + production_cost)
 
         return landscape/sum(landscape)
 
