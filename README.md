@@ -41,7 +41,7 @@ Set a parameter value
 
 The parameters for the model are specified in the `gnh.cfg` file. Alternate
 configuration files can be used with the `--config` argument to
-`night_hike.py`:
+`niche_hike.py`:
 
 ```sh
 python niche_hike.py --config other_config.cfg

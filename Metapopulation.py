@@ -319,7 +319,7 @@ class Metapopulation(object):
         The size of the metapopulation is the sum of the sizes of the
         subpopulations
         """
-        return sum([len(d['population']) for n, d in self.topology.nodes_iter(data=True)])
+        return sum(len(d['population']) for n, d in self.topology.nodes_iter(data=True))
 
     def __len__(self):
         """Return the length of a Metapopulation
@@ -332,7 +332,7 @@ class Metapopulation(object):
 
     def num_producers(self):
         """Return the number of producers in the metapopulation"""
-        return sum([d['population'].num_producers() for n, d in self.topology.nodes_iter(data=True)])
+        return sum(d['population'].num_producers() for n, d in self.topology.nodes_iter(data=True))
 
     def prop_producers(self):
         """Get the proportion of producers in the metapopulation"""
