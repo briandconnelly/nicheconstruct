@@ -97,18 +97,11 @@ class Population(object):
         if self.is_empty():
             return
 
-        pre = any(self.abundances < 0)
-
         if stochastic:
             self.abundances = np.random.binomial(self.abundances,
                                                  self.dilution_factor)
         else:
             self.abundances = np.floor(self.abundances * self.dilution_factor).astype(np.uint32)
-
-        post = any(self.abundances < 0)
-
-        if post:
-            print("Abundances after dilution negative!!!!", pre)
 
 
     def grow(self):
@@ -153,10 +146,12 @@ class Population(object):
 
         mutated_population = np.zeros(2**(self.genome_length + 1), dtype=np.uint32)
 
+        multinomial = np.random.multinomial
+
         for i in range(len(self.abundances)):
-            mutated_population += np.random.multinomial(self.abundances[i],
-                                                        self.metapopulation.mutation_probs[i],
-                                                        size=1)[0]
+            mutated_population += multinomial(self.abundances[i],
+                                              self.metapopulation.mutation_probs[i],
+                                              size=1)[0]
 
         self.abundances = mutated_population
 

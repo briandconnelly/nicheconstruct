@@ -20,7 +20,7 @@ __version__ = '0.1.1'
 def parse_arguments():
     """Parse command line arguments"""
 
-    parser = argparse.ArgumentParser(prog='niche_hike.ph',
+    parser = argparse.ArgumentParser(prog='niche_hike.py',
                                      description='Run a GNH simluation')
     parser.add_argument('--config', '-c', metavar='FILE', help='Configuration '\
                         'file to use (default: gnh.cfg)', default='gnh.cfg',
