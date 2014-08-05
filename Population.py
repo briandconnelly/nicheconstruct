@@ -245,5 +245,5 @@ class Population(object):
         if popsize == 0:
             return 'NA'
         else:
-            return sum(self.abundances * landscape)/popsize
+            return np.sum(self.abundances * landscape)/popsize
 
