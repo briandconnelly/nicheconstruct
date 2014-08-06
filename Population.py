@@ -51,7 +51,7 @@ class Population(object):
         self.initialize = config.get(section='Population',
                                      option='initialize')
 
-        assert self.genome_length > 0, 'genome_length must be larger than 0'
+        assert self.genome_length >= 0, 'genome_length must be non-negative'
         assert self.mutation_rate >= 0 and self.mutation_rate <= 1
         assert self.prod_mutation_rate >= 0 and self.prod_mutation_rate <= 1
         assert self.dilution_factor >=0 and self.dilution_factor <= 1, 'dilution_factor must be between 0 and 1'

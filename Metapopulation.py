@@ -174,7 +174,7 @@ class Metapopulation(object):
         min_effect = self.config.getfloat(section='Population',
                                           option='fitness_min_effect')
 
-        assert genome_length > 0
+        assert genome_length >= 0
         assert base_fitness >= 0
 
         if exponential:
