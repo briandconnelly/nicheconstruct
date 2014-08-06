@@ -247,3 +247,20 @@ class Population(object):
         else:
             return np.sum(self.abundances * landscape)/popsize
 
+    def max_fitnesses(self):
+        """Get the maximum fitness among producers and non-producers"""
+
+        popsize = self.size()
+
+        if popsize == 0:
+            return (0,0)
+
+        # Get the fitnesses of genotypes present in the population
+        fitnesses = np.array(self.abundances > 0, dtype=int) * self.metapopulation.fitness_landscape
+
+        gl = self.genome_length
+        max_producer = np.max(fitnesses[2**gl:])
+        max_nonproducer = np.max(fitnesses[:2**gl])
+
+        return (max_producer, max_nonproducer)
+

@@ -10,6 +10,7 @@ import Population
 import topology
 import DemographicsOutput
 import GenotypesOutput
+import FitnessOutput
 
 
 class Metapopulation(object):
@@ -129,6 +130,8 @@ class Metapopulation(object):
                                                        option='log_demographics')
         self.log_genotypes = self.config.getboolean(section='Simulation',
                                                     option='log_genotypes')
+        self.log_fitness = self.config.getboolean(section='Simulation',
+                                                  option='log_fitness')
 
         # log_objects is a list of any logging objects used by this simulation
         self.log_objects = []
@@ -144,6 +147,12 @@ class Metapopulation(object):
                                                             filename=os.path.join(data_dir, 'genotypes.csv.bz2'))
             self.log_objects.append(out_genotypes)
 
+        if self.log_fitness:
+            out_fitness = FitnessOutput.FitnessOutput(metapopulation=self,
+                                                      filename=os.path.join(data_dir, 'fitness.csv.bz2'))
+            self.log_objects.append(out_fitness)
+
+
     def __repr__(self):
         """Return a string representation of the Metapopulation object"""
         prop_producers = self.prop_producers()
@@ -151,8 +160,23 @@ class Metapopulation(object):
         if prop_producers == 'NA':
             res = "Metapopulation: Size {s}, NA% producers".format(s=self.size())
         else:
-            res = "Metapopulation: Size {s}, {p:.1%} producers".format(s=self.size(),
-                                                                    p=self.prop_producers())
+            maxfit = self.max_fitnesses()
+            maxfit_p = max(maxfit[0])
+            maxfit_np = max(maxfit[1])
+            #res = "Metapopulation: Size {s}, {p:.1%} producers".format(s=self.size(),
+            #                                                        p=self.prop_producers())
+
+            if maxfit_p > maxfit_np:
+                symbol = '>'
+            elif maxfit_p < maxfit_np:
+                symbol = '<'
+            else:
+                symbol = '='
+
+            res = "Metapopulation: Size {s}, {p:.1%} producers. w(P): {mp:.2} "\
+                  "{sym} w(Np): {mnp:.2}.".format(s=self.size(), p=self.prop_producers(),
+                                                 mp=maxfit_p, mnp=maxfit_np, sym=symbol)
+
         return res
 
     def build_fitness_landscape(self):
@@ -339,6 +363,14 @@ class Metapopulation(object):
         else:
             return 1.0 * self.num_producers() / self.size()
 
+
+    def max_fitnesses(self):
+        """Get the maximum fitness among producers and non-producers"""
+
+        prod_max = [d['population'].max_fitnesses()[0] for n, d in self.topology.nodes_iter(data=True)]
+        nonprod_max = [d['population'].max_fitnesses()[1] for n, d in self.topology.nodes_iter(data=True)]
+
+        return (prod_max, nonprod_max)
 
     def write_logfiles(self):
         """Write any log files"""
