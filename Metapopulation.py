@@ -26,6 +26,10 @@ class Metapopulation(object):
                                               option='migration_dest')
         self.topology_type = self.config.get(section='Metapopulation',
                                              option='topology')
+        self.log_frequency = self.config.getint(section='Simulation',
+                                                option='log_frequency')
+        self.dilution_stochastic = self.config.getboolean(section='Population',
+                                                          option='dilution_stochastic')
 
 
         assert self.migration_rate >= 0 and self.migration_rate <= 1
@@ -33,6 +37,7 @@ class Metapopulation(object):
         assert self.topology_type is not None, 'Topology must be specified'
         assert self.topology_type in ['moore', 'vonneumann', 'smallworld',
                                       'complete']
+        assert self.log_frequency > 0
 
         if self.topology_type.lower() == 'moore':
             width = self.config.getint(section='MooreTopology',
@@ -325,7 +330,7 @@ class Metapopulation(object):
         """
         self.migrate()
         self.census()
-        self.dilute()
+        self.dilute(stochastic=self.dilution_stochastic)
         self.grow()
         self.mutate()
 
@@ -375,10 +380,12 @@ class Metapopulation(object):
     def write_logfiles(self):
         """Write any log files"""
 
-        for l in self.log_objects:
-            l.update(time=self.time)
+        if self.time % self.log_frequency == 0:
+            for l in self.log_objects:
+                l.update(time=self.time)
 
 
     def cleanup(self):
         for l in self.log_objects:
             l.close()
+
