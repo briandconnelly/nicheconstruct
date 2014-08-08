@@ -94,3 +94,15 @@ def smallworld(size, neighbors, edgeprob, seed=None):
 
     return g
 
+def regular(size, degree, seed=None):
+    assert size > 0
+    assert degree >= 0
+
+    if seed:
+        g = nx.random_regular_graph(d=degree, n=size, seed=seed)
+    else:
+        g = nx.random_regular_graph(d=degree, n=size)
+
+    g.name = 'Random Regular Graph: {n} nodes, {d} degree'.format(n=size,
+                                                                  d=degree)
+    return g

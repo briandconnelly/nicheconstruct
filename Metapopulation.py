@@ -36,7 +36,7 @@ class Metapopulation(object):
         assert self.migration_dest in ['single', 'neighbors']
         assert self.topology_type is not None, 'Topology must be specified'
         assert self.topology_type in ['moore', 'vonneumann', 'smallworld',
-                                      'complete']
+                                      'complete', 'regular']
         assert self.log_frequency > 0
 
         if self.topology_type.lower() == 'moore':
@@ -95,6 +95,16 @@ class Metapopulation(object):
             assert size > 0
 
             self.topology = nx.complete_graph(n=size)
+
+        elif self.topology_type.lower() == 'regular':
+            size = self.config.getint(section='RegularTopology',
+                                      option='size')
+            degree = self.config.getint(section='RegularTopology',
+                                        option='degree')
+            seed = self.config.getint(section='Simulation', option='seed')
+
+            self.topology = topology.regular(size=size, degree=degree,
+                                             seed=seed)
 
 
         export_topology = self.config.getboolean(section='Simulation',
