@@ -348,6 +348,21 @@ class Metapopulation(object):
 
         self.time += 1
 
+    def change_environment(self):
+        """Change the environment
+
+        The change_environment function changes the environment for the
+        metapopulation. This re-generates the fitness landscape and zeros out
+        all fitness-encoding loci. This is meant to represent the metapopulation
+        being subjected to different selective pressures.
+        """
+
+        self.fitness_landscape = self.build_fitness_landscape()
+
+        for n, d in self.topology.nodes_iter(data=True):
+            d['population'].reset_loci()
+
+
     def size(self):
         """Return the size of the metapopulation
 

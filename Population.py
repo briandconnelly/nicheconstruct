@@ -202,6 +202,26 @@ class Population(object):
         self.abundances += self.delta
         self.delta = np.zeros(2**(self.genome_length + 1), dtype=np.uint32)
 
+    def reset_loci(self):
+        """Reset the loci of the population to all zeros
+
+        When an environment changes, the population is not yet adapted to it.
+        This function captures this change by resetting all fitness-encoding
+        loci to zero.
+        """
+
+        gl = self.genome_length
+        producer_genomes = np.arange(start=2**gl, stop=2**(gl+1))
+        nonproducer_genomes = np.arange(start=0, stop=2**gl)
+        num_producers = np.sum(self.abundances[producer_genomes])
+        num_nonproducers = np.sum(self.abundances[nonproducer_genomes])
+
+        self.abundances = np.zeros(2**(self.genome_length + 1), dtype=np.uint32)
+        self.abundances[0] = num_nonproducers
+        self.abundances[2**gl] = num_producers
+        # ZOOZ
+
+
     def size(self):
         """Get the size of the population"""
         return np.sum(self.abundances)
