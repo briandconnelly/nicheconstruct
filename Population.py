@@ -117,15 +117,16 @@ class Population(object):
             return
 
         landscape = self.metapopulation.fitness_landscape
+        nsum = np.sum
 
         final_size = self.capacity_min + \
                 (self.capacity_max - self.capacity_min) * \
                 self.prop_producers()
 
-        grow_probs = self.abundances * landscape
+        grow_probs = self.abundances * (landscape/nsum(landscape))
 
-        if sum(grow_probs) > 0:
-            norm_grow_probs = grow_probs/sum(grow_probs)
+        if nsum(grow_probs) > 0:
+            norm_grow_probs = grow_probs/nsum(grow_probs)
             self.abundances = np.random.multinomial(final_size, norm_grow_probs,
                                                     1)[0]
 
@@ -216,10 +217,9 @@ class Population(object):
         num_producers = np.sum(self.abundances[producer_genomes])
         num_nonproducers = np.sum(self.abundances[nonproducer_genomes])
 
-        self.abundances = np.zeros(2**(self.genome_length + 1), dtype=np.uint32)
+        self.abundances = np.zeros(2**(gl + 1), dtype=np.uint32)
         self.abundances[0] = num_nonproducers
         self.abundances[2**gl] = num_producers
-        # ZOOZ
 
 
     def size(self):

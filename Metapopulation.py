@@ -176,8 +176,8 @@ class Metapopulation(object):
             res = "Metapopulation: Size {s}, NA% producers".format(s=self.size())
         else:
             maxfit = self.max_fitnesses()
-            maxfit_p = max(maxfit[0])
-            maxfit_np = max(maxfit[1])
+            maxfit_p = max(maxfit[0]) / max(self.fitness_landscape)
+            maxfit_np = max(maxfit[1]) / max(self.fitness_landscape)
             #res = "Metapopulation: Size {s}, {p:.1%} producers".format(s=self.size(),
             #                                                        p=self.prop_producers())
 
@@ -234,7 +234,7 @@ class Metapopulation(object):
                                  genotype)
             landscape[i] = sum(genotype * effects) + (base_fitness + production_cost)
 
-        return landscape/sum(landscape)
+        return landscape
 
 
     def get_mutation_probabilities(self):
