@@ -11,6 +11,7 @@ import topology
 import DemographicsOutput
 import GenotypesOutput
 import FitnessOutput
+from ChangeEnvironment import ChangeEnvironment
 
 
 class Metapopulation(object):
@@ -151,6 +152,7 @@ class Metapopulation(object):
         # log_objects is a list of any logging objects used by this simulation
         self.log_objects = []
 
+
         if self.log_demographics:
             out_demographics = DemographicsOutput.DemographicsOutput(metapopulation=self,
                                                        filename=os.path.join(data_dir, 'demographics.csv.bz2'))
@@ -166,6 +168,10 @@ class Metapopulation(object):
             out_fitness = FitnessOutput.FitnessOutput(metapopulation=self,
                                                       filename=os.path.join(data_dir, 'fitness.csv.bz2'))
             self.log_objects.append(out_fitness)
+
+
+        self.actions = []
+        self.actions.append(ChangeEnvironment(metapopulation=self))
 
 
     def __repr__(self):
@@ -345,6 +351,7 @@ class Metapopulation(object):
         self.mutate()
 
         self.write_logfiles()
+        self.perform_actions()
 
         self.time += 1
 
@@ -408,6 +415,12 @@ class Metapopulation(object):
         if self.time % self.log_frequency == 0:
             for l in self.log_objects:
                 l.update(time=self.time)
+
+    def perform_actions(self):
+        """Perform any actions"""
+
+        for a in self.actions:
+            a.update(time=self.time)
 
 
     def cleanup(self):
