@@ -12,6 +12,6 @@ class ChangeEnvironment(Action):
         assert self.frequency >= 0
 
     def update(self, time):
-        if self.frequency > 0 and time % self.frequency == 0:
+        if self.frequency > 0 and time > 0 and time % self.frequency == 0:
             self.metapopulation.change_environment()
 

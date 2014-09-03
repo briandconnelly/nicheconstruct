@@ -361,14 +361,20 @@ class Metapopulation(object):
         The change_environment function changes the environment for the
         metapopulation. This re-generates the fitness landscape and zeros out
         all fitness-encoding loci. This is meant to represent the metapopulation
-        being subjected to different selective pressures.
+        being subjected to different selective pressures. The number of
+        individuals of each genotype that survive this event are proportional to
+        the abundance of that genotype times the mutation rate (representing
+        individuals that acquired the mutation that allows them to persist).
         """
 
         self.fitness_landscape = self.build_fitness_landscape()
 
-        for n, d in self.topology.nodes_iter(data=True):
-            d['population'].reset_loci()
+        mutation_rate = self.config.getfloat(section='Population',
+                                             option='mutation_rate')
 
+        for n, d in self.topology.nodes_iter(data=True):
+            d['population'].bottleneck(survival_rate=mutation_rate)
+            d['population'].reset_loci()
 
     def size(self):
         """Return the size of the metapopulation

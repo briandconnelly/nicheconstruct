@@ -221,6 +221,18 @@ class Population(object):
         self.abundances[0] = num_nonproducers
         self.abundances[2**gl] = num_producers
 
+    def bottleneck(self, survival_rate):
+        """ Pass the population through a bottleneck
+
+        This function passes the population through a bottleneck. The
+        probability of survival is specified as the survival_rate parameter
+        [0,1]. 
+        """
+
+        assert survival_rate >= 0
+        assert survival_rate >= 1
+
+        self.abundances = np.random.binomial(self.abundances, survival_rate)
 
     def size(self):
         """Get the size of the population"""
