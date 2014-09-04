@@ -15,7 +15,12 @@ class Population(object):
 
     * genome_length: the length of the genome. The production allele is added to
         this, so the number of genotypes is 2^(genome_length+1)
-    * mutation_rate: the probability of a single locus mutating (bit flip)
+    * mutation_rate_stress: the probability of an individual acquiring a
+        mutation that allows it to survive a change of environment (stress)
+    * mutation_rate_social: the probability of a mutation (bit flip) occuring at
+        the social locus
+    * mutation_rate_adaptation: the probability of a mutation (bit flip) at a
+        non-social locus
     * prod_mutation_rate: the probability of the production locus mutating
     * capacity_min: the minimum size of a fully-grown population. This occurs
         when there are no producers
@@ -36,8 +41,12 @@ class Population(object):
 
         self.genome_length = config.getint(section='Population',
                                            option='genome_length')
-        self.mutation_rate = config.getfloat(section='Population',
-                                             option='mutation_rate')
+        self.mutation_rate_stress = config.getfloat(section='Population',
+                                                    option='mutation_rate_stress')
+        self.mutation_rate_social = config.getfloat(section='Population',
+                                                    option='mutation_rate_social')
+        self.mutation_rate_adaptation = config.getfloat(section='Population',
+                                                        option='mutation_rate_adaptation')
         self.prod_mutation_rate = config.getfloat(section='Population',
                                                    option='prod_mutation_rate')
         self.dilution_factor = config.getfloat(section='Population',
@@ -52,7 +61,9 @@ class Population(object):
                                      option='initialize')
 
         assert self.genome_length >= 0, 'genome_length must be non-negative'
-        assert self.mutation_rate >= 0 and self.mutation_rate <= 1
+        assert self.mutation_rate_stress >= 0 and self.mutation_rate_stress <= 1
+        assert self.mutation_rate_social >= 0 and self.mutation_rate_social <= 1
+        assert self.mutation_rate_adaptation >= 0 and self.mutation_rate_adaptation <= 1
         assert self.prod_mutation_rate >= 0 and self.prod_mutation_rate <= 1
         assert self.dilution_factor >=0 and self.dilution_factor <= 1, 'dilution_factor must be between 0 and 1'
         assert self.capacity_min >= 0
@@ -230,7 +241,7 @@ class Population(object):
         """
 
         assert survival_rate >= 0
-        assert survival_rate >= 1
+        assert survival_rate <= 1
 
         self.abundances = np.random.binomial(self.abundances, survival_rate)
 

@@ -125,20 +125,35 @@ class Metapopulation(object):
         # Create the fitness landscape
         self.fitness_landscape = self.build_fitness_landscape()
 
+        initial_state = self.config.get(section='Metapopulation',
+                                        option='initial_state')
+        genome_length = self.config.getint(section='Population',
+                                           option='genome_length')
+        max_cap = self.config.getint(section='Population', option='capacity_max')
+        min_cap = self.config.getint(section='Population', option='capacity_min')
+        mutation_rate_stress = self.config.getfloat(section='Population',
+                                                    option='mutation_rate_stress')
+
+
         # Create each of the populations
         for n, d in self.topology.nodes_iter(data=True):
             d['population'] = Population.Population(metapopulation=self, config=config)
 
-            if n == 0:
-                # TODO: all coops
-                genome_length = self.config.getint(section='Population',
-                                                   option='genome_length')
-                d['population'].abundances[2**genome_length] = self.config.getint('Population',
-                                                                   'capacity_max')
+            if initial_state == 'corners':
+                # Place all producers in one corner and all non-producers in
+                # the other
+                if n == 0:
+                    d['population'].abundances[2**genome_length] = max_cap
+                    d['population'].dilute(stochastic=self.dilution_stochastic)
+                elif n == len(self.topology)-1:
+                    d['population'].abundances[0] = min_cap
+                    d['population'].dilute(stochastic=self.dilution_stochastic)
 
-            if n == len(self.topology)-1:
-                d['population'].abundances[0] = self.config.getint('Population',
-                                                                   'capacity_min')
+            elif initial_state == 'stress':
+                halfcap = (min_cap + max_cap) // 4
+                d['population'].abundances[0] = halfcap
+                d['population'].abundances[2**genome_length] = halfcap
+                d['population'].bottleneck(survival_rate=mutation_rate_stress)
 
 
         data_dir = self.config.get(section='Simulation', option='data_dir')
@@ -203,7 +218,6 @@ class Metapopulation(object):
     def build_fitness_landscape(self):
         """Build a fitness landscape
 
-        TODO documentation
         """
 
         genome_length = self.config.getint(section='Population',
@@ -259,20 +273,37 @@ class Metapopulation(object):
 
         genome_length = self.config.getint(section='Population',
                                            option='genome_length')
-        mutation_rate = self.config.getfloat(section='Population',
-                                             option='mutation_rate')
+        mutation_rate_social = self.config.getfloat(section='Population',
+                                                    option='mutation_rate_social')
+        mutation_rate_adaptation = self.config.getfloat(section='Population',
+                                                        option='mutation_rate_adaptation')
+
+
+        # S is a matrix of all genome combinations that indicates whether
+        # mutations between them would involve change in the social locus (1) or
+        # not (0)
+        S = np.vstack((np.array([[0]*2**genome_length + [1]*2**genome_length]).repeat(repeats=2**genome_length, axis=0),
+                       np.array([[1]*2**genome_length + [0]*2**genome_length]).repeat(repeats=2**genome_length, axis=0)))
 
         # Get the pairwise Hamming distance for all genotypes
-        # NOTE: this doesn't differentiate between producer-nonproducer
-        # mutations
         hamming_v = np.vectorize(genome.hamming_distance)
         genotypes = np.arange(start=0, stop=2**(genome_length+1))
         xx, yy = np.meshgrid(genotypes, genotypes)
         hamming_distances = hamming_v(xx, yy)
 
-        return np.power(1-mutation_rate, genome_length+1-hamming_distances) * \
-                np.power(mutation_rate, hamming_distances)
+        # nonsocial_hd is a matrix containing the pairwise Hamming distances
+        # between all genomes considering only the non-social loci
+        nonsocial_hd = hamming_distances - S
 
+        # mr is a matrix where each element contains the probability of mutating
+        # from one genome to the other.
+        # mr = npower(1-m1, L-NS) * npower(m1, NS) * npower(1-m2, S2) * npower(m2, S)
+
+        npower = np.power
+        mr = npower(1-mutation_rate_adaptation, genome_length-nonsocial_hd) *\
+                npower(mutation_rate_adaptation, nonsocial_hd) * npower(1-mutation_rate_social, S==0) * npower(mutation_rate_social, S)
+
+        return mr
 
     def dilute(self, stochastic=True):
         """Dilute the metapopulation
@@ -344,14 +375,15 @@ class Metapopulation(object):
         population, and then migrating among populations.
 
         """
-        self.migrate()
-        self.census()
-        self.dilute(stochastic=self.dilution_stochastic)
         self.grow()
         self.mutate()
+        self.migrate()
+        self.census()
 
         self.write_logfiles()
         self.perform_actions()
+        
+        self.dilute(stochastic=self.dilution_stochastic)
 
         self.time += 1
 
@@ -369,11 +401,11 @@ class Metapopulation(object):
 
         self.fitness_landscape = self.build_fitness_landscape()
 
-        mutation_rate = self.config.getfloat(section='Population',
-                                             option='mutation_rate')
+        mutation_rate_stress = self.config.getfloat(section='Population',
+                                                    option='mutation_rate_stress')
 
         for n, d in self.topology.nodes_iter(data=True):
-            d['population'].bottleneck(survival_rate=mutation_rate)
+            d['population'].bottleneck(survival_rate=mutation_rate_stress)
             d['population'].reset_loci()
 
     def size(self):
@@ -427,7 +459,6 @@ class Metapopulation(object):
 
         for a in self.actions:
             a.update(time=self.time)
-
 
     def cleanup(self):
         for l in self.log_objects:
