@@ -311,7 +311,9 @@ class Metapopulation(object):
 
         npower = np.power
         mr = npower(1-mutation_rate_adaptation, genome_length-nonsocial_hd) *\
-                npower(mutation_rate_adaptation, nonsocial_hd) * npower(1-mutation_rate_social, S==0) * npower(mutation_rate_social, S)
+                npower(mutation_rate_adaptation, nonsocial_hd) *\
+                npower(1-mutation_rate_social, S==0) *\
+                npower(mutation_rate_social, S)
 
         return mr
 

@@ -225,8 +225,8 @@ class Population(object):
         gl = self.genome_length
         producer_genomes = np.arange(start=2**gl, stop=2**(gl+1))
         nonproducer_genomes = np.arange(start=0, stop=2**gl)
-        num_producers = np.sum(self.abundances[producer_genomes])
-        num_nonproducers = np.sum(self.abundances[nonproducer_genomes])
+        num_producers = self.abundances[producer_genomes].sum()
+        num_nonproducers = self.abundances[nonproducer_genomes].sum()
 
         self.abundances = np.zeros(2**(gl + 1), dtype=np.uint32)
         self.abundances[0] = num_nonproducers
@@ -247,10 +247,10 @@ class Population(object):
 
     def size(self):
         """Get the size of the population"""
-        return np.sum(self.abundances)
+        return self.abundances.sum()
 
     def __len__(self):
-        return np.sum(self.abundances)
+        return self.abundances.sum()
 
     def is_empty(self):
         """Return whether or not the population is empty"""
@@ -267,7 +267,7 @@ class Population(object):
 
         gl = self.genome_length
         producer_genomes = np.arange(start=2**gl, stop=2**(gl+1))
-        return np.sum(self.abundances[producer_genomes])
+        return self.abundances[producer_genomes].sum()
 
 
     def prop_producers(self):
@@ -302,8 +302,8 @@ class Population(object):
         fitnesses = np.array(self.abundances > 0, dtype=int) * self.metapopulation.fitness_landscape
 
         gl = self.genome_length
-        max_producer = np.max(fitnesses[2**gl:])
-        max_nonproducer = np.max(fitnesses[:2**gl])
+        max_producer = fitnesses[2**gl:].max()
+        max_nonproducer = fitnesses[:2**gl].max()
 
         return (max_producer, max_nonproducer)
 
