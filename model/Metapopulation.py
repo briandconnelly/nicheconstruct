@@ -277,23 +277,10 @@ class Metapopulation(object):
                                                     option='mutation_rate_social')
         mutation_rate_adaptation = self.config.getfloat(section='Population',
                                                         option='mutation_rate_adaptation')
-        social_mutation_type = self.config.get(section='Population',
-                                               option='social_mutation_type')
 
-        assert social_mutation_type.lower() in ('both', 'gain', 'loss')
+        S = np.vstack((np.array([[0]*2**genome_length + [1]*2**genome_length]).repeat(repeats=2**genome_length, axis=0),
+                       np.array([[1]*2**genome_length + [0]*2**genome_length]).repeat(repeats=2**genome_length, axis=0)))
 
-        # S is a matrix of all genome combinations that indicates whether
-        # mutations between them would involve change in the social locus (1) or
-        # not (0)
-        if social_mutation_type.lower() == 'both':
-            S = np.vstack((np.array([[0]*2**genome_length + [1]*2**genome_length]).repeat(repeats=2**genome_length, axis=0),
-                           np.array([[1]*2**genome_length + [0]*2**genome_length]).repeat(repeats=2**genome_length, axis=0)))
-        elif social_mutation_type.lower() == 'gain':
-            S = np.vstack((np.array([[0]*2**genome_length + [1]*2**genome_length]).repeat(repeats=2**genome_length, axis=0),
-                           np.array([[0]*2**genome_length + [0]*2**genome_length]).repeat(repeats=2**genome_length, axis=0)))
-        elif social_mutation_type.lower() == 'loss':
-            S = np.vstack((np.array([[0]*2**genome_length + [0]*2**genome_length]).repeat(repeats=2**genome_length, axis=0),
-                           np.array([[1]*2**genome_length + [0]*2**genome_length]).repeat(repeats=2**genome_length, axis=0)))
 
         # Get the pairwise Hamming distance for all genotypes
         hamming_v = np.vectorize(genome.hamming_distance)
