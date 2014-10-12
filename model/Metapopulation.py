@@ -282,6 +282,9 @@ class Metapopulation(object):
                        np.array([[1]*2**genome_length + [0]*2**genome_length]).repeat(repeats=2**genome_length, axis=0)))
 
 
+        # TODO: to handle things like P->NP but not NP->P (or vice versa), just
+        # manipulate the mr vector.
+
         # Get the pairwise Hamming distance for all genotypes
         hamming_v = np.vectorize(genome.hamming_distance)
         genotypes = np.arange(start=0, stop=2**(genome_length+1))

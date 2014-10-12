@@ -76,7 +76,7 @@ class Population(object):
         elif self.initialize.lower() == 'random':
             self.randomize()
 
-        self.delta = np.zeros(2**(self.genome_length + 1), dtype=np.uint32)
+        self.delta = np.zeros(2**(self.genome_length + 1), dtype=np.int32)
 
     def __repr__(self):
         """Return a string representation of a Population object"""
@@ -212,7 +212,7 @@ class Population(object):
         """
 
         self.abundances += self.delta
-        self.delta = np.zeros(2**(self.genome_length + 1), dtype=np.uint32)
+        self.delta = np.zeros(2**(self.genome_length + 1), dtype=np.int32)
 
     def reset_loci(self):
         """Reset the loci of the population to all zeros

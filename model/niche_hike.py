@@ -61,7 +61,7 @@ def main():
     if args.seed:
         config.set(section='Simulation', option='seed', value=str(args.seed))
     elif config.has_option(section='Simulation', option='seed') is not True:
-        seed = np.random.randint(low=0, high=np.iinfo(np.int).max)
+        seed = np.random.randint(low=0, high=np.iinfo(np.uint32).max)
         config.set(section='Simulation', option='seed', value=str(seed))
 
     # Set the seed for the pseudorandom number generator
