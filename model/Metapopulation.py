@@ -131,6 +131,8 @@ class Metapopulation(object):
                                            option='genome_length')
         max_cap = self.config.getint(section='Population', option='capacity_max')
         min_cap = self.config.getint(section='Population', option='capacity_min')
+        initial_producer_proportion = self.config.getfloat(section='Population',
+                                                           option='initial_producer_proportion')
         mutation_rate_stress = self.config.getfloat(section='Population',
                                                     option='mutation_rate_stress')
 
@@ -150,9 +152,12 @@ class Metapopulation(object):
                     d['population'].dilute(stochastic=self.dilution_stochastic)
 
             elif initial_state == 'stress':
-                halfcap = (min_cap + max_cap) // 4
-                d['population'].abundances[0] = halfcap
-                d['population'].abundances[2**genome_length] = halfcap
+                cap = int(min_cap + ( (max_cap - min_cap) * initial_producer_proportion))
+                num_producers = int(cap * initial_producer_proportion)
+                num_nonproducers = cap - num_producers
+
+                d['population'].abundances[0] = num_producers
+                d['population'].abundances[2**genome_length] = num_nonproducers
                 d['population'].bottleneck(survival_rate=mutation_rate_stress)
 
 
