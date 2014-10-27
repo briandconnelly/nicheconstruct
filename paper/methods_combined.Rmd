@@ -1,22 +1,21 @@
 ---
 title: "Model Description"
-output: md_document
+output: word_document
 ---
 
 Using a computational model, we observed the relationship between adaptation to stress and the production of public good over evolutionary timescales. The simulation software and all configurations for the experiments reported are available at TODO. Simulations were run using Python 2.7.2, NumPy 1.8.1, and NetworkX 1.9. Data analyses were performed using R 3.1.1. Model parameters and their values are listed in [Table X](https://github.com/briandconnelly/niche_hike/wiki/Table%20of%20Parameter%20Values).
 
 # Description of metapopulation, populations, and individuals
 
-Each simulation tracks a single metapopulation comprising $N^2$ sites, arranged as an $N×N$ bounded lattice of sites. Each site could potentially hold a population. Populations consist of individuals, where the genotype of each individual is a binary string of length $L+1$. Alleles at the first $L$ loci (bits) determine the individual’s level of adaptation to the stressful environment. We refer to these loci as “stress loci.” The allele at the $(L+1)th$ locus determines whether the individual is a producer of a public good (allele $1$) or a non-producer (allele $0$). We refer to this locus as the “production locus.”
+Each simulation tracks a single metapopulation comprising $N^2$ sites, arranged as an $N×N$ bounded lattice. Each site could potentially hold a population. Populations consist of individuals, where the genotype of each individual is a binary string of length $L+1$. Alleles at the first $L$ loci (bits) determine the individual’s level of adaptation to the stressful environment. We refer to these loci as “stress loci.” The allele at the $(L+1)$<sup>th</sup> locus determines whether the individual is a producer of a public good (allele $1$) or a non-producer (allele $0$). We refer to this locus as the “production locus.”
 
 # Individual fitness
 
-A mutation from $0$ to $1$ at the $i$th stress locus will improve individual fitness by $w_i$ despite the allelic states of other loci (i.e., there is no epistasis). We assume that $\{w_1,w_2,w_3,...,w_L\}$ are independent and identically distributed (iid) random variables with $w_i \sim unif[w_{min}, w_{max}]$. Public good production is costly, reducing individual fitness by $c$. Thus, if the allelic state of the $i$ th locus is denoted $a_i$ (with $a_i \in \{0,1\}$), then the fitness of an individual is:
+A mutation from $0$ to $1$ at the $i$<sup>th</sup> stress locus will improve individual fitness by $w_i$ despite the allelic states of other loci (i.e., there is no epistasis). We assume that $\{w_1, w_2, w_3, \ldots, w_L\}$ are independent and identically distributed (i.i.d.) random variables with $w_i \sim unif[w_{min}, w_{max}]$. Public good production is costly, reducing individual fitness by $c$. Thus, if the allelic state of the $i$<sup>th</sup> locus is denoted $a_i$ (with $a_i \in \{0,1\}$), then the fitness of an individual is:
 
 $$
 W = z + \sum_{i=1}^{L} a_i w_i - a_{L+1} c
 $$
-
 
 where $z$ is a baseline fitness (the fitness of an individual with zeros at every locus). If there are no stress loci ($L=0$), the fitness of a producer and non-producer is $z-c$ and $z$, respectively.
 
@@ -27,13 +26,13 @@ Each simulation is run for $T$ cycles. Each cycle consists of population growth,
 
 ## Population Growth
 
-If the proportion of producers in a population is $p$ at the beginning of a growth cycle, then the population grows to the following size over the growth cycle:
+If $p$ is the proportion of producers in a population at the beginning of a growth cycle, then that population grows to the following size over the growth cycle:
 
 $$
 S(p) = S_{min} + (S_{max} - S_{min}) p
 $$
 
-Therefore, a population with solely non-producers reaches a size of $S_{min}$, while a population with only producers reaches a size of $S_{max}$ (with $S_{max} \gt S_{min}$). The function $S(p)$ gauges the benefit of public good production, as population size increases linearly with the proportion of producers. During population growth, competition between genotypes occurs. There are $2^{L+1}$ possible genotypes. Consider an arbitrary genotype $g$ (with $g \in \{1,2,3,...,2^{L+1}\}$). Let $n_g$ be the number of individuals with genotype $g$, and let $W_g$ be the fitness of genotype $g$ (see equation [1]). The composition of genotypes after population growth is multinomial with parameters $S(p)$ and $\{\pi_1, \pi_2, \ldots, \pi_{2^{L+1}}\}$, where
+Therefore, a population with solely non-producers reaches a size of $S_{min}$, while a population with only producers reaches a size of $S_{max}$ (with $S_{max} \ge S_{min}$). The function $S(p)$ gauges the benefit of public good production, as population size increases linearly with the proportion of producers. During population growth, competition between genotypes occurs. There are $2^{L+1}$ possible genotypes. Consider an arbitrary genotype $g$ (with $g \in \{1, 2, 3, \ldots, 2^{L+1}\}$). Let $n_g$ be the number of individuals with genotype $g$, and let $W_g$ be the fitness of genotype $g$ (see equation [1]). The composition of genotypes after population growth is multinomial with parameters $S(p)$ and $\{\pi_1, \pi_2, \ldots, \pi_{2^{L+1}}\}$, where
 
 $$
 \pi_g = \frac{n_g W_g}{\sum_{i=1}^{2^{L+1}} n_i W_i}
@@ -52,21 +51,10 @@ $$
 
 where $H_{s}(g,~g')$ and $H_{p}(g,~g')$ are the Hamming distances between genotypes $g$ and $g'$ at the stress loci and production locus, respectively. The Hamming distance between two bit strings is the number of differing bits.
 
-Let $n_{g}^{*}$ be the number of individuals with genotype $g$ after population growth and before mutation. The composition of genotypes after mutation is multinomial with parameters $S(p)$ and $\{\pi_{1}^{*}, \pi_{2}^{*}, \pi_{3}^{*}, \ldots, \pi_{L+1}^{*}\}$, where 
-
-
-$$
-\pi_{g'}^{*} = \frac{\sum_{g=1}^{2^{L+1}} n_{g} \tau_{g \rightarrow g'}}{\sum_{g'=1}^{2^{L+1}} \sum_{g=1}^{2^{L+1}} n_{g} \tau_{g \rightarrow g'}}
-$$
-
-Thus, $\pi_{g'}^{*}$ is the probability that an individual in the population after mutation is genotype $g'$ (such that $\sum \pi_{g'}^{*} = 1$).
-
 
 ## Migration
 
 Following mutation, migration of individuals occurs. For each populated site, a random adjacent site in its Moore neighborhood (the 8 nearest sites on the lattice) is chosen. Note, the metapopulation lattice has boundaries, thus sites on the edge of the metapopulation have fewer adjacent sites than those in the interior. Every individual in the focal site moves to the adjacent site with probability $m$.
-
-**BDC:** Use more generic graph description if wellmixed is included?
 
 
 ## Dilution
@@ -76,4 +64,4 @@ Following migration, populations were thinned to allow for growth in the next cy
 
 ## Stress Adaptation
 
-The emergence of an environmental stress subjects populations to an additional bottleneck. Individuals survive this event with probability $\mu_{?}$, which represents the likelihood of a stress-surviving trait arising via mutation. Because individuals are not adapted to this new stress, the allelic state $a_{i}$ is set to $0$ at each stress locus. The fitness effects associated with adaptations at each locus $w_{i}$ are also regenerated as described in Individual Fitness. Note that this removes the influence of any previous stress. Simulations begin by applying this process to full populations initiated at each site with producer proportion $p_{0}$.
+The emergence of an environmental stress subjects populations to an additional bottleneck. Individuals survive this event with probability $\mu_{e}$, which represents the likelihood that a mutation occurs, engendering survival in the new environment. Because individuals are not adapted to this new stress, the allelic state $a_{i}$ is set to $0$ at each stress locus. The fitness effects associated with adaptations at each locus $w_{i}$ are also regenerated as described in Individual Fitness. Note that this removes the influence of any previous stress. Simulations begin by applying this process to full populations initiated at each site with producer proportion $p_{0}$.
