@@ -1,9 +1,9 @@
 ---
 title: "Genome Length"
-output: pdf_document
+output: html_document
 ---
 
-```{r Load the Data, echo=FALSE, message=FALSE, warning=FALSE}
+```{r Load the Data, echo=TRUE, message=FALSE, warning=FALSE}
 library(dplyr)
 library(magrittr)
 library(ggplot2)
@@ -43,13 +43,14 @@ p <- ggplot(d1, aes(x=Time, y=Mean, color=as.factor(GenomeLength),
     geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70') +   
     geom_ribbon(aes(ymin=CL95_lower, ymax=CL95_upper), color=NA, alpha=0.2) +   
     geom_line() +
-    scale_color_hue(name='Genome Length (L)', guide=guide_legend(order=1)) +
+    scale_color_hue(name='Genome Length (L)', guide=guide_legend(order=1, keywidth=0.9)) +
     scale_fill_hue(guide=FALSE) +
     scale_linetype_manual(values=c('lattice, 25x25'='solid',
                                    'well-mixed, 625'='dashed'),
                           labels=c('lattice, 25x25'='Structured',
                                    'well-mixed, 625'='Unstructured'),
-                          name='Population Structure') +
+                          name='Population Structure',
+                          guide=guide_legend(order=2, keywidth=0.9)) +
     labs(x='Time', y='Producer Proportion') +
     theme_bdc_grey()
 rescale_golden(p)
@@ -147,12 +148,12 @@ p <- ggplot(prod_integrals, aes(x=GenomeLength, y=Integral,
     scale_color_hue(name='Population Structure',
                     labels=c("lattice, 25x25"="Structured",
                              "well-mixed, 625"="Unstructured"),
-                    guide=guide_legend(order=1)) +
+                    guide=guide_legend(order=1, keywidth=0.9)) +
     scale_shape_manual(name='Population Structure',
                        labels=c("lattice, 25x25"="Structured",
                                 "well-mixed, 625"="Unstructured"),
                        values=c("lattice, 25x25"=15,
-                                "well-mixed, 625"=16), guide=guide_legend(order=1)) +
+                                "well-mixed, 625"=16), guide=guide_legend(order=1, keywidth=0.9)) +
     labs(x='Genome Length (L)',
          y=sprintf('Producer Presence over %d Cycles',
                    max(gnhdata$Time)-min(gnhdata$Time))) +
