@@ -49,7 +49,7 @@ p <- ggplot(d1, aes(x=Time, y=Mean, color=as.factor(GenomeLength),
                                    'well-mixed, 625'='dashed'),
                           labels=c('lattice, 25x25'='Structured',
                                    'well-mixed, 625'='Unstructured'),
-                          name='Population Structure',
+                          name='Metapopulation Structure',
                           guide=guide_legend(order=2, keywidth=0.9)) +
     labs(x='Time', y='Producer Proportion') +
     theme_bdc_grey()
@@ -75,7 +75,7 @@ ggplot(d2, aes(x=Time, y=Mean, color=as.factor(GenomeLength),
     geom_line() +
     scale_linetype_manual(values=c('lattice, 25x25'='solid',
                                    'well-mixed, 625'='dashed'),
-                          name='Population Structure', guide=FALSE) +
+                          name='Metapopulation Structure', guide=FALSE) +
     scale_color_hue(name='Genome Length (L)', guide=guide_legend(order=1)) +
     scale_fill_hue(guide=FALSE) +
     facet_grid(PopulationStructure ~ ., labeller=struct_labeler) +
@@ -111,10 +111,10 @@ p <- ggplot(prod_integrals08, aes(x=as.factor(GenomeLength), y=Integral,
     stat_summary(fun.y='mean', geom='line', aes(group=PopulationStructure)) +
     stat_summary(fun.data='mean_cl_boot') +
     scale_x_discrete(breaks=unique(prod_integrals08$GenomeLength)) +
-    scale_color_hue(name='Population Structure', labels=c("lattice, 25x25"="Structured",
+    scale_color_hue(name='Metapopulation Structure', labels=c("lattice, 25x25"="Structured",
                                                           "well-mixed, 625"="Unstructured"),
                     guide=guide_legend(order=1)) +
-    scale_shape_manual(name='Population Structure',
+    scale_shape_manual(name='Metapopulation Structure',
                        labels=c("lattice, 25x25"="Structured",
                                 "well-mixed, 625"="Unstructured"),
                        values=c("lattice, 25x25"=15,
@@ -145,15 +145,16 @@ p <- ggplot(prod_integrals, aes(x=GenomeLength, y=Integral,
     #geom_point(shape=1, alpha=0.1) +
     stat_summary(fun.data='mean_cl_boot') +
     scale_x_continuous(breaks=unique(prod_integrals$GenomeLength)) +
-    scale_color_hue(name='Population Structure',
+    scale_color_hue(name='Metapopulation Structure',
                     labels=c("lattice, 25x25"="Structured",
                              "well-mixed, 625"="Unstructured"),
                     guide=guide_legend(order=1, keywidth=0.9)) +
-    scale_shape_manual(name='Population Structure',
+    scale_shape_manual(name='Metapopulation Structure',
                        labels=c("lattice, 25x25"="Structured",
                                 "well-mixed, 625"="Unstructured"),
                        values=c("lattice, 25x25"=15,
-                                "well-mixed, 625"=16), guide=guide_legend(order=1, keywidth=0.9)) +
+                                "well-mixed, 625"=16),
+                       guide=guide_legend(order=1, keywidth=0.9)) +
     labs(x='Genome Length (L)',
          y=sprintf('Producer Presence over %d Cycles',
                    max(gnhdata$Time)-min(gnhdata$Time))) +
