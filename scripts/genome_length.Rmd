@@ -1,0 +1,161 @@
+---
+title: "Genome Length"
+output: pdf_document
+---
+
+```{r Load the Data, echo=FALSE, message=FALSE, warning=FALSE}
+library(dplyr)
+library(magrittr)
+library(ggplot2)
+library(ggplot2bdc)
+library(Hmisc)
+
+load(file='../data/gnhdata.rda')
+source('gnh_summary.R')
+
+struct_labeler <- function(variable, value)
+{
+    labels <- c('lattice, 25x25'='Structured',
+                'well-mixed, 625'='Unstructured')
+    return(labels[value])
+}
+```
+
+# Proportion of Producers for diferent genome lengths
+
+## Genome Lengths 0 and 8
+
+This plot demonstrates that adaptation to non-social traits can significantly increase the amount of time that producers are present.
+
+```{r Proportion of Producers - Main, fig.cap='Proportion of producers over time when adaptation to stress is possible (L=8) and not (L=0). Shaded areas indicate bootstrapped 95% confidence intervals.'}
+d1 <- gnhdata %>%
+    filter(GenomeLength==0 | GenomeLength==8) %>%
+    filter(SocialMutations==TRUE) %>%
+    filter(FitnessDistribution=='uniform') %>%
+    filter(MinCarryingCapacity==800 & MaxCarryingCapacity==2000) %>%
+    filter(MigrationRate==0.05) %>%
+    filter(MutationRateSocial==1e-5 & MutationRateAdaptation==1e-5) %>%
+    group_by(Time, GenomeLength, PopulationStructure) %>%
+    do(gnh_summary(.$MeanProducerProportion))
+
+p <- ggplot(d1, aes(x=Time, y=Mean, color=as.factor(GenomeLength),
+              fill=as.factor(GenomeLength), linetype=PopulationStructure)) +
+    geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70') +   
+    geom_ribbon(aes(ymin=CL95_lower, ymax=CL95_upper), color=NA, alpha=0.2) +   
+    geom_line() +
+    scale_color_hue(name='Genome Length (L)', guide=guide_legend(order=1)) +
+    scale_fill_hue(guide=FALSE) +
+    scale_linetype_manual(values=c('lattice, 25x25'='solid',
+                                   'well-mixed, 625'='dashed'),
+                          labels=c('lattice, 25x25'='Structured',
+                                   'well-mixed, 625'='Unstructured'),
+                          name='Population Structure') +
+    labs(x='Time', y='Producer Proportion') +
+    theme_bdc_grey()
+rescale_golden(p)
+```
+
+### All Genome Lengths (0-10)
+
+```{r Proportion of Producers - Full, fig.cap='Proportion of producers over time for different genome lengths in structured and unstructured populations. Shaded areas indicate bootstrapped 95% confidence intervals.'}
+d2 <- gnhdata %>%
+    filter(SocialMutations==TRUE) %>%
+    filter(FitnessDistribution=='uniform') %>%
+    filter(MinCarryingCapacity==800 & MaxCarryingCapacity==2000) %>%
+    filter(MigrationRate==0.05) %>%
+    filter(MutationRateSocial==1e-5 & MutationRateAdaptation==1e-5) %>%
+    group_by(Time, GenomeLength, PopulationStructure) %>%
+    do(gnh_summary(.$MeanProducerProportion))
+
+ggplot(d2, aes(x=Time, y=Mean, color=as.factor(GenomeLength),
+              fill=as.factor(GenomeLength), linetype=PopulationStructure)) +
+    geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70') +   
+    geom_ribbon(aes(ymin=CL95_lower, ymax=CL95_upper), color=NA, alpha=0.2) +   
+    geom_line() +
+    scale_linetype_manual(values=c('lattice, 25x25'='solid',
+                                   'well-mixed, 625'='dashed'),
+                          name='Population Structure', guide=FALSE) +
+    scale_color_hue(name='Genome Length (L)', guide=guide_legend(order=1)) +
+    scale_fill_hue(guide=FALSE) +
+    facet_grid(PopulationStructure ~ ., labeller=struct_labeler) +
+    labs(x='Time', y='Producer Proportion') +
+    theme_bdc_grey()
+```
+
+
+# Producer "Presence" (Integral)
+
+```{r Producer Presence - Subsetting the Data}
+prod_integrals <- gnhdata %>%
+    filter(SocialMutations==TRUE) %>%
+    filter(FitnessDistribution=='uniform') %>%
+    filter(MinCarryingCapacity==800 & MaxCarryingCapacity==2000) %>%
+    filter(MigrationRate==0.05) %>%
+    filter(MutationRateSocial==1e-5 & MutationRateAdaptation==1e-5) %>%
+    select(Time, MeanProducerProportion, GenomeLength, PopulationStructure, Replicate) %>%
+    group_by(GenomeLength, PopulationStructure, Replicate) %>%
+    summarise(Integral=sum(MeanProducerProportion))
+
+prod_integrals08 <- filter(prod_integrals, GenomeLength==0 | GenomeLength==8)
+```
+
+Hello.
+
+```{r Producer Presence - Main, fig.cap='Producer presence (integral) over 2990 cycles in structured (lattice) and unstructured environments. Error bars indicate bootstrapped 95% confidence intervals.'}
+
+p <- ggplot(prod_integrals08, aes(x=as.factor(GenomeLength), y=Integral,
+                                  color=PopulationStructure,
+                                  shape=PopulationStructure)) +
+    #geom_point(shape=1, alpha=0.1) +
+    stat_summary(fun.y='mean', geom='line', aes(group=PopulationStructure)) +
+    stat_summary(fun.data='mean_cl_boot') +
+    scale_x_discrete(breaks=unique(prod_integrals08$GenomeLength)) +
+    scale_color_hue(name='Population Structure', labels=c("lattice, 25x25"="Structured",
+                                                          "well-mixed, 625"="Unstructured"),
+                    guide=guide_legend(order=1)) +
+    scale_shape_manual(name='Population Structure',
+                       labels=c("lattice, 25x25"="Structured",
+                                "well-mixed, 625"="Unstructured"),
+                       values=c("lattice, 25x25"=15,
+                                "well-mixed, 625"=16), guide=guide_legend(order=1)) +
+    labs(x='Genome Length (L)', y=sprintf('Producer Presence over %d Cycles', max(gnhdata$Time)-min(gnhdata$Time))) +
+    theme_bdc_grey(grid.y=FALSE)
+rescale_plot(p, ratio=0.2)
+```
+
+
+```{r Producer Presence - Main Regression}
+structured <- filter(prod_integrals08, PopulationStructure=='lattice, 25x25')
+unstructured <- filter(prod_integrals08, PopulationStructure=='well-mixed, 625')
+
+structured_lm <- lm(Integral~GenomeLength, data=structured)
+unstructured_lm <- lm(Integral~GenomeLength, data=unstructured)
+
+summary(structured_lm)
+summary(unstructured_lm)
+
+```
+
+
+```{r Producer Presence - Full, fig.cap='Producer presence (integral) over 2990 cycles in structured (lattice) and unstructured environments. Error bars indicate bootstrapped 95% confidence intervals.'}
+p <- ggplot(prod_integrals, aes(x=GenomeLength, y=Integral,
+                                color=PopulationStructure,
+                                shape=PopulationStructure)) +
+    #geom_point(shape=1, alpha=0.1) +
+    stat_summary(fun.data='mean_cl_boot') +
+    scale_x_continuous(breaks=unique(prod_integrals$GenomeLength)) +
+    scale_color_hue(name='Population Structure',
+                    labels=c("lattice, 25x25"="Structured",
+                             "well-mixed, 625"="Unstructured"),
+                    guide=guide_legend(order=1)) +
+    scale_shape_manual(name='Population Structure',
+                       labels=c("lattice, 25x25"="Structured",
+                                "well-mixed, 625"="Unstructured"),
+                       values=c("lattice, 25x25"=15,
+                                "well-mixed, 625"=16), guide=guide_legend(order=1)) +
+    labs(x='Genome Length (L)',
+         y=sprintf('Producer Presence over %d Cycles',
+                   max(gnhdata$Time)-min(gnhdata$Time))) +
+    theme_bdc_grey(grid.y=FALSE)
+rescale_golden(p)
+```
