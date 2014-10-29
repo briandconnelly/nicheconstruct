@@ -1,0 +1,141 @@
+---
+title: "Exponential Fitness Effects"
+output: html_document
+---
+
+```{r setup}
+library(dplyr)
+library(ggplot2)
+library(ggplot2bdc)
+library(Hmisc)
+library(magrittr)
+
+load(file='../data/gnhdata.rda')
+source('gnh_summary.R')
+
+fitness_labeller <- function(variable, value)
+{
+    labels <- c('uniform'='Uniform',
+                'exponential'='Exponential')
+    return(labels[value])
+}
+
+````
+
+```{r data subsetting}
+expdata <- gnhdata %>% filter(SocialMutations==TRUE) %>% 
+    filter(PopulationStructure=='lattice, 25x25') %>%
+    filter(MigrationRate==0.05) %>%
+    filter(MutationRateSocial==1e-5 & MutationRateAdaptation==1e-5) %>%
+    filter(MutationRateStress==1e-5) %>%
+    filter(MinCarryingCapacity==800) %>%
+    filter(MaxCarryingCapacity==2000)
+```
+
+```{r summaries}
+exp_prop <- expdata %>%
+    group_by(FitnessDistribution, GenomeLength, Time) %>%
+    do(gnh_summary(.$MeanProducerProportion))
+
+exp_prop08 <- filter(exp_prop, GenomeLength==0 | GenomeLength==8)
+
+exp_pres <- expdata %>%
+    group_by(FitnessDistribution, GenomeLength, Source, Replicate) %>%
+    summarise(Integral=sum(MeanProducerProportion))
+
+exp_pres08 <- filter(exp_pres, GenomeLength==0 | GenomeLength==8)
+
+```
+
+```{r proportion 08}
+p_exp_prop08 <- ggplot(exp_prop08, aes(x=Time, y=Mean, color=as.factor(GenomeLength), fill=as.factor(GenomeLength),
+                                   linetype=FitnessDistribution)) +
+    geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70') +   
+    geom_ribbon(aes(ymin=CL95_lower, ymax=CL95_upper), color=NA, alpha=0.2) +   
+    geom_line() +
+    scale_color_hue(name='Genome Length (L)', guide=guide_legend(order=1)) +
+    scale_linetype_manual(values=c('uniform'='solid',
+                                   'exponential'='dashed'),
+                          labels=c('uniform'='Uniform',
+                                   'exponential'='Exponential'),
+                          name='Distribution of Fitness Effects', guide=guide_legend(order=2, keywidth=0.9)) +
+    scale_fill_hue(guide=FALSE) +
+    labs(x='Time (T)', y='Producer Proportion') +
+    theme_bdc_grey()
+rescale_golden(p_exp_prop08)
+#ggsave_golden('../figures/08-expfitness-proportion.png')
+```
+
+
+
+```{r proportion all}
+p_exp_prop <- ggplot(exp_prop, aes(x=Time, y=Mean, color=as.factor(GenomeLength), fill=as.factor(GenomeLength),
+                                   linetype=FitnessDistribution)) +
+    geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70') +   
+    geom_ribbon(aes(ymin=CL95_lower, ymax=CL95_upper), color=NA, alpha=0.2) +   
+    geom_line() +
+    facet_grid(FitnessDistribution ~ ., labeller=fitness_labeller) +
+    scale_linetype_manual(values=c('uniform'='solid',
+                                   'exponential'='dashed'),
+                          name='Distribution of Fitness Effects', guide=FALSE) +
+    scale_color_hue(name='Migration Rate (m)', guide=guide_legend(order=1)) +
+    scale_fill_hue(guide=FALSE) +
+    labs(x='Time (T)', y='Producer Proportion') +
+    theme_bdc_grey()
+rescale_plot(p_exp_prop, ratio=2.5)
+#ggsave('../figures/all-expfitness-proportion.png')
+```
+
+
+```{r presence 08}
+
+```
+
+
+```{r presence all}
+p_presence <- ggplot(exp_pres, aes(x=GenomeLength, y=Integral,
+                                   color=FitnessDistribution,
+                                   shape=FitnessDistribution)) +
+    geom_point(shape=1, alpha=0.06, position='identity') +
+    stat_summary(fun.data='mean_cl_boot') +
+    scale_x_continuous(breaks=unique(exp_pres$GenomeLength)) +
+    scale_color_hue(name='Distribution of Fitness Effects',
+                    labels=c('uniform'='Uniform',
+                             'exponential'='Exponential'),
+                    guide=guide_legend(order=1, keywidth=0.9)) +
+    scale_shape_manual(name='Distribution of Fitness Effects',
+                       labels=c('uniform'='Uniform',
+                                'exponential'='Exponential'), 
+                       values=c('uniform'=16, 'exponential'=17),
+                       guide=guide_legend(order=1, keywidth=0.9)) +
+    labs(x='Genome Length (L)',
+         y=sprintf('Producer Presence over %d Cycles',
+                   max(gnhdata$Time)-min(gnhdata$Time))) +
+    theme_bdc_grey(grid.y=FALSE)
+rescale_golden(p_presence)
+#ggsave_golden('../figures/all-expfitness-presence.png')
+```
+
+```{r presence 08}
+p_presence08 <- ggplot(exp_pres08, aes(x=GenomeLength, y=Integral,
+                                   color=FitnessDistribution,
+                                   shape=FitnessDistribution)) +
+    geom_point(shape=1, alpha=0.06, position='identity') +
+    stat_summary(fun.y='mean', geom='line', aes(group=FitnessDistribution)) +
+    stat_summary(fun.data='mean_cl_boot') +
+    scale_x_continuous(breaks=unique(exp_pres08$GenomeLength)) +
+    scale_color_hue(name='Distribution of Fitness Effects',
+                    labels=c('uniform'='Uniform',
+                             'exponential'='Exponential'),
+                    guide=guide_legend(order=1, keywidth=0.9)) +
+    scale_shape_manual(name='Distribution of Fitness Effects',
+                       labels=c('uniform'='Uniform',
+                                'exponential'='Exponential'), 
+                       values=c('uniform'=16, 'exponential'=17),
+                       guide=guide_legend(order=1, keywidth=0.9)) +
+    labs(x='Genome Length (L)',
+         y=sprintf('Producer Presence over %d Cycles',
+                   max(gnhdata$Time)-min(gnhdata$Time))) +
+    theme_bdc_grey(grid.y=FALSE)
+rescale_plot(p_presence08, ratio=0.2)
+```
