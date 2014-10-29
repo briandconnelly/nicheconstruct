@@ -12,6 +12,7 @@ library(Hmisc)
 
 load(file='../data/gnhdata.rda')
 source('gnh_summary.R')
+source('gnh_labels.R')
 
 struct_labeler <- function(variable, value)
 {
@@ -45,9 +46,9 @@ p_proportion <- ggplot(migration_data, aes(x=Time, y=Mean, color=as.factor(Migra
     geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70') +   
     geom_ribbon(aes(ymin=CL95_lower, ymax=CL95_upper), color=NA, alpha=0.2) +   
     geom_line() +
-    scale_color_hue(name='Migration Rate (m)', guide=guide_legend(order=1)) +
+    scale_color_hue(name=label_migration_rate, guide=guide_legend(order=1)) +
     scale_fill_hue(guide=FALSE) +
-    labs(x='Time (T)', y='Producer Proportion') +
+    labs(x=label_time, y=label_producer_proportion) +
     theme_bdc_grey()
 rescale_golden(p_proportion)
 # ggsave_golden('../figures//all-migration-proportion.png')
@@ -70,7 +71,7 @@ p_presence <- ggplot(migration_integrals, aes(x=MigrationRate, y=Integral)) +
     stat_summary(fun.data='mean_cl_boot') +
     scale_x_log10(breaks=unique(migration_integrals$MigrationRate),
                   labels=migration_labels) +
-    labs(x='Migration Rate (m)',
+    labs(x=label_migration_rate,
          y=sprintf('Producer Presence over %d Cycles',
                    max(gnhdata$Time)-min(gnhdata$Time))) +
     theme_bdc_grey(grid.y=FALSE)

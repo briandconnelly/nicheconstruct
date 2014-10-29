@@ -12,6 +12,7 @@ library(magrittr)
 
 load(file='../data/gnhdata.rda')
 source('gnh_summary.R')
+source('gnh_labels.R')
 
 fitness_labeller <- function(variable, value)
 {
@@ -54,14 +55,14 @@ p_exp_prop08 <- ggplot(exp_prop08, aes(x=Time, y=Mean, color=as.factor(GenomeLen
     geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70') +   
     geom_ribbon(aes(ymin=CL95_lower, ymax=CL95_upper), color=NA, alpha=0.2) +   
     geom_line() +
-    scale_color_hue(name='Genome Length (L)', guide=guide_legend(order=1)) +
+    scale_color_hue(name=label_length, guide=guide_legend(order=1)) +
     scale_linetype_manual(values=c('uniform'='solid',
                                    'exponential'='dashed'),
                           labels=c('uniform'='Uniform',
                                    'exponential'='Exponential'),
                           name='Distribution of Fitness Effects', guide=guide_legend(order=2, keywidth=0.9)) +
     scale_fill_hue(guide=FALSE) +
-    labs(x='Time (T)', y='Producer Proportion') +
+    labs(x=label_time, y=label_producer_proportion) +
     theme_bdc_grey()
 rescale_golden(p_exp_prop08)
 #ggsave_golden('../figures/08-expfitness-proportion.png')
@@ -78,10 +79,10 @@ p_exp_prop <- ggplot(exp_prop, aes(x=Time, y=Mean, color=as.factor(GenomeLength)
     facet_grid(FitnessDistribution ~ ., labeller=fitness_labeller) +
     scale_linetype_manual(values=c('uniform'='solid',
                                    'exponential'='dashed'),
-                          name='Genome Length (L)', guide=FALSE) +
-    scale_color_hue(name='Genome Length (L)', guide=guide_legend(order=1)) +
+                          name=label_genome_length, guide=FALSE) +
+    scale_color_hue(name=label_genome_length, guide=guide_legend(order=1)) +
     scale_fill_hue(guide=FALSE) +
-    labs(x='Time (T)', y='Producer Proportion') +
+    labs(x=label_time, y=label_producer_proportion) +
     theme_bdc_grey()
 rescale_plot(p_exp_prop, ratio=2.5)
 #ggsave('../figures/all-expfitness-proportion.png')
@@ -109,7 +110,7 @@ p_presence <- ggplot(exp_pres, aes(x=GenomeLength, y=Integral,
                                 'exponential'='Exponential'), 
                        values=c('uniform'=16, 'exponential'=17),
                        guide=guide_legend(order=1, keywidth=0.9)) +
-    labs(x='Genome Length (L)',
+    labs(x=label_genome_length,
          y=sprintf('Producer Presence over %d Cycles',
                    max(gnhdata$Time)-min(gnhdata$Time))) +
     theme_bdc_grey(grid.y=FALSE)
@@ -134,7 +135,7 @@ p_presence08 <- ggplot(exp_pres08, aes(x=GenomeLength, y=Integral,
                                 'exponential'='Exponential'), 
                        values=c('uniform'=16, 'exponential'=17),
                        guide=guide_legend(order=1, keywidth=0.9)) +
-    labs(x='Genome Length (L)',
+    labs(x=label_genome_length,
          y=sprintf('Producer Presence over %d Cycles',
                    max(gnhdata$Time)-min(gnhdata$Time))) +
     theme_bdc_grey(grid.y=FALSE)

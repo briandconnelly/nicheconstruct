@@ -1,0 +1,72 @@
+---
+title: "Mutation Rate"
+output: html_document
+---
+
+```{r setup}
+library(dplyr)
+library(magrittr)
+library(ggplot2)
+library(ggplot2bdc)
+library(Hmisc)
+
+load(file='../data/gnhdata.rda')
+source('gnh_summary.R')
+source('gnh_labels.R')
+
+mutation_labels <- c('1e-7'='0.0000001', '1e-6'='0.000001', '1e-5'='0.00001',
+                     '1e-4'='0.0001', '1e-3'='0.001', '1e-2'='0.01',
+                     '1e-1'='0.1')
+```
+
+```{r subsetting}
+mu_data <- gnhdata %>%
+    filter(GenomeLength==8) %>%
+    filter(SocialMutations==TRUE) %>%
+    filter(PopulationStructure=='lattice, 25x25') %>%
+    filter(FitnessDistribution=='uniform') %>%
+    filter(MigrationRate==0.05) %>%
+    filter(MutationRateStress==1e-5) %>%
+    filter(MinCarryingCapacity==800) %>%
+    filter(MaxCarryingCapacity==2000)
+```
+
+```{r analyses}
+mu_prop <- mu_data %>%
+    group_by(MutationRateSocial, MutationRateAdaptation, Time) %>%
+    do(gnh_summary(.$MeanProducerProportion))
+
+mu_pres <- mu_data %>%
+    group_by(MutationRateSocial, MutationRateAdaptation, Source, Replicate) %>%
+    summarise(Integral=sum(MeanProducerProportion))
+
+```
+
+```{r Producer Proportion All}
+p_mu_prop <- ggplot(mu_prop, aes(x=Time, y=Mean,
+                                         color=as.factor(MutationRateAdaptation),
+                                         fill=as.factor(MutationRateAdaptation))) +
+    geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70') +   
+    geom_ribbon(aes(ymin=CL95_lower, ymax=CL95_upper), color=NA, alpha=0.2) +   
+    geom_line() +
+    scale_color_hue(name=label_mu, guide=guide_legend(order=1)) +
+    scale_fill_hue(guide=FALSE) +
+    labs(x=label_time, y=label_producer_proportion) +
+    theme_bdc_grey()
+rescale_golden(p_mu_prop)
+# ggsave_golden('../figures/all-mu-proportion.png')
+```
+
+```{r Producer Presence All}
+p_mu_pres <- ggplot(mu_pres, aes(x=MutationRateAdaptation, y=Integral)) +
+    geom_point(shape=1, alpha=0.06, position='identity') +
+    stat_summary(fun.data='mean_cl_boot') +
+    scale_x_log10(breaks=unique(mu_pres$MutationRateAdaptation),
+                  labels=mutation_labels) +
+    labs(x=label_mu,
+         y=sprintf('Producer Presence over %d Cycles',
+                   max(mu_data$Time)-min(mu_data$Time))) +
+    theme_bdc_grey(grid.y=FALSE)
+rescale_golden(p_mu_pres)
+# ggsave_golden('../figures/all-mu-presence.png')
+```

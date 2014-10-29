@@ -12,6 +12,7 @@ library(Hmisc)
 
 load(file='../data/gnhdata.rda')
 source('gnh_summary.R')
+source('gnh_labels.R')
 
 struct_labeler <- function(variable, value)
 {
@@ -19,6 +20,7 @@ struct_labeler <- function(variable, value)
                 'well-mixed, 625'='Unstructured')
     return(labels[value])
 }
+
 ```
 
 # Proportion of Producers for diferent genome lengths
@@ -44,7 +46,7 @@ p_gl08 <- ggplot(gldata_08, aes(x=Time, y=Mean, color=as.factor(GenomeLength),
     geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70') +   
     geom_ribbon(aes(ymin=CL95_lower, ymax=CL95_upper), color=NA, alpha=0.2) +   
     geom_line() +
-    scale_color_hue(name='Genome Length (L)', guide=guide_legend(order=1, keywidth=0.9)) +
+    scale_color_hue(name=label_genome_length, guide=guide_legend(order=1, keywidth=0.9)) +
     scale_fill_hue(guide=FALSE) +
     scale_linetype_manual(values=c('lattice, 25x25'='solid',
                                    'well-mixed, 625'='dashed'),
@@ -52,7 +54,7 @@ p_gl08 <- ggplot(gldata_08, aes(x=Time, y=Mean, color=as.factor(GenomeLength),
                                    'well-mixed, 625'='Unstructured'),
                           name='Metapopulation Structure',
                           guide=guide_legend(order=2, keywidth=0.9)) +
-    labs(x='Time (T)', y='Producer Proportion') +
+    labs(x=label_time, y=label_producer_proportion) +
     theme_bdc_grey()
 rescale_golden(p_gl08)
 # ggsave_golden('../figures//08-spatial_vs_non-producer_proportion.png')
@@ -78,10 +80,10 @@ p_glall <- ggplot(gldata_all, aes(x=Time, y=Mean, color=as.factor(GenomeLength),
     scale_linetype_manual(values=c('lattice, 25x25'='solid',
                                    'well-mixed, 625'='dashed'),
                           name='Metapopulation Structure', guide=FALSE) +
-    scale_color_hue(name='Genome Length (L)', guide=guide_legend(order=1)) +
+    scale_color_hue(name=label_genome_length, guide=guide_legend(order=1)) +
     scale_fill_hue(guide=FALSE) +
     facet_grid(PopulationStructure ~ ., labeller=struct_labeler) +
-    labs(x='Time (T)', y='Producer Proportion') +
+    labs(x=label_time, y=label_producer_proportion) +
     theme_bdc_grey()
 rescale_plot(p_glall, ratio=2.5)
 # ggsave(filename='../figures/all-spatial_vs_non-producer_proportion.png')
@@ -125,7 +127,7 @@ p <- ggplot(prod_integrals08, aes(x=as.factor(GenomeLength), y=Integral,
                                 "well-mixed, 625"="Unstructured"),
                        values=c("lattice, 25x25"=15,
                                 "well-mixed, 625"=16), guide=guide_legend(order=1)) +
-    labs(x='Genome Length (L)', y=sprintf('Producer Presence over %d Cycles', max(gnhdata$Time)-min(gnhdata$Time))) +
+    labs(x=label_genome_length, y=sprintf('Producer Presence over %d Cycles', max(gnhdata$Time)-min(gnhdata$Time))) +
     theme_bdc_grey(grid.y=FALSE)
 rescale_plot(p, ratio=0.2)
 # ggsave('../figures//08-spatial_vs_non-producer_presence.png')
@@ -161,7 +163,7 @@ p <- ggplot(prod_integrals, aes(x=GenomeLength, y=Integral,
                        values=c("lattice, 25x25"=15,
                                 "well-mixed, 625"=16),
                        guide=guide_legend(order=1, keywidth=0.9)) +
-    labs(x='Genome Length (L)',
+    labs(x=label_genome_length,
          y=sprintf('Producer Presence over %d Cycles',
                    max(gnhdata$Time)-min(gnhdata$Time))) +
     theme_bdc_grey(grid.y=FALSE)
