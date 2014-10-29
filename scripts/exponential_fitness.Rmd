@@ -23,7 +23,8 @@ fitness_labeller <- function(variable, value)
 ````
 
 ```{r data subsetting}
-expdata <- gnhdata %>% filter(SocialMutations==TRUE) %>% 
+expdata <- gnhdata %>%
+    filter(SocialMutations==TRUE) %>% 
     filter(PopulationStructure=='lattice, 25x25') %>%
     filter(MigrationRate==0.05) %>%
     filter(MutationRateSocial==1e-5 & MutationRateAdaptation==1e-5) %>%
@@ -77,8 +78,8 @@ p_exp_prop <- ggplot(exp_prop, aes(x=Time, y=Mean, color=as.factor(GenomeLength)
     facet_grid(FitnessDistribution ~ ., labeller=fitness_labeller) +
     scale_linetype_manual(values=c('uniform'='solid',
                                    'exponential'='dashed'),
-                          name='Distribution of Fitness Effects', guide=FALSE) +
-    scale_color_hue(name='Migration Rate (m)', guide=guide_legend(order=1)) +
+                          name='Genome Length (L)', guide=FALSE) +
+    scale_color_hue(name='Genome Length (L)', guide=guide_legend(order=1)) +
     scale_fill_hue(guide=FALSE) +
     labs(x='Time (T)', y='Producer Proportion') +
     theme_bdc_grey()
@@ -138,4 +139,16 @@ p_presence08 <- ggplot(exp_pres08, aes(x=GenomeLength, y=Integral,
                    max(gnhdata$Time)-min(gnhdata$Time))) +
     theme_bdc_grey(grid.y=FALSE)
 rescale_plot(p_presence08, ratio=0.2)
+#ggsave('../figures//08-expfitness-presence.png')
+```
+
+```{r presence 08 regression}
+uniform <- filter(exp_pres08, FitnessDistribution=='uniform')
+exponential <- filter(exp_pres08, FitnessDistribution=='exponential')
+
+uniform_lm <- lm(Integral~GenomeLength, data=uniform)
+exponential_lm <- lm(Integral~GenomeLength, data=exponential)
+
+summary(uniform_lm)
+summary(exponential_lm)
 ```
