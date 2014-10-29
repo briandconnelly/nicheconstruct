@@ -1,6 +1,6 @@
 ---
 title: "Genome Length"
-output: html_document
+output: pdf_document
 ---
 
 ```{r Load the Data, echo=TRUE, message=FALSE, warning=FALSE}
@@ -28,17 +28,18 @@ struct_labeler <- function(variable, value)
 This plot demonstrates that adaptation to non-social traits can significantly increase the amount of time that producers are present.
 
 ```{r Proportion of Producers - Main, fig.cap='Proportion of producers over time when adaptation to stress is possible (L=8) and not (L=0). Shaded areas indicate bootstrapped 95% confidence intervals.'}
-d1 <- gnhdata %>%
+gldata_08 <- gnhdata %>%
     filter(GenomeLength==0 | GenomeLength==8) %>%
     filter(SocialMutations==TRUE) %>%
     filter(FitnessDistribution=='uniform') %>%
     filter(MinCarryingCapacity==800 & MaxCarryingCapacity==2000) %>%
     filter(MigrationRate==0.05) %>%
     filter(MutationRateSocial==1e-5 & MutationRateAdaptation==1e-5) %>%
+    filter(MutationRateStress==1e-5) %>%
     group_by(Time, GenomeLength, PopulationStructure) %>%
     do(gnh_summary(.$MeanProducerProportion))
 
-p <- ggplot(d1, aes(x=Time, y=Mean, color=as.factor(GenomeLength),
+p_gl08 <- ggplot(gldata_08, aes(x=Time, y=Mean, color=as.factor(GenomeLength),
               fill=as.factor(GenomeLength), linetype=PopulationStructure)) +
     geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70') +   
     geom_ribbon(aes(ymin=CL95_lower, ymax=CL95_upper), color=NA, alpha=0.2) +   
@@ -51,24 +52,25 @@ p <- ggplot(d1, aes(x=Time, y=Mean, color=as.factor(GenomeLength),
                                    'well-mixed, 625'='Unstructured'),
                           name='Metapopulation Structure',
                           guide=guide_legend(order=2, keywidth=0.9)) +
-    labs(x='Time', y='Producer Proportion') +
+    labs(x='Time (T)', y='Producer Proportion') +
     theme_bdc_grey()
-rescale_golden(p)
+rescale_golden(p_gl08)
+# ggsave_golden('../figures//08-spatial_vs_non-producer_proportion.png')
 ```
 
 ### All Genome Lengths (0-10)
 
 ```{r Proportion of Producers - Full, fig.cap='Proportion of producers over time for different genome lengths in structured and unstructured populations. Shaded areas indicate bootstrapped 95% confidence intervals.'}
-d2 <- gnhdata %>%
+gldata_all <- gnhdata %>%
     filter(SocialMutations==TRUE) %>%
     filter(FitnessDistribution=='uniform') %>%
     filter(MinCarryingCapacity==800 & MaxCarryingCapacity==2000) %>%
     filter(MigrationRate==0.05) %>%
-    filter(MutationRateSocial==1e-5 & MutationRateAdaptation==1e-5) %>%
+    filter(MutationRateSocial==1e-5 & MutationRateAdaptation==1e-5 & MutationRateStress==1e-5) %>%
     group_by(Time, GenomeLength, PopulationStructure) %>%
     do(gnh_summary(.$MeanProducerProportion))
 
-ggplot(d2, aes(x=Time, y=Mean, color=as.factor(GenomeLength),
+p_glall <- ggplot(gldata_all, aes(x=Time, y=Mean, color=as.factor(GenomeLength),
               fill=as.factor(GenomeLength), linetype=PopulationStructure)) +
     geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70') +   
     geom_ribbon(aes(ymin=CL95_lower, ymax=CL95_upper), color=NA, alpha=0.2) +   
@@ -79,22 +81,26 @@ ggplot(d2, aes(x=Time, y=Mean, color=as.factor(GenomeLength),
     scale_color_hue(name='Genome Length (L)', guide=guide_legend(order=1)) +
     scale_fill_hue(guide=FALSE) +
     facet_grid(PopulationStructure ~ ., labeller=struct_labeler) +
-    labs(x='Time', y='Producer Proportion') +
+    labs(x='Time (T)', y='Producer Proportion') +
     theme_bdc_grey()
+rescale_plot(p_glall, ratio=2.5)
+# ggsave(filename='../figures/all-spatial_vs_non-producer_proportion.png')
 ```
 
 
 # Producer "Presence" (Integral)
 
 ```{r Producer Presence - Subsetting the Data}
+
 prod_integrals <- gnhdata %>%
     filter(SocialMutations==TRUE) %>%
     filter(FitnessDistribution=='uniform') %>%
     filter(MinCarryingCapacity==800 & MaxCarryingCapacity==2000) %>%
     filter(MigrationRate==0.05) %>%
     filter(MutationRateSocial==1e-5 & MutationRateAdaptation==1e-5) %>%
-    select(Time, MeanProducerProportion, GenomeLength, PopulationStructure, Replicate) %>%
-    group_by(GenomeLength, PopulationStructure, Replicate) %>%
+    filter(MutationRateStress==1e-5) %>%
+    #select(Time, MeanProducerProportion, GenomeLength, PopulationStructure, Replicate) %>%
+    group_by(GenomeLength, PopulationStructure, Source, Replicate) %>%
     summarise(Integral=sum(MeanProducerProportion))
 
 prod_integrals08 <- filter(prod_integrals, GenomeLength==0 | GenomeLength==8)
@@ -122,6 +128,7 @@ p <- ggplot(prod_integrals08, aes(x=as.factor(GenomeLength), y=Integral,
     labs(x='Genome Length (L)', y=sprintf('Producer Presence over %d Cycles', max(gnhdata$Time)-min(gnhdata$Time))) +
     theme_bdc_grey(grid.y=FALSE)
 rescale_plot(p, ratio=0.2)
+# ggsave('../figures//08-spatial_vs_non-producer_presence.png')
 ```
 
 
@@ -134,7 +141,6 @@ unstructured_lm <- lm(Integral~GenomeLength, data=unstructured)
 
 summary(structured_lm)
 summary(unstructured_lm)
-
 ```
 
 
@@ -160,4 +166,5 @@ p <- ggplot(prod_integrals, aes(x=GenomeLength, y=Integral,
                    max(gnhdata$Time)-min(gnhdata$Time))) +
     theme_bdc_grey(grid.y=FALSE)
 rescale_golden(p)
+# ggsave_golden('../figures/all-spatial_vs_non-producer_presence.png')
 ```
