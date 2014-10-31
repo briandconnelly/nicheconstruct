@@ -136,6 +136,7 @@ p_glpres08 <- ggplot(gl_pres08, aes(x=as.factor(GenomeLength), y=Integral,
     stat_summary(fun.data='mean_cl_boot') +
     scale_x_discrete(breaks=unique(gl_pres08$GenomeLength),
                      labels=label_genomelengths08) +
+    scale_y_continuous(limits=c(0, 0.1)) +
     scale_color_hue(name='Metapopulation Structure', labels=label_structure,
                     guide=guide_legend(order=1)) +
     scale_shape_manual(name='Metapopulation Structure',
@@ -171,6 +172,7 @@ p_glpres <- ggplot(gl_pres, aes(x=as.factor(GenomeLength), y=Integral,
     stat_summary(fun.data='mean_cl_boot') +
     scale_x_discrete(breaks=unique(gl_pres$GenomeLength),
                      labels=label_genomelengths) +
+    scale_y_continuous(limits=c(0,0.1)) +
     scale_color_hue(name='Metapopulation Structure', labels=label_structure,
                     guide=guide_legend(order=1)) +
     scale_shape_manual(name='Metapopulation Structure',

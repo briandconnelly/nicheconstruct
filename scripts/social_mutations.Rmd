@@ -101,6 +101,7 @@ p_social_presence <- ggplot(social_pres, aes(x=GenomeLength, y=Integral,
     stat_summary(fun.data='mean_cl_boot') +
     scale_x_continuous(breaks=unique(social_pres$GenomeLength),
                        labels=label_genomelengths) +
+    scale_y_continuous(limits=c(0,0.1)) +
     scale_color_hue(name=label_socialmu) +
     scale_shape_manual(name=label_socialmu, 
                        values=c('0'=1, '1e-05'=16)) +
@@ -119,6 +120,7 @@ p_social_presence08 <- ggplot(social_pres08, aes(x=GenomeLength, y=Integral,
     stat_summary(fun.data='mean_cl_boot') +
     scale_x_continuous(breaks=unique(social_pres08$GenomeLength),
                        labels=label_genomelengths08) +
+    scale_y_continuous(limits=c(0,0.1)) +
     scale_color_hue(name=label_socialmu) +
     scale_shape_manual(name=label_socialmu, 
                        values=c('0'=1, '1e-05'=16)) +

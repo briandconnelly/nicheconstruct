@@ -48,7 +48,8 @@ p_mu_prop <- ggplot(mu_prop, aes(x=Time, y=Mean,
     geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70') +   
     geom_ribbon(aes(ymin=CL95_lower, ymax=CL95_upper), color=NA, alpha=0.2) +   
     geom_line() +
-    scale_color_hue(name=label_mu, guide=guide_legend(order=1)) +
+    scale_color_hue(name=label_mu, labels=mutation_labels,
+                    guide=guide_legend(order=1)) +
     scale_fill_hue(guide=FALSE) +
     labs(x=label_time, y=label_producer_proportion) +
     theme_bdc_grey()
@@ -62,6 +63,7 @@ p_mu_pres <- ggplot(mu_pres, aes(x=MutationRateAdaptation, y=Integral)) +
     stat_summary(fun.data='mean_cl_boot') +
     scale_x_log10(breaks=unique(mu_pres$MutationRateAdaptation),
                   labels=mutation_labels) +
+    scale_y_continuous(limits=c(0, 0.1)) +
     labs(x=label_mu,
          y=label_producer_presence) +
     theme_bdc_grey(grid.y=FALSE)

@@ -102,6 +102,7 @@ p_presence <- ggplot(exp_pres, aes(x=GenomeLength, y=Integral,
     stat_summary(fun.data='mean_cl_boot') +
     scale_x_continuous(breaks=unique(exp_pres$GenomeLength),
                        labels=length_labels) +
+    scale_y_continuous(limits=c(0,0.1))+ 
     scale_color_hue(name='Distribution of Fitness Effects',
                     labels=c('uniform'='Uniform',
                              'exponential'='Exponential'),
@@ -126,6 +127,7 @@ p_presence08 <- ggplot(exp_pres08, aes(x=GenomeLength, y=Integral,
     stat_summary(fun.y='mean', geom='line', aes(group=FitnessDistribution)) +
     stat_summary(fun.data='mean_cl_boot') +
     scale_x_continuous(breaks=unique(exp_pres08$GenomeLength)) +
+    scale_y_continuous(limits=c(0, 0.1)) +
     scale_color_hue(name='Distribution of Fitness Effects',
                     labels=c('uniform'='Uniform',
                              'exponential'='Exponential'),
@@ -139,7 +141,7 @@ p_presence08 <- ggplot(exp_pres08, aes(x=GenomeLength, y=Integral,
          y=label_producer_presence) +
     theme_bdc_grey(grid.y=FALSE)
 rescale_plot(p_presence08, ratio=0.2)
-#ggsave('../figures//08-expfitness-presence.png')
+#ggsave('../figures/08-expfitness-presence.png')
 ```
 
 ```{r presence 08 regression}

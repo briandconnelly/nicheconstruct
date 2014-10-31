@@ -15,4 +15,4 @@ label_producer_proportion_sd <- expression(bold(paste(sigma, '(Proportion of Pro
 
 # TODO: highlight base values in labels with bold text or asterisk
 
-mutation_labels <- c('1e-7'='0.0000001', '1e-6'='0.000001', '1e-5'='0.00001', '1e-4'='0.0001', '1e-3'='0.001', '1e-2'='0.01', '1e-1'='0.1')
+mutation_labels <- c('1e-7'='0.0000001', '1e-6'='0.000001', '1e-5'=expression(bold('0.00001')), '1e-4'='0.0001', '1e-3'='0.001', '1e-2'='0.01', '1e-1'='0.1')
