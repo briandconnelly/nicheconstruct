@@ -2,6 +2,7 @@ label_time <- 'Time (T)'
 label_genome_length <- 'Genome Length (L)'
 label_migration_rate <- 'Migration Rate (m)'
 label_producer_proportion <- 'Producer Proportion'
+label_producer_presence <- 'Producer Presence'
 label_stressmu <- expression(bold(paste('Survival Mutation Rate (', mu[t], ')')))
 
 label_mu <- expression(bold(paste('Mutation Rate (', mu[p], ', ', mu[s], ')')))

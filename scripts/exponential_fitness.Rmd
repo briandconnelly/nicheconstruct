@@ -21,6 +21,7 @@ fitness_labeller <- function(variable, value)
     return(labels[value])
 }
 
+length_labels <- c('0', '1', '2', '3', '4', '5', '6', '7', expression(bold('8')), '9', '10')
 ````
 
 ```{r data subsetting}
@@ -41,9 +42,11 @@ exp_prop <- expdata %>%
 
 exp_prop08 <- filter(exp_prop, GenomeLength==0 | GenomeLength==8)
 
+exp_duration <- max(expdata$Time) - min(expdata$Time)
+
 exp_pres <- expdata %>%
     group_by(FitnessDistribution, GenomeLength, Source, Replicate) %>%
-    summarise(Integral=sum(MeanProducerProportion))
+    summarise(Integral=sum(MeanProducerProportion)/exp_duration)
 
 exp_pres08 <- filter(exp_pres, GenomeLength==0 | GenomeLength==8)
 
@@ -55,7 +58,7 @@ p_exp_prop08 <- ggplot(exp_prop08, aes(x=Time, y=Mean, color=as.factor(GenomeLen
     geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70') +   
     geom_ribbon(aes(ymin=CL95_lower, ymax=CL95_upper), color=NA, alpha=0.2) +   
     geom_line() +
-    scale_color_hue(name=label_length, guide=guide_legend(order=1)) +
+    scale_color_hue(name=label_genome_length, guide=guide_legend(order=1)) +
     scale_linetype_manual(values=c('uniform'='solid',
                                    'exponential'='dashed'),
                           labels=c('uniform'='Uniform',
@@ -80,7 +83,7 @@ p_exp_prop <- ggplot(exp_prop, aes(x=Time, y=Mean, color=as.factor(GenomeLength)
     scale_linetype_manual(values=c('uniform'='solid',
                                    'exponential'='dashed'),
                           name=label_genome_length, guide=FALSE) +
-    scale_color_hue(name=label_genome_length, guide=guide_legend(order=1)) +
+    scale_color_hue(name=label_genome_length, labels=length_labels, guide=guide_legend(order=1)) +
     scale_fill_hue(guide=FALSE) +
     labs(x=label_time, y=label_producer_proportion) +
     theme_bdc_grey()
@@ -100,7 +103,8 @@ p_presence <- ggplot(exp_pres, aes(x=GenomeLength, y=Integral,
                                    shape=FitnessDistribution)) +
     geom_point(shape=1, alpha=0.06, position='identity') +
     stat_summary(fun.data='mean_cl_boot') +
-    scale_x_continuous(breaks=unique(exp_pres$GenomeLength)) +
+    scale_x_continuous(breaks=unique(exp_pres$GenomeLength),
+                       labels=length_labels) +
     scale_color_hue(name='Distribution of Fitness Effects',
                     labels=c('uniform'='Uniform',
                              'exponential'='Exponential'),
@@ -111,8 +115,7 @@ p_presence <- ggplot(exp_pres, aes(x=GenomeLength, y=Integral,
                        values=c('uniform'=16, 'exponential'=17),
                        guide=guide_legend(order=1, keywidth=0.9)) +
     labs(x=label_genome_length,
-         y=sprintf('Producer Presence over %d Cycles',
-                   max(gnhdata$Time)-min(gnhdata$Time))) +
+         y=label_producer_presence) +
     theme_bdc_grey(grid.y=FALSE)
 rescale_golden(p_presence)
 #ggsave_golden('../figures/all-expfitness-presence.png')
@@ -136,8 +139,7 @@ p_presence08 <- ggplot(exp_pres08, aes(x=GenomeLength, y=Integral,
                        values=c('uniform'=16, 'exponential'=17),
                        guide=guide_legend(order=1, keywidth=0.9)) +
     labs(x=label_genome_length,
-         y=sprintf('Producer Presence over %d Cycles',
-                   max(gnhdata$Time)-min(gnhdata$Time))) +
+         y=label_producer_presence) +
     theme_bdc_grey(grid.y=FALSE)
 rescale_plot(p_presence08, ratio=0.2)
 #ggsave('../figures//08-expfitness-presence.png')

@@ -13,7 +13,6 @@ library(magrittr)
 load(file='../data/gnhdata.rda')
 source('gnh_summary.R')
 source('gnh_labels.R')
-
 ```
 
 ```{r subsetting}
@@ -28,16 +27,17 @@ social_data <- gnhdata %>%
 ```
 
 ```{r analysis}
-
 social_prop <- social_data %>%
     group_by(MutationRateSocial, GenomeLength, Time) %>%
     do(gnh_summary(.$MeanProducerProportion))
 
 social_prop08 <- filter(social_prop, GenomeLength==0 | GenomeLength==8)
 
+duration <- max(social_data$Time) - min(social_data$Time)
+
 social_pres <- social_data %>%
     group_by(MutationRateSocial, GenomeLength, Source, Replicate) %>%
-    summarise(Integral=sum(MeanProducerProportion))
+    summarise(Integral=sum(MeanProducerProportion)/duration)
 
 social_pres08 <- filter(social_pres, GenomeLength==0 | GenomeLength==8)
 
@@ -94,8 +94,7 @@ p_social_presence <- ggplot(social_pres, aes(x=GenomeLength, y=Integral,
     scale_shape_manual(name=label_socialmu, 
                        values=c('0'=1, '1e-05'=16)) +
     labs(x=label_genome_length,
-         y=sprintf('Producer Presence over %d Cycles',
-                   max(social_data$Time)-min(social_data$Time))) +
+         y=label_producer_presence) +
     theme_bdc_grey(grid.y=FALSE)
 rescale_golden(p_social_presence)
 #ggsave_golden('../figures/all-social-presence.png')
@@ -112,8 +111,7 @@ p_social_presence08 <- ggplot(social_pres08, aes(x=GenomeLength, y=Integral,
     scale_shape_manual(name=label_socialmu, 
                        values=c('0'=1, '1e-05'=16)) +
     labs(x=label_genome_length,
-         y=sprintf('Producer Presence over %d Cycles',
-                   max(social_data$Time)-min(social_data$Time))) +
+         y=label_producer_presence) +
     theme_bdc_grey(grid.y=FALSE)
 rescale_plot(p_social_presence08, ratio=0.2)
 #ggsave_golden('../figures/08-social-presence.png')

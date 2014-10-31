@@ -13,6 +13,9 @@ library(magrittr)
 load(file='../data/gnhdata.rda')
 source('gnh_summary.R')
 source('gnh_labels.R')
+
+stress_labels <- c('1e-5'=expression(bold('0.00001')), '1e-4'='0.0001',
+                   '1e-3'='0.001', '1e-2'='0.01', '1e-1'='0.1')
 ```
 
 ```{r subsetting}
@@ -29,13 +32,15 @@ stress_data <- gnhdata %>%
 
 
 ```{r analysis}
+duration <- max(stress_data$Time) - min(stress_data$Time)
+
 stress_prop <- stress_data %>%
     group_by(MutationRateStress, Time) %>%
     do(gnh_summary(.$MeanProducerProportion))
 
 stress_pres <- stress_data %>%
     group_by(MutationRateStress, Source, Replicate) %>%
-    summarise(Integral=sum(MeanProducerProportion))
+    summarise(Integral=sum(MeanProducerProportion)/duration)
 ```
 
 ```{r Proportion of Producers over Time}
@@ -86,10 +91,10 @@ rescale_golden(p_stress_t0d)
 p_stress_presence <- ggplot(stress_pres, aes(x=MutationRateStress, y=Integral)) +
     geom_point(shape=1, alpha=0.06, position='identity') +
     stat_summary(fun.data='mean_cl_boot') +
-    scale_x_log10(breaks=unique(stress_pres$MutationRateStress)) +
+    scale_x_log10(breaks=unique(stress_pres$MutationRateStress),
+                  labels=stress_labels) +
     labs(x=label_stressmu,
-         y=sprintf('Producer Presence over %d Cycles',
-                   max(stress_data$Time)-min(stress_data$Time))) +
+         y=label_producer_presence) +
     theme_bdc_grey(grid.y=FALSE)
 rescale_golden(p_stress_presence)
 #ggsave_golden('../figures/all-stress-presence.png')

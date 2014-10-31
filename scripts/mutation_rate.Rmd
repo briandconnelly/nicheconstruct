@@ -14,7 +14,7 @@ load(file='../data/gnhdata.rda')
 source('gnh_summary.R')
 source('gnh_labels.R')
 
-mutation_labels <- c('1e-7'='0.0000001', '1e-6'='0.000001', '1e-5'='0.00001',
+mutation_labels <- c('1e-7'='0.0000001', '1e-6'='0.000001', '1e-5'=expression(bold('0.00001')),
                      '1e-4'='0.0001', '1e-3'='0.001', '1e-2'='0.01',
                      '1e-1'='0.1')
 ```
@@ -36,10 +36,11 @@ mu_prop <- mu_data %>%
     group_by(MutationRateSocial, MutationRateAdaptation, Time) %>%
     do(gnh_summary(.$MeanProducerProportion))
 
+mu_duration <- max(mu_data$Time) - min(mu_data$Time)
+
 mu_pres <- mu_data %>%
     group_by(MutationRateSocial, MutationRateAdaptation, Source, Replicate) %>%
-    summarise(Integral=sum(MeanProducerProportion))
-
+    summarise(Integral=sum(MeanProducerProportion)/mu_duration)
 ```
 
 ```{r Producer Proportion All}
@@ -64,8 +65,7 @@ p_mu_pres <- ggplot(mu_pres, aes(x=MutationRateAdaptation, y=Integral)) +
     scale_x_log10(breaks=unique(mu_pres$MutationRateAdaptation),
                   labels=mutation_labels) +
     labs(x=label_mu,
-         y=sprintf('Producer Presence over %d Cycles',
-                   max(mu_data$Time)-min(mu_data$Time))) +
+         y=label_producer_presence) +
     theme_bdc_grey(grid.y=FALSE)
 rescale_golden(p_mu_pres)
 # ggsave_golden('../figures/all-mu-presence.png')
