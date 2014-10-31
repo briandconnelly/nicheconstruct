@@ -42,11 +42,9 @@ exp_prop <- expdata %>%
 
 exp_prop08 <- filter(exp_prop, GenomeLength==0 | GenomeLength==8)
 
-exp_duration <- max(expdata$Time) - min(expdata$Time)
-
 exp_pres <- expdata %>%
     group_by(FitnessDistribution, GenomeLength, Source, Replicate) %>%
-    summarise(Integral=sum(MeanProducerProportion)/exp_duration)
+    summarise(Integral=sum(MeanProducerProportion)/(max(Time)-min(Time)))
 
 exp_pres08 <- filter(exp_pres, GenomeLength==0 | GenomeLength==8)
 

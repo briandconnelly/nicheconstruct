@@ -47,11 +47,10 @@ migration_prop <- migration_data %>%
     group_by(Time, MigrationRate) %>%
     do(gnh_summary(.$MeanProducerProportion))
 
-migration_duration <- max(migration_data$Time) - min(migration_data$Time)
-
 migration_pres <- migration_data %>%
     group_by(MigrationRate, Replicate, Source) %>%
-    summarise(Integral=sum(MeanProducerProportion)/migration_duration)
+    summarise(Integral=sum(MeanProducerProportion)/(max(Time)-min(Time)))
+
 ```
 
 ```{r Proportion of Producers}

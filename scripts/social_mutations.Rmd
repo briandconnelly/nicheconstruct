@@ -33,11 +33,9 @@ social_prop <- social_data %>%
 
 social_prop08 <- filter(social_prop, GenomeLength==0 | GenomeLength==8)
 
-duration <- max(social_data$Time) - min(social_data$Time)
-
 social_pres <- social_data %>%
     group_by(MutationRateSocial, GenomeLength, Source, Replicate) %>%
-    summarise(Integral=sum(MeanProducerProportion)/duration)
+    summarise(Integral=sum(MeanProducerProportion)/(max(Time)-min(Time)))
 
 social_pres08 <- filter(social_pres, GenomeLength==0 | GenomeLength==8)
 

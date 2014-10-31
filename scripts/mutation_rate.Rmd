@@ -36,11 +36,9 @@ mu_prop <- mu_data %>%
     group_by(MutationRateSocial, MutationRateAdaptation, Time) %>%
     do(gnh_summary(.$MeanProducerProportion))
 
-mu_duration <- max(mu_data$Time) - min(mu_data$Time)
-
 mu_pres <- mu_data %>%
     group_by(MutationRateSocial, MutationRateAdaptation, Source, Replicate) %>%
-    summarise(Integral=sum(MeanProducerProportion)/mu_duration)
+    summarise(Integral=sum(MeanProducerProportion)/(max(Time)-min(Time)))
 ```
 
 ```{r Producer Proportion All}
