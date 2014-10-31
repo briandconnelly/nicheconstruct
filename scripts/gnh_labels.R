@@ -4,6 +4,9 @@ label_migration_rate <- 'Migration Rate (m)'
 label_producer_proportion <- 'Producer Proportion'
 label_producer_presence <- 'Producer Presence'
 label_stressmu <- expression(bold(paste('Survival Mutation Rate (', mu[t], ')')))
+label_genomelengths <- c('0', '1', '2', '3', '4', '5', '6', '7', expression(bold('8')), '9', '10')
+label_genomelengths08 <- c('0', expression(bold('8')) )
+label_structure <- c('lattice, 25x25'=expression(bold('Structured')), 'well-mixed, 625'='Unstructured')
 
 label_mu <- expression(bold(paste('Mutation Rate (', mu[p], ', ', mu[s], ')')))
 label_socialmu <- expression(bold(paste('Mutation Rate at Social Locus (', mu[p], ')')))

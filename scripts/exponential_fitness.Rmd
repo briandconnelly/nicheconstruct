@@ -21,7 +21,6 @@ fitness_labeller <- function(variable, value)
     return(labels[value])
 }
 
-length_labels <- c('0', '1', '2', '3', '4', '5', '6', '7', expression(bold('8')), '9', '10')
 ````
 
 ```{r data subsetting}
@@ -81,7 +80,7 @@ p_exp_prop <- ggplot(exp_prop, aes(x=Time, y=Mean, color=as.factor(GenomeLength)
     scale_linetype_manual(values=c('uniform'='solid',
                                    'exponential'='dashed'),
                           name=label_genome_length, guide=FALSE) +
-    scale_color_hue(name=label_genome_length, labels=length_labels, guide=guide_legend(order=1)) +
+    scale_color_hue(name=label_genome_length, labels=label_genomelengths, guide=guide_legend(order=1)) +
     scale_fill_hue(guide=FALSE) +
     labs(x=label_time, y=label_producer_proportion) +
     theme_bdc_grey()

@@ -13,6 +13,14 @@ library(magrittr)
 load(file='../data/gnhdata.rda')
 source('gnh_summary.R')
 source('gnh_labels.R')
+
+smu_labeller <- function(variable, value)                                     
+{                                                                               
+    labels <- c('1e-05'=expression(bold('0.00001')),                
+                '0'='0')                               
+    return(labels[as.character(value)])                                                       
+}
+
 ```
 
 ```{r subsetting}
@@ -38,7 +46,6 @@ social_pres <- social_data %>%
     summarise(Integral=sum(MeanProducerProportion)/(max(Time)-min(Time)))
 
 social_pres08 <- filter(social_pres, GenomeLength==0 | GenomeLength==8)
-
 ```
 
 ```{r Proportion of Producers over Time}
@@ -49,11 +56,12 @@ p_social_prop <- ggplot(social_prop, aes(x=Time, y=Mean,
     geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70') +   
     geom_ribbon(aes(ymin=CL95_lower, ymax=CL95_upper), color=NA, alpha=0.2) +   
     geom_line() +
-    facet_grid(MutationRateSocial ~ .) +
+    facet_grid(MutationRateSocial ~ ., labeller=smu_labeller) +
     scale_linetype_manual(values=c('1e-05'='solid',
                                    '0'='dashed'),
                           name='Mutations at Social Allele', guide=FALSE) +
-    scale_color_hue(name=label_genome_length, guide=guide_legend(order=1)) +
+    scale_color_hue(name=label_genome_length, labels=label_genomelengths, 
+                    guide=guide_legend(order=1)) +
     scale_fill_hue(guide=FALSE) +
     labs(x=label_time, y=label_producer_proportion) +
     theme_bdc_grey()
@@ -71,8 +79,12 @@ p_social_prop08 <- ggplot(social_prop08, aes(x=Time, y=Mean,
     geom_line() +
     scale_linetype_manual(values=c('1e-05'='solid',
                                    '0'='dashed'),
-                          name='Mutations at Social Allele', guide=FALSE) +
-    scale_color_hue(name=label_genome_length, guide=guide_legend(order=1)) +
+                          labels=c('1e-05'=expression(bold('0.00001')),
+                                   '0'='0'),
+                          name=label_socialmu,
+                          guide=guide_legend(order=2, keywidth=0.9)) +
+    scale_color_hue(name=label_genome_length, labels=label_genomelengths08,
+                    guide=guide_legend(order=1)) +
     scale_fill_hue(guide=FALSE) +
     labs(x=label_time, y=label_producer_proportion) +
     theme_bdc_grey()
@@ -87,7 +99,8 @@ p_social_presence <- ggplot(social_pres, aes(x=GenomeLength, y=Integral,
                                    shape=as.factor(MutationRateSocial))) +
     #geom_point(shape=1, alpha=0.06, position='identity') +
     stat_summary(fun.data='mean_cl_boot') +
-    scale_x_continuous(breaks=unique(social_pres$GenomeLength)) +
+    scale_x_continuous(breaks=unique(social_pres$GenomeLength),
+                       labels=label_genomelengths) +
     scale_color_hue(name=label_socialmu) +
     scale_shape_manual(name=label_socialmu, 
                        values=c('0'=1, '1e-05'=16)) +
@@ -104,7 +117,8 @@ p_social_presence08 <- ggplot(social_pres08, aes(x=GenomeLength, y=Integral,
                                    shape=as.factor(MutationRateSocial))) +
     stat_summary(fun.y='mean', geom='line', aes(group=MutationRateSocial)) +
     stat_summary(fun.data='mean_cl_boot') +
-    scale_x_continuous(breaks=unique(social_pres08$GenomeLength)) +
+    scale_x_continuous(breaks=unique(social_pres08$GenomeLength),
+                       labels=label_genomelengths08) +
     scale_color_hue(name=label_socialmu) +
     scale_shape_manual(name=label_socialmu, 
                        values=c('0'=1, '1e-05'=16)) +

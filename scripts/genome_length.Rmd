@@ -16,12 +16,39 @@ source('gnh_labels.R')
 
 struct_labeler <- function(variable, value)
 {
-    labels <- c('lattice, 25x25'='Structured',
+    labels <- c('lattice, 25x25'=expression(bold('Structured')),
                 'well-mixed, 625'='Unstructured')
     return(labels[value])
 }
 
 ```
+
+```{r subsetting}
+gldata <- gnhdata %>%
+    filter(SocialMutations==TRUE) %>%
+    filter(FitnessDistribution=='uniform') %>%
+    filter(MinCarryingCapacity==800 & MaxCarryingCapacity==2000) %>%
+    filter(MigrationRate==0.05) %>%
+    filter(MutationRateSocial==1e-5 & MutationRateAdaptation==1e-5) %>%
+    filter(MutationRateStress==1e-5)
+```
+
+```{r analysis}
+
+gl_prop <- gldata %>%
+    group_by(GenomeLength, PopulationStructure, Time) %>%
+    do(gnh_summary(.$MeanProducerProportion))
+
+gl_prop08 <- filter(gl_prop, GenomeLength==0 | GenomeLength==8)
+
+gl_pres <- gldata %>%
+    group_by(GenomeLength, PopulationStructure, Source, Replicate) %>%
+    summarise(Integral=sum(MeanProducerProportion)/(max(Time)-min(Time)))
+
+gl_pres08 <- filter(gl_pres, GenomeLength==0 | GenomeLength==8)
+    
+```
+
 
 # Proportion of Producers for diferent genome lengths
 
@@ -30,62 +57,51 @@ struct_labeler <- function(variable, value)
 This plot demonstrates that adaptation to non-social traits can significantly increase the amount of time that producers are present.
 
 ```{r Proportion of Producers - Main, fig.cap='Proportion of producers over time when adaptation to stress is possible (L=8) and not (L=0). Shaded areas indicate bootstrapped 95% confidence intervals.'}
-gldata_08 <- gnhdata %>%
-    filter(GenomeLength==0 | GenomeLength==8) %>%
-    filter(SocialMutations==TRUE) %>%
-    filter(FitnessDistribution=='uniform') %>%
-    filter(MinCarryingCapacity==800 & MaxCarryingCapacity==2000) %>%
-    filter(MigrationRate==0.05) %>%
-    filter(MutationRateSocial==1e-5 & MutationRateAdaptation==1e-5) %>%
-    filter(MutationRateStress==1e-5) %>%
-    group_by(Time, GenomeLength, PopulationStructure) %>%
-    do(gnh_summary(.$MeanProducerProportion))
 
-p_gl08 <- ggplot(gldata_08, aes(x=Time, y=Mean, color=as.factor(GenomeLength),
+p_gl08 <- ggplot(gl_prop08, aes(x=Time, y=Mean, color=as.factor(GenomeLength),
               fill=as.factor(GenomeLength), linetype=PopulationStructure)) +
     geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70') +   
     geom_ribbon(aes(ymin=CL95_lower, ymax=CL95_upper), color=NA, alpha=0.2) +   
     geom_line() +
-    scale_color_hue(name=label_genome_length, guide=guide_legend(order=1, keywidth=0.9)) +
+    scale_color_hue(name=label_genome_length, labels=label_genomelengths08,
+                    guide=guide_legend(order=1, keywidth=0.9)) +
     scale_fill_hue(guide=FALSE) +
     scale_linetype_manual(values=c('lattice, 25x25'='solid',
                                    'well-mixed, 625'='dashed'),
-                          labels=c('lattice, 25x25'='Structured',
-                                   'well-mixed, 625'='Unstructured'),
+                          labels=label_structure,
                           name='Metapopulation Structure',
                           guide=guide_legend(order=2, keywidth=0.9)) +
     labs(x=label_time, y=label_producer_proportion) +
     theme_bdc_grey()
 rescale_golden(p_gl08)
-# ggsave_golden('../figures//08-spatial_vs_non-producer_proportion.png')
+# ggsave_golden('../figures/08-spatial_vs_non-producer_proportion.png')
+
 ```
+
+
+
 
 ### All Genome Lengths (0-10)
 
 ```{r Proportion of Producers - Full, fig.cap='Proportion of producers over time for different genome lengths in structured and unstructured populations. Shaded areas indicate bootstrapped 95% confidence intervals.'}
-gldata_all <- gnhdata %>%
-    filter(SocialMutations==TRUE) %>%
-    filter(FitnessDistribution=='uniform') %>%
-    filter(MinCarryingCapacity==800 & MaxCarryingCapacity==2000) %>%
-    filter(MigrationRate==0.05) %>%
-    filter(MutationRateSocial==1e-5 & MutationRateAdaptation==1e-5 & MutationRateStress==1e-5) %>%
-    group_by(Time, GenomeLength, PopulationStructure) %>%
-    do(gnh_summary(.$MeanProducerProportion))
 
-p_glall <- ggplot(gldata_all, aes(x=Time, y=Mean, color=as.factor(GenomeLength),
+p_gl <- ggplot(gl_prop, aes(x=Time, y=Mean, color=as.factor(GenomeLength),
               fill=as.factor(GenomeLength), linetype=PopulationStructure)) +
     geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70') +   
     geom_ribbon(aes(ymin=CL95_lower, ymax=CL95_upper), color=NA, alpha=0.2) +   
     geom_line() +
-    scale_linetype_manual(values=c('lattice, 25x25'='solid',
-                                   'well-mixed, 625'='dashed'),
-                          name='Metapopulation Structure', guide=FALSE) +
-    scale_color_hue(name=label_genome_length, guide=guide_legend(order=1)) +
+    scale_color_hue(name=label_genome_length, labels=label_genomelengths,
+                    guide=guide_legend(order=1, keywidth=0.9)) +
     scale_fill_hue(guide=FALSE) +
     facet_grid(PopulationStructure ~ ., labeller=struct_labeler) +
+    scale_linetype_manual(values=c('lattice, 25x25'='solid',
+                                   'well-mixed, 625'='dashed'),
+                          labels=label_structure,
+                          name='Metapopulation Structure',
+                          guide=FALSE) +
     labs(x=label_time, y=label_producer_proportion) +
     theme_bdc_grey()
-rescale_plot(p_glall, ratio=2.5)
+rescale_golden(p_gl)
 # ggsave(filename='../figures/all-spatial_vs_non-producer_proportion.png')
 ```
 
@@ -112,25 +128,24 @@ Hello.
 
 ```{r Producer Presence - Main, fig.cap='Producer presence (integral) over 2990 cycles in structured (lattice) and unstructured environments. Error bars indicate bootstrapped 95% confidence intervals.'}
 
-p <- ggplot(prod_integrals08, aes(x=as.factor(GenomeLength), y=Integral,
-                                  color=PopulationStructure,
-                                  shape=PopulationStructure)) +
+p_glpres08 <- ggplot(gl_pres08, aes(x=as.factor(GenomeLength), y=Integral,
+                           color=PopulationStructure,
+                           shape=PopulationStructure)) +
     #geom_point(shape=1, alpha=0.1) +
     stat_summary(fun.y='mean', geom='line', aes(group=PopulationStructure)) +
     stat_summary(fun.data='mean_cl_boot') +
-    scale_x_discrete(breaks=unique(prod_integrals08$GenomeLength)) +
-    scale_color_hue(name='Metapopulation Structure', labels=c("lattice, 25x25"="Structured",
-                                                          "well-mixed, 625"="Unstructured"),
+    scale_x_discrete(breaks=unique(gl_pres08$GenomeLength),
+                     labels=label_genomelengths08) +
+    scale_color_hue(name='Metapopulation Structure', labels=label_structure,
                     guide=guide_legend(order=1)) +
     scale_shape_manual(name='Metapopulation Structure',
-                       labels=c("lattice, 25x25"="Structured",
-                                "well-mixed, 625"="Unstructured"),
+                       labels=label_structure,
                        values=c("lattice, 25x25"=15,
                                 "well-mixed, 625"=16), guide=guide_legend(order=1)) +
-    labs(x=label_genome_length, y=sprintf('Producer Presence over %d Cycles', max(gnhdata$Time)-min(gnhdata$Time))) +
+    labs(x=label_genome_length, y=label_producer_presence) +
     theme_bdc_grey(grid.y=FALSE)
-rescale_plot(p, ratio=0.2)
-# ggsave('../figures//08-spatial_vs_non-producer_presence.png')
+rescale_plot(p_glpres08, ratio=0.2)
+# ggsave('../figures/08-spatial_vs_non-producer_presence.png')
 ```
 
 
@@ -147,26 +162,25 @@ summary(unstructured_lm)
 
 
 ```{r Producer Presence - Full, fig.cap='Producer presence (integral) over 2990 cycles in structured (lattice) and unstructured environments. Error bars indicate bootstrapped 95% confidence intervals.'}
-p <- ggplot(prod_integrals, aes(x=GenomeLength, y=Integral,
+
+p_glpres <- ggplot(gl_pres, aes(x=as.factor(GenomeLength), y=Integral,
                                 color=PopulationStructure,
                                 shape=PopulationStructure)) +
-    #geom_point(shape=1, alpha=0.1) +
+    geom_point(shape=1, alpha=0.1) +
+    #stat_smooth(aes(group=PopulationStructure), method='lm', fill=NA) +
     stat_summary(fun.data='mean_cl_boot') +
-    scale_x_continuous(breaks=unique(prod_integrals$GenomeLength)) +
-    scale_color_hue(name='Metapopulation Structure',
-                    labels=c("lattice, 25x25"="Structured",
-                             "well-mixed, 625"="Unstructured"),
-                    guide=guide_legend(order=1, keywidth=0.9)) +
+    scale_x_discrete(breaks=unique(gl_pres$GenomeLength),
+                     labels=label_genomelengths) +
+    scale_color_hue(name='Metapopulation Structure', labels=label_structure,
+                    guide=guide_legend(order=1)) +
     scale_shape_manual(name='Metapopulation Structure',
-                       labels=c("lattice, 25x25"="Structured",
-                                "well-mixed, 625"="Unstructured"),
+                       labels=label_structure,
                        values=c("lattice, 25x25"=15,
-                                "well-mixed, 625"=16),
-                       guide=guide_legend(order=1, keywidth=0.9)) +
-    labs(x=label_genome_length,
-         y=sprintf('Producer Presence over %d Cycles',
-                   max(gnhdata$Time)-min(gnhdata$Time))) +
+                                "well-mixed, 625"=16), guide=guide_legend(order=1)) +
+    labs(x=label_genome_length, y=label_producer_presence) +
     theme_bdc_grey(grid.y=FALSE)
-rescale_golden(p)
-# ggsave_golden('../figures/all-spatial_vs_non-producer_presence.png')
+rescale_golden(p_glpres)
+# ggsave('../figures/all-spatial_vs_non-producer_presence.png')
 ```
+
+TODO fit lm to these and compare
