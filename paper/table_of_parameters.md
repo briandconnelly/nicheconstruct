@@ -13,7 +13,7 @@
 | S<sub>max</sub>  | Maximum Population Size     | 2000          |
 | μ<sub>s</sub> | Mutation Rate (Stress)         | 10<sup>-5</sup> |
 | μ<sub>p</sub>    | Mutation Rate (Production)  | 10<sup>-5</sup> |
-| μ<sub>t</sub> | Mutation Rate (Survival in New Environment)  | 10<sup>-5</sup> |
+| μ<sub>t</sub> | Mutation Rate (Tolerance to New Stress)  | 10<sup>-5</sup> |
 | m      | Migration Rate                        | 0.05          |
 | d      | Dilution Factor                       | 0.1           |
 | p<sub>0</sub> | Initial Producer Proportion    | 0.5           |
