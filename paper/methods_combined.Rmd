@@ -3,7 +3,7 @@ title: "Model Description"
 output: word_document
 ---
 
-Using a computational model, we observed the relationship between adaptation to stress and the production of public good over evolutionary timescales. The simulation software and all configurations for the experiments reported are available at TODO. Simulations were run using Python 2.7.3, NumPy 1.9.0, and NetworkX 1.9.1. Data analyses were performed using R 3.1.1. Model parameters and their values are listed in [Table X](https://github.com/briandconnelly/niche_hike/wiki/Table%20of%20Parameter%20Values).
+Using a computational model, we observed the relationship between adaptation to stress and the production of public good over evolutionary timescales. The simulation software and all configurations for the experiments reported are available at TODO. Simulations were run using Python 2.7.3, NumPy 1.9.0, and NetworkX 1.9.1. Data analyses were performed using R 3.1.1. Model parameters and their values are listed in [Table X](https://github.com/briandconnelly/niche_hike/blob/master/paper/table_of_parameters.md).
 
 # Description of metapopulation, populations, and individuals
 
