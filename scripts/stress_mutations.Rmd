@@ -15,7 +15,7 @@ source('gnh_summary.R')
 source('gnh_labels.R')
 
 stress_labels <- c('1e-5'=expression(bold('0.00001')), '1e-4'='0.0001',
-                   '1e-3'='0.001', '1e-2'='0.01', '1e-1'='0.1')
+                   '1e-3'='0.001', '1e-2'='0.01', '1e-1'='0.1', '1e0'='1')
 ```
 
 ```{r subsetting}
@@ -94,6 +94,7 @@ p_stress_presence <- ggplot(stress_pres, aes(x=MutationRateStress, y=Integral)) 
     scale_y_continuous(limits=c(0,0.1)) +
     labs(x=label_stressmu, y=label_producer_presence) +
     theme_bdc_grey(grid.y=FALSE)
-rescale_golden()
+rescale_golden(p_stress_presence)
+#rescale_plot(p_stress_presence, ratio=5)
 #ggsave_golden('../figures/all-stress-presence.png')
 ```
