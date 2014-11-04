@@ -25,7 +25,6 @@ fitness_labeller <- function(variable, value)
 
 ```{r data subsetting}
 expdata <- gnhdata %>%
-    filter(SocialMutations==TRUE) %>% 
     filter(PopulationStructure=='lattice, 25x25') %>%
     filter(MigrationRate==0.05) %>%
     filter(MutationRateSocial==1e-5 & MutationRateAdaptation==1e-5) %>%

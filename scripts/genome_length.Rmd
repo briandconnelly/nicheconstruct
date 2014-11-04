@@ -25,7 +25,6 @@ struct_labeler <- function(variable, value)
 
 ```{r subsetting}
 gldata <- gnhdata %>%
-    filter(SocialMutations==TRUE) %>%
     filter(FitnessDistribution=='uniform') %>%
     filter(MinCarryingCapacity==800 & MaxCarryingCapacity==2000) %>%
     filter(MigrationRate==0.05) %>%
@@ -111,7 +110,6 @@ rescale_golden(p_gl)
 ```{r Producer Presence - Subsetting the Data}
 
 prod_integrals <- gnhdata %>%
-    filter(SocialMutations==TRUE) %>%
     filter(FitnessDistribution=='uniform') %>%
     filter(MinCarryingCapacity==800 & MaxCarryingCapacity==2000) %>%
     filter(MigrationRate==0.05) %>%

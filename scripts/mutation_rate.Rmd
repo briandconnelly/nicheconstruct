@@ -22,10 +22,10 @@ mutation_labels <- c('1e-7'='0.0000001', '1e-6'='0.000001', '1e-5'=expression(bo
 ```{r subsetting}
 mu_data <- gnhdata %>%
     filter(GenomeLength==8) %>%
-    filter(SocialMutations==TRUE) %>%
     filter(PopulationStructure=='lattice, 25x25') %>%
     filter(FitnessDistribution=='uniform') %>%
     filter(MigrationRate==0.05) %>%
+    filter(MutationRateSocial > 0) %>%
     filter(MutationRateStress==1e-5) %>%
     filter(MinCarryingCapacity==800) %>%
     filter(MaxCarryingCapacity==2000)
