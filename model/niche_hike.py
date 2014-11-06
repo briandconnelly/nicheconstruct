@@ -2,13 +2,17 @@
 # -*- coding: utf-8 -*-
 
 import argparse
-import ConfigParser
 import datetime
 import getpass
 import os
 import shutil
 import sys
 import warnings
+
+try:
+    from ConfigParser import SafeConfigParser                                         
+except ImportError:                                                             
+    from configparser import SafeConfigParser
 
 import networkx as nx
 import numpy as np
@@ -46,7 +50,7 @@ def main():
     args = parse_arguments()
 
     # Read the configuration file
-    config = ConfigParser.SafeConfigParser()
+    config = SafeConfigParser()
     config.readfp(args.configfile)
     args.configfile.close()
 
@@ -98,7 +102,7 @@ def main():
 
     # Write the configuration file and some additional information
     cfg_out = os.path.join(data_dir, 'configuration.cfg')
-    with open(cfg_out, 'wb') as configfile:
+    with open(cfg_out, 'w') as configfile:
         configfile.write('# GNH Configuration\n')
         configfile.write('# Generated: {when} by {who}\n'.format(when=datetime.datetime.now().isoformat(),
                                                                  who=getpass.getuser()))
