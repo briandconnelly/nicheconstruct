@@ -6,11 +6,11 @@ import networkx as nx
 import numpy as np
 
 import genome
-import Population
+from Population import Population
 import topology
-import DemographicsOutput
-import GenotypesOutput
-import FitnessOutput
+from DemographicsOutput import DemographicsOutput
+from GenotypesOutput import GenotypesOutput
+from FitnessOutput import FitnessOutput
 
 
 class Metapopulation(object):
@@ -138,7 +138,7 @@ class Metapopulation(object):
 
         # Create each of the populations
         for n, d in self.topology.nodes_iter(data=True):
-            d['population'] = Population.Population(metapopulation=self, config=config)
+            d['population'] = Population(metapopulation=self, config=config)
 
             if initial_state == 'corners':
                 # Place all producers in one corner and all non-producers in
@@ -173,19 +173,19 @@ class Metapopulation(object):
 
 
         if self.log_demographics:
-            out_demographics = DemographicsOutput.DemographicsOutput(metapopulation=self,
-                                                       filename=os.path.join(data_dir, 'demographics.csv.bz2'))
+            out_demographics = DemographicsOutput(metapopulation=self,
+                                                  filename=os.path.join(data_dir, 'demographics.csv.bz2'))
 
             self.log_objects.append(out_demographics)
 
         if self.log_genotypes:
-            out_genotypes = GenotypesOutput.GenotypesOutput(metapopulation=self,
-                                                            filename=os.path.join(data_dir, 'genotypes.csv.bz2'))
+            out_genotypes = GenotypesOutput(metapopulation=self,
+                                            filename=os.path.join(data_dir, 'genotypes.csv.bz2'))
             self.log_objects.append(out_genotypes)
 
         if self.log_fitness:
-            out_fitness = FitnessOutput.FitnessOutput(metapopulation=self,
-                                                      filename=os.path.join(data_dir, 'fitness.csv.bz2'))
+            out_fitness = FitnessOutput(metapopulation=self,
+                                        filename=os.path.join(data_dir, 'fitness.csv.bz2'))
             self.log_objects.append(out_fitness)
 
 

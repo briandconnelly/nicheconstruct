@@ -3,11 +3,10 @@
 import bz2
 import csv
 
-import OutputWriter
-import Population
+from OutputWriter import OutputWriter
 
 
-class DemographicsOutput(OutputWriter.OutputWriter):
+class DemographicsOutput(OutputWriter):
 
     def __init__(self, metapopulation, filename='demographics.csv.bz2', delimiter=','):
         super(DemographicsOutput, self).__init__(metapopulation=metapopulation,

@@ -5,12 +5,11 @@ import csv
 
 import numpy as np
 
-import OutputWriter
-import Population
+from OutputWriter import OutputWriter
 import genome
 
 
-class GenotypesOutput(OutputWriter.OutputWriter):
+class GenotypesOutput(OutputWriter):
 
     def __init__(self, metapopulation, filename='genotypes.csv.bz2', delimiter=','):
 

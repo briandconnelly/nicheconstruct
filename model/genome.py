@@ -4,7 +4,7 @@ def bitstring_as_base10(a):
     return np.sum(a * 2**np.arange(len(a))[::-1])
 
 def base10_as_bitarray(a):
-    return np.array(map(int, bin(a)[2:]))
+    return np.array(list(map(int, bin(a)[2:])))
 
 def hamming_distance(a, b):
     return bin(a ^ b)[2:].count('1')
