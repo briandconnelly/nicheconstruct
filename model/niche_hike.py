@@ -17,9 +17,9 @@ except ImportError:
 import networkx as nx
 import numpy as np
 
-import Metapopulation
+from Metapopulation import Metapopulation
 
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 
 def parse_arguments():
     """Parse command line arguments"""
@@ -115,7 +115,7 @@ def main():
         config.write(configfile)
 
 
-    m = Metapopulation.Metapopulation(config=config)
+    m = Metapopulation(config=config)
 
     for t in range(config.getint(section='Simulation', option='num_cycles')):
         m.cycle()
