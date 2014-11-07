@@ -132,8 +132,8 @@ class Metapopulation(object):
         min_cap = self.config.getint(section='Population', option='capacity_min')
         initial_producer_proportion = self.config.getfloat(section='Population',
                                                            option='initial_producer_proportion')
-        mutation_rate_stress = self.config.getfloat(section='Population',
-                                                    option='mutation_rate_stress')
+        mutation_rate_tolerance = self.config.getfloat(section='Population',
+                                                       option='mutation_rate_tolerance')
 
 
         # Create each of the populations
@@ -157,7 +157,7 @@ class Metapopulation(object):
 
                 d['population'].abundances[0] = num_producers
                 d['population'].abundances[2**genome_length] = num_nonproducers
-                d['population'].bottleneck(survival_rate=mutation_rate_stress)
+                d['population'].bottleneck(survival_rate=mutation_rate_tolerance)
 
 
         data_dir = self.config.get(section='Simulation', option='data_dir')
@@ -402,11 +402,11 @@ class Metapopulation(object):
 
         self.fitness_landscape = self.build_fitness_landscape()
 
-        mutation_rate_stress = self.config.getfloat(section='Population',
-                                                    option='mutation_rate_stress')
+        mutation_rate_tolerance = self.config.getfloat(section='Population',
+                                                       option='mutation_rate_tolerance')
 
         for n, d in self.topology.nodes_iter(data=True):
-            d['population'].bottleneck(survival_rate=mutation_rate_stress)
+            d['population'].bottleneck(survival_rate=mutation_rate_tolerance)
             d['population'].reset_loci()
 
     def size(self):
