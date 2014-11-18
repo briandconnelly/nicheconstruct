@@ -114,24 +114,14 @@ class Population(object):
                                                     size=2**(self.genome_length+1))
 
 
-    def dilute(self, stochastic=True):
+    def dilute(self):
         """Dilute a population
         
-        dilute dilutes the population by the dilution factor, which is specified
-        in the Population section of the configuration as dilution_factor. If
-        the stochastic parameter is True (default), dilution will be done
-        randomly. Otherwise, the abundances of each genotype will be multiplied
-        by the dilution factor and rounded down.
-
+        dilute reduces the population's size stochastically by the configured
+        dilution factor (dilution_factor in Population section)
         """
-        if self.is_empty():
-            return
 
-        if stochastic:
-            self.abundances = np.random.binomial(self.abundances,
-                                                 self.dilution_factor)
-        else:
-            self.abundances = np.floor(self.abundances * self.dilution_factor).astype(np.uint32)
+        self.bottleneck(survival_rate=self.dilution_factor)
 
 
     def grow(self):

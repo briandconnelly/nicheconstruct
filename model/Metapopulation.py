@@ -19,20 +19,6 @@ class Metapopulation(object):
         self.config = config
         self.time = 0
 
-        self.migration_rate = self.config.getfloat(section='Metapopulation',
-                                                   option='migration_rate')
-        self.migration_dest = self.config.get(section='Metapopulation',
-                                              option='migration_dest')
-        self.log_frequency = self.config.getint(section='Simulation',
-                                                option='log_frequency')
-        self.dilution_stochastic = self.config.getboolean(section='Population',
-                                                          option='dilution_stochastic')
-
-
-        assert self.migration_rate >= 0 and self.migration_rate <= 1
-        assert self.migration_dest in ['single', 'neighbors']
-        assert self.log_frequency > 0
-
         # Build the topology, which links the subpopulations
         self.build_topology()
 
@@ -42,6 +28,8 @@ class Metapopulation(object):
         # Create the fitness landscape
         self.fitness_landscape = self.build_fitness_landscape()
 
+
+        # Create each of the populations
         initial_state = self.config.get(section='Metapopulation',
                                         option='initial_state')
         genome_length = self.config.getint(section='Population',
@@ -53,8 +41,6 @@ class Metapopulation(object):
         mutation_rate_tolerance = self.config.getfloat(section='Population',
                                                        option='mutation_rate_tolerance')
 
-
-        # Create each of the populations
         for n, d in self.topology.nodes_iter(data=True):
             d['population'] = Population(metapopulation=self, config=config)
 
@@ -63,10 +49,10 @@ class Metapopulation(object):
                 # the other
                 if n == 0:
                     d['population'].abundances[2**genome_length] = max_cap
-                    d['population'].dilute(stochastic=self.dilution_stochastic)
+                    d['population'].dilute()
                 elif n == len(self.topology)-1:
                     d['population'].abundances[0] = min_cap
-                    d['population'].dilute(stochastic=self.dilution_stochastic)
+                    d['population'].dilute()
 
             elif initial_state == 'stress':
                 cap = int(min_cap + ( (max_cap - min_cap) * initial_producer_proportion))
@@ -77,21 +63,31 @@ class Metapopulation(object):
                 d['population'].abundances[2**genome_length] = num_nonproducers
                 d['population'].bottleneck(survival_rate=mutation_rate_tolerance)
 
+        # Get the settings for migration among populations
+        self.migration_rate = self.config.getfloat(section='Metapopulation',
+                                                   option='migration_rate')
+        self.migration_dest = self.config.get(section='Metapopulation',
+                                              option='migration_dest')
+        assert self.migration_rate >= 0 and self.migration_rate <= 1
+        assert self.migration_dest in ['single', 'neighbors']
 
-        data_dir = self.config.get(section='Simulation', option='data_dir')
+
+        # Set up data logging
+        # log_objects is a list of any logging objects used by this simulation
         self.log_demographics = self.config.getboolean(section='Simulation',
                                                        option='log_demographics')
         self.log_fitness = self.config.getboolean(section='Simulation',
                                                   option='log_fitness')
+        self.log_frequency = self.config.getint(section='Simulation',
+                                                option='log_frequency')
+        data_dir = self.config.get(section='Simulation', option='data_dir')
+        assert self.log_frequency > 0
 
-        # log_objects is a list of any logging objects used by this simulation
         self.log_objects = []
-
 
         if self.log_demographics:
             out_demographics = DemographicsOutput(metapopulation=self,
                                                   filename=os.path.join(data_dir, 'demographics.csv.bz2'))
-
             self.log_objects.append(out_demographics)
 
         if self.log_fitness:
@@ -294,21 +290,16 @@ class Metapopulation(object):
 
         return mr
 
-    def dilute(self, stochastic=True):
+    def dilute(self)
         """Dilute the metapopulation
 
         Dilute the metapopulation by diluting each population by the dilution
         factor specified with the dilution_factor option in the Population
         section of the configuration file.
-
-        * stochastic: If True, the population will be diluted stochastically by
-            sampling from a binomial distribution. If False, the population will
-            be diluted by multiplying abundances by the dilution factor and
-            taking the floor.
-
         """
+
         for n, d in self.topology.nodes_iter(data=True):
-            d['population'].dilute(stochastic=stochastic)
+            d['population'].dilute()
 
     def grow(self):
         """Grow the metapopulation ...."""
@@ -371,7 +362,7 @@ class Metapopulation(object):
 
         self.write_logfiles()
         
-        self.dilute(stochastic=self.dilution_stochastic)
+        self.dilute()
 
         self.time += 1
 
