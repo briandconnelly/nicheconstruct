@@ -95,6 +95,8 @@ class Metapopulation(object):
                                         filename=os.path.join(data_dir, 'fitness.csv.bz2'))
             self.log_objects.append(out_fitness)
 
+        self.set_dirty()
+
 
     def __repr__(self):
         """Return a string representation of the Metapopulation object"""
@@ -197,6 +199,8 @@ class Metapopulation(object):
             data_dir = self.config.get(section='Simulation', option='data_dir')
             nx.write_gml(self.topology, os.path.join(data_dir, 'topology.gml'))
 
+        self.set_dirty()
+
 
     def build_fitness_landscape(self):
         """Build a fitness landscape
@@ -237,6 +241,7 @@ class Metapopulation(object):
                                  genotype)
             landscape[i] = sum(genotype * effects) + (base_fitness + production_cost)
 
+        self.set_dirty()
         return landscape
 
 
@@ -355,13 +360,12 @@ class Metapopulation(object):
         population, and then migrating among populations.
 
         """
-        self._size = sum(len(d['population']) for n, d in self.topology.nodes_iter(data=True))
-        self._num_producers = sum(d['population'].num_producers() for n, d in self.topology.nodes_iter(data=True))
 
-        if self._size == 0:
-            self._prop_producers = 'NA'
-        else:
-            self._prop_producers = 1.0 * self._num_producers / self._size
+        ignore = self.size()
+        ignore = self.num_producers()
+        ignore = self.prop_producers()
+        # TODO: handle fitnesses, etc
+        self.clear_dirty()
 
         self.write_logfiles()
         self.grow()
@@ -396,12 +400,18 @@ class Metapopulation(object):
             d['population'].bottleneck(survival_rate=mutation_rate_tolerance)
             d['population'].reset_loci()
 
+        self.set_dirty()
+
+
     def size(self):
         """Return the size of the metapopulation
 
         The size of the metapopulation is the sum of the sizes of the
         subpopulations
         """
+        if self.is_dirty():
+            self._size = sum(len(d['population']) for n, d in self.topology.nodes_iter(data=True))
+
         return self._size
 
     def __len__(self):
@@ -415,10 +425,20 @@ class Metapopulation(object):
 
     def num_producers(self):
         """Return the number of producers in the metapopulation"""
+        if self.is_dirty():
+            self._num_producers = sum(d['population'].num_producers() for n, d in self.topology.nodes_iter(data=True))
+
         return self._num_producers
 
     def prop_producers(self):
         """Get the proportion of producers in the metapopulation"""
+        if self.is_dirty():
+            try:
+                # TODO: this may use dirty values for num_producers and size
+                self._prop_producers = 1.0 * self._num_producers / self._size
+            except ZeroDivisionError:
+                self._prop_producers = -1
+
         return self._prop_producers
 
     def max_fitnesses(self):
@@ -439,4 +459,15 @@ class Metapopulation(object):
     def cleanup(self):
         for l in self.log_objects:
             l.close()
+
+    def set_dirty(self):
+        self._dirty = True
+
+    def clear_dirty(self):
+        for n, d in self.topology.nodes_iter(data=True):
+            d['population'].clear_dirty()
+        self._dirty = False
+
+    def is_dirty(self):
+        return self._dirty
 

@@ -95,7 +95,11 @@ class Population(object):
         self.genome_length = self.genome_length_min
         # TODO: adjust the genome length based on how the population was initialized??
 
+        # Delta stores the differences in abundaces due to immigration and emigration
         self.delta = np.zeros(2**(self.genome_length + 1), dtype=np.int32)
+
+        # Mark this population as having been changed
+        self.set_dirty()
 
     def __repr__(self):
         """Return a string representation of a Population object"""
@@ -106,12 +110,14 @@ class Population(object):
     def empty(self):
         """Empty a population"""
         self.abundances = np.zeros(2**(self.genome_length + 1), dtype=np.uint32)
+        self.set_dirty()
 
     def randomize(self):
         """Create a random population"""
         self.abundances = np.random.random_integers(low=0,
                                                     high=self.capacity_min,
                                                     size=2**(self.genome_length+1))
+        self.set_dirty()
 
 
     def dilute(self):
@@ -151,6 +157,7 @@ class Population(object):
                                                     1)[0]
 
         self.cumulative_density += np.sum(self.abundances)
+        self.set_dirty()
 
 
     def mutate(self):
@@ -177,6 +184,7 @@ class Population(object):
                                               size=1)[0]
 
         self.abundances = mutated_population
+        self.set_dirty()
 
 
     def select_migrants(self, migration_rate):
@@ -189,9 +197,8 @@ class Population(object):
 
         assert migration_rate >= 0 and migration_rate <= 1
 
-        migrants = np.random.binomial(self.abundances, migration_rate)
+        return np.random.binomial(self.abundances, migration_rate)
 
-        return migrants
 
     def remove_emigrants(self, emigrants):
         """Remove emigrants from the population
@@ -202,6 +209,7 @@ class Population(object):
 
         """
         self.delta -= emigrants
+        self.set_dirty()
 
     def add_immigrants(self, immigrants):
         """Add immigrants to the population
@@ -212,6 +220,7 @@ class Population(object):
 
         """
         self.delta += immigrants
+        self.set_dirty()
 
     def census(self):
         """Update the population's abundances after migration
@@ -224,6 +233,8 @@ class Population(object):
 
         self.abundances += self.delta
         self.delta = np.zeros(2**(self.genome_length + 1), dtype=np.int32)
+        self.set_dirty()
+
 
     def reset_loci(self):
         """Reset the loci of the population to all zeros
@@ -243,6 +254,9 @@ class Population(object):
         self.abundances[0] = num_nonproducers
         self.abundances[2**gl] = num_producers
 
+        self.set_dirty()
+
+
     def bottleneck(self, survival_rate):
         """ Pass the population through a bottleneck
 
@@ -255,6 +269,8 @@ class Population(object):
         assert survival_rate <= 1
 
         self.abundances = np.random.binomial(self.abundances, survival_rate)
+        self.set_dirty()
+
 
     def size(self):
         """Get the size of the population"""
@@ -285,16 +301,20 @@ class Population(object):
         """Get the proportion of producers"""
         popsize = self.size()
         
-        if popsize == 0:
-            return 'NA'
-        else:
-            return 1.0 * self.num_producers() / popsize
+        try:
+            retval = 1.0 * self.num_producers() / self.size()
+        except ZeroDivisionError:
+            retval = -1
+
+        return retval
+
 
     def average_fitness(self):
         """Get the average fitness in the population"""
 
         popsize = self.size()
         landscape = self.metapopulation.fitness_landscape
+        # TODO: update for population-specific fitness landscapes
 
         if popsize == 0:
             return 'NA'
@@ -305,6 +325,7 @@ class Population(object):
         """Get the maximum fitness among producers and non-producers"""
 
         popsize = self.size()
+        # TODO: handle dirty
 
         if popsize == 0:
             return (0,0)
@@ -317,4 +338,14 @@ class Population(object):
         max_nonproducer = fitnesses[:2**gl].max()
 
         return (max_producer, max_nonproducer)
+
+    def set_dirty(self):
+        self._dirty = True
+        self.metapopulation.set_dirty()
+
+    def clear_dirty(self):
+        self._dirty = False
+
+    def is_dirty(self):
+        return self._dirty
 
