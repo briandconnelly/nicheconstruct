@@ -355,12 +355,13 @@ class Metapopulation(object):
         population, and then migrating among populations.
 
         """
+        self.write_logfiles()
         self.grow()
         self.mutate()
         self.migrate()
         self.census()
 
-        self.write_logfiles()
+        # TODO: check each population to see if environment should change
         
         self.dilute()
 

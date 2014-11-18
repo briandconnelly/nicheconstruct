@@ -123,6 +123,7 @@ def main():
             msg = "[{t}] {m}".format(t=t, m=m)
             print(msg)
 
+    m.write_logfiles()
     m.cleanup()
 
 
