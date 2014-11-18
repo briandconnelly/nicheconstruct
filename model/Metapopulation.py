@@ -352,6 +352,13 @@ class Metapopulation(object):
         for n, d in self.topology.nodes_iter(data=True):
             d['population'].census()
 
+
+    def construct(self):
+        """Update a population's environment when appropriate"""
+        for n, d in self.topology.nodes_iter(data=True):
+            d['population'].construct()
+
+
     def cycle(self):
         """Cycle the metapopulation
 
@@ -372,6 +379,7 @@ class Metapopulation(object):
         self.mutate()
         self.migrate()
         self.census()
+        self.construct()
 
         # TODO: check each population to see if environment should change
         

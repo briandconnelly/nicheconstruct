@@ -124,10 +124,13 @@ class Population(object):
         """Dilute a population
         
         dilute reduces the population's size stochastically by the configured
-        dilution factor (dilution_factor in Population section)
+        dilution factor (dilution_factor in Population section). This does
+        not get done if the population just experienced an environmental change
+        (which does a dilution of its own)
         """
 
-        self.bottleneck(survival_rate=self.dilution_factor)
+        if not self.environment_changed:
+            self.bottleneck(survival_rate=self.dilution_factor)
 
 
     def grow(self):
@@ -234,6 +237,26 @@ class Population(object):
         self.abundances += self.delta
         self.delta = np.zeros(2**(self.genome_length + 1), dtype=np.int32)
         self.set_dirty()
+
+    def construct(self):
+        """Change the environment when appropriate
+
+        If the cumulative density has risen above the threshold, the environment
+        will be updated at this patch
+        """
+
+        if self.enable_construction and \
+                self.cumulative_density > self.density_threshold and\
+                self.genome_length < self.genome_length_max:
+            self.genome_length += 1
+
+            # TODO: change environment
+
+            self.environment_changed = True
+            self.cumulative_density = 0
+            self.set_dirty()
+        else:
+            self.environment_changed = False
 
 
     def reset_loci(self):

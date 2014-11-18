@@ -103,8 +103,8 @@ def main():
     # Write the configuration file and some additional information
     cfg_out = os.path.join(data_dir, 'configuration.cfg')
     with open(cfg_out, 'w') as configfile:
-        configfile.write('# Generated: {when} by {who}\n'.format(when=datetime.datetime.now().isoformat(),
-                                                                 who=getpass.getuser()))
+        configfile.write('# Generated: {when} by {whom}\n'.format(when=datetime.datetime.now().isoformat(),
+                                                                 whom=getpass.getuser()))
         configfile.write('# ncsimulate.py version: {v}\n'.format(v=__version__))
         configfile.write('# Python version: {v}\n'.format(v= ".".join(map(str, sys.version_info[:3]))))
         configfile.write('# NumPy version: {v}\n'.format(v=np.version.version))
