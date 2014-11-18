@@ -290,7 +290,7 @@ class Metapopulation(object):
 
         return mr
 
-    def dilute(self)
+    def dilute(self):
         """Dilute the metapopulation
 
         Dilute the metapopulation by diluting each population by the dilution
@@ -355,6 +355,14 @@ class Metapopulation(object):
         population, and then migrating among populations.
 
         """
+        self._size = sum(len(d['population']) for n, d in self.topology.nodes_iter(data=True))
+        self._num_producers = sum(d['population'].num_producers() for n, d in self.topology.nodes_iter(data=True))
+
+        if self._size == 0:
+            self._prop_producers = 'NA'
+        else:
+            self._prop_producers = 1.0 * self._num_producers / self._size
+
         self.write_logfiles()
         self.grow()
         self.mutate()
@@ -394,7 +402,7 @@ class Metapopulation(object):
         The size of the metapopulation is the sum of the sizes of the
         subpopulations
         """
-        return sum(len(d['population']) for n, d in self.topology.nodes_iter(data=True))
+        return self._size
 
     def __len__(self):
         """Return the length of a Metapopulation
@@ -407,17 +415,11 @@ class Metapopulation(object):
 
     def num_producers(self):
         """Return the number of producers in the metapopulation"""
-        return sum(d['population'].num_producers() for n, d in self.topology.nodes_iter(data=True))
+        return self._num_producers
 
     def prop_producers(self):
         """Get the proportion of producers in the metapopulation"""
-        metapopsize = self.size()
-
-        if metapopsize == 0:
-            return 'NA'
-        else:
-            return 1.0 * self.num_producers() / self.size()
-
+        return self._prop_producers
 
     def max_fitnesses(self):
         """Get the maximum fitness among producers and non-producers"""

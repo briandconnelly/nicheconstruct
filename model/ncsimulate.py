@@ -114,6 +114,8 @@ def main():
         config.write(configfile)
 
 
+    stop_on_empty = config.getboolean(section='Simulation',
+                                      option='stop_on_empty')
     m = Metapopulation(config=config)
 
     for t in range(config.getint(section='Simulation', option='num_cycles')):
@@ -122,6 +124,9 @@ def main():
         if not args.quiet:
             msg = "[{t}] {m}".format(t=t, m=m)
             print(msg)
+
+        if stop_on_empty and m.size()==0:
+            break      
 
     m.write_logfiles()
     m.cleanup()
