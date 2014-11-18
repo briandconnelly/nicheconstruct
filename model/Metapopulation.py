@@ -23,8 +23,6 @@ class Metapopulation(object):
                                                    option='migration_rate')
         self.migration_dest = self.config.get(section='Metapopulation',
                                               option='migration_dest')
-        self.topology_type = self.config.get(section='Metapopulation',
-                                             option='topology')
         self.log_frequency = self.config.getint(section='Simulation',
                                                 option='log_frequency')
         self.dilution_stochastic = self.config.getboolean(section='Population',
@@ -33,89 +31,10 @@ class Metapopulation(object):
 
         assert self.migration_rate >= 0 and self.migration_rate <= 1
         assert self.migration_dest in ['single', 'neighbors']
-        assert self.topology_type is not None, 'Topology must be specified'
-        assert self.topology_type in ['moore', 'vonneumann', 'smallworld',
-                                      'complete', 'regular']
         assert self.log_frequency > 0
 
-        if self.topology_type.lower() == 'moore':
-            width = self.config.getint(section='MooreTopology',
-                                       option='width')
-            height = self.config.getint(section='MooreTopology',
-                                        option='height')
-            periodic = self.config.getboolean(section='MooreTopology',
-                                              option='periodic')
-            radius = self.config.getint(section='MooreTopology',
-                                        option='radius')
-
-            assert width > 0
-            assert height > 0
-            assert radius > 0
-
-            self.topology = topology.moore_lattice(rows=height, columns=width,
-                                                   radius=radius,
-                                                   periodic=periodic)
-
-        elif self.topology_type.lower() == 'vonneumann':
-            width = self.config.getint(section='VonNeumannTopology',
-                                       option='width')
-            height = self.config.getint(section='VonNeumannTopology',
-                                        option='height')
-            periodic = self.config.getboolean(section='VonNeumannTopology',
-                                              option='periodic')
-
-            assert width > 0
-            assert height > 0
-
-            self.topology = topology.vonneumann_lattice(rows=height,
-                                                        columns=width,
-                                                        periodic=periodic)
-
-        elif self.topology_type.lower() == 'smallworld':
-            size = self.config.getint(section='SmallWorldTopology',
-                                      option='size')
-            neighbors = self.config.getint(section='SmallWorldTopology',
-                                           option='neighbors')
-            edgeprob = self.config.getfloat(section='SmallWorldTopology',
-                                            option='edgeprob')
-            seed = self.config.getint(section='Simulation', option='seed')
-
-            assert size > 0
-            assert neighbors >= 0
-            assert edgeprob >= 0 and edgeprob <= 1
-
-            self.topology = topology.smallworld(size=size, neighbors=neighbors,
-                                                edgeprob=edgeprob, seed=seed)
-
-        elif self.topology_type.lower() == 'complete':
-            size = self.config.getint(section='CompleteTopology',
-                                      option='size')
-
-            assert size > 0
-
-            self.topology = nx.complete_graph(n=size)
-
-        elif self.topology_type.lower() == 'regular':
-            size = self.config.getint(section='RegularTopology',
-                                      option='size')
-            degree = self.config.getint(section='RegularTopology',
-                                        option='degree')
-            seed = self.config.getint(section='Simulation', option='seed')
-
-            self.topology = topology.regular(size=size, degree=degree,
-                                             seed=seed)
-
-
-        export_topology = self.config.getboolean(section='Simulation',
-                                                 option='export_topology')
-
-        # Export the structure of the topology, allowing the topology to be
-        # re-created. This is especially useful for randomly-generated
-        # topologies.
-        if export_topology:
-            data_dir = self.config.get(section='Simulation', option='data_dir')
-            nx.write_gml(self.topology, os.path.join(data_dir, 'topology.gml'))
-
+        # Build the topology, which links the subpopulations
+        self.build_topology()
 
         # Store the probabilities of mutations between all pairs of genotypes
         self.mutation_probs = self.get_mutation_probabilities()
@@ -206,6 +125,94 @@ class Metapopulation(object):
                                                  mp=maxfit_p, mnp=maxfit_np, sym=symbol)
 
         return res
+
+
+    def build_topology(self):
+        """Build the topology (a graph) for the metapopulation"""
+        topology_type = self.config.get(section='Metapopulation',
+                                        option='topology')
+
+        assert topology_type is not None, 'Topology must be specified'
+        assert topology_type in ['moore', 'vonneumann', 'smallworld',
+                                 'complete', 'regular']
+
+        if topology_type.lower() == 'moore':
+            width = self.config.getint(section='MooreTopology',
+                                       option='width')
+            height = self.config.getint(section='MooreTopology',
+                                        option='height')
+            periodic = self.config.getboolean(section='MooreTopology',
+                                              option='periodic')
+            radius = self.config.getint(section='MooreTopology',
+                                        option='radius')
+
+            assert width > 0
+            assert height > 0
+            assert radius > 0
+
+            self.topology = topology.moore_lattice(rows=height, columns=width,
+                                                   radius=radius,
+                                                   periodic=periodic)
+
+        elif topology_type.lower() == 'vonneumann':
+            width = self.config.getint(section='VonNeumannTopology',
+                                       option='width')
+            height = self.config.getint(section='VonNeumannTopology',
+                                        option='height')
+            periodic = self.config.getboolean(section='VonNeumannTopology',
+                                              option='periodic')
+
+            assert width > 0
+            assert height > 0
+
+            self.topology = topology.vonneumann_lattice(rows=height,
+                                                        columns=width,
+                                                        periodic=periodic)
+
+        elif topology_type.lower() == 'smallworld':
+            size = self.config.getint(section='SmallWorldTopology',
+                                      option='size')
+            neighbors = self.config.getint(section='SmallWorldTopology',
+                                           option='neighbors')
+            edgeprob = self.config.getfloat(section='SmallWorldTopology',
+                                            option='edgeprob')
+            seed = self.config.getint(section='Simulation', option='seed')
+
+            assert size > 0
+            assert neighbors >= 0
+            assert edgeprob >= 0 and edgeprob <= 1
+
+            self.topology = topology.smallworld(size=size, neighbors=neighbors,
+                                                edgeprob=edgeprob, seed=seed)
+
+        elif topology_type.lower() == 'complete':
+            size = self.config.getint(section='CompleteTopology',
+                                      option='size')
+
+            assert size > 0
+
+            self.topology = nx.complete_graph(n=size)
+
+        elif topology_type.lower() == 'regular':
+            size = self.config.getint(section='RegularTopology',
+                                      option='size')
+            degree = self.config.getint(section='RegularTopology',
+                                        option='degree')
+            seed = self.config.getint(section='Simulation', option='seed')
+
+            self.topology = topology.regular(size=size, degree=degree,
+                                             seed=seed)
+
+        export_topology = self.config.getboolean(section='Simulation',
+                                                 option='export_topology')
+
+        # Export the structure of the topology, allowing the topology to be
+        # re-created. This is especially useful for randomly-generated
+        # topologies.
+        if export_topology:
+            data_dir = self.config.get(section='Simulation', option='data_dir')
+            nx.write_gml(self.topology, os.path.join(data_dir, 'topology.gml'))
+
 
     def build_fitness_landscape(self):
         """Build a fitness landscape
