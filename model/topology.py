@@ -21,6 +21,11 @@ def moore_lattice(rows, columns, radius=1, periodic=False):
         Prevent edge effects using periodic boundaries
 
     """
+
+    assert rows > 0
+    assert columns > 0
+    assert radius >= 0
+
     G = nx.empty_graph()
     G.name = "Moore Lattice: {r} rows, {c} columns, radius={rx}".format(r=rows,
                                                                         c=columns,
@@ -66,6 +71,9 @@ def vonneumann_lattice(rows, columns, periodic=False):
         Prevent edge effects using periodic boundaries
     """
 
+    assert rows > 0
+    assert columns > 0
+
     g = nx.grid_2d_graph(m=columns, n=rows, periodic=periodic)
     g = nx.convert_node_labels_to_integers(g)
     g.name = "VonNeumann Lattice: {r} rows, {c} columns".format(r=rows,
@@ -94,6 +102,7 @@ def smallworld(size, neighbors, edgeprob, seed=None):
 
     return g
 
+
 def regular(size, degree, seed=None):
     assert size > 0
     assert degree >= 0
@@ -106,3 +115,4 @@ def regular(size, degree, seed=None):
     g.name = 'Random Regular Graph: {n} nodes, {d} degree'.format(n=size,
                                                                   d=degree)
     return g
+

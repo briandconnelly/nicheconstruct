@@ -146,10 +146,6 @@ class Metapopulation(object):
             radius = self.config.getint(section='MooreTopology',
                                         option='radius')
 
-            assert width > 0
-            assert height > 0
-            assert radius > 0
-
             self.topology = topology.moore_lattice(rows=height, columns=width,
                                                    radius=radius,
                                                    periodic=periodic)
@@ -161,9 +157,6 @@ class Metapopulation(object):
                                         option='height')
             periodic = self.config.getboolean(section='VonNeumannTopology',
                                               option='periodic')
-
-            assert width > 0
-            assert height > 0
 
             self.topology = topology.vonneumann_lattice(rows=height,
                                                         columns=width,
@@ -178,18 +171,12 @@ class Metapopulation(object):
                                             option='edgeprob')
             seed = self.config.getint(section='Simulation', option='seed')
 
-            assert size > 0
-            assert neighbors >= 0
-            assert edgeprob >= 0 and edgeprob <= 1
-
             self.topology = topology.smallworld(size=size, neighbors=neighbors,
                                                 edgeprob=edgeprob, seed=seed)
 
         elif topology_type.lower() == 'complete':
             size = self.config.getint(section='CompleteTopology',
                                       option='size')
-
-            assert size > 0
 
             self.topology = nx.complete_graph(n=size)
 
@@ -203,12 +190,13 @@ class Metapopulation(object):
             self.topology = topology.regular(size=size, degree=degree,
                                              seed=seed)
 
-        export_topology = self.config.getboolean(section='Simulation',
-                                                 option='export_topology')
-
         # Export the structure of the topology, allowing the topology to be
         # re-created. This is especially useful for randomly-generated
         # topologies.
+
+        export_topology = self.config.getboolean(section='Simulation',
+                                                 option='export_topology')
+
         if export_topology:
             data_dir = self.config.get(section='Simulation', option='data_dir')
             nx.write_gml(self.topology, os.path.join(data_dir, 'topology.gml'))
