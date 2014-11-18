@@ -1,4 +1,4 @@
-# Genetic Niche Hiking Project
+# Niche Construction Project
 
 ## Organization
 * **configurations**: Configurations used for published results
