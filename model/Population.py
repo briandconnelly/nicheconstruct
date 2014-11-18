@@ -13,8 +13,16 @@ class Population(object):
     individual's genotype. The state of the highest order bit determines whether
     (1) or not (0) that individual is a producer.
 
-    * genome_length: the length of the genome. The production allele is added to
-        this, so the number of genotypes is 2^(genome_length+1)
+    * genome_length_min: the minimum length of the genome. this occurs in
+        environments that haven't been constructed
+    * genome_length_max: the minimum length of the genome. this occurs in
+        environments that have been maximally constructed
+    * enable_construction: whether or not populations can alter their environment
+    * density_threshold: the cumulative density at which an environmental change
+        (construction) is triggered. See cumulative_density.
+    * cumulative_density: The densities that this population has accumulated
+        over time. This value is added to during each growth cycle and reset
+        when an environmental change occurs.
     * mutation_rate_tolerance: the probability of an individual acquiring a
         mutation that allows it to survive a change of environment (stress)
     * mutation_rate_social: the probability of a mutation (bit flip) occuring at
@@ -38,8 +46,14 @@ class Population(object):
         self.metapopulation = metapopulation
         self.config = config
 
-        self.genome_length = config.getint(section='Population',
-                                           option='genome_length')
+        self.genome_length_min = config.getint(section='Population',
+                                               option='genome_length_min')
+        self.genome_length_max = config.getint(section='Population',
+                                               option='genome_length_max')
+        self.enable_construction = config.getboolean(section='Population',
+                                                     option='enable_construction')
+        self.density_threshold = config.getint(section='Population',
+                                               option='density_threshold')
         self.mutation_rate_tolerance = config.getfloat(section='Population',
                                                        option='mutation_rate_tolerance')
         self.mutation_rate_social = config.getfloat(section='Population',
@@ -57,7 +71,8 @@ class Population(object):
         self.initialize = config.get(section='Population',
                                      option='initialize')
 
-        assert self.genome_length >= 0, 'genome_length must be non-negative'
+        assert self.genome_length_min >= 0, 'genome_length_min must be non-negative'
+        assert self.genome_length_max >= self.genome_length_min, 'genome_length_max must be at least as large as genome_length_min'
         assert self.mutation_rate_tolerance >= 0 and self.mutation_rate_tolerance <= 1
         assert self.mutation_rate_social >= 0 and self.mutation_rate_social <= 1
         assert self.mutation_rate_adaptation >= 0 and self.mutation_rate_adaptation <= 1
@@ -66,11 +81,19 @@ class Population(object):
         assert self.capacity_max >= 0 and self.capacity_max >= self.capacity_min
         assert self.initialize.lower() in ['empty', 'random'], "initialize must be one of 'empty', 'random'"
 
+        if self.enable_construction:
+            assert self.density_threshold > 0
+
+        self.cumulative_density = 0
+
         # Create an empty population
         if self.initialize.lower() == 'empty':
             self.empty()
         elif self.initialize.lower() == 'random':
             self.randomize()
+
+        self.genome_length = self.genome_length_min
+        # TODO: adjust the genome length based on how the population was initialized??
 
         self.delta = np.zeros(2**(self.genome_length + 1), dtype=np.int32)
 
@@ -136,6 +159,8 @@ class Population(object):
             norm_grow_probs = grow_probs/nsum(grow_probs)
             self.abundances = np.random.multinomial(final_size, norm_grow_probs,
                                                     1)[0]
+
+        self.cumulative_density += np.sum(self.abundances)
 
 
     def mutate(self):

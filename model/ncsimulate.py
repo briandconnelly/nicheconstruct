@@ -24,10 +24,10 @@ __version__ = '0.1.2'
 def parse_arguments():
     """Parse command line arguments"""
 
-    parser = argparse.ArgumentParser(prog='niche_hike.py',
-                                     description='Run a GNH simluation')
+    parser = argparse.ArgumentParser(prog='ncsimulate.py',
+                                     description='Run a simluation')
     parser.add_argument('--config', '-c', metavar='FILE', help='Configuration '\
-                        'file to use (default: gnh.cfg)', default='gnh.cfg',
+                        'file to use (default: run.cfg)', default='run.cfg',
                         dest='configfile', type=argparse.FileType('r'))
     parser.add_argument('--data_dir', '-d', metavar='DIR',
                         help='Directory to store data (default: data)')
@@ -103,10 +103,9 @@ def main():
     # Write the configuration file and some additional information
     cfg_out = os.path.join(data_dir, 'configuration.cfg')
     with open(cfg_out, 'w') as configfile:
-        configfile.write('# GNH Configuration\n')
         configfile.write('# Generated: {when} by {who}\n'.format(when=datetime.datetime.now().isoformat(),
                                                                  who=getpass.getuser()))
-        configfile.write('# niche_hike.py version: {v}\n'.format(v=__version__))
+        configfile.write('# ncsimulate.py version: {v}\n'.format(v=__version__))
         configfile.write('# Python version: {v}\n'.format(v= ".".join(map(str, sys.version_info[:3]))))
         configfile.write('# NumPy version: {v}\n'.format(v=np.version.version))
         configfile.write('# NetworkX version: {v}\n'.format(v=nx.__version__))
