@@ -37,8 +37,6 @@ class Population(object):
         a decrease in growth rate
     * initialize: How to initialize the population
         empty: the population will have no individuals
-
-
     """
 
     def __init__(self, metapopulation, config):
@@ -86,14 +84,17 @@ class Population(object):
 
         self.cumulative_density = 0
 
+        self.genome_length = self.genome_length_min
+        # TODO: adjust the genome length based on how the population was initialized??
+
+        # Build the fitness landscape
+        self.fitness_landscape = self.build_fitness_landscape()
+
         # Create an empty population
         if self.initialize.lower() == 'empty':
             self.empty()
         elif self.initialize.lower() == 'random':
             self.randomize()
-
-        self.genome_length = self.genome_length_min
-        # TODO: adjust the genome length based on how the population was initialized??
 
         # Delta stores the differences in abundaces due to immigration and emigration
         self.delta = np.zeros(2**(self.genome_length + 1), dtype=np.int32)
@@ -118,6 +119,50 @@ class Population(object):
                                                     high=self.capacity_min,
                                                     size=2**(self.genome_length+1))
         self.set_dirty()
+
+    def build_fitness_landscape(self):
+        """Build a fitness landscape
+
+        The fitness landscape is based on the genome length, which represents
+        the number of fitness-affecting alleles, and the configured
+        distribution of fitness effects, which is sampled from to assign
+        fitness effects for each locus.
+        """
+
+        base_fitness = self.config.getfloat(section='Population',
+                                            option='base_fitness')
+        production_cost = self.config.getfloat(section='Population',
+                                               option='production_cost')
+        exponential = self.config.getboolean(section='Population',
+                                             option='fitness_exponential')
+        avg_effect = self.config.getfloat(section='Population',
+                                          option='fitness_avg_effect')
+        min_effect = self.config.getfloat(section='Population',
+                                          option='fitness_min_effect')
+
+        assert base_fitness >= 0
+
+        if exponential:
+            effects = np.random.exponential(scale=avg_effect,
+                                            size=self.genome_length)
+        else:
+            effects = np.random.uniform(low=min_effect,
+                                        high=2*avg_effect-min_effect,
+                                        size=self.genome_length)
+
+        effects = np.append(-1.0*production_cost, effects)
+
+        landscape = np.zeros(2**(self.genome_length + 1))
+
+        for i in range(2**(self.genome_length + 1)):
+            # TODO: is there a more efficient way to do this vector algebra without first converting to base 2?
+            genotype = genome.base10_as_bitarray(i)
+            genotype = np.append(np.zeros(len(effects) - len(genotype)),
+                                 genotype)
+            landscape[i] = sum(genotype * effects) + (base_fitness + production_cost)
+
+        self.set_dirty()
+        return landscape
 
 
     def dilute(self):
@@ -145,7 +190,7 @@ class Population(object):
         if self.is_empty():
             return
 
-        landscape = self.metapopulation.fitness_landscape
+        landscape = self.fitness_landscape
         nsum = np.sum
 
         final_size = self.capacity_min + \
@@ -250,7 +295,8 @@ class Population(object):
                 self.genome_length < self.genome_length_max:
             self.genome_length += 1
 
-            # TODO: change environment
+            self.fitness_landscape = self.build_fitness_landscape()
+            # TODO: change environment - what else?
 
             self.environment_changed = True
             self.cumulative_density = 0
@@ -336,8 +382,9 @@ class Population(object):
         """Get the average fitness in the population"""
 
         popsize = self.size()
-        landscape = self.metapopulation.fitness_landscape
+        landscape = self.fitness_landscape
         # TODO: update for population-specific fitness landscapes
+        # TODO: check the calculation of this
 
         if popsize == 0:
             return 'NA'
@@ -354,7 +401,8 @@ class Population(object):
             return (0,0)
 
         # Get the fitnesses of genotypes present in the population
-        fitnesses = np.array(self.abundances > 0, dtype=int) * self.metapopulation.fitness_landscape
+        # TODO: check the calculation of this
+        fitnesses = np.array(self.abundances > 0, dtype=int) * self.fitness_landscape
 
         gl = self.genome_length
         max_producer = fitnesses[2**gl:].max()

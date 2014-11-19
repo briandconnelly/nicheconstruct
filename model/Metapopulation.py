@@ -25,15 +25,11 @@ class Metapopulation(object):
         # Store the probabilities of mutations between all pairs of genotypes
         self.mutation_probs = self.get_mutation_probabilities()
 
-        # Create the fitness landscape
-        self.fitness_landscape = self.build_fitness_landscape()
-
-
         # Create each of the populations
         initial_state = self.config.get(section='Metapopulation',
                                         option='initial_state')
-        genome_length = self.config.getint(section='Population',
-                                           option='genome_length')
+        genome_length_max = self.config.getint(section='Population',
+                                               option='genome_length_max')
         max_cap = self.config.getint(section='Population', option='capacity_max')
         min_cap = self.config.getint(section='Population', option='capacity_min')
         initial_producer_proportion = self.config.getfloat(section='Population',
@@ -48,7 +44,7 @@ class Metapopulation(object):
                 # Place all producers in one corner and all non-producers in
                 # the other
                 if n == 0:
-                    d['population'].abundances[2**genome_length] = max_cap
+                    d['population'].abundances[2**genome_length_max] = max_cap
                     d['population'].dilute()
                 elif n == len(self.topology)-1:
                     d['population'].abundances[0] = min_cap
@@ -60,7 +56,7 @@ class Metapopulation(object):
                 num_nonproducers = cap - num_producers
 
                 d['population'].abundances[0] = num_producers
-                d['population'].abundances[2**genome_length] = num_nonproducers
+                d['population'].abundances[2**genome_length_max] = num_nonproducers
                 d['population'].bottleneck(survival_rate=mutation_rate_tolerance)
 
         # Get the settings for migration among populations
@@ -106,10 +102,9 @@ class Metapopulation(object):
             res = "Metapopulation: Size {s}, NA% producers".format(s=self.size())
         else:
             maxfit = self.max_fitnesses()
-            maxfit_p = max(maxfit[0]) / max(self.fitness_landscape)
-            maxfit_np = max(maxfit[1]) / max(self.fitness_landscape)
-            #res = "Metapopulation: Size {s}, {p:.1%} producers".format(s=self.size(),
-            #                                                        p=self.prop_producers())
+            # TODO get the maximum fitnesses among producers and non-producers
+            maxfit_p = 99
+            maxfit_np = 99
 
             if maxfit_p > maxfit_np:
                 symbol = '>'
@@ -118,9 +113,11 @@ class Metapopulation(object):
             else:
                 symbol = '='
 
-            res = "Metapopulation: Size {s}, {p:.1%} producers. w(P): {mp:.2} "\
-                  "{sym} w(Np): {mnp:.2}.".format(s=self.size(), p=self.prop_producers(),
-                                                 mp=maxfit_p, mnp=maxfit_np, sym=symbol)
+          #  res = "Metapopulation: Size {s}, {p:.1%} producers. w(P): {mp:.2} "\
+          #        "{sym} w(Np): {mnp:.2}.".format(s=self.size(), p=self.prop_producers(),
+          #                                       mp=maxfit_p, mnp=maxfit_np, sym=symbol)
+
+            res = "Metapopulation: Size {s}, TODO".format(s=self.size())
 
         return res
 
@@ -202,49 +199,6 @@ class Metapopulation(object):
         self.set_dirty()
 
 
-    def build_fitness_landscape(self):
-        """Build a fitness landscape
-
-        """
-
-        genome_length = self.config.getint(section='Population',
-                                           option='genome_length')
-        base_fitness = self.config.getfloat(section='Population',
-                                            option='base_fitness')
-        production_cost = self.config.getfloat(section='Population',
-                                               option='production_cost')
-        exponential = self.config.getboolean(section='Population',
-                                             option='fitness_exponential')
-        avg_effect = self.config.getfloat(section='Population',
-                                          option='fitness_avg_effect')
-        min_effect = self.config.getfloat(section='Population',
-                                          option='fitness_min_effect')
-
-        assert genome_length >= 0
-        assert base_fitness >= 0
-
-        if exponential:
-            effects = np.random.exponential(scale=avg_effect,
-                                            size=genome_length)
-        else:
-            effects = np.random.uniform(low=min_effect,
-                                        high=2*avg_effect-min_effect,
-                                        size=genome_length)
-
-        effects = np.append(-1.0*production_cost, effects)
-
-        landscape = np.zeros(2**(genome_length + 1))
-
-        for i in range(2**(genome_length + 1)):
-            genotype = genome.base10_as_bitarray(i)
-            genotype = np.append(np.zeros(len(effects) - len(genotype)),
-                                 genotype)
-            landscape[i] = sum(genotype * effects) + (base_fitness + production_cost)
-
-        self.set_dirty()
-        return landscape
-
-
     def get_mutation_probabilities(self):
         """Get a table of probabilities among all pairs of genotypes
         
@@ -259,8 +213,9 @@ class Metapopulation(object):
         
         """
 
+        # TODO: this should be moved to the Population level
         genome_length = self.config.getint(section='Population',
-                                           option='genome_length')
+                                           option='genome_length_max')
         mutation_rate_social = self.config.getfloat(section='Population',
                                                     option='mutation_rate_social')
         mutation_rate_adaptation = self.config.getfloat(section='Population',
@@ -391,7 +346,7 @@ class Metapopulation(object):
         """Change the environment
 
         The change_environment function changes the environment for the
-        metapopulation. This re-generates the fitness landscape and zeros out
+        entire metapopulation. This re-generates the fitness landscape and zeros out
         all fitness-encoding loci. This is meant to represent the metapopulation
         being subjected to different selective pressures. The number of
         individuals of each genotype that survive this event are proportional to
@@ -399,14 +354,14 @@ class Metapopulation(object):
         individuals that acquired the mutation that allows them to persist).
         """
 
-        self.fitness_landscape = self.build_fitness_landscape()
-
         mutation_rate_tolerance = self.config.getfloat(section='Population',
                                                        option='mutation_rate_tolerance')
 
         for n, d in self.topology.nodes_iter(data=True):
+            # TODO could these 3 steps be encapsulated in a Population-level function?
             d['population'].bottleneck(survival_rate=mutation_rate_tolerance)
             d['population'].reset_loci()
+            d['population'].fitness_landscape = d['population'].build_fitness_landscape()
 
         self.set_dirty()
 
