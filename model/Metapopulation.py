@@ -36,6 +36,8 @@ class Metapopulation(object):
                                                            option='initial_producer_proportion')
         mutation_rate_tolerance = self.config.getfloat(section='Population',
                                                        option='mutation_rate_tolerance')
+        self.population_construction = config.getboolean(section='Population',
+                                                         option='enable_construction')
 
         for n, d in self.topology.nodes_iter(data=True):
             d['population'] = Population(metapopulation=self, config=config)
@@ -323,24 +325,34 @@ class Metapopulation(object):
 
         """
 
+        # Update some metrics based on the current state of the metapopulation
         ignore = self.size()
         ignore = self.num_producers()
         ignore = self.prop_producers()
         # TODO: handle fitnesses, etc
         self.clear_dirty()
 
+        # Add an entry for each log file
         self.write_logfiles()
+
+        # Grow and mutate each population
         self.grow()
         self.mutate()
+
+        # Migrate among populations
         self.migrate()
         self.census()
-        self.construct()
 
-        # TODO: check each population to see if environment should change
-        
+        # Change the environment in populations where enabled and when that
+        # population has triggered the change
+        if self.population_construction:
+            self.construct()
+
+        # Dilute the population to allow for growth in the next cycle
         self.dilute()
 
         self.time += 1
+
 
     def change_environment(self):
         """Change the environment

@@ -82,6 +82,7 @@ class Population(object):
         if self.enable_construction:
             assert self.density_threshold > 0
 
+        self.environment_changed = False
         self.cumulative_density = 0
 
         self.genome_length = self.genome_length_min
