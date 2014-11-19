@@ -22,9 +22,6 @@ class Metapopulation(object):
         # Build the topology, which links the subpopulations
         self.build_topology()
 
-        # Store the probabilities of mutations between all pairs of genotypes
-        self.mutation_probs = self.get_mutation_probabilities()
-
         # Create each of the populations
         initial_state = self.config.get(section='Metapopulation',
                                         option='initial_state')
@@ -201,57 +198,6 @@ class Metapopulation(object):
         self.set_dirty()
 
 
-    def get_mutation_probabilities(self):
-        """Get a table of probabilities among all pairs of genotypes
-        
-        This works by first generating the Hamming distances between all of the
-        possible genotypes. These distances are then used to calculate the
-        probabilities of mutating by:
-
-            (1-mu)^(#matching bits) * mu^(#different bits)
-
-        Where #matching bits is the genome length - Hamming distance and
-        #different bits is the Hamming distance.
-        
-        """
-
-        # TODO: this should be moved to the Population level
-        genome_length = self.config.getint(section='Population',
-                                           option='genome_length_max')
-        mutation_rate_social = self.config.getfloat(section='Population',
-                                                    option='mutation_rate_social')
-        mutation_rate_adaptation = self.config.getfloat(section='Population',
-                                                        option='mutation_rate_adaptation')
-
-        S = np.vstack((np.array([[0]*2**genome_length + [1]*2**genome_length]).repeat(repeats=2**genome_length, axis=0),
-                       np.array([[1]*2**genome_length + [0]*2**genome_length]).repeat(repeats=2**genome_length, axis=0)))
-
-
-        # TODO: to handle things like P->NP but not NP->P (or vice versa), just
-        # manipulate the mr vector.
-
-        # Get the pairwise Hamming distance for all genotypes
-        hamming_v = np.vectorize(genome.hamming_distance)
-        genotypes = np.arange(start=0, stop=2**(genome_length+1))
-        xx, yy = np.meshgrid(genotypes, genotypes)
-        hamming_distances = hamming_v(xx, yy)
-
-        # nonsocial_hd is a matrix containing the pairwise Hamming distances
-        # between all genomes considering only the non-social loci
-        nonsocial_hd = hamming_distances - S
-
-        # mr is a matrix where each element contains the probability of mutating
-        # from one genome to the other.
-        # mr = npower(1-m1, L-NS) * npower(m1, NS) * npower(1-m2, S2) * npower(m2, S)
-
-        npower = np.power
-        mr = npower(1-mutation_rate_adaptation, genome_length-nonsocial_hd) *\
-                npower(mutation_rate_adaptation, nonsocial_hd) *\
-                npower(1-mutation_rate_social, S==0) *\
-                npower(mutation_rate_social, S)
-
-        return mr
-
     def dilute(self):
         """Dilute the metapopulation
 
@@ -348,6 +294,8 @@ class Metapopulation(object):
         if self.population_construction:
             self.construct()
 
+        # Could also add metapopulation-level construction events here
+
         # Dilute the population to allow for growth in the next cycle
         self.dilute()
 
@@ -389,6 +337,7 @@ class Metapopulation(object):
 
         return self._size
 
+
     def __len__(self):
         """Return the length of a Metapopulation
 
@@ -398,12 +347,14 @@ class Metapopulation(object):
         """
         return self.size()
 
+
     def num_producers(self):
         """Return the number of producers in the metapopulation"""
         if self.is_dirty():
             self._num_producers = sum(d['population'].num_producers() for n, d in self.topology.nodes_iter(data=True))
 
         return self._num_producers
+
 
     def prop_producers(self):
         """Get the proportion of producers in the metapopulation"""
@@ -416,6 +367,7 @@ class Metapopulation(object):
 
         return self._prop_producers
 
+
     def max_fitnesses(self):
         """Get the maximum fitness among producers and non-producers"""
 
@@ -424,6 +376,7 @@ class Metapopulation(object):
 
         return (prod_max, nonprod_max)
 
+
     def write_logfiles(self):
         """Write any log files"""
 
@@ -431,17 +384,21 @@ class Metapopulation(object):
             for l in self.log_objects:
                 l.update(time=self.time)
 
+
     def cleanup(self):
         for l in self.log_objects:
             l.close()
 
+
     def set_dirty(self):
         self._dirty = True
+
 
     def clear_dirty(self):
         for n, d in self.topology.nodes_iter(data=True):
             d['population'].clear_dirty()
         self._dirty = False
+
 
     def is_dirty(self):
         return self._dirty

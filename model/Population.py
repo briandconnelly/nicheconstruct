@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from numpy import sum as nsum
+from numpy import zeros as zeros
+from numpy.random import multinomial
 
 import genome
 
@@ -98,7 +101,7 @@ class Population(object):
             self.randomize()
 
         # Delta stores the differences in abundaces due to immigration and emigration
-        self.delta = np.zeros(2**(self.genome_length + 1), dtype=np.int32)
+        self.delta = zeros(2**(self.genome_length + 1), dtype=np.int32)
 
         # Mark this population as having been changed
         self.set_dirty()
@@ -111,14 +114,15 @@ class Population(object):
 
     def empty(self):
         """Empty a population"""
-        self.abundances = np.zeros(2**(self.genome_length + 1), dtype=np.uint32)
+        self.abundances = zeros(2**(self.genome_length_max + 1),
+                                dtype=np.uint32)
         self.set_dirty()
 
     def randomize(self):
         """Create a random population"""
         self.abundances = np.random.random_integers(low=0,
                                                     high=self.capacity_min,
-                                                    size=2**(self.genome_length+1))
+                                                    size=2**(self.genome_length_max+1))
         self.set_dirty()
 
     def build_fitness_landscape(self):
@@ -153,17 +157,26 @@ class Population(object):
 
         effects = np.append(-1.0*production_cost, effects)
 
-        landscape = np.zeros(2**(self.genome_length + 1))
+        landscape = zeros(2**(self.genome_length + 1))
 
         for i in range(2**(self.genome_length + 1)):
             # TODO: is there a more efficient way to do this vector algebra without first converting to base 2?
             genotype = genome.base10_as_bitarray(i)
-            genotype = np.append(np.zeros(len(effects) - len(genotype)),
-                                 genotype)
+            genotype = np.append(zeros(len(effects) - len(genotype)), genotype)
             landscape[i] = sum(genotype * effects) + (base_fitness + production_cost)
 
         self.set_dirty()
         return landscape
+
+
+    def get_mutation_probabilities(self, genotype):
+        """Get a vector of the mutation probabilities for a given genotype
+        in the population
+        """
+        tmp = zeros(2**(self.genome_length) + 1)
+        tmp[genotype] = 1
+        # TODO: if mutations not allowed in non-visible loci, make sure these are zero
+        return tmp
 
 
     def dilute(self):
@@ -192,7 +205,6 @@ class Population(object):
             return
 
         landscape = self.fitness_landscape
-        nsum = np.sum
 
         final_size = self.capacity_min + \
                 (self.capacity_max - self.capacity_min) * \
@@ -202,10 +214,9 @@ class Population(object):
 
         if nsum(grow_probs) > 0:
             norm_grow_probs = grow_probs/nsum(grow_probs)
-            self.abundances = np.random.multinomial(final_size, norm_grow_probs,
-                                                    1)[0]
+            self.abundances = multinomial(final_size, norm_grow_probs, 1)[0]
 
-        self.cumulative_density += np.sum(self.abundances)
+        self.cumulative_density += nsum(self.abundances)
         self.set_dirty()
 
 
@@ -220,16 +231,18 @@ class Population(object):
         
         """
 
-        if self.is_empty():
-            return
+        mutated_population = zeros(2**(self.genome_length_max + 1),
+                                   dtype=np.uint32)
 
-        mutated_population = np.zeros(2**(self.genome_length + 1), dtype=np.uint32)
-
-        multinomial = np.random.multinomial
-
-        for i in range(len(self.abundances)):
-            mutated_population += multinomial(self.abundances[i],
-                                              self.metapopulation.mutation_probs[i],
+        # For all of the genotypes with >0 abundance, mutate
+        # should we only do this for genotypes that are visible?
+        # - difficulty is that since we use a full abundances vector, there
+        #   would be a gap between producers and producers
+        # - handle this decision in the get_mutation_probs. if we are ignoring
+        #   invisible loci completely, their abundances will be zero.
+        for g in np.where(self.abundances > 0):
+            mu_probs = self.get_mutation_probabilities(g)
+            mutated_population += multinomial(self.abundances[g], mu_probs,
                                               size=1)[0]
 
         self.abundances = mutated_population
@@ -245,7 +258,6 @@ class Population(object):
         """
 
         assert migration_rate >= 0 and migration_rate <= 1
-
         return np.random.binomial(self.abundances, migration_rate)
 
 
@@ -260,6 +272,7 @@ class Population(object):
         self.delta -= emigrants
         self.set_dirty()
 
+
     def add_immigrants(self, immigrants):
         """Add immigrants to the population
                                     
@@ -271,6 +284,7 @@ class Population(object):
         self.delta += immigrants
         self.set_dirty()
 
+
     def census(self):
         """Update the population's abundances after migration
         
@@ -281,8 +295,9 @@ class Population(object):
         """
 
         self.abundances += self.delta
-        self.delta = np.zeros(2**(self.genome_length + 1), dtype=np.int32)
+        self.delta = zeros(2**(self.genome_length_max + 1), dtype=np.int32)
         self.set_dirty()
+
 
     def construct(self):
         """Change the environment when appropriate
@@ -292,13 +307,11 @@ class Population(object):
         """
 
         if self.enable_construction and \
-                self.cumulative_density > self.density_threshold and\
+                self.cumulative_density > self.density_threshold and \
                 self.genome_length < self.genome_length_max:
+
             self.genome_length += 1
-
             self.fitness_landscape = self.build_fitness_landscape()
-            # TODO: change environment - what else?
-
             self.environment_changed = True
             self.cumulative_density = 0
             self.set_dirty()
@@ -314,15 +327,13 @@ class Population(object):
         loci to zero.
         """
 
-        gl = self.genome_length
-        producer_genomes = np.arange(start=2**gl, stop=2**(gl+1))
-        nonproducer_genomes = np.arange(start=0, stop=2**gl)
-        num_producers = self.abundances[producer_genomes].sum()
-        num_nonproducers = self.abundances[nonproducer_genomes].sum()
+        L = self.genome_length_max
+        num_producers = self.abundances[2**L:].sum()
+        num_nonproducers = self.abundances[:2**L].sum()
 
-        self.abundances = np.zeros(2**(gl + 1), dtype=np.uint32)
+        self.abundances = zeros(2**(L + 1), dtype=np.uint32)
         self.abundances[0] = num_nonproducers
-        self.abundances[2**gl] = num_producers
+        self.abundances[2**L] = num_producers
 
         self.set_dirty()
 
@@ -390,7 +401,7 @@ class Population(object):
         if popsize == 0:
             return 'NA'
         else:
-            return np.sum(self.abundances * landscape)/popsize
+            return nsum(self.abundances * landscape)/popsize
 
     def max_fitnesses(self):
         """Get the maximum fitness among producers and non-producers"""
