@@ -32,6 +32,8 @@ class Population(object):
         the social locus
     * mutation_rate_adaptation: the probability of a mutation (bit flip) at a
         non-social locus
+    * mutate_hidden: whether or not to allow mutations at loci that are not
+        exposed
     * capacity_min: the minimum size of a fully-grown population. This occurs
         when there are no producers
     * capacity_max: the maximum size of a fully-grown population. This occurs
@@ -55,12 +57,14 @@ class Population(object):
                                                      option='enable_construction')
         self.density_threshold = config.getint(section='Population',
                                                option='density_threshold')
-        self.mutation_rate_tolerance = config.getfloat(section='Population',
-                                                       option='mutation_rate_tolerance')
         self.mutation_rate_social = config.getfloat(section='Population',
                                                     option='mutation_rate_social')
         self.mutation_rate_adaptation = config.getfloat(section='Population',
                                                         option='mutation_rate_adaptation')
+        self.mutate_hidden = config.getboolean(section='Population',
+                                               option='mutate_hidden')
+        self.mutation_rate_tolerance = config.getfloat(section='Population',
+                                                       option='mutation_rate_tolerance')
         self.dilution_factor = config.getfloat(section='Population',
                                                option='dilution_factor')
         self.capacity_min = config.getint(section='Population',
@@ -157,10 +161,11 @@ class Population(object):
 
         effects = np.append(-1.0*production_cost, effects)
 
-        landscape = zeros(2**(self.genome_length + 1))
+        num_genotypes = 2**(self.genome_length + 1)
 
-        for i in range(2**(self.genome_length + 1)):
-            # TODO: is there a more efficient way to do this vector algebra without first converting to base 2?
+        landscape = zeros(num_genotypes)
+
+        for i in range(num_genotypes):
             genotype = genome.base10_as_bitarray(i)
             genotype = np.append(zeros(len(effects) - len(genotype)), genotype)
             landscape[i] = sum(genotype * effects) + (base_fitness + production_cost)
@@ -173,9 +178,14 @@ class Population(object):
         """Get a vector of the mutation probabilities for a given genotype
         in the population
         """
-        tmp = zeros(2**(self.genome_length) + 1)
+        tmp = zeros(2**(self.genome_length + 1))
         tmp[genotype] = 1
-        # TODO: if mutations not allowed in non-visible loci, make sure these are zero
+
+        if not self.mutate_hidden:
+            # If mutations are not allowed in non-visible loci make probabilities zero and make sure weights still add up to 1.
+            # TODO
+            pass
+
         return tmp
 
 
@@ -232,14 +242,8 @@ class Population(object):
         """
 
         mutated_population = zeros(2**(self.genome_length_max + 1),
-                                   dtype=np.uint32)
+                                   dtype=self.abundances.dtype)
 
-        # For all of the genotypes with >0 abundance, mutate
-        # should we only do this for genotypes that are visible?
-        # - difficulty is that since we use a full abundances vector, there
-        #   would be a gap between producers and producers
-        # - handle this decision in the get_mutation_probs. if we are ignoring
-        #   invisible loci completely, their abundances will be zero.
         for g in np.where(self.abundances > 0):
             mu_probs = self.get_mutation_probabilities(g)
             mutated_population += multinomial(self.abundances[g], mu_probs,
@@ -414,7 +418,7 @@ class Population(object):
 
         # Get the fitnesses of genotypes present in the population
         # TODO: check the calculation of this
-        fitnesses = np.array(self.abundances > 0, dtype=int) * self.fitness_landscape
+        fitnesses = np.array(self.abundances > 0, dtype=np.int) * self.fitness_landscape
 
         gl = self.genome_length
         max_producer = fitnesses[2**gl:].max()
