@@ -94,7 +94,7 @@ class Population(object):
         self.environment_changed = False
         self.cumulative_density = 0
 
-        self.genome_length = self.genome_length_min
+        self.set_genome_length(self.genome_length_min)
         # TODO: adjust the genome length based on how the population was initialized??
 
         # Build the fitness landscape
@@ -118,6 +118,18 @@ class Population(object):
         res = "Population: Size {s}, {p:.1%} producers".format(s=self.size(),
                                                                p=self.prop_producers())
         return res
+
+    
+    def set_genome_length(self, length):
+        """Set the length of the genotypes for this population"""
+        assert length >= self.genome_length_min and length <= self.genome_length_max
+
+        self.genome_length = L = length
+        Lmax = self.genome_length_max
+
+        self.genome_visible = np.zeros(2**(Lmax + 1), dtype=np.bool)
+        self.genome_visible[:2**L] = True
+        self.genome_visible[2**Lmax:2**Lmax+2**L] = True
 
 
     def empty(self):
@@ -185,20 +197,15 @@ class Population(object):
         in the population
         """
         probs = zeros(2**(self.genome_length_max + 1))
-        probs[genotype] = 1
+        probs[genotype] = 1 # Temporary
 
         # TODO: get pairwise hamming distances.
         # TODO: raise by mutation rates
         # TODO: handle social locus rates
 
-        # If mutations are not allowed in non-visible loci make probabilities
-        # zero
+        # If configured, disallow mutations to genomes with non-visible loci
         if not self.mutate_hidden:
-            L = self.genome_length
-            Lmax = self.genome_length_max
-
-            probs[L**2-1:Lmax**2] = 0
-            probs[(Lmax**2 + L**2 - 1):] = 0
+            probs[self.genome_visible==False] = 0
 
         # TODO: normalize probs
 
@@ -233,25 +240,19 @@ class Population(object):
         landscape = self.fitness_landscape
 
         # Zero out the fitness effects at non-visible loci
-        L = self.genome_length
-        Lmax = self.genome_length_max
-
-        landscape[L**2-1:Lmax**2] = 0
-        landscape[(Lmax**2 + L**2 - 1):] = 0
-
-        print("Landscape for",L,landscape)
+        landscape[self.genome_visible==False] = 0
 
         final_size = self.capacity_min + \
                 (self.capacity_max - self.capacity_min) * \
                 self.prop_producers()
 
-        grow_probs = self.abundances * (landscape/nsum(landscape))
+        grow_probs = self.abundances * (landscape/landscape.sum())
 
         if nsum(grow_probs) > 0:
-            norm_grow_probs = grow_probs/nsum(grow_probs)
+            norm_grow_probs = grow_probs/grow_probs.sum()
             self.abundances = multinomial(final_size, norm_grow_probs, 1)[0]
 
-        self.cumulative_density += nsum(self.abundances)
+        self.cumulative_density += self.abundances.sum()
         self.set_dirty()
 
 
@@ -265,6 +266,9 @@ class Population(object):
         metapopulation.mutation_probs.
         
         """
+
+        if self.abundances.sum() == 0:
+            return
 
         mutated_population = zeros(2**(self.genome_length_max + 1),
                                    dtype=self.abundances.dtype)
@@ -339,7 +343,7 @@ class Population(object):
                 self.cumulative_density > self.density_threshold and \
                 self.genome_length < self.genome_length_max:
 
-            self.genome_length += 1
+            self.set_genome_length(self.genome_length + 1)
             self.environment_changed = True
             self.cumulative_density = 0
             self.set_dirty()
