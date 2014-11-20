@@ -112,17 +112,20 @@ class Population(object):
         # Mark this population as having been changed
         self.set_dirty()
 
+
     def __repr__(self):
         """Return a string representation of a Population object"""
         res = "Population: Size {s}, {p:.1%} producers".format(s=self.size(),
                                                                p=self.prop_producers())
         return res
 
+
     def empty(self):
         """Empty a population"""
         self.abundances = zeros(2**(self.genome_length_max + 1),
-                                dtype=np.uint)
+                                dtype=np.int)
         self.set_dirty()
+
 
     def randomize(self):
         """Create a random population"""
@@ -130,6 +133,7 @@ class Population(object):
                                                     high=self.capacity_min,
                                                     size=2**(self.genome_length_max+1))
         self.set_dirty()
+
 
     def build_fitness_landscape(self):
         """Build a fitness landscape
@@ -153,23 +157,23 @@ class Population(object):
 
         assert base_fitness >= 0
 
+        num_genotypes = 2**(self.genome_length_max + 1)
+
         if exponential:
             effects = np.random.exponential(scale=avg_effect,
-                                            size=self.genome_length)
+                                            size=self.genome_length_max)
         else:
             effects = np.random.uniform(low=min_effect,
                                         high=2*avg_effect-min_effect,
-                                        size=self.genome_length)
+                                        size=self.genome_length_max)
 
         effects = np.append(-1.0*production_cost, effects)
-
-        num_genotypes = 2**(self.genome_length + 1)
 
         landscape = zeros(num_genotypes)
 
         for i in range(num_genotypes):
             genotype = genome.base10_as_bitarray(i)
-            genotype = np.append(zeros(len(effects) - len(genotype)), genotype)
+            genotype = np.append(zeros(effects.size - len(genotype)), genotype)
             landscape[i] = sum(genotype * effects) + (base_fitness + production_cost)
 
         self.set_dirty()
@@ -180,15 +184,25 @@ class Population(object):
         """Get a vector of the mutation probabilities for a given genotype
         in the population
         """
-        tmp = zeros(2**(self.genome_length + 1))
-        tmp[genotype] = 1
+        probs = zeros(2**(self.genome_length_max + 1))
+        probs[genotype] = 1
 
+        # TODO: get pairwise hamming distances.
+        # TODO: raise by mutation rates
+        # TODO: handle social locus rates
+
+        # If mutations are not allowed in non-visible loci make probabilities
+        # zero
         if not self.mutate_hidden:
-            # If mutations are not allowed in non-visible loci make probabilities zero and make sure weights still add up to 1.
-            # TODO
-            pass
+            L = self.genome_length
+            Lmax = self.genome_length_max
 
-        return tmp
+            probs[L**2-1:Lmax**2] = 0
+            probs[(Lmax**2 + L**2 - 1):] = 0
+
+        # TODO: normalize probs
+
+        return probs
 
 
     def dilute(self):
@@ -217,6 +231,15 @@ class Population(object):
             return
 
         landscape = self.fitness_landscape
+
+        # Zero out the fitness effects at non-visible loci
+        L = self.genome_length
+        Lmax = self.genome_length_max
+
+        landscape[L**2-1:Lmax**2] = 0
+        landscape[(Lmax**2 + L**2 - 1):] = 0
+
+        print("Landscape for",L,landscape)
 
         final_size = self.capacity_min + \
                 (self.capacity_max - self.capacity_min) * \
@@ -317,7 +340,6 @@ class Population(object):
                 self.genome_length < self.genome_length_max:
 
             self.genome_length += 1
-            self.fitness_landscape = self.build_fitness_landscape()
             self.environment_changed = True
             self.cumulative_density = 0
             self.set_dirty()
@@ -333,13 +355,13 @@ class Population(object):
         loci to zero.
         """
 
-        L = self.genome_length_max
-        num_producers = self.abundances[2**L:].sum()
-        num_nonproducers = self.abundances[:2**L].sum()
+        Lmax = self.genome_length_max
+        num_producers = self.abundances[2**Lmax:].sum()
+        num_nonproducers = self.abundances[:2**Lmax].sum()
 
-        self.abundances = zeros(2**(L + 1), dtype=np.uint)
+        self.abundances = zeros(2**(Lmax + 1), dtype=np.int)
         self.abundances[0] = num_nonproducers
-        self.abundances[2**L] = num_producers
+        self.abundances[2**Lmax] = num_producers
 
         self.set_dirty()
 
@@ -363,12 +385,15 @@ class Population(object):
         """Get the size of the population"""
         return self.abundances.sum()
 
+
     def __len__(self):
         return self.abundances.sum()
+
 
     def is_empty(self):
         """Return whether or not the population is empty"""
         return self.size() == 0
+
 
     def num_producers(self):
         """Get the number of producers"""
@@ -409,6 +434,7 @@ class Population(object):
         else:
             return nsum(self.abundances * landscape)/popsize
 
+
     def max_fitnesses(self):
         """Get the maximum fitness among producers and non-producers"""
 
@@ -428,12 +454,15 @@ class Population(object):
 
         return (max_producer, max_nonproducer)
 
+
     def set_dirty(self):
         self._dirty = True
         self.metapopulation.set_dirty()
 
+
     def clear_dirty(self):
         self._dirty = False
+
 
     def is_dirty(self):
         return self._dirty
