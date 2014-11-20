@@ -107,7 +107,7 @@ class Population(object):
             self.randomize()
 
         # Delta stores the differences in abundaces due to immigration and emigration
-        self.delta = zeros(2**(self.genome_length + 1), dtype=np.int)
+        self.delta = zeros(2**(self.genome_length_max + 1), dtype=np.int)
 
         # Mark this population as having been changed
         self.set_dirty()
