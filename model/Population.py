@@ -107,7 +107,7 @@ class Population(object):
             self.randomize()
 
         # Delta stores the differences in abundaces due to immigration and emigration
-        self.delta = zeros(2**(self.genome_length + 1), dtype=np.int32)
+        self.delta = zeros(2**(self.genome_length + 1), dtype=np.int)
 
         # Mark this population as having been changed
         self.set_dirty()
@@ -121,7 +121,7 @@ class Population(object):
     def empty(self):
         """Empty a population"""
         self.abundances = zeros(2**(self.genome_length_max + 1),
-                                dtype=np.uint32)
+                                dtype=np.uint)
         self.set_dirty()
 
     def randomize(self):
@@ -301,7 +301,7 @@ class Population(object):
         """
 
         self.abundances += self.delta
-        self.delta = zeros(2**(self.genome_length_max + 1), dtype=np.int32)
+        self.delta = zeros(2**(self.genome_length_max + 1), dtype=np.int)
         self.set_dirty()
 
 
@@ -337,7 +337,7 @@ class Population(object):
         num_producers = self.abundances[2**L:].sum()
         num_nonproducers = self.abundances[:2**L].sum()
 
-        self.abundances = zeros(2**(L + 1), dtype=np.uint32)
+        self.abundances = zeros(2**(L + 1), dtype=np.uint)
         self.abundances[0] = num_nonproducers
         self.abundances[2**L] = num_producers
 
