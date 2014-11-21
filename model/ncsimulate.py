@@ -118,7 +118,7 @@ def main():
                                       option='stop_on_empty')
     m = Metapopulation(config=config)
 
-    for t in range(config.getint(section='Simulation', option='num_cycles')):
+    for t in xrange(config.getint(section='Simulation', option='num_cycles')):
         m.cycle()
 
         if not args.quiet:

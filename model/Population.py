@@ -183,10 +183,10 @@ class Population(object):
 
         landscape = zeros(num_genotypes)
 
-        for i in range(num_genotypes):
+        for i in xrange(num_genotypes):
             genotype = genome.base10_as_bitarray(i)
-            genotype = np.append(zeros(effects.size - len(genotype)), genotype)
-            landscape[i] = sum(genotype * effects) + (base_fitness + production_cost)
+            genotype = np.append(zeros(effects.size - genotype.size), genotype)
+            landscape[i] = np.sum(genotype * effects) + (base_fitness + production_cost)
 
         self.set_dirty()
         return landscape
@@ -273,7 +273,7 @@ class Population(object):
         mutated_population = zeros(2**(self.genome_length_max + 1),
                                    dtype=self.abundances.dtype)
 
-        for g in np.where(self.abundances > 0):
+        for g in np.where(self.abundances > 0)[0]:
             mu_probs = self.get_mutation_probabilities(g)
             mutated_population += multinomial(self.abundances[g], mu_probs,
                                               size=1)[0]

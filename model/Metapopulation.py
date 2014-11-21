@@ -243,7 +243,7 @@ class Metapopulation(object):
             # Distribute the migrants among the neighboring populations
             elif self.migration_dest.lower() == 'neighbors':
                 num_neighbors = self.topology.degree(n)
-                for neighbor_node in self.topology.neighbors(n):
+                for neighbor_node in self.topology.neighbors_iter(n):
                     migrants = pop.select_migrants(migration_rate=self.migration_rate/num_neighbors)
                     neighbor = self.topology.node[neighbor_node]['population']
                     neighbor.add_immigrants(migrants)
