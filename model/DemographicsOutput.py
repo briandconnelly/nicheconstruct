@@ -1,14 +1,28 @@
 # -*- coding: utf-8 -*-
 
-import bz2
-import csv
+"""Write demographic information about the metapopulation"""
 
 from OutputWriter import OutputWriter
 
 
 class DemographicsOutput(OutputWriter):
+    """Write demographic information about each population in the
+    metapopulation
 
-    def __init__(self, metapopulation, filename='demographics.csv.bz2', delimiter=','):
+    Data includes:
+    * Time
+    * Node ID (Population ID)
+    * Size of Population
+    * Number of Producers
+    * Proportion of producers
+    * Number of nonproducers
+    * Proportion of nonproducers
+    * Average fitness
+
+    """
+
+    def __init__(self, metapopulation, filename='demographics.csv.bz2',
+                 delimiter=','):
         super(DemographicsOutput, self).__init__(metapopulation=metapopulation,
                                                  filename=filename,
                                                  delimiter=delimiter)
@@ -18,8 +32,8 @@ class DemographicsOutput(OutputWriter):
                               'PropNonProducers', 'AvgFitness'])
 
     def update(self, time):
-        for n, d in self.metapopulation.topology.nodes_iter(data=True):
-            size = len(d['population'])
+        for node, data in self.metapopulation.topology.nodes_iter(data=True):
+            size = len(data['population'])
 
             if size == 0:
                 num_producers = 0
@@ -28,13 +42,13 @@ class DemographicsOutput(OutputWriter):
                 prop_nonproducers = 'NA'
                 average_fitness = 'NA'
             else:
-                num_producers = d['population'].num_producers()
+                num_producers = data['population'].num_producers()
                 num_nonproducers = size - num_producers
                 prop_producers = 1.0*num_producers/size
                 prop_nonproducers = 1.0*num_nonproducers/size
-                average_fitness = d['population'].average_fitness()
+                average_fitness = data['population'].average_fitness()
 
-            self.writer.writerow([time, n, size, num_producers, prop_producers,
-                                  num_nonproducers, prop_nonproducers,
-                                  average_fitness])
+            self.writer.writerow([time, node, size, num_producers,
+                                  prop_producers, num_nonproducers,
+                                  prop_nonproducers, average_fitness])
 

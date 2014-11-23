@@ -1,15 +1,23 @@
 # -*- coding: utf-8 -*-
 
-import bz2
-import csv
+"""Write information about metapopulation fitness to a file"""
 
 import OutputWriter
-import Population
 
 
 class FitnessOutput(OutputWriter.OutputWriter):
+    """Write information about the distribution of fitness within the
+    metapopulation
 
-    def __init__(self, metapopulation, filename='max_fitness.csv.bz2', delimiter=','):
+    Data includes:
+    * Time
+    * Maximum fitness of producers
+    * Maximum fitness of non-producers
+
+    """
+
+    def __init__(self, metapopulation, filename='max_fitness.csv.bz2',
+                 delimiter=','):
         super(FitnessOutput, self).__init__(metapopulation=metapopulation,
                                             filename=filename,
                                             delimiter=delimiter)
