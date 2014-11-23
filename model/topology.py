@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+"""Functions for building different graph topologies"""
+
 import networkx as nx
 
 
@@ -26,34 +28,32 @@ def moore_lattice(rows, columns, radius=1, periodic=False):
     assert columns > 0
     assert radius >= 0
 
-    G = nx.empty_graph()
-    G.name = "Moore Lattice: {r} rows, {c} columns, radius={rx}".format(r=rows,
-                                                                        c=columns,
-                                                                        rx=radius)
-    
+    graph = nx.empty_graph()
+    graph.name = "Moore Lattice: {r} rows, {c} columns, "\
+                 "radius={rx}".format(r=rows, c=columns, rx=radius)
+
     if periodic:
-        G.name += ' with periodoc boundaries' 
+        graph.name += ' with periodoc boundaries'
 
-    G.add_nodes_from(list(range(rows * columns)))
+    graph.add_nodes_from(list(range(rows * columns)))
 
-    for n in G.nodes():
-        myrow = n // columns
-        mycol = n % columns
+    for node in graph.nodes_iter():
+        (myrow, mycol) = divmod(node, columns)
 
-        for r in range(myrow - radius, myrow + radius + 1):
-            if periodic == False and (r < 0 or r >= rows):
+        for row in range(myrow - radius, myrow + radius + 1):
+            if periodic == False and (row < 0 or row >= rows):
                 continue
 
-            for c in range(mycol - radius, mycol + radius + 1):
-                if periodic == False and (c < 0 or c >= columns):
+            for col in range(mycol - radius, mycol + radius + 1):
+                if periodic == False and (col < 0 or col >= columns):
                     continue
 
-                neighbor = (columns * (r % rows)) + (c % columns)
+                neighbor = (columns * (row % rows)) + (col % columns)
 
-                if n != neighbor:
-                    G.add_edge(n, neighbor)
+                if node != neighbor:
+                    graph.add_edge(node, neighbor)
 
-    return G
+    return graph
 
 
 def vonneumann_lattice(rows, columns, periodic=False):
@@ -74,45 +74,47 @@ def vonneumann_lattice(rows, columns, periodic=False):
     assert rows > 0
     assert columns > 0
 
-    g = nx.grid_2d_graph(m=columns, n=rows, periodic=periodic)
-    g = nx.convert_node_labels_to_integers(g)
-    g.name = "VonNeumann Lattice: {r} rows, {c} columns".format(r=rows,
-                                                                c=columns)
+    graph = nx.grid_2d_graph(m=columns, n=rows, periodic=periodic)
+    graph = nx.convert_node_labels_to_integers(graph)
+    graph.name = "VonNeumann Lattice: {r} rows, {c} columns".format(r=rows,
+                                                                    c=columns)
 
     if periodic:
-        g.name += ' with periodic boundaries'
+        graph.name += ' with periodic boundaries'
 
-    return g
+    return graph
 
 
 def smallworld(size, neighbors, edgeprob, seed=None):
+    """Return a small world network with the given properties"""
     assert size > 0
     assert neighbors >= 0
     assert edgeprob >= 0 and edgeprob <= 1
 
     if seed:
-        g = nx.newman_watts_strogatz_graph(n=size, k=neighbors, p=edgeprob,
-                                           seed=seed)
+        graph = nx.newman_watts_strogatz_graph(n=size, k=neighbors, p=edgeprob,
+                                               seed=seed)
 
     else:
-        g = nx.newman_watts_strogatz_graph(n=size, k=neighbors, p=edgeprob)
+        graph = nx.newman_watts_strogatz_graph(n=size, k=neighbors, p=edgeprob)
 
-    g.name = 'Small World network: {s} nodes, {n} neighbors, ' \
-             '{p} edge probability'.format(s=size, n=neighbors, p=edgeprob)
+    graph.name = 'Small World network: {s} nodes, {n} neighbors, ' \
+                 '{p} edge probability'.format(s=size, n=neighbors, p=edgeprob)
 
-    return g
+    return graph
 
 
 def regular(size, degree, seed=None):
+    """Return a regular graph with the given properties"""
     assert size > 0
     assert degree >= 0
 
     if seed:
-        g = nx.random_regular_graph(d=degree, n=size, seed=seed)
+        graph = nx.random_regular_graph(d=degree, n=size, seed=seed)
     else:
-        g = nx.random_regular_graph(d=degree, n=size)
+        graph = nx.random_regular_graph(d=degree, n=size)
 
-    g.name = 'Random Regular Graph: {n} nodes, {d} degree'.format(n=size,
-                                                                  d=degree)
-    return g
+    graph.name = 'Random Regular Graph: {n} nodes, {d} degree'.format(n=size,
+                                                                      d=degree)
+    return graph
 

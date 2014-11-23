@@ -81,7 +81,7 @@ class Population(object):
         assert self.mutation_rate_tolerance >= 0 and self.mutation_rate_tolerance <= 1
         assert self.mutation_rate_social >= 0 and self.mutation_rate_social <= 1
         assert self.mutation_rate_adaptation >= 0 and self.mutation_rate_adaptation <= 1
-        assert self.dilution_factor >=0 and self.dilution_factor <= 1, 'dilution_factor must be between 0 and 1'
+        assert self.dilution_factor >= 0 and self.dilution_factor <= 1, 'dilution_factor must be between 0 and 1'
         assert self.capacity_min >= 0
         assert self.capacity_max >= 0 and self.capacity_max >= self.capacity_min
         assert self.initialize.lower() in ['empty', 'random'], "initialize must be one of 'empty', 'random'"
@@ -169,8 +169,6 @@ class Population(object):
 
         assert base_fitness >= 0
 
-        num_genotypes = 2**(self.genome_length_max + 1)
-
         if exponential:
             effects = np.random.exponential(scale=avg_effect,
                                             size=self.genome_length_max)
@@ -181,6 +179,7 @@ class Population(object):
 
         effects = np.append(-1.0*production_cost, effects)
 
+        num_genotypes = 2**(self.genome_length_max + 1)
         landscape = zeros(num_genotypes)
 
         for i in xrange(num_genotypes):
@@ -196,12 +195,19 @@ class Population(object):
         """Get a vector of the mutation probabilities for a given genotype
         in the population
         """
+
+        # Get the Hamming Distance to all other genotypes
+        hamming_v = np.vectorize(genome.hamming_distance)
+        hd = hamming_v(genotype, np.arange(start=0,
+                                           stop=2**(self.genome_length_max+1)))
+
+        # TODO: calculat probs by raising distances to the mutation rates
+        # TODO: extra stuff to handle social mutations
+        # TODO: abulity to control direction of social mutations e.g., P->NP but not NP->P
+
+
         probs = zeros(2**(self.genome_length_max + 1))
         probs[genotype] = 1 # Temporary
-
-        # TODO: get pairwise hamming distances.
-        # TODO: raise by mutation rates
-        # TODO: handle social locus rates
 
         # If configured, disallow mutations to genomes with non-visible loci
         if not self.mutate_hidden:
@@ -446,7 +452,7 @@ class Population(object):
         # TODO: handle dirty
 
         if popsize == 0:
-            return (0,0)
+            return (0, 0)
 
         # Get the fitnesses of genotypes present in the population
         # TODO: check the calculation of this
