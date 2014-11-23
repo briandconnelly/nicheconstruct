@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+"""Represent Populations of individuals"""
+
 import numpy as np
 from numpy import sum as nsum
 from numpy import zeros as zeros
@@ -13,23 +15,24 @@ class Population(object):
 
     A population is a collection of individuals. Each individual is represented
     by a number. The binary representation of that number defines that
-    individual's genotype. The state of the highest order bit determines whether
-    (1) or not (0) that individual is a producer.
+    individual's genotype. The state of the highest order bit determines
+    whether (1) or not (0) that individual is a producer.
 
     * genome_length_min: the minimum length of the genome. this occurs in
         environments that haven't been constructed
     * genome_length_max: the minimum length of the genome. this occurs in
         environments that have been maximally constructed
-    * enable_construction: whether or not populations can alter their environment
-    * density_threshold: the cumulative density at which an environmental change
-        (construction) is triggered. See cumulative_density.
+    * enable_construction: whether or not populations can alter their
+        environment
+    * density_threshold: the cumulative density at which an environmental
+         change (construction) is triggered. See cumulative_density.
     * cumulative_density: The densities that this population has accumulated
         over time. This value is added to during each growth cycle and reset
         when an environmental change occurs.
     * mutation_rate_tolerance: the probability of an individual acquiring a
         mutation that allows it to survive a change of environment (stress)
-    * mutation_rate_social: the probability of a mutation (bit flip) occuring at
-        the social locus
+    * mutation_rate_social: the probability of a mutation (bit flip) occuring
+        at the social locus
     * mutation_rate_adaptation: the probability of a mutation (bit flip) at a
         non-social locus
     * mutate_hidden: whether or not to allow mutations at loci that are not
@@ -72,7 +75,7 @@ class Population(object):
         self.capacity_max = config.getint(section='Population',
                                           option='capacity_max')
         self.production_cost = config.getfloat(section='Population',
-                                          option='production_cost')
+                                               option='production_cost')
         self.initialize = config.get(section='Population',
                                      option='initialize')
 
@@ -91,23 +94,25 @@ class Population(object):
         else:
             assert self.genome_length_min == self.genome_length_max
 
+        # Keep some information about the population
         self.environment_changed = False
         self.cumulative_density = 0
-
-        self.set_genome_length(self.genome_length_min)
-        # TODO: adjust the genome length based on how the population was initialized??
 
         # Build the fitness landscape
         self.fitness_landscape = self.build_fitness_landscape()
 
-        # Create an empty population
-        if self.initialize.lower() == 'empty':
-            self.empty()
-        elif self.initialize.lower() == 'random':
+        self.set_genome_length(self.genome_length_min)
+        # TODO: adjust the genome length based on how the population was initialized??
+
+        # Initialize the population (empty by default)
+        self.abundances = zeros(self.fitness_landscape.size, dtype=np.int)
+
+        if self.initialize.lower() == 'random':
             self.randomize()
 
-        # Delta stores the differences in abundaces due to immigration and emigration
-        self.delta = zeros(2**(self.genome_length_max + 1), dtype=np.int)
+        # Delta stores the differences in abundaces due to immigration and
+        # emigration
+        self.delta = zeros(self.abundances.size, dtype=np.int)
 
         # Mark this population as having been changed
         self.set_dirty()
@@ -119,7 +124,7 @@ class Population(object):
                                                                p=self.prop_producers())
         return res
 
-    
+
     def set_genome_length(self, length):
         """Set the length of the genotypes for this population"""
         assert length >= self.genome_length_min and length <= self.genome_length_max
@@ -127,15 +132,15 @@ class Population(object):
         self.genome_length = L = length
         Lmax = self.genome_length_max
 
-        self.genome_visible = np.zeros(2**(Lmax + 1), dtype=np.bool)
+        self.genome_visible = np.zeros(self.fitness_landscape.size,
+                                       dtype=np.bool)
         self.genome_visible[:2**L] = True
         self.genome_visible[2**Lmax:2**Lmax+2**L] = True
 
 
     def empty(self):
         """Empty a population"""
-        self.abundances = zeros(2**(self.genome_length_max + 1),
-                                dtype=np.int)
+        self.abundances = zeros(self.fitness_landscape.size, dtype=np.int)
         self.set_dirty()
 
 
@@ -143,7 +148,7 @@ class Population(object):
         """Create a random population"""
         self.abundances = np.random.random_integers(low=0,
                                                     high=self.capacity_min,
-                                                    size=2**(self.genome_length_max+1))
+                                                    size=self.fitness_landscape.size)
         self.set_dirty()
 
 
@@ -198,20 +203,20 @@ class Population(object):
 
         # Get the Hamming Distance to all other genotypes
         hamming_v = np.vectorize(genome.hamming_distance)
-        hd = hamming_v(genotype, np.arange(start=0,
-                                           stop=2**(self.genome_length_max+1)))
+        hdist = hamming_v(genotype, np.arange(start=0,
+                                              stop=self.fitness_landscape.size))
 
         # TODO: calculat probs by raising distances to the mutation rates
         # TODO: extra stuff to handle social mutations
         # TODO: abulity to control direction of social mutations e.g., P->NP but not NP->P
 
 
-        probs = zeros(2**(self.genome_length_max + 1))
+        probs = zeros(self.fitness_landscape.size)
         probs[genotype] = 1 # Temporary
 
         # If configured, disallow mutations to genomes with non-visible loci
         if not self.mutate_hidden:
-            probs[self.genome_visible==False] = 0
+            probs[self.genome_visible == False] = 0
 
         # TODO: normalize probs
 
@@ -220,7 +225,7 @@ class Population(object):
 
     def dilute(self):
         """Dilute a population
-        
+
         dilute reduces the population's size stochastically by the configured
         dilution factor (dilution_factor in Population section). This does
         not get done if the population just experienced an environmental change
@@ -233,7 +238,7 @@ class Population(object):
 
     def grow(self):
         """Grow the population to carrying capacity
-        
+
         The final population size is determined based on the proportion of
         producers present. This population is determined by drawing from a
         multinomial with the probability of each genotype proportional to its
@@ -246,7 +251,7 @@ class Population(object):
         landscape = self.fitness_landscape
 
         # Zero out the fitness effects at non-visible loci
-        landscape[self.genome_visible==False] = 0
+        landscape[self.genome_visible == False] = 0
 
         final_size = self.capacity_min + \
                 (self.capacity_max - self.capacity_min) * \
@@ -254,7 +259,7 @@ class Population(object):
 
         grow_probs = self.abundances * (landscape/landscape.sum())
 
-        if nsum(grow_probs) > 0:
+        if grow_probs.sum() > 0:
             norm_grow_probs = grow_probs/grow_probs.sum()
             self.abundances = multinomial(final_size, norm_grow_probs, 1)[0]
 
@@ -264,13 +269,13 @@ class Population(object):
 
     def mutate(self):
         """Mutate a Population
-        
-        Each genotype mutates to another with probability inversely proportional
-        to the Hamming distance (# different bits in binary representation)
-        between them. The distances between all pairs of genotypes is
-        pre-calculated at the beginning of a run and stored in
+
+        Each genotype mutates to another with probability inversely
+        proportional to the Hamming distance (# different bits in binary
+        representation) between them. The distances between all pairs of
+        genotypes is pre-calculated at the beginning of a run and stored in
         metapopulation.mutation_probs.
-        
+
         """
 
         if self.abundances.sum() == 0:
@@ -279,10 +284,10 @@ class Population(object):
         mutated_population = zeros(2**(self.genome_length_max + 1),
                                    dtype=self.abundances.dtype)
 
-        for g in np.where(self.abundances > 0)[0]:
-            mu_probs = self.get_mutation_probabilities(g)
-            mutated_population += multinomial(self.abundances[g], mu_probs,
-                                              size=1)[0]
+        for genotype in np.where(self.abundances > 0)[0]:
+            mu_probs = self.get_mutation_probabilities(genotype)
+            mutated_population += multinomial(self.abundances[genotype],
+                                              mu_probs, size=1)[0]
 
         self.abundances = mutated_population
         self.set_dirty()
@@ -290,10 +295,10 @@ class Population(object):
 
     def select_migrants(self, migration_rate):
         """Select individuals to migrate
-                                    
+
         Select genotypes to migrate. The amount of each genotype that migrates
         is chosen in proportion to that genotype's abundance.
-                                    
+
         """
 
         assert migration_rate >= 0 and migration_rate <= 1
@@ -302,7 +307,7 @@ class Population(object):
 
     def remove_emigrants(self, emigrants):
         """Remove emigrants from the population
-                                    
+
         remove_emigrants removes the given emigrants from the population. The
         genotypes are not immediately removed to the population, but their
         counts are placed in a temporary area until census() is called.
@@ -314,7 +319,7 @@ class Population(object):
 
     def add_immigrants(self, immigrants):
         """Add immigrants to the population
-                                    
+
         add_immigrants adds the given immigrants to the population. The new
         genotypes are not immediately added to the population, but placed in
         a temporary area until census() is called.
@@ -326,23 +331,24 @@ class Population(object):
 
     def census(self):
         """Update the population's abundances after migration
-        
+
         When migration occurs, the immigrants and emigrants are not directly
         accounted for in the list of genotype abundances. This function adds
         immigrants and removes emigrants to/from the abundances.
-                                    
+
         """
 
         self.abundances += self.delta
-        self.delta = zeros(2**(self.genome_length_max + 1), dtype=np.int)
+        self.delta = zeros(self.abundances.size, dtype=np.int)
         self.set_dirty()
 
 
     def construct(self):
         """Change the environment when appropriate
 
-        If the cumulative density has risen above the threshold, the environment
-        will be updated at this patch
+        If the cumulative density has risen above the threshold, the
+        environment will be updated at this patch
+
         """
 
         if self.enable_construction and \
@@ -366,10 +372,11 @@ class Population(object):
         """
 
         Lmax = self.genome_length_max
-        num_producers = self.abundances[2**Lmax:].sum()
-        num_nonproducers = self.abundances[:2**Lmax].sum()
 
-        self.abundances = zeros(2**(Lmax + 1), dtype=np.int)
+        num_producers = self.num_producers()
+        num_nonproducers = self.num_nonproducers()
+
+        self.abundances = zeros(self.fitness_landscape.size, dtype=np.int)
         self.abundances[0] = num_nonproducers
         self.abundances[2**Lmax] = num_producers
 
@@ -381,48 +388,51 @@ class Population(object):
 
         This function passes the population through a bottleneck. The
         probability of survival is specified as the survival_rate parameter
-        [0,1]. 
+        [0,1].
         """
-
-        assert survival_rate >= 0
-        assert survival_rate <= 1
 
         self.abundances = np.random.binomial(self.abundances, survival_rate)
         self.set_dirty()
 
 
     def size(self):
-        """Get the size of the population"""
+        """Get the size of the population, which is the number of individuals
+        """
         return self.abundances.sum()
 
 
     def __len__(self):
+        """Get the length of the population, which is the number of
+        individuals"""
         return self.abundances.sum()
 
 
     def is_empty(self):
         """Return whether or not the population is empty"""
-        return self.size() == 0
+        return self.abundances.sum() == 0
 
 
     def num_producers(self):
         """Get the number of producers"""
 
-        # How this works:
-        # 1. generate all indices whose producer bit is set
-        #    - this is all numbers from 2^nbits through 2^(nbits+1)-1
-        # 2. get the abundances at those indices
-        # 3. sum them up
+        L = self.genome_length
+        Lmax = self.genome_length_max
 
-        gl = self.genome_length
-        producer_genomes = np.arange(start=2**gl, stop=2**(gl+1))
-        return self.abundances[producer_genomes].sum()
+        return self.abundances[2**Lmax:2**Lmax+2**L].sum()
+
+
+    def num_nonproducers(self):
+        """Get the number of non-producers"""
+
+        L = self.genome_length
+        Lmax = self.genome_length_max
+
+        return self.abundances[:2**L].sum()
 
 
     def prop_producers(self):
         """Get the proportion of producers"""
-        popsize = self.size()
-        
+
         try:
             retval = 1.0 * self.num_producers() / self.size()
         except ZeroDivisionError:
@@ -434,46 +444,41 @@ class Population(object):
     def average_fitness(self):
         """Get the average fitness in the population"""
 
-        popsize = self.size()
-        landscape = self.fitness_landscape
-        # TODO: update for population-specific fitness landscapes
-        # TODO: check the calculation of this
+        try:
+            retval = nsum(self.abundances * self.fitness_landscape)/self.abundances.sum()
+        except ZeroDivisionError:
+            retval = 'NA'
 
-        if popsize == 0:
-            return 'NA'
-        else:
-            return nsum(self.abundances * landscape)/popsize
+        return retval
 
 
     def max_fitnesses(self):
         """Get the maximum fitness among producers and non-producers"""
 
-        popsize = self.size()
-        # TODO: handle dirty
+        L = self.genome_length
+        Lmax = self.genome_length_max
 
-        if popsize == 0:
-            return (0, 0)
+        # Get the fitnesses of genomes that are present in the population
+        extant_fitnesses = (self.abundances > 0) * self.fitness_landscape
 
-        # Get the fitnesses of genotypes present in the population
-        # TODO: check the calculation of this
-        fitnesses = np.array(self.abundances > 0, dtype=np.int) * self.fitness_landscape
-
-        gl = self.genome_length
-        max_producer = fitnesses[2**gl:].max()
-        max_nonproducer = fitnesses[:2**gl].max()
-
-        return (max_producer, max_nonproducer)
+        # Return a tuple containing the maximum fitnesses among extant
+        # producers and non-producers
+        return (extant_fitnesses[2**Lmax:2**Lmax+2**L].max(),
+                extant_fitnesses[:2**L].max())
 
 
     def set_dirty(self):
+        """Mark the Population as having been changed this cycle"""
         self._dirty = True
         self.metapopulation.set_dirty()
 
 
     def clear_dirty(self):
+        """Mark the Population as having not been changed this cycle"""
         self._dirty = False
 
 
     def is_dirty(self):
+        """Return whether or not the Population has been changed this cycle"""
         return self._dirty
 
