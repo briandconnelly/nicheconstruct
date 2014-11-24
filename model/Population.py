@@ -95,18 +95,17 @@ class Population(object):
         else:
             assert self.genome_length_min == self.genome_length_max
 
-
         # Keep some information about the population
         self.environment_changed = False
         self.cumulative_density = 0
         self._dirty = True
 
         # Build the fitness landscape
-        self.fitness_landscape = self.build_fitness_landscape()
+        self.full_fitness_landscape = self.build_fitness_landscape()
+        self.fitness_landscape = None  # will be set after genome_length is
 
         # Set the genome length
         self.genome_length = None
-        self.genome_visible = None
         self.set_genome_length(self.genome_length_min)
 
         # Initialize the population (empty by default)
@@ -134,13 +133,8 @@ class Population(object):
         """Set the length of the genotypes for this population"""
         assert length >= self.genome_length_min and length <= self.genome_length_max
 
-        self.genome_length = L = length
-        Lmax = self.genome_length_max
-
-        self.genome_visible = np.zeros(self.fitness_landscape.size,
-                                       dtype=np.bool)
-        self.genome_visible[:2**L] = True
-        self.genome_visible[2**Lmax:2**Lmax+2**L] = True
+        self.genome_length = length
+        self.fitness_landscape = self.get_visible_fitness_landscape()
 
 
     def empty(self):
@@ -151,6 +145,7 @@ class Population(object):
 
     def randomize(self):
         """Create a random population"""
+        # TODO: account for visible landscape
         self.abundances = np.random.random_integers(low=0,
                                                     high=self.capacity_min,
                                                     size=self.fitness_landscape.size)
@@ -226,7 +221,10 @@ class Population(object):
 
         # If configured, disallow mutations to genomes with non-visible loci
         if not self.mutate_hidden:
-            probs[self.genome_visible != True] = 0
+            L = self.genome_length
+            Lmax = self.genome_length_max
+            probs[2**L:2**Lmax] = 0
+            probs[2**Lmax + 2**L:] = 0
 
         # We could adjust probs to allow for non-bidirectionality in social
         # mutations here
@@ -250,6 +248,27 @@ class Population(object):
             self.bottleneck(survival_rate=self.dilution_factor)
 
 
+    def get_visible_fitness_landscape(self):
+        """Get a vector of the fitnesses of each genotype present
+
+        If any genotypes exist that contain non-visible alleles, the fitness
+        based only on visible alleles will be given.
+        """
+
+        fitnesses = np.zeros(self.full_fitness_landscape.size)
+        L = self.genome_length
+        Lmax = self.genome_length_max
+
+        # For each possible genotype, set fitness based on the allelic effects
+        # of each visible locus, disregarding non-visible loci
+        for genotype in xrange(self.full_fitness_landscape.size):
+            visible_genotype = ((genotype >= 2**Lmax) * 2**Lmax) + \
+                    (genotype & (2**L)-1)
+            fitnesses[genotype] = self.full_fitness_landscape[visible_genotype]
+
+        return fitnesses
+
+
     def grow(self):
         """Grow the population to carrying capacity
 
@@ -263,9 +282,6 @@ class Population(object):
             return
 
         landscape = self.fitness_landscape
-
-        # Zero out the fitness effects at non-visible loci
-        landscape[self.genome_visible == False] = 0
 
         final_size = self.capacity_min + \
                 (self.capacity_max - self.capacity_min) * \
@@ -434,16 +450,12 @@ class Population(object):
 
     def num_producers(self):
         """Get the number of producers"""
-
-        L = self.genome_length
-        Lmax = self.genome_length_max
-
-        return self.abundances[2**Lmax:2**Lmax+2**L].sum()
+        return self.abundances[2**self.genome_length_max:].sum()
 
 
     def num_nonproducers(self):
         """Get the number of non-producers"""
-        return self.abundances[:2**self.genome_length].sum()
+        return self.abundances[:2**self.genome_length_max].sum()
 
 
     def prop_producers(self):
@@ -455,6 +467,27 @@ class Population(object):
             retval = -1
 
         return retval
+
+
+    def prop_nonproducers(self):
+        """Get the proportion of nonproducers"""
+
+        try:
+            retval = 1.0 * self.num_nonproducers() / self.size()
+        except ZeroDivisionError:
+            retval = -1
+
+        return retval
+
+
+    def num_producer_genotypes(self):
+        """Return the number of different producer genotypes in existence"""
+        return np.count_nonzero(self.abundances[2**self.genome_length_max:])
+
+
+    def num_nonproducer_genotypes(self):
+        """Return the number of different non-producer genotypes in existence"""
+        return np.count_nonzero(self.abundances[:2**self.genome_length_max])
 
 
     def average_fitness(self):
@@ -471,16 +504,14 @@ class Population(object):
     def max_fitnesses(self):
         """Get the maximum fitness among producers and non-producers"""
 
-        L = self.genome_length
-        Lmax = self.genome_length_max
-
-        # Get the fitnesses of genomes that are present in the population
         extant_fitnesses = (self.abundances > 0) * self.fitness_landscape
 
         # Return a tuple containing the maximum fitnesses among extant
         # producers and non-producers
-        return (extant_fitnesses[2**Lmax:2**Lmax+2**L].max(),
-                extant_fitnesses[:2**L].max())
+        Lmax = self.genome_length_max
+
+        return (extant_fitnesses[2**Lmax:].max(),
+                extant_fitnesses[:2**Lmax].max())
 
 
     def set_dirty(self):
