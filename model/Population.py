@@ -206,8 +206,8 @@ class Population(object):
         in the population
         """
 
-        mu_S = self.mutation_rate_social
-        mu_A = self.mutation_rate_adaptation
+        mu_s = self.mutation_rate_social
+        mu_a = self.mutation_rate_adaptation
         Lmax = self.genome_length_max
 
         genotypes = np.arange(start=0, stop=self.fitness_landscape.size)
@@ -215,32 +215,21 @@ class Population(object):
 
         # Get the Hamming distances to all other genotypes at the adaptive
         # and social loci, respectively
-        hdist_A = genome.hamming_distance_v(genotype,
+        hdist_a = genome.hamming_distance_v(genotype & ((2**Lmax)-1),
                                             genotypes & ((2**Lmax)-1))
-        hdist_S = (genome.is_producer(genotype, self.genome_length_max) != coop_genotypes) * 1.0
+        hdist_s = (genome.is_producer(genotype, self.genome_length_max) != coop_genotypes) * 1.0
 
-        # TODO: the probs for the producer type are VERY low (~ 0)
+        probs = npow(1.0 - mu_a, self.genome_length-hdist_a) * \
+                npow(mu_a, hdist_a) * \
+                npow(1 - mu_s, hdist_s == 0) * \
+                npow(mu_s, hdist_s)
 
-        probs = npow(1.0 - mu_A, self.genome_length-hdist_A) * \
-                npow(mu_A, hdist_A) * \
-                npow(1-mu_S, hdist_S==0) * \
-                npow(mu_S, hdist_S)
-
-        probs = npow(1.0 - mu_A, self.genome_length-hdist_A) * \
-                npow(mu_A, hdist_A)
-
-        if probs.sum() < 0.1:
-            print("Genotype", genotype)
-            print("Sum:", probs.sum())
-            print("Probs:", probs[genotype])
-            #print("Probs:", probs)
-            print("Hdist_s:", hdist_S)
-            print("------------")
-
-        # TODO: this is kind of heavy-handed. is there another way?
         # If configured, disallow mutations to genomes with non-visible loci
         if not self.mutate_hidden:
             probs[self.genome_visible != True] = 0
+
+        # We could adjust probs to allow for non-bidirectionality in social
+        # mutations here
 
         # Normalize the probabilities
         probs = probs/probs.sum()
@@ -309,12 +298,13 @@ class Population(object):
         if self.abundances.sum() == 0:
             return
 
-        mutated_population = zeros(2**(self.genome_length_max + 1),
+        mutated_population = zeros(self.abundances.size,
                                    dtype=self.abundances.dtype)
 
+        # For each extant genotype, get the probability of mutating to each
+        # other genotype, and use these probabilities to sample mutants using a
+        # multinomial
         for genotype in np.where(self.abundances > 0)[0]:
-            print("Genotype", genotype)
-            print("Abundance", self.abundances[genotype])
             mu_probs = self.get_mutation_probabilities(genotype)
             mutated_population += multinomial(self.abundances[genotype],
                                               mu_probs, size=1)[0]
