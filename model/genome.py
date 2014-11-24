@@ -14,6 +14,8 @@ def hamming_distance(genome1, genome2):
     """Calculate the Hamming distance between two genotypes"""
     return bin(genome1 ^ genome2)[2:].count('1')
 
+hamming_distance_v = np.vectorize(hamming_distance)
+
 def is_producer(genotype, bits):
     """Determine whether or not the given genotype is a producer"""
     return genotype & 2**bits == 2**bits

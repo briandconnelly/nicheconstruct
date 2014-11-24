@@ -3,6 +3,7 @@
 """Represent Populations of individuals"""
 
 import numpy as np
+from numpy import power as npow
 from numpy import sum as nsum
 from numpy import zeros as zeros
 from numpy.random import multinomial
@@ -94,15 +95,19 @@ class Population(object):
         else:
             assert self.genome_length_min == self.genome_length_max
 
+
         # Keep some information about the population
         self.environment_changed = False
         self.cumulative_density = 0
+        self._dirty = True
 
         # Build the fitness landscape
         self.fitness_landscape = self.build_fitness_landscape()
 
+        # Set the genome length
+        self.genome_length = None
+        self.genome_visible = None
         self.set_genome_length(self.genome_length_min)
-        # TODO: adjust the genome length based on how the population was initialized??
 
         # Initialize the population (empty by default)
         self.abundances = zeros(self.fitness_landscape.size, dtype=np.int)
@@ -201,24 +206,44 @@ class Population(object):
         in the population
         """
 
-        # Get the Hamming Distance to all other genotypes
-        hamming_v = np.vectorize(genome.hamming_distance)
-        hdist = hamming_v(genotype, np.arange(start=0,
-                                              stop=self.fitness_landscape.size))
+        mu_S = self.mutation_rate_social
+        mu_A = self.mutation_rate_adaptation
+        Lmax = self.genome_length_max
 
-        # TODO: calculat probs by raising distances to the mutation rates
-        # TODO: extra stuff to handle social mutations
-        # TODO: abulity to control direction of social mutations e.g., P->NP but not NP->P
+        genotypes = np.arange(start=0, stop=self.fitness_landscape.size)
+        coop_genotypes = genotypes & genotypes.size/2 == genotypes.size/2
 
+        # Get the Hamming distances to all other genotypes at the adaptive
+        # and social loci, respectively
+        hdist_A = genome.hamming_distance_v(genotype,
+                                            genotypes & ((2**Lmax)-1))
+        hdist_S = (genome.is_producer(genotype, self.genome_length_max) != coop_genotypes) * 1.0
 
-        probs = zeros(self.fitness_landscape.size)
-        probs[genotype] = 1 # Temporary
+        # TODO: the probs for the producer type are VERY low (~ 0)
 
+        probs = npow(1.0 - mu_A, self.genome_length-hdist_A) * \
+                npow(mu_A, hdist_A) * \
+                npow(1-mu_S, hdist_S==0) * \
+                npow(mu_S, hdist_S)
+
+        probs = npow(1.0 - mu_A, self.genome_length-hdist_A) * \
+                npow(mu_A, hdist_A)
+
+        if probs.sum() < 0.1:
+            print("Genotype", genotype)
+            print("Sum:", probs.sum())
+            print("Probs:", probs[genotype])
+            #print("Probs:", probs)
+            print("Hdist_s:", hdist_S)
+            print("------------")
+
+        # TODO: this is kind of heavy-handed. is there another way?
         # If configured, disallow mutations to genomes with non-visible loci
         if not self.mutate_hidden:
-            probs[self.genome_visible == False] = 0
+            probs[self.genome_visible != True] = 0
 
-        # TODO: normalize probs
+        # Normalize the probabilities
+        probs = probs/probs.sum()
 
         return probs
 
@@ -263,6 +288,9 @@ class Population(object):
             norm_grow_probs = grow_probs/grow_probs.sum()
             self.abundances = multinomial(final_size, norm_grow_probs, 1)[0]
 
+        # DEBUG - remove this once things have been thoroughly tested
+        assert np.all(self.abundances >= 0)
+
         self.cumulative_density += self.abundances.sum()
         self.set_dirty()
 
@@ -285,6 +313,8 @@ class Population(object):
                                    dtype=self.abundances.dtype)
 
         for genotype in np.where(self.abundances > 0)[0]:
+            print("Genotype", genotype)
+            print("Abundance", self.abundances[genotype])
             mu_probs = self.get_mutation_probabilities(genotype)
             mutated_population += multinomial(self.abundances[genotype],
                                               mu_probs, size=1)[0]
@@ -423,11 +453,7 @@ class Population(object):
 
     def num_nonproducers(self):
         """Get the number of non-producers"""
-
-        L = self.genome_length
-        Lmax = self.genome_length_max
-
-        return self.abundances[:2**L].sum()
+        return self.abundances[:2**self.genome_length].sum()
 
 
     def prop_producers(self):
