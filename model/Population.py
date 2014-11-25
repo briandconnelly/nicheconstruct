@@ -2,6 +2,8 @@
 
 """Represent Populations of individuals"""
 
+import sys
+
 import numpy as np
 from numpy import power as npow
 from numpy import sum as nsum
@@ -9,6 +11,9 @@ from numpy import zeros as zeros
 from numpy.random import multinomial
 
 import genome
+
+if sys.version_info[0] == 3:
+    xrange = range
 
 
 class Population(object):
@@ -206,7 +211,7 @@ class Population(object):
         Lmax = self.genome_length_max
 
         genotypes = np.arange(start=0, stop=self.fitness_landscape.size)
-        coop_genotypes = genotypes & genotypes.size/2 == genotypes.size/2
+        coop_genotypes = genotypes & int(genotypes.size/2) == int(genotypes.size/2)
 
         # Get the Hamming distances to all other genotypes at the adaptive
         # and social loci, respectively

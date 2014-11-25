@@ -22,6 +22,9 @@ from Metapopulation import Metapopulation
 
 __version__ = '0.1.2'
 
+if sys.version_info[0] == 3:
+    xrange = range
+
 def parse_arguments():
     """Parse command line arguments"""
 
