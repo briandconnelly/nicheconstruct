@@ -135,6 +135,7 @@ class Population(object):
 
         self.genome_length = length
         self.fitness_landscape = self.get_visible_fitness_landscape()
+        self.set_dirty()
 
 
     def empty(self):
@@ -145,10 +146,9 @@ class Population(object):
 
     def randomize(self):
         """Create a random population"""
-        # TODO: account for visible landscape
-        self.abundances = np.random.random_integers(low=0,
-                                                    high=self.capacity_min,
-                                                    size=self.fitness_landscape.size)
+        abundances = np.random.random_integers(low=0, high=self.capacity_min,
+                                               size=self.fitness_landscape.size)
+        self.abundances = self.strip_nonvisible_loci(abundances)
         self.set_dirty()
 
 
@@ -269,6 +269,23 @@ class Population(object):
         return fitnesses
 
 
+    def strip_nonvisible_loci(self, abundances):
+        """Move abundances for genomes with non-visible loci to genomes that
+        are fully visible"""
+
+        L = self.genome_length
+        Lmax = self.genome_length_max
+
+        modified = np.zeros(abundances.size)
+
+        for genotype in np.nonzero(abundances)[0]:
+            visible_genotype = ((genotype >= 2**Lmax) * 2**Lmax) + \
+                    (genotype & (2**L)-1)
+            modified[visible_genotype] += abundances[genotype]
+
+        return modified
+
+
     def grow(self):
         """Grow the population to carrying capacity
 
@@ -366,21 +383,9 @@ class Population(object):
             return
 
         if not self.mutate_hidden:
-            L = self.genome_length
-            Lmax = self.genome_length_max
+            immigrants = self.strip_nonvisible_loci(immigrants)
 
-            visible_immigrants = np.zeros(self.full_fitness_landscape.size)
-
-            for genotype in np.nonzero(immigrants)[0]:
-                visible_genotype = ((genotype >= 2**Lmax) * 2**Lmax) + \
-                        (genotype & (2**L)-1)
-                visible_immigrants[visible_genotype] += immigrants[genotype]
-
-            self.delta += visible_immigrants
-
-        else:
-            self.delta += immigrants
-
+        self.delta += immigrants
         self.set_dirty()
 
 
@@ -426,14 +431,12 @@ class Population(object):
         loci to zero.
         """
 
-        Lmax = self.genome_length_max
-
         num_producers = self.num_producers()
         num_nonproducers = self.num_nonproducers()
 
         self.abundances = zeros(self.fitness_landscape.size, dtype=np.int)
         self.abundances[0] = num_nonproducers
-        self.abundances[2**Lmax] = num_producers
+        self.abundances[2**self.genome_length_max] = num_producers
 
         self.set_dirty()
 
