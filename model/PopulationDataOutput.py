@@ -17,9 +17,11 @@ class PopulationDataOutput(OutputWriter):
     * Number of Producers
     * Proportion of producers
     * Max producer fitness
+    * Number of producer genotypes
     * Number of nonproducers
     * Proportion of nonproducers
     * Max nonproducer fitness
+    * Number of nonproducer genotypes
     * Environment changed (0 or 1)
 
     """
@@ -32,8 +34,9 @@ class PopulationDataOutput(OutputWriter):
 
         self.writer.writerow(['Time', 'Population', 'GenomeLength', 'Size',
                               'AvgFitness', 'Producers', 'PropProducers',
-                              'MaxProducerFitness', 'NonProducers',
-                              'PropNonProducers', 'MaxNonProducerFitness',
+                              'MaxProducerFitness', 'ProducerGenotypes',
+                              'NonProducers', 'PropNonProducers',
+                              'MaxNonProducerFitness', 'NonProducerGenotypes',
                               'EnvironmentChanged'])
 
 
@@ -47,11 +50,14 @@ class PopulationDataOutput(OutputWriter):
             prop_producers = data['population'].prop_producers()
             prop_nonproducers = data['population'].prop_nonproducers()
             maxfitnesses = data['population'].max_fitnesses()
+            pgenotypes = data['population'].num_producer_genotypes()
+            npgenotypes = data['population'].num_nonproducer_genotypes()
             envchange = int(data['population'].environment_changed)
 
             self.writer.writerow([time, node, genomelength, size,
                                   average_fitness, num_producers,
                                   prop_producers, maxfitnesses[0],
-                                  num_nonproducers, prop_nonproducers,
-                                  maxfitnesses[1], envchange])
+                                  pgenotypes, num_nonproducers,
+                                  prop_nonproducers, maxfitnesses[1],
+                                  npgenotypes, envchange])
 

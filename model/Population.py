@@ -481,10 +481,20 @@ class Population(object):
         """Get the number of producers"""
         return self.abundances[2**self.genome_length_max:].sum()
 
+    
+    def num_producer_genotypes(self):
+        """Get the number of different producer genotypes"""
+        return np.nonzero(self.abundances[2**self.genome_length_max:])[0].size
+
 
     def num_nonproducers(self):
         """Get the number of non-producers"""
         return self.abundances[:2**self.genome_length_max].sum()
+
+
+    def num_nonproducer_genotypes(self):
+        """Get the number of different producer genotypes"""
+        return np.nonzero(self.abundances[:2**self.genome_length_max])[0].size
 
 
     def prop_producers(self):
