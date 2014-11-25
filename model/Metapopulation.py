@@ -330,7 +330,7 @@ class Metapopulation(object):
         subpopulations
         """
         if self.is_dirty():
-            self._size = sum(len(d['population']) for n, d in self.topology.nodes_iter(data=True))
+            self._size = sum(d['population'].size() for n, d in self.topology.nodes_iter(data=True))
 
         return self._size
 
@@ -358,7 +358,7 @@ class Metapopulation(object):
         if self.is_dirty():
             try:
                 # TODO: this may use dirty values for num_producers and size
-                self._prop_producers = 1.0 * self._num_producers / self._size
+                self._prop_producers = 1.0 * self.num_producers() / self.size()
             except ZeroDivisionError:
                 self._prop_producers = -1
 
