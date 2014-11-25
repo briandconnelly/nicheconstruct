@@ -1,36 +1,40 @@
 # -*- coding: utf-8 -*-
 
-"""Write demographic information about the metapopulation"""
+"""Write information about each population in the metapopulation"""
 
 from OutputWriter import OutputWriter
 
 
-class DemographicsOutput(OutputWriter):
-    """Write demographic information about each population in the
-    metapopulation
+class PopulationDataOutput(OutputWriter):
+    """Write information about each population in the metapopulation
 
     Data includes:
     * Time
     * Node ID (Population ID)
     * Genome Length
     * Size of Population
+    * Average fitness
     * Number of Producers
     * Proportion of producers
+    * Max producer fitness
     * Number of nonproducers
     * Proportion of nonproducers
-    * Average fitness
+    * Max nonproducer fitness
+    * Environment changed (0 or 1)
 
     """
 
-    def __init__(self, metapopulation, filename='demographics.csv.bz2',
+    def __init__(self, metapopulation, filename='population.csv.bz2',
                  delimiter=','):
-        super(DemographicsOutput, self).__init__(metapopulation=metapopulation,
+        super(PopulationDataOutput, self).__init__(metapopulation=metapopulation,
                                                  filename=filename,
                                                  delimiter=delimiter)
 
         self.writer.writerow(['Time', 'Population', 'GenomeLength', 'Size',
-                              'Producers', 'PropProducers', 'NonProducers',
-                              'PropNonProducers', 'AvgFitness'])
+                              'AvgFitness', 'Producers', 'PropProducers',
+                              'MaxProducerFitness', 'NonProducers',
+                              'PropNonProducers', 'MaxNonProducerFitness',
+                              'EnvironmentChanged'])
 
 
     def update(self, time):
@@ -42,9 +46,12 @@ class DemographicsOutput(OutputWriter):
             average_fitness = data['population'].average_fitness()
             prop_producers = data['population'].prop_producers()
             prop_nonproducers = data['population'].prop_nonproducers()
+            maxfitnesses = data['population'].max_fitnesses()
+            envchange = int(data['population'].environment_changed)
 
             self.writer.writerow([time, node, genomelength, size,
-                                  num_producers, prop_producers,
+                                  average_fitness, num_producers,
+                                  prop_producers, maxfitnesses[0],
                                   num_nonproducers, prop_nonproducers,
-                                  average_fitness])
+                                  maxfitnesses[1], envchange])
 

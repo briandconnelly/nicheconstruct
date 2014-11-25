@@ -8,8 +8,8 @@ import os
 import networkx as nx
 import numpy as np
 
-from DemographicsOutput import DemographicsOutput
 from FitnessOutput import FitnessOutput
+from PopulationDataOutput import PopulationDataOutput
 from Population import Population
 import topology
 
@@ -84,8 +84,8 @@ class Metapopulation(object):
 
         # Set up data logging
         # log_objects is a list of any logging objects used by this simulation
-        self.log_demographics = self.config.getboolean(section='Simulation',
-                                                       option='log_demographics')
+        self.log_population = self.config.getboolean(section='Simulation',
+                                                     option='log_population')
         self.log_fitness = self.config.getboolean(section='Simulation',
                                                   option='log_fitness')
         self.log_frequency = self.config.getint(section='Simulation',
@@ -95,10 +95,10 @@ class Metapopulation(object):
 
         self.log_objects = []
 
-        if self.log_demographics:
-            out_demographics = DemographicsOutput(metapopulation=self,
-                                                  filename=os.path.join(data_dir, 'demographics.csv.bz2'))
-            self.log_objects.append(out_demographics)
+        if self.log_population:
+            out_population = PopulationDataOutput(metapopulation=self,
+                                                  filename=os.path.join(data_dir, 'population.csv.bz2'))
+            self.log_objects.append(out_population)
 
         if self.log_fitness:
             out_fitness = FitnessOutput(metapopulation=self,
