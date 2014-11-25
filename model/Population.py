@@ -311,15 +311,20 @@ class Population(object):
 
         grow_probs = self.abundances * (landscape/landscape.sum())
 
-        if grow_probs.sum() > 0:
+        try:
             norm_grow_probs = grow_probs/grow_probs.sum()
+        except ZeroDivisionError:
+            # These should only occur if grow_probs is all 0s, which would be
+            # unusual
+            pass
+        else:
             self.abundances = multinomial(final_size, norm_grow_probs, 1)[0]
 
-        # DEBUG - remove this once things have been thoroughly tested
-        assert np.all(self.abundances >= 0)
+            # DEBUG - remove this once things have been thoroughly tested
+            assert np.all(self.abundances >= 0)
 
-        self.cumulative_density += self.abundances.sum()
-        self.set_dirty()
+            self.cumulative_density += self.abundances.sum()
+            self.set_dirty()
 
 
     def mutate(self):
@@ -332,9 +337,6 @@ class Population(object):
         metapopulation.mutation_probs.
 
         """
-
-        if self.abundances.sum() == 0:
-            return
 
         mutated_population = zeros(self.abundances.size,
                                    dtype=self.abundances.dtype)
