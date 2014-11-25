@@ -360,7 +360,7 @@ class Metapopulation(object):
                 # TODO: this may use dirty values for num_producers and size
                 self._prop_producers = 1.0 * self.num_producers() / self.size()
             except ZeroDivisionError:
-                self._prop_producers = -1
+                self._prop_producers = 'NA'
 
         return self._prop_producers
 

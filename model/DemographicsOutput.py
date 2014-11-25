@@ -12,6 +12,7 @@ class DemographicsOutput(OutputWriter):
     Data includes:
     * Time
     * Node ID (Population ID)
+    * Genome Length
     * Size of Population
     * Number of Producers
     * Proportion of producers
@@ -27,28 +28,23 @@ class DemographicsOutput(OutputWriter):
                                                  filename=filename,
                                                  delimiter=delimiter)
 
-        self.writer.writerow(['Time', 'Population', 'Size', 'Producers',
-                              'PropProducers', 'NonProducers',
+        self.writer.writerow(['Time', 'Population', 'GenomeLength', 'Size',
+                              'Producers', 'PropProducers', 'NonProducers',
                               'PropNonProducers', 'AvgFitness'])
+
 
     def update(self, time):
         for node, data in self.metapopulation.topology.nodes_iter(data=True):
-            size = len(data['population'])
+            genomelength = data['population'].genome_length
+            size = data['population'].size()
+            num_producers = data['population'].num_producers()
+            num_nonproducers = size - num_producers
+            average_fitness = data['population'].average_fitness()
+            prop_producers = data['population'].prop_producers()
+            prop_nonproducers = data['population'].prop_nonproducers()
 
-            if size == 0:
-                num_producers = 0
-                num_nonproducers = 0
-                prop_producers = 'NA'
-                prop_nonproducers = 'NA'
-                average_fitness = 'NA'
-            else:
-                num_producers = data['population'].num_producers()
-                num_nonproducers = size - num_producers
-                prop_producers = 1.0*num_producers/size
-                prop_nonproducers = 1.0*num_nonproducers/size
-                average_fitness = data['population'].average_fitness()
-
-            self.writer.writerow([time, node, size, num_producers,
-                                  prop_producers, num_nonproducers,
-                                  prop_nonproducers, average_fitness])
+            self.writer.writerow([time, node, genomelength, size,
+                                  num_producers, prop_producers,
+                                  num_nonproducers, prop_nonproducers,
+                                  average_fitness])
 

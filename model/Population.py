@@ -491,20 +491,18 @@ class Population(object):
         """Get the proportion of producers"""
 
         try:
-            retval = 1.0 * self.num_producers() / self.size()
+            return 1.0 * self.num_producers() / self.size()
         except ZeroDivisionError:
-            retval = -1
-
-        return retval
+            return 'NA'
 
 
     def prop_nonproducers(self):
         """Get the proportion of nonproducers"""
 
         try:
-            retval = 1.0 * self.num_nonproducers() / self.size()
+            return 1.0 * self.num_nonproducers() / self.size()
         except ZeroDivisionError:
-            retval = -1
+            return 'NA'
 
         return retval
 
@@ -522,12 +520,17 @@ class Population(object):
     def average_fitness(self):
         """Get the average fitness in the population"""
 
-        try:
-            retval = nsum(self.abundances * self.fitness_landscape)/self.abundances.sum()
-        except ZeroDivisionError:
-            retval = 'NA'
+        # Note: using a try/catch is difficult here, since numpy can now divide
+        # by zero without exception, returning nan, inf, or -inf. These would
+        # have to be found with if statements, which are just as costly as
+        # doing an if on the population size.
 
-        return retval
+        size = self.abundances.sum()
+
+        if size == 0:
+            return 'NA'
+        else:
+            return (self.abundances * self.fitness_landscape).sum() / self.abundances.sum()
 
 
     def max_fitnesses(self):
