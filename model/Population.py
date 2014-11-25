@@ -278,7 +278,7 @@ class Population(object):
         abundance times its fitness.
         """
 
-        if self.is_empty():
+        if self.abundances.sum() == 0:
             return
 
         landscape = self.fitness_landscape
@@ -320,7 +320,7 @@ class Population(object):
         # For each extant genotype, get the probability of mutating to each
         # other genotype, and use these probabilities to sample mutants using a
         # multinomial
-        for genotype in np.where(self.abundances > 0)[0]:
+        for genotype in np.nonzero(self.abundances)[0]:
             mu_probs = self.get_mutation_probabilities(genotype)
             mutated_population += multinomial(self.abundances[genotype],
                                               mu_probs, size=1)[0]
@@ -361,7 +361,26 @@ class Population(object):
         a temporary area until census() is called.
 
         """
-        self.delta += immigrants
+
+        if immigrants.sum() == 0:
+            return
+
+        if not self.mutate_hidden:
+            L = self.genome_length
+            Lmax = self.genome_length_max
+
+            visible_immigrants = np.zeros(self.full_fitness_landscape.size)
+
+            for genotype in np.nonzero(immigrants)[0]:
+                visible_genotype = ((genotype >= 2**Lmax) * 2**Lmax) + \
+                        (genotype & (2**L)-1)
+                visible_immigrants[visible_genotype] += immigrants[genotype]
+
+            self.delta += visible_immigrants
+
+        else:
+            self.delta += immigrants
+
         self.set_dirty()
 
 
