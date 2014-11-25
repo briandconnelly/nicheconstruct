@@ -9,6 +9,7 @@ import networkx as nx
 import numpy as np
 
 from FitnessOutput import FitnessOutput
+from GenotypesOutput import GenotypesOutput
 from PopulationDataOutput import PopulationDataOutput
 from Population import Population
 import topology
@@ -88,6 +89,8 @@ class Metapopulation(object):
                                                      option='log_population')
         self.log_fitness = self.config.getboolean(section='Simulation',
                                                   option='log_fitness')
+        self.log_genotypes = self.config.getboolean(section='Simulation',
+                                                    option='log_genotypes')
         self.log_frequency = self.config.getint(section='Simulation',
                                                 option='log_frequency')
         data_dir = self.config.get(section='Simulation', option='data_dir')
@@ -99,6 +102,11 @@ class Metapopulation(object):
             out_population = PopulationDataOutput(metapopulation=self,
                                                   filename=os.path.join(data_dir, 'population.csv.bz2'))
             self.log_objects.append(out_population)
+
+        if self.log_genotypes:
+            out_genotypes = GenotypesOutput(metapopulation=self,
+                                            filename=os.path.join(data_dir, 'genotypes.csv.bz2'))
+            self.log_objects.append(out_genotypes)
 
         if self.log_fitness:
             out_fitness = FitnessOutput(metapopulation=self,
