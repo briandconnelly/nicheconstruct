@@ -5,6 +5,7 @@
 import sys
 
 import numpy as np
+from numpy import divide as ndivide
 from numpy import power as npow
 from numpy import sum as nsum
 from numpy import zeros as zeros
@@ -235,7 +236,7 @@ class Population(object):
         # mutations here
 
         # Normalize the probabilities
-        probs = probs/probs.sum()
+        probs = ndivide(probs, probs.sum())
 
         return probs
 
@@ -260,18 +261,13 @@ class Population(object):
         based only on visible alleles will be given.
         """
 
-        fitnesses = np.zeros(self.full_fitness_landscape.size)
         L = self.genome_length
         Lmax = self.genome_length_max
+        genotypes = np.arange(self.full_fitness_landscape.size)
 
         # For each possible genotype, set fitness based on the allelic effects
         # of each visible locus, disregarding non-visible loci
-        for genotype in xrange(self.full_fitness_landscape.size):
-            visible_genotype = ((genotype >= 2**Lmax) * 2**Lmax) + \
-                    (genotype & (2**L)-1)
-            fitnesses[genotype] = self.full_fitness_landscape[visible_genotype]
-
-        return fitnesses
+        return self.full_fitness_landscape[((genotypes >= 2**Lmax) * 2**Lmax) + ((genotypes & (2**L) - 1))]
 
 
     def strip_nonvisible_loci(self, abundances):
@@ -309,13 +305,14 @@ class Population(object):
                 (self.capacity_max - self.capacity_min) * \
                 self.prop_producers()
 
-        grow_probs = self.abundances * (landscape/landscape.sum())
+        grow_probs = self.abundances * ndivide(landscape, landscape.sum())
 
         try:
-            norm_grow_probs = grow_probs/grow_probs.sum()
+            norm_grow_probs = ndivide(grow_probs, grow_probs.sum())
         except ZeroDivisionError:
             # These should only occur if grow_probs is all 0s, which would be
             # unusual
+            # TODO: this actually won't work, since np returns nan, inf, or -inf on divide by zero
             pass
         else:
             self.abundances = multinomial(final_size, norm_grow_probs, 1)[0]
