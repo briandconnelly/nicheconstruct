@@ -5,13 +5,16 @@
 import sys
 
 import numpy as np
+from numpy import arange
+from numpy import binary_repr
 from numpy import divide as ndivide
+from numpy import dot as ndot
 from numpy import power as npow
 from numpy import sum as nsum
 from numpy import zeros as zeros
 from numpy.random import multinomial
 
-import genome
+from genome import hamming_distance_v, is_producer
 
 if sys.version_info[0] == 3:
     xrange = range
@@ -191,12 +194,12 @@ class Population(object):
         effects = np.append(-1.0*production_cost, effects)
 
         num_genotypes = 2**(self.genome_length_max + 1)
-        landscape = zeros(num_genotypes)
 
-        for i in xrange(num_genotypes):
-            genotype = genome.base10_as_bitarray(i)
-            genotype = np.append(zeros(effects.size - genotype.size), genotype)
-            landscape[i] = np.sum(genotype * effects) + (base_fitness + production_cost)
+        # Generate all possible bitstrings for all genotypes in this landscape
+        # and multiply them by the fitness effects of each allele to get
+        # fitness for each
+        bitstrings = np.array([[int(b) for b in binary_repr(i, width=self.genome_length_max+1)] for i in xrange(num_genotypes)])
+        landscape = ndot(bitstrings, effects) + base_fitness + production_cost
 
         self.set_dirty()
         return landscape
@@ -211,14 +214,14 @@ class Population(object):
         mu_a = self.mutation_rate_adaptation
         Lmax = self.genome_length_max
 
-        genotypes = np.arange(start=0, stop=self.fitness_landscape.size)
+        genotypes = arange(start=0, stop=self.fitness_landscape.size)
         coop_genotypes = genotypes & int(genotypes.size/2) == int(genotypes.size/2)
 
         # Get the Hamming distances to all other genotypes at the adaptive
         # and social loci, respectively
-        hdist_a = genome.hamming_distance_v(genotype & ((2**Lmax)-1),
-                                            genotypes & ((2**Lmax)-1))
-        hdist_s = (genome.is_producer(genotype, self.genome_length_max) != coop_genotypes) * 1.0
+        hdist_a = hamming_distance_v(genotype & ((2**Lmax)-1),
+                                     genotypes & ((2**Lmax)-1))
+        hdist_s = (is_producer(genotype, self.genome_length_max) != coop_genotypes) * 1.0
 
         probs = npow(1.0 - mu_a, self.genome_length-hdist_a) * \
                 npow(mu_a, hdist_a) * \
@@ -263,7 +266,7 @@ class Population(object):
 
         L = self.genome_length
         Lmax = self.genome_length_max
-        genotypes = np.arange(self.full_fitness_landscape.size)
+        genotypes = arange(self.full_fitness_landscape.size)
 
         # For each possible genotype, set fitness based on the allelic effects
         # of each visible locus, disregarding non-visible loci
