@@ -22,3 +22,9 @@ def is_producer(genotype, bits):
     """Determine whether or not the given genotype is a producer"""
     return genotype & 2**bits == 2**bits
 
+def num_ones(bitstring):
+    """Return the number of 1s in the bitstring"""
+    return bin(bitstring)[2:].count('1')
+
+num_ones_v = vectorize(num_ones)
+
