@@ -123,14 +123,14 @@ def main():
 
     stop_on_empty = config.getboolean(section='Simulation',
                                       option='stop_on_empty')
+    num_cycles = config.getint(section='Simulation', option='num_cycles')
     metapopulation = Metapopulation(config=config)
 
-    for cycle in xrange(config.getint(section='Simulation',
-                                      option='num_cycles')):
+    for cycle in xrange(num_cycles):
         metapopulation.cycle()
 
         if not args.quiet:
-            msg = "[{c}] {m}".format(c=cycle, m=metapopulation)
+            msg = "Cycle {c}: {m}".format(c=str(cycle).rjust(len(str(num_cycles))), m=metapopulation.statusbar())
             print(msg)
 
         if stop_on_empty and metapopulation.size() == 0:
