@@ -124,8 +124,18 @@ class Metapopulation(object):
         if prop_producers == 'NA':
             res = "Metapopulation: Size {s}, NA% producers".format(s=self.size())
         else:
-            res = "Metapopulation: Size {s}, {p:.1%} "\
-                  "producers".format(s=self.size(), p=self.prop_producers())
+            (pfr, nfr) = self.max_fitnesses()
+            pf = max(pfr)
+            nf = max(nfr)
+
+            if pf > nf:
+                comp = ">"
+            elif pf < nf:
+                comp = "<"
+            else:
+                comp = "="
+
+            res = "Metapopulation: Size {s}, {pp:.1%} producers, P {c} N".format(s=self.size(), pp=self.prop_producers(), c=comp)
 
         return res
 
@@ -378,6 +388,17 @@ class Metapopulation(object):
 
         prod_max = [d['population'].max_fitnesses()[0] for n, d in self.topology.nodes_iter(data=True)]
         nonprod_max = [d['population'].max_fitnesses()[1] for n, d in self.topology.nodes_iter(data=True)]
+
+        return (prod_max, nonprod_max)
+
+
+    def max_ones(self):
+        """Get the maximum number of ones in the visible portion of producer
+        and non-producer genotypes (tuple). This indicates how adapted each
+        type is to the environment.
+        """
+        prod_max = [d['population'].max_ones()[0] for n, d in self.topology.nodes_iter(data=True)]
+        nonprod_max = [d['population'].max_ones()[1] for n, d in self.topology.nodes_iter(data=True)]
 
         return (prod_max, nonprod_max)
 

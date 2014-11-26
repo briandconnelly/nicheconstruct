@@ -14,7 +14,7 @@ from numpy import sum as nsum
 from numpy import zeros as zeros
 from numpy.random import multinomial
 
-from genome import hamming_distance_v, is_producer
+from genome import hamming_distance_v, is_producer, num_ones_v
 
 if sys.version_info[0] == 3:
     xrange = range
@@ -546,14 +546,28 @@ class Population(object):
     def max_fitnesses(self):
         """Get the maximum fitness among producers and non-producers"""
 
-        extant_fitnesses = (self.abundances > 0) * self.fitness_landscape
-
-        # Return a tuple containing the maximum fitnesses among extant
-        # producers and non-producers
         Lmax = self.genome_length_max
+        extant_fitnesses = (self.abundances > 0) * self.fitness_landscape
 
         return (extant_fitnesses[2**Lmax:].max(),
                 extant_fitnesses[:2**Lmax].max())
+
+
+    def max_ones(self):
+        """Get the maximum number of ones among the visible portion of producer
+        and non-producer genotypes (tuple)
+        
+        This gives an indication of how adapted each type is to the
+        environment. The fraction of adaptations made is #ones/genome_length
+
+        """
+
+        L = self.genome_length
+        Lmax = self.genome_length_max
+        genotypes = arange(self.full_fitness_landscape.size) & ((2**L) - 1)
+        ones_extant = num_ones_v((self.abundances > 0) * genotypes)
+
+        return (ones_extant[2**Lmax:].max(), ones_extant[:2**Lmax].max())
 
 
     def set_dirty(self):
