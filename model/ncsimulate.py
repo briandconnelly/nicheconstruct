@@ -7,6 +7,7 @@ import argparse
 import datetime
 import getpass
 import os
+import platform
 import sys
 import warnings
 
@@ -70,7 +71,7 @@ def main():
     # supplied configuration file, create one.
     if args.seed:
         config.set(section='Simulation', option='seed', value=str(args.seed))
-    elif config.has_option(section='Simulation', option='seed') is not True:
+    elif not config.has_option(section='Simulation', option='seed'):
         seed = np.random.randint(low=0, high=np.iinfo(np.uint32).max)
         config.set(section='Simulation', option='seed', value=str(seed))
 
@@ -110,8 +111,10 @@ def main():
     # Write the configuration file and some additional information
     cfg_out = os.path.join(data_dir, 'configuration.cfg')
     with open(cfg_out, 'w') as configfile:
-        configfile.write('# Generated: {when} by {whom}\n'.format(when=datetime.datetime.now().isoformat(),
-                                                                  whom=getpass.getuser()))
+        configfile.write('# Generated: {when} by {whom} on {where}\n'.format(when=datetime.datetime.now().isoformat(),
+                                                                             whom=getpass.getuser(),
+                                                                             where=platform.node()))
+        configfile.write('# Platform: {p}\n'.format(p=platform.platform()))
         configfile.write('# ncsimulate.py version: {v}\n'.format(v=__version__))
         configfile.write('# Python version: {v}\n'.format(v=".".join([str(n) for n in sys.version_info[:3]])))
         configfile.write('# NumPy version: {v}\n'.format(v=np.version.version))
