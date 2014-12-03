@@ -14,7 +14,7 @@ def base10_as_bitarray(num):
 
 def hamming_distance(genome1, genome2):
     """Calculate the Hamming distance between two genotypes"""
-    return bin(genome1 ^ genome2)[2:].count('1')
+    return bin(genome1 ^ genome2).count('1')
 
 hamming_distance_v = vectorize(hamming_distance)
 
@@ -24,7 +24,7 @@ def is_producer(genotype, bits):
 
 def num_ones(bitstring):
     """Return the number of 1s in the bitstring"""
-    return bin(bitstring)[2:].count('1')
+    return bin(bitstring).count('1')
 
 num_ones_v = vectorize(num_ones)
 

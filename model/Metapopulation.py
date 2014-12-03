@@ -12,6 +12,7 @@ from FitnessOutput import FitnessOutput
 from GenotypesOutput import GenotypesOutput
 from PopulationDataOutput import PopulationDataOutput
 from Population import Population
+from genome import num_ones_v
 import topology
 
 
@@ -51,6 +52,8 @@ class Metapopulation(object):
                                                        option='mutation_rate_tolerance')
         self.population_construction = config.getboolean(section='Population',
                                                          option='enable_construction')
+
+        self.genotype_num_ones = num_ones_v(np.arange(2**(genome_length_max+1), dtype=int))
 
         for node, data in self.topology.nodes_iter(data=True):
             data['population'] = Population(metapopulation=self, config=config)

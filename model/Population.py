@@ -3,6 +3,7 @@
 """Represent Populations of individuals"""
 
 import sys
+import warnings
 
 import numpy as np
 from numpy import arange
@@ -13,8 +14,9 @@ from numpy import power as npow
 from numpy import sum as nsum
 from numpy import zeros as zeros
 from numpy.random import multinomial
+from numpy.random import binomial
 
-from genome import hamming_distance_v, is_producer, num_ones_v
+from genome import hamming_distance_v, is_producer
 
 if sys.version_info[0] == 3:
     xrange = range
@@ -101,6 +103,9 @@ class Population(object):
 
         if self.enable_construction:
             assert self.density_threshold > 0
+
+            if self.genome_length_min == self.genome_length_max:
+                warnings.warn('populations cannot construct environment when genome_length_min==genome_length_max')
         else:
             assert self.genome_length_min == self.genome_length_max
 
@@ -362,7 +367,7 @@ class Population(object):
         """
 
         assert migration_rate >= 0 and migration_rate <= 1
-        return np.random.binomial(self.abundances, migration_rate)
+        return binomial(self.abundances, migration_rate)
 
 
     def remove_emigrants(self, emigrants):
@@ -456,7 +461,7 @@ class Population(object):
         [0,1].
         """
 
-        self.abundances = np.random.binomial(self.abundances, survival_rate)
+        self.abundances = binomial(self.abundances, survival_rate)
         self.set_dirty()
 
 
@@ -562,11 +567,8 @@ class Population(object):
 
         """
 
-        L = self.genome_length
         Lmax = self.genome_length_max
-        genotypes = arange(self.full_fitness_landscape.size) & ((2**L) - 1)
-        ones_extant = num_ones_v((self.abundances > 0) * genotypes)
-
+        ones_extant = (self.abundances > 0) * self.metapopulation.genotype_num_ones
         return (ones_extant[2**Lmax:].max(), ones_extant[:2**Lmax].max())
 
 
