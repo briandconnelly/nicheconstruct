@@ -15,7 +15,7 @@ except ImportError:
 
 from Simulation import Simulation
 
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 
 
 def parse_arguments():
@@ -37,9 +37,7 @@ def parse_arguments():
                         help='Suppress output messages')
     parser.add_argument('--version', action='version', version=__version__)
 
-    args = parser.parse_args()
-
-    return args
+    return parser.parse_args()
 
 
 def main():
@@ -64,7 +62,6 @@ def main():
     if args.seed:
         config.set(section='Simulation', option='seed', value=str(args.seed))
 
-
     # If the data directory is specified, add it to the config, overwriting any
     # previous value
     if args.data_dir:
@@ -86,7 +83,6 @@ def main():
                                                                 new=newname)
         warn(msg)
         config.set(section='Simulation', option='data_dir', value=newname)
-
 
     # Create the simulation object and iterate through the timesteps
     for step in Simulation(config=config):

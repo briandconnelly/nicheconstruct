@@ -28,3 +28,4 @@ class FitnessOutput(OutputWriter.OutputWriter):
         maxfit = self.simulation.metapopulation.max_fitnesses()
         self.writer.writerow([self.simulation.cycle, max(maxfit[0]),
                               max(maxfit[1])])
+

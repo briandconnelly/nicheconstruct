@@ -36,7 +36,7 @@ class GenotypesOutput(OutputWriter):
                                               filename=filename,
                                               delimiter=delimiter)
 
-        self.writer.writerow(['Time', 'Population', 'GenomeLength', 
+        self.writer.writerow(['Time', 'Population', 'GenomeLength',
                               'Genotype', 'IsProducer', 'NonsocialGenotype',
                               'NumOnes', 'VisibleGenotype', 'VisibleNumOnes',
                               'Abundance', 'Fitness'])

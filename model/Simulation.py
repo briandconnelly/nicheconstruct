@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Represent a Simulation"""
 
 import datetime
