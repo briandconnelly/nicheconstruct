@@ -18,10 +18,14 @@ from PopulationDataOutput import PopulationDataOutput
 
 
 class Simulation(object):
+    """Metapopulation simulation object
+
+    A Simulation object can be iterated over multiple timesteps
+    """
+
     def __init__(self, config):
         """Initialize a Simulation object"""
         self.config = config
-        self.cycle = 0
 
         # Set the seed for the pseudorandom number generator
         # If one does not already exist in the config, generate one
@@ -93,9 +97,6 @@ class Simulation(object):
         self.cycle = 0
         self.proceed = self.cycle < self.num_cycles
 
-        self.stop_on_empty = self.config.getboolean(section='Simulation',
-                                                    option='stop_on_empty')
-
 
     def __iter__(self):
         """Create an iterator for Simulation objects"""
@@ -121,8 +122,11 @@ class Simulation(object):
         self.cycle += 1
         self.proceed = self.cycle < self.num_cycles
 
+        stop_on_empty = self.config.getboolean(section='Simulation',
+                                               option='stop_on_empty')
+
         # Stop iterating if the metapopulation is empty
-        if self.stop_on_empty and self.metapopulation.size() == 0:
+        if stop_on_empty and self.metapopulation.size() == 0:
             self.proceed = False
 
         return self
@@ -141,9 +145,10 @@ class Simulation(object):
         cfg_out = os.path.join(self.data_dir, filename)
 
         with open(cfg_out, 'w') as configfile:
-            configfile.write('# Generated: {when} by {whom} on {where}\n'.format(when=datetime.datetime.now().isoformat(),
-                                                                                 whom=getpass.getuser(),
-                                                                                 where=platform.node()))
+            infostr = '# Generated: {when} by {whom} on {where}\n'
+            configfile.write(infostr.format(when=datetime.datetime.now().isoformat(),
+                                            whom=getpass.getuser(),
+                                            where=platform.node()))
             configfile.write('# Platform: {p}\n'.format(p=platform.platform()))
             configfile.write('# Python version: {v}\n'.format(v=".".join([str(n) for n in sys.version_info[:3]])))
             configfile.write('# NumPy version: {v}\n'.format(v=np.version.version))
@@ -181,20 +186,22 @@ class Simulation(object):
             delta = '-'
 
         (pfr, nfr) = self.metapopulation.max_fitnesses()
-        pf = max(pfr)
-        nf = max(nfr)
+        producer_maxfitness = max(pfr)
+        nonproducer_maxfitness = max(nfr)
 
         plabel = 'P'
         nlabel = 'N'
 
-        if pf > nf:
+        if producer_maxfitness > nonproducer_maxfitness:
             plabel = '\033[1m' + 'P' + '\033[0m'
-        elif nf > pf:
+        elif nonproducer_maxfitness > producer_maxfitness:
             nlabel = '\033[1m' + 'N' + '\033[0m'
 
         pbars = int(round(num_ticks * max(0, prop_producers - 0.5) / 0.5))
         nbars = int(round(num_ticks * max(0, 1 - prop_producers - 0.5) / 0.5))
-        bar_layout = "Cycle {c}: {N} [{sn}{bn}|{bp}{sp}] {P} ({d}{p:.1%}), Size: {s}"
+        bar_layout = "Cycle {c}: {N} [{sn}{bn}|{bp}{sp}] {P} ({d}{p:.1%}), " \
+                "Size: {s}"
+
         return bar_layout.format(c=str(self.cycle).rjust(len(str(self.num_cycles))),
                                  bn=nbars*symbol, bp=pbars*symbol,
                                  sn=(num_ticks-nbars)*' ',
