@@ -15,7 +15,7 @@ class OutputWriter(object):
         self.outfile = bz2.BZ2File(self.filename, 'w')
         self.writer = csv.writer(self.outfile, delimiter=delimiter)
 
-    def update(self, time):
+    def update(self):
         """Update an OutputWriter object. This typically means writing a
         record of data to the file"""
         pass

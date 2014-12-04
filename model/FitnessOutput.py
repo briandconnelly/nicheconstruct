@@ -24,6 +24,7 @@ class FitnessOutput(OutputWriter.OutputWriter):
 
         self.writer.writerow(['Time', 'Producers', 'Nonproducers'])
 
-    def update(self, time):
+    def update(self):
         maxfit = self.simulation.metapopulation.max_fitnesses()
-        self.writer.writerow([time, max(maxfit[0]), max(maxfit[1])])
+        self.writer.writerow([self.simulation.cycle, max(maxfit[0]),
+                              max(maxfit[1])])

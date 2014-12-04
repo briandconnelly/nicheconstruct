@@ -107,54 +107,6 @@ class Metapopulation(object):
 
         return res
 
-    def statusbar(self):
-        """Create a representation of the Metapopulation to use as a status
-        bar
-        """
-
-        num_ticks = 5
-        prop_producers = self.prop_producers()
-
-        if prop_producers == 'NA':
-            return "[Empty Metapopulation]"
-
-        symbol = '='
-
-        if self._prev_prop_producers == 'NA':
-            delta = ' '
-        elif self._prev_prop_producers > prop_producers:
-            delta = u'\u2193'.encode('utf-8')
-        elif self._prev_prop_producers < prop_producers:
-            delta = u'\u2191'.encode('utf-8')
-        else:
-           delta = '-'
-
-        (pfr, nfr) = self.max_fitnesses()
-        pf = max(pfr)
-        nf = max(nfr)
-
-        plabel = 'P'
-        nlabel = 'N'
-
-        if pf > nf:
-            plabel = '\033[1m' + 'P' + '\033[0m'
-        elif nf > pf:
-            nlabel = '\033[1m' + 'N' + '\033[0m'
-
-        pbars = int(round(num_ticks * max(0, prop_producers - 0.5) / 0.5))                     
-        nbars = int(round(num_ticks * max(0, 1 - prop_producers - 0.5) / 0.5))                 
-        bar_layout = "{N} [{sn}{bn}|{bp}{sp}] {P} ({d}{p:.1%}), Size: {s}"
-        bar = bar_layout.format(bn=nbars*symbol, bp=pbars*symbol,
-                                sn=(num_ticks-nbars)*' ',
-                                sp=(num_ticks-pbars)*' ', p=prop_producers,
-                                s=self.size(),
-                                N=nlabel,
-                                P=plabel,
-                                d=delta)
-        return bar
-
-
-
 
     def build_topology(self):
         """Build the topology (a graph) for the metapopulation"""
@@ -244,15 +196,18 @@ class Metapopulation(object):
         for node, data in self.topology.nodes_iter(data=True):
             data['population'].dilute()
 
+
     def grow(self):
         """Grow the metapopulation ...."""
         for node, data in self.topology.nodes_iter(data=True):
             data['population'].grow()
 
+
     def mutate(self):
         """Mutate the metapopulation ...."""
         for node, data in self.topology.nodes_iter(data=True):
             data['population'].mutate()
+
 
     def migrate(self):
         """Migrate individuals among the populations"""

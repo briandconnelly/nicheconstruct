@@ -89,15 +89,9 @@ def main():
 
 
     # Create the simulation object and iterate through the timesteps
-    simulation = Simulation(config=config)
-
-    for timestep in simulation:
+    for step in Simulation(config=config):
         if not args.quiet:
-            # TODO: print some message
-            print("Completed timestep")
-
-    simulation.write_logfiles()
-    simulation.cleanup()
+            print(step.statusbar())
 
 
 if __name__ == "__main__":

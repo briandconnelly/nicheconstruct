@@ -42,7 +42,7 @@ class GenotypesOutput(OutputWriter):
                               'Abundance', 'Fitness'])
 
 
-    def update(self, time):
+    def update(self):
         for node, data in self.simulation.metapopulation.topology.nodes_iter(data=True):
             pop = data['population']
             L = pop.genome_length
@@ -52,7 +52,7 @@ class GenotypesOutput(OutputWriter):
                 visible = genotype & ((2**L) - 1)
                 nonsocial = genotype & (2**Lmax - 1)
 
-                self.writer.writerow([time, node, L, genotype,
+                self.writer.writerow([self.simulation.cycle, node, L, genotype,
                                       is_producer(genotype, Lmax),
                                       nonsocial, num_ones(nonsocial), visible,
                                       num_ones(visible),
