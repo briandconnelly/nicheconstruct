@@ -185,6 +185,14 @@ class Metapopulation(object):
         self.set_dirty()
 
 
+    def populations_iter(self):
+        """Return an iterator containing all of the Populations in the
+        metapopulation
+        """
+        for node, data in self.topology.nodes_iter(data=True):
+            yield data['population']
+
+
     def dilute(self):
         """Dilute the metapopulation
 
