@@ -136,11 +136,14 @@ class Population(object):
         self.set_dirty()
 
 
-    def __repr__(self):
+    def __str__(self):
         """Return a string representation of a Population object"""
-        res = "Population: Size {s}, {p:.1%} producers".format(s=self.size(),
-                                                               p=self.prop_producers())
-        return res
+        prop_producers = self.prop_producers()
+        if prop_producers == 'NA':
+            return "Population: Size {s}".format(s=self.size())
+        else:
+            return "Population: Size {s}, {p:.1%} producers".format(s=self.size(),
+                                                                   p=prop_producers)
 
 
     def set_genome_length(self, length):

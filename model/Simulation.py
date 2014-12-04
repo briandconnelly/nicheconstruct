@@ -71,19 +71,7 @@ class Simulation(object):
 
 
         # Write the configuration file and some additional information
-        cfg_out = os.path.join(self.data_dir, 'configuration.cfg')
-        with open(cfg_out, 'w') as configfile:
-            configfile.write('# Generated: {when} by {whom} on {where}\n'.format(when=datetime.datetime.now().isoformat(),
-                                                                                 whom=getpass.getuser(),
-                                                                                 where=platform.node()))
-            configfile.write('# Platform: {p}\n'.format(p=platform.platform()))
-            configfile.write('# Python version: {v}\n'.format(v=".".join([str(n) for n in sys.version_info[:3]])))
-            configfile.write('# NumPy version: {v}\n'.format(v=np.version.version))
-            configfile.write('# NetworkX version: {v}\n'.format(v=nx.__version__))
-            configfile.write('# Command: {cmd}\n'.format(cmd=' '.join(sys.argv)))
-            configfile.write('# {line}\n\n'.format(line='-'*77))
-            config.write(configfile)
-
+        self.write_configuration(filename='configuration.cfg')
 
         # Create the metapopulation
         self.metapopulation = Metapopulation(config=self.config)
@@ -146,6 +134,23 @@ class Simulation(object):
         if self.cycle % self.log_frequency == 0:
             for log in self.log_objects:
                 log.update()
+
+
+    def write_configuration(self, filename='configuration.cfg'):
+        """Write the configuration to a file"""
+        cfg_out = os.path.join(self.data_dir, filename)
+
+        with open(cfg_out, 'w') as configfile:
+            configfile.write('# Generated: {when} by {whom} on {where}\n'.format(when=datetime.datetime.now().isoformat(),
+                                                                                 whom=getpass.getuser(),
+                                                                                 where=platform.node()))
+            configfile.write('# Platform: {p}\n'.format(p=platform.platform()))
+            configfile.write('# Python version: {v}\n'.format(v=".".join([str(n) for n in sys.version_info[:3]])))
+            configfile.write('# NumPy version: {v}\n'.format(v=np.version.version))
+            configfile.write('# NetworkX version: {v}\n'.format(v=nx.__version__))
+            configfile.write('# Command: {cmd}\n'.format(cmd=' '.join(sys.argv)))
+            configfile.write('# {line}\n\n'.format(line='-'*77))
+            self.config.write(configfile)
 
 
     def cleanup(self):

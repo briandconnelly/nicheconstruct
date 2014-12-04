@@ -85,12 +85,12 @@ class Metapopulation(object):
         self.set_dirty()
 
 
-    def __repr__(self):
+    def __str__(self):
         """Return a string representation of the Metapopulation object"""
         prop_producers = self.prop_producers()
 
         if prop_producers == 'NA':
-            res = "Metapopulation: Size {s}, NA% producers".format(s=self.size())
+            res = "Metapopulation: Size {s}".format(s=self.size())
         else:
             (pfr, nfr) = self.max_fitnesses()
             pf = max(pfr)
@@ -103,9 +103,17 @@ class Metapopulation(object):
             else:
                 comp = "="
 
-            res = "Metapopulation: Size {s}, {pp:.1%} producers, w(P) {c} w(N)".format(s=self.size(), pp=self.prop_producers(), c=comp)
+            res = "Metapopulation: Size {s}, {pp:.1%} producers, " \
+                    "w(P) {c} w(N)".format(s=self.size(),
+                                           pp=self.prop_producers(), c=comp)
 
         return res
+
+
+    def __getitem__(self, key):
+        """Get a specific population from the metapopulation
+        """
+        return self.topology.node[key]['population']
 
 
     def build_topology(self):
