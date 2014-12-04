@@ -10,6 +10,9 @@ import networkx as nx
 import numpy as np
 
 from Metapopulation import Metapopulation
+from FitnessOutput import FitnessOutput
+from GenotypesOutput import GenotypesOutput
+from PopulationDataOutput import PopulationDataOutput
 
 
 class Simulation(object):
@@ -42,18 +45,27 @@ class Simulation(object):
 
         self.log_objects = []
 
-        if self.log_population:
-            out_population = PopulationDataOutput(metapopulation=self,
+        log_population = self.config.getboolean(section='Simulation',
+                                                option='log_population')
+        log_fitness = self.config.getboolean(section='Simulation',
+                                             option='log_fitness')
+        log_genotypes = self.config.getboolean(section='Simulation',
+                                               option='log_genotypes')
+        log_frequency = self.config.getint(section='Simulation',
+                                           option='log_frequency')
+
+        if log_population:
+            out_population = PopulationDataOutput(simulation=self,
                                                   filename=os.path.join(self.data_dir, 'population.csv.bz2'))
             self.log_objects.append(out_population)
 
-        if self.log_genotypes:
-            out_genotypes = GenotypesOutput(metapopulation=self,
+        if log_genotypes:
+            out_genotypes = GenotypesOutput(simulation=self,
                                             filename=os.path.join(self.data_dir, 'genotypes.csv.bz2'))
             self.log_objects.append(out_genotypes)
 
-        if self.log_fitness:
-            out_fitness = FitnessOutput(metapopulation=self,
+        if log_fitness:
+            out_fitness = FitnessOutput(simulation=self,
                                         filename=os.path.join(self.data_dir, 'fitness.csv.bz2'))
             self.log_objects.append(out_fitness)
 
@@ -93,6 +105,15 @@ class Simulation(object):
         self.stop_on_empty = self.config.getboolean(section='Simulation',
                                                     option='stop_on_empty')
         
+    def cycle(self):
+        # TODO: make this next() ?
+        # 1. write logfiles
+        self.write_logfiles()
+
+        # 2. update metapopulation
+        # 2b. stop if empty
+        # 3. update time
+        pass
 
     def write_logfiles(self):
         """Write any log files"""
@@ -101,4 +122,10 @@ class Simulation(object):
             for log in self.log_objects:
                 # TODO: remove the time argument?
                 log.update(time=self.time)
+
+
+    def cleanup(self):
+        """Perform cleanup tasks when the object is cleaned up"""
+        for log in self.log_objects:
+            log.close()
 

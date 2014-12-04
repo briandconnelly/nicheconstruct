@@ -28,9 +28,9 @@ class PopulationDataOutput(OutputWriter):
 
     """
 
-    def __init__(self, metapopulation, filename='population.csv.bz2',
+    def __init__(self, simulation, filename='population.csv.bz2',
                  delimiter=','):
-        super(PopulationDataOutput, self).__init__(metapopulation=metapopulation,
+        super(PopulationDataOutput, self).__init__(simulation=simulation,
                                                  filename=filename,
                                                  delimiter=delimiter)
 
@@ -44,7 +44,7 @@ class PopulationDataOutput(OutputWriter):
 
 
     def update(self, time):
-        for node, data in self.metapopulation.topology.nodes_iter(data=True):
+        for node, data in self.simulation.metapopulation.topology.nodes_iter(data=True):
             genomelength = data['population'].genome_length
             size = data['population'].size()
             num_producers = data['population'].num_producers()

@@ -8,9 +8,6 @@ import os
 import networkx as nx
 import numpy as np
 
-from FitnessOutput import FitnessOutput
-from GenotypesOutput import GenotypesOutput
-from PopulationDataOutput import PopulationDataOutput
 from Population import Population
 from genome import num_ones_v
 import topology
@@ -26,7 +23,6 @@ class Metapopulation(object):
     def __init__(self, config):
         """Initialize a Metapopulation object"""
         self.config = config
-        self.time = 0
 
         # Keep some information about the population
         self._dirty = None
@@ -85,38 +81,6 @@ class Metapopulation(object):
                                               option='migration_dest')
         assert self.migration_rate >= 0 and self.migration_rate <= 1
         assert self.migration_dest in ['single', 'neighbors']
-
-
-        # Set up data logging
-        # log_objects is a list of any logging objects used by this simulation
-        self.log_population = self.config.getboolean(section='Simulation',
-                                                     option='log_population')
-        self.log_fitness = self.config.getboolean(section='Simulation',
-                                                  option='log_fitness')
-        self.log_genotypes = self.config.getboolean(section='Simulation',
-                                                    option='log_genotypes')
-        self.log_frequency = self.config.getint(section='Simulation',
-                                                option='log_frequency')
-        data_dir = self.config.get(section='Simulation', option='data_dir')
-        assert self.log_frequency > 0
-
-        self.log_objects = []
-
-        if self.log_population:
-            out_population = PopulationDataOutput(metapopulation=self,
-                                                  filename=os.path.join(data_dir, 'population.csv.bz2'))
-            self.log_objects.append(out_population)
-
-        if self.log_genotypes:
-            out_genotypes = GenotypesOutput(metapopulation=self,
-                                            filename=os.path.join(data_dir, 'genotypes.csv.bz2'))
-            self.log_objects.append(out_genotypes)
-
-        if self.log_fitness:
-            out_fitness = FitnessOutput(metapopulation=self,
-                                        filename=os.path.join(data_dir, 'fitness.csv.bz2'))
-            self.log_objects.append(out_fitness)
-
 
         self.set_dirty()
 
@@ -343,9 +307,6 @@ class Metapopulation(object):
         # TODO: handle fitnesses, etc
         self.clear_dirty()
 
-        # Add an entry for each log file
-        self.write_logfiles()
-
         # Grow and mutate each population
         self.grow()
         self.mutate()
@@ -363,8 +324,6 @@ class Metapopulation(object):
 
         # Dilute the population to allow for growth in the next cycle
         self.dilute()
-
-        self.time += 1
 
 
     def change_environment(self):
@@ -454,20 +413,6 @@ class Metapopulation(object):
         nonprod_max = [d['population'].max_ones()[1] for n, d in self.topology.nodes_iter(data=True)]
 
         return (prod_max, nonprod_max)
-
-
-    def write_logfiles(self):
-        """Write any log files"""
-
-        if self.time % self.log_frequency == 0:
-            for log in self.log_objects:
-                log.update(time=self.time)
-
-
-    def cleanup(self):
-        """Perform cleanup tasks when the object is cleaned up"""
-        for log in self.log_objects:
-            log.close()
 
 
     def set_dirty(self):

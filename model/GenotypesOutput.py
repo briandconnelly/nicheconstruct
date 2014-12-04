@@ -30,9 +30,9 @@ class GenotypesOutput(OutputWriter):
 
     """
 
-    def __init__(self, metapopulation, filename='genotypes.csv.bz2',
+    def __init__(self, simulation, filename='genotypes.csv.bz2',
                  delimiter=','):
-        super(GenotypesOutput, self).__init__(metapopulation=metapopulation,
+        super(GenotypesOutput, self).__init__(simulation=simulation,
                                               filename=filename,
                                               delimiter=delimiter)
 
@@ -43,7 +43,7 @@ class GenotypesOutput(OutputWriter):
 
 
     def update(self, time):
-        for node, data in self.metapopulation.topology.nodes_iter(data=True):
+        for node, data in self.simulation.metapopulation.topology.nodes_iter(data=True):
             pop = data['population']
             L = pop.genome_length
             Lmax = pop.genome_length_max
