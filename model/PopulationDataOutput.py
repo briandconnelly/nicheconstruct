@@ -45,18 +45,19 @@ class PopulationDataOutput(OutputWriter):
 
     def update(self):
         for node, data in self.simulation.metapopulation.topology.nodes_iter(data=True):
-            genomelength = data['population'].genome_length
-            size = data['population'].size()
-            num_producers = data['population'].num_producers()
+            pop = data['population']
+            genomelength = pop.genome_length
+            size = pop.size()
+            num_producers = pop.num_producers()
             num_nonproducers = size - num_producers
-            average_fitness = data['population'].average_fitness()
-            prop_producers = data['population'].prop_producers()
-            prop_nonproducers = data['population'].prop_nonproducers()
-            maxones = data['population'].max_ones()
-            maxfitnesses = data['population'].max_fitnesses()
-            pgenotypes = data['population'].num_producer_genotypes()
-            npgenotypes = data['population'].num_nonproducer_genotypes()
-            envchange = int(data['population'].environment_changed)
+            average_fitness = pop.average_fitness()
+            prop_producers = pop.prop_producers()
+            prop_nonproducers = pop.prop_nonproducers()
+            maxones = pop.max_ones()
+            maxfitnesses = pop.max_fitnesses()
+            pgenotypes = pop.num_producer_genotypes()
+            npgenotypes = pop.num_nonproducer_genotypes()
+            envchange = int(pop.environment_changed)
 
             self.writer.writerow([self.simulation.cycle, node, genomelength,
                                   size, average_fitness, num_producers,
