@@ -8,9 +8,6 @@ import os
 import networkx as nx
 import numpy as np
 
-from FitnessOutput import FitnessOutput
-from GenotypesOutput import GenotypesOutput
-from PopulationDataOutput import PopulationDataOutput
 from Population import Population
 from genome import num_ones_v
 import topology
@@ -26,7 +23,6 @@ class Metapopulation(object):
     def __init__(self, config):
         """Initialize a Metapopulation object"""
         self.config = config
-        self.time = 0
 
         # Keep some information about the population
         self._dirty = None
@@ -86,38 +82,6 @@ class Metapopulation(object):
         assert self.migration_rate >= 0 and self.migration_rate <= 1
         assert self.migration_dest in ['single', 'neighbors']
 
-
-        # Set up data logging
-        # log_objects is a list of any logging objects used by this simulation
-        self.log_population = self.config.getboolean(section='Simulation',
-                                                     option='log_population')
-        self.log_fitness = self.config.getboolean(section='Simulation',
-                                                  option='log_fitness')
-        self.log_genotypes = self.config.getboolean(section='Simulation',
-                                                    option='log_genotypes')
-        self.log_frequency = self.config.getint(section='Simulation',
-                                                option='log_frequency')
-        data_dir = self.config.get(section='Simulation', option='data_dir')
-        assert self.log_frequency > 0
-
-        self.log_objects = []
-
-        if self.log_population:
-            out_population = PopulationDataOutput(metapopulation=self,
-                                                  filename=os.path.join(data_dir, 'population.csv.bz2'))
-            self.log_objects.append(out_population)
-
-        if self.log_genotypes:
-            out_genotypes = GenotypesOutput(metapopulation=self,
-                                            filename=os.path.join(data_dir, 'genotypes.csv.bz2'))
-            self.log_objects.append(out_genotypes)
-
-        if self.log_fitness:
-            out_fitness = FitnessOutput(metapopulation=self,
-                                        filename=os.path.join(data_dir, 'fitness.csv.bz2'))
-            self.log_objects.append(out_fitness)
-
-
         self.set_dirty()
 
 
@@ -142,54 +106,6 @@ class Metapopulation(object):
             res = "Metapopulation: Size {s}, {pp:.1%} producers, w(P) {c} w(N)".format(s=self.size(), pp=self.prop_producers(), c=comp)
 
         return res
-
-    def statusbar(self):
-        """Create a representation of the Metapopulation to use as a status
-        bar
-        """
-
-        num_ticks = 5
-        prop_producers = self.prop_producers()
-
-        if prop_producers == 'NA':
-            return "[Empty Metapopulation]"
-
-        symbol = '='
-
-        if self._prev_prop_producers == 'NA':
-            delta = ' '
-        elif self._prev_prop_producers > prop_producers:
-            delta = u'\u2193'.encode('utf-8')
-        elif self._prev_prop_producers < prop_producers:
-            delta = u'\u2191'.encode('utf-8')
-        else:
-           delta = '-'
-
-        (pfr, nfr) = self.max_fitnesses()
-        pf = max(pfr)
-        nf = max(nfr)
-
-        plabel = 'P'
-        nlabel = 'N'
-
-        if pf > nf:
-            plabel = '\033[1m' + 'P' + '\033[0m'
-        elif nf > pf:
-            nlabel = '\033[1m' + 'N' + '\033[0m'
-
-        pbars = int(round(num_ticks * max(0, prop_producers - 0.5) / 0.5))                     
-        nbars = int(round(num_ticks * max(0, 1 - prop_producers - 0.5) / 0.5))                 
-        bar_layout = "{N} [{sn}{bn}|{bp}{sp}] {P} ({d}{p:.1%}), Size: {s}"
-        bar = bar_layout.format(bn=nbars*symbol, bp=pbars*symbol,
-                                sn=(num_ticks-nbars)*' ',
-                                sp=(num_ticks-pbars)*' ', p=prop_producers,
-                                s=self.size(),
-                                N=nlabel,
-                                P=plabel,
-                                d=delta)
-        return bar
-
-
 
 
     def build_topology(self):
@@ -269,6 +185,14 @@ class Metapopulation(object):
         self.set_dirty()
 
 
+    def populations_iter(self):
+        """Return an iterator containing all of the Populations in the
+        metapopulation
+        """
+        for node, data in self.topology.nodes_iter(data=True):
+            yield data['population']
+
+
     def dilute(self):
         """Dilute the metapopulation
 
@@ -280,15 +204,18 @@ class Metapopulation(object):
         for node, data in self.topology.nodes_iter(data=True):
             data['population'].dilute()
 
+
     def grow(self):
         """Grow the metapopulation ...."""
         for node, data in self.topology.nodes_iter(data=True):
             data['population'].grow()
 
+
     def mutate(self):
         """Mutate the metapopulation ...."""
         for node, data in self.topology.nodes_iter(data=True):
             data['population'].mutate()
+
 
     def migrate(self):
         """Migrate individuals among the populations"""
@@ -343,9 +270,6 @@ class Metapopulation(object):
         # TODO: handle fitnesses, etc
         self.clear_dirty()
 
-        # Add an entry for each log file
-        self.write_logfiles()
-
         # Grow and mutate each population
         self.grow()
         self.mutate()
@@ -363,8 +287,6 @@ class Metapopulation(object):
 
         # Dilute the population to allow for growth in the next cycle
         self.dilute()
-
-        self.time += 1
 
 
     def change_environment(self):
@@ -454,20 +376,6 @@ class Metapopulation(object):
         nonprod_max = [d['population'].max_ones()[1] for n, d in self.topology.nodes_iter(data=True)]
 
         return (prod_max, nonprod_max)
-
-
-    def write_logfiles(self):
-        """Write any log files"""
-
-        if self.time % self.log_frequency == 0:
-            for log in self.log_objects:
-                log.update(time=self.time)
-
-
-    def cleanup(self):
-        """Perform cleanup tasks when the object is cleaned up"""
-        for log in self.log_objects:
-            log.close()
 
 
     def set_dirty(self):

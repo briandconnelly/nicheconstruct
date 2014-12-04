@@ -30,9 +30,9 @@ class GenotypesOutput(OutputWriter):
 
     """
 
-    def __init__(self, metapopulation, filename='genotypes.csv.bz2',
+    def __init__(self, simulation, filename='genotypes.csv.bz2',
                  delimiter=','):
-        super(GenotypesOutput, self).__init__(metapopulation=metapopulation,
+        super(GenotypesOutput, self).__init__(simulation=simulation,
                                               filename=filename,
                                               delimiter=delimiter)
 
@@ -42,8 +42,8 @@ class GenotypesOutput(OutputWriter):
                               'Abundance', 'Fitness'])
 
 
-    def update(self, time):
-        for node, data in self.metapopulation.topology.nodes_iter(data=True):
+    def update(self):
+        for node, data in self.simulation.metapopulation.topology.nodes_iter(data=True):
             pop = data['population']
             L = pop.genome_length
             Lmax = pop.genome_length_max
@@ -52,7 +52,7 @@ class GenotypesOutput(OutputWriter):
                 visible = genotype & ((2**L) - 1)
                 nonsocial = genotype & (2**Lmax - 1)
 
-                self.writer.writerow([time, node, L, genotype,
+                self.writer.writerow([self.simulation.cycle, node, L, genotype,
                                       is_producer(genotype, Lmax),
                                       nonsocial, num_ones(nonsocial), visible,
                                       num_ones(visible),

@@ -5,25 +5,18 @@
 
 import argparse
 import datetime
-import getpass
 import os
-import sys
-import warnings
+from warnings import warn
 
 try:
     from ConfigParser import SafeConfigParser
 except ImportError:
     from configparser import SafeConfigParser
 
-import networkx as nx
-import numpy as np
+from Simulation import Simulation
 
-from Metapopulation import Metapopulation
+__version__ = '0.2.0'
 
-__version__ = '0.1.2'
-
-if sys.version_info[0] == 3:
-    xrange = range
 
 def parse_arguments():
     """Parse command line arguments"""
@@ -70,13 +63,6 @@ def main():
     # supplied configuration file, create one.
     if args.seed:
         config.set(section='Simulation', option='seed', value=str(args.seed))
-    elif config.has_option(section='Simulation', option='seed') is not True:
-        seed = np.random.randint(low=0, high=np.iinfo(np.uint32).max)
-        config.set(section='Simulation', option='seed', value=str(seed))
-
-    # Set the seed for the pseudorandom number generator
-    if config.has_option(section='Simulation', option='seed'):
-        np.random.seed(seed=config.getint(section='Simulation', option='seed'))
 
 
     # If the data directory is specified, add it to the config, overwriting any
@@ -85,12 +71,11 @@ def main():
         config.set(section='Simulation', option='data_dir',
                    value=args.data_dir)
 
-    if config.has_option(section='Simulation', option='data_dir'):
-        data_dir = config.get(section='Simulation', option='data_dir')
-    else:
+    # If a directory wasn't listed in the config, use the default ('data')
+    if not config.has_option(section='Simulation', option='data_dir'):
         config.set(section='Simulation', option='data_dir', value='data')
-        data_dir = 'data'
 
+    data_dir = config.get(section='Simulation', option='data_dir')
 
     # If the data_dir already exists, append the current date and time to
     # data_dir, and use that. Afterwards, create the directory.
@@ -99,45 +84,14 @@ def main():
                                    d=datetime.datetime.now().strftime("%Y%m%d%H%M%S"))
         msg = '{d} already exists. Using {new} instead.'.format(d=data_dir,
                                                                 new=newname)
-        warnings.warn(msg)
-
-        data_dir = newname
-        config.set(section='Simulation', option='data_dir', value=data_dir)
-
-    os.mkdir(data_dir)
+        warn(msg)
+        config.set(section='Simulation', option='data_dir', value=newname)
 
 
-    # Write the configuration file and some additional information
-    cfg_out = os.path.join(data_dir, 'configuration.cfg')
-    with open(cfg_out, 'w') as configfile:
-        configfile.write('# Generated: {when} by {whom}\n'.format(when=datetime.datetime.now().isoformat(),
-                                                                  whom=getpass.getuser()))
-        configfile.write('# ncsimulate.py version: {v}\n'.format(v=__version__))
-        configfile.write('# Python version: {v}\n'.format(v=".".join([str(n) for n in sys.version_info[:3]])))
-        configfile.write('# NumPy version: {v}\n'.format(v=np.version.version))
-        configfile.write('# NetworkX version: {v}\n'.format(v=nx.__version__))
-        configfile.write('# Command: {cmd}\n'.format(cmd=' '.join(sys.argv)))
-        configfile.write('# {line}\n\n'.format(line='-'*77))
-        config.write(configfile)
-
-
-    stop_on_empty = config.getboolean(section='Simulation',
-                                      option='stop_on_empty')
-    num_cycles = config.getint(section='Simulation', option='num_cycles')
-    metapopulation = Metapopulation(config=config)
-
-    for cycle in xrange(num_cycles):
-        metapopulation.cycle()
-
+    # Create the simulation object and iterate through the timesteps
+    for step in Simulation(config=config):
         if not args.quiet:
-            msg = "Cycle {c}: {m}".format(c=str(cycle).rjust(len(str(num_cycles))), m=metapopulation.statusbar())
-            print(msg)
-
-        if stop_on_empty and metapopulation.size() == 0:
-            break
-
-    metapopulation.write_logfiles()
-    metapopulation.cleanup()
+            print(step.statusbar())
 
 
 if __name__ == "__main__":

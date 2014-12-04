@@ -16,14 +16,15 @@ class FitnessOutput(OutputWriter.OutputWriter):
 
     """
 
-    def __init__(self, metapopulation, filename='max_fitness.csv.bz2',
+    def __init__(self, simulation, filename='max_fitness.csv.bz2',
                  delimiter=','):
-        super(FitnessOutput, self).__init__(metapopulation=metapopulation,
+        super(FitnessOutput, self).__init__(simulation=simulation,
                                             filename=filename,
                                             delimiter=delimiter)
 
         self.writer.writerow(['Time', 'Producers', 'Nonproducers'])
 
-    def update(self, time):
-        maxfit = self.metapopulation.max_fitnesses()
-        self.writer.writerow([time, max(maxfit[0]), max(maxfit[1])])
+    def update(self):
+        maxfit = self.simulation.metapopulation.max_fitnesses()
+        self.writer.writerow([self.simulation.cycle, max(maxfit[0]),
+                              max(maxfit[1])])
