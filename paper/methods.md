@@ -20,7 +20,7 @@ output:
 
 ---
 
-We develop a computational model to observe how the evolution of public goods production is affected as populations adapt to and modify their environment. Each simulation tracks a single metapopulation comprising $N^2$ sites, arranged as an $N×N$ bounded lattice, where each site can potentially hold a population. The genotype of each individual in these populations is a length $L+1$ string of digits, where $L_{min} \le L \le L_{max}$. Each locus in these genotypes is occupied by one of $A$ possible alleles. In several simulations, $A=1$, which results in genotypes that are binary bit strings. Alleles at the first $L$ loci determine the individual’s level of adaptation to the stressful environment. We refer to these loci as “stress loci”. An additional allele at the $(L+1)$<sup>th</sup> locus determines whether the individual is a producer (allele $1$) or a non-producer (allele $0$) of a public good. We refer to this locus as the “production locus”.
+We develop a computational model to observe how the evolution of public goods production is affected as populations adapt to and modify their environment. Each simulation tracks a single metapopulation comprising $N^2$ sites, arranged as an $N×N$ bounded lattice, where each site can potentially hold a population. The genotype of each individual in these populations is a length $L+1$ string of digits, where $L_{min} \le L \le L_{max}$. Each locus in these genotypes is occupied by a zero or one of $A$ possible alleles. In several simulations, $A=1$, which produces genotypes that are binary bit strings. Alleles at the first $L$ loci determine the individual’s level of adaptation to the stressful environment. We refer to these loci as “stress loci”. An additional allele at the $(L+1)$<sup>th</sup> locus determines whether the individual is a producer (allele $1$) or a non-producer (allele $0$) of a public good. We refer to this locus as the “production locus”.
 
 
 ## Individual Fitness
@@ -33,6 +33,7 @@ $$
 where $z$ is a baseline fitness (the fitness of an individual with zeros at every locus), and $X(a_i)$ indicates whether the allelic state $a_i$ is non-zero ($1$) or not ($0$). If there are no stress loci ($L=0$), the fitness of a producer and non-producer is $z-c$ and $z$, respectively.
 
 **TODO: better name for $X()$**
+**TODO: delta for the non-zero fitness effects? - delta is the sampled value**
 
 ## Overview of Basic Simulation Cycle
 
@@ -41,7 +42,7 @@ After initialization, simulations are run for $T$ cycles, where each cycle consi
 
 ### Population Growth
 
-**TODO: There aren't $2^{L+1}$ genotypes, but $(A+1)^{L+1}$. How can this best be described?**
+**TODO: There aren't $2^{L+1}$ genotypes, but $(A+1)^{L+1}$. How can this best be described? Have a variable containing the number of genotypes?**
 
 If $p$ is the proportion of producers in a population at the beginning of a growth cycle, then that population grows to the following size during the growth phase:
 
@@ -81,36 +82,37 @@ After migration, populations are thinned to allow for growth in the next cycle. 
 
 ### Initialization
 
-Metapopulations are initiated in a state that follows the onset of an environmental stress. First, populations are seeded at each site with producer proportion $p_{0}$ and grown to density $S(p_{0})$\. Each population is then subjected to a bottleneck. Individuals survive this event with probability $\mu_{t}$, which represents the likelihood that a mutation occurs that enables survival. Because individuals have not yet adapted to this new stress, the allelic state $a_{i}$ is set to $0$ at each stress locus. The fitness effects associated with adaptations at each locus $w_{i}$ are also sampled as previously described.
+Metapopulations are initiated in a state that follows the onset of an environmental stress. First, populations are seeded at each site with producer proportion $p_{0}$ and grown to density $S(p_{0})$. Each population is then subjected to a bottleneck. Individuals survive this event with probability $\mu_{t}$, which represents the likelihood that a mutation occurs that enables survival. Because individuals have not yet adapted to this new stress, the allelic state $a_{i}$ is set to $0$ at each stress locus. The fitness effects associated with adaptations at each locus $w_{i}$ are also sampled as previously described.
 
 
 ## Changing Environments and Niche Construction
 
-Through growth and adaptation, populations can alter their environment. These changes can produce feedbacks that affect selection at the local or metapopulation level. We describe three ways in which populations are able to bring about environmental change.
+Through growth and adaptation, populations alter their environment. These changes can produce feedbacks that affect selection at the local or metapopulation level. We describe three ways by which populations bring about environmental change.
 
+***TODO: mention that these methods were used separately?***
 
 ### Niche Construction at the Metapopulation Level
 
-First, we examine how the presence of organisms can reveal new avenues for adaptation. When $\tau_{m}$ total individuals have existed in the metapopulation, an environmental change is triggered at each site of the metapopulation as described in the previous section. Because populations containing producers are able to reach greater densities during each cycle, the presence of producers hastens these changes. For these simulations, genome lengths $L$ were held constant. Therefore, the amount of adaptation that could occur between environmental changes was limited. 
-
-TODO: A=1, binary genotypes. Fixed genome length.
+The sustained presence of organisms can reveal new avenues for adaptation. When $\tau_{m}$ individuals have existed in the metapopulation, an environmental change is triggered at each site. As with metapopulation intialization, this change resets the allelic state at each stress locus and regenerates the fitness effects of each adaptation. This method occurs independent of the specific genotypes that have been present in the metapopulation. For these simulations, genotypes are represented by fixed-length binary strings (i.e., $L = L_{min} = L_{max} and A=1$).
 
 
 ### Niche Construction at the Population Level
 
-We also performed simulations in which environmental change was more likely to occur in populations which brought it about. Here, the space of genotypes within populations begins with genome length $L_{min}$. Once $\tau_{p}$ individuals have existed in a particular site, an environmental change occurs that increases the number of fitness-encoding loci in the genotype by one.
-
-TODO: A=1, binary genotypes, varying genome length.
+Alternately, change occurs locally at a site when that population reaches cumulative density $\tau_{p}$. In this case, the number of fitness-affecting loci $L$ is increased for that population. When individuals from this population migrate to a neighboring site with smaller $L$, fitness is still based on the smaller $L$, but these indivuals are "pre-adapted" for future change at that site. Populations are initialized with $L=L_{min}$ and can trigger environmental change until $L$ reaches $L_{max}$. Genotypes consist of binary strings ($A=1$) in simulations where this form of construction occurs.
 
 
 ### Genotype-Mediated Niche Construction
 
 The previous two methods described environmental change that was brought about simply by the presence of organisms. TODO
 
+TODO: next alleles
+TODO: gamma
+TODO: delta
+TODO: Primacy, recency parameter
 
 
 ## Source Code and Software Versions
 
-The simulation software and all configurations for the experiments reported are available at [https://github.com/briandconnelly/nicheconstruct/](https://github.com/briandconnelly/nicheconstruct/). Simulations were run using Python 2.7.3, NumPy 1.9.0, and NetworkX 1.9.1. Data analyses were performed using R 3.1.2 [@rproject]. Model parameters and their values are listed in [Table X](https://github.com/briandconnelly/nicheconstruct/blob/master/paper/table_of_parameters.md).
+The simulation software and configurations for the experiments reported are available at [https://github.com/briandconnelly/nicheconstruct/](https://github.com/briandconnelly/nicheconstruct/). Simulations were run using Python 2.7.3, NumPy 1.9.0, and NetworkX 1.9.1. Data analyses were performed using R 3.1.2 [@rproject]. Model parameters and their values are listed in [Table X](https://github.com/briandconnelly/nicheconstruct/blob/master/paper/table_of_parameters.md).
 
 # References
