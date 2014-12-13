@@ -2,6 +2,9 @@
 title: "Methods"
 csl: evolutionary-ecology-research.csl
 output:
+  word_document:
+    fig_height: 5
+    fig_width: 5
   pdf_document:
     number_sections: no
     toc: no
@@ -9,11 +12,6 @@ output:
     number_sections: no
     theme: default
     toc: yes
-  word_document:
-    fig_height: 5
-    fig_width: 5
-    number_sections: no
-    toc: no
 bibliography: references.bib
 ---
 
@@ -110,13 +108,18 @@ Where $X(a_i)$ indicates whether allele $a_{i}$ matches the target ($1$) or not 
 
 As with the population-level construction method, the presence of individuals over time expands a population's genome length. At the beginning of the simulation, an ordering is defined that specifies the sequence of revealed target alleles. 
 
-
-TODO: how next alleles are chosen
-
-TODO: Primacy, recency parameter
+To allow population growth and niche construction to occur on different timescales, we also retain the distribution of genotypes in each population for $n$ cycles. Following [@laland1996evolutionary], these $n$ states can equally affect the allele to be revealed next or be affected more by earlier or later population states.
 
 
-## Source Code and Software Versions
+* for each locus $l$, for each allele $a \in \{0, \ldots, A\}$, what is the proportion of $a$? Look at these values over time (weighted)
+* As we select an allele at a locus, how do we account for its effects on the previous locus?
+* Can we handle weighting of the values over time with a single parameter? [@laland1996evolutionary] kind of does, but they use separate equations for the primacy, recency, and equal weight cases. Hill function?
+* I don't have the math skills to concisely describe the ordering of alleles.
+
+
+
+
+## Source Code and Software Environment
 
 The simulation software and configurations for the experiments reported are available at [TODO](TODO). Simulations were run using Python 2.7.3, NumPy 1.9.0, and NetworkX 1.9.1. Data analyses were performed using R 3.1.2 [@rproject]. Model parameters and their values are listed in [Table X](https://github.com/briandconnelly/nicheconstruct/blob/master/paper/table_of_parameters.md).
 
