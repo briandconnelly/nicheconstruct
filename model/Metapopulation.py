@@ -20,9 +20,10 @@ class Metapopulation(object):
 
     """
 
-    def __init__(self, config):
+    def __init__(self, simulation):
         """Initialize a Metapopulation object"""
-        self.config = config
+        self.simulation = simulation
+        self.config = self.simulation.config
 
         # Keep some information about the population
         self._dirty = None
@@ -31,8 +32,20 @@ class Metapopulation(object):
         self._prop_producers = None
         self._prev_prop_producers = None
 
+        if self.simulation.env_change == 'Metapopulation':
+            self.enable_construction = True
+            self.density_threshold = self.config.getint(section='Metapopulation',
+                                                        option='density_threshold')
+            assert self.density_threshold > 0
+        else:
+            self.enable_construction = False
+
+        self.cumulative_density = 0
+        self.environment_changed = False
+
         # Build the topology, which links the subpopulations
         self.topology = None
+
         self.build_topology()
 
         # Create each of the populations
@@ -46,13 +59,12 @@ class Metapopulation(object):
                                                            option='initial_producer_proportion')
         mutation_rate_tolerance = self.config.getfloat(section='Population',
                                                        option='mutation_rate_tolerance')
-        self.population_construction = config.getboolean(section='Population',
-                                                         option='enable_construction')
 
         self.genotype_num_ones = num_ones_v(np.arange(2**(genome_length_max+1), dtype=int))
 
         for node, data in self.topology.nodes_iter(data=True):
-            data['population'] = Population(metapopulation=self, config=config)
+            data['population'] = Population(simulation=self.simulation,
+                                            metapopulation=self)
 
             if initial_state == 'corners':
                 # Place all producers in one corner and all non-producers in
@@ -286,15 +298,22 @@ class Metapopulation(object):
         self.migrate()
         self.census()
 
-        # Change the environment in populations where enabled and when that
-        # population has triggered the change
-        if self.population_construction:
+        # Handle environmental change
+        self.environment_changed = False
+        self.cumulative_density += self.size()
+
+        if self.simulation.env_change == 'Population':
             self.construct()
 
-        # Could also add metapopulation-level construction events here
+        elif self.simulation.env_change == 'Metapopulation' and \
+                self.cumulative_density > self.density_threshold:
+            self.change_environment()
+            self.environment_changed = True
+            self.cumulative_density = 0
 
         # Dilute the population to allow for growth in the next cycle
-        self.dilute()
+        if not self.environment_changed:
+            self.dilute()
 
 
     def change_environment(self):
@@ -318,7 +337,7 @@ class Metapopulation(object):
             # TODO could these 3 steps be encapsulated in a Population-level function?
             data['population'].bottleneck(survival_rate=mutation_rate_tolerance)
             data['population'].reset_loci()
-            data['population'].fitness_landscape = data['population'].build_fitness_landscape()
+            data['population'].build_fitness_landscape()
 
         self.set_dirty()
 

@@ -77,8 +77,16 @@ class Simulation(object):
         # Write the configuration file and some additional information
         self.write_configuration(filename='configuration.cfg')
 
+
+        # Methods for environmental change
+        self.env_change = self.config.get(section='Simulation',
+                                          option='environment_change')
+        assert self.env_change.lower() in ['none', 'metapopulation', \
+                                           'population', 'genotype']
+
+
         # Create the metapopulation
-        self.metapopulation = Metapopulation(config=self.config)
+        self.metapopulation = Metapopulation(simulation=self)
 
         # Export the metapopulation topology
         export_topology = self.config.getboolean(section='Simulation',

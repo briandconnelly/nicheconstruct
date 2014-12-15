@@ -59,37 +59,34 @@ class Population(object):
         empty: the population will have no individuals
     """
 
-    def __init__(self, metapopulation, config):
+    def __init__(self, simulation, metapopulation):
         """Initialize a Population object"""
+        self.simulation = simulation
         self.metapopulation = metapopulation
-        self.config = config
+        self.config = self.simulation.config
 
-        self.genome_length_min = config.getint(section='Population',
-                                               option='genome_length_min')
-        self.genome_length_max = config.getint(section='Population',
-                                               option='genome_length_max')
-        self.enable_construction = config.getboolean(section='Population',
-                                                     option='enable_construction')
-        self.density_threshold = config.getint(section='Population',
-                                               option='density_threshold')
-        self.mutation_rate_social = config.getfloat(section='Population',
-                                                    option='mutation_rate_social')
-        self.mutation_rate_adaptation = config.getfloat(section='Population',
-                                                        option='mutation_rate_adaptation')
-        self.mutate_hidden = config.getboolean(section='Population',
-                                               option='mutate_hidden')
-        self.mutation_rate_tolerance = config.getfloat(section='Population',
-                                                       option='mutation_rate_tolerance')
-        self.dilution_factor = config.getfloat(section='Population',
-                                               option='dilution_factor')
-        self.capacity_min = config.getint(section='Population',
-                                          option='capacity_min')
-        self.capacity_max = config.getint(section='Population',
-                                          option='capacity_max')
-        self.production_cost = config.getfloat(section='Population',
-                                               option='production_cost')
-        self.initialize = config.get(section='Population',
-                                     option='initialize')
+        self.genome_length_min = self.config.getint(section='Population',
+                                                    option='genome_length_min')
+        self.genome_length_max = self.config.getint(section='Population',
+                                                    option='genome_length_max')
+        self.mutation_rate_social = self.config.getfloat(section='Population',
+                                                         option='mutation_rate_social')
+        self.mutation_rate_adaptation = self.config.getfloat(section='Population',
+                                                             option='mutation_rate_adaptation')
+        self.mutate_hidden = self.config.getboolean(section='Population',
+                                                    option='mutate_hidden')
+        self.mutation_rate_tolerance = self.config.getfloat(section='Population',
+                                                            option='mutation_rate_tolerance')
+        self.dilution_factor = self.config.getfloat(section='Population',
+                                                    option='dilution_factor')
+        self.capacity_min = self.config.getint(section='Population',
+                                               option='capacity_min')
+        self.capacity_max = self.config.getint(section='Population',
+                                               option='capacity_max')
+        self.production_cost = self.config.getfloat(section='Population',
+                                                    option='production_cost')
+        self.initialize = self.config.get(section='Population',
+                                          option='initialize')
 
         assert self.genome_length_min >= 0, 'genome_length_min must be non-negative'
         assert self.genome_length_max >= self.genome_length_min, 'genome_length_max must be at least as large as genome_length_min'
@@ -101,13 +98,21 @@ class Population(object):
         assert self.capacity_max >= 0 and self.capacity_max >= self.capacity_min
         assert self.initialize.lower() in ['empty', 'random'], "initialize must be one of 'empty', 'random'"
 
+        if self.simulation.env_change == 'Population':
+            self.enable_construction = True
+        else:
+            self.enable_construction = False
+
         if self.enable_construction:
+            self.density_threshold = self.config.getint(section='Population',
+                                                        option='density_threshold')
             assert self.density_threshold > 0
 
             if self.genome_length_min == self.genome_length_max:
                 warnings.warn('populations cannot construct environment when genome_length_min==genome_length_max')
         else:
-            assert self.genome_length_min == self.genome_length_max
+            assert self.genome_length_min == self.genome_length_max, 'genome_length_min must equal genome_length_max'
+
 
         # Keep some information about the population
         self.environment_changed = False
@@ -115,7 +120,7 @@ class Population(object):
         self._dirty = True
 
         # Build the fitness landscape
-        self.full_fitness_landscape = self.build_fitness_landscape()
+        self.build_fitness_landscape()
         self.fitness_landscape = None  # will be set after genome_length is
 
         # Set the genome length
@@ -209,8 +214,8 @@ class Population(object):
         bitstrings = np.array([[int(b) for b in binary_repr(i, width=self.genome_length_max+1)] for i in xrange(num_genotypes)])
         landscape = ndot(bitstrings, effects) + base_fitness + production_cost
 
+        self.full_fitness_landscape = landscape
         self.set_dirty()
-        return landscape
 
 
     def get_mutation_probabilities(self, genotype):
