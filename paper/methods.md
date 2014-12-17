@@ -14,6 +14,9 @@ output:
     toc: yes
 bibliography: references.bib
 ---
+# NOTES
+* "site" may be misleading. switch to "patch"?
+* "Indicator function" for a_i=0 or non-zero.
 
 We develop a computational model to observe how the evolution of public goods production is affected as populations adapt to and modify their environment. Each simulation tracks a single metapopulation comprising $N^2$ sites, arranged as an $N×N$ bounded lattice, where each site can potentially hold a population. The genotype of each individual in these populations is a length $L+1$ string of digits, where $L_{min} \le L \le L_{max}$. Each locus in these genotypes is occupied by a zero or one of $A$ possible alleles. In several simulations, $A=1$, which produces genotypes that are binary bit strings. Alleles at the first $L$ loci determine the individual’s level of adaptation to the stressful environment. We refer to these loci as “stress loci”. An additional allele at the $(L+1)$<sup>th</sup> locus determines whether the individual is a producer (allele $1$) or a non-producer (allele $0$) of a public good. We refer to this locus as the “production locus”.
 
