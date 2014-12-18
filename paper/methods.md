@@ -2,6 +2,9 @@
 title: "Methods"
 csl: evolutionary-ecology-research.csl
 output:
+  word_document:
+    fig_height: 5
+    fig_width: 5
   pdf_document:
     number_sections: no
     toc: no
@@ -9,9 +12,6 @@ output:
     number_sections: no
     theme: default
     toc: yes
-  word_document:
-    fig_height: 5
-    fig_width: 5
 bibliography: references.bib
 ---
 
@@ -19,14 +19,14 @@ We develop a computational model to observe how the evolution of public goods pr
 
 
 ## Individual Fitness
-A mutation from $0$ to any non-zero allele from $A$ at the $i$<sup>th</sup> stress locus will improve individual fitness by $\delta$ regardless of the allelic states of other loci (i.e., there is no epistasis). For simplicity, all non-zero alleles carry the same fitness benefit. Public good production is costly, reducing individual fitness by $c$. Thus, if the allelic state of the $i$<sup>th</sup> locus in genotype $g$ is denoted $a_{g,i}$ with $a_{g,i} \in (\{0\} \cup A)$, then the fitness of an individual with genotype $g$ is:
+A mutation from $0$ to any non-zero allele from $A$ at the $i$<sup>th</sup> stress locus will improve individual fitness by $\delta$ regardless of the allelic states of other loci (i.e., there is no epistasis). For simplicity, all non-zero alleles carry the same fitness benefit. Public good production is costly, reducing individual fitness by $c$. Thus, if the allelic state of the $l$<sup>th</sup> locus in genotype $g$ is denoted $a_{g,l}$ with $a_{g,l} \in (\{0\} \cup A)$, then the fitness of an individual with genotype $g$ is:
 
 $$
 W_{g} = z + \delta \sum_{l=1}^{L} 1_{A}(a_{g,l}) - a_{g,L+1} c
 $$
 
 
-where $z$ is a baseline fitness (the fitness of an individual with zeros at every locus), and $1_{A}$ indicates whether the allelic state $a_{g,i}$ is non-zero ($1$) or not ($0$). If there are no stress loci ($L=0$), the fitness of a producer and non-producer is $z-c$ and $z$, respectively.
+where $z$ is a baseline fitness (the fitness of an individual with zeros at every locus), and $1_{A}$ indicates whether the allelic state $a_{g,l}$ is non-zero ($1$) or not ($0$). If there are no stress loci ($L=0$), the fitness of a producer and non-producer is $z-c$ and $z$, respectively.
 
 
 ## Overview of Basic Simulation Cycle
@@ -74,7 +74,7 @@ After migration, populations are thinned to allow for growth in the next cycle. 
 
 ### Initialization
 
-Metapopulations are initiated in a state that follows the onset of an environmental stress. First, populations are seeded at each patch with producer proportion $p_{0}$ and grown to density $S(p_{0})$. Stress is then introduced by subjecting the population to a bottleneck. The number of survivors with each genotype $g$ is sampled from a binomial distribution, where the number of trials is $n_g$. The probability of success is $\mu_{t}$, which represents the likelihood that a mutation occurs that enables survival. Because individuals have not yet adapted to this new stress, the allelic state $a_{i}$ is set to $0$ at each stress locus ($\forall g \in \{1, \ldots, G\}, i \in \{1, \ldots, L\}: a_{g,~i} = 0$).
+Metapopulations are initiated in a state that follows the onset of an environmental stress. First, populations are seeded at each patch with producer proportion $p_{0}$ and grown to density $S(p_{0})$. Stress is then introduced by subjecting the population to a bottleneck. The number of survivors with each genotype $g$ is sampled from a binomial distribution, where the number of trials is $n_g$. The probability of success is $\mu_{t}$, which represents the likelihood that a mutation occurs that enables survival. Because individuals have not yet adapted to this new stress, the allelic state is set to $0$ at each stress locus ($\forall g \in \{1, \ldots, G\}, l \in \{1, \ldots, L\}: a_{g,l} = 0$).
 
 
 ## Changing Environments and Niche Construction
@@ -96,13 +96,13 @@ Alternately, change occurs locally at a patch when its population reaches cumula
 **Note: This section is under heavy construction.**
 **TODO: describe ordering of alleles**
 
-Finally, we allow construction to be affected by the genotypes present in a population. Populations are initialized as previously described with genome length $L_{min}$, and each patch is given a target allele drawn from the $A$ possible alleles. We expand individual fitness as described in Equation 1 to include additional fitness benefit $\epsilon$ for each allele $a_{g,~l}$ that matches this target:
+Finally, we allow construction to be affected by the genotypes present in a population. Populations are initialized as previously described with genome length $L_{min}$, and each patch is given a target allele drawn from the $A$ possible alleles. We expand individual fitness as described in Equation 1 to include additional fitness benefit $\epsilon$ for each allele $a_{g,l}$ that matches this target:
 
 $$
-W_{g} = z + \delta \sum_{l=1}^{L} 1_{A}(a_{g,~l}) + \epsilon OtherLoci + \epsilon SelfLocus - a_{g,L+1} c
+W_{g} = z + \delta \sum_{l=1}^{L} 1_{A}(a_{g,l}) + \epsilon OtherLoci + \epsilon SelfLocus - a_{g,L+1} c
 $$
 
-Where $X(a_i)$ indicates whether allele $a_{i}$ matches the target ($1$) or not ($0$).
+Where $X(a_l)$ indicates whether allele $a_{l}$ matches the target ($1$) or not ($0$).
 
 As with the population-level construction method, the presence of individuals over time expands a population's genome length. At the beginning of the simulation, an ordering is defined that specifies the sequence of revealed target alleles. 
 
