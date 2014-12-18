@@ -6,7 +6,7 @@
 | L<sub>max</sub> | Maximum Number of Adaptive Loci | 8             |
 | &epsilon; | Niche construction effect          | x             |
 | &delta; | Effect of non-zero allele (TODO)     | x             |
-| A      | Potential alleles per locus           | x             |
+| a<sub>max</sub> | Potential alleles per locus  | x             |
 | c      | Production Cost                       | 0.1           |
 | z      | Baseline fitness                      | 1             |
 | S<sub>min</sub>  | Minimum Population Size     | 800           |
