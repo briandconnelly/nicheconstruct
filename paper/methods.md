@@ -2,31 +2,31 @@
 title: "Methods"
 csl: evolutionary-ecology-research.csl
 output:
-  word_document:
-    fig_height: 5
-    fig_width: 5
   pdf_document:
-    number_sections: no
+    number_sections: yes
     toc: no
   html_document:
     number_sections: no
     theme: default
     toc: yes
+  word_document:
+    fig_height: 5
+    fig_width: 5
 bibliography: references.bib
 ---
 
-We develop a computational model to observe how the evolution of public goods production is affected as populations modify and adapt to their environment. Each simulation tracks a single metapopulation composed of $N^2$ patches arranged as an $N×N$ bounded lattice, where each patch can hold a population. The genotype of each individual in these populations is a length $L+1$ string of digits, where $L_{min} \le L \le L_{max}$. Values (alleles) in the first $L$ positions (loci) determine the individual’s level of adaptation to the stressful environment. Each of these “stress loci” is occupied by a zero or an element from the set of alleles $A = \{1, \ldots, a_{max}\}$, where $a_{max}$ is the number of possible alleles. An additional binary allele at the $(L+1)$<sup>th</sup> locus determines whether the individual is a producer (allele $1$) or a non-producer (allele $0$) of a public good. We refer to this locus as the “production locus”. Using this represnetation, the number of unique genotypes $G$ is $(A + 1)^{L + 1}$.
+We develop a computational model to observe how the evolution of public goods production is affected as populations modify and adapt to their environment. Each simulation tracks a single metapopulation composed of $N^2$ patches arranged as an $N \times N$ bounded lattice, where each patch can hold a population. The genotype of each individual in these populations is a length $L+1$ string of digits, where $L_{min} \le L \le L_{max}$. Values (alleles) in the first $L$ positions (loci) determine the individual’s level of adaptation to the stressful environment. Each of these “stress loci” is occupied by a zero or an element from the set of alleles $A = \{1, \ldots, a_{max}\}$, where $a_{max}$ is the number of possible alleles. An additional binary allele at the $(L+1)$<sup>th</sup> locus determines whether the individual is a producer (allele $1$) or a non-producer (allele $0$) of a public good. We refer to this locus as the “production locus”. Using this represnetation, the number of unique genotypes $G$ is $(A + 1)^{L + 1}$.
 
 
 ## Individual Fitness
 A mutation from $0$ to any non-zero allele from $A$ at the $i$<sup>th</sup> stress locus will improve individual fitness by $\delta$ regardless of the allelic states of other loci (i.e., there is no epistasis). For simplicity, all non-zero alleles carry the same fitness benefit. Public good production is costly, reducing individual fitness by $c$. Thus, if the allelic state of the $l$<sup>th</sup> locus in genotype $g$ is denoted $a_{g,l}$ with $a_{g,l} \in (\{0\} \cup A)$, then the fitness of an individual with genotype $g$ is:
 
 $$
-W_{g} = z + \delta \sum_{l=1}^{L} 1_{A}(a_{g,l}) - a_{g,L+1} c
+W_{g} = z + \delta \sum_{l=1}^{L} I_{A}(a_{g,l}) - a_{g,L+1} c
 $$
 
 
-where $z$ is a baseline fitness (the fitness of an individual with zeros at every locus), and $1_{A}$ indicates whether the allelic state $a_{g,l}$ is non-zero ($1$) or not ($0$). If there are no stress loci ($L=0$), the fitness of a producer and non-producer is $z-c$ and $z$, respectively.
+where $z$ is a baseline fitness (the fitness of an individual with zeros at every locus), and $I_{A}$ indicates whether the allelic state $a_{g,l}$ is non-zero ($1$) or not ($0$). If there are no stress loci ($L=0$), the fitness of a producer and non-producer is $z-c$ and $z$, respectively.
 
 
 ## Overview of Basic Simulation Cycle
@@ -91,24 +91,25 @@ The sustained presence of organisms can reveal new avenues for adaptation. When 
 
 Alternately, change occurs locally at a patch when its population reaches cumulative density $\tau_{p}$. In this case, the number of fitness-affecting loci $L$ is increased at that patch. Fitness is patch-specific, so the state at alleles greater than $L$ will have no fitness effects in individuals that immigrate from patches with larger $L$. Patches are initialized with $L = L_{min}$ and populations can increase $L$ through this process until it reaches $L_{max}$. For simulations using this form of niche construction, binary string genotypes are used ($A = 1$).
 
+
 ### Genotype-Mediated Niche Construction
 
-**Note: This section is under heavy construction.**
-**TODO: describe ordering of alleles**
+Finally, we allow construction to be affected by the abundances of the genotypes present in a population. Populations are initialized as previously described with genome length $L_{min}$. 
 
-Finally, we allow construction to be affected by the genotypes present in a population. Populations are initialized as previously described with genome length $L_{min}$, and each patch is given a target allele drawn from the $A$ possible alleles. We expand individual fitness as described in Equation 1 to include additional fitness benefit $\epsilon$ for each allele $a_{g,l}$ that matches this target:
+TODO: A possible alleles, any equally likely
+TODO: density dependence, so progression of genotypes that fix will vary by population
+TODO: allelic state at locus l should be 1 greater than at at locus l-1
+
+and each patch is given a target allele drawn from the $A$ possible alleles. We expand individual fitness as described in Equation 1 to include additional fitness benefit $\epsilon$ for each locus $l$ when the allelic state at that locus is one number higher than at the previous locus. Under this expanded model, the fitness of an individual with genotype $g$ is:
 
 $$
-W_{g} = z + \delta \sum_{l=1}^{L} 1_{A}(a_{g,l}) + \epsilon OtherLoci + \epsilon SelfLocus - a_{g,L+1} c
+W_{g} = z + \delta \sum_{l=1}^{L} I_{A}(a_{g,l}) + \epsilon \sum_{h=1}^{N} \sum_{l=2}^{L} I_{a_{h,l-1}} (a_{g,l}-1) + \epsilon \sum_{h=1}^{N} I_{a_{h,1}} (a_{g,1}) - a_{g,L+1} c
 $$
 
-Where $X(a_l)$ indicates whether allele $a_{l}$ matches the target ($1$) or not ($0$).
+Where $N$ is the number of individuals in the population at a given patch, $L$ is the length of genomes in that population, and $I_{x} (y)$ indicates whether the allelic state $y$ matches allelic state $x$ ($1$) or not ($0$).
 
-As with the population-level construction method, the presence of individuals over time expands a population's genome length. At the beginning of the simulation, an ordering is defined that specifies the sequence of revealed target alleles. 
 
-To allow population growth and niche construction to occur on different timescales, we also retain the distribution of genotypes in each population for $n$ cycles. Following [@laland1996evolutionary], these $n$ states can equally affect the allele to be revealed next or be affected more by earlier or later population states.
-
-* Can we handle weighting of the values over time with a single parameter? [@laland1996evolutionary] kind of does, but they use separate equations for the primacy, recency, and equal weight cases. Hill function?
+To allow population growth and niche construction to occur on different timescales, we also retain genotype abundances in each population for the last $T$ cycles. Following [@laland1996evolutionary], these $n$ states can equally affect the allele to be revealed next or be affected more by earlier or later population states.
 
 
 
@@ -116,6 +117,7 @@ To allow population growth and niche construction to occur on different timescal
 
 ## Source Code and Software Environment
 
-The simulation software and configurations for the experiments reported are available at [TODO](TODO). Simulations used Python 2.7.3, NumPy 1.9.1, and NetworkX 1.9.1. Data analyses were performed with R 3.1.2 [@rproject]. Model parameters and their values are listed in [Table X](https://github.com/briandconnelly/nicheconstruct/blob/master/paper/table_of_parameters.md).
+The simulation software and configurations for the experiments reported are available online [@coderef]. Simulations used Python 2.7.3, NumPy 1.9.1, and NetworkX 1.9.1 [@hagberg2008exploring]. Data analyses were performed with R 3.1.2 [@rproject]. Model parameters and their values are listed in [Table X](https://github.com/briandconnelly/nicheconstruct/blob/master/paper/table_of_parameters.md).
+
 
 # References
