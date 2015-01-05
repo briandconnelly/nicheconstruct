@@ -26,7 +26,7 @@ W_{g} = z + \delta \sum_{l=1}^{L} I_{A}(a_{g,l}) - a_{g,L+1} c
 $$
 
 
-where $z$ is a baseline fitness (the fitness of an individual with zeros at every locus), and $I_{A}$ indicates whether the allelic state $a_{g,l}$ is non-zero ($1$) or not ($0$). If there are no stress loci ($L=0$), the fitness of a producer and non-producer is $z-c$ and $z$, respectively.
+where $z$ is a baseline fitness (the fitness of a non-adapted individual with zeros at every locus), and $I_{A}$ indicates whether the allelic state $a_{g,l}$ is non-zero ($1$) or not ($0$). If there are no stress loci ($L=0$), the fitness of a producer and non-producer is $z-c$ and $z$, respectively.
 
 
 ## Overview of Basic Simulation Cycle
@@ -94,19 +94,36 @@ Alternately, change occurs locally at a patch when its population reaches cumula
 
 ### Genotype-Mediated Niche Construction
 
-Finally, we allow construction to be affected by the abundances of the genotypes present in a population. Populations are initialized as previously described with genome length $L_{min}$. 
+Finally, we allow construction to be affected by the genotypes present in a population. Populations are initialized as previously described with genome length $L_{min}$, where each locus contains either zero or an allele from the set $A$. Any non-zero allele carries fitness benefit $\delta$. There is no intrinsic difference between any two alleles in $A$. However, non-zero alleles in genotype $g$ carry an additional benefit $\epsilon$ if the allelic state at a given locus is one greater than at the preceeding alele, or $a_{g,l} = 1 + a_{g,l-1} (\bmod a_{max})$. This ordering to wraps around (e.g., when $A = \{1,\ldots,9\}$, it is beficial when a $1$ proceeds a $9$). Under this expanded model, the fitness of an individual with genotype $g$ is
 
-TODO: A possible alleles, any equally likely
+$$
+W_{g} = z + \delta \sum_{l=1}^{L} I_{A}(a_{g,l}) + \epsilon \sum_{h=1}^{N} I_{a_{h,1}} (a_{g,1}) + \epsilon \sum_{l=2}^{L} n(a_{g,l}) - a_{g,L+1} c
+$$
+
+**TODO: can we use $\sum_{h=1}^{N}$ like this? It shouldn't be a number $1..N$, but instead a genotype. We need a function like g(h)**
+
+where $z$ is the baseline fitness, $L$ is the number of fitness-affecting loci, $N$ is the population size, and $c$ is the cost of the cooperative allele. $I_{x} (y)$ indicates whether the allelic state $y$ matches allelic state $x$ ($1$) or not ($0$). $n(a_{g,l})$ is the number of individuals in the population with allelic state at the previous locus equal to one less than that at the focal locus $a_{g,l}$, or
+
+$$
+n(a_{g,l}) = \sum_{h=1}^{N} I_{a_{g,l}} (1 + a_{h,l-1} (\bmod a_{max}))
+$$
+
+
+
+TODO: $w$ and TIME
+
+$$
+W_{g} = z + \delta \sum_{l=1}^{L} I_{A}(a_{g,l}) + \epsilon \sum_{h=1}^{N} I_{a_{h,1}} (a_{g,1}) + \epsilon \sum_{l=2}^{L} \sum_{i=1}^{T} w n_{T-i}(a_{g,l} - 1) - a_{g,L+1} c
+$$
+
 TODO: density dependence, so progression of genotypes that fix will vary by population
-TODO: allelic state at locus l should be 1 greater than at at locus l-1
 
-and each patch is given a target allele drawn from the $A$ possible alleles. We expand individual fitness as described in Equation 1 to include additional fitness benefit $\epsilon$ for each locus $l$ when the allelic state at that locus is one number higher than at the previous locus. Under this expanded model, the fitness of an individual with genotype $g$ is:
 
 $$
-W_{g} = z + \delta \sum_{l=1}^{L} I_{A}(a_{g,l}) + \epsilon \sum_{h=1}^{N} \sum_{l=2}^{L} I_{a_{h,l-1}} (a_{g,l}-1) + \epsilon \sum_{h=1}^{N} I_{a_{h,1}} (a_{g,1}) - a_{g,L+1} c
+\Phi^{i} = 
 $$
 
-Where $N$ is the number of individuals in the population at a given patch, $L$ is the length of genomes in that population, and $I_{x} (y)$ indicates whether the allelic state $y$ matches allelic state $x$ ($1$) or not ($0$).
+
 
 
 To allow population growth and niche construction to occur on different timescales, we also retain genotype abundances in each population for the last $T$ cycles. Following [@laland1996evolutionary], these $n$ states can equally affect the allele to be revealed next or be affected more by earlier or later population states.
