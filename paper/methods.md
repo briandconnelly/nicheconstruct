@@ -22,7 +22,7 @@ We develop a computational model to observe how the evolution of public goods pr
 A mutation from $0$ to any non-zero allele from $A$ at the $i$<sup>th</sup> stress locus will improve individual fitness by $\delta$ regardless of the allelic states of other loci (i.e., there is no epistasis). For simplicity, all non-zero alleles carry the same fitness benefit. Public good production is costly, reducing individual fitness by $c$. Thus, if the allelic state of the $l$<sup>th</sup> locus in genotype $g$ is denoted $a_{g,l}$ with $a_{g,l} \in (\{0\} \cup A)$, then the fitness of an individual with genotype $g$ is:
 
 $$
-W_{g} = z + \delta \sum_{l=1}^{L} I_{A}(a_{g,l}) - a_{g,L+1} c
+W_{g} = z + \delta \sum_{l=1}^{L} I_{A}(a_{g,l}) - a_{g,L_{max}+1} c
 $$
 
 
@@ -97,7 +97,7 @@ Alternately, change occurs locally at a patch when its population reaches cumula
 Finally, we allow construction to be affected by the genotypes present in a population. Populations are initialized as previously described with genome length $L_{min}$, where each locus contains either zero or an allele from the set $A$. Any non-zero allele carries fitness benefit $\delta$. There is no intrinsic difference between any two alleles in $A$. However, non-zero alleles in genotype $g$ carry an additional benefit $\epsilon$ if the allelic state at a given locus is one greater than at the preceeding alele, or $a_{g,l} = 1 + a_{g,l-1} (\bmod a_{max})$. This ordering to wraps around (e.g., when $A = \{1,\ldots,9\}$, it is beficial when a $1$ proceeds a $9$). Under this expanded model, the fitness of an individual with genotype $g$ is:
 
 $$
-W_{g} = z + \delta \sum_{l=1}^{L} I_{A}(a_{g,l}) + \epsilon \sum_{h=1}^{N} I_{a_{h,1}} (a_{g,1}) + \epsilon \sum_{l=2}^{L} n(a_{g,l}) - a_{g,L+1} c
+W_{g} = z + \delta \sum_{l=1}^{L} I_{A}(a_{g,l}) + \epsilon \sum_{h=1}^{N} I_{a_{h,1}} (a_{g,1}) + \epsilon \sum_{l=2}^{L} n(a_{g,l}) - a_{g,L_{max}+1} c
 $$
 
 **TODO: can we use $\sum_{h=1}^{N}$ like this? It shouldn't be a number $1..N$, but instead a genotype. We need a function like g(h)**
@@ -116,7 +116,7 @@ Because a major component of fitness is this ordering of allelic states, the ada
 By de-coupling the timescales at which change occurs in populations and patches, we control how niche constructive behaviors affect the evolutionary process. If fitness is affected by the genotypic abundances over the last $T$ timesteps, the fitness of an individual with genotype $g$ becomes:
 
 $$
-W_{g} = z + \delta \sum_{l=1}^{L} I_{A}(a_{g,l}) + \epsilon \sum_{h=1}^{N} I_{a_{h,1}} (a_{g,1}) + \epsilon \sum_{l=2}^{L} \sum_{i=1}^{T} w n_{T-i}(a_{g,l} - 1) - a_{g,L+1} c
+W_{g} = z + \delta \sum_{l=1}^{L} I_{A}(a_{g,l}) + \epsilon \sum_{h=1}^{N} I_{a_{h,1}} (a_{g,1}) + \epsilon \sum_{l=2}^{L} \sum_{i=1}^{T} w n_{T-i}(a_{g,l} - 1) - a_{g,L_{max}+1} c
 $$
 
 where $w$ weights the effect of the population at a given time point.

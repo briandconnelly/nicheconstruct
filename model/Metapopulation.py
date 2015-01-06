@@ -191,6 +191,13 @@ class Metapopulation(object):
             self.topology = topology.regular(size=size, degree=degree,
                                              seed=seed)
 
+
+        # How frequently should the metapopulation be mixed?
+        self.mix_frequency = self.config.getint(section='Metapopulation',
+                                                option='mix_frequency')
+        assert self.mix_frequency >= 0
+
+
         # Export the structure of the topology, allowing the topology to be
         # re-created. This is especially useful for randomly-generated
         # topologies.
@@ -223,6 +230,24 @@ class Metapopulation(object):
 
         for node, data in self.topology.nodes_iter(data=True):
             data['population'].dilute()
+
+
+    def mix(self):
+        """Mix the population
+
+        Mix the population. The abundances at all populations are combined and
+        re-distributed.
+        """
+
+        genome_length_max = self.config.getint(section='Population',
+                                               option='genome_length_max')
+        abundances = np.zeros(2**(genome_length_max+1), dtype=np.int)
+
+        for n, d in self.topology.nodes_iter(data=True):
+            abundances += d['population'].abundances
+
+        for n, d in self.topology.nodes_iter(data=True):
+            d['population'].abundances = np.random.binomial(abundances, 1.0/len(self.topology))
 
 
     def grow(self):
@@ -297,6 +322,12 @@ class Metapopulation(object):
         # Migrate among populations
         self.migrate()
         self.census()
+
+        # Mix the populations
+        time = self.simulation.cycle
+        if self.mix_frequency > 0 and time > 0 and \
+                (time % self.mix_frequency == 0):
+            self.mix()
 
         # Handle environmental change
         self.environment_changed = False
