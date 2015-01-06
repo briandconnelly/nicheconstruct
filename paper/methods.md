@@ -42,7 +42,7 @@ $$
 S(p) = S_{min} + p (S_{max} - S_{min})
 $$
 
-Therefore, a population composed entirely of non-producers reaches size $S_{min}$, while one composed entirely of producers reaches size $S_{max}$ (with $S_{max} \ge S_{min}$). The function $S(p)$ gauges the benefit of public good production, as population size increases linearly with the proportion of producers. During growth, competition occurs among the $G$ genotypes. Consider an arbitrary genotype $g$. Let $n_g$ be the number of individuals with genotype $g$, and let $W_{g}$ be the fitness of genotype $g$ (see equation [1]). The composition of genotypes after population growth is multinomial with parameters $S(p)$ and $\{\pi_1, \pi_2, \ldots, \pi_{G}\}$, where
+Therefore, a population composed entirely of non-producers reaches size $S_{min}$, while one composed entirely of producers reaches size $S_{max}$ (with $S_{max} \ge S_{min}$). The function $S(p)$ gauges the benefit of public good production, as population size increases linearly with the proportion of producers. During growth, competition occurs among the $G$ genotypes. Consider an arbitrary genotype $g$. Let $n_g$ be the number of individuals with genotype $g$, and let $W_{g}$ be the fitness of genotype $g$ (see equation [1]). The composition of genotypes after population growth is multinomial with parameters $S(p)$ and $\{\pi_1, \pi_2, \ldots, \pi_{G}\}$, where:
 
 $$
 \pi_g = \frac{n_g W_g}{\sum_{i=1}^{G} n_i W_i}
@@ -94,7 +94,7 @@ Alternately, change occurs locally at a patch when its population reaches cumula
 
 ### Genotype-Mediated Niche Construction
 
-Finally, we allow construction to be affected by the genotypes present in a population. Populations are initialized as previously described with genome length $L_{min}$, where each locus contains either zero or an allele from the set $A$. Any non-zero allele carries fitness benefit $\delta$. There is no intrinsic difference between any two alleles in $A$. However, non-zero alleles in genotype $g$ carry an additional benefit $\epsilon$ if the allelic state at a given locus is one greater than at the preceeding alele, or $a_{g,l} = 1 + a_{g,l-1} (\bmod a_{max})$. This ordering to wraps around (e.g., when $A = \{1,\ldots,9\}$, it is beficial when a $1$ proceeds a $9$). Under this expanded model, the fitness of an individual with genotype $g$ is
+Finally, we allow construction to be affected by the genotypes present in a population. Populations are initialized as previously described with genome length $L_{min}$, where each locus contains either zero or an allele from the set $A$. Any non-zero allele carries fitness benefit $\delta$. There is no intrinsic difference between any two alleles in $A$. However, non-zero alleles in genotype $g$ carry an additional benefit $\epsilon$ if the allelic state at a given locus is one greater than at the preceeding alele, or $a_{g,l} = 1 + a_{g,l-1} (\bmod a_{max})$. This ordering to wraps around (e.g., when $A = \{1,\ldots,9\}$, it is beficial when a $1$ proceeds a $9$). Under this expanded model, the fitness of an individual with genotype $g$ is:
 
 $$
 W_{g} = z + \delta \sum_{l=1}^{L} I_{A}(a_{g,l}) + \epsilon \sum_{h=1}^{N} I_{a_{h,1}} (a_{g,1}) + \epsilon \sum_{l=2}^{L} n(a_{g,l}) - a_{g,L+1} c
@@ -102,27 +102,26 @@ $$
 
 **TODO: can we use $\sum_{h=1}^{N}$ like this? It shouldn't be a number $1..N$, but instead a genotype. We need a function like g(h)**
 
-where $z$ is the baseline fitness, $L$ is the number of fitness-affecting loci, $N$ is the population size, and $c$ is the cost of the cooperative allele. $I_{x} (y)$ indicates whether the allelic state $y$ matches allelic state $x$ ($1$) or not ($0$). $n(a_{g,l})$ is the number of individuals in the population with allelic state at the previous locus equal to one less than that at the focal locus $a_{g,l}$, or
+where $z$ is the baseline fitness, $L$ is the number of fitness-affecting loci, $N$ is the population size, and $c$ is the cost of the cooperative allele. $I_{x} (y)$ indicates whether the allelic state $y$ matches allelic state $x$ ($1$) or not ($0$). $n(a_{g,l})$ is the number of individuals in the population with allelic state at the previous locus equal to one less than that at the focal locus $a_{g,l}$, or:
 
 $$
 n(a_{g,l}) = \sum_{h=1}^{N} I_{a_{g,l}} (1 + a_{h,l-1} (\bmod a_{max}))
 $$
 
+Because a major component of fitness is this ordering of allelic states, the adaptations gained early on have a significant impact on selection as populations adapt to and construct their environment. Because mutations are random, the trajectories that evolution follows at each patch will differ.
 
 
-TODO: $w$ and TIME
+#### Evolutionary Timescales of Populations and Patches
+
+By de-coupling the timescales at which change occurs in populations and patches, we control how niche constructive behaviors affect the evolutionary process. If fitness is affected by the genotypic abundances over the last $T$ timesteps, the fitness of an individual with genotype $g$ becomes:
 
 $$
 W_{g} = z + \delta \sum_{l=1}^{L} I_{A}(a_{g,l}) + \epsilon \sum_{h=1}^{N} I_{a_{h,1}} (a_{g,1}) + \epsilon \sum_{l=2}^{L} \sum_{i=1}^{T} w n_{T-i}(a_{g,l} - 1) - a_{g,L+1} c
 $$
 
-TODO: density dependence, so progression of genotypes that fix will vary by population
+where $w$ weights the effect of the population at a given time point.
 
-
-$$
-\Phi^{i} = 
-$$
-
+**TODO: Show $w$ for primacy, recency, and uniform**
 
 
 
