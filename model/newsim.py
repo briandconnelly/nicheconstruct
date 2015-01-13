@@ -6,6 +6,7 @@ from configparser import SafeConfigParser
 from Metapopulation import *
 from misc import *
 from Population import *
+from topology import build_topology
 
 config = SafeConfigParser()
 config.read('run.cfg')
@@ -27,3 +28,6 @@ pop12 = get_population(metapop, 12)
 print(pop12.shape)
 print(num_cooperators(pop12))
 print(pct_cooperators(pop12))
+
+top = build_topology(config)
+print(top)
