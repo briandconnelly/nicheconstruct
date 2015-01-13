@@ -2,32 +2,130 @@
 # -*- coding: utf-8 -*-
 
 from configparser import SafeConfigParser
+import argparse
+import datetime
+import os
+from warnings import warn
 
 from Metapopulation import *
 from misc import *
 from Population import *
 from Topology import *
 
-config = SafeConfigParser()
-config.read('run.cfg')
+__version__ = '0.2.0'
 
-metapop = create_metapopulation(config)
-topology = build_topology(config)
 
-print(topology)
-print(metapop.shape)
-print(num_cooperators(metapop))
-print(pct_cooperators(metapop))
+def parse_arguments():
+    """Parse command line arguments"""
 
-print("-"*79)
-metapop = bottleneck(metapop, 0.01)
-print(metapop.shape)
-print(num_cooperators(metapop))
-print(pct_cooperators(metapop))
+    parser = argparse.ArgumentParser(prog='ncsimulate.py',
+                                     description='Run a simluation')
+    parser.add_argument('--config', '-c', metavar='FILE', help='Configuration '\
+                        'file to use (default: run.cfg)', default='run.cfg',
+                        dest='configfile', type=argparse.FileType('r'))
+    parser.add_argument('--data_dir', '-d', metavar='DIR',
+                        help='Directory to store data (default: data)')
+    parser.add_argument('--param', '-p', nargs=3, metavar=('SECTION', 'NAME',
+                                                           'VALUE'),
+                        action='append', help='Set a parameter value')
+    parser.add_argument('--seed', '-s', metavar='S', help='Set the '\
+                        'pseudorandom number generator seed', type=int)
+    parser.add_argument('--quiet', '-q', action='store_true', default=False,
+                        help='Suppress output messages')
+    parser.add_argument('--version', action='version', version=__version__)
 
-print("-"*79)
-pop12 = get_population(metapop, 12)
-print(pop12.shape)
-print(num_cooperators(pop12))
-print(pct_cooperators(pop12))
+    return parser.parse_args()
 
+
+def main():
+    """Run a simulation"""
+
+    # Get the command line arguments
+    args = parse_arguments()
+
+    # Read the configuration file
+    config = SafeConfigParser()
+    config.readfp(args.configfile)
+    args.configfile.close()
+
+    # Add any parameters specified on the command line to the configuration
+    if args.param:
+        for param in args.param:
+            config[param[0]][param[1]] = param[2]
+
+    # If the random number generator seed specified, add it to the config,
+    # overwriting any previous value. Otherwise, if it wasn't in the
+    # supplied configuration file, create one.
+    if args.seed:
+        config['Simulation']['seed'] = str(args.seed)
+
+    # If the data directory is specified, add it to the config, overwriting any
+    # previous value
+    if args.data_dir:
+        config['Simulation']['data_dir'] = args.data_dir
+    # If a directory wasn't listed in the config, use the default ('data')
+    if not config.has_option(section='Simulation', option='data_dir'):
+        config['Simulation']['data_dir'] = 'data'
+
+
+    # If the data_dir already exists, append the current date and time to
+    # data_dir, and use that. Afterwards, create the directory.
+    if os.path.exists(config['Simulation']['data_dir']):
+        newname = '{o}-{d}'.format(o=config['Simulation']['data_dir'],
+                                   d=datetime.datetime.now().strftime("%Y%m%d%H%M%S"))
+        msg = '{d} already exists. Using {new} instead.'.format(d=config['Simulation']['data_dir'],
+                                                                new=newname)
+        warn(msg)
+        config['Simulation']['data_dir'] = newname
+
+    os.mkdir(config['Simulation']['data_dir'])
+
+    # TODO: open up the data files for logging and write headers
+
+    # Create the migration topology. This is a graph where each population is a
+    # node, and the edges between nodes represent potential paths for migration
+    topology = build_topology(config=config)
+
+    if config['Simulation'].getboolean('export_topology'):
+        fn = os.path.join(config['Simulation']['data_dir'], 'topology.gml')
+        export_topology(topology=topology, filename=fn)
+
+
+    # Create the metapopulation and apply the initial stress bottleneck
+    metapop = create_metapopulation(config=config, size=len(topology))
+    metapop = bottleneck(metapop,
+                         config['Population']['mutation_rate_tolerance'])
+
+    for cycle in range(int(config['Simulation']['num_cycles'])):
+        if not args.quiet:
+            print("Cycle",cycle)
+
+        # TODO: write data
+        # TODO: cycle the population
+        # TODO: handle stop_on_empty
+
+
+    # TODO: write final data
+    # TODO: close up
+
+#-------------------------------------------------------------------------
+
+    print(topology)
+    print(metapop.shape)
+    print(num_cooperators(metapop))
+    print(pct_cooperators(metapop))
+
+    print("-"*79)
+    metapop = bottleneck(metapop, 0.01)
+    print(metapop.shape)
+    print(num_cooperators(metapop))
+    print(pct_cooperators(metapop))
+
+    print("-"*79)
+    pop12 = get_population(metapop, 12)
+    print(pop12.shape)
+    print(num_cooperators(pop12))
+    print(pct_cooperators(pop12))
+
+if __name__ == "__main__":
+    main()

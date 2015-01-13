@@ -3,7 +3,7 @@
 import numpy as np
 import pandas as pd
 
-def create_metapopulation(config):
+def create_metapopulation(config, size):
     capacity_min = int(config['Population']['capacity_min'])
     capacity_max = int(config['Population']['capacity_max'])
     assert 0 <= capacity_min <= capacity_max
@@ -18,8 +18,8 @@ def create_metapopulation(config):
     initial_popsize = capacity_min + \
                   (initial_producer_proportion * (capacity_max - capacity_min))
 
-    # TODO
-    num_populations = 500
+    assert size > 0
+    num_populations = size
 
     M = pd.DataFrame({'Population': np.repeat(np.arange(num_populations),
                                               initial_popsize)
