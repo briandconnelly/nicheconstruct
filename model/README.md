@@ -2,9 +2,10 @@
 
 ## Dependiencies
 
-* Python 2.7
-* [NumPy](http://www.numpy.org) 1.8.0 or later
+* Python 3
 * [NetworkX](https://networkx.github.io/)
+* [NumPy](http://www.numpy.org) 1.8.0 or later
+* [Pandas](http://pandas.pydata.org)
 
 
 ## Running the Model

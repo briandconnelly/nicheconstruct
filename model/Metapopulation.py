@@ -21,9 +21,14 @@ def create_metapopulation(config):
     # TODO
     num_populations = 500
 
-    # TODO: build the data frame
     M = pd.DataFrame({'Population': np.repeat(np.arange(num_populations),
                                               initial_popsize)
                      })
 
+    for locus in ["S{0:02d}".format(x) for x in range(1,genome_length_max+1)]:
+        M[locus] = np.zeros(M.shape[0])
+
+    M['Coop'] = np.random.binomial(1, initial_producer_proportion, M.shape[0])==1
+
     return M
+
