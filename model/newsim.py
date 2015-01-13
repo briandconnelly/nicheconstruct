@@ -6,17 +6,19 @@ from configparser import SafeConfigParser
 from Metapopulation import *
 from misc import *
 from Population import *
-from topology import build_topology
+from Topology import *
 
 config = SafeConfigParser()
 config.read('run.cfg')
 
 metapop = create_metapopulation(config)
+topology = build_topology(config)
+
+print(topology)
 print(metapop.shape)
 print(num_cooperators(metapop))
 print(pct_cooperators(metapop))
 
-#metapop = metapop.drop(metapop.index[np.where(np.random.binomial(1,0.1,metapop.shape[0])==0)]) 
 print("-"*79)
 metapop = bottleneck(metapop, 0.01)
 print(metapop.shape)
@@ -29,5 +31,3 @@ print(pop12.shape)
 print(num_cooperators(pop12))
 print(pct_cooperators(pop12))
 
-top = build_topology(config)
-print(top)
