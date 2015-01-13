@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 
 def create_metapopulation(config, size):
+    """Create a metapopulation"""
     capacity_min = int(config['Population']['capacity_min'])
     capacity_max = int(config['Population']['capacity_max'])
     assert 0 <= capacity_min <= capacity_max
@@ -25,10 +26,11 @@ def create_metapopulation(config, size):
                                               initial_popsize)
                      })
 
-    for locus in ["S{0:02d}".format(x) for x in range(1,genome_length_max+1)]:
+    for locus in ["S{0:02d}".format(x) for x in range(1, genome_length_max+1)]:
         M[locus] = np.zeros(M.shape[0])
 
-    M['Coop'] = np.random.binomial(1, initial_producer_proportion, M.shape[0])==1
+    M['Coop'] = np.random.binomial(1, initial_producer_proportion,
+                                   M.shape[0]) == 1
 
     return M
 

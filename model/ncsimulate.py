@@ -1,21 +1,19 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-"""Run a niche construction / niche hiking simulation"""
-
+from configparser import SafeConfigParser
 import argparse
 import datetime
 import os
 from warnings import warn
 
-try:
-    from ConfigParser import SafeConfigParser
-except ImportError:
-    from configparser import SafeConfigParser
+from Metapopulation import *
+from metrics import *
+from misc import *
+from Population import *
+from Topology import *
 
-from Simulation import Simulation
-
-__version__ = '0.2.1'
+__version__ = '0.2.0'
 
 
 def parse_arguments():
@@ -54,42 +52,81 @@ def main():
     # Add any parameters specified on the command line to the configuration
     if args.param:
         for param in args.param:
-            config.set(section=param[0], option=param[1], value=param[2])
+            config[param[0]][param[1]] = param[2]
 
     # If the random number generator seed specified, add it to the config,
     # overwriting any previous value. Otherwise, if it wasn't in the
     # supplied configuration file, create one.
     if args.seed:
-        config.set(section='Simulation', option='seed', value=str(args.seed))
+        config['Simulation']['seed'] = str(args.seed)
 
     # If the data directory is specified, add it to the config, overwriting any
     # previous value
     if args.data_dir:
-        config.set(section='Simulation', option='data_dir',
-                   value=args.data_dir)
-
+        config['Simulation']['data_dir'] = args.data_dir
     # If a directory wasn't listed in the config, use the default ('data')
     if not config.has_option(section='Simulation', option='data_dir'):
-        config.set(section='Simulation', option='data_dir', value='data')
+        config['Simulation']['data_dir'] = 'data'
 
-    data_dir = config.get(section='Simulation', option='data_dir')
 
     # If the data_dir already exists, append the current date and time to
     # data_dir, and use that. Afterwards, create the directory.
-    if os.path.exists(data_dir):
-        newname = '{o}-{d}'.format(o=data_dir,
+    if os.path.exists(config['Simulation']['data_dir']):
+        newname = '{o}-{d}'.format(o=config['Simulation']['data_dir'],
                                    d=datetime.datetime.now().strftime("%Y%m%d%H%M%S"))
-        msg = '{d} already exists. Using {new} instead.'.format(d=data_dir,
+        msg = '{d} already exists. Using {new} instead.'.format(d=config['Simulation']['data_dir'],
                                                                 new=newname)
         warn(msg)
-        config.set(section='Simulation', option='data_dir', value=newname)
+        config['Simulation']['data_dir'] = newname
 
-    # Create the simulation object and iterate through the timesteps
-    for step in Simulation(config=config):
+    os.mkdir(config['Simulation']['data_dir'])
+
+    # TODO: open up the data files for logging and write headers
+
+    # Create the migration topology. This is a graph where each population is a
+    # node, and the edges between nodes represent potential paths for migration
+    topology = build_topology(config=config)
+
+    if config['Simulation'].getboolean('export_topology'):
+        fn = os.path.join(config['Simulation']['data_dir'], 'topology.gml')
+        export_topology(topology=topology, filename=fn)
+
+
+    # Create the metapopulation and apply the initial stress bottleneck
+    metapop = create_metapopulation(config=config, size=len(topology))
+    metapop = bottleneck(P=metapop,
+                         survival_pct=float(config['Population']['mutation_rate_tolerance']))
+
+    for cycle in range(int(config['Simulation']['num_cycles'])):
         if not args.quiet:
-            print(step.statusbar())
+            print("Cycle",cycle)
 
+        env_changed = False
+
+        # TODO: write data
+        # TODO: cycle the population
+        # TODO:   - grow
+        # TODO:   - mutate
+        # TODO:   - migrate
+        # TODO:   - census??
+        # TODO:   - mix
+        # TODO:   environmental change (metapop or pop level)
+
+        # Dilution
+        if not env_changed:
+            metapop = bottleneck(P=metapop,
+                                 survival_pct=float(config['Population']['dilution_factor']))
+
+        if config['Simulation'].getboolean('stop_on_empty') and \
+                is_empty(metapop):
+            print('Metapopulation is empty')
+            break
+
+
+    # TODO: write final data
+    # TODO: close up
+
+#-------------------------------------------------------------------------
 
 if __name__ == "__main__":
     main()
-

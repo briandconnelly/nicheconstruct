@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 
-def get_population(M, pid):
+"""Functions for working with individual populations"""
+
+
+def get_population(M, popid):
     """Get data corresponding to the given population (ID)"""
-    return M[M['Population']==pid]
+    return M[M['Population'] == popid]
 
 
 # Could this instead take a metapopulation and an optional population ID?
 def population_allele_frequencies(P):
     """TODO"""
     pass
+
