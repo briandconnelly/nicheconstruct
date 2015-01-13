@@ -119,7 +119,6 @@ def main():
 
         if config['Simulation'].getboolean('stop_on_empty') and \
                 is_empty(metapop):
-            print('Metapopulation is empty')
             break
 
 
