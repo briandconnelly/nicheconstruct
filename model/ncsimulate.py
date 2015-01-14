@@ -81,7 +81,10 @@ def main():
 
     os.mkdir(config['Simulation']['data_dir'])
 
+    # TODO: write the config file
+
     # TODO: open up the data files for logging and write headers
+
 
     # Create the migration topology. This is a graph where each population is a
     # node, and the edges between nodes represent potential paths for migration
@@ -98,6 +101,7 @@ def main():
                          survival_pct=float(config['Population']['mutation_rate_tolerance']))
 
     mix_frequency = int(config['Metapopulation']['mix_frequency'])
+    # TODO: set up per-population L values
 
     for cycle in range(int(config['Simulation']['num_cycles'])):
         if not args.quiet:
@@ -111,9 +115,9 @@ def main():
         # TODO:   - mutate
         # TODO:   - migrate
         # TODO:   - census??
-        # TODO:   - mix
 
-        if mix_frequency > 0 and cycle % mix_frequency == 0:
+        # Mix the metapopulation (if configured)
+        if mix_frequency > 0 and cycle > 0 and (cycle % mix_frequency == 0):
             metapop = mix(M=metapop, topology=topology)
 
         # TODO:   environmental change (metapop or pop level)

@@ -16,7 +16,3 @@ def pct_cooperators(P):
     """Get the proportion of cooperators in the population"""
     return P['Coop'].sum()/P.shape[0]
 
-def size(P):
-    """Get the size of the population"""
-    return P.shape[0]
-
