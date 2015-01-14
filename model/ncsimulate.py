@@ -54,11 +54,18 @@ def main():
         for param in args.param:
             config[param[0]][param[1]] = param[2]
 
+
     # If the random number generator seed specified, add it to the config,
     # overwriting any previous value. Otherwise, if it wasn't in the
     # supplied configuration file, create one.
     if args.seed:
         config['Simulation']['seed'] = str(args.seed)
+    elif not config.has_option(section='Simulation', option='seed'):
+        seed = np.random.randint(low=0, high=np.iinfo(np.uint32).max)           
+        config['Simulation']['seed'] = str(seed)
+
+    np.random.seed(seed=int(config['Simulation']['seed']))
+
 
     # If the data directory is specified, add it to the config, overwriting any
     # previous value
@@ -81,7 +88,11 @@ def main():
 
     os.mkdir(config['Simulation']['data_dir'])
 
-    # TODO: write the config file
+
+    # Write the configuration file
+    configfile = os.path.join(config['Simulation']['data_dir'],
+                              'configuration.cfg')
+    write_configuration(config=config, filename=configfile)
 
     # TODO: open up the data files for logging and write headers
 
