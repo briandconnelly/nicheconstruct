@@ -93,9 +93,11 @@ def main():
 
 
     # Create the metapopulation and apply the initial stress bottleneck
-    metapop = create_metapopulation(config=config, size=len(topology))
+    metapop = create_metapopulation(config=config, topology=topology)
     metapop = bottleneck(P=metapop,
                          survival_pct=float(config['Population']['mutation_rate_tolerance']))
+
+    mix_frequency = int(config['Metapopulation']['mix_frequency'])
 
     for cycle in range(int(config['Simulation']['num_cycles'])):
         if not args.quiet:
@@ -110,6 +112,10 @@ def main():
         # TODO:   - migrate
         # TODO:   - census??
         # TODO:   - mix
+
+        if mix_frequency > 0 and cycle % mix_frequency == 0:
+            metapop = mix(M=metapop, topology=topology)
+
         # TODO:   environmental change (metapop or pop level)
 
         # Dilution
