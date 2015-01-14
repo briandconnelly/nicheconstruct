@@ -124,11 +124,13 @@ def main():
 
         # TODO: cycle the population
         # TODO:   - grow
-        # TODO:   - mutate
 
+        # Mutate individuals in the population
         metapop = mutate(M=metapop,
                          mu_stress=float(config['Population']['mutation_rate_stress']),
-                         mu_cooperation=float(config['Population']['mutation_rate_cooperation']))
+                         mu_cooperation=float(config['Population']['mutation_rate_cooperation']),
+                         Lmax=int(config['Population']['genome_length_max']),
+                         stress_alleles=float(config['Population']['stress_alleles']))
 
         # Migrate individuals among subpopulations
         metapop = migrate(M=metapop, topology=topology,

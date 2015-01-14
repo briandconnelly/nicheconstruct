@@ -8,6 +8,7 @@ from numpy.random import binomial
 import pandas as pd
 
 from Topology import random_neighbor
+from misc import stress_loci
 
 
 def create_metapopulation(config, topology):
@@ -30,8 +31,8 @@ def create_metapopulation(config, topology):
                   (initial_producer_proportion * (capacity_max - capacity_min))
 
     cols = {'Population': np.repeat(np.arange(size), initial_popsize),
-            'Coop': np.random.binomial(1, initial_producer_proportion,
-                                       size*initial_popsize) == 1}
+            'Coop': binomial(1, initial_producer_proportion,
+                             size*initial_popsize) == 1}
     cols.update({"S{0:02d}".format(i): np.zeros(size*initial_popsize, dtype=np.int) for i in range(1, genome_length_max + 1)})
 
     return pd.DataFrame(cols)
@@ -74,13 +75,19 @@ def grow(M, config):
 
 
 # Separate into two functions, one for stress and one for coop? Makes sense since bit flip on coop is easier.
-def mutate(M, mu_stress, mu_cooperation):
+def mutate(M, mu_stress, mu_cooperation, Lmax, stress_alleles):
     assert 0 <= mu_stress <= 1
     assert 0 <= mu_cooperation <= 1
+    assert Lmax > 0
+    assert stress_alleles >= 0
 
     Mcopy = M.copy(deep=True)
 
-    # Social mutations - TODO go column by column
+    # Mutations at stress loci
+    # Alleles to mutate are chosen from a binomial distrubution, and these
+    # alleles are modified by adding a random amount
+    s = stress_loci(Lmax)
+    Mcopy[s] = (Mcopy[s] + (binomial(n=1, p=mu_stress, size=Mcopy[s].shape) * np.random.random_integers(1,2*stress_alleles, Mcopy[s].shape))) % stress_alleles
 
     # Cooperation mutations - flip the cooperation bit 0->1 or 1->0
     Mcopy['Coop'] = bitwise_xor(Mcopy['Coop'], binomial(n=1, p=mu_cooperation,
