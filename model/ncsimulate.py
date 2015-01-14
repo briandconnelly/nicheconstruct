@@ -118,18 +118,21 @@ def main():
         if not args.quiet:
             print("Cycle",cycle)
 
+        # TODO: write data
+
         env_changed = False
 
-        # TODO: write data
         # TODO: cycle the population
         # TODO:   - grow
         # TODO:   - mutate
-        # TODO:   - migrate
 
+        metapop = mutate(M=metapop,
+                         mu_stress=float(config['Population']['mutation_rate_stress']),
+                         mu_cooperation=float(config['Population']['mutation_rate_cooperation']))
+
+        # Migrate individuals among subpopulations
         metapop = migrate(M=metapop, topology=topology,
                           rate=float(config['Metapopulation']['migration_rate']))
-
-        # TODO:   - census??
 
         # Mix the metapopulation (if configured)
         if mix_frequency > 0 and cycle > 0 and (cycle % mix_frequency == 0):

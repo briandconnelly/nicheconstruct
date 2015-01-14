@@ -133,7 +133,7 @@ To allow population growth and niche construction to occur on different timescal
 
 ## Source Code and Software Environment
 
-The simulation software and configurations for the experiments reported are available online [@coderef]. Simulations used Python 2.7.3, NumPy 1.9.1, and NetworkX 1.9.1 [@hagberg2008exploring]. Data analyses were performed with R 3.1.2 [@rproject]. Model parameters and their values are listed in [Table X](https://github.com/briandconnelly/nicheconstruct/blob/master/paper/table_of_parameters.md).
+The simulation software and configurations for the experiments reported are available online [@coderef]. Simulations used Python 2.7.3, NumPy 1.9.1, Pandas 0.15.2 [@mckinney2010data], NetworkX 1.9.1 [@hagberg2008exploring]. Data analyses were performed with R 3.1.2 [@rproject]. Model parameters and their values are listed in [Table X](https://github.com/briandconnelly/nicheconstruct/blob/master/paper/table_of_parameters.md).
 
 
 # References
