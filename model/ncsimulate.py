@@ -108,7 +108,7 @@ def main():
 
     # Create the metapopulation and apply the initial stress bottleneck
     metapop = create_metapopulation(config=config, topology=topology)
-    metapop = bottleneck(P=metapop,
+    metapop = bottleneck(population=metapop,
                          survival_pct=float(config['Population']['mutation_rate_tolerance']))
 
     mix_frequency = int(config['Metapopulation']['mix_frequency'])
@@ -135,11 +135,11 @@ def main():
 
         # Dilution
         if not env_changed:
-            metapop = bottleneck(P=metapop,
+            metapop = bottleneck(population=metapop,
                                  survival_pct=float(config['Population']['dilution_factor']))
 
         if config['Simulation'].getboolean('stop_on_empty') and \
-                is_empty(metapop):
+                is_empty(population=metapop):
             break
 
 
