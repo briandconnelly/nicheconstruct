@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from numpy import where
+from numpy.random import binomial
 import pandas as pd
+
+from Topology import random_neighbor
 
 
 def create_metapopulation(config, topology):
@@ -39,8 +43,24 @@ def mix(M, topology):
     """
 
     Mcopy = M.copy(deep=True)
-    Mcopy['Population'] = np.random.random_integers(low=0,
-                                                    high=len(topology)-1,
-                                                    size=Mcopy.shape[0])
+    Mcopy.Population = np.random.random_integers(low=0, high=len(topology)-1,
+                                                 size=Mcopy.shape[0])
+    return Mcopy
+
+
+def migrate(M, topology, rate):
+    """Migrate individuals among subpopulations"""
+    assert 0 <= rate <= 1
+
+    Mcopy = M.copy(deep=True)
+
+    emigrants_ix = Mcopy.index[where(binomial(n=1, p=rate,
+                                              size=Mcopy.index.shape[0]) == 1)]
+
+    if emigrants_ix.shape[0] > 0:
+        targets = {p: random_neighbor(p, topology) for p in M.Population.unique()}
+        get_target = np.vectorize(lambda t: targets[t])
+        Mcopy.loc[emigrants_ix, 'Population'] = get_target(Mcopy.loc[emigrants_ix, 'Population'].values)
+
     return Mcopy
 

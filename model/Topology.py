@@ -5,6 +5,7 @@
 import os
 
 import networkx as nx
+import numpy as np
 
 
 def build_topology(config):
@@ -151,15 +152,20 @@ def nodes_iter(topology):
     return topology.nodes_iter()
 
 
-def neighbors_iter(topology, n):
+def neighbors_iter(node, topology):
     """Get an iterator for all of a node's neighbors"""
-    return topology[n]
+    return topology[node]
 
 
-def neighbors(topology, n):
+def neighbors(node, topology):
     """Get a list of a node's neighbors
     
     For iterating through a node's neighbors, neighbors_iter is preferable.
     """
-    return [n for n in topology[n]]
+    return [n for n in topology[node]]
+
+
+def random_neighbor(node, topology):
+    """Get a randomly-chosen neighbor node"""
+    return np.random.choice(neighbors(node=node, topology=topology))
 
