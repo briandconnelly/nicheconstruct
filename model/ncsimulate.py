@@ -115,6 +115,7 @@ def main():
     # TODO: set up per-population L values
 
     for cycle in range(int(config['Simulation']['num_cycles'])):
+        print(size(metapop))
         if not args.quiet:
             print("Cycle",cycle)
 

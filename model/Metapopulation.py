@@ -23,18 +23,12 @@ def create_metapopulation(config, topology):
     initial_popsize = capacity_min + \
                   (initial_producer_proportion * (capacity_max - capacity_min))
 
+    cols = {'Population': np.repeat(np.arange(size), initial_popsize),
+            'Coop': np.random.binomial(1, initial_producer_proportion,
+                                       size*initial_popsize) == 1 }
+    cols.update({"S{0:02d}".format(i): np.zeros(size*initial_popsize, dtype=np.int) for i in range(1, genome_length_max + 1)})
 
-    M = pd.DataFrame({'Population': np.repeat(np.arange(size),
-                                              initial_popsize),
-                      'Coop': np.random.binomial(1,
-                                                 initial_producer_proportion,
-                                                 size*initial_popsize) == 1
-                     })
-
-    for locus in ["S{0:02d}".format(x) for x in range(1, genome_length_max+1)]:
-        M[locus] = np.zeros(M.shape[0])
-
-    return M
+    return pd.DataFrame(cols)
 
 
 def mix(M, topology):
