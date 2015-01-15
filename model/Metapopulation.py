@@ -71,11 +71,37 @@ def migrate(M, topology, rate):
 def grow(M, config):
     """Grow the population"""
     # Mcopy.loc[Mcopy.shape[0]] = [NEW_ROW]
-    pass
+
+    Mcopy = M.copy(deep=True)
 
 
-# Separate into two functions, one for stress and one for coop? Makes sense since bit flip on coop is easier.
+    # Add:
+    #Mcopy[Mcopy.index.max() + 1] = [NEW_ROW]
+
+
+    # Get histogram for each population at locus S1
+    #ZZZ=grouped.apply(lambda x: np.histogram(x.S1, range=(0,8), bins=9)[0])
+
+    for pop in M.population.unique():
+        # N table for a pop, np.histogram(POPDATA, range=(0, A), bins=A+1)
+        #    np.histogram(P5.S1, range=(0,8), bins=9)
+
+        # When You do P = M[M.Population==i] and then update P, M isn't updated
+        # Actual indices of individuals: 
+
+        # TODO: Get the fitness of each individual.
+        # TODO: turn fitnesses into a probability (PROB)
+        # TODO: calculate end density (DEN)
+        # TODO: draw DEN-CUR_SIZE samples from the individuals, each with probability PROB
+
+        pass
+
+
+    return Mcopy
+
+
 def mutate(M, mu_stress, mu_cooperation, Lmax, stress_alleles):
+    """Mutate individuals in the metapopulation"""
     assert 0 <= mu_stress <= 1
     assert 0 <= mu_cooperation <= 1
     assert Lmax > 0
@@ -87,11 +113,16 @@ def mutate(M, mu_stress, mu_cooperation, Lmax, stress_alleles):
     # Alleles to mutate are chosen from a binomial distrubution, and these
     # alleles are modified by adding a random amount
     s = stress_loci(Lmax)
-    Mcopy[s] = (Mcopy[s] + (binomial(n=1, p=mu_stress, size=Mcopy[s].shape) * np.random.random_integers(1,2*stress_alleles, Mcopy[s].shape))) % stress_alleles
+    if stress_alleles == 1:
+        Mcopy[s] = bitwise_xor(Mcopy[s], binomial(n=1, p=mu_stress,
+                                                  size=Mcopy[s].shape))
+    else:
+        # Small problem, an allele could mutate to itself.
+        Mcopy[s] = (Mcopy[s] + (binomial(n=1, p=mu_stress, size=Mcopy[s].shape) * np.random.random_integers(low=1, high=2*stress_alleles, size=Mcopy[s].shape))) % stress_alleles
 
     # Cooperation mutations - flip the cooperation bit 0->1 or 1->0
-    Mcopy['Coop'] = bitwise_xor(Mcopy['Coop'], binomial(n=1, p=mu_cooperation,
-                                                        size=Mcopy.shape[0]))
+    Mcopy.Coop = bitwise_xor(Mcopy.Coop, binomial(n=1, p=mu_cooperation,
+                                                        size=Mcopy.Coop.shape))
 
     return Mcopy
 
