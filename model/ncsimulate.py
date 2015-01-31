@@ -111,9 +111,19 @@ def main():
     metapop = bottleneck(population=metapop,
                          survival_pct=float(config['Population']['mutation_rate_tolerance']))
 
-    mix_frequency = int(config['Metapopulation']['mix_frequency'])
-    # TODO: set up per-population L values
+    # Keep track of the cumulative densities of each population
+    densities = pd.DataFrame(columns=['Cycle', 'Population', 'Density'])
 
+    # Keep track of how often the metapopulation should be mixed
+    mix_frequency = int(config['Metapopulation']['mix_frequency'])
+
+    # Keep track of the number of stress loci that affect fitness for each
+    # population
+    genome_lengths = np.repeat(int(config['Population']['genome_length_min']),
+                               len(topology))
+
+
+    # Iterate through each cycle of the simulation
     for cycle in range(int(config['Simulation']['num_cycles'])):
         if not args.quiet:
             print("Cycle",cycle)
@@ -140,6 +150,8 @@ def main():
         if mix_frequency > 0 and cycle > 0 and (cycle % mix_frequency == 0):
             metapop = mix(M=metapop, topology=topology)
 
+        # TODO: update the count of densities.
+            # - DataFrame with per-population densities (metapop info is the sum)
         # TODO:   environmental change (metapop or pop level)
 
         # Dilution
@@ -147,8 +159,8 @@ def main():
             metapop = bottleneck(population=metapop,
                                  survival_pct=float(config['Population']['dilution_factor']))
 
-        if config['Simulation'].getboolean('stop_on_empty') and \
-                is_empty(population=metapop):
+        if config['Simulation'].getboolean('stop_when_empty') and \
+                metapop.shape[0] == 0:
             break
 
 

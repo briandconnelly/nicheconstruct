@@ -79,7 +79,7 @@ def migrate(M, topology, rate):
     return Mcopy
 
 
-def grow(M, config):
+def grow(M, genome_lengths, config):
     """Grow the population"""
 
     Mcopy = M.copy(deep=True)
