@@ -92,13 +92,17 @@ def grow(M, genome_lengths, config):
     smin = float(config['Population']['capacity_min'])
     smax = float(config['Population']['capacity_max'])
 
+    stress_alleles = int(config['Population']['stress_alleles'])
+
     # Add:
     #Mcopy[Mcopy.index.max() + 1] = [NEW_ROW]
 
+    stress_columns = stress_loci(Lmax=int(config['Population']['genome_length_max']))
+
     for pop in M.Population.unique():
         subpop = M[M.Population==pop]
-        visible = subpop[stress_columns[:genome_lengths[p]]]
-        pop_N = np.apply_along_axis(lambda x: np.bincount(x, minlength=A+1), axis=0, arr=visible)
+        visible = subpop[stress_columns[:genome_lengths[pop]]]
+        pop_N = np.apply_along_axis(lambda x: np.bincount(x, minlength=stress_alleles+1), axis=0, arr=visible)
 
         # Calculate the fitness of each individual
         # TODO: get gamma fitness
@@ -117,16 +121,15 @@ def grow(M, genome_lengths, config):
         offspring = subpop.iloc[np.repeat(np.arange(parent_num_offspring.shape[0]), parent_num_offspring)]
 
         # Mutate the offspring
-        mu_ofspring = mutate(M=offspring,
-                             mu_stress=float(config['Population']['mutation_rate_stress']),
-                             mu_cooperation=float(config['Population']['mutation_rate_cooperation']),
-                             Lmax=int(config['Population']['genome_length_max']),
-                             stress_alleles=int(config['Population']['stress_alleles']) )
+        mu_offspring = mutate(M=offspring,
+                              mu_stress=float(config['Population']['mutation_rate_stress']),
+                              mu_cooperation=float(config['Population']['mutation_rate_cooperation']),
+                              Lmax=int(config['Population']['genome_length_max']),
+                              stress_alleles=stress_alleles)
 
         # Merge in the offspring
-        Mcopy = Mcopy.append(mutated_offspring)
+        Mcopy = Mcopy.append(mu_offspring)
 
-        pass
 
     # Reindex the metapopulation
     Mcopy.index = np.arange(Mcopy.shape[0])
@@ -146,7 +149,7 @@ def mutate(M, mu_stress, mu_cooperation, Lmax, stress_alleles):
     # Mutations at stress loci
     # Alleles to mutate are chosen from a binomial distrubution, and these
     # alleles are modified by adding a random amount
-    s = stress_loci(Lmax-1)
+    s = stress_loci(Lmax)
     if stress_alleles == 1:
         Mcopy[s] = bitwise_xor(Mcopy[s], binomial(n=1, p=mu_stress,
                                                   size=Mcopy[s].shape))
