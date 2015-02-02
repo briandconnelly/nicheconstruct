@@ -89,29 +89,47 @@ def grow(M, genome_lengths, config):
     delta = float(config['Population']['benefit_nonzero'])
     gamma = float(config['Population']['benefit_ordered'])
 
+    smin = float(config['Population']['capacity_min'])
+    smax = float(config['Population']['capacity_max'])
+
     # Add:
     #Mcopy[Mcopy.index.max() + 1] = [NEW_ROW]
 
+    for pop in M.Population.unique():
+        subpop = M[M.Population==pop]
+        visible = subpop[stress_columns[:genome_lengths[p]]]
+        pop_N = np.apply_along_axis(lambda x: np.bincount(x, minlength=A+1), axis=0, arr=visible)
 
-    # Get histogram for each population at locus S1
-    #ZZZ=grouped.apply(lambda x: np.histogram(x.S1, range=(0,8), bins=9)[0])
+        # Calculate the fitness of each individual
+        # TODO: get gamma fitness
+        fitness = base_fitness + \
+                (np.sum(visible > 0, axis=1) * delta) - \
+                (subpop.Coop * cost_cooperation)
 
-    for pop in M.population.unique():
-        # N table for a pop, np.histogram(POPDATA, range=(0, A), bins=A+1)
-        #    np.histogram(P5.S1, range=(0,8), bins=9)
+        pct_cooperators = subpop.Coop.mean()
+        num_offspring = int(smin + (pct_cooperators * (smax - smin)) - subpop.shape[0])
+        parent_num_offspring = np.random.multinomial(n=num_offspring,
+                                                     pvals=fitness/fitness.sum())
 
-        # When You do P = M[M.Population==i] and then update P, M isn't updated
-        # Actual indices of individuals: 
+        # parent_num_offspring is an array where each element represents a
+        # parent (relative index), and the value contains the number of
+        # offspring
+        offspring = subpop.iloc[np.repeat(np.arange(parent_num_offspring.shape[0]), parent_num_offspring)]
 
-        # TODO: Get the fitness of each individual.
-        # TODO: turn fitnesses into a probability (PROB)
-        # TODO: calculate end density (DEN)
-        # TODO: draw DEN-CUR_SIZE samples from the individuals, each with probability PROB
+        # Mutate the offspring
+        mu_ofspring = mutate(M=offspring,
+                             mu_stress=float(config['Population']['mutation_rate_stress']),
+                             mu_cooperation=float(config['Population']['mutation_rate_cooperation']),
+                             Lmax=int(config['Population']['genome_length_max']),
+                             stress_alleles=int(config['Population']['stress_alleles']) )
 
-        # IDEA: make a lambda function for calculating fitness that uses S1..S8,Coop
+        # Merge in the offspring
+        Mcopy = Mcopy.append(mutated_offspring)
 
         pass
 
+    # Reindex the metapopulation
+    Mcopy.index = np.arange(Mcopy.shape[0])
 
     return Mcopy
 
@@ -128,17 +146,17 @@ def mutate(M, mu_stress, mu_cooperation, Lmax, stress_alleles):
     # Mutations at stress loci
     # Alleles to mutate are chosen from a binomial distrubution, and these
     # alleles are modified by adding a random amount
-    s = stress_loci(Lmax)
+    s = stress_loci(Lmax-1)
     if stress_alleles == 1:
         Mcopy[s] = bitwise_xor(Mcopy[s], binomial(n=1, p=mu_stress,
                                                   size=Mcopy[s].shape))
     else:
         # Small problem, an allele could mutate to itself.
-        Mcopy[s] = (Mcopy[s] + (binomial(n=1, p=mu_stress, size=Mcopy[s].shape) * np.random.random_integers(low=1, high=2*stress_alleles, size=Mcopy[s].shape))) % stress_alleles
+        Mcopy[s] = (Mcopy[s] + (binomial(n=1, p=mu_stress, size=Mcopy[s].shape) * np.random.random_integers(low=1, high=stress_alleles, size=Mcopy[s].shape))) % (stress_alleles + 1)
 
     # Cooperation mutations - flip the cooperation bit 0->1 or 1->0
     Mcopy.Coop = bitwise_xor(Mcopy.Coop, binomial(n=1, p=mu_cooperation,
-                                                        size=Mcopy.Coop.shape))
+                                                  size=Mcopy.Coop.shape))
 
     return Mcopy
 

@@ -132,15 +132,16 @@ def main():
 
         env_changed = False
 
-        # TODO: cycle the population
-        # TODO:   - grow
+        # Grow the population to carrying capacity, potentially mutating
+        # offspring
+        metapop = grow(M=metapop, genome_lengths=genome_lengths, config=config)
 
-        # Mutate individuals in the population
-        metapop = mutate(M=metapop,
-                         mu_stress=float(config['Population']['mutation_rate_stress']),
-                         mu_cooperation=float(config['Population']['mutation_rate_cooperation']),
-                         Lmax=int(config['Population']['genome_length_max']),
-                         stress_alleles=float(config['Population']['stress_alleles']))
+        # Mutate individuals in the population - do this if all individuals can acquire mutations
+        #metapop = mutate(M=metapop,
+        #                 mu_stress=float(config['Population']['mutation_rate_stress']),
+        #                 mu_cooperation=float(config['Population']['mutation_rate_cooperation']),
+        #                 Lmax=int(config['Population']['genome_length_max']),
+        #                 stress_alleles=float(config['Population']['stress_alleles']))
 
         # Migrate individuals among subpopulations
         metapop = migrate(M=metapop, topology=topology,
