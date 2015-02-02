@@ -30,13 +30,14 @@ def create_metapopulation(config, topology):
     initial_popsize = capacity_min + \
                   (initial_cooperator_proportion * (capacity_max - capacity_min))
 
-    cols = {'Population': np.repeat(np.arange(size), initial_popsize),
-            'Coop': binomial(1, initial_cooperator_proportion,
-                             size*initial_popsize) == 1}
-    cols.update({"S{0:02d}".format(i): np.zeros(size*initial_popsize, dtype=np.int) for i in range(1, genome_length_max + 1)})
-
-    return pd.DataFrame(cols)
-
+    stress_columns = stress_loci(Lmax=genome_length_max)
+    data = {'Time': 0,
+            'Population': np.repeat(np.arange(size), initial_popsize).tolist(),
+            'Coop': np.random.binomial(1, initial_cooperator_proportion, size * initial_popsize).tolist(),
+            'Fitness': 0}
+    data.update({sc: np.zeros(size * initial_popsize, dtype=np.int).tolist() for sc in stress_columns})
+    return pd.DataFrame(data,
+                        columns=['Time', 'Population', 'Coop'] + ["S{0:02d}".format(i) for i in np.arange(1,genome_length_max+1)] + ['Fitness'])
 
 def reset_stress_loci(M, Lmax):
     """Reset all stress loci in the population
@@ -110,6 +111,8 @@ def grow(M, genome_lengths, config):
                 (np.sum(visible > 0, axis=1) * delta) - \
                 (subpop.Coop * cost_cooperation)
 
+        # TODO: assign fitness back in Mcopy
+
         pct_cooperators = subpop.Coop.mean()
         num_offspring = int(smin + (pct_cooperators * (smax - smin)) - subpop.shape[0])
         parent_num_offspring = np.random.multinomial(n=num_offspring,
@@ -129,7 +132,6 @@ def grow(M, genome_lengths, config):
 
         # Merge in the offspring
         Mcopy = Mcopy.append(mu_offspring)
-
 
     # Reindex the metapopulation
     Mcopy.index = np.arange(Mcopy.shape[0])

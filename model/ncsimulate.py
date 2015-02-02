@@ -112,7 +112,13 @@ def main():
                          survival_pct=float(config['Population']['mutation_rate_tolerance']))
 
     # Keep track of the cumulative densities of each population
-    densities = pd.DataFrame(columns=['Cycle', 'Population', 'Density'])
+    densities = np.zeros(len(topology), dtype=np.int)
+
+    try:
+        environment_change = config['Simulation']['environment_change']
+    except KeyError:
+        environment_change = None
+
 
     # Keep track of how often the metapopulation should be mixed
     mix_frequency = int(config['Metapopulation']['mix_frequency'])
@@ -126,7 +132,7 @@ def main():
     # Iterate through each cycle of the simulation
     for cycle in range(int(config['Simulation']['num_cycles'])):
         if not args.quiet:
-            print("Cycle",cycle)
+            print("Cycle {c}: Size {ps}, Populations {pops}, {pc:.0%} cooperators, Fitness: {f:.02}".format(c=cycle, ps=metapop.shape[0], pops=metapop.Population.unique().shape[0], pc=metapop.Coop.mean(), f=metapop.Fitness.mean()))
 
         # TODO: write data
 
@@ -136,13 +142,6 @@ def main():
         # offspring
         metapop = grow(M=metapop, genome_lengths=genome_lengths, config=config)
 
-        # Mutate individuals in the population - do this if all individuals can acquire mutations
-        #metapop = mutate(M=metapop,
-        #                 mu_stress=float(config['Population']['mutation_rate_stress']),
-        #                 mu_cooperation=float(config['Population']['mutation_rate_cooperation']),
-        #                 Lmax=int(config['Population']['genome_length_max']),
-        #                 stress_alleles=float(config['Population']['stress_alleles']))
-
         # Migrate individuals among subpopulations
         metapop = migrate(M=metapop, topology=topology,
                           rate=float(config['Metapopulation']['migration_rate']))
@@ -151,9 +150,21 @@ def main():
         if mix_frequency > 0 and cycle > 0 and (cycle % mix_frequency == 0):
             metapop = mix(M=metapop, topology=topology)
 
-        # TODO: update the count of densities.
-            # - DataFrame with per-population densities (metapop info is the sum)
-        # TODO:   environmental change (metapop or pop level)
+        densities += [metapop[metapop.Population==i].shape[0] for i in range(len(topology))]
+
+        # Handle density based environmental change
+        if environment_change == 'Metapopulation':
+            if densities.sum() >= int(config['Metapopulation']['density_threshold']):
+                metapop = reset_stress_loci(M=metapop, Lmax=int(config['Population']['genome_length_max']))
+                # TODO: re-calculate fitness column (if used)
+                densities = np.zeros(len(topology), dtype=np.int)
+                env_changed = True
+
+        elif environment_change == 'Population':
+            for p in np.where(densities > int(config['Population']['density_threshold'])):
+                genome_lengths[p] = min(int(config['Population']['genome_length_max']),
+                                        genome_lengths[p] + 1)
+                densities[p] = 0
 
         # Dilution
         if not env_changed:
@@ -162,6 +173,7 @@ def main():
 
         if config['Simulation'].getboolean('stop_when_empty') and \
                 metapop.shape[0] == 0:
+            print('Empty!')
             break
 
 
