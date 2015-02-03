@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from configparser import SafeConfigParser
 import argparse
+from configparser import SafeConfigParser
+import csv
 import datetime
 import os
 from warnings import warn
@@ -94,8 +95,9 @@ def main():
                               'configuration.cfg')
     write_configuration(config=config, filename=configfile)
 
-    # TODO: open up the data files for logging and write headers
-
+    # TODO: use DictWriter
+    writer = csv.writer(open(os.path.join(config['Simulation']['data_dir'], 'metapop.csv'), 'w'))
+    writer.writerow(['Time', 'PopulationSize', 'ProducerProportion', 'MaxCooperatorFitness', 'MaxDefectorFitness'])
 
     # Create the migration topology. This is a graph where each population is a
     # node, and the edges between nodes represent potential paths for migration
@@ -110,6 +112,7 @@ def main():
     metapop = create_metapopulation(config=config, topology=topology)
     metapop = bottleneck(population=metapop,
                          survival_pct=float(config['Population']['mutation_rate_tolerance']))
+    metapop = assign_fitness(M=metapop, config=config)
 
     # Keep track of the cumulative densities of each population
     densities = np.zeros(len(topology), dtype=np.int)
@@ -128,13 +131,17 @@ def main():
     genome_lengths = np.repeat(int(config['Population']['genome_length_min']),
                                len(topology))
 
+    stress_columns = stress_colnames(L=int(config['Population']['genome_length_max']))
 
     # Iterate through each cycle of the simulation
     for cycle in range(int(config['Simulation']['num_cycles'])):
         if not args.quiet:
-            print("Cycle {c}: Size {ps}, Populations {pops}, {pc:.0%} cooperators, Fitness: {f:.02} [{fm}, {fM}]".format(c=cycle, ps=metapop.shape[0], pops=metapop.Population.unique().shape[0], pc=metapop.Coop.mean(), f=metapop.Fitness.mean(), fm=metapop.Fitness.min(), fM=metapop.Fitness.max()))
+            c1 = (metapop.loc[metapop.Coop==1, stress_columns] > 0).sum(axis=1).max()
+            d1 = (metapop.loc[metapop.Coop==0, stress_columns] > 0).sum(axis=1).max()
+            print("Cycle {c}: Size {ps}, Populations {pops}, {pc:.0%} cooperators, Fitness: {f:.02}, C1: {c1}, D1: {d1} ]".format(c=cycle, ps=metapop.shape[0], pops=metapop.Population.unique().shape[0], pc=metapop.Coop.mean(), f=metapop.Fitness.mean(), c1=c1, d1=d1))
 
-        # TODO: write data
+        writer.writerow([cycle, metapop.shape[0], metapop.Coop.mean(), metapop[metapop.Coop==1].Fitness.max(), metapop[metapop.Coop==0].Fitness.max()])
+        # Num cooperator 1s (P3.loc[P3.Coop==1, stress_columns] > 0).sum(axis=1)
 
         env_changed = False
 
@@ -176,8 +183,10 @@ def main():
             break
 
 
-    # TODO: write final data
     # TODO: close up data files
+    writer.writerow([cycle, metapop.shape[0], metapop.Coop.mean(),
+                     metapop[metapop.Coop==1].Fitness.max(),
+                     metapop[metapop.Coop==0].Fitness.max()])
 
 #-------------------------------------------------------------------------
 
