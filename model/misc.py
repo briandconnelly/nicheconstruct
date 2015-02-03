@@ -31,9 +31,9 @@ def pct_cooperators(population):
     return population['Coop'].sum()/population.shape[0]
 
 
-def stress_loci(Lmax=None):
+def stress_colnames(L=None):
     """TODO"""
-    return ["S{0:02d}".format(i) for i in range(1, Lmax + 1)]
+    return ["S{0:02d}".format(i) for i in range(1, L + 1)]
 
 
 def write_configuration(config, filename='configuration.cfg'):

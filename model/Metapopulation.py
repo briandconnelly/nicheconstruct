@@ -8,7 +8,7 @@ from numpy.random import binomial
 import pandas as pd
 
 from Topology import random_neighbor
-from misc import stress_loci
+from misc import stress_colnames
 
 
 def create_metapopulation(config, topology):
@@ -30,7 +30,7 @@ def create_metapopulation(config, topology):
     initial_popsize = capacity_min + \
                   (initial_cooperator_proportion * (capacity_max - capacity_min))
 
-    stress_columns = stress_loci(Lmax=genome_length_max)
+    stress_columns = stress_colnames(L=genome_length_max)
     data = {'Time': 0,
             'Population': np.repeat(np.arange(size), initial_popsize).tolist(),
             'Coop': np.random.binomial(1, initial_cooperator_proportion, size * initial_popsize).tolist(),
@@ -43,6 +43,7 @@ def create_metapopulation(config, topology):
     return M
 
 
+# TODO: take an argument for number of fitness-encoding loci
 def assign_fitness(M, config):
     """Assign fitness for all individuals in the metapopulation"""
 
@@ -59,7 +60,7 @@ def assign_fitness(M, config):
 
     Mcopy = M.copy(deep=True)
 
-    stress_columns = stress_loci(Lmax=genome_length_max)
+    stress_columns = stress_colnames(L=genome_length_max)
     stress_alleles = M[stress_columns]
 
     allele_dist = np.apply_along_axis(lambda x: np.bincount(x, minlength=num_stress_alleles+1),
@@ -69,8 +70,7 @@ def assign_fitness(M, config):
     Mcopy.Fitness += np.sum(M[stress_columns] > 0, axis=1) * delta
     Mcopy.Fitness -= Mcopy.Coop * cost_cooperation
 
-    # TODO: also only do this if number of stress loci >0? >1?
-    if num_stress_alleles > 1:
+    if num_stress_alleles > 1 and num_stress_loci > 0:
         # Add gamma times the number of individuals with matching first allele
         # TODO: what if it is all zeros? A bunch of zeros would have higher fitness than delta.
         Mcopy.Fitness += allele_dist[stress_alleles[stress_columns[0]], 0] * gamma
@@ -90,7 +90,7 @@ def reset_stress_loci(M, Lmax):
     """
 
     Mcopy = M.copy(deep=True)
-    Mcopy[stress_loci(Lmax)] = 0
+    Mcopy[stress_colnames(L=Lmax)] = 0
     return Mcopy
 
 
@@ -141,7 +141,7 @@ def grow(M, genome_lengths, config):
 
     Mcopy = M.copy(deep=True)
 
-    stress_columns = stress_loci(Lmax=int(config['Population']['genome_length_max']))
+    stress_columns = stress_colnames(L=int(config['Population']['genome_length_max']))
 
     for pop in M.Population.unique():
         subpop = M[M.Population==pop]
@@ -189,7 +189,7 @@ def mutate(M, mu_stress, mu_cooperation, Lmax, num_stress_alleles):
     # Mutations at stress loci
     # Alleles to mutate are chosen from a binomial distrubution, and these
     # alleles are modified by adding a random amount
-    s = stress_loci(Lmax)
+    s = stress_colnames(L=Lmax)
     if num_stress_alleles == 1:
         Mcopy[s] = bitwise_xor(Mcopy[s], binomial(n=1, p=mu_stress,
                                                   size=Mcopy[s].shape))
