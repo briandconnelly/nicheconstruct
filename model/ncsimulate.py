@@ -132,7 +132,7 @@ def main():
     # Iterate through each cycle of the simulation
     for cycle in range(int(config['Simulation']['num_cycles'])):
         if not args.quiet:
-            print("Cycle {c}: Size {ps}, Populations {pops}, {pc:.0%} cooperators, Fitness: {f:.02}".format(c=cycle, ps=metapop.shape[0], pops=metapop.Population.unique().shape[0], pc=metapop.Coop.mean(), f=metapop.Fitness.mean()))
+            print("Cycle {c}: Size {ps}, Populations {pops}, {pc:.0%} cooperators, Fitness: {f:.02} [{fm}, {fM}]".format(c=cycle, ps=metapop.shape[0], pops=metapop.Population.unique().shape[0], pc=metapop.Coop.mean(), f=metapop.Fitness.mean(), fm=metapop.Fitness.min(), fM=metapop.Fitness.max()))
 
         # TODO: write data
 
@@ -156,7 +156,7 @@ def main():
         if environment_change == 'Metapopulation':
             if densities.sum() >= int(config['Metapopulation']['density_threshold']):
                 metapop = reset_stress_loci(M=metapop, Lmax=int(config['Population']['genome_length_max']))
-                # TODO: re-calculate fitness column (if used)
+                metapop = assign_fitness(M=metapop, config=config)
                 densities = np.zeros(len(topology), dtype=np.int)
                 env_changed = True
 
@@ -173,12 +173,11 @@ def main():
 
         if config['Simulation'].getboolean('stop_when_empty') and \
                 metapop.shape[0] == 0:
-            print('Empty!')
             break
 
 
     # TODO: write final data
-    # TODO: close up
+    # TODO: close up data files
 
 #-------------------------------------------------------------------------
 
