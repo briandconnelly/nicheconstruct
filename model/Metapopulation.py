@@ -4,7 +4,7 @@
 
 import numpy as np
 from numpy import bitwise_xor, where
-from numpy.random import binomial
+from numpy.random import binomial, multinomial, random_integers
 import pandas as pd
 
 from Topology import random_neighbor
@@ -33,7 +33,7 @@ def create_metapopulation(config, topology):
     stress_columns = stress_colnames(L=genome_length_max)
     data = {'Time': 0,
             'Population': np.repeat(np.arange(size), initial_popsize).tolist(),
-            'Coop': (np.random.binomial(1, initial_cooperator_proportion, size * initial_popsize) == 1).tolist(),
+            'Coop': (binomial(1, initial_cooperator_proportion, size * initial_popsize) == 1).tolist(),
             'Fitness': 0}
     data.update({sc: np.zeros(size * initial_popsize, dtype=np.int).tolist() for sc in stress_columns})
     M = pd.DataFrame(data,
@@ -59,7 +59,7 @@ def assign_fitness(M, config):
     assert genome_length_max >= 0
 
     stress_columns = stress_colnames(L=genome_length_max)
-    stress_alleles = M[stress_columns]
+    stress_alleles = M.loc[:, stress_columns]
 
     allele_dist = np.apply_along_axis(lambda x: np.bincount(x, minlength=num_stress_alleles+1),
                                       axis=0, arr=stress_alleles)
@@ -98,8 +98,8 @@ def mix(M, topology):
     evenly among the populations
     """
 
-    M.Population = np.random.random_integers(low=0, high=len(topology)-1,
-                                                 size=M.shape[0])
+    M.Population = random_integers(low=0, high=len(topology)-1,
+                                   size=M.shape[0])
     return M
 
 
@@ -140,7 +140,7 @@ def mutate(M, mu_stress, mu_cooperation, Lmax, num_stress_alleles):
                                                   size=Mcopy[s].shape))
     else:
         # Small problem, an allele could mutate to itself.
-        Mcopy[s] = (Mcopy[s] + (binomial(n=1, p=mu_stress, size=Mcopy[s].shape) * np.random.random_integers(low=1, high=num_stress_alleles, size=Mcopy[s].shape))) % (num_stress_alleles + 1)
+        Mcopy[s] = (Mcopy[s] + (binomial(n=1, p=mu_stress, size=Mcopy[s].shape) * random_integers(low=1, high=num_stress_alleles, size=Mcopy[s].shape))) % (num_stress_alleles + 1)
 
     return Mcopy
 
@@ -174,8 +174,8 @@ def grow(M, genome_lengths, config):
         num_offspring = smin + round(subpop.Coop.mean() * (smax - smin)) - len(subpop)
 
         # Select the number of offspring to produce for each parent
-        parent_num_offspring = np.random.multinomial(n=num_offspring,
-                                                     pvals=subpop.Fitness/subpop.Fitness.sum())
+        parent_num_offspring = multinomial(n=num_offspring,
+                                           pvals=subpop.Fitness/subpop.Fitness.sum())
 
         # Get a list of the global index values for each parent
         parent_ix = subpop.iloc[np.repeat(np.arange(len(parent_num_offspring)),

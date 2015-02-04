@@ -40,6 +40,16 @@ def parse_arguments():
     return parser.parse_args()
 
 
+def write_metapop_data(writer, metapop, cycle):
+    """Write information about the metapopulation to a CSV writer"""
+    metapop_data = {'Time': cycle,
+                    'PopulationSize': metapop.shape[0],
+                    'ProducerProportion': metapop.Coop.mean(),
+                    'MaxCooperatorFitness': metapop[metapop.Coop==1].Fitness.max(),
+                    'MaxDefectorFitness': metapop[metapop.Coop==0].Fitness.max()}
+    writer.writerow(metapop_data)
+
+
 def main():
     """Run a simulation"""
 
@@ -69,8 +79,7 @@ def main():
     np.random.seed(seed=int(config['Simulation']['seed']))
 
     # Generate a universally unique identifier (UUID) for this run
-    sim_uuid = uuid.uuid4()
-    config['Simulation']['UUID'] = str(sim_uuid)
+    config['Simulation']['UUID'] = str(uuid.uuid4())
 
     # If the data directory is specified, add it to the config, overwriting any
     # previous value
@@ -100,8 +109,9 @@ def main():
     write_configuration(config=config, filename=configfile)
 
     # TODO: use DictWriter
-    writer = csv.writer(open(os.path.join(config['Simulation']['data_dir'], 'metapop.csv'), 'w'))
-    writer.writerow(['Time', 'PopulationSize', 'ProducerProportion', 'MaxCooperatorFitness', 'MaxDefectorFitness'])
+    fieldnames = ['Time', 'PopulationSize', 'ProducerProportion', 'MaxCooperatorFitness', 'MaxDefectorFitness']
+    writer = csv.DictWriter(open(os.path.join(config['Simulation']['data_dir'], 'metapop.csv'), 'w'), fieldnames=fieldnames)
+    writer.writeheader()
 
     # Create the migration topology. This is a graph where each population is a
     # node, and the edges between nodes represent potential paths for migration
@@ -144,8 +154,7 @@ def main():
             d1 = (metapop.loc[metapop.Coop==0, stress_columns] > 0).sum(axis=1).max()
             print("Cycle {c}: Size {ps}, Populations {pops}, {pc:.0%} cooperators, Fitness: {f:.02}, C1: {c1}, D1: {d1} ]".format(c=cycle, ps=metapop.shape[0], pops=metapop.Population.unique().shape[0], pc=metapop.Coop.mean(), f=metapop.Fitness.mean(), c1=c1, d1=d1))
 
-        writer.writerow([cycle, metapop.shape[0], metapop.Coop.mean(), metapop[metapop.Coop==1].Fitness.max(), metapop[metapop.Coop==0].Fitness.max()])
-        # Num cooperator 1s (P3.loc[P3.Coop==1, stress_columns] > 0).sum(axis=1)
+        write_metapop_data(writer=writer, metapop=metapop, cycle=cycle)
 
         env_changed = False
 
@@ -189,10 +198,7 @@ def main():
             break
 
 
-    # TODO: close up data files
-    writer.writerow([cycle, metapop.shape[0], metapop.Coop.mean(),
-                     metapop[metapop.Coop==1].Fitness.max(),
-                     metapop[metapop.Coop==0].Fitness.max()])
+    write_metapop_data(writer=writer, metapop=metapop, cycle=cycle)
 
 #-------------------------------------------------------------------------
 
