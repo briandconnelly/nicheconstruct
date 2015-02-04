@@ -129,7 +129,7 @@ def mutate(M, mu_stress, mu_cooperation, Lmax, num_stress_alleles):
 
     # Cooperation mutations - flip the cooperation bit 0->1 or 1->0
     Mcopy.Coop = bitwise_xor(Mcopy.Coop, binomial(n=1, p=mu_cooperation,
-                                                  size=Mcopy.Coop.shape))
+                                                  size=Mcopy.Coop.shape))==1
 
     # Mutations at stress loci
     # Alleles to mutate are chosen from a binomial distrubution, and these
@@ -166,28 +166,34 @@ def grow(M, genome_lengths, config):
 
     stress_columns = stress_colnames(L=genome_length_max)
 
+    offspring_ix = np.array([], dtype=np.int)
+
+    # Get a list of parent individual indices
     for popid, subpop in M.groupby('Population'):
+        # Get the number of offspring to produce (carrying capacity - current)
         num_offspring = smin + round(subpop.Coop.mean() * (smax - smin)) - len(subpop)
 
+        # Select the number of offspring to produce for each parent
         parent_num_offspring = np.random.multinomial(n=num_offspring,
                                                      pvals=subpop.Fitness/subpop.Fitness.sum())
 
-        # parent_num_offspring is an array where each element represents a
-        # parent (relative index), and the value contains the number of
-        # offspring
-        offspring = subpop.iloc[np.repeat(np.arange(len(parent_num_offspring)),
-                                          parent_num_offspring)]
+        # Get a list of the global index values for each parent
+        parent_ix = subpop.iloc[np.repeat(np.arange(len(parent_num_offspring)),
+                                          parent_num_offspring)].index.values
 
-        # Mutate the offspring
-        mu_offspring = mutate(M=offspring,
-                              mu_stress=mu_stress,
-                              mu_cooperation=mu_cooperation,
-                              Lmax=genome_length_max,
-                              num_stress_alleles=num_stress_alleles)
-        mu_offspring = assign_fitness(M=mu_offspring, config=config)
+        offspring_ix = np.append(offspring_ix, parent_ix)
 
-        # Merge in the offspring
-        M = M.append(mu_offspring)
+
+    # Mutate the offspring
+    mu_offspring = mutate(M=M.loc[offspring_ix],
+                          mu_stress=mu_stress,
+                          mu_cooperation=mu_cooperation,
+                          Lmax=genome_length_max,
+                          num_stress_alleles=num_stress_alleles)
+    mu_offspring = assign_fitness(M=mu_offspring, config=config)
+
+    # Merge in the offspring
+    M = M.append(mu_offspring)
 
     # Reindex the metapopulation
     M.index = np.arange(len(M))
