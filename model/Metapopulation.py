@@ -33,7 +33,7 @@ def create_metapopulation(config, topology):
     stress_columns = stress_colnames(L=genome_length_max)
     data = {'Time': 0,
             'Population': np.repeat(np.arange(size), initial_popsize).tolist(),
-            'Coop': np.random.binomial(1, initial_cooperator_proportion, size * initial_popsize).tolist(),
+            'Coop': (np.random.binomial(1, initial_cooperator_proportion, size * initial_popsize) == 1).tolist(),
             'Fitness': 0}
     data.update({sc: np.zeros(size * initial_popsize, dtype=np.int).tolist() for sc in stress_columns})
     M = pd.DataFrame(data,
@@ -166,12 +166,9 @@ def grow(M, genome_lengths, config):
 
     stress_columns = stress_colnames(L=genome_length_max)
 
-    #num_offspring = M.groupby('Population').Coop.agg(lambda x: smin + (np.mean(x) * (smax-smin)) - len(x))
-
     for popid, subpop in M.groupby('Population'):
         num_offspring = smin + round(subpop.Coop.mean() * (smax - smin)) - len(subpop)
 
-        #num_offspring = num_offspring[pop]
         parent_num_offspring = np.random.multinomial(n=num_offspring,
                                                      pvals=subpop.Fitness/subpop.Fitness.sum())
 
