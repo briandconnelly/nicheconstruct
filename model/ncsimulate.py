@@ -157,7 +157,9 @@ def main():
         if mix_frequency > 0 and cycle > 0 and (cycle % mix_frequency == 0):
             metapop = mix(M=metapop, topology=topology)
 
-        densities += [metapop[metapop.Population==i].shape[0] for i in range(len(topology))]
+        popsizes = metapop.groupby('Population').Fitness.agg(len)
+        for popid in popsizes.keys():
+            densities[popid] += popsizes[popid]
 
         # Handle density based environmental change
         if environment_change == 'Metapopulation':

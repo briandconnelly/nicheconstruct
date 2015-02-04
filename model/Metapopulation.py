@@ -160,35 +160,41 @@ def grow(M, genome_lengths, config):
     num_stress_alleles = int(config['Population']['stress_alleles'])
     assert num_stress_alleles >= 0
 
-    stress_columns = stress_colnames(L=int(config['Population']['genome_length_max']))
+    genome_length_max = int(config['Population']['genome_length_max'])
+    mu_stress = float(config['Population']['mutation_rate_stress'])
+    mu_cooperation = float(config['Population']['mutation_rate_cooperation'])
 
-    for pop in M.Population.unique():
-        subpop = M[M.Population==pop]
+    stress_columns = stress_colnames(L=genome_length_max)
 
-        pct_cooperators = subpop.Coop.mean()
-        num_offspring = int(smin + (pct_cooperators * (smax - smin)) - subpop.shape[0])
+    num_offspring = M.groupby('Population').Coop.agg(lambda x: smin + (np.mean(x) * (smax-smin)) - len(x))
+
+    for popid, subpop in M.groupby('Population'):
+        num_offspring = smin + round(subpop.Coop.mean() * (smax - smin)) - len(subpop)
+
+        #num_offspring = num_offspring[pop]
         parent_num_offspring = np.random.multinomial(n=num_offspring,
                                                      pvals=subpop.Fitness/subpop.Fitness.sum())
 
         # parent_num_offspring is an array where each element represents a
         # parent (relative index), and the value contains the number of
         # offspring
-        offspring = subpop.iloc[np.repeat(np.arange(parent_num_offspring.shape[0]), parent_num_offspring)]
+        offspring = subpop.iloc[np.repeat(np.arange(len(parent_num_offspring)),
+                                          parent_num_offspring)]
 
         # Mutate the offspring
         mu_offspring = mutate(M=offspring,
-                              mu_stress=float(config['Population']['mutation_rate_stress']),
-                              mu_cooperation=float(config['Population']['mutation_rate_cooperation']),
-                              Lmax=int(config['Population']['genome_length_max']),
+                              mu_stress=mu_stress,
+                              mu_cooperation=mu_cooperation,
+                              Lmax=genome_length_max,
                               num_stress_alleles=num_stress_alleles)
         mu_offspring = assign_fitness(M=mu_offspring, config=config)
 
         # Merge in the offspring
         M = M.append(mu_offspring)
+        print("--- Size of", popid, "is now", len(M[M.Population==popid]))
 
     # Reindex the metapopulation
-    M.index = np.arange(M.shape[0])
+    M.index = np.arange(len(M))
 
     return M
-
 
