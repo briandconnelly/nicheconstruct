@@ -108,7 +108,7 @@ def migrate(M, topology, rate):
     assert 0 <= rate <= 1
 
     emigrants_ix = M.index[where(binomial(n=1, p=rate,
-                                              size=M.index.shape[0]) == 1)]
+                                          size=M.index.shape[0]) == 1)]
 
     if emigrants_ix.shape[0] > 0:
         targets = {p: random_neighbor(p, topology) for p in M.Population.unique()}

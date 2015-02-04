@@ -170,11 +170,10 @@ def main():
         if mix_frequency > 0 and cycle > 0 and (cycle % mix_frequency == 0):
             metapop = mix(M=metapop, topology=topology)
 
-        popsizes = metapop.groupby('Population').Fitness.agg(len)
-        for popid in popsizes.keys():
-            densities[popid] += popsizes[popid]
-
         # Handle density based environmental change
+        for popid, groupfitness in metapop.groupby('Population').Fitness:
+            densities[popid] += groupfitness.count()
+
         if environment_change == 'Metapopulation':
             if densities.sum() >= int(config['Metapopulation']['density_threshold']):
                 metapop = reset_stress_loci(M=metapop, Lmax=int(config['Population']['genome_length_max']))
