@@ -6,6 +6,7 @@ from configparser import SafeConfigParser
 import csv
 import datetime
 import os
+import uuid
 from warnings import warn
 
 from Metapopulation import *
@@ -67,6 +68,9 @@ def main():
 
     np.random.seed(seed=int(config['Simulation']['seed']))
 
+    # Generate a universally unique identifier (UUID) for this run
+    sim_uuid = uuid.uuid4()
+    config['Simulation']['UUID'] = str(sim_uuid)
 
     # If the data directory is specified, add it to the config, overwriting any
     # previous value

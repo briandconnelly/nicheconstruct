@@ -166,7 +166,7 @@ def grow(M, genome_lengths, config):
 
     stress_columns = stress_colnames(L=genome_length_max)
 
-    num_offspring = M.groupby('Population').Coop.agg(lambda x: smin + (np.mean(x) * (smax-smin)) - len(x))
+    #num_offspring = M.groupby('Population').Coop.agg(lambda x: smin + (np.mean(x) * (smax-smin)) - len(x))
 
     for popid, subpop in M.groupby('Population'):
         num_offspring = smin + round(subpop.Coop.mean() * (smax - smin)) - len(subpop)
@@ -191,7 +191,6 @@ def grow(M, genome_lengths, config):
 
         # Merge in the offspring
         M = M.append(mu_offspring)
-        print("--- Size of", popid, "is now", len(M[M.Population==popid]))
 
     # Reindex the metapopulation
     M.index = np.arange(len(M))
