@@ -7,8 +7,9 @@ from numpy import bitwise_xor, where
 from numpy.random import binomial, multinomial, random_integers
 import pandas as pd
 
-from Topology import random_neighbor
+from Population import assign_fitness
 from misc import stress_colnames
+from Topology import random_neighbor
 
 
 def create_metapopulation(config, topology):
@@ -39,45 +40,7 @@ def create_metapopulation(config, topology):
     M = pd.DataFrame(data,
                      columns=['Time', 'Population', 'Coop'] + ["S{0:02d}".format(i) for i in np.arange(1,genome_length_max+1)] + ['Fitness'])
 
-    M = assign_fitness(M=M, config=config)
-    return M
-
-
-# TODO: take an argument for number of fitness-encoding loci
-def assign_fitness(M, config):
-    """Assign fitness for all individuals in the metapopulation"""
-
-    base_fitness = float(config['Population']['base_fitness'])
-    cost_cooperation = float(config['Population']['cost_cooperation'])
-    delta = float(config['Population']['benefit_nonzero'])
-    gamma = float(config['Population']['benefit_ordered'])
-
-    num_stress_alleles = int(config['Population']['stress_alleles'])
-    assert num_stress_alleles >= 0
-
-    genome_length_max = int(config['Population']['genome_length_max'])
-    assert genome_length_max >= 0
-
-    stress_columns = stress_colnames(L=genome_length_max)
-    stress_alleles = M.loc[:, stress_columns]
-
-    allele_dist = np.apply_along_axis(lambda x: np.bincount(x, minlength=num_stress_alleles+1),
-                                      axis=0, arr=stress_alleles)
-
-    M.Fitness = base_fitness
-    M.Fitness += np.sum(M[stress_columns] > 0, axis=1) * delta
-    M.Fitness -= M.Coop * cost_cooperation
-
-    if num_stress_alleles > 1 and num_stress_loci > 0:
-        # Add gamma times the number of individuals with matching first allele
-        # TODO: what if it is all zeros? A bunch of zeros would have higher fitness than delta.
-        M.Fitness += allele_dist[stress_alleles[stress_columns[0]], 0] * gamma
-
-        # Add gamma times the number of individuals with increasing allele value
-        stress_alleles_next = (1 + (stress_alleles % num_stress_alleles)).values[:,:-1]
-        allele_dist_next = allele_dist[:,1:]
-        M.Fitness += allele_dist_next[stress_alleles_next, range(genome_length_max-1)].sum(axis=1) * gamma
-
+    M = assign_fitness(P=M, config=config)
     return M
 
 
@@ -190,7 +153,7 @@ def grow(M, genome_lengths, config):
                           mu_cooperation=mu_cooperation,
                           Lmax=genome_length_max,
                           num_stress_alleles=num_stress_alleles)
-    mu_offspring = assign_fitness(M=mu_offspring, config=config)
+    mu_offspring = assign_fitness(P=mu_offspring, config=config)
 
     # Merge in the offspring
     M = M.append(mu_offspring)

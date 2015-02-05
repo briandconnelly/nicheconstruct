@@ -6,9 +6,11 @@ from configparser import SafeConfigParser
 import csv
 import datetime
 import os
+import sys
 import uuid
 from warnings import warn
 
+from config import *
 from Metapopulation import *
 from metrics import *
 from misc import *
@@ -26,6 +28,9 @@ def parse_arguments():
     parser.add_argument('--config', '-c', metavar='FILE', help='Configuration '\
                         'file to use (default: run.cfg)', default='run.cfg',
                         dest='configfile', type=argparse.FileType('r'))
+    parser.add_argument('--checkconfig', '-C', action='store_true',
+                        default=False,
+                        help='Check the given configuration file and quit (note: includes parameters specified with --param')
     parser.add_argument('--data_dir', '-d', metavar='DIR',
                         help='Directory to store data (default: data)')
     parser.add_argument('--param', '-p', nargs=3, metavar=('SECTION', 'NAME',
@@ -66,6 +71,15 @@ def main():
         for param in args.param:
             config[param[0]][param[1]] = param[2]
 
+    try:
+        validate_configfile(config)
+    except ValueError as e:
+        print('Error: {}'.format(e))
+        sys.exit(1)
+
+    if args.checkconfig:
+        # DO the validation always??
+        sys.exit(0)
 
     # If the random number generator seed specified, add it to the config,
     # overwriting any previous value. Otherwise, if it wasn't in the
@@ -106,7 +120,7 @@ def main():
     # Write the configuration file
     configfile = os.path.join(config['Simulation']['data_dir'],
                               'configuration.cfg')
-    write_configuration(config=config, filename=configfile)
+    write_configfile(config=config, filename=configfile)
 
     # TODO: use DictWriter
     fieldnames = ['Time', 'PopulationSize', 'ProducerProportion', 'MaxCooperatorFitness', 'MaxDefectorFitness']
@@ -126,7 +140,7 @@ def main():
     metapop = create_metapopulation(config=config, topology=topology)
     metapop = bottleneck(population=metapop,
                          survival_pct=float(config['Population']['mutation_rate_tolerance']))
-    metapop = assign_fitness(M=metapop, config=config)
+    metapop = assign_fitness(P=metapop, config=config)
 
     # Keep track of the cumulative densities of each population
     densities = np.zeros(len(topology), dtype=np.int)
@@ -177,7 +191,7 @@ def main():
         if environment_change == 'Metapopulation':
             if densities.sum() >= int(config['Metapopulation']['density_threshold']):
                 metapop = reset_stress_loci(M=metapop, Lmax=int(config['Population']['genome_length_max']))
-                metapop = assign_fitness(M=metapop, config=config)
+                metapop = assign_fitness(P=metapop, config=config)
                 densities = np.zeros(len(topology), dtype=np.int)
                 env_changed = True
 

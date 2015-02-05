@@ -88,8 +88,8 @@ def build_topology_smallworld(config):
     """Build a small world network"""
 
     size = int(config['SmallWorldTopology']['size'])
-    neighbors = int(config['VonNeumannTopology']['neighbors'])
-    edgeprob = float(config['VonNeumannTopology']['edgeprob'])
+    neighbors = int(config['SmallWorldTopology']['neighbors'])
+    edgeprob = float(config['SmallWorldTopology']['edgeprob'])
     seed = int(config['Simulation']['seed'])
 
     assert size > 0
