@@ -42,4 +42,3 @@ def assign_fitness(P, config):
 
     return P
 
-

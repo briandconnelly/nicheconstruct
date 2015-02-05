@@ -78,7 +78,7 @@ def main():
         sys.exit(1)
 
     if args.checkconfig:
-        # DO the validation always??
+        print("No errors found in configuration file {f}".format(f=args.configfile.name))
         sys.exit(0)
 
     # If the random number generator seed specified, add it to the config,
