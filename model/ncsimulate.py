@@ -49,9 +49,13 @@ def write_metapop_data(writer, metapop, cycle):
     """Write information about the metapopulation to a CSV writer"""
     metapop_data = {'Time': cycle,
                     'PopulationSize': metapop.shape[0],
-                    'ProducerProportion': metapop.Coop.mean(),
+                    'CooperatorProportion': metapop.Coop.mean(),
+                    'MinCooperatorFitness': metapop[metapop.Coop==1].Fitness.min(),
                     'MaxCooperatorFitness': metapop[metapop.Coop==1].Fitness.max(),
-                    'MaxDefectorFitness': metapop[metapop.Coop==0].Fitness.max()}
+                    'MeanCooperatorFitness': metapop[metapop.Coop==1].Fitness.mean(),
+                    'MinDefectorFitness': metapop[metapop.Coop==0].Fitness.min(),
+                    'MaxDefectorFitness': metapop[metapop.Coop==0].Fitness.max(),
+                    'MeanDefectorFitness': metapop[metapop.Coop==0].Fitness.mean()}
     writer.writerow(metapop_data)
 
 
@@ -123,7 +127,10 @@ def main():
     write_configfile(config=config, filename=configfile)
 
     # TODO: use DictWriter
-    fieldnames = ['Time', 'PopulationSize', 'ProducerProportion', 'MaxCooperatorFitness', 'MaxDefectorFitness']
+    fieldnames = ['Time', 'PopulationSize', 'CooperatorProportion',
+                  'MinCooperatorFitness', 'MaxCooperatorFitness',
+                  'MeanCooperatorFitness', 'MinDefectorFitness',
+                  'MaxDefectorFitness', 'MeanDefectorFitness']
     writer = csv.DictWriter(open(os.path.join(config['Simulation']['data_dir'], 'metapop.csv'), 'w'), fieldnames=fieldnames)
     writer.writeheader()
 
