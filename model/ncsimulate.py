@@ -120,6 +120,10 @@ def main():
 
     os.mkdir(config['Simulation']['data_dir'])
 
+    # Write information about the run
+    infofile = os.path.join(config['Simulation']['data_dir'], 'run_info.txt')
+    write_run_information(filename=infofile, config=config)
+
 
     # Write the configuration file
     configfile = os.path.join(config['Simulation']['data_dir'],
