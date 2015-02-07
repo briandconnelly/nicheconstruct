@@ -10,7 +10,6 @@ import sys
 import uuid
 from warnings import warn
 
-from config import *
 from Metapopulation import *
 from metrics import *
 from misc import *
@@ -75,11 +74,7 @@ def main():
         for param in args.param:
             config[param[0]][param[1]] = param[2]
 
-    try:
-        validate_configfile(config)
-    except ValueError as e:
-        print('Error: {}'.format(e))
-        sys.exit(1)
+    # TODO: validate configuration file.
 
     if args.checkconfig:
         print("No errors found in configuration file {f}".format(f=args.configfile.name))
@@ -126,17 +121,22 @@ def main():
 
 
     # Write the configuration file
-    configfile = os.path.join(config['Simulation']['data_dir'],
-                              'configuration.cfg')
-    write_configfile(config=config, filename=configfile)
+    cfg_filename = os.path.join(config['Simulation']['data_dir'],
+                                'configuration.cfg')
 
-    # TODO: use DictWriter
+    with open(cfg_filename, 'w') as configfile:
+        config.write(configfile)
+
+    # Config options for logging metapopulation. Name, frequency, etc.
     fieldnames = ['Time', 'PopulationSize', 'CooperatorProportion',
                   'MinCooperatorFitness', 'MaxCooperatorFitness',
                   'MeanCooperatorFitness', 'MinDefectorFitness',
                   'MaxDefectorFitness', 'MeanDefectorFitness']
-    writer = csv.DictWriter(open(os.path.join(config['Simulation']['data_dir'], 'metapop.csv'), 'w'), fieldnames=fieldnames)
+    writer = csv.DictWriter(open(os.path.join(config['Simulation']['data_dir'],
+                                 'metapopulation.csv'), 'w'),
+                                 fieldnames=fieldnames)
     writer.writeheader()
+
 
     # Create the migration topology. This is a graph where each population is a
     # node, and the edges between nodes represent potential paths for migration
