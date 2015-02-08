@@ -127,15 +127,19 @@ def main():
     with open(cfg_filename, 'w') as configfile:
         config.write(configfile)
 
-    # Config options for logging metapopulation. Name, frequency, etc.
-    fieldnames = ['Time', 'PopulationSize', 'CooperatorProportion',
-                  'MinCooperatorFitness', 'MaxCooperatorFitness',
-                  'MeanCooperatorFitness', 'MinDefectorFitness',
-                  'MaxDefectorFitness', 'MeanDefectorFitness']
-    writer = csv.DictWriter(open(os.path.join(config['Simulation']['data_dir'],
-                                 'metapopulation.csv'), 'w'),
-                                 fieldnames=fieldnames)
-    writer.writeheader()
+    log_metapopulation = config['Simulation'].getboolean('log_metapopulation')
+    if log_metapopulation:
+        log_metapopulation_freq = int(config['MetapopulationLog']['frequency'])
+
+        # Config options for logging metapopulation. Name, frequency, etc.
+        fieldnames = ['Time', 'PopulationSize', 'CooperatorProportion',
+                      'MinCooperatorFitness', 'MaxCooperatorFitness',
+                      'MeanCooperatorFitness', 'MinDefectorFitness',
+                      'MaxDefectorFitness', 'MeanDefectorFitness']
+        writermp = csv.DictWriter(open(os.path.join(config['Simulation']['data_dir'],
+                                       'metapopulation.csv'), 'w'),
+                                       fieldnames=fieldnames)
+        writermp.writeheader()
 
 
     # Create the migration topology. This is a graph where each population is a
@@ -179,7 +183,8 @@ def main():
             d1 = (metapop.loc[metapop.Coop==0, stress_columns] > 0).sum(axis=1).max()
             print("Cycle {c}: Size {ps}, Populations {pops}, {pc:.0%} cooperators, Fitness: {f:.02}, C1: {c1}, D1: {d1} ]".format(c=cycle, ps=metapop.shape[0], pops=metapop.Population.unique().shape[0], pc=metapop.Coop.mean(), f=metapop.Fitness.mean(), c1=c1, d1=d1))
 
-        write_metapop_data(writer=writer, metapop=metapop, cycle=cycle)
+        if log_metapopulation and cycle % log_metapopulation_freq == 0:
+            write_metapop_data(writer=writermp, metapop=metapop, cycle=cycle)
 
         env_changed = False
 
@@ -222,7 +227,8 @@ def main():
             break
 
 
-    write_metapop_data(writer=writer, metapop=metapop, cycle=cycle)
+    if log_metapopulation:
+        write_metapop_data(writer=writermp, metapop=metapop, cycle=cycle+1)
 
 #-------------------------------------------------------------------------
 
