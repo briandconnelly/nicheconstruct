@@ -40,7 +40,12 @@ def create_metapopulation(config, topology):
     M = pd.DataFrame(data,
                      columns=['Time', 'Population', 'Coop'] + ["S{0:02d}".format(i) for i in np.arange(1,genome_length_max+1)] + ['Fitness'])
 
-    M = assign_fitness(P=M, config=config)
+    M = assign_fitness(P=M, genome_length=genome_length_min,
+                       num_stress_alleles=int(config['Population']['stress_alleles']),
+                       base_fitness=float(config['Population']['base_fitness']),
+                       cost_cooperation=float(config['Population']['cost_cooperation']),
+                       benefit_nonzero=float(config['Population']['benefit_nonzero']),
+                       benefit_ordered=float(config['Population']['benefit_ordered']))
     return M
 
 
@@ -97,24 +102,20 @@ def mutate(M, mu_stress, mu_cooperation, Lmax, num_stress_alleles):
     # Mutations at stress loci
     # Alleles to mutate are chosen from a binomial distrubution, and these
     # alleles are modified by adding a random amount
-    s = stress_colnames(L=Lmax)
-    if num_stress_alleles == 1:
-        Mcopy[s] = bitwise_xor(Mcopy[s], binomial(n=1, p=mu_stress,
-                                                  size=Mcopy[s].shape))
-    else:
-        # Small problem, an allele could mutate to itself.
-        Mcopy[s] = (Mcopy[s] + (binomial(n=1, p=mu_stress, size=Mcopy[s].shape) * random_integers(low=1, high=num_stress_alleles, size=Mcopy[s].shape))) % (num_stress_alleles + 1)
+    if Lmax > 0:
+        s = stress_colnames(L=Lmax)
+        if num_stress_alleles == 1:
+            Mcopy[s] = bitwise_xor(Mcopy[s], binomial(n=1, p=mu_stress,
+                                                      size=Mcopy[s].shape))
+        else:
+            # Small problem, an allele could mutate to itself.
+            Mcopy[s] = (Mcopy[s] + (binomial(n=1, p=mu_stress, size=Mcopy[s].shape) * random_integers(low=1, high=num_stress_alleles, size=Mcopy[s].shape))) % (num_stress_alleles + 1)
 
     return Mcopy
 
 
 def grow(M, genome_lengths, config):
     """Grow the population"""
-
-    base_fitness = float(config['Population']['base_fitness'])
-    cost_cooperation = float(config['Population']['cost_cooperation'])
-    delta = float(config['Population']['benefit_nonzero'])
-    gamma = float(config['Population']['benefit_ordered'])
 
     smin = float(config['Population']['capacity_min'])
     smax = float(config['Population']['capacity_max'])
@@ -153,7 +154,13 @@ def grow(M, genome_lengths, config):
                           mu_cooperation=mu_cooperation,
                           Lmax=genome_length_max,
                           num_stress_alleles=num_stress_alleles)
-    mu_offspring = assign_fitness(P=mu_offspring, config=config)
+
+    mu_offspring = assign_fitness(P=mu_offspring, genome_length=genome_length_max,
+                                  num_stress_alleles=int(config['Population']['stress_alleles']),
+                                  base_fitness=float(config['Population']['base_fitness']),
+                                  cost_cooperation=float(config['Population']['cost_cooperation']),
+                                  benefit_nonzero=float(config['Population']['benefit_nonzero']),
+                                  benefit_ordered=float(config['Population']['benefit_ordered']))
 
     # Merge in the offspring
     M = M.append(mu_offspring)

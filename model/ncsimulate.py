@@ -11,7 +11,6 @@ import uuid
 from warnings import warn
 
 from Metapopulation import *
-from metrics import *
 from misc import *
 from Population import *
 from Topology import *
@@ -155,7 +154,6 @@ def main():
     metapop = create_metapopulation(config=config, topology=topology)
     metapop = bottleneck(population=metapop,
                          survival_pct=float(config['Population']['mutation_rate_tolerance']))
-    metapop = assign_fitness(P=metapop, config=config)
 
     # Keep track of the cumulative densities of each population
     densities = np.zeros(len(topology), dtype=np.int)
@@ -179,8 +177,12 @@ def main():
     # Iterate through each cycle of the simulation
     for cycle in range(int(config['Simulation']['num_cycles'])):
         if not args.quiet:
-            c1 = (metapop.loc[metapop.Coop==1, stress_columns] > 0).sum(axis=1).max()
-            d1 = (metapop.loc[metapop.Coop==0, stress_columns] > 0).sum(axis=1).max()
+            if len(stress_columns) > 0:
+                c1 = (metapop.loc[metapop.Coop==1, stress_columns] > 0).sum(axis=1).max()
+                d1 = (metapop.loc[metapop.Coop==0, stress_columns] > 0).sum(axis=1).max()
+            else:
+                c1 = d1 = 'NA'
+
             print("Cycle {c}: Size {ps}, Populations {pops}, {pc:.0%} cooperators, Fitness: {f:.02}, C1: {c1}, D1: {d1} ]".format(c=cycle, ps=metapop.shape[0], pops=metapop.Population.unique().shape[0], pc=metapop.Coop.mean(), f=metapop.Fitness.mean(), c1=c1, d1=d1))
 
         if log_metapopulation and cycle % log_metapopulation_freq == 0:
