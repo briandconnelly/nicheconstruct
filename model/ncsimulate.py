@@ -126,7 +126,7 @@ def main():
     with open(cfg_filename, 'w') as configfile:
         config.write(configfile)
 
-    log_metapopulation = config['Simulation'].getboolean('log_metapopulation')
+    log_metapopulation = config['MetapopulationLog'].getboolean('enabled')
     if log_metapopulation:
         log_metapopulation_freq = int(config['MetapopulationLog']['frequency'])
 
