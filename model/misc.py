@@ -50,6 +50,6 @@ def write_run_information(filename, config):
         infofile.write('NumPy Version: {v}\n'.format(v=np.version.version))
         infofile.write('NetworkX Version: {v}\n'.format(v=nx.__version__))
         infofile.write('Command: {cmd}\n'.format(cmd=' '.join(sys.argv)))
-        infofile.write('Random Seed: {seed}\n'.format(seed=config.getint('Simulation', 'seed')))
-        infofile.write('UUID: {uuid}\n'.format(uuid=config.get('Simulation', 'UUID')))
+        infofile.write('Random Seed: {seed}\n'.format(seed=config['Simulation']['seed']))
+        infofile.write('UUID: {uuid}\n'.format(uuid=config['Simulation']['UUID']))
 

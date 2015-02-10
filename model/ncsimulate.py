@@ -2,13 +2,15 @@
 # -*- coding: utf-8 -*-
 
 import argparse
-from configparser import SafeConfigParser
 import csv
 import datetime
 import os
 import sys
 import uuid
 from warnings import warn
+
+from configobj import ConfigObj, ConfigObjError, flatten_errors
+from validate import Validator
 
 from Metapopulation import *
 from misc import *
@@ -25,7 +27,7 @@ def parse_arguments():
                                      description='Run a simluation')
     parser.add_argument('--config', '-c', metavar='FILE', help='Configuration '\
                         'file to use (default: run.cfg)', default='run.cfg',
-                        dest='configfile', type=argparse.FileType('r'))
+                        dest='configfile')
     parser.add_argument('--checkconfig', '-C', action='store_true',
                         default=False,
                         help='Check the given configuration file and quit (note: includes parameters specified with --param')
@@ -64,16 +66,32 @@ def main():
     args = parse_arguments()
 
     # Read the configuration file
-    config = SafeConfigParser()
-    config.readfp(args.configfile)
-    args.configfile.close()
+    try:
+        config = ConfigObj(infile=args.configfile, configspec='configspec.ini',
+                           file_error=True)
+    except (ConfigObjError, OSError) as e:
+        print("Error: {e}".format(e=e))
+        sys.exit(1)
 
     # Add any parameters specified on the command line to the configuration
     if args.param:
         for param in args.param:
             config[param[0]][param[1]] = param[2]
 
-    # TODO: validate configuration file.
+    # Validate the configuration
+    validation = config.validate(Validator(), copy=True)
+
+    if validation != True:
+        errors = flatten_errors(config, validation)
+        print("Found {n} error(s) in configuration:".format(n=len(errors)))
+        for (section_list, key, _) in errors:
+            if key is not None:
+                print("\t* Invalid value for '{k}' in Section '{s}'".format(k=key, s=section_list[0]))
+            else:
+                print("\t* Missing required section '{s}'".format(s=section_list[0]))
+
+        sys.exit(2)
+
 
     if args.checkconfig:
         print("No errors found in configuration file {f}".format(f=args.configfile.name))
@@ -83,12 +101,13 @@ def main():
     # overwriting any previous value. Otherwise, if it wasn't in the
     # supplied configuration file, create one.
     if args.seed:
-        config['Simulation']['seed'] = str(args.seed)
-    elif not config.has_option(section='Simulation', option='seed'):
+        config['Simulation']['seed'] = args.seed
+    #elif not config.has_option(section='Simulation', option='seed'):
+    elif 'seed' not in config['Simulation'] or config['Simulation']['seed']==None:
         seed = np.random.randint(low=0, high=np.iinfo(np.uint32).max)           
-        config['Simulation']['seed'] = str(seed)
+        config['Simulation']['seed'] = seed
 
-    np.random.seed(seed=int(config['Simulation']['seed']))
+    np.random.seed(seed=config['Simulation']['seed'])
 
     # Generate a universally unique identifier (UUID) for this run
     config['Simulation']['UUID'] = str(uuid.uuid4())
@@ -97,9 +116,6 @@ def main():
     # previous value
     if args.data_dir:
         config['Simulation']['data_dir'] = args.data_dir
-    # If a directory wasn't listed in the config, use the default ('data')
-    if not config.has_option(section='Simulation', option='data_dir'):
-        config['Simulation']['data_dir'] = 'data'
 
 
     # If the data_dir already exists, append the current date and time to
@@ -120,15 +136,15 @@ def main():
 
 
     # Write the configuration file
-    cfg_filename = os.path.join(config['Simulation']['data_dir'],
-                                'configuration.cfg')
+    config.filename = os.path.join(config['Simulation']['data_dir'],
+                                   'configuration.cfg')
+    config.write()
 
-    with open(cfg_filename, 'w') as configfile:
-        config.write(configfile)
 
-    log_metapopulation = config['MetapopulationLog'].getboolean('enabled')
+    # Create the log file of metapopulation-level data if enabled
+    log_metapopulation = config['MetapopulationLog']['enabled']
     if log_metapopulation:
-        log_metapopulation_freq = int(config['MetapopulationLog']['frequency'])
+        log_metapopulation_freq = config['MetapopulationLog']['frequency']
 
         # Config options for logging metapopulation. Name, frequency, etc.
         fieldnames = ['Time', 'PopulationSize', 'CooperatorProportion',
@@ -145,7 +161,7 @@ def main():
     # node, and the edges between nodes represent potential paths for migration
     topology = build_topology(config=config)
 
-    if config['Simulation'].getboolean('export_topology'):
+    if config['Simulation']['export_topology']:
         fn = os.path.join(config['Simulation']['data_dir'], 'topology.gml')
         export_topology(topology=topology, filename=fn)
 
@@ -153,7 +169,7 @@ def main():
     # Create the metapopulation and apply the initial stress bottleneck
     metapop = create_metapopulation(config=config, topology=topology)
     metapop = bottleneck(population=metapop,
-                         survival_pct=float(config['Population']['mutation_rate_tolerance']))
+                         survival_pct=config['Population']['mutation_rate_tolerance'])
 
     # Keep track of the cumulative densities of each population
     densities = np.zeros(len(topology), dtype=np.int)
@@ -165,17 +181,17 @@ def main():
 
 
     # Keep track of how often the metapopulation should be mixed
-    mix_frequency = int(config['Metapopulation']['mix_frequency'])
+    mix_frequency = config['Metapopulation']['mix_frequency']
 
     # Keep track of the number of stress loci that affect fitness for each
     # population
-    genome_lengths = np.repeat(int(config['Population']['genome_length_min']),
+    genome_lengths = np.repeat(config['Population']['genome_length_min'],
                                len(topology))
 
-    stress_columns = stress_colnames(L=int(config['Population']['genome_length_max']))
+    stress_columns = stress_colnames(L=config['Population']['genome_length_max'])
 
     # Iterate through each cycle of the simulation
-    for cycle in range(int(config['Simulation']['num_cycles'])):
+    for cycle in range(config['Simulation']['num_cycles']):
         if not args.quiet:
             if len(stress_columns) > 0:
                 c1 = (metapop.loc[metapop.Coop==1, stress_columns] > 0).sum(axis=1).max()
@@ -196,7 +212,7 @@ def main():
 
         # Migrate individuals among subpopulations
         metapop = migrate(M=metapop, topology=topology,
-                          rate=float(config['Metapopulation']['migration_rate']))
+                          rate=config['Metapopulation']['migration_rate'])
 
         # Mix the metapopulation (if configured)
         if mix_frequency > 0 and cycle > 0 and (cycle % mix_frequency == 0):
@@ -207,24 +223,24 @@ def main():
             densities[popid] += groupfitness.count()
 
         if environment_change == 'Metapopulation':
-            if densities.sum() >= int(config['Metapopulation']['density_threshold']):
-                metapop = reset_stress_loci(M=metapop, Lmax=int(config['Population']['genome_length_max']))
+            if densities.sum() >= config['Metapopulation']['density_threshold']:
+                metapop = reset_stress_loci(M=metapop, Lmax=config['Population']['genome_length_max'])
                 metapop = assign_fitness(P=metapop, config=config)
                 densities = np.zeros(len(topology), dtype=np.int)
                 env_changed = True
 
         elif environment_change == 'Population':
-            for p in np.where(densities > int(config['Population']['density_threshold'])):
-                genome_lengths[p] = min(int(config['Population']['genome_length_max']),
+            for p in np.where(densities > config['Population']['density_threshold']):
+                genome_lengths[p] = min(config['Population']['genome_length_max'],
                                         genome_lengths[p] + 1)
                 densities[p] = 0
 
         # Dilution
         if not env_changed:
             metapop = bottleneck(population=metapop,
-                                 survival_pct=float(config['Population']['dilution_factor']))
+                                 survival_pct=config['Population']['dilution_factor'])
 
-        if config['Simulation'].getboolean('stop_when_empty') and \
+        if config['Simulation']['stop_when_empty'] and \
                 metapop.shape[0] == 0:
             break
 

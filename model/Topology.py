@@ -13,7 +13,7 @@ def build_topology(config):
 
     The specific topology is defined in Metapopulation:Topology
     """
-    top_type = config['Metapopulation']['Topology']
+    top_type = config['Metapopulation']['topology']
     assert top_type.lower() in ['moore', 'vonneumann', 'smallworld',
                                 'complete', 'regular']
 
@@ -31,11 +31,12 @@ def build_topology(config):
 
 def build_topology_moore(config):
     """Build a lattice graph with Moore neighborhood"""
-    columns = int(config['MooreTopology']['width'])
-    rows = int(config['MooreTopology']['height'])
-    periodic = config['MooreTopology'].getboolean('periodic')
-    radius = int(config['MooreTopology']['radius'])
+    columns = config['MooreTopology']['width']
+    rows = config['MooreTopology']['height']
+    radius = config['MooreTopology']['radius']
     assert rows > 0 and columns > 0 and radius > 0
+
+    periodic = config['MooreTopology']['periodic']
 
     top = nx.empty_graph()
     top.name = "Moore Lattice: {r} rows, {c} columns, radius={rx}".format(r=rows,
@@ -68,9 +69,9 @@ def build_topology_moore(config):
 def build_topology_vonneumann(config):
     """Build a lattice graph with Von Neumann neighborhood"""
 
-    width = int(config['VonNeumannTopology']['width'])
-    height = int(config['VonNeumannTopology']['height'])
-    periodic = config['VonNeumannTopology'].getboolean('periodic')
+    width = config['VonNeumannTopology']['width']
+    height = config['VonNeumannTopology']['height']
+    periodic = config['VonNeumannTopology']['periodic']
     assert width > 0 and height > 0
 
     graph = nx.grid_2d_graph(m=width, n=height, periodic=periodic)
@@ -87,10 +88,10 @@ def build_topology_vonneumann(config):
 def build_topology_smallworld(config):
     """Build a small world network"""
 
-    size = int(config['SmallWorldTopology']['size'])
-    neighbors = int(config['SmallWorldTopology']['neighbors'])
-    edgeprob = float(config['SmallWorldTopology']['edgeprob'])
-    seed = int(config['Simulation']['seed'])
+    size = config['SmallWorldTopology']['size']
+    neighbors = config['SmallWorldTopology']['neighbors']
+    edgeprob = config['SmallWorldTopology']['edgeprob']
+    seed = config['Simulation']['seed']
 
     assert size > 0
     assert neighbors >= 0
@@ -107,7 +108,7 @@ def build_topology_smallworld(config):
 def build_topology_complete(config):
     """Build a complete graph"""
 
-    size = int(config['CompleteTopology']['size'])
+    size = config['CompleteTopology']['size']
     assert size > 0
 
     return nx.complete_graph(n=size)
@@ -116,9 +117,9 @@ def build_topology_complete(config):
 def build_topology_regular(config):
     """Build a N-regular graph"""
 
-    size = int(config['RegularTopology']['size'])
-    degree = int(config['RegularTopology']['degree'])
-    seed = int(config['Simulation']['seed'])
+    size = config['RegularTopology']['size']
+    degree = config['RegularTopology']['degree']
+    seed = config['Simulation']['seed']
 
     assert size > 0
     assert degree >= 0
