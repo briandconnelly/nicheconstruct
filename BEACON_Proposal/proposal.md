@@ -1,5 +1,5 @@
 ---
-title: TODO
+title: "Niche Construct 2: The Streets"
 author:
 - Brian D. Connelly
 
@@ -48,12 +48,12 @@ adaptation [@waite2012adaptation; @morgan2012selection]. As part of a
 BEACON-funded project, we have recently shown using a model inspired by
 microbial experimentation that cooperators can have a substantial leg up on
 defectors when the cooperative behavior increases population density and thus
-the likelihood of acquiring beneficial mutations (manuscript in preparation).
-However, this advantage is fleeting (Figure 1A, TODO). Once the opportunities
-for adaptation are exhausted, cooperators are once again at a disadvantage
-against defectors. As seen in Figure 1B (TODO), however, cooperation can be
-maintained indefinitely if environmental change occurs frequently, providing a
-constant source of adaptive opportnities.
+the likelihood of acquiring beneficial mutations (in prep.).  However, this
+advantage is fleeting (Fig. 1A, TODO). Once the opportunities for adaptation
+are exhausted, cooperators are once again at a disadvantage against defectors.
+As seen in Fig. 1B (TODO), however, cooperation can be maintained indefinitely
+when environmental change occurs frequently, providing a constant source of
+adaptive opportnities.
 
 TODO: what about endogenous change?
 
