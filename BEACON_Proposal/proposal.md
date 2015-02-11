@@ -1,5 +1,5 @@
 ---
-title: TODO
+title: Evolution of Cooperation through Feedback from Niche Construction
 author:
 - Brian Connelly (UW)
 
@@ -63,16 +63,34 @@ themselves. Through their metabolism, their interactions with others, and even
 through their death, organisms constantly modify their environment. These
 changes can produce feedback loops in which environmental change alters
 selection, which, in turn, alters phenotypes and their corresponding effects on
-the environment. The proposed studies aim to reveal how endogenous
+the environment. The proposed research aims to reveal how endogenous
 environmental change, or *niche construction* [@odling2003niche], affects the
 evolution of cooperation.
+
+## Model Description
+
+In our agent-based model, evolution occurs in a metapopulation consisting of
+populations connected by limited migration. There are two types of individuals
+within populations: cooperators and defectors. Cooperation is costly, but
+increases the productivity of the population. During each simulation cycle,
+populations grow to carrying capacity, mutate, and migrate to neighboring
+populations.
+
+TODO: individuals and fitness (build in mutation)
+TODO: migration
+TODO: dilution
+TODO: new opportunities for adaptation (stress)
 
 
 ## Aim 1: Phenotype-Driven Niche Construction
 
-## Aim 2: Niche Construction and Spite
+Spite as part of this
 
-## Aim 3: Feedbacks in Host-Symbiont Co-Evolution
+
+## Aim 2: Feedbacks in Host-Symbiont Co-Evolution
+
+As described in the previous aim, the environmental state was implicit,
+depending only on the state of the population.
 
 paper [@hamblin2014viral]
 
