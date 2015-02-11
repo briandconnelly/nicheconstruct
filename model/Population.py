@@ -20,14 +20,19 @@ def assign_fitness(P, genome_length, num_stress_alleles, base_fitness,
         stress_columns = stress_colnames(L=genome_length)
         stress_alleles = P.loc[:, stress_columns]
 
-        allele_dist = np.apply_along_axis(lambda x: np.bincount(x, minlength=num_stress_alleles+1),
-                                          axis=0, arr=stress_alleles)
-
         P.Fitness += np.sum(P[stress_columns] > 0, axis=1) * benefit_nonzero
 
-        if num_stress_alleles > 1 and num_stress_loci > 0:
+        if num_stress_alleles > 1:
+            # Fitness is proportional to the number of individuals in the 
+            # population with the same allele at each locus. Get the
+            # distribution of alleles in the population (per locus). Since
+            # the 0 allele is the absence of adaptation, it does not contribute
+            # to fitness.
+            allele_dist = np.apply_along_axis(lambda x: np.bincount(x, minlength=num_stress_alleles+1),
+                                              axis=0, arr=stress_alleles)
+            allele_dist[0] = np.zeros(allele_dist.shape[1])
+
             # Add gamma times the number of individuals with matching first allele
-            # TODO: what if it is all zeros? A bunch of zeros would have higher fitness than delta.
             P.Fitness += allele_dist[stress_alleles[stress_columns[0]], 0] * benefit_ordered
 
             # Add gamma times the number of individuals with increasing allele value
