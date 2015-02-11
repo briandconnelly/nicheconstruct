@@ -33,7 +33,7 @@ def assign_fitness(P, genome_length, num_stress_alleles, base_fitness,
             # Add gamma times the number of individuals with increasing allele value
             stress_alleles_next = (1 + (stress_alleles % num_stress_alleles)).values[:,:-1]
             allele_dist_next = allele_dist[:,1:]
-            P.Fitness += allele_dist_next[stress_alleles_next, range(genome_length_max-1)].sum(axis=1) * benefit_ordered
+            P.Fitness += allele_dist_next[stress_alleles_next, range(genome_length-1)].sum(axis=1) * benefit_ordered
 
     return P
 
