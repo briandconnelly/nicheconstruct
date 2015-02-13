@@ -47,7 +47,7 @@ bolstered by genetic association with self-benefitting traits
 the stage for an "adaptive race" in which cooperators and defectors vie for the
 first highly-beneficial non-social adaptation [@waite2012adaptation;
 @morgan2012selection]. Using a computational model inspired by corresponding
-microbial experiments, we have recently shown that cooperators can gain a
+microbial experiments, we recently showed that cooperators can gain a
 substantial leg up on defectors when the cooperative behavior increases
 population density, and thus the likelihood of acquiring beneficial mutations
 (in prep.). However, this advantage is fleeting (Fig. 1A). Once the
@@ -58,26 +58,47 @@ providing a stream of adaptive opportunities. While natural organisms typically
 find themselves in changing environments, can cooperators bet their success on
 these environments providing a steady influx of adaptive opportunities?
 
-Our previous model and others have neglected one potentially major determinant
-of evolutionary outcomes---environmental change brought about by the organisms
+Our previous model and others neglected one potentially major determinant of
+evolutionary outcomes---environmental change brought about by the organisms
 themselves. Through their metabolism, their interactions with others, and even
 through their death, organisms constantly modify their environment. These
 changes can produce feedback loops in which environmental change alters
 selection, which, in turn, alters phenotypes and their corresponding effects on
 the environment. **This research aims to reveal how endogenous environmental
 change, or *niche construction*, [@odling2003niche] affects the evolution of
-cooperation.**
+cooperation.** First, we will explore how selective feedbacks influence
+evolution as populations modify their physical environment. We then expand our
+scope to see how this process changes when the environment itself is under
+selection, such as when symbiont populations modify their host.
 
 
-### Aim 1: Phenotype-Driven Niche Construction
+### Phenotype-Driven Niche Construction
 
-- what will this address?
-- Spite as part of this
+As detailed in [Model Overview](#model), we will develop an agent-based model
+where evolution occurs in a metapopulation of populations connected by limited
+migration. Within each population, growth occurs based on the interaction of
+cooperators and defectors. We first consider public goods cooperation, where
+the costly production of a public good allows populations to reach greater
+densities. For example, many bacterial species produce exoenzymes that digest
+large proteins in the environment, making the resulting amino acids an
+accessible carbon source for nearby cells. In the model, beneficial non-social
+adaptations allow populations to further adapt to their patch. Importantly,
+these adaptations alter how populations interact with their environment, which,
+in turn, alters selection at that patch. As a result, cooperator populations
+may render their environment inhospitable to immigrant defectors. In some
+conditions, cooperators may instead construct their own demise, making their
+patch *more* hospitable to defectors.
 
-Model described in [Model Overview](#model)
+Natural organisms display a great diversity of cooperative behaviors. To
+identify more general principles about how niche construction influences the
+evolution of cooperation, we will extend our model to study additional forms of
+social interaction. For example, bacteria commonly produce toxins that inhibit
+or kill competing strains [@riley2002bacteriocins]. These *public bads* are
+harmful to others, but benefit the immune cooperator strain by reducing
+competition. TODO: model specifics?
 
 
-### Aim 2: Feedbacks in Host-Symbiont Co-Evolution
+### Feedbacks in Host-Symbiont Co-Evolution
 
 As described in the previous aim, the environmental state was implicit,
 depending only on the state of the population.
@@ -87,25 +108,22 @@ paper [@hamblin2014viral]
 
 #### Model Overview {#model}
 
-In our agent-based model, evolution occurs in a metapopulation where
-populations are connected by limited migration. During each simulation cycle,
-populations grow to carrying capacity, mutate, and migrate to neighboring
-populations.
 
-Individuals have a length $L+1$ genotype. The first $L$ loci are *stress
-loci*, and are each occupied by a $0$ or an integer from the set $A=\{1,
-\ldots, a_{max}\}$, where $a_{max}$ is the number of possible alleles. These
-alleles represent adaptations to the environment, and the number of loci
-determine the number of possible adaptations. All non-zero alleles carry
-fitness benefit $\delta$. Although there is no inherent difference between each
-allele, we reward genotypes with sequential stress alleles, providing fitness
-benefit $\epsilon$ for each allele whose value is 1 greater than the previous
-allele (modulo $A$). Because mutations are random, as described below, each
-population will evolve sequences that start with different allelic states.
-Importantly, these different sequences represent the unique niches constructed
-at each patch.  An additional binary allele at locus $L + 1$ determines whether
-or not the individual is a cooperator, which carries cost $c$. Populations are
-initiated with non-adapted individuals and cooperator proportion $p_0$.
+Individuals have a length $L+1$ genotype. The first $L$ loci are *stress loci*,
+and are each occupied by a $0$ or an integer from the set $A=\{1, \ldots,
+a_{max}\}$, where $a_{max}$ is the number of possible alleles. These alleles
+represent adaptations to the environment, and the number of loci determine the
+number of possible adaptations. All non-zero alleles carry fitness benefit
+$\delta$. Although there is no inherent difference between each allele, we
+reward genotypes with sequential stress alleles, providing fitness benefit
+$\epsilon$ for each allele whose value is 1 greater than the previous allele
+(modulo $A$). Because mutations are random, as described below, each population
+will evolve sequences that start with different allelic states.  Importantly,
+these different sequences represent the unique niches constructed at each
+patch.  An additional binary allele at locus $L + 1$ determines whether or not
+the individual is a cooperator, which carries cost $c$. Each of the $N$
+populations in the metapopulation are initiated with non-adapted individuals
+and cooperator proportion $p_0$.
 
 Each population grows to capacity $S_{min} + p (S_{max} - S_{min})$, where $p$
 is the proportion of cooperators in that population. Mutations alter the
