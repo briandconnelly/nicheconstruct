@@ -33,7 +33,7 @@ others avoid subversion by those that do not? Over time, we would expect these
 *defectors* to rise in abundance at the expense of others, eventually driving
 cooperators (and perhaps the entire population) to extinction.
 
-A number of factors can defer this potential *tragedy of the commons*
+Several factors can defer this potential *tragedy of the commons*
 [@hardin1968tragedy; @hamilton1964geneticalboth; @nowak2006five;
 @west2007evolutionary]. For example, it has frequently been demonstrated that
 close relatives must be more likely to benefit from the cooperative act than
@@ -53,41 +53,42 @@ population density, and thus the likelihood of acquiring beneficial mutations
 (in prep.). However, this advantage is fleeting (Fig. 1A). Once the
 opportunities for adaptation are exhausted, cooperators are once again at a
 disadvantage against defectors. As shown in Fig. 1B, however, cooperation can
-be maintained indefinitely when environmental change occurs frequently,
-providing a stream of adaptive opportunities. While natural organisms typically
-find themselves in changing environments, can cooperators bet their success on
-these environments providing a steady influx of adaptive opportunities?
+be maintained indefinitely when frequent environmental changes produce a stream
+of adaptive opportunities. While natural organisms typically find themselves in
+changing environments, can cooperators bet their success on the environment
+providing a sufficient influx of adaptive opportunities?
 
-Our previous model and others neglected one potentially major determinant of
-evolutionary outcomes---environmental change brought about by the organisms
+Our previous study and others have neglected one potentially major determinant
+of evolutionary outcomes---environmental change brought about by the organisms
 themselves. Through their metabolism, their interactions with others, and even
 through their death, organisms constantly modify their environment. These
-changes can produce feedback loops in which environmental change alters
-selection, which, in turn, alters phenotypes and their corresponding effects on
-the environment. **This research aims to reveal how endogenous environmental
-change, or *niche construction*, [@odling2003niche] affects the evolution of
-cooperation.** First, we will explore how selective feedbacks influence
-evolution as populations modify their physical environment. We then expand our
-scope to see how this process changes when the environment itself is under
-selection, such as when symbiont populations modify their host.
+changes can produce evolutionary feedback loops in which environmental change
+alters selection, which, in turn, alters phenotypes and their corresponding
+effects on the environment. **This research aims to reveal how endogenous
+environmental change, or *niche construction*, [@odling2003niche] affects the
+evolution of cooperation.** First, we will explore how selective feedbacks
+influence evolution as populations modify their environment. We then expand our
+scope to see how this process changes when the environment itself is also a
+target of selection, such as when symbiont populations modify their host.
+**[TODO: add big picture questions here? applications?]**
 
 
 ### Phenotype-Driven Niche Construction
 
-As detailed in [Model Overview](#model), we will develop an agent-based model
-where evolution occurs in a metapopulation of populations connected by limited
-migration. Within each population, growth occurs based on the interaction of
-cooperators and defectors. We first consider public goods cooperation, where
-the costly production of a public good allows populations to reach greater
-densities. For example, many bacterial species produce exoenzymes that digest
-large proteins in the environment, making the resulting amino acids an
-accessible carbon source for nearby cells. In the model, beneficial non-social
-adaptations allow populations to further adapt to their patch. Importantly,
+As detailed in the [Model Overview](#model), we will develop an agent-based
+model to observe evolution in a metapopulation where populations are connected
+by limited migration. Within each population, growth occurs based on the
+interaction of cooperators and defectors. We first consider public goods
+cooperation, where the costly production of a public good allows populations to
+reach greater densities. For example, many bacterial species produce exoenzymes
+that digest large proteins in the environment, unlocking the resulting amino
+acids as a carbon source for nearby cells. In the model, beneficial non-social
+adaptations allow populations to further adapt to their patch.  Importantly,
 these adaptations alter how populations interact with their environment, which,
 in turn, alters selection at that patch. As a result, cooperator populations
-may render their environment inhospitable to immigrant defectors. In some
-conditions, cooperators may instead construct their own demise, making their
-patch *more* hospitable to defectors.
+may ensure survival by rendering their environment inhospitable to immigrant
+defectors. However, in some conditions, cooperators may instead construct their
+own demise by making their patch *more* hospitable to defectors.
 
 Natural organisms display a great diversity of cooperative behaviors. To
 identify more general principles about how niche construction influences the
@@ -101,9 +102,9 @@ competition. TODO: model specifics?
 ### Feedbacks in Host-Symbiont Co-Evolution
 
 As described in the previous aim, the environmental state was implicit,
-depending only on the state of the population.
+depending only on the state of the population...
 
-paper [@hamblin2014viral]
+viral nc paper [@hamblin2014viral]
 
 
 #### Model Overview {#model}
@@ -147,7 +148,7 @@ gaining a mutation conferring tolerance.
 \newpage
 
 \renewcommand{\figurename}{Fig.}
-![(**A**) With "genetic niche hiking", cooperators outrun defectors by association with non-social adaptations that compensate for the cost of cooperation. Once defectors become equally adapted, they drive cooperators from the population. (**B**) When environmental change occurs frequently (here every 1,000 cycles), the continual opportunity for adaptation allows cooperators to persist indefinitely.](figures/Figure1all-scaled.png)
+![(**A**) Through "genetic niche hiking", cooperators outrun defectors by association with non-social adaptations that compensate for the cost of cooperation. Once defectors become equally adapted, however, they quickly drive cooperators to extinction. (**B**) When environmental change is frequent (here every 1,000 cycles), the continual potential for adaptation allows cooperators to persist indefinitely.](figures/Figure1all-scaled.png)
 
 \newpage
 
