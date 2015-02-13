@@ -64,20 +64,36 @@ themselves. Through their metabolism, their interactions with others, and even
 through their death, organisms constantly modify their environment. These
 changes can produce feedback loops in which environmental change alters
 selection, which, in turn, alters phenotypes and their corresponding effects on
-the environment. **The proposed research aims to reveal how endogenous
-environmental change, or *niche construction* [@odling2003niche], affects the
-evolution of cooperation.**
+the environment. **This research aims to reveal how endogenous environmental
+change, or *niche construction*, [@odling2003niche] affects the evolution of
+cooperation.**
 
 
-#### Model Overview
+### Aim 1: Phenotype-Driven Niche Construction
+
+- what will this address?
+- Spite as part of this
+
+Model described in [Model Overview](#model)
+
+
+### Aim 2: Feedbacks in Host-Symbiont Co-Evolution
+
+As described in the previous aim, the environmental state was implicit,
+depending only on the state of the population.
+
+paper [@hamblin2014viral]
+
+
+#### Model Overview {#model}
 
 In our agent-based model, evolution occurs in a metapopulation where
 populations are connected by limited migration. During each simulation cycle,
 populations grow to carrying capacity, mutate, and migrate to neighboring
 populations.
 
-Individuals have a length $L + 1$ genotype. The first $L$ loci are *stress
-loci*, and are each occupied by a $0$ or an integer from the set $A = \{1,
+Individuals have a length $L+1$ genotype. The first $L$ loci are *stress
+loci*, and are each occupied by a $0$ or an integer from the set $A=\{1,
 \ldots, a_{max}\}$, where $a_{max}$ is the number of possible alleles. These
 alleles represent adaptations to the environment, and the number of loci
 determine the number of possible adaptations. All non-zero alleles carry
@@ -110,22 +126,10 @@ this change with probability $\mu_{t}$, which represents the likelihood of
 gaining a mutation conferring tolerance.
 
 
-### Aim 1: Phenotype-Driven Niche Construction
-
-Spite as part of this
-
-
-### Aim 2: Feedbacks in Host-Symbiont Co-Evolution
-
-As described in the previous aim, the environmental state was implicit,
-depending only on the state of the population.
-
-paper [@hamblin2014viral]
-
 \newpage
 
-![This is the caption](figures/Figure1all.png)
-
+\renewcommand{\figurename}{Fig.}
+![(**A**) With "genetic niche hiking", cooperators outrun defectors by association with non-social adaptations that compensate for the cost of cooperation. Once defectors become equally adapted, they drive cooperators from the population. (**B**) When environmental change occurs frequently (here every 1,000 cycles), the continual opportunity for adaptation allows cooperators to persist indefinitely.](figures/Figure1all-scaled.png)
 
 \newpage
 
