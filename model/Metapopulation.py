@@ -45,6 +45,7 @@ def create_metapopulation(config, topology):
                        cost_cooperation=config['Population']['cost_cooperation'],
                        benefit_nonzero=config['Population']['benefit_nonzero'],
                        benefit_ordered=config['Population']['benefit_ordered'])
+
     return M
 
 
@@ -85,7 +86,7 @@ def migrate(M, topology, rate):
     return M
 
 
-def mutate(M, mu_stress, mu_cooperation, Lmax, num_stress_alleles):
+def mutate(M, mu_stress, mu_cooperation, Lmax, num_stress_alleles, config):
     """Mutate individuals in the metapopulation"""
     assert 0 <= mu_stress <= 1
     assert 0 <= mu_cooperation <= 1
@@ -110,6 +111,15 @@ def mutate(M, mu_stress, mu_cooperation, Lmax, num_stress_alleles):
             # Small problem, an allele could mutate to itself.
             Mcopy[s] = (Mcopy[s] + (binomial(n=1, p=mu_stress, size=Mcopy[s].shape) * random_integers(low=1, high=num_stress_alleles, size=Mcopy[s].shape))) % (num_stress_alleles + 1)
 
+    # for popid, subpop in M.groupby('Population'):
+    Mcopy = assign_fitness(P=Mcopy,
+                           genome_length=config['Population']['genome_length_max'],
+                           num_stress_alleles=config['Population']['stress_alleles'],
+                           base_fitness=config['Population']['base_fitness'],
+                           cost_cooperation=config['Population']['cost_cooperation'],
+                           benefit_nonzero=config['Population']['benefit_nonzero'],
+                           benefit_ordered=config['Population']['benefit_ordered'])
+
     return Mcopy
 
 
@@ -120,15 +130,7 @@ def grow(M, genome_lengths, config):
     smax = config['Population']['capacity_max']
     assert smin <= smax
 
-    num_stress_alleles = config['Population']['stress_alleles']
-    assert num_stress_alleles >= 0
-
-    genome_length_max = config['Population']['genome_length_max']
-    mu_stress = config['Population']['mutation_rate_stress']
-    mu_cooperation = config['Population']['mutation_rate_cooperation']
-
-    stress_columns = stress_colnames(L=genome_length_max)
-
+    # Keep track of the indices of offspring
     offspring_ix = np.array([], dtype=np.int)
 
     # Get a list of parent individual indices
@@ -146,20 +148,13 @@ def grow(M, genome_lengths, config):
 
         offspring_ix = np.append(offspring_ix, parent_ix)
 
-
     # Mutate the offspring
     mu_offspring = mutate(M=M.loc[offspring_ix],
-                          mu_stress=mu_stress,
-                          mu_cooperation=mu_cooperation,
-                          Lmax=genome_length_max,
-                          num_stress_alleles=num_stress_alleles)
-
-    mu_offspring = assign_fitness(P=mu_offspring, genome_length=genome_length_max,
-                                  num_stress_alleles=config['Population']['stress_alleles'],
-                                  base_fitness=config['Population']['base_fitness'],
-                                  cost_cooperation=config['Population']['cost_cooperation'],
-                                  benefit_nonzero=config['Population']['benefit_nonzero'],
-                                  benefit_ordered=config['Population']['benefit_ordered'])
+                          mu_stress=config['Population']['mutation_rate_stress'],
+                          mu_cooperation=config['Population']['mutation_rate_cooperation'],
+                          Lmax=config['Population']['genome_length_max'],
+                          num_stress_alleles=config['Population']['stress_alleles'],
+                          config=config)
 
     # Merge in the offspring
     M = M.append(mu_offspring)
