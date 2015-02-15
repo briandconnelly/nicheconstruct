@@ -7,7 +7,6 @@ from numpy import bitwise_xor, where
 from numpy.random import binomial, multinomial, random_integers
 import pandas as pd
 
-from Population import assign_fitness
 from misc import stress_colnames
 from Topology import random_neighbor
 
@@ -39,7 +38,8 @@ def create_metapopulation(config, topology):
     M = pd.DataFrame(data,
                      columns=['Time', 'Population', 'Coop'] + ["S{0:02d}".format(i) for i in np.arange(1,genome_length_max+1)] + ['Fitness'])
 
-    M = assign_fitness(P=M, genome_length=genome_length_min,
+    M = assign_fitness(M=M, Lmin=config['Population']['genome_length_min'],
+                       Lmax=config['Population']['genome_length_max'],
                        num_stress_alleles=config['Population']['stress_alleles'],
                        base_fitness=config['Population']['base_fitness'],
                        cost_cooperation=config['Population']['cost_cooperation'],
@@ -111,9 +111,9 @@ def mutate(M, mu_stress, mu_cooperation, Lmax, num_stress_alleles, config):
             # Small problem, an allele could mutate to itself.
             Mcopy[s] = (Mcopy[s] + (binomial(n=1, p=mu_stress, size=Mcopy[s].shape) * random_integers(low=1, high=num_stress_alleles, size=Mcopy[s].shape))) % (num_stress_alleles + 1)
 
-    # for popid, subpop in M.groupby('Population'):
-    Mcopy = assign_fitness(P=Mcopy,
-                           genome_length=config['Population']['genome_length_max'],
+    Mcopy = assign_fitness(M=Mcopy,
+                           Lmin=config['Population']['genome_length_min'],
+                           Lmax=config['Population']['genome_length_max'],
                            num_stress_alleles=config['Population']['stress_alleles'],
                            base_fitness=config['Population']['base_fitness'],
                            cost_cooperation=config['Population']['cost_cooperation'],
@@ -161,6 +161,48 @@ def grow(M, genome_lengths, config):
 
     # Reindex the metapopulation
     M.index = np.arange(len(M))
+
+    return M
+
+
+def assign_fitness(M, Lmin, Lmax, num_stress_alleles, base_fitness,
+                   cost_cooperation, benefit_nonzero, benefit_ordered):
+
+    assert Lmin >= 0
+    assert Lmax >= 0
+    assert Lmin <= Lmax
+    assert num_stress_alleles > 0
+
+    for popid, P in M.groupby('Population'):
+        Px = P.copy(deep=True)
+
+        Px.Fitness = base_fitness - (Px.Coop * cost_cooperation)
+
+        if Lmin > 0:
+            stress_columns = stress_colnames(L=Lmax)
+            stress_alleles = P.loc[:, stress_columns]
+
+            Px.Fitness += np.sum(Px[stress_columns] > 0, axis=1) * benefit_nonzero
+
+            if num_stress_alleles > 1:
+                # Fitness is proportional to the number of individuals in the 
+                # population with the same allele at each locus. Get the
+                # distribution of alleles in the population (per locus). Since
+                # the 0 allele is the absence of adaptation, it does not contribute
+                # to fitness.
+                allele_dist = np.apply_along_axis(lambda x: np.bincount(x, minlength=num_stress_alleles+1),
+                                                  axis=0, arr=stress_alleles)
+                allele_dist[0] = np.zeros(allele_dist.shape[1])
+
+                # Add gamma times the number of individuals with matching first allele
+                Px.Fitness += allele_dist[stress_alleles[stress_columns[0]], 0] * benefit_ordered
+
+                # Add gamma times the number of individuals with increasing allele value
+                stress_alleles_next = (1 + (stress_alleles % num_stress_alleles)).values[:,:-1]
+                allele_dist_next = allele_dist[:,1:]
+                Px.Fitness += allele_dist_next[stress_alleles_next, range(Lmax-1)].sum(axis=1) * benefit_ordered
+
+        M.loc[M.Population==popid, 'Fitness'] = Px.Fitness
 
     return M
 
