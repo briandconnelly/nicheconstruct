@@ -184,7 +184,7 @@ def assign_fitness(M, Lmin, Lmax, num_stress_alleles, base_fitness,
 
             Px.Fitness += np.sum(Px[stress_columns] > 0, axis=1) * benefit_nonzero
 
-            if num_stress_alleles > 1:
+            if num_stress_alleles > 1 and benefit_ordered != 0:
                 # Fitness is proportional to the number of individuals in the 
                 # population with the same allele at each locus. Get the
                 # distribution of alleles in the population (per locus). Since
