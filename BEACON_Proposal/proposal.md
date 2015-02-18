@@ -68,45 +68,63 @@ alters selection, which, in turn, alters phenotypes and their corresponding
 effects on the environment. **This research will reveal how endogenous
 environmental change, or *niche construction*, [@odling2003niche] affects the
 evolution of cooperation.** First, we will explore how selective feedbacks
-influence evolution as populations modify their environment. We then expand our
+influence evolution as populations modify their environment. We then widen our
 scope to include scenarios where the environment itself is also a target of
-selection, such as when symbiont populations modify their host.  **[TODO: add
-big picture questions here? applications?]**
+selection, such as when symbiont populations modify their host. As detailed in
+the [Model Overview](#model), we will develop an agent-based model to observe
+evolution in a metapopulation where populations are connected by limited
+migration. Within each population, growth occurs based on the interactions of
+cooperators and defectors, and mutations alter both social and non-social
+traits.
 
 
 ### Phenotype-Driven Niche Construction
 
-As detailed in the [Model Overview](#model), we will develop an agent-based
-model to observe evolution in a metapopulation where populations are connected
-by limited migration. Within each population, growth occurs based on the
-interaction of cooperators and defectors. We first consider public goods
+We first address the role of selective feedbacks in the context of public goods
 cooperation, where the costly production of a public good allows populations to
 reach greater densities. For example, many bacterial species produce exoenzymes
 that digest large proteins in the environment, unlocking the resulting amino
 acids as a carbon and energy source for nearby cells. In the model, beneficial
 non-social adaptations allow populations to further adapt to their patch.
-Importantly, these adaptations alter how populations interact with their
-environment, which, in turn, alters selection at that patch. As a result,
-cooperator populations may ensure survival by rendering their environment
-inhospitable to immigrant defectors. However, under different conditions,
-cooperators may instead construct their own demise by making their patch *more*
-hospitable to defectors.
+TODO: basic idea behind the implementation. Importantly, these adaptations
+alter how populations interact with their environment, which, in turn, alters
+selection at that patch. As a result, cooperator populations may ensure
+survival by rendering their environment inhospitable to immigrant defectors.
+Of course, these cooperators remain susceptible to invasion from within by
+defectors that arise via mutation.
 
 Natural organisms display a great diversity of social behaviors. For example,
 bacteria commonly produce toxins that inhibit or kill competing strains
 [@riley2002bacteriocins]. These *public bads* are harmful to others, but
-benefit the immune cooperator strain by reducing competition. To identify more
+benefit the immune cooperator strain both by reducing competition for resources
+and by limiting their competitors' mutational opportunities. To identify
 general principles about how niche construction influences the evolution of
 social behaviors, we will extend our model to address additional forms of
-social interaction, such as spite [@hamilton1970selfish].
+social interaction, such as spite [@hamilton1970selfish]. TODO implementation
+details.
 
 
 ### Feedbacks in Host-Symbiont Co-Evolution
 
-As described in the previous aim, the environmental state was implicit,
-depending only on the state of the population...
+As described in the previous aim, the state of the environment was implicit,
+depending entirely on the state of the population. When the environment itself
+is also a target of selection, additional evolutionary feedbacks are produced.
+For example, this is the case in the human microbiome and in infections, where
+bacterial populations affect their host's fitness. As the host population
+changes, so too will selection on their microbial symbiont populations.
 
-viral nc paper [@hamblin2014viral]
+Here, evolutionary outcomes depend greatly on the degree of shared interests
+between the host and symbiont. For example, cooperative production of virulence
+factors in lung infections by *P. aeruginosa* is harmful to those with cystic
+fibrosis. Conversely, digestive enzymes produced in the gut microbiome, are
+vital to host health. We will use our model to address how the different types
+of interactions that hosts and their symbionts have, such as mutualisms and
+parasitisms, affect the evolutionary process. It was recently suggested that
+this niche construction perspective will be critical for improving our
+understanding of viral evolution [@hamblin2014viral] and co-infecting parasites
+[@hafer2015when].
+
+[//]: # Left off here
 
 
 #### Model Overview {#model}
@@ -120,7 +138,7 @@ alleles carry fitness benefit $\delta$. Although we define no inherent
 differences among the alleles, we reward genotypes with sequential stress
 alleles, providing fitness benefit $\epsilon$ for each allele whose value is 1
 greater than the previous allele (modulo $A$). The timescales of population
-growth and niche construction can be de-coupled by factoring previous alleleic
+growth and niche construction can be de-coupled by factoring previous allelic
 states into these fitness calculations [@laland1996evolutionary]. Because
 mutations are random, as described below, each population will evolve sequences
 that start with different allelic states. Importantly, these different
