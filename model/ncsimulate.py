@@ -156,6 +156,13 @@ def main():
         writermp.writeheader()
 
 
+    # Create the log file of population-level data if enabled
+    log_population = config['PopulationLog']['enabled']
+    if log_population:
+        log_population_freq = config['PopulationLog']['frequency']
+        # TODO
+
+
     # Create the migration topology. This is a graph where each population is a
     # node, and the edges between nodes represent potential paths for migration
     topology = build_topology(config=config)
@@ -202,6 +209,10 @@ def main():
 
         if log_metapopulation and cycle % log_metapopulation_freq == 0:
             write_metapop_data(writer=writermp, metapop=metapop, cycle=cycle)
+
+        if log_population and cycle % log_population_freq == 0:
+            # TODO
+            pass
 
         env_changed = False
 
