@@ -140,33 +140,35 @@ will be critical for improving our understanding of viral evolution
 
 #### Model Description {#model}
 
-In our proposed model, each individual has a length $L+1$ genotype. The first
-$L$ loci are *stress loci*, and are each occupied by a $0$ or an integer from
-the set $A=\{1, \ldots, a_{max}\}$, where $a_{max}$ is the number of possible
-alleles.  These alleles represent adaptations to the environment, and the
-number of loci determines the number of possible adaptations. All non-zero
-alleles carry fitness benefit $\delta$. Although we define no inherent
-differences among the alleles, we reward genotypes with sequential stress
-alleles, providing fitness benefit $\epsilon$ for each allele whose value is 1
-greater than the previous allele (modulo $A$). The timescales of population
-growth and niche construction can be de-coupled by factoring previous allelic
-states into these fitness calculations [@laland1996evolutionary]. Because
-mutations are random, as described below, each population will evolve sequences
-that start with different allelic states. Importantly, these different
-sequences represent the unique niches constructed at each patch.  An additional
-binary allele at locus $L + 1$ determines whether or not the individual is a
-cooperator, which carries cost $c$. Each of the $N$ populations in the
+In our proposed model, each individual has a length $L+1$ genotype. A binary
+allele at the first locus determines whether or not the individual is a
+cooperator, which carries cost $c$. The remaining $L$ loci are *stress loci*,
+and are each occupied by a $0$ or an integer from the set $A=\{1, \ldots,
+a_{max}\}$, where $a_{max}$ is the number of possible alleles.  These alleles
+represent adaptations to the environment, and the number of loci determines the
+number of possible adaptations. All non-zero alleles carry fitness benefit
+$\delta$.  Although we define no inherent differences among the alleles, we
+reward genotypes with sequential stress alleles, providing fitness benefit
+$\epsilon$ for each allele whose value is 1 greater than the previous allele
+(modulo $A$).  Because mutations are random, as described below, each
+population will evolve sequences that start with different allelic states.
+Importantly, these different sequences represent the unique niches constructed
+at each patch.  Individuals that more closely represent their niche have higher
+fitness. We can de-couple the timescales at which population growth and niche
+construction occur by factoring previous allelic states into these fitness
+calculations [@laland1996evolutionary]. Each of the $N$ populations in the
 metapopulation is initiated with non-adapted individuals and cooperator
 proportion $p_0$.
 
 Each population grows to capacity $S_{min} + p (S_{max} - S_{min})$, where $p$
 is the proportion of cooperators in that population. Mutations alter the
 allelic state at stress loci and the cooperation locus with probability
-$\mu_{s}$ and $\mu_{p}$, respectively. After growth, individuals migrate to a
-randomly chosen neighbor patch at rate $m$. These migrational neighborhoods
-consist of adjacent population nodes on a lattice or other graph. Finally,
-populations are thinned to allow for growth in the next cycle. Individuals
-survive this thinning with probability $d$.
+$\mu_{s}$ and $\mu_{p}$, respectively. In our public goods scenario, $S_{max} >
+S_{min}$. After growth, individuals migrate to a randomly chosen neighbor patch
+at rate $m$. These migrational neighborhoods consist of adjacent population
+nodes on a lattice or other graph. Finally, populations are thinned to allow
+for growth in the next cycle. Individuals survive this thinning with
+probability $d$.
 
 
 \newpage

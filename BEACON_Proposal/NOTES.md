@@ -1,6 +1,6 @@
 # TODO
-* Model description
-    * Currently starting to address this role in P aeruginosa
+* Move model description up.
+* Better titles for the Aims. Form as questions?
 * Figure 1: Get font sizes of A and B to match
 * New title
 
