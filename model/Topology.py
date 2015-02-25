@@ -49,6 +49,7 @@ def build_topology_moore(config):
 
     for node in top.nodes_iter():
         (myrow, mycol) = divmod(node, columns)
+        top.node[node]['coords'] = (myrow, mycol)
 
         for r in range(myrow - radius, myrow + radius + 1):
             if periodic == False and (r < 0 or r >= rows):
@@ -81,6 +82,9 @@ def build_topology_vonneumann(config):
 
     if periodic:
         graph.name += ' with periodic boundaries'
+
+    for node in graph.nodes_iter():
+        graph.node[node]['coords'] = divmod(node, width)
 
     return graph
 

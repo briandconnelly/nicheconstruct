@@ -12,6 +12,7 @@ from warnings import warn
 from configobj import ConfigObj, ConfigObjError, flatten_errors
 from validate import Validator
 
+from logfile import write_metapop_data, write_population_data
 from Metapopulation import *
 from misc import *
 from Topology import *
@@ -42,20 +43,6 @@ def parse_arguments():
     parser.add_argument('--version', action='version', version=__version__)
 
     return parser.parse_args()
-
-
-def write_metapop_data(writer, metapop, cycle):
-    """Write information about the metapopulation to a CSV writer"""
-    metapop_data = {'Time': cycle,
-                    'PopulationSize': metapop.shape[0],
-                    'CooperatorProportion': metapop.Coop.mean(),
-                    'MinCooperatorFitness': metapop[metapop.Coop==1].Fitness.min(),
-                    'MaxCooperatorFitness': metapop[metapop.Coop==1].Fitness.max(),
-                    'MeanCooperatorFitness': metapop[metapop.Coop==1].Fitness.mean(),
-                    'MinDefectorFitness': metapop[metapop.Coop==0].Fitness.min(),
-                    'MaxDefectorFitness': metapop[metapop.Coop==0].Fitness.max(),
-                    'MeanDefectorFitness': metapop[metapop.Coop==0].Fitness.mean()}
-    writer.writerow(metapop_data)
 
 
 def main():
@@ -160,7 +147,17 @@ def main():
     log_population = config['PopulationLog']['enabled']
     if log_population:
         log_population_freq = config['PopulationLog']['frequency']
-        # TODO
+
+        # Config options for logging population. Name, frequency, etc.
+        fieldnames = ['Time', 'Population', 'X', 'Y', 'PopulationSize',
+                      'CooperatorProportion', 'MinCooperatorFitness',
+                      'MaxCooperatorFitness', 'MeanCooperatorFitness',
+                      'MinDefectorFitness', 'MaxDefectorFitness',
+                      'MeanDefectorFitness']
+        writerp = csv.DictWriter(open(os.path.join(config['Simulation']['data_dir'],
+                                      'population.csv'), 'w'),
+                                      fieldnames=fieldnames)
+        writerp.writeheader()
 
 
     # Create the migration topology. This is a graph where each population is a
@@ -208,10 +205,12 @@ def main():
             print("Cycle {c}: Size {ps}, Populations {pops}, {pc:.0%} cooperators, Fitness: {f:.02}, C1: {c1}, D1: {d1} ]".format(c=cycle, ps=metapop.shape[0], pops=metapop.Population.unique().shape[0], pc=metapop.Coop.mean(), f=metapop.Fitness.mean(), c1=c1, d1=d1))
 
         if log_metapopulation and cycle % log_metapopulation_freq == 0:
-            write_metapop_data(writer=writermp, metapop=metapop, cycle=cycle)
+            write_metapop_data(writer=writermp, metapop=metapop,
+                               topology=topology, cycle=cycle)
 
         if log_population and cycle % log_population_freq == 0:
-            # TODO
+            write_population_data(writer=writerp, metapop=metapop,
+                                  topology=topology, cycle=cycle)
             pass
 
         env_changed = False

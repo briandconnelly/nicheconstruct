@@ -173,13 +173,14 @@ def assign_fitness(M, Lmin, Lmax, num_stress_alleles, base_fitness,
     assert Lmin <= Lmax
     assert num_stress_alleles > 0
 
+    stress_columns = stress_colnames(L=Lmax)
+
     for popid, P in M.groupby('Population'):
         Px = P.copy(deep=True)
 
         Px.Fitness = base_fitness - (Px.Coop * cost_cooperation)
 
         if Lmin > 0:
-            stress_columns = stress_colnames(L=Lmax)
             stress_alleles = P.loc[:, stress_columns]
 
             Px.Fitness += np.sum(Px[stress_columns] > 0, axis=1) * benefit_nonzero
