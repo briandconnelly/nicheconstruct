@@ -31,7 +31,7 @@ output:
 * Paper overview
 
 
-# Methods
+# Materials and Methods
 
 We develop a computational model to observe how the evolution of public goods production is affected as populations modify and adapt to their environment. Each simulation tracks a single metapopulation composed of $N^2$ patches arranged as an $N \times N$ bounded lattice, where each patch can hold a population. The genotype of each individual in these populations is a length $L+1$ string of digits, where $L_{min} \le L \le L_{max}$. Values (alleles) in the first $L$ positions (loci) determine the individual’s level of adaptation to the environment. Each of these "stress loci" is occupied by a zero or an element from the set of alleles $A = \{1, \ldots, a_{max}\}$, where $a_{max}$ is the number of possible alleles. An additional binary allele at the $(L+1)$<sup>th</sup> locus determines whether the individual is a producer (allele $1$) or a non-producer (allele $0$) of a public good. We refer to this locus as the "production locus". Using this representation, the number of unique genotypes $G$ is $2 (A + 1)^{L}$. All model parameters and their values are listed in [Table X](https://github.com/briandconnelly/nicheconstruct/blob/master/paper/table_of_parameters.md).
 
