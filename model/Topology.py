@@ -129,8 +129,7 @@ def build_topology_regular(config):
     assert degree >= 0
 
     top = nx.random_regular_graph(d=degree, n=size, seed=seed)
-    top.name = 'Random Regular Graph: {n} nodes, {d} degree'.format(n=size,
-                                                                    d=degree)
+    top.name = 'Random Regular Graph: {n} nodes, {d} degree, {s} seed'.format(n=size, d=degree, s=seed)
     return top
 
 

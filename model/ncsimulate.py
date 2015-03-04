@@ -255,7 +255,11 @@ def main():
 
 
     if log_metapopulation:
-        write_metapop_data(writer=writermp, metapop=metapop, cycle=cycle+1)
+        write_metapop_data(writer=writermp, metapop=metapop, topology=topology,
+                           cycle=cycle+1)
+    if log_population:
+        write_population_data(writer=writerp, metapop=metapop,
+                              topology=topology, cycle=cycle)
 
 #-------------------------------------------------------------------------
 
