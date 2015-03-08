@@ -171,27 +171,61 @@ evolution of  social behaviors.
 
 ## Criterion One: Scientific Strength of the Proposed Project
 
+The selective feedbacks that organisms produce as they change their environment
+has received relatively little attention, despite their potential to radically
+alter evolutionary outcomes. By incorporating these selective feedbacks, this
+project will offer new insights into the evolution of cooperation, both in the
+context of single populations and in host-symbiont interactions.
+
 ## Criterion Two: Centrality of Project to BEACON’s Mission
+
 
 ## Criterion Three: Quality of Plan for Obtaining External Funding
 
+We believe that the results gained from this project and the preliminary
+experiments that they inspire will enable us to be extremely competitive in
+finding external funding. Several recent publications have argued that insights
+into the selective feedbacks produced by niche construction are critical for
+understanding host-pathogen co-evolution.
+
+
 ## Criterion Four: Degree of Multidisciplinarity of Project
+
+Due to its complexity, this project is currently focused on modeling and
+simulation. However, both members of our team are currently using microbes to
+explore how the environment affects evolution, and the results from this work
+will inform future experiments that incorporate selective feedbacks that arise
+through niche construction.
+
 
 ## Criterion Five: Impact on Education and Human Resource Development
 
-* Pacific Science Center
+Through a Science Communication Fellowship, BC is currently developing hands-on
+activities at the Pacific Science Center that introduce evolution and the
+effects of environmental change. These activities will be led several times in
+the coming year with high school students and the general public.
+
 
 ## Criterion Six: Knowledge Transfer to Industry
 
-* Medical
-* agricultural
-* Decentralized networks (cars, internet of things)
+In medicine, "anti-infective" treatments have been proposed that disrupt
+microbial social behaviors as an alternative to antibiotics. Similarly, the
+cooperative formation (and inhibition) of biofilms is a persistent challenge in
+agriculture and wastewater treatment.  An understanding of the forces that
+maintain cooperation is essential in these contexts. This is also true in
+engineering, where decentralized systems such as the networks that will connect
+our cars and other devices must be designed in ways that enforce "social"
+behaviors such as prudent bandwidth usage. Our understanding of the forces that
+maintain cooperation in nature will be invaluable for preventing a digital
+tragedy of the commons in these systems.
 
 ## Criterion Seven: Impact on Achieving the Diversity Goals of BEACON
 
 ## Criterion Eight: Multi-Institutionality
 
-* UW and MSU
+This project is a collaboration between individuals from the University of
+Washington and Michigan State University.
+
 
 ## Criterion Nine: Budget Appropriateness
 
