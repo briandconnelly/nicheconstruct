@@ -1,8 +1,4 @@
 ---
-#title: Evolution of Cooperation through Feedback from Niche Construction
-#author:
-#- Brian Connelly (UW)
-
 geometry: margin=0.75in
 fontsize: 10pt
 bibliography: references.bib
@@ -105,7 +101,7 @@ alter the allelic state at stress loci and the cooperation locus with
 probability $\mu_{s}$ and $\mu_{p}$, respectively. Individuals then migrate to
 a randomly chosen neighbor patch at rate $m$. These migrational neighborhoods
 consist of adjacent population nodes on a lattice or other graph. Finally,
-populations are thinned to proportion $d$ to accomodate growth in the next
+populations are thinned to proportion $d$ to accommodate growth in the next
 cycle.
 
 
@@ -137,16 +133,19 @@ the host population changes, so too will selection on their symbiont
 populations. Here, evolutionary outcomes depend greatly on the degree of shared
 interest between the host and symbiont. For example, the cooperative production
 of virulence factors by the pathogen *P.  aeruginosa* in lung infections is
-harmful to those with cystic fibrosis.  Conversely, digestive enzymes produced
+harmful to those with cystic fibrosis. Conversely, digestive enzymes produced
 in the gut microbiome are vital to host health.
 
-By extending our model to include selection at the host level and defining how
-changes in host fitness affect changes in symbiont fitness (and vice versa), we
-will address how the different types of interactions that hosts and their
-symbionts have, such as mutualisms and parasitisms, affect the evolutionary
-process. It was recently suggested that this niche construction perspective
-will be critical for improving our understanding of viral evolution
-[@hamblin2014viral] and evolution in co-infecting parasites [@hafer2015when].
+To address how feedbacks from niche construction affect social evolution in
+host-symbiont systems, we will extend our model to include selection and
+replication at the host level. Here, host fitness will be dependent on the
+state of the symbiont population. By altering this dependence, we can observe
+how host-symbiont co-evolution differs with *positive-* and *negative niche
+construction*. As hosts replicate, we can also explore how co-evolution differs
+when symbiont populations are transferred vertically or horizontally. It was
+recently suggested that this niche construction perspective will be critical
+for improving our understanding of viral evolution [@hamblin2014viral] and
+evolution in co-infecting parasites [@hafer2015when].
 
 
 
