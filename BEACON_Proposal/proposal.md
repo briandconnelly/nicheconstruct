@@ -122,7 +122,7 @@ whether this benefits cooperators, whose larger populations produce more
 migrants.
 
 
-### How do Feedbacks affect Host-Symbiont Co-Evolution?
+### How do Selective Feedbacks affect Host-Symbiont Co-Evolution?
 
 In our first set of experiments, the state of the environment is implicit,
 depending entirely on the composition of the population. However, the
@@ -133,8 +133,9 @@ the host population changes, so too will selection on their symbiont
 populations. Here, evolutionary outcomes depend greatly on the degree of shared
 interest between the host and symbiont. For example, the cooperative production
 of virulence factors by the pathogen *P.  aeruginosa* in lung infections is
-harmful to those with cystic fibrosis. Conversely, digestive enzymes produced
-in the gut microbiome are vital to host health.
+harmful to those with cystic fibrosis. Conversely, cooperative light production
+by *A. fischeri* is vital for the survival of its host, the Hawaiian bobtail
+squid.
 
 To address how feedbacks from niche construction affect social evolution in
 host-symbiont systems, we will extend our model to include selection and
@@ -148,21 +149,16 @@ for improving our understanding of viral evolution [@hamblin2014viral] and
 evolution in co-infecting parasites [@hafer2015when].
 
 
-
-### Future Directions
+### Future Directions (may be cut)
 
 Natural organisms display a great diversity of social behaviors. Along with
 public goods, bacteria also commonly produce toxins that inhibit or kill
 competing strains [@riley2002bacteriocins]. These *public bads* benefit the
 immune cooperator strain both by reducing competition for resources and by
-limiting their competitors' mutational opportunities. To identify general
-principles about how niche construction influences the evolution of social
-behaviors, we will extend our model to capture additional forms of social
-interaction. For example, we can model spiteful behaviors
-[@hamilton1970selfish] by allowing populations to reach the same carrying
-capacity, but having mutations occur at a rate proportional to the number of
-cooperators.
-
+limiting their competitors' mutational opportunities. By extending our model to
+capture additional forms of social interaction such as these, we hope to
+identify general principles about how niche construction influences the
+evolution of  social behaviors.
 
 
 \newpage
