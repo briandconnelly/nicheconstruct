@@ -186,22 +186,28 @@ def assign_fitness(M, Lmin, Lmax, num_stress_alleles, base_fitness,
             Px.Fitness += np.sum(Px[stress_columns] > 0, axis=1) * benefit_nonzero
 
             if num_stress_alleles > 1 and benefit_ordered != 0:
-                # Fitness is proportional to the number of individuals in the 
+                # Fitness is proportional to the number of individuals in the
                 # population with the same allele at each locus. Get the
                 # distribution of alleles in the population (per locus). Since
-                # the 0 allele is the absence of adaptation, it does not contribute
-                # to fitness.
+                # the 0 allele is the absence of adaptation, it does not
+                # contribute to fitness.
                 allele_dist = np.apply_along_axis(lambda x: np.bincount(x, minlength=num_stress_alleles+1),
                                                   axis=0, arr=stress_alleles)
                 allele_dist[0] = np.zeros(allele_dist.shape[1])
 
                 # Add gamma times the number of individuals with matching first allele
-                Px.Fitness += allele_dist[stress_alleles[stress_columns[0]], 0] * benefit_ordered
+                # TODO: remove this. Benefit of first allelic state is number at last locus that is 1 less.
+                #Px.Fitness += allele_dist[stress_alleles[stress_columns[0]], 0] * benefit_ordered
 
                 # Add gamma times the number of individuals with increasing allele value
-                stress_alleles_next = (1 + (stress_alleles % num_stress_alleles)).values[:,:-1]
-                allele_dist_next = allele_dist[:,1:]
-                Px.Fitness += allele_dist_next[stress_alleles_next, range(Lmax-1)].sum(axis=1) * benefit_ordered
+                #stress_alleles_next = (1 + (stress_alleles % num_stress_alleles)).values[:,:-1]
+                #allele_dist_next = allele_dist[:,1:]
+                #Px.Fitness += allele_dist_next[stress_alleles_next, range(Lmax-1)].sum(axis=1) * benefit_ordered
+
+                stress_alleles_next = (1 + (stress_alleles % num_stress_alleles)).values
+                allele_dist_next = np.roll(a=allele_dist, shift=-1, axis=1)
+
+                Px.Fitness += allele_dist_next[stress_alleles_next, range(Lmax)].sum(axis=1) * benefit_ordered
 
         M.loc[M.Population==popid, 'Fitness'] = Px.Fitness
 
