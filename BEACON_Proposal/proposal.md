@@ -32,7 +32,7 @@ cooperators---and perhaps the entire population---to extinction.
 
 Several factors can defer this potential *tragedy of the commons*
 [@hardin1968tragedy; @hamilton1964geneticalboth; @nowak2006five;
-@west2007evolutionary]. For example, close relatives must benefit more from the
+@west2007evolutionary]. For example, cooperators must benefit more from the
 cooperative act than others. This can occur when cooperators are clustered
 together in spatially-structured populations [@kudzalfick2011high;
 @fletcher2009simple; @nadell2010emergence] or when cooperators use
@@ -55,26 +55,26 @@ While natural organisms typically find themselves in changing environments,
 cooperators may not be able to rely on the the environment to provide
 sufficient adaptive opportunities for their long-term survival.
 
-Previous studies have have typically neglected one potentially major
-determinant of evolutionary outcomes: environmental change brought about by the
-organisms themselves. Through their metabolism, their interactions with others,
-and even through their deaths, organisms constantly modify their environment.
-These changes can produce evolutionary feedback loops in which environmental
-change alters selection, which, in turn, alters phenotypes and their
-corresponding effects on the environment [@odling2003niche]. **This research
-will reveal how endogenous environmental change, or *niche construction*,
-affects the evolution of cooperation.** First, we will explore how selective
-feedbacks influence evolution as populations construct their environment. We
-then widen our scope to include scenarios where the environment is also a
-target of selection, such as when symbiont populations modify their host.
+Previous studies on the evolution have have typically neglected one potentially
+major determinant of evolutionary outcomes: environmental change brought about
+by the organisms themselves. Through their metabolism, their interactions with
+others, and even through their deaths, organisms constantly modify their
+environment.  These changes can produce evolutionary feedback loops in which
+environmental change alters selection, which, in turn, alters phenotypes and
+their corresponding effects on the environment [@odling2003niche]. **This
+research will reveal how endogenous environmental change, or *niche
+construction*, affects the evolution of cooperation.** First, we will explore
+how selective feedbacks influence evolution as populations construct their
+environment. We then widen our scope to include scenarios where the environment
+itself is biotic, such as when symbiont populations modify their host.
 
 Because this research requires a level of control over both population and
 environment that would be difficult to attain even with well-characterized
-natural systems, we employ computational modeling for these initial studies.
-However, we expect that the results gained through this project will be
-instrumental in designing future microbial experiments. We first describe the
-model that will be developed and then detail how it will be used to reveal how
-niche construction affects the evolution of cooperation in two contexts.
+systems, we employ computational modeling for these initial studies. However,
+we expect that the results gained through this project will be instrumental in
+designing future microbial experiments. We first describe the model that will
+be developed and then detail how it will be used to study the effects of niche
+construction on the evolution of cooperation in two contexts.
 
 #### Model Description {#model}
 
@@ -150,16 +150,9 @@ for improving our understanding of viral evolution [@hamblin2014viral] and
 evolution in co-infecting parasites [@hafer2015when].
 
 
-### Future Directions (may be cut)
+### Summary
 
-Natural organisms display a great diversity of social behaviors. Along with
-public goods, bacteria also commonly produce toxins that inhibit or kill
-competing strains [@riley2002bacteriocins]. These *public bads* benefit the
-immune cooperator strain both by reducing competition for resources and by
-limiting their competitors' mutational opportunities. By extending our model to
-capture additional forms of social interaction such as these, we hope to
-identify general principles about how niche construction influences the
-evolution of  social behaviors.
+TODO
 
 
 \newpage
@@ -169,7 +162,9 @@ evolution of  social behaviors.
 
 \newpage
 
-## Criterion One: Scientific Strength of the Proposed Project
+## Abstract (1600 chars)
+
+## Criterion One: Scientific Strength of the Proposed Project (250 chars)
 
 The selective feedbacks that organisms produce as they change their environment
 has received relatively little attention, despite their potential to radically
@@ -177,57 +172,51 @@ alter evolutionary outcomes. By incorporating these selective feedbacks, this
 project will offer new insights into the evolution of cooperation, both in the
 context of single populations and in host-symbiont interactions.
 
-## Criterion Two: Centrality of Project to BEACON’s Mission
+
+## Criterion Two: Centrality of Project to BEACON’s Mission (250 chars)
 
 
-## Criterion Three: Quality of Plan for Obtaining External Funding
+## Criterion Three: Quality of Plan for Obtaining External Funding (250 chars)
 
-We believe that the results gained from this project and the preliminary
-experiments that they inspire will enable us to be extremely competitive in
-finding external funding. Several recent publications have argued that insights
-into the selective feedbacks produced by niche construction are critical for
+The preliminary results will enable us to be competitive in finding external
+funding. Several recent publications have argued that insights into the
+selective feedbacks produced by niche construction are critical for
 understanding host-pathogen co-evolution.
 
 
-## Criterion Four: Degree of Multidisciplinarity of Project
+## Criterion Four: Degree of Multidisciplinarity of Project (250 chars)
 
-Due to its complexity, this project is currently focused on modeling and
-simulation. However, both members of our team are currently using microbes to
-explore how the environment affects evolution, and the results from this work
-will inform future experiments that incorporate selective feedbacks that arise
-through niche construction.
+This project is a collaboration of a computer scientist (Connelly) and a biologist (Turner).
 
 
-## Criterion Five: Impact on Education and Human Resource Development
+## Criterion Five: Impact on Education and Human Resource Development (250 chars)
 
-Through a Science Communication Fellowship, BC is currently developing hands-on
-activities at the Pacific Science Center that introduce evolution and the
-effects of environmental change. These activities will be led several times in
-the coming year with high school students and the general public.
+B. Connelly is currently developing hands-on activities at the Pacific Science
+Center that introduce evolution and the effects of environmental change to high
+school students and the general public. He will lead these several times in the
+coming year
 
 
-## Criterion Six: Knowledge Transfer to Industry
+## Criterion Six: Knowledge Transfer to Industry (250 chars)
 
-In medicine, "anti-infective" treatments have been proposed that disrupt
-microbial social behaviors as an alternative to antibiotics. Similarly, the
-cooperative formation (and inhibition) of biofilms is a persistent challenge in
-agriculture and wastewater treatment.  An understanding of the forces that
-maintain cooperation is essential in these contexts. This is also true in
-engineering, where decentralized systems such as the networks that will connect
-our cars and other devices must be designed in ways that enforce "social"
-behaviors such as prudent bandwidth usage. Our understanding of the forces that
-maintain cooperation in nature will be invaluable for preventing a digital
-tragedy of the commons in these systems.
+Understanding the forces that maintain cooperation is essential in medicine for
+developing "anti-infective" treatments, in industry for wastewater treatment,
+and in engineering networks where resources are shared among cars and other
+devices.
 
-## Criterion Seven: Impact on Achieving the Diversity Goals of BEACON
 
-## Criterion Eight: Multi-Institutionality
+## Criterion Seven: Impact on Achieving the Diversity Goals of BEACON (250 chars)
+
+
+## Criterion Eight: Multi-Institutionality (250 chars)
 
 This project is a collaboration between individuals from the University of
 Washington and Michigan State University.
 
 
-## Criterion Nine: Budget Appropriateness
+## Criterion Nine: Budget Appropriateness (1600 chars)
+
+All funds will be allocated to salary for B. Connelly, who will lead model development, run simulations, analyze data, and lead preparation for all manuscripts that result.
 
 ## Criterion Ten: Overall Quality
 
