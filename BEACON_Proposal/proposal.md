@@ -1,5 +1,5 @@
 ---
-geometry: margin=0.75in
+geometry: margin=0.65in
 fontsize: 10pt
 bibliography: references.bib
 csl: nature.csl
@@ -157,12 +157,32 @@ TODO
 
 \newpage
 
-\renewcommand{\figurename}{Fig.}
 ![(**A**) Through "genetic niche hiking", cooperators outrun defectors by association with non-social adaptations that compensate for the cost of cooperation. Once defectors become equally adapted, however, they quickly drive cooperators to extinction. (**B**) When environmental change is frequent (here every 1,000 cycles), the continual potential for adaptation allows cooperators to persist indefinitely.](figures/Figure1all-scaled.png)
+
+![Model Overview: For simplicity, we consider two clonal populations. (**A**) Because public good production is costly, the cooperator population has lower fitness relative to the defector population as shown in the bar graph. However, these public goods enable the cooperator population to be larger. (**B**) As a result, the cooperator population more quickly acquires mutations. Because these mutations are beneficial, the fitness of cooperators surpasses that of the ancestral defector (bar graph baseline). (**C**) Selection favors alleles at adjacent loci that form sequences, offering a further boost to cooperators. (**D**) The cooperator patch now favors individuals with allelic state $2,3,1$.](figures/diagram1.pdf)
 
 \newpage
 
 ## Abstract (1600 chars)
+
+Through their interactions, their activities, and even their mere presence,
+organisms change the environment for themselves and others. This "niche
+construction" process becomes particularly interesting when it creates
+evolutionary feedback, whereby selective pressures are altered in response to
+environmental change. With the proposed project, we aim to reveal how niche
+construction influences the evolution of cooperation, which has been a
+long-standing challenge to evolutionary theory. We will develop and use a
+simulation model in which 
+
+populations of individuals that cooperatively
+produce a public good that permits increased growth in a stressful environment
+and investigate how local- and global-scale niche construction affects the
+ability of these populations to resist invasion by non-producing cheats. We
+find that niche construction profoundly impacts the evolution of cooperation by
+creating new opportunities for adaptation. Cooperators are able to escape
+subversion by cheats as long as niche construction clears these paths of
+adaptation. This work provides a crucial step towards understanding how
+evolution occurs in complex environments like those found in nature.
 
 ## Criterion One: Scientific Strength of the Proposed Project (250 chars)
 
@@ -216,13 +236,30 @@ Washington and Michigan State University.
 
 ## Criterion Nine: Budget Appropriateness (1600 chars)
 
-All funds will be allocated to salary for B. Connelly, who will lead model development, run simulations, analyze data, and lead preparation for all manuscripts that result.
+All funds will be allocated to salary for Connelly, who will lead model development, run simulations, analyze data, and lead preparation for all manuscripts that result. Computational resources for simulations will be funded by a grant to Connelly from Google.
+
 
 ## Criterion Ten: Overall Quality
 
 ## Diversity plan (1600 characters maximum)
 
 ## Data management plan (1600 characters maximum)
+
+We are committed to practices that facilitate the maintenance and dissemination
+of all data produced during and after the duration of the proposed research in
+a manner consistent with the requirements defined by the NSF as specified in
+the Grant Proposal Guide. It is a primary concern that all data related to this
+project are accessible, understandable, usable, and clearly demonstrate the
+methods used in order to be repeatable. For the purposes of this project, we
+define data to be software, configuration files, and result data. We include
+published figures, plots, and tables of data used for making plots as well as
+curriculum materials for educational and outreach programs. All data will be
+stored in plain-text formats and will be readable by freely-available software.
+Descriptive metadata will be included in order to sufficiently annotate all
+result data and configuration files, as well as to indicate the steps necessary
+to regenerate those data. All data will be made publically available and
+released under licensed approved by the [Open Source Initiative](http://opensource.org).
+
 
 ## Comments (1600 characters maximum)
 
