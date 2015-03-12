@@ -1,4 +1,5 @@
 # TODO
+* Summary
 * Figure 1: Get font sizes of A and B to match
 * Sonia: remove "These migrational neighborhoods...graph" sentence
 
