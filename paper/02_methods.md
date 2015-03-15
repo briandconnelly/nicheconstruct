@@ -1,13 +1,13 @@
 # Materials and Methods
 
-We develop a computational model to observe how the evolution of public goods production is affected as populations modify and adapt to their environment. Each simulation tracks a single metapopulation composed of $N^2$ patches arranged as an $N \times N$ bounded lattice, where each patch can hold a population. The genotype of each individual in these populations is a length $L+1$ string of digits, where $L_{min} \le L \le L_{max}$. Values (alleles) in the first $L$ positions (loci) determine the individual’s level of adaptation to the stressful environment. Each of these “stress loci” is occupied by a zero or an element from the set of alleles $A = \{1, \ldots, a_{max}\}$, where $a_{max}$ is the number of possible alleles. An additional binary allele at the $(L+1)$<sup>th</sup> locus determines whether the individual is a producer (allele $1$) or a non-producer (allele $0$) of a public good. We refer to this locus as the “production locus”. Using this represnetation, the number of unique genotypes $G$ is $(A + 1)^{L + 1}$.
+We develop a computational model to observe how the evolution of public goods production is affected as populations modify and adapt to their environment. Each simulation tracks a single metapopulation composed of $N^2$ patches arranged as an $N \times N$ bounded lattice, where each patch can hold a population. The genotype of each individual in these populations is a length $L+1$ string of digits. Values (alleles) in the first $L$ positions (loci) determine the individual’s level of adaptation to the stressful environment. Each of these “stress loci” is occupied by a zero or an element from the set of alleles $A = \{1, \ldots, a_{max}\}$, where $a_{max}$ is the number of possible alleles. An additional binary allele at the $(L+1)$<sup>th</sup> locus determines whether the individual is a producer (allele $1$) or a non-producer (allele $0$) of a public good. We refer to this locus as the “production locus”. Using this represnetation, the number of unique genotypes $G$ is $(A + 1)^{L + 1}$.
 
 
 ## Individual Fitness
 A mutation from $0$ to any non-zero allele from $A$ at the $i$<sup>th</sup> stress locus will improve individual fitness by $\delta$ regardless of the allelic states of other loci (i.e., there is no epistasis). For simplicity, all non-zero alleles carry the same fitness benefit. Public good production is costly, reducing individual fitness by $c$. Thus, if the allelic state of the $l$<sup>th</sup> locus in genotype $g$ is denoted $a_{g,l}$ with $a_{g,l} \in (\{0\} \cup A)$, then the fitness of an individual with genotype $g$ is:
 
 $$
-W_{g} = z + \delta \sum_{l=1}^{L} I_{A}(a_{g,l}) - a_{g,L_{max}+1} c
+W_{g} = z + \delta \sum_{l=1}^{L} I_{A}(a_{g,l}) - a_{g,L+1} c
 $$
 
 
@@ -38,7 +38,7 @@ Thus, $\pi_g$ is the probability that an individual in the population after grow
 
 ### Mutation
 
-For simplicity, we apply mutation after population growth. For every individual, allelic state changes occur independently at each stress locus with probability $\mu_{s}$, while the production locus changes allelic state with probability $\mu_{p}$. Thus, the probability that genotype $g$ mutates into genotype $g'$ is given by
+For simplicity, we apply mutation after population growth. For every individual, allelic state changes occur independently at each stress locus with probability $\mu_{s}$, while the cooperation locus changes allelic state with probability $\mu_{c}$. Thus, the probability that genotype $g$ mutates into genotype $g'$ is given by
 
 $$
 \tau_{g \rightarrow g'} = \mu_{s}^{H_{s}(g,~g')}(1-\mu_{s})^{\{L-H_{s}(g,~g')\}} \mu_{p}^{H_{p}(g,~g')} (1-\mu_{p})^{\{1-H_{p}(g,~g')\}}
@@ -82,7 +82,7 @@ Alternately, change occurs locally at a patch when its population reaches cumula
 Finally, we allow construction to be affected by the genotypes present in a population. Populations are initialized as previously described with genome length $L_{min}$, where each locus contains either zero or an allele from the set $A$. Any non-zero allele carries fitness benefit $\delta$. There is no intrinsic difference between any two alleles in $A$. However, non-zero alleles in genotype $g$ carry an additional benefit $\epsilon$ if the allelic state at a given locus is one greater than at the preceeding alele, or $a_{g,l} = 1 + a_{g,l-1} (\bmod a_{max})$. This ordering to wraps around (e.g., when $A = \{1,\ldots,9\}$, it is beficial when a $1$ proceeds a $9$). Under this expanded model, the fitness of an individual with genotype $g$ is:
 
 $$
-W_{g} = z + \delta \sum_{l=1}^{L} I_{A}(a_{g,l}) + \epsilon \sum_{h=1}^{N} I_{a_{h,1}} (a_{g,1}) + \epsilon \sum_{l=2}^{L} n(a_{g,l}) - a_{g,L_{max}+1} c
+W_{g} = z + \delta \sum_{l=1}^{L} I_{A}(a_{g,l}) + \epsilon \sum_{h=1}^{N} I_{a_{h,1}} (a_{g,1}) + \epsilon \sum_{l=2}^{L} n(a_{g,l}) - a_{g,L+1} c
 $$
 
 **TODO: can we use $\sum_{h=1}^{N}$ like this? It shouldn't be a number $1..N$, but instead a genotype. We need a function like g(h)**
@@ -101,7 +101,7 @@ Because a major component of fitness is this ordering of allelic states, the ada
 By de-coupling the timescales at which change occurs in populations and patches, we control how niche constructive behaviors affect the evolutionary process. If fitness is affected by the genotypic abundances over the last $T$ timesteps, the fitness of an individual with genotype $g$ becomes:
 
 $$
-W_{g} = z + \delta \sum_{l=1}^{L} I_{A}(a_{g,l}) + \epsilon \sum_{h=1}^{N} I_{a_{h,1}} (a_{g,1}) + \epsilon \sum_{l=2}^{L} \sum_{i=1}^{T} w n_{T-i}(a_{g,l} - 1) - a_{g,L_{max}+1} c
+W_{g} = z + \delta \sum_{l=1}^{L} I_{A}(a_{g,l}) + \epsilon \sum_{h=1}^{N} I_{a_{h,1}} (a_{g,1}) + \epsilon \sum_{l=2}^{L} \sum_{i=1}^{T} w n_{T-i}(a_{g,l} - 1) - a_{g,L+1} c
 $$
 
 where $w$ weights the effect of the population at a given time point.

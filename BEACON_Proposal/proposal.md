@@ -45,7 +45,7 @@ the stage for an "adaptive race" in which cooperators and defectors vie for the
 first highly-beneficial non-social adaptation [@waite2012adaptation;
 @morgan2012selection]. We recently showed that in spatially-structured
 populations, cooperators gain a substantial leg up on defectors in an adaptive
-race when the cooperative behavior increases population density, thus
+race when the cooperative behavior increases local population density, thus
 increasing the likelihood of acquiring beneficial non-social mutations (in
 prep.).  Nevertheless, this advantage is fleeting (Fig.  1A). As soon as the
 opportunities for adaptation are exhausted, cooperators are once again at a
@@ -63,8 +63,8 @@ their interactions with others, and even through their deaths, organisms
 constantly modify their environment.  These changes can produce evolutionary
 feedback loops in which environmental change alters selection, which, in turn,
 alters phenotypes and their corresponding effects on the environment
-[@odling2003niche]. **This research will reveal how endogenous environmental
-change, or *niche construction*, affects the evolution of cooperation.** First,
+[@odling2003niche]. **This research will reveal how environmental
+change brought about by organisms, or *niche construction*, affects the evolution of cooperation.** First,
 we will explore how selective feedbacks influence evolution as populations
 construct their environment. We then widen our scope to include scenarios where
 the environment itself is biotic, such as when symbiont populations modify
@@ -87,21 +87,24 @@ individual is a cooperator, which carries cost $c$. The remaining $L$ loci are
 $A=\{1, \ldots, a_{max}\}$, where $a_{max}$ is the number of possible alleles.
 These alleles represent adaptations to the environment, and the number of loci
 determines the number of possible adaptations. All non-zero alleles carry
-fitness benefit $\delta$. Although we define no inherent differences among the
-alleles, we reward genotypes with sequentially increasing allelic states by
-conferring fitness benefit $\epsilon$ for each allele whose value is 1 greater
-than the allele at the previous locus (modulo $A$). Thus, the particular
-sequence of alleles in a population determines which genotypes are most fit.
-Because mutations are random, as described below, each population will evolve
-sequences that start with different allelic states.  These different sequences
-represent the unique niches constructed by populations.
+fitness benefit $\delta$. Organisms also influence their environment, which can
+feed back to influence selection. We model this as a form of frequency
+dependent selection.  Specifically, the selective value of allele $a$ at locus
+$i$ increases with the proportion of the population that has allele $a-1$
+(modulo $A$) at locus $i-1$.  The slope of this increase is $\epsilon$ (which
+gauges the intensity of niche construction).  As a consequence of this form of
+frequency dependence, genotypes with sequentially increasing allelic states
+will tend to evolve.  Because mutations are random, as described below, each
+population will evolve sequences that start with different allelic states.
+These different sequences represent the unique niches constructed by
+populations.
 
 We observe the evolutionary process in a metapopulation of $N$ populations,
 which are initiated with non-adapted individuals and cooperator proportion
 $p_0$. Each population grows to capacity $S_{min} + p (S_{max} - S_{min})$,
 where $p$ is the proportion of cooperators in that population. After growth,
 mutations alter the allelic state at stress loci and the cooperation locus with
-probabilities $\mu_{s}$ and $\mu_{p}$, respectively. Individuals then migrate
+probabilities $\mu_{s}$ and $\mu_{c}$, respectively. Individuals then migrate
 to a randomly chosen neighbor patch at rate $m$. Finally, populations are
 thinned to proportion $d$ to accommodate the next cycle of growth.
 
@@ -141,13 +144,16 @@ To address how feedbacks from niche construction affect social evolution in
 host-symbiont systems, we will extend our model to include selection and
 replication at the host level. Here, patches will be replaced by replicating
 hosts. Each host will have a genotype, and their fitness will depend both on
-this genotype and the genotypes in their symbiont populations and the niche
-that they create. We can control this dependence by adjusting how much these
-genotypes overlap as well as the magnitude and direction of their interaction.
-In doing so, we will be able to observe how host-symbiont co-evolution differs
-with *positive-* and *negative niche construction*. Using this model, we can
-also explore how co-evolution differs when symbiont populations are transferred
-vertically or horizontally.
+this genotype and the genotypes in their symbiont populations.  We can control
+this relationship by altering the symmetry of the fitness effects of a match
+between host and symbiont genotypes. If a match improves the fitness of both
+players simultaneously, the relationship is mutualistic. If a match improves
+fitness of the symbiont, but not the host, then the relationship is
+antagonistic (e.g., the symbiont is a parasite).  By altering such features, we
+will be able to observe how host-symbiont co-evolution differs with *positive*
+and *negative niche construction*. Using this model, we can also explore how
+co-evolution differs when symbiont populations are transferred vertically or
+horizontally.
 
 ## Summary
 
@@ -165,118 +171,16 @@ evolution of cooperative behaviors.
 
 \newpage
 
-![(**A**) Through "genetic niche hiking", cooperators outrun defectors by association with non-social adaptations that compensate for the cost of cooperation. Colored lines represent different opportunities for adaptation (or "stress loci" in our model). Once defectors become equally adapted, however, they quickly drive cooperators to extinction. (**B**) When environmental change is frequent (here every 1,000 cycles), the continual potential for adaptation allows cooperators to persist indefinitely.](figures/Figure1all-scaled.png)
+![(**A**) Through "genetic niche hiking", cooperators outrun defectors by association with non-social adaptations that compensate for the cost of cooperation. Colored lines represent different opportunities for adaptation (or "stress loci" in our model). Once defectors become equally adapted, however, they quickly drive cooperators to extinction. (**B**) When environmental change is frequent (here every 1,000 cycles), the continual potential for adaptation allows cooperators to persist indefinitely.](figures/Figure1all.png)
 
 \newpage
 
-![Model Overview: For simplicity, we consider two clonal populations. (**A**) Because public good production is costly, the cooperator population has lower fitness relative to the defector population as shown in the bar graph. However, these public goods enable the cooperator population to be larger. (**B**) As a result, the cooperator population acquires beneficial mutations more quickly, allowing cooperator fitness to surpasses that of the ancestral defector (bar graph baseline). (**C**) Selection favors alleles at adjacent loci that form sequences, offering a further boost to cooperators. Here, there 3 possible alleles, so allelic state 1 follows 3. (**D**) The cooperator patch now favors individuals with allelic state $2,3,1$.](figures/diagram1.pdf)
+![**Model Overview:** For simplicity, we consider two clonal populations. (**A**) Because public good production is costly, the cooperator population has lower fitness relative to the defector population, as shown in the bar graph. However, these public goods enable the cooperator population to be larger. (**B**) As a result, the cooperator population acquires beneficial mutations more quickly, allowing cooperator fitness to surpasses that of the ancestral defector (bar graph baseline). (**C**) Selection favors alleles at adjacent loci that form sequences, offering a further boost to cooperators. Here, there 3 possible alleles, so allelic state 1 follows 3. (**D**) The cooperator patch now favors individuals with allelic state $2,3,1$.](figures/diagram1.pdf)
 
 
 \newpage
 
 ![Migration reveals two key effects of niche construction. First, when immigrating to the cooperator patch (left), defectors will be at a disadvantage against cooperators, which are more adapted to their environment (2, 3, 1, see Fig. 2D). Second, the larger group of cooperators that emigrate to the defector population (right) will strongly affect selection at the defector patch, effectively "exporting" their niche.](figures/diagram2.pdf)
-
-\newpage
-
-## Abstract (1600 chars)
-
-Through their interactions, their activities, and even their mere presence,
-organisms change the environment for themselves and others. This "niche
-construction" process becomes particularly interesting when it creates
-evolutionary feedback, whereby selective pressures are altered in response to
-environmental change. With the proposed project, we aim to reveal how niche
-construction influences the evolution of cooperation, which has been a
-long-standing challenge to evolutionary theory. We will develop and use a
-simulation model in which 
-
-populations of individuals that cooperatively
-produce a public good that permits increased growth in a stressful environment
-and investigate how local- and global-scale niche construction affects the
-ability of these populations to resist invasion by non-producing cheats. We
-find that niche construction profoundly impacts the evolution of cooperation by
-creating new opportunities for adaptation. Cooperators are able to escape
-subversion by cheats as long as niche construction clears these paths of
-adaptation. This work provides a crucial step towards understanding how
-evolution occurs in complex environments like those found in nature.
-
-## Criterion One: Scientific Strength of the Proposed Project (250 chars)
-
-The selective feedbacks that organisms produce as they change their environment
-has received relatively little attention, despite their potential to radically
-alter evolutionary outcomes. By incorporating these selective feedbacks, this
-project will offer new insights into the evolution of cooperation, both in the
-context of single populations and in host-symbiont interactions.
-
-
-## Criterion Two: Centrality of Project to BEACON’s Mission (250 chars)
-
-
-## Criterion Three: Quality of Plan for Obtaining External Funding (250 chars)
-
-The preliminary results will enable us to be competitive in finding external
-funding. Several recent publications have argued that insights into the
-selective feedbacks produced by niche construction are critical for
-understanding host-pathogen co-evolution.
-
-
-## Criterion Four: Degree of Multidisciplinarity of Project (250 chars)
-
-This project is a collaboration of a computer scientist (Connelly) and a biologist (Turner).
-
-
-## Criterion Five: Impact on Education and Human Resource Development (250 chars)
-
-Connelly is currently developing hands-on activities at the Pacific Science
-Center that introduce evolution and the effects of environmental change to high
-school students and the general public. He will lead these several times in the
-coming year
-
-
-## Criterion Six: Knowledge Transfer to Industry (250 chars)
-
-Understanding the forces that maintain cooperation is essential in medicine for
-developing "anti-infective" treatments, in industry for wastewater treatment,
-and in engineering networks where resources are shared among cars and other
-devices.
-
-
-## Criterion Seven: Impact on Achieving the Diversity Goals of BEACON (250 chars)
-
-
-## Criterion Eight: Multi-Institutionality (250 chars)
-
-This project is a collaboration between individuals from the University of
-Washington and Michigan State University.
-
-
-## Criterion Nine: Budget Appropriateness (1600 chars)
-
-All funds will be allocated to salary for Connelly, who will lead model development, run simulations, analyze data, and lead preparation for all manuscripts that result. Computational resources for simulations will be funded by a grant to Connelly from Google.
-
-
-## Criterion Ten: Overall Quality
-
-## Diversity plan (1600 characters maximum)
-
-## Data management plan (1600 characters maximum)
-
-We are committed to practices that facilitate the maintenance and dissemination
-of all data produced during and after the duration of the proposed research in
-a manner consistent with the requirements defined by the NSF as specified in
-the Grant Proposal Guide. It is a primary concern that all data related to this
-project are accessible, understandable, usable, and clearly demonstrate the
-methods used in order to be repeatable. For the purposes of this project, we
-define data to be software, configuration files, and result data. We include
-published figures, plots, and tables of data used for making plots as well as
-curriculum materials for educational and outreach programs. All data will be
-stored in plain-text formats and will be readable by freely-available software.
-Descriptive metadata will be included in order to sufficiently annotate all
-result data and configuration files, as well as to indicate the steps necessary
-to regenerate those data. All data will be made publicly available and
-released under licensed approved by the [Open Source Initiative](http://opensource.org).
-
-
-## Comments (1600 characters maximum)
 
 \newpage
 

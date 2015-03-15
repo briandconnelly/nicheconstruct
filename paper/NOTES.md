@@ -1,5 +1,10 @@
 * intro: Can use BEACON stuff. Not sure how to phrase GNH stuff.
 
+* Methods: Call producers cooperators
+* Methods: Remove density based env change
+* Methods: Make sure L is used instead of Lmin or Lmax
+* Table 1: items in order that they appear in methods or alphabetical?
+
 # Stitch together multiple docs
 * http://stackoverflow.com/questions/21247978/compile-multiple-files-into-one-with-title-blocks
 * http://stackoverflow.com/questions/4779582/markdown-and-including-multiple-files

@@ -1,0 +1,154 @@
+% Typical Latex document setup
+% Brian D. Connelly
+
+\def\name{Brian D. Connelly}
+
+% Warn about bad/depricated latex commands
+\RequirePackage[l2tabu,orthodox]{nag}
+
+% Set the geometry of pages
+\usepackage[margin=1in]{geometry}
+
+% Handle spacing
+\usepackage{setspace}
+
+% Allow for graphics.  Always display, even if in draft mode
+\usepackage[final]{graphicx}
+
+% Allow figures to be wrapped by text (note: this will require some work)
+\usepackage{wrapfig}
+
+% allow things to be done conditionally if the document is a draft or not 
+\usepackage{ifdraft}
+
+% Add some nice colors
+%\usepackage{color}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\definecolor{grey10}{gray}{0.1}
+\definecolor{grey20}{gray}{0.2}
+\definecolor{grey30}{gray}{0.3}
+\definecolor{grey40}{gray}{0.4}
+\definecolor{grey50}{gray}{0.5}
+\definecolor{grey60}{gray}{0.6}
+\definecolor{grey70}{gray}{0.7}
+\definecolor{grey80}{gray}{0.8}
+\definecolor{grey90}{gray}{0.9}
+
+% Allow for graphics with TikZ
+\usepackage{tikz}
+
+% Nice package for putting frames, titled frames, and thick left bars on things
+\usepackage{framed}
+\colorlet{shadecolor}{gray!15}
+
+% Allow for conditionals if we're building a PDF file
+\usepackage{ifpdf}
+
+% Add some nice microtype tweaks.
+%\usepackage[protrusion=true,expansion=true]{microtype}
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+
+% Handle citations with natbib
+\usepackage[numbers,sort&compress]{natbib}
+%\usepackage[]{natbib}
+
+% Allow for inline publication references
+\usepackage{bibentry}
+
+% siunitx is great for typesetting SI units, prefixes, and measures
+\usepackage{siunitx}
+
+% and for typesetting chemistry
+\usepackage[version=3]{mhchem}
+
+% Allow for tables that span multiple pages
+\usepackage{longtable}
+
+% Integration with Git repositories
+\usepackage{gitinfo}
+
+% Put watermarks in drafts
+\ifdraft{\usepackage{draftwatermark}\SetWatermarkScale{4}\SetWatermarkColor{grey90}}
+
+% Allow for fancy headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% In draft mode, print information about the Git revision below Otherwise, add
+% a title to the top center, and place page numbers in the lower right
+\setlength{\headheight}{18.2pt}
+\renewcommand{\headrulewidth}{0pt}
+\lhead{}
+\chead{\color{grey50}{\small \title}}
+\rhead{}
+\lfoot{}
+\cfoot{}
+\ifdraft{\cfoot{{\color{grey50}{\small Revision \gitAbbrevHash (\gitCommitterIsoDate) by \gitCommitterName}}}}{\cfoot{}}
+\rfoot{{\small \thepage}}
+
+% Define a special fancy header for the first page.
+\fancypagestyle{first}{%
+    \fancyhead{}
+    \renewcommand{\headrulewidth}{0pt}
+}
+
+% Get references to pages
+\usepackage{lastpage}
+
+% Print line numbers
+\usepackage{lineno}
+
+% Create subfigures
+\usepackage[]{subcaption}
+
+% Create nicely-formatted tables
+\usepackage{booktabs}
+
+% For listing code
+\usepackage{listings}
+
+% For formatting section titles
+\usepackage{titlesec}
+%\renewcommand{\thesubsection}{}
+\titleformat{\subsection}{\normalfont\large}{}{0em}{}
+% Remove the section number from sections.  section* doesn't let nameref work, so this is a workaround.
+\titleformat{\section}{\normalfont\Large\bfseries}{}{0em}{}
+
+% Allow for hyperlinks and table of contents in PDF files
+% Set the title of each document with \hypersetup{pdftitle={THE TITLE}}
+\usepackage[
+    pdfauthor={\name},
+    pdftitle={\title},
+    draft=false, % always display, even in draft mode
+    colorlinks=true, 
+    allcolors=grey50, 
+    raiselinks=false, 
+    hyperfootnotes=true,
+    ocgcolorlinks]{hyperref}
+\urlstyle{same}
+
+% Macros...
+\newcommand{\Vc}{\textit{Vibrio cholerae}}
+\newcommand{\vc}{\textit{V.\ cholerae}}
+\newcommand{\Vh}{\textit{Vibrio harveyi}}
+\newcommand{\vh}{\textit{V.\ harveyi}}
+\newcommand{\Pa}{\textit{Pseudomonas aeruginosa}}
+\newcommand{\pa}{\textit{P.\ aeruginosa}}
+\newcommand{\Pf}{\textit{Pseudomonas fluorescens}}
+\newcommand{\pf}{\textit{P.\ fluorescens}}
+\newcommand{\Ec}{\textit{Escherichia coli}}
+\newcommand{\ec}{\textit{E.\ coli}}
+
+\newcommand{\avidainstr}[1]{{\tt #1}}
+\newcommand{\avidatask}[1]{{\tt #1}}
+
+% Create some macros for drafts
+\ifdraft{
+    \newcommand{\BDC}[1]{{\color{blue}[{\bfseries BDC: }{\em #1}]}}
+    \newcommand{\PKM}[1]{{\color{blue}[{\bfseries PKM: }{\em #1}]}}
+    \newcommand{\CMW}[1]{{\color{blue}[{\bfseries CMW: }{\em #1}]}}
+    \newcommand{\MCK}[1]{{\color{blue}[{\bfseries MCK: }{\em #1}]}}
+    \newcommand{\BK}[1]{{\color{blue}[{\bfseries BK: }{\em #1}]}}
+    \newcommand{\TODO}[1]{{\color{red}[{\bfseries TODO: }{\em #1}]}}
+}{}
+
