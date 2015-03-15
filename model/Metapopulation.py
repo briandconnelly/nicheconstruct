@@ -1,454 +1,215 @@
 # -*- coding: utf-8 -*-
 
-"""Represent metapopulations: collections of populations of individuals and the
-migration between them"""
+"""Functions for working with Metapopulations"""
 
-import os
-
-import networkx as nx
 import numpy as np
+from numpy import bitwise_xor, where
+from numpy.random import binomial, multinomial, random_integers
+import pandas as pd
 
-from Population import Population
-from genome import num_ones_v
-import topology
+from misc import stress_colnames
+from Topology import random_neighbor
 
 
-class Metapopulation(object):
-    """Define a Metapopulation object
+def create_metapopulation(config, topology):
+    """Create a metapopulation"""
+    size = len(topology)
+    assert size > 0
 
-    Metapopulations are collections of populations of individuals.
+    capacity_min = config['Population']['capacity_min']
+    capacity_max = config['Population']['capacity_max']
+    assert capacity_min <= capacity_max
 
+    initial_cooperator_proportion = config['Population']['initial_cooperator_proportion']
+
+    genome_length_min = config['Population']['genome_length_min']
+    genome_length_max = config['Population']['genome_length_max']
+    assert genome_length_min <= genome_length_max
+
+    initial_popsize = capacity_min + \
+                  (initial_cooperator_proportion * (capacity_max - capacity_min))
+
+    stress_columns = stress_colnames(L=genome_length_max)
+    data = {'Time': 0,
+            'Population': np.repeat(np.arange(size), initial_popsize).tolist(),
+            'Coop': (binomial(1, initial_cooperator_proportion, size * initial_popsize) == 1).tolist(),
+            'Fitness': 0}
+    data.update({sc: np.zeros(size * initial_popsize, dtype=np.int).tolist() for sc in stress_columns})
+    M = pd.DataFrame(data,
+                     columns=['Time', 'Population', 'Coop'] + ["S{0:02d}".format(i) for i in np.arange(1,genome_length_max+1)] + ['Fitness'])
+
+    M = assign_fitness(M=M, Lmin=config['Population']['genome_length_min'],
+                       Lmax=config['Population']['genome_length_max'],
+                       num_stress_alleles=config['Population']['stress_alleles'],
+                       base_fitness=config['Population']['base_fitness'],
+                       cost_cooperation=config['Population']['cost_cooperation'],
+                       benefit_nonzero=config['Population']['benefit_nonzero'],
+                       benefit_ordered=config['Population']['benefit_ordered'])
+
+    return M
+
+
+def reset_stress_loci(M, Lmax):
+    """Reset all stress loci in the population
+    
+    Resetting a stress locus sets its allelic state to 0.
     """
 
-    def __init__(self, simulation):
-        """Initialize a Metapopulation object"""
-        self.simulation = simulation
-        self.config = self.simulation.config
+    M[stress_colnames(L=Lmax)] = 0
+    return M
 
-        # Keep some information about the population
-        self._dirty = None
-        self._size = None
-        self._num_producers = None
-        self._prop_producers = None
-        self._prev_prop_producers = None
 
-        if self.simulation.env_change == 'Metapopulation':
-            self.enable_construction = True
-            self.density_threshold = self.config.getint(section='Metapopulation',
-                                                        option='density_threshold')
-            assert self.density_threshold > 0
+def mix(M, topology):
+    """Mix the metapopulation
+
+    Mixing creates the individuals in a metapopulation to be re-distributed
+    evenly among the populations
+    """
+
+    M.Population = random_integers(low=0, high=len(topology)-1,
+                                   size=M.shape[0])
+    return M
+
+
+def migrate(M, topology, rate):
+    """Migrate individuals among subpopulations"""
+    assert 0 <= rate <= 1
+
+    emigrants_ix = M.index[where(binomial(n=1, p=rate,
+                                          size=M.index.shape[0]) == 1)]
+
+    if emigrants_ix.shape[0] > 0:
+        targets = {p: random_neighbor(p, topology) for p in M.Population.unique()}
+        get_target = np.vectorize(lambda t: targets[t])
+        M.loc[emigrants_ix, 'Population'] = get_target(M.loc[emigrants_ix, 'Population'].values)
+
+    return M
+
+
+def mutate(M, mu_stress, mu_cooperation, Lmax, num_stress_alleles, config):
+    """Mutate individuals in the metapopulation"""
+    assert 0 <= mu_stress <= 1
+    assert 0 <= mu_cooperation <= 1
+    assert Lmax >= 0
+    assert num_stress_alleles >= 0
+
+    Mcopy = M.copy(deep=True)
+
+    # Cooperation mutations - flip the cooperation bit 0->1 or 1->0
+    Mcopy.Coop = bitwise_xor(Mcopy.Coop, binomial(n=1, p=mu_cooperation,
+                                                  size=Mcopy.Coop.shape))==1
+
+    # Mutations at stress loci
+    # Alleles to mutate are chosen from a binomial distrubution, and these
+    # alleles are modified by adding a random amount
+    if Lmax > 0:
+        s = stress_colnames(L=Lmax)
+        if num_stress_alleles == 1:
+            Mcopy[s] = bitwise_xor(Mcopy[s], binomial(n=1, p=mu_stress,
+                                                      size=Mcopy[s].shape))
         else:
-            self.enable_construction = False
-
-        self.cumulative_density = 0
-        self.environment_changed = False
-
-        # Build the topology, which links the subpopulations
-        self.topology = None
-
-        self.build_topology()
-
-        # Create each of the populations
-        initial_state = self.config.get(section='Metapopulation',
-                                        option='initial_state')
-        genome_length_max = self.config.getint(section='Population',
-                                               option='genome_length_max')
-        max_cap = self.config.getint(section='Population', option='capacity_max')
-        min_cap = self.config.getint(section='Population', option='capacity_min')
-        initial_producer_proportion = self.config.getfloat(section='Population',
-                                                           option='initial_producer_proportion')
-        mutation_rate_tolerance = self.config.getfloat(section='Population',
-                                                       option='mutation_rate_tolerance')
-
-        self.genotype_num_ones = num_ones_v(np.arange(2**(genome_length_max+1), dtype=int))
-
-        for node, data in self.topology.nodes_iter(data=True):
-            data['population'] = Population(simulation=self.simulation,
-                                            metapopulation=self)
-
-            if initial_state == 'corners':
-                # Place all producers in one corner and all non-producers in
-                # the other
-                if node == 0:
-                    data['population'].abundances[2**genome_length_max] = max_cap
-                    data['population'].dilute()
-                elif node == len(self.topology)-1:
-                    data['population'].abundances[0] = min_cap
-                    data['population'].dilute()
-
-            elif initial_state == 'stress':
-                cap = int(min_cap + ((max_cap - min_cap) * \
-                                     initial_producer_proportion))
-                num_producers = int(cap * initial_producer_proportion)
-                num_nonproducers = cap - num_producers
-
-                data['population'].abundances[0] = num_producers
-                data['population'].abundances[2**genome_length_max] = num_nonproducers
-                data['population'].bottleneck(survival_rate=mutation_rate_tolerance)
-
-        # Get the settings for migration among populations
-        self.migration_rate = self.config.getfloat(section='Metapopulation',
-                                                   option='migration_rate')
-        self.migration_dest = self.config.get(section='Metapopulation',
-                                              option='migration_dest')
-        assert self.migration_rate >= 0 and self.migration_rate <= 1
-        assert self.migration_dest in ['single', 'neighbors']
-
-        self.set_dirty()
-
-
-    def __str__(self):
-        """Return a string representation of the Metapopulation object"""
-        prop_producers = self.prop_producers()
-
-        if prop_producers == 'NA':
-            res = "Metapopulation: Size {s}".format(s=self.size())
-        else:
-            (pfr, nfr) = self.max_fitnesses()
-            pf = max(pfr)
-            nf = max(nfr)
-
-            if pf > nf:
-                comp = ">"
-            elif pf < nf:
-                comp = "<"
-            else:
-                comp = "="
-
-            res = "Metapopulation: Size {s}, {pp:.1%} producers, " \
-                    "w(P) {c} w(N)".format(s=self.size(),
-                                           pp=self.prop_producers(), c=comp)
-
-        return res
-
-
-    def __getitem__(self, key):
-        """Get a specific population from the metapopulation
-        """
-        return self.topology.node[key]['population']
-
-
-    def build_topology(self):
-        """Build the topology (a graph) for the metapopulation"""
-        topology_type = self.config.get(section='Metapopulation',
-                                        option='topology')
-
-        assert topology_type is not None, 'Topology must be specified'
-        assert topology_type in ['moore', 'vonneumann', 'smallworld',
-                                 'complete', 'regular']
-
-        if topology_type.lower() == 'moore':
-            width = self.config.getint(section='MooreTopology',
-                                       option='width')
-            height = self.config.getint(section='MooreTopology',
-                                        option='height')
-            periodic = self.config.getboolean(section='MooreTopology',
-                                              option='periodic')
-            radius = self.config.getint(section='MooreTopology',
-                                        option='radius')
+            # Small problem, an allele could mutate to itself.
+            Mcopy[s] = (Mcopy[s] + (binomial(n=1, p=mu_stress, size=Mcopy[s].shape) * random_integers(low=1, high=num_stress_alleles, size=Mcopy[s].shape))) % (num_stress_alleles + 1)
 
-            self.topology = topology.moore_lattice(rows=height, columns=width,
-                                                   radius=radius,
-                                                   periodic=periodic)
+    Mcopy = assign_fitness(M=Mcopy,
+                           Lmin=config['Population']['genome_length_min'],
+                           Lmax=config['Population']['genome_length_max'],
+                           num_stress_alleles=config['Population']['stress_alleles'],
+                           base_fitness=config['Population']['base_fitness'],
+                           cost_cooperation=config['Population']['cost_cooperation'],
+                           benefit_nonzero=config['Population']['benefit_nonzero'],
+                           benefit_ordered=config['Population']['benefit_ordered'])
 
-        elif topology_type.lower() == 'vonneumann':
-            width = self.config.getint(section='VonNeumannTopology',
-                                       option='width')
-            height = self.config.getint(section='VonNeumannTopology',
-                                        option='height')
-            periodic = self.config.getboolean(section='VonNeumannTopology',
-                                              option='periodic')
+    return Mcopy
 
-            self.topology = topology.vonneumann_lattice(rows=height,
-                                                        columns=width,
-                                                        periodic=periodic)
 
-        elif topology_type.lower() == 'smallworld':
-            size = self.config.getint(section='SmallWorldTopology',
-                                      option='size')
-            neighbors = self.config.getint(section='SmallWorldTopology',
-                                           option='neighbors')
-            edgeprob = self.config.getfloat(section='SmallWorldTopology',
-                                            option='edgeprob')
-            seed = self.config.getint(section='Simulation', option='seed')
+def grow(M, genome_lengths, config):
+    """Grow the population"""
 
-            self.topology = topology.smallworld(size=size, neighbors=neighbors,
-                                                edgeprob=edgeprob, seed=seed)
+    smin = config['Population']['capacity_min']
+    smax = config['Population']['capacity_max']
+    assert smin <= smax
 
-        elif topology_type.lower() == 'complete':
-            size = self.config.getint(section='CompleteTopology',
-                                      option='size')
+    # Keep track of the indices of offspring
+    offspring_ix = np.array([], dtype=np.int)
 
-            self.topology = nx.complete_graph(n=size)
+    # Get a list of parent individual indices
+    for popid, subpop in M.groupby('Population'):
+        # Get the number of offspring to produce (carrying capacity - current)
+        num_offspring = smin + round(subpop.Coop.mean() * (smax - smin)) - len(subpop)
 
-        elif topology_type.lower() == 'regular':
-            size = self.config.getint(section='RegularTopology',
-                                      option='size')
-            degree = self.config.getint(section='RegularTopology',
-                                        option='degree')
-            seed = self.config.getint(section='Simulation', option='seed')
+        # Select the number of offspring to produce for each parent
+        parent_num_offspring = multinomial(n=num_offspring,
+                                           pvals=subpop.Fitness/subpop.Fitness.sum())
 
-            self.topology = topology.regular(size=size, degree=degree,
-                                             seed=seed)
+        # Get a list of the global index values for each parent
+        parent_ix = subpop.iloc[np.repeat(np.arange(len(parent_num_offspring)),
+                                          parent_num_offspring)].index.values
 
-
-        # How frequently should the metapopulation be mixed?
-        self.mix_frequency = self.config.getint(section='Metapopulation',
-                                                option='mix_frequency')
-        assert self.mix_frequency >= 0
+        offspring_ix = np.append(offspring_ix, parent_ix)
 
+    # Mutate the offspring
+    mu_offspring = mutate(M=M.loc[offspring_ix],
+                          mu_stress=config['Population']['mutation_rate_stress'],
+                          mu_cooperation=config['Population']['mutation_rate_cooperation'],
+                          Lmax=config['Population']['genome_length_max'],
+                          num_stress_alleles=config['Population']['stress_alleles'],
+                          config=config)
 
-        # Export the structure of the topology, allowing the topology to be
-        # re-created. This is especially useful for randomly-generated
-        # topologies.
+    # Merge in the offspring
+    M = M.append(mu_offspring)
 
-        export_topology = self.config.getboolean(section='Simulation',
-                                                 option='export_topology')
+    # Reindex the metapopulation
+    M.index = np.arange(len(M))
 
-        if export_topology:
-            data_dir = self.config.get(section='Simulation', option='data_dir')
-            nx.write_gml(self.topology, os.path.join(data_dir, 'topology.gml'))
+    return M
 
-        self.set_dirty()
 
+def assign_fitness(M, Lmin, Lmax, num_stress_alleles, base_fitness,
+                   cost_cooperation, benefit_nonzero, benefit_ordered):
 
-    def populations_iter(self):
-        """Return an iterator containing all of the Populations in the
-        metapopulation
-        """
-        for node, data in self.topology.nodes_iter(data=True):
-            yield data['population']
+    assert Lmin >= 0
+    assert Lmax >= 0
+    assert Lmin <= Lmax
+    assert num_stress_alleles > 0
 
+    stress_columns = stress_colnames(L=Lmax)
 
-    def dilute(self):
-        """Dilute the metapopulation
+    for popid, P in M.groupby('Population'):
+        Px = P.copy(deep=True)
 
-        Dilute the metapopulation by diluting each population by the dilution
-        factor specified with the dilution_factor option in the Population
-        section of the configuration file.
-        """
+        Px.Fitness = base_fitness - (Px.Coop * cost_cooperation)
 
-        for node, data in self.topology.nodes_iter(data=True):
-            data['population'].dilute()
+        if Lmin > 0:
+            stress_alleles = P.loc[:, stress_columns]
 
+            Px.Fitness += np.sum(Px[stress_columns] > 0, axis=1) * benefit_nonzero
 
-    def mix(self):
-        """Mix the population
+            if num_stress_alleles > 1 and benefit_ordered != 0:
+                # Fitness is proportional to the number of individuals in the
+                # population with the same allele at each locus. Get the
+                # distribution of alleles in the population (per locus). Since
+                # the 0 allele is the absence of adaptation, it does not
+                # contribute to fitness.
+                allele_dist = np.apply_along_axis(lambda x: np.bincount(x, minlength=num_stress_alleles+1),
+                                                  axis=0, arr=stress_alleles)
+                allele_dist[0] = np.zeros(allele_dist.shape[1])
 
-        Mix the population. The abundances at all populations are combined and
-        re-distributed.
-        """
+                # Add gamma times the number of individuals with matching first allele
+                # TODO: remove this. Benefit of first allelic state is number at last locus that is 1 less.
+                #Px.Fitness += allele_dist[stress_alleles[stress_columns[0]], 0] * benefit_ordered
 
-        genome_length_max = self.config.getint(section='Population',
-                                               option='genome_length_max')
-        abundances = np.zeros(2**(genome_length_max+1), dtype=np.int)
+                # Add gamma times the number of individuals with increasing allele value
+                #stress_alleles_next = (1 + (stress_alleles % num_stress_alleles)).values[:,:-1]
+                #allele_dist_next = allele_dist[:,1:]
+                #Px.Fitness += allele_dist_next[stress_alleles_next, range(Lmax-1)].sum(axis=1) * benefit_ordered
 
-        for n, d in self.topology.nodes_iter(data=True):
-            abundances += d['population'].abundances
+                stress_alleles_next = (1 + (stress_alleles % num_stress_alleles)).values
+                allele_dist_next = np.roll(a=allele_dist, shift=-1, axis=1)
 
-        for n, d in self.topology.nodes_iter(data=True):
-            d['population'].abundances = np.random.binomial(abundances, 1.0/len(self.topology))
+                Px.Fitness += allele_dist_next[stress_alleles_next, range(Lmax)].sum(axis=1) * benefit_ordered
 
+        M.loc[M.Population==popid, 'Fitness'] = Px.Fitness
 
-    def grow(self):
-        """Grow the metapopulation ...."""
-        for node, data in self.topology.nodes_iter(data=True):
-            data['population'].grow()
-
-
-    def mutate(self):
-        """Mutate the metapopulation ...."""
-        for node, data in self.topology.nodes_iter(data=True):
-            data['population'].mutate()
-
-
-    def migrate(self):
-        """Migrate individuals among the populations"""
-        if self.migration_rate == 0:
-            return
-
-        for node, data in self.topology.nodes_iter(data=True):
-            pop = data['population']
-
-            # Migrate everything to one neighboring population
-            if self.migration_dest.lower() == 'single':
-                migrants = pop.select_migrants(migration_rate=self.migration_rate)
-                neighbor_index = np.random.choice(self.topology.neighbors(node))
-                neighbor = self.topology.node[neighbor_index]['population']
-                neighbor.add_immigrants(migrants)
-                pop.remove_emigrants(migrants)
-            # Distribute the migrants among the neighboring populations
-            elif self.migration_dest.lower() == 'neighbors':
-                num_neighbors = self.topology.degree(node)
-                for neighbor_node in self.topology.neighbors_iter(node):
-                    migrants = pop.select_migrants(migration_rate=self.migration_rate/num_neighbors)
-                    neighbor = self.topology.node[neighbor_node]['population']
-                    neighbor.add_immigrants(migrants)
-                    pop.remove_emigrants(migrants)
-
-
-    def census(self):
-        """Update each population's abundance to account for migration"""
-        for node, data in self.topology.nodes_iter(data=True):
-            data['population'].census()
-
-
-    def construct(self):
-        """Update a population's environment when appropriate"""
-        for node, data in self.topology.nodes_iter(data=True):
-            data['population'].construct()
-
-
-    def cycle(self):
-        """Cycle the metapopulation
-
-        In each cycle, the metapopulation cycles its state by diluting each
-        population, allowing each population to grow to capacity, mutate each
-        population, and then migrating among populations.
-
-        """
-
-        # Update some metrics based on the current state of the metapopulation
-        ignore = self.size()
-        ignore = self.num_producers()
-        ignore = self.prop_producers()
-        # TODO: handle fitnesses, etc
-        self.clear_dirty()
-
-        # Grow and mutate each population
-        self.grow()
-        self.mutate()
-
-        # Migrate among populations
-        self.migrate()
-        self.census()
-
-        # Mix the populations
-        time = self.simulation.cycle
-        if self.mix_frequency > 0 and time > 0 and \
-                (time % self.mix_frequency == 0):
-            self.mix()
-
-        # Handle environmental change
-        self.environment_changed = False
-        self.cumulative_density += self.size()
-
-        if self.simulation.env_change == 'Population':
-            self.construct()
-
-        elif self.simulation.env_change == 'Metapopulation' and \
-                self.cumulative_density > self.density_threshold:
-            self.change_environment()
-            self.environment_changed = True
-            self.cumulative_density = 0
-
-        # Dilute the population to allow for growth in the next cycle
-        if not self.environment_changed:
-            self.dilute()
-
-
-    def change_environment(self):
-        """Change the environment
-
-        The change_environment function changes the environment for the entire
-        metapopulation. This re-generates the fitness landscape and zeros out
-        all fitness-encoding loci. This is meant to represent the
-        metapopulation being subjected to different selective pressures. The
-        number of individuals of each genotype that survive this event are
-        proportional to the abundance of that genotype times the mutation rate
-        (representing individuals that acquired the mutation that allows them
-        to persist).
-
-        """
-
-        mutation_rate_tolerance = self.config.getfloat(section='Population',
-                                                       option='mutation_rate_tolerance')
-
-        for node, data in self.topology.nodes_iter(data=True):
-            # TODO could these 3 steps be encapsulated in a Population-level function?
-            data['population'].bottleneck(survival_rate=mutation_rate_tolerance)
-            data['population'].reset_loci()
-            data['population'].build_fitness_landscape()
-
-        self.set_dirty()
-
-
-    def size(self):
-        """Return the size of the metapopulation
-
-        The size of the metapopulation is the sum of the sizes of the
-        subpopulations
-        """
-        if self.is_dirty():
-            self._size = sum(d['population'].size() for n, d in self.topology.nodes_iter(data=True))
-
-        return self._size
-
-
-    def __len__(self):
-        """Return the length of a Metapopulation
-
-        We'll define the length of a metapopulation as its size, so len(metapop)
-        returns the number of individuals in all populations of Metapopulation
-        metapop
-        """
-        return self.size()
-
-
-    def num_producers(self):
-        """Return the number of producers in the metapopulation"""
-        if self.is_dirty():
-            self._num_producers = sum(d['population'].num_producers() for n, d in self.topology.nodes_iter(data=True))
-
-        return self._num_producers
-
-
-    def prop_producers(self):
-        """Get the proportion of producers in the metapopulation"""
-        if self.is_dirty():
-            try:
-                # TODO: this may use dirty values for num_producers and size
-                self._prev_prop_producers = self._prop_producers
-                self._prop_producers = 1.0 * self.num_producers() / self.size()
-            except ZeroDivisionError:
-                self._prop_producers = 'NA'
-
-        return self._prop_producers
-
-
-    def max_fitnesses(self):
-        """Get the maximum fitness among producers and non-producers"""
-
-        prod_max = [d['population'].max_fitnesses()[0] for n, d in self.topology.nodes_iter(data=True)]
-        nonprod_max = [d['population'].max_fitnesses()[1] for n, d in self.topology.nodes_iter(data=True)]
-
-        return (prod_max, nonprod_max)
-
-
-    def max_ones(self):
-        """Get the maximum number of ones in the visible portion of producer
-        and non-producer genotypes (tuple). This indicates how adapted each
-        type is to the environment.
-        """
-        prod_max = [d['population'].max_ones()[0] for n, d in self.topology.nodes_iter(data=True)]
-        nonprod_max = [d['population'].max_ones()[1] for n, d in self.topology.nodes_iter(data=True)]
-
-        return (prod_max, nonprod_max)
-
-
-    def set_dirty(self):
-        """Mark the metapopulation as changed in the current cycle"""
-        self._dirty = True
-
-
-    def clear_dirty(self):
-        """Mark the metapopulation as unchanged in the current cycle"""
-        for node, data in self.topology.nodes_iter(data=True):
-            data['population'].clear_dirty()
-        self._dirty = False
-
-
-    def is_dirty(self):
-        """Return whether or not the Metapopulation has been changed"""
-        return self._dirty
+    return M
 

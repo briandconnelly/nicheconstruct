@@ -1,0 +1,15 @@
+\usepackage[%
+		shash={47f559e},
+		lhash={47f559e2e42f6e278b6aef0125697b2d160613c2},
+		authname={Brian Connelly},
+		authemail={bdc@msu.edu},
+		authsdate={2013-03-20},
+		authidate={2013-03-20 13:26:39 -0700},
+		authudate={1363811199},
+		commname={Brian Connelly},
+		commemail={bdc@msu.edu},
+		commsdate={2013-03-20},
+		commidate={2013-03-20 13:26:39 -0700},
+		commudate={1363811199},
+		refnames={ (HEAD, master)}
+	]{gitsetinfo}
