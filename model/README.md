@@ -2,11 +2,17 @@
 
 ## Dependiencies
 
-* Python 3
-* [Pandas](http://pandas.pydata.org)
-* [NetworkX](https://networkx.github.io/)
-* [NumPy](http://www.numpy.org) 1.8.0 or later
+* Python 2.7 or 3.4
+* [Pandas](http://pandas.pydata.org) 0.15.2
+* [NetworkX](https://networkx.github.io/) 1.9.1
+* [NumPy](http://www.numpy.org) 1.9.1
+* [ConfigObj](https://pypi.python.org/pypi/configobj/) 5.0.6
 
+These dependencies can be installed in a modern Python environment using:
+
+```sh
+pip install numpy==1.9.1 pandas==0.15.2 networkx==1.9.1 configobj==5.0.6
+```
 
 ## Running the Model
 
@@ -62,26 +68,4 @@ TODO
 
 ## Result Data
 
-### Uncompressing the Data Files
-
-To save space, the resulting data files are compressed. To open these files in Python:
-
-```python
-import bz2
-import csv
-
-reader = csv.reader(bz2.BZ2File('demographics.csv.bz2', 'r'))
-for row in reader:
-    print(row)
-```
-
-The decompression is done transparently in R:
-
-```r
-mydata <- read.csv('demographics.csv.bz2')
-```
-
-Otherwise, they can be opened by double clicking on them in Finder (Mac),
-running `bunzip2 <filename>` (Mac/Linux), or opening with
-[7-Zip](http://www.7-zip.org/) (Windows).
-
+TODO
