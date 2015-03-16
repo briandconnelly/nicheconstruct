@@ -14,6 +14,10 @@ These dependencies can be installed in a modern Python environment using:
 pip install numpy==1.9.1 pandas==0.15.2 networkx==1.9.1 configobj==5.0.6
 ```
 
+## Virtual Environment
+
+TODO
+
 ## Running the Model
 
 Simulations using this model are run using the `ncsimulate.py` script. To see

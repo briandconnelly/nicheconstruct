@@ -11,6 +11,9 @@ Here, we extend the model presented in @HANKSHAW to explore whether the selectiv
 Niche construction and selective feedbacks
 
 Niche construction and cooperation
+* [@vandyken2012origins]
+* [@lehmann2007evolution]
+* [@platt2009kin]
 
 Niche construction and other social interactions
 
