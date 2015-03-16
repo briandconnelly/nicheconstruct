@@ -2,6 +2,6 @@
 
 * summary of results
 * future primacy/recency
-* future other types of social interactions
-* future QS or other environmental sensing
+* public goods as niche construction
 * Host symbiont - many instances of cooperation occur among pathogens.
+* future QS or other environmental sensing
