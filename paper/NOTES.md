@@ -5,27 +5,15 @@
 * Methods: Make sure L is used instead of Lmin or Lmax
 * Table 1: items in order that they appear in methods or alphabetical?
 
+* Get CSL for Evolutionary Ecology.
+
 # Stitch together multiple docs
 * http://stackoverflow.com/questions/21247978/compile-multiple-files-into-one-with-title-blocks
 * http://stackoverflow.com/questions/4779582/markdown-and-including-multiple-files
 
-# To Cite:
-* Cite Python
-* Cite Pandas
-* Cite R
-
 # Get pandoc template (for modification)
 * http://stackoverflow.com/questions/14883525/set-double-spacing-and-line-numbers-when-converting-from-markdown-to-pdf-with-pa
 
-
-@InProceedings{mckinney2010data,
-    author    = {McKinney, Wes},
-    title     = {Data Structures for Statistical Computing in {Python}},
-    booktitle = {Proceedings of the 9th Python in Science Conference},
-    pages     = {51--56},
-    year      = {2010},
-    editor    = {St\'efan van der Walt and Jarrod Millman}
-}
 
 
 # Length and focus
