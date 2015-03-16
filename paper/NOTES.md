@@ -9,17 +9,14 @@
 * Methods: Call producers cooperators
 * Methods: Remove density based env change
 * Methods: Make sure L is used instead of Lmin or Lmax
-* Table 1: items in order that they appear in methods or alphabetical?
 
-* Get CSL for Evolutionary Ecology.
+
+* Cooperation early on shifts benefits (http://onlinelibrary.wiley.com/doi/10.1111/j.1420-9101.2009.01893.x/full)
+    * Our model doesn't include this option
 
 # Stitch together multiple docs
 * http://stackoverflow.com/questions/21247978/compile-multiple-files-into-one-with-title-blocks
 * http://stackoverflow.com/questions/4779582/markdown-and-including-multiple-files
-
-# Get pandoc template (for modification)
-* http://stackoverflow.com/questions/14883525/set-double-spacing-and-line-numbers-when-converting-from-markdown-to-pdf-with-pa
-
 
 
 # Length and focus

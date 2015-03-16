@@ -5,7 +5,7 @@
 Table: Model parameters and their value.
 
 | Parameter  | Description                                    | Base Value    |
-|------------|:-----------------------------------------------|:-------------:|
+|:-----------|:-----------------------------------------------|:--------------|
 | $L$        | Number of Stress Loci                          | 3             |
 | $a_{max}$  | Number of alleles                              | 4             |
 | $\delta$   | Fitness benefit, nonzero alleles               | 0.5           |
@@ -22,5 +22,4 @@ Table: Model parameters and their value.
 | $N^2$      | Number of Metapopulation Sites                 | 625           |
 | $p_0$      | Initial Producer Proportion                    | 0.5           |
 | $T$        | Number of Simulation Cycles                    | TODO          |
-
 
