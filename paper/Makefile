@@ -14,8 +14,8 @@ methods: 02_methods.md references.bib
 	pandoc 02_methods.md -H draft.sty $(FLAGS) --output methods_draft_$(shell date +'%Y%m%d').pdf
 
 latest:
-	cat 0*md | pandoc -H draft.sty $(FLAGS) --output $(FNAME)-latest.pdf
-	cat 0*md | pandoc -H draft.sty $(FLAGS) --output $(FNAME)-latest.docx
+	@cat 0*md | pandoc -H draft.sty $(FLAGS) --output $(FNAME)-latest.pdf
+	@cat 0*md | pandoc -H draft.sty $(FLAGS) --output $(FNAME)-latest.docx
 
 
 clean:                                                                          
