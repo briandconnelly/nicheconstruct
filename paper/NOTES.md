@@ -1,4 +1,10 @@
-* intro: Can use BEACON stuff. Not sure how to phrase GNH stuff.
+# TODO
+* Methods: Add information about wraparound
+    * In text description
+    * In Equation
+* Methods: Properly typeset the modulo in the text?
+* Methods: Use gamma(i) to get the genotype of an individual
+
 
 * Methods: Call producers cooperators
 * Methods: Remove density based env change
