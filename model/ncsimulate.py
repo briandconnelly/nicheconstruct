@@ -17,7 +17,7 @@ from Metapopulation import *
 from misc import *
 from Topology import *
 
-__version__ = '0.2.1'
+__version__ = '0.2.2'
 
 
 def parse_arguments():
@@ -172,8 +172,14 @@ def main():
 
     # Create the metapopulation and apply the initial stress bottleneck
     metapop = create_metapopulation(config=config, topology=topology)
-    metapop = bottleneck(population=metapop,
-                         survival_pct=config['Population']['mutation_rate_tolerance'])
+
+    stress_tolerance = config['Population']['mutation_rate_tolerance']
+    if stress_tolerance < 1:
+        metapop = bottleneck(population=metapop,
+                             survival_pct=config['Population']['mutation_rate_tolerance'])
+    else:
+        metapop = bottleneck(population=metapop,
+                             survival_pct=config['Population']['dilution_factor'])
 
     # Keep track of the cumulative densities of each population
     densities = np.zeros(len(topology), dtype=np.int)
