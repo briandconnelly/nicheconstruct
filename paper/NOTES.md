@@ -1,18 +1,7 @@
-# TODO
-* Methods: Add information about wraparound
-    * In text description
-    * In Equation
-* Methods: Properly typeset the modulo in the text?
-* Methods: Use gamma(i) to get the genotype of an individual
-
-
-* Methods: Call producers cooperators
-* Methods: Remove density based env change
-* Methods: Make sure L is used instead of Lmin or Lmax
-
-
 * Cooperation early on shifts benefits (http://onlinelibrary.wiley.com/doi/10.1111/j.1420-9101.2009.01893.x/full)
     * Our model doesn't include this option
+
+* Good list of public goods in west2007
 
 # Stitch together multiple docs
 * http://stackoverflow.com/questions/21247978/compile-multiple-files-into-one-with-title-blocks

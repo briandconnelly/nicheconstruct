@@ -20,6 +20,6 @@ Table: Model parameters and their value.
 | $m$        | Migration Rate                                 | 0.05          |
 | $d$        | Population Dilution Factor                     | 0.1           |
 | $N^2$      | Number of Metapopulation Sites                 | 625           |
-| $p_0$      | Initial Producer Proportion                    | 0.5           |
+| $p_0$      | Initial Cooperator Proportion                  | 0.5           |
 | $T$        | Number of Simulation Cycles                    | TODO          |
 
