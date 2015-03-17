@@ -4,8 +4,14 @@
 
 import numpy as np
 
-def write_metapop_data(writer, metapop, topology, cycle):
+from misc import stress_colnames
+
+def write_metapop_data(writer, metapop, topology, cycle, config):
     """Write information about the metapopulation to a CSV writer"""
+
+    stress_columns = stress_colnames(L=config['Population']['genome_length_max'])
+    genotype_props = np.array([group.shape[0]/metapop.shape[0] for genotype, group in metapop.groupby(stress_columns)])
+
     metapop_data = {'Time': cycle,
                     'PopulationSize': metapop.shape[0],
                     'CooperatorProportion': metapop.Coop.mean(),
@@ -14,12 +20,16 @@ def write_metapop_data(writer, metapop, topology, cycle):
                     'MeanCooperatorFitness': metapop[metapop.Coop==1].Fitness.mean(),
                     'MinDefectorFitness': metapop[metapop.Coop==0].Fitness.min(),
                     'MaxDefectorFitness': metapop[metapop.Coop==0].Fitness.max(),
-                    'MeanDefectorFitness': metapop[metapop.Coop==0].Fitness.mean()}
+                    'MeanDefectorFitness': metapop[metapop.Coop==0].Fitness.mean(),
+                    'ShannonIndex': (genotype_props * np.log(genotype_props)).sum() * -1,
+                    'SimpsonIndex': np.power(genotype_props, 2).sum()}
     writer.writerow(metapop_data)
 
 
-def write_population_data(writer, metapop, topology, cycle):
+def write_population_data(writer, metapop, topology, cycle, config):
     """Write information about each population in the metapopulation to a CSV writer"""
+
+    stress_columns = stress_colnames(L=config['Population']['genome_length_max'])
 
     for popid, subpop in metapop.groupby('Population'):
         try:
@@ -28,6 +38,8 @@ def write_population_data(writer, metapop, topology, cycle):
             pos_y = coords[1]
         except KeyError:
             pos_x = pos_y = np.nan
+
+        genotype_props = np.array([group.shape[0]/subpop.shape[0] for genotype, group in subpop.groupby(stress_columns)])
 
         pop_data = {'Time': cycle,
                     'Population': popid,
@@ -40,7 +52,9 @@ def write_population_data(writer, metapop, topology, cycle):
                     'MeanCooperatorFitness': subpop[subpop.Coop==1].Fitness.mean(),
                     'MinDefectorFitness': subpop[subpop.Coop==0].Fitness.min(),
                     'MaxDefectorFitness': subpop[subpop.Coop==0].Fitness.max(),
-                    'MeanDefectorFitness': subpop[subpop.Coop==0].Fitness.mean()}
+                    'MeanDefectorFitness': subpop[subpop.Coop==0].Fitness.mean(),
+                    'ShannonIndex': (genotype_props * np.log(genotype_props)).sum() * -1,
+                    'SimpsonIndex': np.power(genotype_props, 2).sum()}
 
         writer.writerow(pop_data)
 

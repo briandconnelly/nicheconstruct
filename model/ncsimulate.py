@@ -136,7 +136,8 @@ def main():
         fieldnames = ['Time', 'PopulationSize', 'CooperatorProportion',
                       'MinCooperatorFitness', 'MaxCooperatorFitness',
                       'MeanCooperatorFitness', 'MinDefectorFitness',
-                      'MaxDefectorFitness', 'MeanDefectorFitness']
+                      'MaxDefectorFitness', 'MeanDefectorFitness',
+                      'ShannonIndex', 'SimpsonIndex']
         writermp = csv.DictWriter(open(os.path.join(config['Simulation']['data_dir'],
                                        'metapopulation.csv'), 'w'),
                                        fieldnames=fieldnames)
@@ -153,7 +154,7 @@ def main():
                       'CooperatorProportion', 'MinCooperatorFitness',
                       'MaxCooperatorFitness', 'MeanCooperatorFitness',
                       'MinDefectorFitness', 'MaxDefectorFitness',
-                      'MeanDefectorFitness']
+                      'MeanDefectorFitness', 'ShannonIndex', 'SimpsonIndex']
         writerp = csv.DictWriter(open(os.path.join(config['Simulation']['data_dir'],
                                       'population.csv'), 'w'),
                                       fieldnames=fieldnames)
@@ -206,11 +207,11 @@ def main():
 
         if log_metapopulation and cycle % log_metapopulation_freq == 0:
             write_metapop_data(writer=writermp, metapop=metapop,
-                               topology=topology, cycle=cycle)
+                               topology=topology, cycle=cycle, config=config)
 
         if log_population and cycle % log_population_freq == 0:
             write_population_data(writer=writerp, metapop=metapop,
-                                  topology=topology, cycle=cycle)
+                                  topology=topology, cycle=cycle, config=config)
             pass
 
         env_changed = False
@@ -256,10 +257,10 @@ def main():
 
     if log_metapopulation:
         write_metapop_data(writer=writermp, metapop=metapop, topology=topology,
-                           cycle=cycle+1)
+                           cycle=cycle+1, config=config)
     if log_population:
         write_population_data(writer=writerp, metapop=metapop,
-                              topology=topology, cycle=cycle)
+                              topology=topology, cycle=cycle, config=config)
 
 #-------------------------------------------------------------------------
 
