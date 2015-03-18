@@ -1,6 +1,8 @@
 # Discussion
 
 * summary of results
+* similarities/differences from previous work
+    * @schwilk2002genetic
 * future primacy/recency
     * @laland1996evolutionary
     * @lehmann2007evolution
@@ -14,3 +16,7 @@
     * Darch/Diggle
     * QS?
     * Environmental Sensing?
+
+Niche construction and selective feedbacks
+
+Niche construction and other social interactions
