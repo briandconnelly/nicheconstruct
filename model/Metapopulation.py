@@ -108,8 +108,16 @@ def mutate(M, mu_stress, mu_cooperation, Lmax, num_stress_alleles, config):
             Mcopy[s] = bitwise_xor(Mcopy[s], binomial(n=1, p=mu_stress,
                                                       size=Mcopy[s].shape))
         else:
-            # Small problem, an allele could mutate to itself.
-            Mcopy[s] = (Mcopy[s] + (binomial(n=1, p=mu_stress, size=Mcopy[s].shape) * random_integers(low=1, high=num_stress_alleles, size=Mcopy[s].shape))) % (num_stress_alleles + 1)
+            # Technically, an allele could mutate to itself.
+            astates = Mcopy[s].values
+            mutants = binomial(n=1, p=mu_stress, size=Mcopy[s].shape)==1
+            new_alleles = random_integers(low=0, high=num_stress_alleles,
+                                          size=Mcopy[s].shape)
+            astates[mutants] = new_alleles[mutants]
+            Mcopy[s] = astates
+
+            # Old, convoluted way of mutating
+            #Mcopy[s] = (Mcopy[s] + (binomial(n=1, p=mu_stress, size=Mcopy[s].shape) * random_integers(low=1, high=num_stress_alleles, size=Mcopy[s].shape))) % (num_stress_alleles + 1)
 
     Mcopy = assign_fitness(M=Mcopy,
                            Lmin=config['Population']['genome_length_min'],
