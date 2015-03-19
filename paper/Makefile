@@ -10,6 +10,9 @@ draft:
 draft_doc:
 	cat 0*md | pandoc -H draft.sty $(FLAGS) --output $(FNAME)_draft_$(shell date +'%Y%m%d').docx
 
+intro: 01_introduction.md references.bib
+	pandoc 01_introduction.md -H draft.sty $(FLAGS) --output introduction_draft_$(shell date +'%Y%m%d').pdf
+
 methods: 02_methods.md references.bib
 	pandoc 02_methods.md -H draft.sty $(FLAGS) --output methods_draft_$(shell date +'%Y%m%d').pdf
 
