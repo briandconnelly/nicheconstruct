@@ -21,7 +21,7 @@ non-mathematical readers. Review Articles (8,000) survey recent developments
 and major advances in evolutionary ecology. Reviews should be of interest to a
 broad audience and they are expected both to summarize existing knowledge and
 to propose novel ideas and hypotheses for future research.
- 
+
 # Style and structure
 
 Both American and British English are acceptable. Use a clear, concise style,
