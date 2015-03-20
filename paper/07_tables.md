@@ -2,7 +2,7 @@
 
 # Tables {#tables}
 
-Table: Model parameters and their value. {#zuzz}
+Table: Model parameters and their value.
 
 | Parameter  | Description                                    | Base Value    |
 |:-----------|:-----------------------------------------------|:--------------|
@@ -20,6 +20,6 @@ Table: Model parameters and their value. {#zuzz}
 | $m$        | Migration Rate                                 | 0.05          |
 | $p_0$      | Initial Cooperator Proportion                  | 0.5           |
 | $\mu_{t}$  | Mutation Rate (Tolerance to New Stress)        | $10^{-5}$     |
-| $T$        | Number of Simulation Cycles                    | TODO          |
+| $T$        | Number of Simulation Cycles                    | 1000          |
 | $d$        | Population Dilution Factor                     | 0.1           |
 
