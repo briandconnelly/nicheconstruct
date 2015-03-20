@@ -9,6 +9,7 @@ from misc import stress_colnames
 def write_metapop_data(writer, metapop, topology, cycle, config):
     """Write information about the metapopulation to a CSV writer"""
 
+    # Here, diversity is only calculated based on stress loci. To add cooperation locus, use ['Coop'] + stress_columns
     stress_columns = stress_colnames(L=config['Population']['genome_length_max'])
     genotype_props = np.array([group.shape[0]/metapop.shape[0] for genotype, group in metapop.groupby(stress_columns)])
 
