@@ -2,10 +2,10 @@
 
 # Tables {#tables}
 
-Table: Model parameters and their value.
+Table: Model parameters and their value
 
 | Parameter  | Description                                    | Base Value    |
-|:-----------|:-----------------------------------------------|:--------------|
+|:-----------|:-----------------------------------------------|--------------:|
 | $L$        | Number of Stress Loci                          | 5             |
 | $c$        | Production Cost                                | 0.1           |
 | $a_{max}$  | Number of alleles                              | 6             |
