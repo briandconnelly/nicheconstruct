@@ -16,11 +16,11 @@ Cooperators produce a public good that is equally accessible to all members of t
 
 $$ S(p) = S_{min} + p (S_{max} - S_{min}) $$ {#eq:popsize}
 
-The function $S(p)$ gauges the benefit of public good production. A population composed entirely of defectors reaches size $S_{min}$, while one composed entirely of cooperators reaches size $S_{max}$ (with $S_{max} \ge S_{min}$). During growth, competition occurs. An individual's success is proportional to its fitness. The composition of population $P$ after growth is multinomial with parameters and $S(p)$ and $\{\pi_1, \pi_2, \ldots, \pi_{|P|}\}$, where:
+The function $S(p)$ reflects the benefit of public good production. A population composed entirely of defectors reaches size $S_{min}$, while one composed entirely of cooperators reaches size $S_{max}$ (with $S_{max} \ge S_{min}$). During growth, individuals compete for inclusion in the resulting population. The composition of population $P$ after growth is multinomial with parameters and $S(p)$ and $\{\pi_1, \pi_2, \ldots, \pi_{|P|}\}$, where:
 
 $$ \pi_i = \frac{W_{\gamma(i)}}{\sum_{j \in P}^{} W_{\gamma(j)}} $$ {#eq:prob_repr}
 
-Here, $\gamma(i)$ is the genotype of individual $i$, and $W_{\gamma(i)}$ is its fitness.
+Here, $\gamma(i)$ is the genotype of individual $i$, and $W_{\gamma(i)}$ is its fitness. $\pi_i$ is proportional to $W_{\gamma(i)}$ (and $\sum_{i \in P} = 1$).
 
 For simplicity, we apply mutations after population growth. Mutations occur independently at each locus and cause the allelic state to change. At the binary cooperation locus, mutations flip the allelic state at rate $\mu_{c}$, causing cooperators to become defectors and vice versa. Mutations occur at each stress locus at rate $\mu_{s}$, and cause a new allelic state to be chosen at random from the set $\{0\} \cup A$. Therefore, the probability that genotype $g$ mutates into genotype $g'$ is given by:
 
