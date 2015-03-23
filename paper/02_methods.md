@@ -10,7 +10,7 @@ Organisms also influence their environment, which can feed back to influence sel
 
 $$ W_{g} = z + c a_{g,1} + \delta \sum_{l=2}^{L+1} I_{A}(a_{g,l}) + \epsilon \sum_{l=2}^{L+1} n(a_{g,l}) $$ {#eq:fitness}
 
-where $z$ is a baseline fitness, $c$ is the cost of the cooperative allele, $a_{g,l}$ represents the allelic state of genotype $g$ at locus $l$, $L$ is the number of stress loci, and $\gamma(j)$ is the genotype of individual $j$. $I_{A}$ indicates whether allelic state $y$ is in $A$ (i.e., it is non-zero). The function $n(a_{g,l})$ gives the number of individuals in the population with allelic state at the previous locus equal to one less than that at the focal locus $a_{g,l}$, or:
+where $z$ is a baseline fitness, $c$ is the cost of the cooperative allele, $a_{g,l}$ represents the allelic state of genotype $g$ at locus $l$, $L$ is the number of stress loci, and $\gamma(j)$ is the genotype of individual $j$. The function $I_{A}$ indicates whether allelic state $y$ is in $A$ (i.e., it is non-zero). The function $n(a_{g,l})$ gives the number of individuals in the population with allelic state at the previous locus equal to one less than that at the focal locus $a_{g,l}$, or:
 
 $$ n(a_{g,l}) = \sum_{h=1}^{N} I_{a_{g,l}} (1 + a_{h,l-1} (\bmod a_{max})) $$ {#eq:numepsilon}
 
@@ -22,9 +22,9 @@ $$ S(p) = S_{min} + p (S_{max} - S_{min}) $$ {#eq:popsize}
 
 The function $S(p)$ reflects the benefit of public good production. A population composed entirely of defectors reaches size $S_{min}$, while one composed entirely of cooperators reaches size $S_{max}$ (with $S_{max} \ge S_{min}$). During growth, individuals compete for inclusion in the resulting population. The composition of population $P$ with cooperator proportion $p$ after growth is multinomial with parameters and $S(p)$ and $\{\pi_1, \pi_2, \ldots, \pi_{|P|}\}$, where:
 
-$$ \pi_i = \frac{W_{\gamma(i)}}{\sum_{j \in P}^{} W_{\gamma(j)}} $$ {#eq:prob_repr}
+$$ \pi_i = \frac{W_{\gamma(i)}}{\sum_{j \in P} W_{\gamma(j)}} $$ {#eq:prob_repr}
 
-Here, $\gamma(i)$ is the genotype of individual $i$, and $W_{\gamma(i)}$ is its fitness (see Equation @eq:fitness). $\pi_i$ is proportional to $W_{\gamma(i)}$ (and $\sum_{i \in P} \pi_{i} = 1$).
+Here, $\gamma(i)$ is the genotype of individual $i$, and $W_{\gamma(i)}$ is its fitness (see Equation @eq:fitness). $\pi_$ therefore reflects that an individual's ability to persist is proportional to its fitness relative to others'.
 
 For simplicity, we apply mutations after population growth. Mutations occur independently at each locus and cause the allelic state to change. At the binary cooperation locus, mutations occur at rate $\mu_{c}$. These mutations flip the allelic state, causing cooperators to become defectors and vice versa. Mutations occur at each stress locus at rate $\mu_{s}$, and cause a new allelic state to be chosen at random from the set $\{0\} \cup A$. Therefore, the probability that genotype $g$ mutates into genotype $g'$ is given by:
 
