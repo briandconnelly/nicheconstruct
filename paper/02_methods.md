@@ -24,7 +24,7 @@ The function $S(p)$ reflects the benefit of public good production. A population
 
 $$ \pi_i = \frac{W_{\gamma(i)}}{\sum_{j \in P} W_{\gamma(j)}} $$ {#eq:prob_repr}
 
-Here, $\gamma(i)$ is the genotype of individual $i$, and $W_{\gamma(i)}$ is its fitness (see Equation @eq:fitness). $\pi_$ therefore reflects that an individual's ability to persist is proportional to its fitness relative to others'.
+Here, $\gamma(i)$ is the genotype of individual $i$, and $W_{\gamma(i)}$ is its fitness (see Equation @eq:fitness). $\pi_i$ therefore reflects that an individual's ability to persist is proportional to its fitness relative to others'.
 
 For simplicity, we apply mutations after population growth. Mutations occur independently at each locus and cause the allelic state to change. At the binary cooperation locus, mutations occur at rate $\mu_{c}$. These mutations flip the allelic state, causing cooperators to become defectors and vice versa. Mutations occur at each stress locus at rate $\mu_{s}$, and cause a new allelic state to be chosen at random from the set $\{0\} \cup A$. Therefore, the probability that genotype $g$ mutates into genotype $g'$ is given by:
 
