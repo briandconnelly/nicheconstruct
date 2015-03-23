@@ -16,6 +16,9 @@ intro: 01_introduction.md references.bib
 methods: 02_methods.md 07_tables.md references.bib
 	cat 02_methods.md 07_tables.md newpage.sty | pandoc -H draft.sty $(FLAGS) --output draft_methods_$(shell date +'%Y%m%d').pdf
 
+discussion: 04_discussion.md references.bib
+	cat 04_discussion.md newpage.sty | pandoc -H draft.sty $(FLAGS) --output draft_discussion_$(shell date +'%Y%m%d').pdf
+
 latest:
 	@cat 0*md | pandoc -H draft.sty $(FLAGS) --output $(FNAME)-latest.pdf
 	@cat 0*md | pandoc -H draft.sty $(FLAGS) --output $(FNAME)-latest.docx

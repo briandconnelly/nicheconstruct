@@ -3,11 +3,7 @@
 * summary of results
 * similarities/differences from previous work
     * @schwilk2002genetic
-* future primacy/recency
-    * @laland1996evolutionary
-    * @lehmann2007evolution
 * public goods as niche construction
-* Host symbiont - many instances of cooperation occur among pathogens.
 * future QS or other environmental sensing
 * Facultative cooperation
     * Rodrigues (2012)
@@ -18,5 +14,20 @@
     * Environmental Sensing?
 
 Niche construction and selective feedbacks
-
 Niche construction and other social interactions
+
+## Primacy/Recency
+
+In our model, alterations to the environment were immediately echoed by changes in selection. However, decoupling the timescales on which these processes occur can have substantial effects [@laland1996evolutionary]. By integrating past allelic states into Equation @eq:fitness, we can begin to explore how the cumulative effects of niche construction affect the creation of non-social adaptive opportunities and the benefits that they offer cooperation. Here, how these past allelic states are integrated will play an important role. For example, when the effects of earlier generations are weighted more heavily, the influence of migration may be diminished. While this will reduce the threat of emigration by defectors, cooperator populations will also be less effective at exporting their niche.
+
+## Cooperative Niche Construction
+
+While our focus for this work has been on the eco-evolutionary feedbacks created by non-social traits, it would also be interesting to explore how this system is affected by the timescale at which carrying capacity at a given patch is increased by public goods. In natural settings, a multitude of factors including protein durability [@TODO], diffusion [@TODO], and resource availability [@zhang2013exploring; @ghoul2014experimental] influence both the rate and the degree to which public goods alter the environment (and thereby selection). @lehmann2007evolution demonstrated that a cooperative, niche constructing behavior can be favored when it only affected selection for future generations, thus reducing the potential for competition among contemporary kin. The evolutionary inertia that this creates, however, may ultimately work against cooperators if that trait becomes net costly in the altered environment [@TODO].
+
+
+## Host-Symbiont
+
+In many instances of cooperation, the environment is itself a biological entity, which can produce additional evolutionary feedbacks. As the host population changes, so too will selection on their symbiont populations. Here, evolutionary outcomes depend greatly on the degree of shared interest between the host and symbiont. For example, the cooperative production of virulence factors by the human pathogen *P. aeruginosa* in lung infections is harmful to those with cystic fibrosis [@harrison2007microbial]. Conversely, cooperative light production by *A. fischeri* is vital for the survival of its host, the Hawaiian bobtail squid [@ruby1996lessons]. 
+
+It was recently suggested that incorporating the effects of niche construction is critical for improving our understanding of viral evolution [@hamblin2014viral] and evolution in co-infecting parasites [@hafer2015when]. We believe it may play the same role in understanding the evolution of cooperative behaviors in these host-symbiont settings.
+
