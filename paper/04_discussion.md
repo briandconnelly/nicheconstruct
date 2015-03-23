@@ -3,6 +3,7 @@
 * summary of results
 * similarities/differences from previous work
     * @schwilk2002genetic
+    * 10.1073/pnas.0812644106
 * public goods as niche construction
 * future QS or other environmental sensing
 * Facultative cooperation
@@ -22,12 +23,10 @@ In our model, alterations to the environment were immediately echoed by changes 
 
 ## Cooperative Niche Construction
 
-While our focus for this work has been on the eco-evolutionary feedbacks created by non-social traits, it would also be interesting to explore how this system is affected by the timescale at which carrying capacity at a given patch is increased by public goods. In natural settings, a multitude of factors including protein durability [@TODO], diffusion [@TODO], and resource availability [@zhang2013exploring; @ghoul2014experimental] influence both the rate and the degree to which public goods alter the environment (and thereby selection). @lehmann2007evolution demonstrated that a cooperative, niche constructing behavior can be favored when it only affected selection for future generations, thus reducing the potential for competition among contemporary kin. The evolutionary inertia that this creates, however, may ultimately work against cooperators if that trait becomes net costly in the altered environment [@TODO].
+While our focus for this work has been on the eco-evolutionary feedbacks created by non-social traits, it would also be interesting to explore how this system is affected by the timescale at which carrying capacity at a given patch is increased by public goods. In natural settings, a multitude of factors including protein durability [@brown2007durability], diffusion [@TODO], and resource availability [@zhang2013exploring; @ghoul2014experimental] influence both the rate and the degree to which public goods alter the environment (and thereby selection). @lehmann2007evolution demonstrated that a cooperative, niche constructing behavior can be favored when it only affected selection for future generations, thus reducing the potential for competition among contemporary kin. The evolutionary inertia that this creates, however, may ultimately work against cooperators. When public good accumulates in the environment, cooperators must reduce their investment in production to remain competitive [@kummerli2010molecular].
 
 
 ## Host-Symbiont
 
-In many instances of cooperation, the environment is itself a biological entity, which can produce additional evolutionary feedbacks. As the host population changes, so too will selection on their symbiont populations. Here, evolutionary outcomes depend greatly on the degree of shared interest between the host and symbiont. For example, the cooperative production of virulence factors by the human pathogen *P. aeruginosa* in lung infections is harmful to those with cystic fibrosis [@harrison2007microbial]. Conversely, cooperative light production by *A. fischeri* is vital for the survival of its host, the Hawaiian bobtail squid [@ruby1996lessons]. 
-
-It was recently suggested that incorporating the effects of niche construction is critical for improving our understanding of viral evolution [@hamblin2014viral] and evolution in co-infecting parasites [@hafer2015when]. We believe it may play the same role in understanding the evolution of cooperative behaviors in these host-symbiont settings.
+In many instances of cooperation, the environment is itself a biological entity, which can produce additional evolutionary feedbacks. As the host population changes, so too will selection on their symbiont populations. Here, evolutionary outcomes depend greatly on the degree of shared interest between the host and symbiont. For example, the cooperative production of virulence factors by the human pathogen *P. aeruginosa* in lung infections is harmful to those with cystic fibrosis [@harrison2007microbial]. Conversely, cooperative light production by *A. fischeri* is vital for the survival of its host, the Hawaiian bobtail squid [@ruby1996lessons]. It was recently argued that incorporating the effects of niche construction is critical for improving our understanding of viral evolution [@hamblin2014viral] and evolution in co-infecting parasites [@hafer2015when]. Incorporating host dynamics, co-evolution, and the feedbacks that they produce into models is likely to be equally important for gaining an understanding of how cooperative behaviors evolve in these host-symbiont settings.
 
