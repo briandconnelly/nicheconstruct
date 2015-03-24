@@ -8,9 +8,9 @@ Table: Model parameters and their value
 |:-----------|:-----------------------------------------------|--------------:|
 | $N^2$      | Number of metapopulation sites                 | 625           |
 | $L$        | Number of adaptive loci                        | 5             |
-| $c$        | Production cost                                | 0.1           |
 | $a_{max}$  | Number of alleles                              | 6             |
 | $\delta$   | Fitness benefit, nonzero alleles               | 0.3           |
+| $c$        | Production cost                                | 0.1           |
 | $\epsilon$ | Fitness benefit, sequential alleles            | 0.00015       |
 | $z$        | Baseline fitness                               | 1             |
 | $S_{min}$  | Minimum population size                        | 800           |

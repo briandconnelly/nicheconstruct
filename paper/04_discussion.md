@@ -12,7 +12,7 @@
     * Kümmerli and Brown (2010)
     * Darch/Diggle
     * QS?
-    * Environmental Sensing?
+    * Environmental Sensing? - [@koestler2014bile, @bernier2011modulation]
 
 Niche construction and selective feedbacks
 Niche construction and other social interactions
