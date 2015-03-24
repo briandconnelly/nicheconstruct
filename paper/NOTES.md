@@ -1,6 +1,8 @@
 * Cooperation early on shifts benefits (http://onlinelibrary.wiley.com/doi/10.1111/j.1420-9101.2009.01893.x/full)
     * Our model doesn't include this option
 
+* More diffusion: allen2013spatial
+
 # Stitch together multiple docs
 * http://stackoverflow.com/questions/21247978/compile-multiple-files-into-one-with-title-blocks
 * http://stackoverflow.com/questions/4779582/markdown-and-including-multiple-files
