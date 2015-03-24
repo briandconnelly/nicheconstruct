@@ -75,6 +75,10 @@ def migrate(M, topology, rate):
     """Migrate individuals among subpopulations"""
     assert 0 <= rate <= 1
 
+    # Don't do migration when there's only one population
+    if len(topology) == 1:
+        return
+
     emigrants_ix = M.index[where(binomial(n=1, p=rate,
                                           size=M.index.shape[0]) == 1)]
 
