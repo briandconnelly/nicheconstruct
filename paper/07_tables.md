@@ -11,7 +11,7 @@ Table: Model parameters and their value
 | $c$        | Production cost                                | 0.1           |
 | $a_{max}$  | Number of alleles                              | 6             |
 | $\delta$   | Fitness benefit, nonzero alleles               | 0.3           |
-| $\epsilon$ | Fitness benefit, sequential alleles            | TODO          |
+| $\epsilon$ | Fitness benefit, sequential alleles            | 0.00015       |
 | $z$        | Baseline fitness                               | 1             |
 | $S_{min}$  | Minimum population size                        | 800           |
 | $S_{max}$  | Maximum population size                        | 2000          |
