@@ -6,7 +6,7 @@
 
 ### Figure 1A
 
-![Proportion of cooperators over time when there are no opportunities for non-social adaptation](../figures/Figure1A.png) {#fig:fig1a}
+![Proportion of cooperators over time when there are no opportunities for non-social adaptation](../figures/Figure1A.png)
 
 \newpage
 
@@ -17,7 +17,7 @@ Proportion of cooperators over time with non-social adaptation
 ### Figure 1C
 
 Proportion of cooperators over time with non-social adaptation and niche construction
-![Proportion of cooperators over time with non-social adaptation and selective feedbacks](../figures/Figure1C.png) {#fig:fig1c}
+![Proportion of cooperators over time with non-social adaptation and selective feedbacks](../figures/Figure1C.png)
 
 
 ## Figure 2
@@ -27,6 +27,13 @@ Plot showing integral for baseline values, double adaptive benefit (no NC, epsil
 ## Figure 3
 
 Mean fitness over time for the treatments shown in Figure 2
+
+### Figure 3B - Fitness with double delta, no epsilon
+
+![Grand mean Fitness of cooperators and defectors, double delta, no epsilon](../figures/Figure3B.png)
+
+![fitness diff](../figures/Figure3B-alternate.pdf)
+
 
 ## Figure 4
 
