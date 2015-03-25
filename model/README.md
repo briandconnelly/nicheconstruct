@@ -2,7 +2,9 @@
 
 ## Dependiencies
 
-* Python 2.7 or 3.4
+The following software versions were used for this work:
+
+* Python 3.4
 * [Pandas](http://pandas.pydata.org) 0.15.2
 * [NetworkX](https://networkx.github.io/) 1.9.1
 * [NumPy](http://www.numpy.org) 1.9.1
@@ -11,8 +13,11 @@
 These dependencies can be installed in a modern Python environment using:
 
 ```sh
-pip install numpy==1.9.1 pandas==0.15.2 networkx==1.9.1 configobj==5.0.6
+pip3 install numpy==1.9.1 pandas==0.15.2 networkx==1.9.1 configobj==5.0.6
 ```
+
+The model also must be run on a machine with a 64-bit processor and operating system.
+
 
 ## Virtual Environment
 
@@ -73,3 +78,4 @@ TODO
 ## Result Data
 
 TODO
+

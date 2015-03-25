@@ -5,4 +5,4 @@ contains the exact versions of software used in our work.
 
 ## Requirements
 * [virtualenv](https://virtualenv.pypa.io/en/latest/)
-* Python 2.7 (2.7.3 was used in our simulations)
+* Python 3.4

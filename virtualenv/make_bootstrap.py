@@ -12,7 +12,7 @@ def after_install(options, home_dir):
         subprocess.call([os.path.join(home_dir, 'Scripts', 'pip.exe'), 'install', '-r', 'requirements.txt'])
 '''
 
-script = virtualenv.create_bootstrap_script(s, python_version='2.7')
+script = virtualenv.create_bootstrap_script(s, python_version='3.4')
 f = open('bootstrap.py','w')
 f.write(script)
 f.close()
