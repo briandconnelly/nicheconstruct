@@ -46,5 +46,4 @@ alldata <- do.call(rbind, z)
 alldata$Replicate <- as.factor(alldata$Replicate)                               
 alldata$Treatment <- as.factor(alldata$Treatment)  
 
-write.csv(alldata, file='../data/L05_A06_2xDelta_0xEpsilon.csv',
-          row.names=FALSE) 
+write.csv(alldata, file=sprintf('../data/%s.csv', treatment), row.names=FALSE) 

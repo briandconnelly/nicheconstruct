@@ -1,8 +1,9 @@
-# Combine all replicate data from the L00 treatment
-# L00 uses baseline parameter values, but L=0, so there is neither adaptation nor niche construction
+# Combine all replicate data from the L05_A06_1xDelta_1xEpsilon treatment
+
+# This is our baseline treatment
 
 replicates <- seq(0,9)
-treatment <- 'L00'
+treatment <- 'L05_A06_1xDelta_1xEpsilon'
 runs <- expand.grid(Treatment=treatment, Replicate=replicates)
 runs$Filename <- sprintf('../data/raw/data_%s_%02d/metapopulation.csv',
                          runs$Treatment, runs$Replicate)
@@ -25,7 +26,7 @@ get_dataset <- function(x)
         return()
     }
     
-    data$GenomeLength <- 0
+    data$GenomeLength <- 5
     data$Alleles <- 6
     data$Delta <- 0.3
     data$Epsilon <- 0.00015
