@@ -37,6 +37,7 @@ def write_population_data(writer, metapop, topology, cycle, config):
     """Write information about each population in the metapopulation to a CSV writer"""
 
     Lmax = config['Population']['genome_length_max']
+    stress_columns = stress_colnames(L=config['Population']['genome_length_max'])
 
     for popid, subpop in metapop.groupby('Population'):
         try:
