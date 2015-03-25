@@ -1,4 +1,4 @@
-Raw data from simulations
+# Raw data from simulations
 
 Each directory contains the output from one replicate simulation of a treatment. The treatment is specified in the prefix (see table below), and the replicate ID is appended.
 
