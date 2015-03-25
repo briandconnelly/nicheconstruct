@@ -20,6 +20,8 @@ Niche construction and other social interactions
 
 ## Public Goods
 
+TODO: merge this in with the "Cooperative Niche Construction" section [TEST](Coopeative Niche Construction)
+
 By their very nature, public goods benefit populations by making their environment more hospitable. For example, bacteria produce extracellular products that find soluble iron [@griffin2004cooperation], digest large proteins [@darch2012density; @diggle2007cooperation], and reduce the risk of predation [@cosson2002pseudomonas], among many others [@west2007social]. While many studies have explored how the environment affects the evolution of cooperative bahviors, relatively few have examined how those behaviors affect the environment and the resulting change in evolutionary trajectories. @lehmann2007evolution demonstrated analytically that when niche construction act benefits future generations, cooperation is favored due to reduced competition among kin. When rate-benefitting and yield-benefitting altruistic acts co-evolve, @vandyken2012origins showed that "reciprocal niche construction", where the selective feedbacks produced by one act benefitted the other, can lead to increased selection for both traits. While these studies have focused on the niche constructing effects of cooperation, we instead focus our attention here on how niche construction enables cooperators to escape defection by hitchhiking along with non-social traits.
 
 ## Primacy/Recency

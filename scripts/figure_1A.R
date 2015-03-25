@@ -1,3 +1,9 @@
+# Plot Figure 1A
+#
+# Dependencies can be installed with:
+#    install.packages(c('magrittr', 'ggplot2', 'devtools', 'gtable'))
+#    devtools::install_github('briandconnelly/ggplot2bdc')
+
 library(magrittr)
 library(ggplot2)
 library(ggplot2bdc)
@@ -18,7 +24,7 @@ fig1A <- rescale_square(plot=fig1A)
 g <- ggplotGrob(fig1A)                                                          
 g <- gtable_add_grob(g, textGrob(expression(bold("A")), gp=gpar(col='black', fontsize=20), x=0, hjust=0, vjust=0.5), t=1, l=2)
 
-png('../figures/Figure1A.png', width=6, height=3.708204, units='in', res=300)   
+png('../figures/Figure1A.png', width=6, height=6, units='in', res=300)   
 grid.newpage()                                                                  
 grid.draw(g)                                                                    
 dev.off()

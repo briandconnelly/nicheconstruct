@@ -2,7 +2,7 @@ FNAME=ncnh
 BIB=references.bib
 CSL=evolutionary-ecology-research.csl
 #CSL=springer-basic-author-date-no-et-al.csl
-FLAGS=--smart --from markdown+autolink_bare_uris+ascii_identifiers+implicit_figures+header_attributes+table_captions --filter pandoc-eqnos --filter /usr/local/bin/pandoc-citeproc --highlight-style tango --bibliography $(BIB) --csl $(CSL) --latex-engine=xelatex
+FLAGS=--smart --from markdown+autolink_bare_uris+ascii_identifiers+implicit_figures+header_attributes+table_captions --filter pandoc-eqnos --filter pandoc-fignos --filter /usr/local/bin/pandoc-citeproc --highlight-style tango --bibliography $(BIB) --csl $(CSL) --latex-engine=xelatex
 
 draft:
 	cat 0*md | pandoc -H draft.sty $(FLAGS) --output draft_$(FNAME)_$(shell date +'%Y%m%d').pdf
