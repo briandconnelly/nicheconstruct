@@ -1,4 +1,4 @@
 # Simulation Data
 
-**raw** contains raw output from simulations.
+* **raw**: raw output from simulations.
 
