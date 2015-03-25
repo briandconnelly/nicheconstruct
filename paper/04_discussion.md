@@ -13,6 +13,7 @@
     * Darch/Diggle
     * QS?
     * Environmental Sensing? - [@koestler2014bile, @bernier2011modulation]
+* Negative Niche construction as a stragegy? - would those that create this constant pressure (L=5, A=6) do better than those that do not (L=5, A=5)?
 
 Niche construction and selective feedbacks
 Niche construction and other social interactions
