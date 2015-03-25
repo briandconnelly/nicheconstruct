@@ -2,10 +2,11 @@
 
 Each directory contains the output from one replicate simulation of a treatment. The treatment is specified in the prefix (see table below), and the replicate ID is appended.
 
-| Prefix                     | Description                                    |
+| Treatment                  | Description                                    |
 |:---------------------------|:-----------------------------------------------|
-| data_L05_A06_1xDelta_1xEpsilon | Base run                                   |
-| data_L05_A06_2xDelta_0xEpsilon | Adaptations, no niche construction (adaptive benefit doubled) |
+| L05_A06_1xDelta_1xEpsilon  | Base Parameter Values                          |
+| L00                        | No opportunities for non-social adaptation     |
+| L05_A06_2xDelta_0xEpsilon  | Adaptations, no niche construction (adaptive benefit doubled) |
 
 
 ## Contents
