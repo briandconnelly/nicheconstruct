@@ -32,8 +32,6 @@ Mean fitness over time for the treatments shown in Figure 2
 
 ![Grand mean Fitness of cooperators and defectors, double delta, no epsilon](../figures/Figure3B.png)
 
-![fitness diff](../figures/Figure3B-alternate.pdf)
-
 
 ## Figure 4
 

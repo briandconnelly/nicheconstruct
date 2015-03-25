@@ -42,12 +42,3 @@ png('../figures/Figure3B.png', width=6, height=3.708204, units='in', res=300)
 grid.newpage()                                                                  
 grid.draw(g)                                                                    
 dev.off()
-
-fig3B_alt <- ggplot(data=fig3B_data, aes(x=Time, y=MeanCooperatorFitness-MeanDefectorFitness)) +
-    geom_hline(aes(yintercept=0), linetype='dotted', color='grey70') +
-    stat_summary(fun.data='mean_cl_normal', geom='ribbon', color=NA, alpha=0.1) +
-    stat_summary(fun.y='mean', geom='line') +
-    labs(x='Time', y='Cooperator Fitness - Defector Fitness') +
-    theme_bdc_grey()
-fig3B_alt <- rescale_golden(plot=fig3B_alt)
-ggsave_golden('../figures/Figure3B-alternate.pdf')
