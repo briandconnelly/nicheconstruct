@@ -14,8 +14,8 @@ fig1C_data$Replicate <- as.factor(fig1C_data$Replicate)
 
 fig1C <- ggplot(data=fig1C_data, aes(x=Time, y=CooperatorProportion)) +
     geom_hline(aes(yintercept=0.5), linetype='dotted', color='grey70') +        
-    stat_summary(fun.data='mean_cl_normal', geom='ribbon', color=NA, alpha=0.1) +
-    stat_summary(fun.y='mean', geom='line') +                                   
+    stat_summary(fun.data='mean_cl_normal', geom='ribbon', color=NA, fill='black', alpha=0.1) +
+    stat_summary(fun.y='mean', geom='line', color='black') +
     scale_y_continuous(breaks=seq(from=0, to=1, by=0.25), limits=c(0,1)) +
     labs(x='Time', y='Cooperator Proportion') +
     theme_bdc_grey()
@@ -28,3 +28,7 @@ png('../figures/Figure1C.png', width=6, height=6, units='in', res=300)
 grid.newpage()                                                                  
 grid.draw(g)                                                                    
 dev.off()
+
+# Save a version with each replicate shown
+ggsave(filename='../figures/Figure1C-all.png', plot=fig1C + geom_line(aes(color=Replicate)),
+       width=6, height=6, units='in', dpi=300)
