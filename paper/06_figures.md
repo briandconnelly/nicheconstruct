@@ -32,6 +32,10 @@ Mean fitness over time for the treatments shown in Figure 2
 
 ![Grand mean Fitness of cooperators and defectors, double delta, no epsilon](../figures/Figure3B.png)
 
+### Figure 3C - Fitness with no negative niche construction (L=5, A=5)
+
+![Grand mean Fitness of cooperators and defectors, no negative niche construction](../figures/Figure3C.png)
+
 
 ## Figure 4
 
