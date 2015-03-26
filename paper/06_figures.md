@@ -36,6 +36,11 @@ Mean fitness over time for the treatments shown in Figure 2
 
 ![Grand mean Fitness of cooperators and defectors, no negative niche construction](../figures/Figure3C.png)
 
+### Figure 3D - Fitness with extreme negative niche construction (L=1, A=6)
+
+![Grand mean Fitness of cooperators and defectors, extreme negative niche construction](../figures/Figure3D.png)
+
+
 
 ## Figure 4
 

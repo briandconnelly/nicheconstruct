@@ -10,7 +10,7 @@ Organisms also influence their environment, which can feed back to influence sel
 
 $$ W_{g} = z + \delta \sum_{l=1}^{L} I_{A}(a_{g,l}) + \epsilon \sum_{l=1}^{L} n(\beta(a_{g,l}, a_{max}), \beta(l, L)) - c a_{g,L+1} $$ {#eq:fitness}
 
-where $z$ is a baseline fitness, $a_{g,l}$ represents the allelic state of genotype $g$ at locus $l$, $L$ is the number of adaptive loci, and $c$ is the cost of the cooperative allele. The function $I_{A}$ indicates whether allelic state $y$ is in $A$ (i.e., it is non-zero). The function $n(a,l)$ gives the number of individuals in the population with allelic state $a$ at the locus $l$ (Equation @eq:numinds), and $\beta(x, x_{max})$ is a function that gives the value below some value $x$ in the circular set $\{1, \ldots, x_{max}\}$ (Equation @eq:beta).
+where $z$ is a baseline fitness, $a_{g,l}$ represents the allelic state of genotype $g$ at locus $l$, $L$ is the number of adaptive loci, and $c$ is the cost of the cooperative allele. The function $I_{A}$ indicates whether allelic state $y$ is in $A$ (i.e., it is non-zero). The function $n(a,l)$ gives the number of individuals in the population with allelic state $a$ at the locus $l$ (Equation @eq:numinds), and $the function \beta(x, x_{max})$ gives the value below some value $x$ in the circular set $\{1, \ldots, x_{max}\}$ (Equation @eq:beta).
 
 $$ n(a, l) = \sum_{i \in P} I_{a_{g,l}}(a_{\gamma(i), l}) $$ {#eq:numinds}
 
