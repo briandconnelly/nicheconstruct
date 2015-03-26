@@ -7,6 +7,7 @@ Each directory contains the output from one replicate simulation of a treatment.
 | L05_A06_1xDelta_1xEpsilon  | Base Parameter Values                          |
 | L00                        | No opportunities for non-social adaptation     |
 | L05_A06_2xDelta_0xEpsilon  | Adaptations, no niche construction (adaptive benefit doubled) |
+| L05_A05_1xDelta_1xEpsilon  | Adaptations, positive niche construction, no negative niche construction |
 
 
 ## Contents
