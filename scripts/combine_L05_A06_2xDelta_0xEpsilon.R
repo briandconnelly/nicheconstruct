@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 # Combine all replicate data from the L05_A06_2xDelta_0xEpsilon treatment
 
 # In this treatment, we examine whether doubling the benefits of non-social

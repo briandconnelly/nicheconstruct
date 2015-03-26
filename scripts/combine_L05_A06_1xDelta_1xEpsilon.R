@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 # Combine all replicate data from the L05_A06_1xDelta_1xEpsilon treatment
 
 # This is our baseline treatment

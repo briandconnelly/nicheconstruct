@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 # Combine all replicate data from the L00 treatment
 # L00 uses baseline parameter values, but L=0, so there is neither adaptation nor niche construction
 

@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 # Plot Figure 1C
 #
 # Dependencies can be installed with:
