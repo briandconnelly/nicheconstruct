@@ -12,11 +12,10 @@
 
 ### Figure 1B
 
-Proportion of cooperators over time with non-social adaptation
+![Proportion of cooperators over time with non-social adaptation (GNH)](../figures/Figure1B.png)
 
 ### Figure 1C
 
-Proportion of cooperators over time with non-social adaptation and niche construction
 ![Proportion of cooperators over time with non-social adaptation and selective feedbacks](../figures/Figure1C.png)
 
 \newpage
