@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 # Plot Figure 3B
 
 library(tidyr)
