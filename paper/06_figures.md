@@ -28,6 +28,10 @@ Plot showing integral for baseline values, double adaptive benefit (no NC, epsil
 
 Mean fitness over time for the treatments shown in Figure 2
 
+### Figure 3A - Fitness for base case: niche construction
+
+![Grand mean Fitness of cooperators and defectors](../figures/Figure3A.png)
+
 ### Figure 3B - Fitness with double delta, no epsilon
 
 ![Grand mean Fitness of cooperators and defectors, double delta, no epsilon](../figures/Figure3B.png)
