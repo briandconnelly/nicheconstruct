@@ -15,8 +15,8 @@ Table: Model parameters and their value
 | $z$        | Baseline fitness                               | 1             |
 | $S_{min}$  | Minimum population size                        | 800           |
 | $S_{max}$  | Maximum population size                        | 2000          |
-| $\mu_{c}$  | Mutation rate (cooperation)                    | $10^{-5}$     |
 | $\mu_{a}$  | Mutation rate (adaptation)                     | $10^{-5}$     |
+| $\mu_{c}$  | Mutation rate (cooperation)                    | $10^{-5}$     |
 | $m$        | Migration rate                                 | 0.05          |
 | $p_0$      | Initial cooperator proportion                  | 0.5           |
 | $\mu_{t}$  | Mutation rate (tolerance to new stress)        | $10^{-5}$     |
