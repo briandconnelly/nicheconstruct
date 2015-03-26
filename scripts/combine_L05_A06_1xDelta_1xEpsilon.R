@@ -4,7 +4,7 @@
 
 # This is our baseline treatment
 
-replicates <- seq(0,9)
+replicates <- seq(0,19)
 treatment <- 'L05_A06_1xDelta_1xEpsilon'
 runs <- expand.grid(Treatment=treatment, Replicate=replicates)
 runs$Filename <- sprintf('../data/raw/data_%s_%02d/metapopulation.csv',

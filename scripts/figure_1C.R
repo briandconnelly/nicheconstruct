@@ -34,5 +34,6 @@ grid.draw(g)
 dev.off()
 
 # Save a version with each replicate shown
-ggsave(filename='../figures/Figure1C-all.png', plot=fig1C + geom_line(aes(color=Replicate)),
+ggsave(filename='../figures/Figure1C-all.png',
+       plot=fig1C + geom_line(aes(color=Replicate)) + scale_color_hue(guide=FALSE),
        width=6, height=6, units='in', dpi=300)
