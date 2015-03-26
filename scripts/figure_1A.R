@@ -11,6 +11,8 @@ library(ggplot2)
 library(ggplot2bdc)
 library(gtable)
 
+source('formatting.R')
+
 fig1A_data <- read.csv('../data/L00.csv')
 fig1A_data$Replicate <- as.factor(fig1A_data$Replicate)
 
@@ -20,7 +22,7 @@ fig1A <- ggplot(data=fig1A_data, aes(x=Time, y=CooperatorProportion)) +
                  alpha=0.1) +
     stat_summary(fun.y='mean', geom='line', color='black') +
     scale_y_continuous(breaks=seq(from=0, to=1, by=0.25), limits=c(0,1)) +
-    labs(x='Time', y='Cooperator Proportion') +
+    labs(x=label_time, y=label_cooperator_proportion) +
     theme_bdc_grey()
 fig1A <- rescale_square(plot=fig1A)
 

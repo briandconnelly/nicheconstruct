@@ -7,8 +7,7 @@ library(ggplot2)
 library(ggplot2bdc)
 library(gtable)
 
-cooperator_color <- '#729ECE'
-defector_color <- '#ED665D'
+source('formatting.R')
 
 fig3C_data <- read.csv('../data/L05_A05_1xDelta_1xEpsilon.csv')
 fig3C_data$Replicate <- as.factor(fig3C_data$Replicate)
@@ -24,15 +23,15 @@ fig3C <- ggplot(data=fig3C_avgfitness, aes(x=Time, y=MeanFitness, color=Type,
     scale_color_manual(name='Type',                                             
                        labels=c('MeanDefectorFitness'='Defector',               
                                 'MeanCooperatorFitness'='Cooperator'),          
-                       values=c('MeanDefectorFitness'=defector_color,                
-                                'MeanCooperatorFitness'=cooperator_color)) +           
+                       values=c('MeanDefectorFitness'=color_defector,                
+                                'MeanCooperatorFitness'=color_cooperator)) +           
     scale_fill_manual(name='Type', guide=FALSE,                                 
                       labels=c('MeanDefectorFitness'='Defector',                
                                'MeanCooperatorFitness'='Cooperator'),           
-                      values=c('MeanDefectorFitness'=defector_color,                 
-                               'MeanCooperatorFitness'=cooperator_color)) + 
+                      values=c('MeanDefectorFitness'=color_defector,                 
+                               'MeanCooperatorFitness'=color_cooperator)) + 
     #scale_y_continuous(limits=c(NA,4)) +
-    labs(x='Time', y='Mean Fitness') +                                          
+    labs(x=label_time, y=label_mean_fitness) +                                          
     theme_bdc_grey() +
     theme(legend.position=c(.5, 1.035), legend.justification=c(0.5, 0.5))
 fig3C <- rescale_golden(plot=fig3C)

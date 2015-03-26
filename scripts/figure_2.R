@@ -7,6 +7,8 @@ library(dplyr)
 library(ggplot2)
 library(ggplot2bdc)
 
+source('formatting.R')
+
 # Read the data sets
 base_data <- read.csv('../data/L05_A06_1xDelta_1xEpsilon.csv')
 nonc_data <- read.csv('../data/L05_A06_2xDelta_0xEpsilon.csv')
@@ -39,7 +41,7 @@ fig2 <- ggplot(data=fig2integrals, aes(x=Treatment, y=Integral)) +
     stat_summary(fun.data='mean_cl_normal') + 
     #geom_boxplot() +
     scale_y_continuous(limits=c(0,1)) + 
-    labs(x='', y='Cooperator Presence') +
+    labs(x='', y=label_cooperator_presence) +
     theme_bdc_grey(ticks.x=FALSE) + theme(axis.text.x = element_text(vjust=1, face='bold'))
 fig2 <- rescale_golden(plot=fig2)
 

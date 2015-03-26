@@ -11,6 +11,8 @@ library(ggplot2)
 library(ggplot2bdc)
 library(gtable)
 
+source('formatting.R')
+
 fig1C_data <- read.csv('../data/L05_A06_1xDelta_1xEpsilon.csv')
 fig1C_data$Replicate <- as.factor(fig1C_data$Replicate)
 
@@ -19,7 +21,7 @@ fig1C <- ggplot(data=fig1C_data, aes(x=Time, y=CooperatorProportion)) +
     stat_summary(fun.data='mean_cl_normal', geom='ribbon', color=NA, fill='black', alpha=0.1) +
     stat_summary(fun.y='mean', geom='line', color='black') +
     scale_y_continuous(breaks=seq(from=0, to=1, by=0.25), limits=c(0,1)) +
-    labs(x='Time', y='Cooperator Proportion') +
+    labs(x=label_time, y=label_cooperator_proportion) +
     theme_bdc_grey()
 fig1C <- rescale_square(plot=fig1C)
 
