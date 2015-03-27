@@ -18,6 +18,10 @@
 
 ![Proportion of cooperators over time with non-social adaptation and selective feedbacks](../figures/Figure1C.png)
 
+### Figure 1X
+
+![Proportion of cooperators over time without negative niche construction](../figures/Figure1X.png)
+
 \newpage
 
 ## Figure 2
