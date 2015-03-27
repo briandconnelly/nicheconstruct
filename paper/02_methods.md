@@ -8,7 +8,7 @@ Our simulated environment consists of $N^2$ patches arranged as an $N \times N$ 
 
 $$ n(a, l) = \sum_{i \in P} I_{a_{g,l}}(a_{\gamma(i), l}) $$ {#eq:numinds}
 
-Organisms also influence their environment, which, in turn, influences selection. We model this as a form of frequency dependent selection. Specifically, the selective value of adaptive allele $a$ at locus $l$ increases with the number of individuals in the population that have allele $a-1$ at locus $l-1$. We treat both adaptive loci and allelic states as "circular", so the allelic state at locus 1 is affected by the allelic composition of the population at locus $L$, and the selective value of allele 1 at any locus increases with the number of individuals carrying allele $a_{max}$ at the previous locus. To make this circularity mathematically crisp, we define a function giving the integer below $x$ in the set $\{1, 2, \ldots, X\}$ 
+Organisms also influence their environment, which, in turn, influences selection. We model this as a form of density dependent selection. Specifically, the selective value of adaptive allele $a$ at locus $l$ increases with the number of individuals in the population that have allele $a-1$ at locus $l-1$. We treat both adaptive loci and allelic states as "circular", so the allelic state at locus 1 is affected by the allelic composition of the population at locus $L$, and the selective value of allele 1 at any locus increases with the number of individuals carrying allele $a_{max}$ at the previous locus. To make this circularity mathematically crisp, we define a function giving the integer below $x$ in the set $\{1, 2, \ldots, X\}$ 
 
 $$ \beta(x, X) = \bmod_{X}(x - 2 + X) + 1 $$ {#eq:beta}
 
