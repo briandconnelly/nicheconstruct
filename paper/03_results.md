@@ -1,14 +1,16 @@
 # Results
 
-## Niche construction prolongs cooperator survival
+## Niche Construction Maintains Cooperation
 
-Introduce Figure 1. Compare 1A (no adaptation) and 1B (GNH) with 1C, which is the NCNH treatment
+Despite being able to form larger populations, cooperators are swiftly eliminated in competition with defectors, despite spatial structuring in the metapopulation (Figure 1A). As demonstrated by @HANKSHAW, cooperators are temporarily bolstered by the ability to hitchhike along with non-social adaptations (Figure 1B). As shown in Figure 1C, we find that niche hiking can prolong cooperation, perhaps indefinitely (see [Table 1](#tables) for model parameters). (**TODO** describe the oscillations). We now explore this process further to identify the factors underlying this effect.
 
-End prompting the question of what is underlying this effect
 
-## Not Just Because of Additional Fitness from Epsilon
+## Not Just Because of Additional Fitness from Epsilon TODO title
 
-Introduce Figure 2. compare 2A and 2B, which shows control run with 2x delta
+In our model, and individual's fitness is the product of two processes. First, mutations can engender environmental adaptations, which are represented by non-zero alleles. These adaptations create the transient lift in cooperation seen in Figure 1B. The second process that contributes to fitness is niche construction. Selection favors individuals with sequentially-increasing alleles. Because larger populations will have a greater effect on their environment, this benefit is density dependent. In our experiments, this positive niche construction contributed equally to fitness when all individuals shared the same allele in a population at maximum carrying capacity. To determine whether cooperation was maintained simply due to the higher selective values made possible by this second source of fitness, we compared our results against the results of experiments in which the ordering of alleles did not matter, and the fitness benefit provided by adaptation was doubled ($\epsilon=0, \delta=0.6$).
+
+As shown in Figure 2, higher selective values have little effect (columns A and C) and do not explain the maintenance of cooperation that we observe when niche construction occurs (column B).
+
 
 Introduce Figure 3 (Fitness). Compare 3A with 3B. Discuss why fitness in NCNH treatment doesn't reach max.
 

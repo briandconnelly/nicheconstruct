@@ -4,6 +4,8 @@
 * similarities/differences from previous work
     * @schwilk2002genetic
     * 10.1073/pnas.0812644106
+* negative/positive NC
+    * laland1996evolutionary
 * public goods as niche construction
 * future QS or other environmental sensing
 * Facultative cooperation
