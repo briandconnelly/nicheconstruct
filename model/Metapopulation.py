@@ -28,6 +28,8 @@ def create_metapopulation(config, topology, initial_state='populated'):
 
     stress_columns = stress_colnames(L=genome_length_max)
 
+    stress_alleles = config['Population']['stress_alleles']
+
     if initial_state == 'populated':
         initial_popsize = capacity_min + \
                       (initial_cooperator_proportion * (capacity_max - capacity_min))
@@ -41,8 +43,8 @@ def create_metapopulation(config, topology, initial_state='populated'):
         M = pd.DataFrame(data,
                          columns=['Time', 'Population', 'Coop'] + ["S{0:02d}".format(i) for i in np.arange(1,genome_length_max+1)] + ['Fitness'])
 
-    elif initial_state == 'coop_invade':
-        coop_popid = int((size-1)/2)
+    elif initial_state == 'cooperator_invade':
+        coop_popid = int(size/2)
 
         defector_pops = np.repeat(np.delete(np.arange(size), coop_popid), capacity_min)
         cooperator_pop = np.repeat(coop_popid, capacity_max)
@@ -52,15 +54,37 @@ def create_metapopulation(config, topology, initial_state='populated'):
                 'Population': np.append(defector_pops, cooperator_pop).tolist(),
                 'Coop': np.append(np.zeros(len(defector_pops))==1, np.ones(len(cooperator_pop))==1).tolist(),
                 'Fitness': 0}
-        data.update({sc: np.zeros(len(data['Coop']), dtype=np.int).tolist() for sc in stress_columns})
+        data.update({sc: np.zeros(len(data['Population']), dtype=np.int).tolist() for sc in stress_columns})
 
         M = pd.DataFrame(data,
                          columns=['Time', 'Population', 'Coop'] + ["S{0:02d}".format(i) for i in np.arange(1,genome_length_max+1)] + ['Fitness'])
 
-        A = config['Population']['stress_alleles']
-        genotype = np.tile(np.arange(A)+1, np.ceil(genome_length_max/A))[:genome_length_max]
-        defector_genotypes = np.repeat([genotype], len(defector_pops), axis=0)
-        cooperator_genotypes = np.repeat([genotype], len(cooperator_pop), axis=0)
+        cgenotype = np.tile(np.arange(stress_alleles)+1, np.ceil(genome_length_max/stress_alleles))[:genome_length_max]
+        dgenotype = np.roll(cgenotype, 2)
+        defector_genotypes = np.repeat([dgenotype], len(defector_pops), axis=0)
+        cooperator_genotypes = np.repeat([cgenotype], len(cooperator_pop), axis=0)
+        M[stress_columns] = np.append(defector_genotypes, cooperator_genotypes, axis=0)
+
+    elif initial_state == 'defector_invade':
+        rare_popid = int(size/2)
+
+        cooperator_pop = np.repeat(np.delete(np.arange(size), rare_popid), capacity_max)
+        defector_pop = np.repeat(rare_popid, capacity_min)
+
+        # Make the metapopulation with all zeros at adaptive loci
+        data = {'Time': 0,
+                'Population': np.append(defector_pop, cooperator_pop).tolist(),
+                'Coop': np.append(np.zeros(len(defector_pop))==1, np.ones(len(cooperator_pop))==1).tolist(),
+                'Fitness': 0}
+        data.update({sc: np.zeros(len(data['Population']), dtype=np.int).tolist() for sc in stress_columns})
+
+        M = pd.DataFrame(data,
+                         columns=['Time', 'Population', 'Coop'] + ["S{0:02d}".format(i) for i in np.arange(1,genome_length_max+1)] + ['Fitness'])
+
+        cgenotype = np.tile(np.arange(stress_alleles)+1, np.ceil(genome_length_max/stress_alleles))[:genome_length_max]
+        dgenotype = np.roll(cgenotype, 2)
+        defector_genotypes = np.repeat([dgenotype], len(defector_pop), axis=0)
+        cooperator_genotypes = np.repeat([cgenotype], len(cooperator_pop), axis=0)
         M[stress_columns] = np.append(defector_genotypes, cooperator_genotypes, axis=0)
 
 
