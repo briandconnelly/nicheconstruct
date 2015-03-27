@@ -24,7 +24,7 @@ To isolate the effect of negative niche construction, we compare our results aga
 
 (**TODO: explain why defector fitness doesn't reach 4 (density dependent fitness)** maybe better in figure caption?)
 
-To further explore the influence of negative niche construction, we performed experiments in which the positive effects of niche construction were removed. Here, individuals had a single adaptive locus that was constantly in conflict ($L=1$, $a_{max}=6$). As seen in Figures 2 (column E) and 3D, the constant source of adaptation that is provided by negative niche construction is not sufficient to maintain cooperation via hitchhiking, and cooperators are quickly purged from the population. This provides further evidence that feedbacks from both positive and negative niche construction are required for cooperation to persist.
+To further explore the influence of negative niche construction, we performed experiments in which the positive effects of niche construction were removed. Here, individuals had a single adaptive locus that was constantly in conflict ($L=1$, $a_{max}=6$). As seen in Figures 2 (column E) and 3D, the constant source of adaptation that is provided by negative niche construction is not sufficient to maintain cooperation via hitchhiking, and cooperators are quickly purged from the population. This offers further evidence that feedbacks from both positive and negative niche construction are required for cooperation to persist.
 
 
 ## NC Enables Cooperator Spread
@@ -38,5 +38,8 @@ Figure 5
 
 ## How Public Good Fuels all of this
 
-Figure 6 A: effect of Smax-Smin, B: effect of migration rate
+The production of public goods has played a central role in all of the results that we have presented. By enabling populations to reach larger sizes, these public goods have effectively increased the rate of evolution for these populations. As a result, larger populations are able to gain adaptations more quickly, both in response to their environment and the environmental changes brought about by niche construction. Additionally, these larger populations more effectively "export" their niche. As more individuals migrate to neighboring patches, these emigrants exert greater selective pressure. Here, we examine how population size and migration rate influence these processes.
 
+To directly explore how the increase in population size affects evolutionary outcomes, we vary the maximum size that a population can reach ($S_{max}$, see Equation @eq:popsize). Figure 6A shows the result of these simulations. (**TODO** description of results)
+
+To address how migration affects the evolutionary process in this system, we vary the rate at which migration occurs ($m$). As seen in Figure 6B, cooperation decreases as migration rate increases. This is likely because migration defines the spatial structuring in this system. As migration increases, the population becomes more like a well-mixed system, where defectors are better able to exploit the benefits of cooperation [@griffin2004cooperation; @kummerli2009viscous].

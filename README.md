@@ -8,7 +8,7 @@
         * Figure 3: [3A](figures/Figure3A.png), [3B](figures/Figure3B.png), [3C](figures/Figure3C.png), [3D](figures/Figure3D.png)
         * Figure 4
         * Figure 5
-        * Figure 6: [6A](figures/Figure6A.png)
+        * Figure 6: 6A, [6B](figures/Figure6B.png)
 * [References List](https://github.com/briandconnelly/nicheconstruct/wiki/References)
 * Discussion
     * [Open Issues About the Paper](https://github.com/briandconnelly/nicheconstruct/labels/paper)
