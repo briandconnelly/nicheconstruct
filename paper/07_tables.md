@@ -1,4 +1,4 @@
-\newpage
+\clearpage
 
 # Tables {#tables}
 

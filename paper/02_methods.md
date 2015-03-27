@@ -12,7 +12,7 @@ Organisms also influence their environment, which, in turn, influences selection
 
 $$ \beta(x, X) = \bmod_{X}(x - 2 + X) + 1 $$ {#eq:beta}
 
-Where $\bmod_{Y}(y)$ is the integer remainder after dividing $y$ by $Y$. Thus, the value of adaptive allele $a$ at locus $l$ increases with the number of individuals that have allele $\beta(a,a_{max})$ at locus $\beta(l, L)$. The slope of this increase is $\epsilon$, which specifies the intensity of niche construction. Consider a genotype $g$ with allelic state at locus $l$ given by $a_{g,l}$; its fitness is defined as
+Where $\bmod_{Y}(y)$ is the integer remainder after dividing $y$ by $Y$. Thus, the value of adaptive allele $a$ at locus $l$ increases with the number of individuals that have allele $\beta(a,a_{max})$ at locus $\beta(l, L)$. The slope of this increase is $\epsilon$, which specifies the intensity of niche construction. Consider a genotype $g$ with allelic state at locus $l$ given by $a_{g,l}$; its fitness is defined as:
 
 $$ W_{g} = z + \delta \sum_{l=1}^{L} I_{A}(a_{g,l}) + \epsilon \sum_{l=1}^{L} n(\beta(a_{g,l}, a_{max}), \beta(l, L)) - c a_{g,L+1} $$ {#eq:fitness}
 
