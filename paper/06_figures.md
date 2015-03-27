@@ -66,4 +66,6 @@ Defectors are kept at bay
 
 ### Figure 6A - Effect of Migration Rate (m)
 
+![TODO Cooperator Presence for different migration rates](../figures/Figure6A.png)
+
 ### Figure 6B - Effect of Public Good Benefit (Smax-Smin)
