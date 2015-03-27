@@ -11,7 +11,7 @@ from misc import stress_colnames
 from Topology import random_neighbor
 
 
-def create_metapopulation(config, topology):
+def create_metapopulation(config, topology, initial_state='populated'):
     """Create a metapopulation"""
     size = len(topology)
     assert size > 0
@@ -26,17 +26,43 @@ def create_metapopulation(config, topology):
     genome_length_max = config['Population']['genome_length_max']
     assert genome_length_min <= genome_length_max
 
-    initial_popsize = capacity_min + \
-                  (initial_cooperator_proportion * (capacity_max - capacity_min))
-
     stress_columns = stress_colnames(L=genome_length_max)
-    data = {'Time': 0,
-            'Population': np.repeat(np.arange(size), initial_popsize).tolist(),
-            'Coop': (binomial(1, initial_cooperator_proportion, size * initial_popsize) == 1).tolist(),
-            'Fitness': 0}
-    data.update({sc: np.zeros(size * initial_popsize, dtype=np.int).tolist() for sc in stress_columns})
-    M = pd.DataFrame(data,
-                     columns=['Time', 'Population', 'Coop'] + ["S{0:02d}".format(i) for i in np.arange(1,genome_length_max+1)] + ['Fitness'])
+
+    if initial_state == 'populated':
+        initial_popsize = capacity_min + \
+                      (initial_cooperator_proportion * (capacity_max - capacity_min))
+
+        data = {'Time': 0,
+                'Population': np.repeat(np.arange(size), initial_popsize).tolist(),
+                'Coop': (binomial(1, initial_cooperator_proportion, size * initial_popsize) == 1).tolist(),
+                'Fitness': 0}
+        data.update({sc: np.zeros(size * initial_popsize, dtype=np.int).tolist() for sc in stress_columns})
+
+        M = pd.DataFrame(data,
+                         columns=['Time', 'Population', 'Coop'] + ["S{0:02d}".format(i) for i in np.arange(1,genome_length_max+1)] + ['Fitness'])
+
+    elif initial_state == 'coop_invade':
+        coop_popid = int((size-1)/2)
+
+        defector_pops = np.repeat(np.delete(np.arange(size), coop_popid), capacity_min)
+        cooperator_pop = np.repeat(coop_popid, capacity_max)
+
+        # Make the metapopulation with all zeros at adaptive loci
+        data = {'Time': 0,
+                'Population': np.append(defector_pops, cooperator_pop).tolist(),
+                'Coop': np.append(np.zeros(len(defector_pops))==1, np.ones(len(cooperator_pop))==1).tolist(),
+                'Fitness': 0}
+        data.update({sc: np.zeros(len(data['Coop']), dtype=np.int).tolist() for sc in stress_columns})
+
+        M = pd.DataFrame(data,
+                         columns=['Time', 'Population', 'Coop'] + ["S{0:02d}".format(i) for i in np.arange(1,genome_length_max+1)] + ['Fitness'])
+
+        A = config['Population']['stress_alleles']
+        genotype = np.tile(np.arange(A)+1, np.ceil(genome_length_max/A))[:genome_length_max]
+        defector_genotypes = np.repeat([genotype], len(defector_pops), axis=0)
+        cooperator_genotypes = np.repeat([genotype], len(cooperator_pop), axis=0)
+        M[stress_columns] = np.append(defector_genotypes, cooperator_genotypes, axis=0)
+
 
     M = assign_fitness(M=M, Lmin=config['Population']['genome_length_min'],
                        Lmax=config['Population']['genome_length_max'],
@@ -45,6 +71,7 @@ def create_metapopulation(config, topology):
                        cost_cooperation=config['Population']['cost_cooperation'],
                        benefit_nonzero=config['Population']['benefit_nonzero'],
                        benefit_ordered=config['Population']['benefit_ordered'])
+
 
     return M
 
@@ -120,8 +147,6 @@ def mutate(M, mu_stress, mu_cooperation, Lmax, num_stress_alleles, config):
             astates[mutants] = new_alleles[mutants]
             Mcopy[s] = astates
 
-            # Old, convoluted way of mutating
-            #Mcopy[s] = (Mcopy[s] + (binomial(n=1, p=mu_stress, size=Mcopy[s].shape) * random_integers(low=1, high=num_stress_alleles, size=Mcopy[s].shape))) % (num_stress_alleles + 1)
 
     Mcopy = assign_fitness(M=Mcopy,
                            Lmin=config['Population']['genome_length_min'],

@@ -171,7 +171,8 @@ def main():
 
 
     # Create the metapopulation and apply the initial stress bottleneck
-    metapop = create_metapopulation(config=config, topology=topology)
+    metapop = create_metapopulation(config=config, topology=topology,
+                                    initial_state=config['Metapopulation']['initial_state'])
 
     stress_tolerance = config['Population']['mutation_rate_tolerance']
     if stress_tolerance < 1:
