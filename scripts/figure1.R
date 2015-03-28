@@ -46,4 +46,4 @@ fig1 <- ggplot(data=fig1_data, aes(x=Time, y=CooperatorProportion)) +
     theme(strip.background = element_blank()) +
     theme(strip.text = element_text(size=rel(1.0), face='bold'))
 fig1 <- rescale_plot(plot=fig1, ratio=1/1.2)
-ggsave(filename='../figures/Figure1.png', plot=fig1)
+ggsave(filename='../figures/Figure1.png', plot=fig1, dpi=300)

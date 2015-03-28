@@ -19,7 +19,7 @@ Table: Model parameters and their value
 | $\mu_{c}$  | Mutation rate (cooperation)                    | $10^{-5}$     |
 | $m$        | Migration rate                                 | 0.05          |
 | $p_0$      | Initial cooperator proportion                  | 0.5           |
-| $\mu_{t}$  | Mutation rate (tolerance to new stress)        | $10^{-5}$     |
+| $\mu_{t}$  | Mutation rate (tolerance to new environment)   | $10^{-5}$     |
 | $T$        | Number of simulation cycles                    | 1000          |
 | $d$        | Population dilution factor                     | 0.1           |
 

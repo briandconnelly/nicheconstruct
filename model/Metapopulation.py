@@ -83,8 +83,9 @@ def create_metapopulation(config, topology, initial_state='populated'):
                          columns=['Time', 'Population', 'Coop'] + ["S{0:02d}".format(i) for i in np.arange(1,genome_length_max+1)] + ['Fitness'])
 
         # Set fully-adapted genotypes for both types
+        # Here, genotypes are matched
         cgenotype = np.tile(np.arange(stress_alleles)+1, np.ceil(genome_length_max/stress_alleles))[:genome_length_max]
-        dgenotype = np.roll(cgenotype, 2)
+        #dgenotype = np.roll(cgenotype, 2)
         dgenotype = cgenotype
         defector_genotypes = np.repeat([dgenotype], len(defector_pop), axis=0)
         cooperator_genotypes = np.repeat([cgenotype], len(cooperator_pop), axis=0)
