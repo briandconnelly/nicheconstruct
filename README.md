@@ -3,7 +3,7 @@
 * Paper
     * Latest Version: [doc](https://github.com/briandconnelly/nicheconstruct/raw/master/paper/ncnh-latest.docx), [pdf](https://github.com/briandconnelly/nicheconstruct/raw/master/paper/ncnh-latest.pdf)
     * Figures
-        * Figure 1: [1A](figures/Figure1A.png), [1B](figures/Figure1B.png), [1C](figures/Figure1C.png)
+        * [Figure 1](figures/Figure1.png)
         * [Figure 2](figures/Figure2.png)
         * Figure 3: [3A](figures/Figure3A.png), [3B](figures/Figure3B.png), [3C](figures/Figure3C.png), [3D](figures/Figure3D.png)
         * Figure 4

@@ -4,27 +4,7 @@
 
 ## Figure 1
 
-### Figure 1A
-
-![Proportion of cooperators over time when there are no opportunities for non-social adaptation](../figures/Figure1A.png)
-
-\clearpage
-
-### Figure 1B
-
-![Proportion of cooperators over time with non-social adaptation (GNH)](../figures/Figure1B.png)
-
-\clearpage
-
-### Figure 1C
-
-![Proportion of cooperators over time with non-social adaptation and selective feedbacks](../figures/Figure1C.png)
-
-\clearpage
-
-### Figure 1X
-
-![Proportion of cooperators over time without negative niche construction](../figures/Figure1X.png)
+![Proportion of cooperators over time TODO](../figures/Figure1.png)
 
 \clearpage
 
