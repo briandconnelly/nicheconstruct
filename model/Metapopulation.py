@@ -59,6 +59,7 @@ def create_metapopulation(config, topology, initial_state='populated'):
         M = pd.DataFrame(data,
                          columns=['Time', 'Population', 'Coop'] + ["S{0:02d}".format(i) for i in np.arange(1,genome_length_max+1)] + ['Fitness'])
 
+        # Set fully-adapted genotypes for both types
         cgenotype = np.tile(np.arange(stress_alleles)+1, np.ceil(genome_length_max/stress_alleles))[:genome_length_max]
         dgenotype = np.roll(cgenotype, 2)
         defector_genotypes = np.repeat([dgenotype], len(defector_pops), axis=0)
@@ -81,8 +82,10 @@ def create_metapopulation(config, topology, initial_state='populated'):
         M = pd.DataFrame(data,
                          columns=['Time', 'Population', 'Coop'] + ["S{0:02d}".format(i) for i in np.arange(1,genome_length_max+1)] + ['Fitness'])
 
+        # Set fully-adapted genotypes for both types
         cgenotype = np.tile(np.arange(stress_alleles)+1, np.ceil(genome_length_max/stress_alleles))[:genome_length_max]
         dgenotype = np.roll(cgenotype, 2)
+        dgenotype = cgenotype
         defector_genotypes = np.repeat([dgenotype], len(defector_pop), axis=0)
         cooperator_genotypes = np.repeat([cgenotype], len(cooperator_pop), axis=0)
         M[stress_columns] = np.append(defector_genotypes, cooperator_genotypes, axis=0)

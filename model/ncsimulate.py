@@ -17,7 +17,7 @@ from Metapopulation import *
 from misc import *
 from Topology import *
 
-__version__ = '0.3.0'
+__version__ = '0.3.1'
 
 
 def parse_arguments():
@@ -78,9 +78,8 @@ def main():
 
         sys.exit(2)
 
-
     if args.checkconfig:
-        print("No errors found in configuration file {f}".format(f=args.configfile.name))
+        print("No errors found in configuration file {f}".format(f=args.configfile))
         sys.exit(0)
 
     # If the random number generator seed specified, add it to the config,
