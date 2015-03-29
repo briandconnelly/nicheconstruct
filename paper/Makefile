@@ -22,10 +22,13 @@ results: 03_results.md 06_figures.md references.bib
 discussion: 04_discussion.md references.bib
 	cat 04_discussion.md newpage.sty | pandoc -H draft.sty $(FLAGS) --output draft_discussion_$(shell date +'%Y%m%d').pdf
 
+figures: 06_figures.md references.bib
+	cat 06_figures.md newpage.sty | pandoc -H draft.sty $(FLAGS) --output draft_figures_$(shell date +'%Y%m%d').pdf
+
 latest:
 	@cat 0*md | pandoc -H draft.sty $(FLAGS) --output $(FNAME)-latest.pdf
 	@cat 0*md | pandoc -H draft.sty $(FLAGS) --output $(FNAME)-latest.docx
 
 
 clean:                                                                          
-	    rm -f $(FNAME)*.pdf $(FNAME)*.tex $(FNAME)*.docx 
+	    rm -f $(FNAME)*.pdf $(FNAME)*.tex $(FNAME)*.docx draft_*.pdf

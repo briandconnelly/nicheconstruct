@@ -27,6 +27,8 @@
 Niche construction and selective feedbacks
 Niche construction and other social interactions
 
+The production of public goods has played a central role in all of the results that we have presented. By enabling populations to reach larger sizes, these public goods have effectively increased the rate of evolution for these populations. As a result, larger populations are able to gain adaptations more quickly, both in response to their environment and the environmental changes brought about by niche construction. Additionally, these larger populations more effectively "export" their niche. As more individuals migrate to neighboring patches, these emigrants exert greater selective pressure. Here, we examine how population size and migration rate influence these processes.
+
 ## Public Goods
 
 TODO: merge this in with the "Cooperative Niche Construction" section [TEST](Coopeative Niche Construction)

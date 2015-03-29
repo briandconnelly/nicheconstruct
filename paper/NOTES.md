@@ -3,6 +3,10 @@
 
 * More diffusion: allen2013spatial
 
+                                                                                    
+Negative niche construction occurs in our model due to selection for sequentially-increasing allelic states and the circular arrangement of these alleles. When the genome length ($L$) is not evenly divided by the number of non-zero alleles ($a_{max}$), a conflict arises when the allelic state at locus $1$ is not 1 larger than the allelic state at locus $L$. For example, consider genotype $(1,2)$ when $L=2$ and $a_{max}=3$. Here, allelic state $2$ at locus 2 will be be beneficial, because it follows allelic state $1$ at locus 1. However, due to the circular effects, allelic state $1$ at locus 1 will be deleterious, because it does not follow $2$.
+      
+
 # Stitch together multiple docs
 * http://stackoverflow.com/questions/21247978/compile-multiple-files-into-one-with-title-blocks
 * http://stackoverflow.com/questions/4779582/markdown-and-including-multiple-files

@@ -4,7 +4,7 @@
 
 ## Figure 1
 
-![Proportion of cooperators over time TODO](../figures/Figure1.png)
+![**Adaptation, niche construction, and the evolution of cooperation.** Curves show the average cooperator proportion among replicate populations, while shaded areas indicate 95% confidence intervals. Unless otherwise noted, parameter values used are listed in [Table 1](#tables). (**A**) When there is no opportunity for adaptation ($L$, the number of adaptive loci, is zero), cooperation is quickly lost. (**B**) When adaptation can occur ($L=5$), but populations do not alter their environment ($\epsilon$, the intensity of niche construction, is zero), cooperators temporarily rise in abundance before eventually going extinct. (**C**) Selective feedbacks from niche construction allows cooperation to be maintained in 13 of 18 replicate populations. (**D**) While it does contribute to success, positive niche construction alone does not maintain cooperation ($A=5$).](../figures/Figure1.png)
 
 \clearpage
 
