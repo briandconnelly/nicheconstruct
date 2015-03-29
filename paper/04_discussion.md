@@ -2,12 +2,12 @@
 
 Despite their negative effects, deleterious traits can rise in abundance due to genetic linkage with other traits that are strongly favored by selection [@maynardsmith1974hitch].
 In a process termed the "Hankshaw effect", @HANKSHAW recently demonstrated that cooperative behaviors can prolong their existence by actively increasing their likelihood of hitchhiking with a beneficial trait.
-While this process favors cooperation in the short term, it eventually reaches a dead end.
-When the opportunities for adaptation are exhausted and cooperators can no longer hitchhike, they face extinction.
+While this process does favor cooperation in the short term, it eventually reaches a dead end.
+When the opportunities for adaptation are exhausted, and cooperators can no longer hitchhike, they face extinction.
 In this work, we have considered whether niche construction can maintain cooperation indefinitely.
 
-Our results reveal that with niche construction, cooperation can indeed persist (Figure 1C).
-But what it is it about this process that maintains cooperation?
+We demonstrate that when niche construction occurs, cooperation can indeed persist (Figure 1C).
+But what aspects of niche construction produce this result?
 In our model, niche construction introduces additional selective effects that could influence the evolutionary process.
 However, simply raising the selective benefits provided by adaptations does not significantly increase cooperator presence (Figure 2, columns C and A), and indicates that niche construction plays an important role.
 Although cooperators benefit greatly from positive niche construction, it does not fully explain our results (Figure 2 D).
