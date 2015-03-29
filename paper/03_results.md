@@ -24,7 +24,7 @@ We find that higher selective values do not provide a significant increase in co
 
 ## Positive Niche Construction Prolongs Cooperation but is not Sufficient
 
-We first focus on the effects of positive niche construction by removing the allelic conflict that leads to negative niche construction ($L=5$, $a_{max}=5$).
+We first focus on the effects of positive niche construction by removing the allelic conflict that leads to negative niche construction ($L=5$, $A=5$).
 In the absence of this conflict, cooperator presence is significantly increased (Figure 2, column D).
 Within these environments, we find that positive niche construction prolongs the fitness advantage that cooperators have over defectors (Figure 3C).
 Nevertheless, cooperators are eventually driven to extinction once defectors gain the fitness advantage. 
@@ -32,7 +32,7 @@ Nevertheless, cooperators are eventually driven to extinction once defectors gai
 
 ## Negative Niche Construction is not Sufficient
 
-To determine how negative niche construction influences the evolution of cooperation, we maximize the allelic conflict ($L=1$, $a_{max}=6$).
+To determine how negative niche construction influences the evolution of cooperation, we maximize the allelic conflict ($L=1$, $A=6$).
 However, selection for increasing allelic states among the stress loci means that any allelic state will not be greater than at the previous allele (itself), and thus there will always be opportunity for adaptation.
 Despite this constant opportunity, niche construction does not increase cooperator presence (Figure 2, column E). Here, defectors rapidly gain the fitness advantage.
 
