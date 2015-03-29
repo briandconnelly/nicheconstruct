@@ -48,7 +48,9 @@ fig2 <- ggplot(data=fig2integrals, aes(x=Treatment, y=Integral)) +
     #geom_text(data=col_labels, aes(label=letters), y=1) +
     scale_y_continuous(limits=c(0,1)) + 
     labs(x='', y=label_cooperator_presence) +
-    theme_bdc_grey(ticks.x=FALSE, grid.y=TRUE) + theme(axis.text.x = element_text(vjust=1, face='bold'))
+    #theme_bdc_grey(base_family='Helvetica', ticks.x=FALSE, grid.y=TRUE) + 
+    theme_bdc_grey(ticks.x=FALSE, grid.y=TRUE) + 
+    theme(axis.text.x = element_text(vjust=1, face='bold'))
 fig2 <- rescale_golden(plot=fig2)
 
 ggsave_golden(plot=fig2, filename='../figures/Figure2.png', dpi=300)

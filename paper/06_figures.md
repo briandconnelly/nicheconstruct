@@ -16,29 +16,8 @@
 
 ## Figure 3
 
-Mean fitness over time for the treatments shown in Figure 2
 
-### Figure 3A - Fitness for base case: niche construction
-
-![**Fitness Effects of Mutation Accumulation by Cooperators and Defectors.** Lines indicate the grand mean of cooperator (blue) and defector (red) fitness among replicate populations, while shaded areas indicate 95% confidence intervals. Dashed lines indicate the maximum fitness values achievable by cooperators and defectors. (**A**) In the presence of niche construction, cooperators persist in the population by maintaining a greater mean fitness. (**B**) When selective values are increased ($\delta=0.6$), populations rapidly adapt. In the absence of niche construction ($\epsilon=0$), defectors eventually become equally adapted and surpass cooperators. At this point, cooperators are driven from the population due to the cost of cooperation. (**C**) With the effects of niche construction removed ($\epsilon=0$), positive niche construction prolongs the time when cooperators are at an advantage over defectors. Once again, however, defectors eventually become equally adapted, leading to the loss of cooperation. (**D**) Without positive niche construction or further adaptive opportunities ($L=1$, $a_{max}=6$) cooperators do not benefit from niche construction.](../figures/Figure3A.png)
-
-\clearpage
-
-### Figure 3B
-
-![Will share caption with 3A](../figures/Figure3B.png)
-
-\clearpage
-
-### Figure 3C
-
-![Will share caption with 3A](../figures/Figure3C.png)
-
-\clearpage
-
-### Figure 3D
-
-![Will share caption with 3A](../figures/Figure3D.png)
+![**Fitness Effects of Mutation Accumulation by Cooperators and Defectors.** Lines indicate the grand mean of cooperator (blue) and defector (red) fitness among replicate populations, while shaded areas indicate 95% confidence intervals. Dashed lines indicate the maximum fitness values achievable by cooperators and defectors. (**A**) In the presence of niche construction, cooperators persist in the population by maintaining a greater mean fitness. (**B**) When selective values are increased ($\delta=0.6$), populations rapidly adapt. In the absence of niche construction ($\epsilon=0$), defectors eventually become equally adapted and surpass cooperators. At this point, cooperators are driven from the population due to the cost of cooperation. (**C**) With the effects of niche construction removed ($\epsilon=0$), positive niche construction prolongs the time when cooperators are at an advantage over defectors. Once again, however, defectors eventually become equally adapted, leading to the loss of cooperation. (**D**) Without positive niche construction or further adaptive opportunities ($L=1$, $a_{max}=6$) cooperators do not benefit from niche construction.](../figures/Figure3.png)
 
 \clearpage
 
