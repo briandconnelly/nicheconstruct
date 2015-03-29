@@ -1,11 +1,24 @@
 # Discussion
 
-* summary of results
-    * niche construction helps. but how?
-    * the extra fitness that it provides does not account for it
-        * in fact, cooperators never get to max fitness!
-    * negative niche construction plays a role
-    * negative niche construction alone does not help
+Despite their negative effects, deleterious traits can rise in abundance due to genetic linkage with other traits that are strongly favored by selection [@maynardsmith1974hitch].
+In a process termed the "Hankshaw effect", @HANKSHAW recently demonstrated that cooperative behaviors can prolong their existence by actively increasing their likelihood of hitchhiking with a beneficial trait.
+While this process favors cooperation in the short term, it eventually reaches a dead end.
+When the opportunities for adaptation are exhausted and cooperators can no longer hitchhike, they face extinction.
+In this work, we have considered whether niche construction can maintain cooperation indefinitely.
+
+Our results reveal that with niche construction, cooperation can indeed persist (Figure 1C).
+But what it is it about this process that maintains cooperation?
+In our model, niche construction introduces additional selective effects that could influence the evolutionary process.
+However, simply raising the selective benefits provided by adaptations does not significantly increase cooperator presence (Figure 2, columns C and A), and indicates that niche construction plays an important role.
+Although cooperators benefit greatly from positive niche construction, it does not fully explain our results (Figure 2 D).
+Indeed, despite an initial increase in abundance, cooperators are eventually driven to extinction when environmental change produces only positive fitness effects (Figure 1D).
+As with the "Hankshaw effect", adaption eventually slows, allowing defectors to outcompete cooperators (Figure 3C).
+While it does not benefit cooperation when alone (Figure 3E), negative niche construction acts to prevent this stasis.
+Combined, we find that both positive and negative niche construction are required to main cooperation.
+
+
+
+--- left off here
 
 
 * similarities/differences from previous work
