@@ -16,6 +16,9 @@ intro: 01_introduction.md references.bib
 methods: 02_methods.md 07_tables.md references.bib
 	cat 02_methods.md 07_tables.md newpage.sty | pandoc -H draft.sty $(FLAGS) --output draft_methods_$(shell date +'%Y%m%d').pdf
 
+results: 03_results.md 06_figures.md references.bib
+	cat 03_results.md 06_figures.md newpage.sty | pandoc -H draft.sty $(FLAGS) --output draft_results_$(shell date +'%Y%m%d').pdf
+
 discussion: 04_discussion.md references.bib
 	cat 04_discussion.md newpage.sty | pandoc -H draft.sty $(FLAGS) --output draft_discussion_$(shell date +'%Y%m%d').pdf
 

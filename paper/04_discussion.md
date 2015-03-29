@@ -1,6 +1,13 @@
 # Discussion
 
 * summary of results
+    * niche construction helps. but how?
+    * the extra fitness that it provides does not account for it
+        * in fact, cooperators never get to max fitness!
+    * negative niche construction plays a role
+    * negative niche construction alone does not help
+
+
 * similarities/differences from previous work
     * @schwilk2002genetic
     * 10.1073/pnas.0812644106

@@ -2,10 +2,36 @@
 
 ## Niche Construction Maintains Cooperation
 
-Despite being able to form larger populations, cooperators are swiftly eliminated in competition with defectors, despite spatial structuring in the metapopulation (Figure 1A). As demonstrated by @HANKSHAW, cooperators are temporarily bolstered by the ability to hitchhike along with non-social adaptations (Figure 1B). As shown in Figure 1C, we find that niche hiking can prolong cooperation, perhaps indefinitely (see [Table 1](#tables) for model parameters). (**TODO** describe the oscillations). We now explore this process further to identify the factors underlying this effect.
+Without the opportunity for adaptation ($L=0$), cooperators are switftly eliminated in competition with defectors (Figure 1). Despite an initial lift due to increased productivity, the cost of cooperation becomes disadvantageous as migration mixes the initially isolated populations. With adaptive opportunities ($L=5$, $\epsilon=0$), cooperators are maintained transiently (Figure 1B). Here, the additional mutational abilities provided by their larger sizes allows cooperator populations to more quickly adapt to their environment. As previously described by @HANKSHAW, however, this advantage diminishes as defector populations become equally adapted, and cooperators are outcompeted. When populations affect their environment and these changes feed back on selection, we find that cooperation can persist, perhaps indefinitely (Figure 1C, 3A). In these environments, cooperators maintain higher fitness than cooperators, which enables survival (Figure 3A).
 
 
-## Not Just Because of Additional Fitness from Epsilon (TODO title)
+## Fitness Increases do not Support Cooperation
+
+In our model, niche construction provides additional selective benefits. To determine how these selective effects contribute to our results, we performed simulations in which the selective effects of niche construction were removed ($\epsilon=0$). As compensation, we increased the fitness benefits conferred by adaptation ($\delta=0.6)$. Here, the selective effects of niche construction are exaggerated, as a fitness benefit of 0.3 (our increase in $\delta$) is the maximum value possible (see @eq:fitness). To quantify cooperator success and permit comparison, we use the area under the cooperator proportion curve. This measure of *cooperator presence* increases as cooperators rise in abundance or remain in the population longer.
+
+We find that higher selective values do not provide a significant increase in cooperator presence (Figure 2, column C). As shown in Figure 3, cooperators gain adaptations more quickly than defectors, which provides a fitness advantage. However, the cost of cooperation puts defectors at an advantage once these populations become fully adapted.
+
+
+## Positive Niche Construction is not Sufficient
+
+Both positive and negative niche construction are present in our model. We focus first on the effects of positive niche construction by removing the allelic conflict that leads to negative niche construction ($L=5$, $a_{max}=5$). When this conflict is removed, we see find that positive niche construction prolongs the fitness advantage of cooperators (Figure 3C), which significantly increases cooperator presence (Figure 2, column D). However, cooperation is eventually lost as gain an advantage (Figure 1D).
+
+
+------ LEFT OFF HERE
+
+WHERE SHOULD THIS GO???
+Negative niche construction occurs in our model due to selection for sequentially-increasing allelic states and the circular arrangement of these alleles. When the genome length ($L$) is not evenly divided by the number of non-zero alleles ($a_{max}$), a conflict arises when the allelic state at locus $1$ is not 1 larger than the allelic state at locus $L$. For example, consider genotype $(1,2)$ when $L=2$ and $a_{max}=3$. Here, allelic state $2$ at locus 2 will be be beneficial, because it follows allelic state $1$ at locus 1. However, due to the circular effects, allelic state $1$ at locus 1 will be deleterious, because it does not follow $2$.
+
+
+When this allelic conflict is removed ($L=5$, $a_{max}=5$), positive niche construction prolongs the fitness advantage of cooperators (Figure 3C), which significantly increases cooperator presence (Figure 2, column D). However, cooperation is eventually lost as gain an advantage (Figure 1D).
+
+
+## Negative Niche Construction is not Sufficient
+
+TODO
+
+
+
 
 In our model, an individual's fitness is the product of two processes. First, mutations engender environmental adaptations, which are represented by non-zero alleles. These adaptations create the transient lift in cooperation seen in Figure 1B. The second process that contributes to fitness is niche construction. Selection favors individuals with sequentially-increasing alleles. Because larger populations will have a greater effect on their environment, this benefit is density dependent. In our experiments, this positive niche construction contributed equally to fitness when all individuals shared the same allele in a population at maximum carrying capacity. To determine whether cooperation was maintained simply due to the higher selective values made possible by this second source of fitness, we compared our results against the results of experiments in which the ordering of alleles did not matter, and the fitness benefit provided by adaptation was doubled ($\epsilon=0$, $\delta=0.6$). That this doubling is an over estimate of the magnitude of fitness contributions that arise from niche construction, since these values would only occur in populations at maximum carrying capacity, which does not occur in the presence of defectors. Nevertheless, Figure 2 shows that higher selective values have little effect (columns A and C) and do not explain the maintenance of cooperation that we observe when niche construction occurs (column B).
 
@@ -18,7 +44,10 @@ Although we have seen that maximum fitness does not substantially effect the mai
 
 ## Negative Niche Construction Plays a Key Role (TODO title)
 
-Figure 3A also shows that niche-constructing populations never reach maximum fitness. One major contributor to this is the density dependence of the benefit provided by niche construction. Because defectors remain present (Figure 1C), the smaller populations that result are unable to unlock the full benefit of niche construction. The second contributor to the reduced fitness that we observe is negative niche construction. This occurs in our model due to selection for sequentially-increasing allelic states and the circular arrangement of these alleles. When the genome length ($L$) is not evenly divided by the number of non-zero alleles ($a_{max}$), a conflict arises when the allelic state at locus $1$ is not 1 larger than the allelic state at locus $L$. For example, consider genotype $(1,2)$ when $L=2$ and $a_{max}=3$. Here, allelic state $2$ at locus 2 will be be beneficial, because it follows allelic state $1$ at locus 1. However, due to the circular effects, allelic state $1$ at locus 1 will be deleterious, because it does not follow $2$.
+
+Figure 3A also shows that niche-constructing populations never reach maximum fitness. One major contributor to this is the density dependence of the benefit provided by niche construction. Because defectors remain present (Figure 1C), the smaller populations that result are unable to unlock the full benefit of niche construction. The second contributor to the reduced fitness that we observe is negative niche construction.
+
+This occurs in our model due to selection for sequentially-increasing allelic states and the circular arrangement of these alleles. When the genome length ($L$) is not evenly divided by the number of non-zero alleles ($a_{max}$), a conflict arises when the allelic state at locus $1$ is not 1 larger than the allelic state at locus $L$. For example, consider genotype $(1,2)$ when $L=2$ and $a_{max}=3$. Here, allelic state $2$ at locus 2 will be be beneficial, because it follows allelic state $1$ at locus 1. However, due to the circular effects, allelic state $1$ at locus 1 will be deleterious, because it does not follow $2$.
 
 To isolate the effect of negative niche construction, we compare our results against those from simulations in which this allelic conflict was absent ($L=5$, $a_{max}=5$). Figure 2 shows that although positive niche construction still led to an increase in cooperation (column D), these populations were not able to maintain the same level of cooperation seen in the presence of negative niche construction (column B). We find that because this lack of conflict allows populations to reach a fully-adapted state, cooperators once again acquire these adaptations more quickly but are eventually driven from the population (Figures 3C and 1X). These results indicate that both positive and negative niche construction is required to maintain cooperation.
 

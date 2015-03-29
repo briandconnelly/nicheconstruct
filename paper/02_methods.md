@@ -1,4 +1,4 @@
-# Materials and Methods
+# Methods
 
 We build upon the model described in @HANKSHAW, in which cooperators and defectors compete and evolve in a metapopulation (a collection of populations). Individuals in each of the populations reproduce, mutate, and migrate to neighboring populations. Importantly, adaptation that is independent of cooperation can occur. In our model here, we further allow populations to modify their local environment, and these modifications feed back to affect selection.
 
