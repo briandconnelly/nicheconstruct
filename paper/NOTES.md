@@ -6,6 +6,32 @@
                                                                                     
 Negative niche construction occurs in our model due to selection for sequentially-increasing allelic states and the circular arrangement of these alleles. When the genome length ($L$) is not evenly divided by the number of non-zero alleles ($a_{max}$), a conflict arises when the allelic state at locus $1$ is not 1 larger than the allelic state at locus $L$. For example, consider genotype $(1,2)$ when $L=2$ and $a_{max}=3$. Here, allelic state $2$ at locus 2 will be be beneficial, because it follows allelic state $1$ at locus 1. However, due to the circular effects, allelic state $1$ at locus 1 will be deleterious, because it does not follow $2$.
       
+                                                                                
+* similarities/differences from previous work                                   
+*     * @schwilk2002genetic                                                       
+*         * 10.1073/pnas.0812644106                                                   
+*         * negative/positive NC                                                          
+* laland1996evolutionary                                                    
+* public goods as niche construction                                            
+* future QS or other environmental sensing                                      
+* Facultative cooperation                                                       
+* Rodrigues (2012)                                                          
+    * Dumas and Kümmerli (2010)                                                 
+    * Kümmerli and Brown (2010)                                                 
+* Darch/Diggle                                                              
+* QS?                                                                       
+* Environmental Sensing? - [@koestler2014bile, @bernier2011modulation]      
+* Negative Niche construction as a stragegy? - would those that create this constant pressure (L=5, A=6) do better than those that do not (L=5, A=5)?
+
+Niche construction and selective feedbacks                                      
+Niche construction and other social interactions                                
+
+
+## Public Goods                                                                 
+
+## Primacy/Recency                                                              
+
+## Cooperative Niche Construction 
 
 # Stitch together multiple docs
 * http://stackoverflow.com/questions/21247978/compile-multiple-files-into-one-with-title-blocks
