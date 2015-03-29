@@ -12,7 +12,7 @@ In our model, niche construction introduces additional selective effects that co
 However, simply raising the selective benefits provided by adaptations does not significantly increase cooperator presence (Figure 2, columns C and A), and indicates that niche construction plays an important role.
 Although cooperators benefit greatly from positive niche construction, it does not fully explain our results (Figure 2 D).
 Indeed, despite an initial increase in abundance, cooperators are eventually driven to extinction when environmental change produces only positive fitness effects (Figure 1D).
-As with the "Hankshaw effect", adaption eventually slows, allowing defectors to outcompete cooperators (Figure 3C).
+As with the Hankshaw effect, adaption eventually slows, allowing defectors to outcompete cooperators (Figure 3C).
 While it does not benefit cooperation when alone (Figure 3E), negative niche construction acts to prevent this stasis.
 Combined, we find that both positive and negative niche construction are required to main cooperation.
 
