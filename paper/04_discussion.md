@@ -16,6 +16,32 @@ As with the "Hankshaw effect", adaption eventually slows, allowing defectors to 
 While it does not benefit cooperation when alone (Figure 3E), negative niche construction acts to prevent this stasis.
 Combined, we find that both positive and negative niche construction are required to main cooperation.
 
+This work further demonstrates that niche 
+
+Previously, @vandyken2012origins showed that 
+
+
+By their very nature, public goods benefit populations by making their environment more hospitable [@west2007social].
+For example, bacteria produce a host of extracellular products that find soluble iron [@griffin2004cooperation], digest large proteins [@darch2012density; @diggle2007cooperation], and reduce the risk of predation [@cosson2002pseudomonas].
+While many studies have explored how the environment affects the evolution of cooperative behaviors such as these, relatively few have examined how those behaviors affect the environment and how the resulting feedbacks influence evolutionary trajectories.
+@lehmann2007evolution demonstrated analytically that when niche construction benefits future generations, cooperation is favored due to reduced competition among kin.
+When rate-benefitting and yield-benefitting altruistic acts co-evolve, @vandyken2012origins showed that "reciprocal niche construction", where the selective feedbacks produced by one act benefitted the other, can lead to increased selection for both traits.
+
+TODO: primacy/recency
+
+In our model, alterations to the environment were immediately echoed by changes in selection. However, decoupling the timescales on which these processes occur can have substantial effects [@laland1996evolutionary]. By integrating past allelic states into Equation @eq:fitness, we can begin to explore how the cumulative effects of niche construction affect the creation of non-social adaptive opportunities and the benefits that they offer cooperation. Here, how these past allelic states are integrated will play an important role. For example, when the effects of earlier generations are weighted more heavily, the influence of migration may be diminished. While this will reduce the threat of emigration by defectors, cooperator populations will also be less effective at exporting their niche.
+
+
+
+
+In many instances of cooperation, the environment is itself a biological entity, which can produce additional evolutionary feedbacks.
+As the host population changes, so too will selection on their symbiont populations.
+Here, evolutionary outcomes depend greatly on the degree of shared interest between the host and symbiont.
+For example, the cooperative production of virulence factors by the human pathogen *P. aeruginosa* in lung infections is harmful to those with cystic fibrosis [@harrison2007microbial].
+Conversely, cooperative light production by *A. fischeri* is vital for the survival of its host, the Hawaiian bobtail squid [@ruby1996lessons].
+It was recently argued that incorporating the effects of niche construction is critical for improving our understanding of viral evolution [@hamblin2014viral] and evolution in co-infecting parasites [@hafer2015when].
+Incorporating host dynamics, co-evolution, and the feedbacks that they produce into models is likely to be equally important for gaining an understanding of how cooperative behaviors evolve in these host-symbiont settings.
+
 
 
 --- left off here
@@ -40,25 +66,14 @@ Combined, we find that both positive and negative niche construction are require
 Niche construction and selective feedbacks
 Niche construction and other social interactions
 
-The production of public goods has played a central role in all of the results that we have presented. By enabling populations to reach larger sizes, these public goods have effectively increased the rate of evolution for these populations. As a result, larger populations are able to gain adaptations more quickly, both in response to their environment and the environmental changes brought about by niche construction. Additionally, these larger populations more effectively "export" their niche. As more individuals migrate to neighboring patches, these emigrants exert greater selective pressure. Here, we examine how population size and migration rate influence these processes.
 
 ## Public Goods
 
-TODO: merge this in with the "Cooperative Niche Construction" section [TEST](Coopeative Niche Construction)
-
-By their very nature, public goods benefit populations by making their environment more hospitable. For example, bacteria produce extracellular products that find soluble iron [@griffin2004cooperation], digest large proteins [@darch2012density; @diggle2007cooperation], and reduce the risk of predation [@cosson2002pseudomonas], among many others [@west2007social]. While many studies have explored how the environment affects the evolution of cooperative bahviors, relatively few have examined how those behaviors affect the environment and the resulting change in evolutionary trajectories. @lehmann2007evolution demonstrated analytically that when niche construction act benefits future generations, cooperation is favored due to reduced competition among kin. When rate-benefitting and yield-benefitting altruistic acts co-evolve, @vandyken2012origins showed that "reciprocal niche construction", where the selective feedbacks produced by one act benefitted the other, can lead to increased selection for both traits. While these studies have focused on the niche constructing effects of cooperation, we instead focus our attention here on how niche construction enables cooperators to escape defection by hitchhiking along with non-social traits.
-
 ## Primacy/Recency
-
-In our model, alterations to the environment were immediately echoed by changes in selection. However, decoupling the timescales on which these processes occur can have substantial effects [@laland1996evolutionary]. By integrating past allelic states into Equation @eq:fitness, we can begin to explore how the cumulative effects of niche construction affect the creation of non-social adaptive opportunities and the benefits that they offer cooperation. Here, how these past allelic states are integrated will play an important role. For example, when the effects of earlier generations are weighted more heavily, the influence of migration may be diminished. While this will reduce the threat of emigration by defectors, cooperator populations will also be less effective at exporting their niche.
 
 ## Cooperative Niche Construction
 
 While our focus for this work has been on the eco-evolutionary feedbacks created by non-social traits, it would also be interesting to explore how this system is affected by the timescale at which carrying capacity at a given patch is increased by public goods. In natural settings, a multitude of factors including protein durability [@brown2007durability; @kummerli2010molecular], diffusion [@driscoll2010theory; @allison2005cheaters], and resource availability [@zhang2013exploring; @ghoul2014experimental] influence both the rate and the degree to which public goods alter the environment (and thereby selection). @lehmann2007evolution demonstrated that a cooperative, niche constructing behavior can be favored when it only affected selection for future generations, thus reducing the potential for competition among contemporary kin. The evolutionary inertia that this creates, however, may ultimately work against cooperators. When public good accumulates in the environment, cooperators must reduce their investment in production to remain competitive [@kummerli2010molecular].
 
 TODO: wrap up. Facultative cooperation requires sensing.
-
-## Host-Symbiont
-
-In many instances of cooperation, the environment is itself a biological entity, which can produce additional evolutionary feedbacks. As the host population changes, so too will selection on their symbiont populations. Here, evolutionary outcomes depend greatly on the degree of shared interest between the host and symbiont. For example, the cooperative production of virulence factors by the human pathogen *P. aeruginosa* in lung infections is harmful to those with cystic fibrosis [@harrison2007microbial]. Conversely, cooperative light production by *A. fischeri* is vital for the survival of its host, the Hawaiian bobtail squid [@ruby1996lessons]. It was recently argued that incorporating the effects of niche construction is critical for improving our understanding of viral evolution [@hamblin2014viral] and evolution in co-infecting parasites [@hafer2015when]. Incorporating host dynamics, co-evolution, and the feedbacks that they produce into models is likely to be equally important for gaining an understanding of how cooperative behaviors evolve in these host-symbiont settings.
 
