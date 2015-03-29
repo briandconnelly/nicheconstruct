@@ -10,7 +10,7 @@
 
 ## Figure 2
 
-![Cooperator Presence TODO](../figures/Figure2.png)
+![**Evolutionary Processes and their Effect on Cooperator Presence.** For each process shown, the cooperator presence among each replicate population is shown as an open circle. Their mean is showed as a filled circle, and bars indicate 95% confidence intervals. (**A**) In our model, adaptations allow cooperation to hitchhike. This effect is transient, which limits cooperator presence. (**B**) In the presence of niche construction (positive and negative), cooperator presence is significantly increased. (**C**) When incorporating the potential benefits that it provides, but removing the selective feedback produced by niche construction, cooperator presence is unaffected. (**D**) Positive niche construction increases cooperator proportion, but not to the levels seen in B. (**E**) Negative niche construction alone does not account for the increase in cooperator presence.](../figures/Figure2.png)
 
 \clearpage
 
@@ -20,44 +20,45 @@ Mean fitness over time for the treatments shown in Figure 2
 
 ### Figure 3A - Fitness for base case: niche construction
 
-![Grand mean Fitness of cooperators and defectors TODO](../figures/Figure3A.png)
+![**Fitness Effects of Mutation Accumulation by Cooperators and Defectors.** Lines indicate the grand mean of cooperator (blue) and defector (red) fitness among replicate populations, while shaded areas indicate 95% confidence intervals. Dashed lines indicate the maximum fitness values achievable by cooperators and defectors. (**A**) In the presence of niche construction, cooperators persist in the population by maintaining a greater mean fitness. (**B**) When selective values are increased ($\delta=0.6$), populations rapidly adapt. In the absence of niche construction ($\epsilon=0$), defectors eventually become equally adapted and surpass cooperators. At this point, cooperators are driven from the population due to the cost of cooperation. (**C**) With the effects of niche construction removed ($\epsilon=0$), positive niche construction prolongs the time when cooperators are at an advantage over defectors. Once again, however, defectors eventually become equally adapted, leading to the loss of cooperation. (**D**) Without positive niche construction or further adaptive opportunities ($L=1$, $a_{max}=6$) cooperators do not benefit from niche construction.](../figures/Figure3A.png)
 
 \clearpage
 
-### Figure 3B - Fitness with double delta, no epsilon
+### Figure 3B
 
-![Grand mean Fitness of cooperators and defectors, double delta, no epsilon TODO](../figures/Figure3B.png)
-
-\clearpage
-
-### Figure 3C - Fitness with no negative niche construction (L=5, A=5)
-
-![Grand mean Fitness of cooperators and defectors, no negative niche construction TODO](../figures/Figure3C.png)
+![Will share caption with 3A](../figures/Figure3B.png)
 
 \clearpage
 
-### Figure 3D - Fitness with extreme negative niche construction (L=1, A=6)
+### Figure 3C
 
-![Grand mean Fitness of cooperators and defectors, extreme negative niche construction TODO](../figures/Figure3D.png)
+![Will share caption with 3A](../figures/Figure3C.png)
+
+\clearpage
+
+### Figure 3D
+
+![Will share caption with 3A](../figures/Figure3D.png)
 
 \clearpage
 
 ## Figure 4
 
-Cooperators invade from single population
+Cooperators invade defector population. Fully adapted but mismatched. Negative NC.
 
 
 ## Figure 5
 
-Defectors are kept at bay
+Defectors invade cooperator population. Fully adapted and matched. Role of Export.
 
 
 ## Figure 6
 
 ### Figure 6A - Effect of Public Good Benefit (Smax-Smin)
 
+![**Cooperator Presence as a Function of Population Size and Migration Rate.** Cooperator presence for each replicate population is shown as an open circle. The mean among these replicates is represented by a filled circle, and bars indicate 95% confidence intervals. (**A**) Cooperator presence increases proportional to increases in population size. Here, the benefit of cooperation ($S_{max}$) is varied. ww (**B**) Cooperator presence decreases with migration rate ($m$). When migration is low, cooperators can not export their niche, which limits expansion. When migration is high, the defectors immigrate into populations more quickly than cooperators can adapt.](../figures/Figure6A.png)
+
 ### Figure 6B - Effect of Migration Rate (m)
 
-![TODO Cooperator Presence for different migration rates](../figures/Figure6B.png)
-
+![Will share caption with 6A](../figures/Figure6B.png)
 
