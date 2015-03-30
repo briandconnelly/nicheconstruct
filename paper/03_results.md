@@ -15,7 +15,7 @@ This measure of cooperator presence increases as cooperators rise in abundance o
 
 ## Niche Construction Maintains Cooperation
 
-Without any opportunity for adaptation ($L=0$), cooperators are swiftly eliminated in competition with defectors (Figure 1).
+Without any opportunity for adaptation ($L=0$), cooperators are swiftly eliminated in competition with defectors (Figure 1A).
 Despite an initial lift due to increased productivity, the cost of cooperation becomes disadvantageous as migration mixes the initially isolated populations.
 When there are opportunties for adaptation ($L=5$) but no niche construction ($\epsilon=0$), cooperators are maintained transiently (Figure 1B).
 Here, the additional mutational opportunities provided by their larger sizes allows cooperator populations to more quickly adapt to their environment.
@@ -29,7 +29,7 @@ In our model, niche construction introduces additional selective benefits.
 To determine how these selective effects influence evolutionary outcomes, we performed simulations in which the selective effects of niche construction were removed ($\epsilon=0$), and we instead increased the fitness benefits conferred by adaptation ($\delta=0.6)$.
 Here, we are consevative by lifting the selective value of exogenous adaptation by the maximum value possible from niche construction.
 
-We find that higher selective values do not provide a significant increase in cooperator presence (Figure 2, column C).
+We find that higher selective values do not provide a significant increase in cooperator presence (Figure 2B).
 As shown in Figure 3, cooperators gain adaptations more quickly than defectors, which provides a fitness advantage.
 However, the cost of cooperation puts defectors at an advantage once these populations become fully adapted.
 
@@ -51,7 +51,7 @@ However, due to the circular effects, allelic state 1 at locus 1 will be deleter
 Yet, fixation for genotype $(3,2)$ does not solve the problem, because a mutant $(3,1)$ is fitter, and so on. 
 
 We first focus on the effects of positive niche construction by removing the allelic conflict that leads to negative niche construction ($L=5$, $A=5$).
-In the absence of this conflict, cooperator presence is significantly increased (Figure 2, column D).
+In the absence of this conflict, cooperator presence is significantly increased (Figure 2C).
 Within these environments, we find that positive niche construction prolongs the fitness advantage that cooperators have over defectors (Figure 3C).
 
 
@@ -59,7 +59,7 @@ Within these environments, we find that positive niche construction prolongs the
 
 To determine how negative niche construction influences the evolution of cooperation, we maximize the allelic conflict ($L=1$, $A=6$).
 Here, selection for increasing allelic states among the stress loci means that any allelic state will not be greater than at the previous allele (itself), and thus there will always be opportunity for adaptation.
-Despite this constant opportunity, niche construction does not increase cooperator presence (Figure 2, column E).
+Despite this constant opportunity, niche construction does not increase cooperator presence (Figure 2D).
 
 
 ## NC Enables Cooperator Spread

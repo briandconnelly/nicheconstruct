@@ -9,8 +9,8 @@ In this work, we have considered whether niche construction can maintain coopera
 We demonstrate that when niche construction occurs, cooperation can indeed persist (Figure 1C).
 But what aspects of niche construction produce this result?
 In our model, niche construction introduces additional selective effects that could influence the evolutionary process.
-However, simply raising the selective benefits provided by adaptations does not significantly increase cooperator presence (Figure 2, columns C and A), and indicates that niche construction plays an important role.
-Although cooperators benefit greatly from positive niche construction, it does not fully explain our results (Figure 2 D).
+However, simply raising the selective benefits provided by adaptations does not significantly increase cooperator presence (Figure 2B), and indicates that niche construction plays an important role.
+Although cooperators benefit greatly from positive niche construction, it does not fully explain our results (Figure 2C).
 Indeed, despite an initial increase in abundance, cooperators are eventually driven to extinction when environmental change produces only positive fitness effects.
 As with the Hankshaw effect, adaption eventually slows, allowing defectors to outcompete cooperators (Figure 3C).
 While it does not benefit cooperation when alone (Figure 3E), negative niche construction acts to prevent this stasis.
@@ -19,7 +19,7 @@ Combined, we find that both positive and negative niche construction are require
 When successful, we observe that populations do not reach the maximum possible fitness (Figure 3A).
 Although cooperation is the focus of this study, it can be seen as deleterious.
 Previous work has shown that niche construction can favor deleterious alleles [@laland1999evolutionary; @laland1996evolutionary].
-Similarly here, cooperation is maintained in the presence of niche construction, but lost otherwise (Figure 2).
+Similarly here, cooperation is maintained in the presence of niche construction, but lost otherwise.
 @vandyken2012origins showed that when two cooperative behaviors co-evolve and niche construction feedbacks benefit the other type, niche construction can increasingly favor these traits, which were otherwise disfavored when alone.
 
 By their very nature, public goods benefit populations by making their environment more hospitable [@west2007social].
