@@ -49,5 +49,5 @@ Metapopulations are initiated in a state that follows an environmental change. F
 
 ## Source Code and Software Environment
 
-The simulation software and configurations for the experiments reported are available online. Simulations used Python 3.4.0, NumPy 1.9.1, Pandas 0.15.2 [@mckinney2010data], and NetworkX 1.9.1 [@hagberg2008exploring]. Data analyses were performed with R 3.1.3 [@rproject].
+The simulation software and configurations for the experiments reported are available online. Simulations used Python 3.4.0, NumPy 1.9.1, Pandas 0.15.2 [@mckinney2010data], and NetworkX 1.9.1 [@hagberg2008exploring]. Data analyses were performed with R 3.1.3 [@rproject]. Confidence intervals were estimated by bootstrapping with 1000 resamples.
 

@@ -10,7 +10,7 @@
 
 ## Figure 2
 
-![**Evolutionary Processes and their Effect on Cooperator Presence.** (**A**) In our model, adaptations allow cooperation to hitchhike. This effect is transient, which limits cooperator presence. (**B**) In the presence of niche construction (positive and negative), cooperator presence is significantly increased. (**C**) When incorporating the potential benefits that it provides, but removing the selective feedback produced by niche construction, cooperator presence is unaffected. (**D**) Positive niche construction increases cooperator proportion, but not to the levels seen in B. (**E**) Negative niche construction alone does not account for the increase in cooperator presence. In these box plots, whiskers show range of data within 1.5 IQR.](../figures/Figure2-edited.pdf)
+![**Evolutionary Processes and their Effect on Cooperator Presence.** (**A**) In our model, adaptations allow cooperation to hitchhike. This effect is transient, which limits cooperator presence. (**B**) In the presence of niche construction (positive and negative), cooperator presence is significantly increased. (**C**) When incorporating the potential benefits that it provides, but removing the selective feedback produced by niche construction, cooperator presence is unaffected. (**D**) Positive niche construction increases cooperator proportion, but not to the levels seen in B. (**E**) Negative niche construction alone does not account for the increase in cooperator presence. In these box plots, whiskers show range of data within 1.5 IQR.](../figures/Figure2.png)
 
 \clearpage
 
@@ -35,7 +35,7 @@ Defectors invade cooperator population. Fully adapted and matched. Role of Expor
 
 ### Figure 6A - Effect of Public Good Benefit (Smax-Smin)
 
-![**Cooperator Presence as a Function of Population Size and Migration Rate.** Cooperator presence for each replicate population is shown as an open circle. The mean among these replicates is represented by a filled circle, and bars indicate 95% confidence intervals. (**A**) Cooperator presence increases proportional to increases in population size. Here, the benefit of cooperation ($S_{max}$) is varied. ww (**B**) Cooperator presence decreases with migration rate ($m$). When migration is low, cooperators can not export their niche, which limits expansion. When migration is high, the defectors immigrate into populations more quickly than cooperators can adapt.](../figures/Figure6A.png)
+![**Cooperator Presence as a Function of Population Size and Migration Rate.** Cooperator presence for each replicate population is shown as an open circle. The mean among these replicates is represented by a filled circle, and bars indicate 95% confidence intervals. (**A**) Cooperator presence increases proportional to increases in population size. Here, the benefit of cooperation ($S_{max}$) is varied (the density-dependent fitness effects of niche construction are adjusted accordingly in the model parameter $\epsilon$).  (**B**) Cooperator presence decreases with migration rate ($m$). When migration is low, cooperators can not export their niche, which limits expansion. When migration is high, the defectors immigrate into populations more quickly than cooperators can adapt.](../figures/Figure6A.png)
 
 ### Figure 6B - Effect of Migration Rate (m)
 

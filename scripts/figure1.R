@@ -4,8 +4,10 @@ library(magrittr)
 library(dplyr)
 library(ggplot2)
 library(ggplot2bdc)
+library(Hmisc)
 
 source('formatting.R')
+source('figsummary.R')
 
 fig1A_data <- read.csv('../data/L00.csv')
 fig1B_data <- read.csv('../data/L05_A06_1xDelta_0xEpsilon.csv') 
@@ -24,19 +26,10 @@ fig1_data$Treatment <- factor(fig1_data$Treatment,
                                        'L05_A06_1xDelta_1xEpsilon'='C',
                                        'L05_A05_1xDelta_1xEpsilon'='D'))
 
-# Wrapper for ggplot2::mean_cl_normal that clips values in the range [0,1] so
-# that ribbons aren't broken
-fig1summary <- function(x, ...)
-{
-    v <- mean_cl_normal(x, ...)
-    v$ymin[v$ymin < 0] <- 0
-    v$ymax[v$ymax > 1] <- 1
-    v
-}
 
 fig1 <- ggplot(data=fig1_data, aes(x=Time, y=CooperatorProportion)) +
     geom_hline(aes(yintercept=0.5), linetype='dotted', color='grey70') +        
-    stat_summary(fun.data='fig1summary', geom='ribbon', color=NA, fill='black',
+    stat_summary(fun.data='figsummary', geom='ribbon', color=NA, fill='black',
                  alpha=0.1) +
     stat_summary(fun.y='mean', geom='line', color='black') +
     scale_y_continuous(breaks=seq(from=0, to=1, by=0.25), limits=c(0,1)) +

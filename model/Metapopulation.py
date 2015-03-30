@@ -61,6 +61,7 @@ def create_metapopulation(config, topology, initial_state='populated'):
 
         # Set fully-adapted genotypes for both types
         cgenotype = np.tile(np.arange(stress_alleles)+1, np.ceil(genome_length_max/stress_alleles))[:genome_length_max]
+        # But change the allelic state of defectors so that there is mismatch
         dgenotype = np.roll(cgenotype, 2)
         defector_genotypes = np.repeat([dgenotype], len(defector_pops), axis=0)
         cooperator_genotypes = np.repeat([cgenotype], len(cooperator_pop), axis=0)
