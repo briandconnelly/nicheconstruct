@@ -42,3 +42,5 @@ For example, the cooperative production of virulence factors by the human pathog
 Conversely, cooperative light production by *A. fischeri* is vital for the survival of its host, the Hawaiian bobtail squid [@ruby1996lessons].
 It was recently argued that incorporating the effects of niche construction is critical for improving our understanding of viral evolution [@hamblin2014viral] and evolution in co-infecting parasites [@hafer2015when].
 Incorporating host dynamics, co-evolution, and the feedbacks that they produce into models is likely to be equally important for gaining an understanding of how cooperative behaviors evolve in these host-symbiont settings.
+
+
