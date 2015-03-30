@@ -12,12 +12,12 @@ $$ \beta(x, X) = \bmod_{X}(x - 2 + X) + 1 $$ {#eq:beta}
 
 Here, $\bmod_{Y}(y)$ is the integer remainder after dividing $y$ by $Y$. Thus, the value of adaptive allele $a$ at locus $l$ increases with the number of individuals that have allele $\beta(a,A)$ at locus $\beta(l, L)$. The slope of this increase is $\epsilon$, which specifies the intensity of niche construction. Consider a genotype $g$ with allelic state at locus $l$ given by $a_{g,l}$; its fitness is defined as:
 
-$$ W_{g} = z + \delta \sum_{l=1}^{L} I_{A}(a_{g,l}) + \epsilon \sum_{l=1}^{L} n(\beta(a_{g,l}, A), \beta(l, L)) - c a_{g,L+1} $$ {#eq:fitness}
+$$ W_{g} = z + \delta \sum_{l=1}^{L} I(a_{g,l}) + \epsilon \sum_{l=1}^{L} n(\beta(a_{g,l}, A), \beta(l, L)) - c a_{g,L+1} $$ {#eq:fitness}
 
-where $z$ is a baseline fitness, and $I_{A}(a)$ indicates whether an adaptive allele is non-zero:
+where $z$ is a baseline fitness, and $I(a)$ indicates whether an adaptive allele is non-zero:
 
 $$
-I_{A}(a) =
+I(a) =
 \begin{cases}
     1 & \text{if }a \in \{1,2,\ldots,A\} \\
     0 & \text{otherwise}
@@ -26,25 +26,25 @@ $$ {#eq:IA}
 
 As a consequence of this form of density dependent selection, genotypes with sequentially increasing allelic states will tend to evolve. Because mutations are random (see below), each population will evolve different consecutive sequences. These different sequences represent the unique niches constructed by populations.
 
-Cooperators produce a public good that is equally accessible to all members of the population. This public good increases the carrying capacity at that patch, allowing the population to reach greater density. This benefit increases linearly with the proportion of cooperators. Thus, if $p$ is the proportion of cooperators in a population at the beginning of a growth cycle, then that population reaches the following size during the growth phase:
+Cooperation allows the population to reach greater density.
+If $p$ is the proportion of cooperators in a population at the beginning of a growth cycle, then that population reaches the following size during the growth phase:
 
 $$ S(p) = S_{min} + p (S_{max} - S_{min}) $$ {#eq:popsize}
 
-The function $S(p)$ reflects the benefit of public good production. A population composed entirely of defectors reaches size $S_{min}$, while one composed entirely of cooperators reaches size $S_{max}$ (with $S_{max} \ge S_{min}$). During growth, individuals compete for inclusion in the resulting population. The composition of a population with size $P$ and cooperator proportion $p$ after growth is multinomial with parameters and $S(p)$ and $\{\pi_1, \pi_2, \ldots, \pi_{P}\}$, where:
+The function $S(p)$ reflects the benefit of cooperation. During growth, individuals compete for inclusion in the resulting population.
+The composition of a population with size $P$ and cooperator proportion $p$ after growth is multinomial with parameters and $S(p)$ and $\{\pi_1, \pi_2, \ldots, \pi_{P}\}$, where:
 
 $$ \pi_i = \frac{W_{\gamma(i)}}{\sum_{j=1}^{P} W_{\gamma(j)}} $$ {#eq:prob_repr}
 
 Here, $W_{\gamma(i)}$ is the fitness of an individual $i$ with genotype $\gamma(i)$ (see Equation @eq:fitness). The value $\pi_i$ therefore reflects an individual's relative reproductive fitness.
 
-For simplicity, we apply mutations after population growth. Mutations occur independently at each locus and cause the allelic state to change. Mutations occur at each adaptive locus at rate $\mu_{a}$, in which a new allele is chosen at random from the set $\{0\} \cup \{1, 2, \ldots, A\}$. At the binary cooperation locus, mutations occur at rate $\mu_{c}$. These mutations flip the allelic state, causing cooperators to become defectors and vice versa. Therefore, the probability that genotype $g$ mutates into genotype $g'$ is given by:
+For simplicity, we apply mutations after population growth. Mutations occur independently at each locus and cause the allelic state to change. Mutations occur at each adaptive locus at rate $\mu_{a}$, in which a new allele is chosen at random from the set $\{0\} \cup \{1, 2, \ldots, A\}$. At the binary cooperation locus, mutations occur at rate $\mu_{c}$. These mutations flip the allelic state, causing cooperators to become defectors and vice versa. 
 
-$$ \tau_{g \rightarrow g'} = \mu_{a}^{H_{a}(g,~g')}(1-\mu_{a})^{\{L-H_{a}(g,~g')\}} \mu_{c}^{H_{c}(g,~g')} (1-\mu_{c})^{\{1-H_{c}(g,~g')\}} $$ {#eq:mutations}
+After mutation, individuals emigrate to an adjacent patch at rate $m$.
+The destination patch is randomly chosen with uniform probability from the source patch's Moore neighborhood, which is composed of the nearest 8 patches on the lattice.
+Because the metapopulation lattice has boundaries, patches located on an edge have smaller neighborhoods.
 
-where $H_{a}(g,~g')$ and $H_{c}(g,~g')$ are the Hamming distances between genotypes $g$ and $g'$ at the cooperation locus and adaptive loci, respectively. The Hamming distance is the number of loci at which allelic states differ [@hamming1950bell].
-
-After mutation, individuals emigrate to an adjacent patch at rate $m$. The destination patch is randomly chosen with uniform probability from the source patch's Moore neighborhood, which is composed of the nearest 8 patches on the lattice. Because the metapopulation lattice has boundaries, patches located on an edge have smaller neighborhoods.
-
-Metapopulations are initiated in a state that follows an environmental change. First, populations are seeded at all patches with cooperator proportion $p_{0}$ and grown to density $S(p_{0})$. An environmental challenge is then introduced, which subjects the population to a bottleneck. For each individual, the probability of survival is $\mu_{t}$, which represents the likelihood that a mutation occurs that confers tolerance. Survivors are chosen by binomial sampling. Because individuals have not yet adapted to this new environment, the allelic state of each individual's genotype is set to $0$ at each adaptive locus. Following initialization, simulations are run for $T$ cycles, where each discrete cycle consists of growth, mutation, and migration. At the end of each cycle, populations are thinned to allow for growth in the next cycle. The individuals that remain are chosen by binomial sampling, where each individual persists with probability $d$, regardless of allelic state.
+Metapopulations are initiated in a state that follows an environmental change. First, populations are seeded at all patches with cooperator proportion $p_{0}$ and grown to density $S(p_{0})$. An environmental challenge is then introduced, which subjects the population to a bottleneck. For each individual, the probability of survival is $\mu_{t}$, which represents the likelihood that a mutation occurs that confers tolerance. Survivors are chosen by binomial sampling. Because individuals have not yet adapted to this new environment, the allelic state of each individual's genotype is set to $0$ at each adaptive locus. Following initialization, simulations are run for $T$ cycles, where each discrete cycle consists of population growth, mutation, and migration. At the end of each cycle, populations are thinned to allow for growth in the next cycle. The individuals that remain are chosen by binomial sampling, where each individual persists with probability $d$, regardless of allelic state.
 
 
 ## Source Code and Software Environment

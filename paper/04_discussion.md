@@ -11,7 +11,7 @@ But what aspects of niche construction produce this result?
 In our model, niche construction introduces additional selective effects that could influence the evolutionary process.
 However, simply raising the selective benefits provided by adaptations does not significantly increase cooperator presence (Figure 2, columns C and A), and indicates that niche construction plays an important role.
 Although cooperators benefit greatly from positive niche construction, it does not fully explain our results (Figure 2 D).
-Indeed, despite an initial increase in abundance, cooperators are eventually driven to extinction when environmental change produces only positive fitness effects (Figure 1D).
+Indeed, despite an initial increase in abundance, cooperators are eventually driven to extinction when environmental change produces only positive fitness effects.
 As with the Hankshaw effect, adaption eventually slows, allowing defectors to outcompete cooperators (Figure 3C).
 While it does not benefit cooperation when alone (Figure 3E), negative niche construction acts to prevent this stasis.
 Combined, we find that both positive and negative niche construction are required to main cooperation.
@@ -30,9 +30,10 @@ In our model, the environmental state was implicitly modeled, and depended solel
 In natural settings, however, the timescales at which environments are modified and reproduction are likely to be decoupled.
 For example, a multitude of factors including protein durability [@brown2007durability; @kummerli2010molecular], diffusion [@driscoll2010theory; @allison2005cheaters], and resource availability [@zhang2013exploring; @ghoul2014experimental] influence both the rate and the degree to which public goods alter the environment.
 These factors are likely to influence evolutionary trajectories [@laland1996evolutionary].
-@lehmann2007evolution demonstrated that a cooperative, niche constructing behavior can be favored when it only affected selection for future generations, thus reducing the potential for competition among contemporary kin. The evolutionary inertia that this creates, however, may ultimately work against cooperators.
+@lehmann2007evolution demonstrated that a cooperative, niche constructing behavior can be favored when it only affected selection for future generations, thus reducing the potential for competition among contemporary kin.
+The evolutionary inertia that this creates, however, may ultimately work against cooperators.
 When public good accumulates in the environment, cooperators must reduce their investment in production to remain competitive [@kummerli2010molecular; @dumas2012cost].
-Cooperation that occurs facultatively, perhaps by sensing the abiotic [@koestler2014bile; @bernier2011modulation] or biotic environment [@darch2012density; @brown2001cooperation], are likely to be favored in these fluctuating environments.
+Cooperation that occurs facultatively, perhaps by sensing the abiotic [@koestler2014bile; @bernier2011modulation] or biotic environment [@darch2012density; @brown2001cooperation], are likely to be favored in these environments.
 
 In many instances of cooperation, the environment is itself a biological entity, which can produce additional evolutionary feedbacks.
 As the host population changes, so too will selection on their symbiont populations.

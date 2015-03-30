@@ -89,7 +89,19 @@ def create_metapopulation(config, topology, initial_state='populated'):
         dgenotype = cgenotype
         defector_genotypes = np.repeat([dgenotype], len(defector_pop), axis=0)
         cooperator_genotypes = np.repeat([cgenotype], len(cooperator_pop), axis=0)
+
+        #cooperator_genotypes = np.array([cgenotype])
+        #shifts = np.random.binomial(1, 0.1, len(cooperator_pop)-1)
+        #for i in range(len(cooperator_pop)-1):
+        #    print('looping',i/448000.0)
+        #    cooperator_genotypes = np.vstack((cooperator_genotypes, np.roll(cgenotype, shifts[i])))
+
         M[stress_columns] = np.append(defector_genotypes, cooperator_genotypes, axis=0)
+
+        for p in M.loc[M.Coop==True].Population.unique():
+            print('setting thing for pop', p)
+            do_roll = np.random.binomial(1, 0.60)
+            M.loc[M.Population==p, stress_columns] = np.roll(M.loc[M.Population==p, stress_columns], do_roll, axis=1)
 
 
     M = assign_fitness(M=M, Lmin=config['Population']['genome_length_min'],
