@@ -1,9 +1,9 @@
 #!/usr/bin/env Rscript
 
 replicates <- seq(0,9)
-treatment <- c(0.01, 0.1, 0.2, 0.5, 2, 10)
+treatment <- c(0.002, 0.01, 0.1, 0.2, 0.5, 2, 10)
 runs <- expand.grid(Treatment=treatment, Replicate=replicates)
-runs$Filename <- sprintf('../data/raw/migration/data_%05.02fx_migration_%02d/metapopulation.csv',
+runs$Filename <- sprintf('../data/raw/migration/data_%06.03fx_migration_%02d/metapopulation.csv',
                          runs$Treatment, runs$Replicate)
 
 get_dataset <- function(x)
