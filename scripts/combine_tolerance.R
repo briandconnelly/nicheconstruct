@@ -4,7 +4,7 @@ replicates <- seq(0,9)
 treatment <- seq(0,5)
 
 runs <- expand.grid(Treatment=treatment, Replicate=replicates)
-runs$Filename <- sprintf('../data/raw/tolerance/data_tolerance_%d_%02d/metapopulation.csv',
+runs$Filename <- sprintf('../data/raw/tolerance/data_tolerance_%d_%02d/metapopulation.csv.bz2',
                          runs$Treatment, runs$Replicate)
 
 get_dataset <- function(x)

@@ -3,7 +3,7 @@
 replicates <- seq(0,9)
 treatment <- c(800, 1100, 1400, 1700, 2400)
 runs <- expand.grid(Treatment=treatment, Replicate=replicates)
-runs$Filename <- sprintf('../data/raw/benefit/data_Smax_%04d_%02d/metapopulation.csv',
+runs$Filename <- sprintf('../data/raw/benefit/data_Smax_%04d_%02d/metapopulation.csv.bz2',
                          runs$Treatment, runs$Replicate)
 
 get_dataset <- function(x)
