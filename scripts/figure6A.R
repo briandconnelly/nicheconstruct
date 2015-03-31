@@ -7,6 +7,7 @@ library(ggplot2bdc)
 library(gtable)
 
 source('formatting.R')
+source('figsummary.R')
 
 # Read the data sets
 benefit_data <- read.csv('../data/benefit.csv')
@@ -29,7 +30,7 @@ fig6Aintegrals <- fig6Adata %>%
 # Make the plot
 fig6A <- ggplot(data=fig6Aintegrals, aes(x=Benefit, y=Integral)) +
     geom_point(shape=1, alpha=0.2) +
-    stat_summary(fun.data='mean_cl_normal') + 
+    stat_summary(fun.data='figsummary') + 
     scale_y_continuous(limits=c(0,1)) + 
     labs(x=label_benefit, y=label_cooperator_presence) +
     theme_bdc_grey(grid.y=TRUE)

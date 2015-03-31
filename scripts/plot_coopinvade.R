@@ -46,13 +46,24 @@ p_mu_prop <- ggplot(data=ci_mu, aes(x=Time, y=CooperatorProportion,
 ggsave(filename='../figures/cooperator_invade-Mutations-proportion.pdf', plot=p_mu_prop)
 
 
-int_nomu <- filter(integrals, Mutations==FALSE)
-ggplot(data=integrals, aes(x=MigrationRate, y=Integral, group=as.factor(MigrationRate)) ) +
-    facet_grid(Mutations ~ Treatment) +
+cinvade_facets <- function(variable, value)
+{
+    labels <- list('Mutations'=list('TRUE'='With Mutations',
+                                    'FALSE'='Without Mutations'),
+                   'Treatment'=list('cheat'='CHEAT',
+                                    'match'='Matching Allelic State',
+                                    'mismatch'='Mismatched Allelic State'))
+    return(labels[[variable]][as.character(value)])
+}
+
+
+p_int <- ggplot(data=integrals, aes(x=MigrationRate, y=Integral, group=as.factor(MigrationRate)) ) +
+    facet_grid(Mutations ~ Treatment, labeller=cinvade_facets) +
     geom_boxplot() +
     scale_x_log10() +
     theme_bdc_grey() +
     labs(x='Migration Rate', y=label_cooperator_presence)
+ggsave(filename='../figures/cooperator_invade-presence.pdf', plot=p_int)
 
 
 
