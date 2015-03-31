@@ -58,7 +58,7 @@ Within these environments, we find that positive niche construction prolongs the
 ## Positive niche construction is important to cooperator persistence
 
 To determine how negative niche construction influences the evolution of cooperation, we maximize the allelic conflict ($L=1$, $A=6$).
-Here, selection for increasing allelic states among the stress loci means that any allelic state will not be greater than at the previous allele (itself), and thus there will always be opportunity for adaptation.
+Here, selection for increasing allelic states among the adaptive loci means that any allelic state will not be greater than at the previous allele (itself), and thus there will always be opportunity for adaptation.
 Despite this constant opportunity, niche construction does not increase cooperator presence (Figure 2D).
 
 
