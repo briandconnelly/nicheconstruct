@@ -12,16 +12,21 @@ Our simulated environment consists of $N^2$ patches arranged as an $N \times N$ 
 ### Individuals and Genotypes
 
 Each individual in a population has a genotype, which is an ordered list of $L+1$ integers (loci).
-A binary allele at locus $L+1$ determines whether or not that individual is a cooperator.
-Individuals with allelic state $1$ at this locus are cooperators, carrying a cost $c$, while individuals with allelic state $0$ are defectors.
+A binary allele at the last locus ($L+1$) determines whether that individual is a cooperator ($1$) or a defector ($0$).
+Cooperators incur a fitness cost $c$.
 The first $L$ loci are *adaptive loci*, and are each occupied by $0$ or an integer from the set $\{1, 2, \ldots, A\}$, where $A$ is the number of alleles conferring a selective benefit.
-Specifically, the presence of any non-zero allele at any of these loci represents an adaptation that confers fitness benefit $\delta$ (with $\delta \gt c$ to allow a minimally adapted cooperator to recoup the cost of cooperation).
+Specifically, the presence of any non-zero allele at any of these loci represents an adaptation that confers a fitness benefit $\delta$. We choose $\delta > c$, which allows a minimally adapted cooperator to recoup the cost of cooperation.
+The fitness benefits of these adaptations are purely endogenous, and are not affected by other individuals or the environment.
 
 
 ### Niche Construction
 
-Organisms also influence their environment, which, in turn, influences selection.
-We model this as a form of density dependent selection, where the "niche" is defined by the allelic states of the population.
+Populations also influence their environment, which feeds back to affect selection.
+This process adds a second, exogenous component to each individual's fitness.
+Here, the "niche" is defined implicitly by the allelic states present in the population.
+As allelic states change, a population constructs its unique niche.
+We use a form of density dependent selection to increasingly favors individuals that match their niche.
+
 Specifically, the selective value of adaptive allele $a$ at locus $l$ increases with the number of individuals in the population that have allele $a+1$ at locus $l+1$.
 We treat both adaptive loci and allelic states as "circular", so the allelic state at locus $L$ is affected by the allelic composition of the population at locus 1, and the selective value of allele $A$ at any locus increases with the number of individuals carrying allele $1$ at the next locus.
 For the remainder of this section, this circularity is represented by the function below, which gives the integer that follows an arbitrary value $x$ in the set $\{1, 2, \ldots, X\}$.
@@ -53,7 +58,7 @@ These different sequences represent the unique niches constructed by populations
 ### Population Growth and the Benefit of Cooperation
 
 Cooperation allows the population to reach greater density.
-If $p$ is the proportion of cooperators in a population at the beginning of a growth cycle, then that population reaches the following size during the growth phase:
+If $p$ is the proportion of cooperators in a population at the beginning of a growth cycle, then that population reaches the following size:
 
 $$ S(p) = S_{min} + p (S_{max} - S_{min}) $$ {#eq:popsize}
 
@@ -64,14 +69,16 @@ The composition of a population with size $P$ and cooperator proportion $p$ afte
 $$ \pi_i = \frac{W_{\gamma(i)}}{\sum_{j=1}^{P} W_{\gamma(j)}} $$ {#eq:prob_repr}
 
 Here, $W_{\gamma(i)}$ is the fitness of an individual $i$ with genotype $\gamma(i)$ (see Equation @eq:fitness).
-The value $\pi_i$ therefore reflects an individual's relative reproductive fitness.
+The value $\pi_i$ therefore reflects an individual's reproductive fitness relative to others' in the population.
 
 
 ### Mutation
 
 For simplicity, we apply mutations after population growth.
-Mutations occur independently at each locus and cause the allelic state to change.
-Mutations occur at each adaptive locus at rate $\mu_{a}$, in which a new allele is chosen at random from the set $\{0\} \cup \{1, 2, \ldots, A\}$.
+Mutations occur independently at each locus and cause an allelic state change.
+At each adaptive locus, mutations occur at rate $\mu_{a}$.
+These mutations replace the current allele with a random selection from the set $\{0\} \cup \{1, 2, \ldots, A\}$.
+Note that this allows for the possibility of an allele replacing itself, thus slightly reducing the effective mutation rate.
 At the binary cooperation locus, mutations occur at rate $\mu_{c}$.
 These mutations flip the allelic state, causing cooperators to become defectors and vice versa.
 
@@ -99,7 +106,7 @@ The individuals that remain are chosen by binomial sampling, where each individu
 ## Source Code and Software Environment
 
 The simulation software and configurations for the experiments reported are available online.
-Simulations used Python 3.4.0, NumPy 1.9.1, Pandas 0.15.2 [@mckinney2010data], and NetworkX 1.9.1 [@hagberg2008exploring].
+Simulations used Python 3.4, NumPy 1.9.1, Pandas 0.15.2 [@mckinney2010data], and NetworkX 1.9.1 [@hagberg2008exploring].
 Data analyses were performed with R 3.1.3 [@rproject].
 Confidence intervals were estimated by bootstrapping with 1000 resamples.
 
