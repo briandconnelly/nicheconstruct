@@ -20,25 +20,3 @@
 
 ![**Niche Construction and Invasion.** Curves trace the proportion of cooperators present in the population for the duration of 160 replicate simulations. These experiments examine whether a strategy initiated at a single population in the center of the metapopulation lattice ($N^{2}=121$) can invade. Unless otherwise noted, we disable mutations ($\mu_{a}=0, \mu_{c}=0$) to focus on how invasion depends on particular combinations of genotypes. (**A**) When cooperators and defectors are matched (i.e., genotypes [1,2,3,4,5]) and adaptation can not occur, defectors quickly drive cooperators to extinction due to the cost of cooperation. Defectors were stochastically eliminated in 2 replicate populations. (**B**) However, the adaptive opportunities produced by negative niche construction and density dependence enable an adapted cooperator (genotype [1,2,3,4,*6*]) to invade a population of defectors. (**C**) These same adaptive opportunities can allow cooperators to resist invasion by initially-matching defectors, which arise via mutation and remain a constant threat. Here, cooperation persisted in 91 populations ($\mu_{a}=0.00005$, the base mutation rate).](../figures/Figure3.png)
 
-\clearpage
-
-## Figure 4
-
-Cooperators invade defector population. Fully adapted but mismatched. Negative NC.
-
-
-## Figure 5
-
-Defectors invade cooperator population. Fully adapted and matched. Role of Export.
-
-
-## Figure 6
-
-### Figure 6A - Effect of Public Good Benefit (Smax-Smin)
-
-![**Cooperator Presence as a Function of Population Size and Migration Rate.** Cooperator presence for each replicate population is shown as an open circle. The mean among these replicates is represented by a filled circle, and bars indicate 95% confidence intervals. (**A**) Cooperator presence increases proportional to increases in population size. Here, the benefit of cooperation ($S_{max}$) is varied (the density-dependent fitness effects of niche construction are adjusted accordingly in the model parameter $\epsilon$).  (**B**) Cooperator presence decreases with migration rate ($m$). When migration is low, cooperators can not export their niche, which limits expansion. When migration is high, the defectors immigrate into populations more quickly than cooperators can adapt.](../figures/Figure6A.png)
-
-### Figure 6B - Effect of Migration Rate (m)
-
-![Will share caption with 6A](../figures/Figure6B.png)
-
