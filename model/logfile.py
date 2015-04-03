@@ -3,6 +3,7 @@
 """Functions for writing data files"""
 
 import numpy as np
+import pandas as pd
 
 from misc import stress_colnames
 
@@ -37,7 +38,7 @@ def write_population_data(writer, metapop, topology, cycle, config):
     """Write information about each population in the metapopulation to a CSV writer"""
 
     Lmax = config['Population']['genome_length_max']
-    stress_columns = stress_colnames(L=config['Population']['genome_length_max'])
+    stress_columns = stress_colnames(L=Lmax)
 
     for popid, subpop in metapop.groupby('Population'):
         try:
@@ -72,3 +73,30 @@ def write_population_data(writer, metapop, topology, cycle, config):
 
         writer.writerow(pop_data)
 
+def write_population_genotypes(writer, metapop, topology, cycle, config):
+    """Write information about each population in the metapopulation to a CSV writer"""
+
+    Lmax = config['Population']['genome_length_max']
+    stress_columns = stress_colnames(L=Lmax)
+
+    for popid, subpop in metapop.groupby('Population'):
+        try:
+            coords = topology.node[popid]['coords']
+            pos_x = coords[0]
+            pos_y = coords[1]
+        except KeyError:
+            pos_x = pos_y = np.nan
+
+        if Lmax > 0:
+            # TODO: get most dominant.
+            genotype_props = np.array([group.shape[0]/subpop.shape[0] for genotype, group in subpop.groupby(stress_columns)])
+            x = pd.DataFrame(subpop.groupby(stress_columns, sort=False).size(), columns=['abundance'])
+            genotype_str = str(x[x.abundance==max(x.abundance)][0:1].reset_index().as_matrix()[0,0:-1])
+            
+            pop_data = {'Time': cycle,
+                        'Population': popid,
+                        'X': pos_x,
+                        'Y': pos_y,
+                        'Genotype': genotype_str}
+
+            writer.writerow(pop_data)

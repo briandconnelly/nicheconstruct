@@ -4,14 +4,14 @@
 
 replicates <- seq(0,19)
 treatment <- c('cheat', 'match', 'mismatch')
-migration_rates <- c(1, 1.5, 2, 2.5, 3, 3.5, 4)
+smaxes <- c(800,1100,1400,1700,2000,2300,2600)
 mutations <- c('mu', 'nomu')
 
-runs <- expand.grid(Treatment=treatment, MigrationRate=migration_rates,
+runs <- expand.grid(Treatment=treatment, CapacityMax=smaxes,
                     Mutations=mutations, Replicate=replicates)
 
-runs$Filename <- sprintf('../data/raw/cooperator_invade/coopinvade_%s_%s_%s_%02d/metapopulation.csv',
-                         runs$Treatment, runs$Mutations, runs$MigrationRate, runs$Replicate)
+runs$Filename <- sprintf('../data/raw/cooperator_invade_benefit/coopinvade_%s_%s_%04d_%02d/metapopulation.csv',
+                         runs$Treatment, runs$Mutations, runs$CapacityMax, runs$Replicate)
 
 get_dataset <- function(x)
 {
@@ -33,7 +33,7 @@ get_dataset <- function(x)
     
     data$Treatment <- x['Treatment']
     data$Mutations <- x['Mutations'] == 'mu'
-    data$MigrationRate <- 5*10^(-1 * as.numeric(x['MigrationRate']))
+    data$Benefit <- as.numeric(x['CapacityMax']) - 800
     data$Replicate <- as.numeric(x['Replicate'])
     
     cat('Done\n')
@@ -46,4 +46,4 @@ alldata <- do.call(rbind, z)
 alldata$Replicate <- as.factor(alldata$Replicate)                               
 alldata$Treatment <- as.factor(alldata$Treatment)  
 
-write.csv(alldata, file='../data/cooperator_invade.csv', row.names=FALSE) 
+write.csv(alldata, file='../data/cooperator_invade_benefit.csv', row.names=FALSE) 

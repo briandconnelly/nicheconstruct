@@ -12,7 +12,7 @@ from warnings import warn
 from configobj import ConfigObj, ConfigObjError, flatten_errors
 from validate import Validator
 
-from logfile import write_metapop_data, write_population_data
+from logfile import write_metapop_data, write_population_data, write_population_genotypes
 from Metapopulation import *
 from misc import *
 from Topology import *
@@ -138,7 +138,7 @@ def main():
                       'MaxDefectorFitness', 'MeanDefectorFitness',
                       'ShannonIndex', 'SimpsonIndex']
         writermp = csv.DictWriter(open(os.path.join(config['Simulation']['data_dir'],
-                                       'metapopulation.csv'), 'w'),
+                                       config['MetapopulationLog']['filename']), 'w'),
                                        fieldnames=fieldnames)
         writermp.writeheader()
 
@@ -155,9 +155,18 @@ def main():
                       'MinDefectorFitness', 'MaxDefectorFitness',
                       'MeanDefectorFitness', 'ShannonIndex', 'SimpsonIndex']
         writerp = csv.DictWriter(open(os.path.join(config['Simulation']['data_dir'],
-                                      'population.csv'), 'w'),
+                                      config['PopulationLog']['filename']), 'w'),
                                       fieldnames=fieldnames)
         writerp.writeheader()
+
+    log_genotypes = config['GenotypeLog']['enabled']
+    if log_genotypes:
+        log_genotypes_freq = config['GenotypeLog']['frequency']
+        fieldnames = ['Time', 'Population', 'X', 'Y', 'Genotype']
+        writerg = csv.DictWriter(open(os.path.join(config['Simulation']['data_dir'],
+                                      config['GenotypeLog']['filename']), 'w'),
+                                      fieldnames=fieldnames)
+        writerg.writeheader()
 
 
     # Create the migration topology. This is a graph where each population is a
@@ -218,7 +227,11 @@ def main():
         if log_population and cycle % log_population_freq == 0:
             write_population_data(writer=writerp, metapop=metapop,
                                   topology=topology, cycle=cycle, config=config)
-            pass
+
+        if log_genotypes and cycle % log_genotypes_freq == 0:
+            write_population_genotypes(writer=writerg, metapop=metapop,
+                                       topology=topology, cycle=cycle,
+                                       config=config)
 
         env_changed = False
 
