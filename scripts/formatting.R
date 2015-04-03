@@ -8,3 +8,5 @@ label_tolerance <- 'Survival Rate, Initial Environmental Change'
 
 color_cooperator <- '#729ECE'
 color_defector <- '#ED665D'
+
+#ggplot2::theme_set(ggplot2bdc::theme_bdc_grey())
