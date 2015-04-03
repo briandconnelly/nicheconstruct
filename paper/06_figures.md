@@ -17,8 +17,10 @@
 
 ## Figure 3
 
+# TODO switch B and C?
 
-![**Niche Construction and Invasion.** Curves trace the proportion of cooperators present in the population for the duration of 160 replicate simulations. In these experiments, we examined whether a strategy initiated at a single population in the center of the metapopulation lattice ($N=11$) can invade. Unless otherwise noted, we disable mutations ($\mu_{a}=0, \mu_{c}=0$) to focus on how invasion depends on particular combinations of genotypes. (**A**) When cooperators and defectors are matched (i.e., genotypes $[1,2,3,4,5]$), defectors quickly drive cooperators to extinction due to the cost of cooperation. (**B**) However, the adaptive opportunities produced by negative niche construction and density dependence can allow an adapted cooperator (genotype $[1,2,3,4,6]$) to invade a population of defectors. TODO explain? (**C**) These same adaptive opportunities can allow cooperators to resist invasion by matching defectors, which arise via mutation and remain a constant threat. Here, adaptation allows cooperation to persist in 91 populations ($\mu_{a}=0.00005$).](../figures/Figure3.png)
+
+![**Niche Construction and Invasion.** Curves trace the proportion of cooperators present in the population for the duration of 160 replicate simulations. In these experiments, we examined whether a strategy initiated at a single population in the center of the metapopulation lattice ($N=11$) can invade. Unless otherwise noted, we disable mutations ($\mu_{a}=0, \mu_{c}=0$) to focus on how invasion depends on particular combinations of genotypes. (**A**) When cooperators and defectors are matched (i.e., genotypes $[1,2,3,4,5]$) and adaptation can not occur, defectors quickly drive cooperators to extinction due to the cost of cooperation. (**B**) However, the adaptive opportunities produced by negative niche construction and density dependence can allow an adapted cooperator (genotype $[1,2,3,4,6]$) to invade a population of defectors. TODO explain? (**C**) These same adaptive opportunities can allow cooperators to resist invasion by matching defectors, which arise via mutation and remain a constant threat. Here, adaptation allows cooperation to persist in 91 populations ($\mu_{a}=0.00005$).](../figures/Figure3.png)
 
 \clearpage
 

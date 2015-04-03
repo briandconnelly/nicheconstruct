@@ -1,46 +1,51 @@
 # Methods
 
-We build upon the model described in @HANKSHAW, in which cooperators and defectors compete and evolve in a metapopulation (a collection of populations).
-Individuals in each of the populations reproduce, mutate, and migrate to neighboring populations.
-Importantly, adaptation can occur.
-In our model here, we further allow populations to modify their local environment, and these modifications feed back to affect selection.
+We develop an individual-based model in which populations of cooperators and defectors evolve and compete in a spatially-structured metapopulation (a collection of populations).
+Through mutations, individuals gain adaptations to their environment.
+These adaptations increase reproductive fitness, and allow those lineages to rise in abundance.
+Migration among neighboring populations allows these more successful lineages to spread.
+
+We expand upon the model described by @HANKSHAW to allow populations to modify their local environment.
+As this process occurs, environmental changes feed back to affect selection.
+We explore how this niche construction affects evolutionary outcomes.
+
 
 ## Model Description
 
-Our simulated environment consists of $N^2$ patches arranged as an $N \times N$ lattice (see [Table 1](#tables) for model parameters and their values), where each patch can support a population.
+### Individual Genotypes and Adaptation
 
-### Individuals and Genotypes
+Each individual in a population has a genotype, which is an ordered list of $L+1$ integers, or *loci* (see [Table 1](#tables) for model parameters and their values).
+Different values at these loci represent different alleles.
+A binary allele at the locus ($L+1$) determines whether that individual is a defector ($0$) or a cooperator ($0$), which carries fitness cost $c$.
+The first $L$ loci are *adaptive loci*, and are each occupied by $0$ or an integer from the set $\{1, 2, \ldots, A\}$.
+Allele $0$ represents a lack of adaptation, while a non-zero allele represents one of the $A$ possible adaptations at that locus.
+The presence of any of these adaptations confers a fitness benefit $\delta$.
+We choose $\delta > c$, which allows a minimally adapted cooperator to recoup the cost of cooperation and gain a fitness advantage.
+The benefits that these adaptations engender are purely endogenous, and are not affected by the other individuals or the state of the environment.
 
-Each individual in a population has a genotype, which is an ordered list of $L+1$ integers (loci).
-A binary allele at the last locus ($L+1$) determines whether that individual is a cooperator ($1$) or a defector ($0$).
-Cooperators incur a fitness cost $c$.
-The first $L$ loci are *adaptive loci*, and are each occupied by $0$ or an integer from the set $\{1, 2, \ldots, A\}$, where $A$ is the number of alleles conferring a selective benefit.
-Specifically, the presence of any non-zero allele at any of these loci represents an adaptation that confers a fitness benefit $\delta$. We choose $\delta > c$, which allows a minimally adapted cooperator to recoup the cost of cooperation.
-The fitness benefits of these adaptations are purely endogenous, and are not affected by other individuals or the environment.
 
+### Niche Construction and Selective Feedbacks
 
-### Niche Construction
+The state of the local environment also affects fitness.
+Here, we model the "niche" implicitly based on the allelic states present in the population.
+As allelic states change, populations alter their environment in different ways, creating a unique niche.
 
-Populations also influence their environment, which feeds back to affect selection.
-This process adds a second, exogenous component to each individual's fitness.
-Here, the "niche" is defined implicitly by the allelic states present in the population.
-As allelic states change, a population constructs its unique niche.
-We use a form of density dependent selection to increasingly favors individuals that match their niche.
-
+We use a form of density dependent selection to capture the eco-evolutionary feedbacks that result from niche construction by increasingly favoring individuals that match their niche.
 Specifically, the selective value of adaptive allele $a$ at locus $l$ increases with the number of individuals in the population that have allele $a+1$ at locus $l+1$.
+As a consequence of this form of density dependent selection, genotypes with sequentially increasing allelic states will tend to evolve.
 We treat both adaptive loci and allelic states as "circular", so the allelic state at locus $L$ is affected by the allelic composition of the population at locus 1, and the selective value of allele $A$ at any locus increases with the number of individuals carrying allele $1$ at the next locus.
-For the remainder of this section, this circularity is represented by the function below, which gives the integer that follows an arbitrary value $x$ in the set $\{1, 2, \ldots, X\}$.
+This circularity is represented by the function $\beta(x,X)$, which gives the integer that follows an arbitrary value $x$ in the set $\{1, 2, \ldots, X\}$:
 
 $$ \beta(x, X) = \bmod_{X}(x) + 1 $$ {#eq:beta}
 
-Here, $\bmod_{Y}(y)$ is the integer remainder when dividing $y$ by $Y$.
+Here, $\bmod_{X}(x)$ is the integer remainder when dividing $y$ by $X$.
 Thus, the selective value of adaptive allele $a$ at locus $l$ increases with the number of individuals that have allele $\beta(a,A)$ at locus $\beta(l, L)$.
 The slope of this increase is $\epsilon$, which specifies the intensity of niche construction.
-Consider a genotype $g$ with allelic state at locus $l$ given by $a_{g,l}$; its fitness is defined as:
+Consider a genotype $g$ with the allelic state at locus $l$ given by $a_{g,l}$; the fitness of an individual with this genotype is defined as:
 
 $$ W_{g} = z + \delta \sum_{l=1}^{L} I(a_{g,l}) + \epsilon \sum_{l=1}^{L} n(\beta(a_{g,l}, A), \beta(l, L)) - c a_{g,L+1} $$ {#eq:fitness}
 
-where $z$ is a baseline fitness, and $I(a)$ indicates whether a given adaptive allele is non-zero:
+where $z$ is a baseline fitness and $I(a)$ indicates whether a given adaptive allele is non-zero:
 
 $$
 I(a) =
@@ -50,8 +55,7 @@ I(a) =
 \end{cases}
 $$ {#eq:IA}
 
-As a consequence of this form of density dependent selection, genotypes with sequentially increasing allelic states will tend to evolve.
-Because mutations are random (see below), each population will evolve different consecutive sequences.
+Because mutations occur randomly (see below), each population will evolve different consecutive sequences.
 These different sequences represent the unique niches constructed by populations.
 
 
@@ -85,6 +89,7 @@ These mutations flip the allelic state, causing cooperators to become defectors 
 
 ### Migration
 
+Our simulated environment consists of $N^2$ patches arranged as an $N \times N$ lattice, where each patch can support a population.
 After mutation, individuals emigrate to an adjacent patch at rate $m$.
 The destination patch is randomly chosen with uniform probability from the source patch's Moore neighborhood, which is composed of the nearest 8 patches on the lattice.
 Because the metapopulation lattice has boundaries, patches located on an edge have smaller neighborhoods.
@@ -92,15 +97,14 @@ Because the metapopulation lattice has boundaries, patches located on an edge ha
 
 ### Metapopulation Initialization and Simulation
 
-Metapopulations are initiated in a state that follows an environmental change.
+Metapopulations are initiated in a state that follows an environmental change, which leaves most patches empty.
 First, populations are seeded at all patches with cooperator proportion $p_{0}$ and grown to density $S(p_{0})$.
 An environmental challenge is then introduced, which subjects the population to a bottleneck.
 For each individual, the probability of survival is $\mu_{t}$, which represents the likelihood that a mutation occurs that confers tolerance.
-Survivors are chosen by binomial sampling.
 Because individuals have not yet adapted to this new environment, the allelic state of each individual's genotype is set to $0$ at each adaptive locus.
 Following initialization, simulations are run for $T$ cycles, where each discrete cycle consists of population growth, mutation, and migration.
 At the end of each cycle, populations are thinned to allow for growth in the next cycle.
-The individuals that remain are chosen by binomial sampling, where each individual persists with probability $d$, regardless of allelic state.
+Each individual persists with probability $d$, regardless of allelic state.
 
 
 ## Source Code and Software Environment
@@ -108,5 +112,5 @@ The individuals that remain are chosen by binomial sampling, where each individu
 The simulation software and configurations for the experiments reported are available online.
 Simulations used Python 3.4, NumPy 1.9.1, Pandas 0.15.2 [@mckinney2010data], and NetworkX 1.9.1 [@hagberg2008exploring].
 Data analyses were performed with R 3.1.3 [@rproject].
-Confidence intervals were estimated by bootstrapping with 1000 resamples.
+Reported confidence intervals were estimated by bootstrapping with 1000 resamples.
 
