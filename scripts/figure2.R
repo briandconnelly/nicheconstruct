@@ -14,27 +14,23 @@ source('figsummary.R')
 base_data <- read.csv('../data/L05_A06_1xDelta_1xEpsilon.csv')
 nonc_data <- read.csv('../data/L05_A06_2xDelta_0xEpsilon.csv')
 noneg_data <- read.csv('../data/L05_A05_1xDelta_1xEpsilon.csv')
-neg_data <- read.csv('../data/L05_A06_1xDelta_1xEpsilon_NEGNC.csv')
 
 # Combine the data sets
-fig2data <- bind_rows(base_data, nonc_data, noneg_data, neg_data)
+fig2data <- bind_rows(base_data, nonc_data, noneg_data)
 fig2data$Replicate <- as.factor(fig2data$Replicate)
 fig2data$Treatment <- factor(fig2data$Treatment,
                              levels=c('L05_A06_1xDelta_1xEpsilon',
                                       'L05_A06_2xDelta_0xEpsilon',
-                                      'L05_A05_1xDelta_1xEpsilon',
-                                      'L05_A06_1xDelta_1xEpsilon_NEGNC'),
+                                      'L05_A05_1xDelta_1xEpsilon'),
                              labels=c('Niche Construction',
-                                      'No Niche Construction',
-                                      'Positive NC Only',
-                                      'Negative NC Only'))
+                                      'Without Niche Construction',
+                                      'Without Negative NC'))
 
 subplot_labels <- data.frame(Time=0, CooperatorProportion=1,
                              Treatment=c('Niche Construction',
-                                         'No Niche Construction',
-                                         'Positive NC Only',
-                                         'Negative NC Only'),
-                             Label=c('A', 'B', 'C', 'D'))
+                                         'Without Niche Construction',
+                                         'Without Negative NC'),
+                             Label=c('A', 'B', 'C'))
 
 fig2 <- ggplot(data=fig2data, aes(x=Time, y=CooperatorProportion)) +
     facet_grid(. ~ Treatment) +
