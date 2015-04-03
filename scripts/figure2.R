@@ -36,7 +36,7 @@ fig2 <- ggplot(data=fig2data, aes(x=Time, y=CooperatorProportion)) +
     facet_grid(. ~ Treatment) +
     geom_hline(aes(yintercept=0.5), linetype='dotted', color='grey70') +        
     stat_summary(fun.data='figsummary', geom='ribbon', color=NA,
-                 fill=color_cooperator, alpha=0.1) +
+                 fill=color_cooperator, alpha=ribbon_alpha) +
     stat_summary(fun.y='mean', geom='line', color=color_cooperator) +
     geom_text(data=subplot_labels, aes(label=Label), hjust=0, vjust=1, face='bold') + 
     scale_y_continuous(breaks=seq(from=0, to=1, by=0.25), limits=c(0,1)) +
