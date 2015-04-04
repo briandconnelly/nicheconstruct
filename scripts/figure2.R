@@ -23,12 +23,12 @@ fig2data$Treatment <- factor(fig2data$Treatment,
                                       'L05_A06_2xDelta_0xEpsilon',
                                       'L05_A05_1xDelta_1xEpsilon'),
                              labels=c('Niche Construction',
-                                      'Without Niche Construction',
+                                      'Without\nNiche Construction',
                                       'Without\nNegative Niche Construction'))
 
 subplot_labels <- data.frame(Time=0, CooperatorProportion=1,
                              Treatment=c('Niche Construction',
-                                         'Without Niche Construction',
+                                         'Without\nNiche Construction',
                                          'Without\nNegative Niche Construction'),
                              Label=c('A', 'B', 'C'))
 

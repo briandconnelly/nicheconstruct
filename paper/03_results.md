@@ -1,16 +1,12 @@
 # Results
 
-We follow the evolution of cooperation in a metapopulation consisting of populations connected by spatially-limited migration.
-Individuals in these populations can gain a limited number of adaptations that confer selective benefits.
-While the allele at an individual’s cooperation locus does not directly affect the value of alleles at adaptive loci, cooperation can have indirect effects on the process of adaptation.
-Specifically, because cooperation increases population density, isolated cooperators experience more mutational opportunities to gain adaptations. 
+Using the model described in the previous section, we perform simulations that follow the evolution of cooperation in a metapopulation consisting of populations connected by spatially-limited migration.
+Individuals compete in these populations by gaining a limited number of adaptations that confer fitness benefits.
+While cooperation does not directly affect the selective value of these adaptations, cooperation can have indirect effects on the adaptive process.
+Specifically, cooperation increases population density. As a result, larger populations of cooperators experience more mutational opportunities to gain adaptations. 
 Cooperation can hitchhike along with these adaptations, which compensate for the cost of cooperation.
-Additionally, populations alter their environment.
-Here, we explore how niche construction can favor the evolution of cooperation.
-Our simulation environment is defined by the parameter values listed in [Table 1](#tables).
-Unless otherwise noted, 10 replicate simulations were performed for each experiment.
-We quantify cooperator success using the area under the cooperator proportion curve.
-This measure of cooperator presence increases as cooperators rise in abundance or remain in the population longer.
+During this process, populations alter their local environments, which, in turn, affects selection.
+Here, we explore how niche construction influences the evolution of cooperation in the simulation environment defined by the parameter values listed in [Table 1](#tables).
 
 
 ## Niche Construction Maintains Cooperation
@@ -18,9 +14,10 @@ This measure of cooperator presence increases as cooperators rise in abundance o
 Without any opportunity for adaptation ($L=0$), cooperators are swiftly eliminated in competition with defectors (Figure 1A).
 Despite an initial lift due to increased productivity, the cost of cooperation becomes disadvantageous as migration mixes the initially isolated populations.
 When there are opportunties for adaptation ($L=5$) but no niche construction ($\epsilon=0$), cooperators are maintained transiently (Figure 1B).
-Here, the additional mutational opportunities provided by their larger sizes allows cooperator populations to more quickly adapt to their environment.
-As previously described by @HANKSHAW, however, cooperation is subsequently lost as *adapted* defector populations arise via mutation.
-When niche construction ins incorporated, cooperation persists (Figure 1C).
+Here, larger cooperator populations can more quickly adapt to their environment.
+As previously described by @HANKSHAW, however, cooperation is subsequently lost once populations become fully adapted to their environment.
+Once this has occurred, adapted defectors that arise via mutation at the cooperation locus have a selective advantage and drive cooperators from the population.
+However, when niche construction creates selective feedbacks, cooperation persists in 13 of 18 replicate populations (Figure 2A).
 
 
 ## Fitness Increases Alone do not Support Persisting Cooperation

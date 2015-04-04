@@ -31,4 +31,4 @@ latest:
 
 
 clean:                                                                          
-	    rm -f $(FNAME)*.pdf $(FNAME)*.tex $(FNAME)*.docx draft_*.pdf
+	    rm -f $(FNAME).pdf $(FNAME).tex $(FNAME).docx draft_*.pdf
