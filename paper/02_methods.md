@@ -6,7 +6,7 @@ Migration among neighboring populations allows more successful lineages to sprea
 
 We expand upon the model described by @HANKSHAW to allow populations to modify their local environment.
 As this process occurs, environmental changes feed back to affect selection.
-We perform simulations using this model to explore how niche construction affects this adaptation process and whether selective feedbacks allow cooperation to be maintained.
+We perform simulations using this model to explore how niche construction affects this adaptation process, and whether selective feedbacks allow cooperation to be maintained.
 
 
 ## Model Description
@@ -15,11 +15,11 @@ We perform simulations using this model to explore how niche construction affect
 
 Each individual in a population has a genotype, which is an ordered list of $L+1$ integers, or *loci* (see [Table 1](#tables) for model parameters and their values).
 Different values at these loci represent different alleles.
-A binary allele at locus $L+1$ determines whether that individual is a defector ($0$) or a cooperator ($0$), which carries fitness cost $c$.
+A binary allele at locus $L+1$ determines whether that individual is a cooperator ($1$), which carries fitness cost $c$, or a defector ($0$).
 Cooperation is independent from adaptation to the environment.
 The first $L$ loci are *adaptive loci*, and are each occupied by $0$ or an integer from the set $\{1, 2, \ldots, A\}$.
 Allele $0$ represents a lack of adaptation, while a non-zero allele represents one of the $A$ possible adaptations at that locus.
-The presence of any of these adaptations confers a fitness benefit $\delta$.
+Adaptations confer a fitness benefit $\delta$, regardless of which non-zero allele is present.
 We choose $\delta > c$, which allows a minimally adapted cooperator to recoup the cost of cooperation and gain a fitness advantage.
 The benefits that these adaptations engender are purely endogenous, and are not affected by the other individuals or the state of the environment.
 
@@ -33,7 +33,7 @@ As allelic states change, populations alter their environment in different ways,
 We use a form of density dependent selection to favors individuals that better match their niche.
 Specifically, the selective value of adaptive allele $a$ at locus $l$ increases with the number of individuals in the population that have allele $a+1$ at locus $l+1$.
 As a consequence, genotypes with sequentially increasing allelic states will tend to evolve.
-We treat both adaptive loci and allelic states as "circular", so the selective value of an allele at locus $L$ is affected by the allelic composition of the population at locus 1.
+We treat both adaptive loci and allelic states as "circular": the selective value of an allele at locus $L$ is affected by the allelic composition of the population at locus 1.
 Similarly, the selective value of allele $A$ at any locus increases with the number of individuals carrying allele $1$ at the next locus.
 This circularity is represented by the function $\beta(x,X)$, which gives the integer that follows an arbitrary value $x$ in the set $\{1, 2, \ldots, X\}$:
 
@@ -105,7 +105,7 @@ Because the metapopulation lattice has boundaries, patches located on an edge ha
 Metapopulations are initiated in a state that follows an environmental change, which leaves most patches empty.
 First, populations are seeded at all patches with cooperator proportion $p_{0}$ and grown to density $S(p_{0})$.
 An environmental challenge is then introduced, which subjects the population to a bottleneck.
-For each individual, the probability of survival is $\mu_{t}$, which represents the likelihood that a mutation occurs that confers tolerance.
+For each individual, the probability of survival is $\mu_{t}$, which represents the likelihood that tolerance arises via mutation.
 Because individuals have not yet adapted to this new environment, the allelic state of each individual's genotype is $0$ at each adaptive locus.
 Following initialization, simulations are run for $T$ cycles, where each discrete cycle consists of population growth, mutation, and migration.
 At the end of each cycle, populations are thinned to allow for growth in the next cycle.

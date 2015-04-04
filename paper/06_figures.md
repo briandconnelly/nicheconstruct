@@ -25,3 +25,7 @@ However, the adaptive opportunities produced by negative niche construction can 
 ## Figure 4 {#fig4}
 
 TODO: snapshots of cooperators adapting to thwart defector invasion
+
+## Figure 5 {#fig5}
+
+TODO: A: defector invading diverse C popuation, B: Adapted cooperators can not spread to resist defector invasion.

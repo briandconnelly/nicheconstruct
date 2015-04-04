@@ -39,9 +39,9 @@ When negative niche construction is removed ($L=5$, $A=5$), cooperators are agai
 
 The adaptation resulting from selective feedbacks can limit invasion by defectors, which arise either through immigration from neighboring patches or through mutation from a cooperator ancestor.
 The latter pose a particularly challenging threat, as they are equally adapted, yet do not incur the cost of cooperation.
-When equally-adapted defectors are introduced as a single population in the center of an $11x11$ metapopulation of cooperators, they quickly spread ([Figure 3A](#fig3)).
+When homologous defectors (i.e., defectors with identical stress loci) are introduced as a single population in the center of an $11x11$ metapopulation of cooperators, they quickly spread ([Figure 3A](#fig3)).
 However, when resident cooperators can adapt and respond to defector invasion, the situation improves dramatically, allowing
-cooperation to resist invasion in 91 of 160 replicate populations ([Figure 3B](#fig3)).
+cooperation to evade defector invasion in 91 of 160 replicate populations ([Figure 3B](#fig3)).
 [Figure 4](#fig4) depicts one such instance where cooperators gained an adaptation that stopped and eliminated invading defectors.
 We further highlight this process in [Figure 3C](#fig3), where an adapted cooperator genotype can rapidly invade a population of defectors.
 
