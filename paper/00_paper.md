@@ -1,5 +1,5 @@
 ---
-title: "A Combination of Positive and Negative Niche Construction Favors the Evolution of Cooperation"
+title: "Negative Niche Construction Favors the Evolution of Cooperation"
 author: 
 abstract: TODO 
 

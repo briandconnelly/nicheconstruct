@@ -1,3 +1,4 @@
+
 # Results
 
 Using the model described in the previous section, we perform simulations that follow the evolution of cooperation in a metapopulation consisting of populations connected by spatially-limited migration.
@@ -5,8 +6,8 @@ Individuals compete in these populations by gaining a limited number of adaptati
 While cooperation does not directly affect the selective value of these adaptations, cooperation can have indirect effects on the adaptive process.
 Specifically, cooperation increases population density. As a result, larger populations of cooperators experience more mutational opportunities to gain adaptations. 
 Cooperation can hitchhike along with these adaptations, which compensate for the cost of cooperation.
-During this process, populations alter their local environments, which, in turn, affects selection.
-Here, we explore how niche construction influences the evolution of cooperation in the simulation environment defined by the parameter values listed in [Table 1](#tables).
+During this process, populations alter their local environments, which, in turn, influences selection.
+Here, we explore how niche construction affects the evolution of cooperation in the simulation environment defined by the parameter values listed in [Table 1](#tables).
 
 
 ## Cooperation Persists with Niche Construction
@@ -49,3 +50,4 @@ We further highlight this process in [Figure 3C](#fig3), where an adapted cooper
 ## Diversity Hampers the Evolution of Cooperation
 
 TODO: defector can invade a diverse population of cooperators, while adaptation to a matching defector can't spread to stop invasion.
+

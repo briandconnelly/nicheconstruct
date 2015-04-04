@@ -1,3 +1,4 @@
+
 # Methods
 
 We develop an individual-based model in which populations of cooperators and defectors evolve and compete in a spatially-structured metapopulation (a collection of populations).
