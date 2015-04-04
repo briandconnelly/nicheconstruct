@@ -24,12 +24,12 @@ fig2data$Treatment <- factor(fig2data$Treatment,
                                       'L05_A05_1xDelta_1xEpsilon'),
                              labels=c('Niche Construction',
                                       'Without Niche Construction',
-                                      'Without Negative NC'))
+                                      'Without\nNegative Niche Construction'))
 
 subplot_labels <- data.frame(Time=0, CooperatorProportion=1,
                              Treatment=c('Niche Construction',
                                          'Without Niche Construction',
-                                         'Without Negative NC'),
+                                         'Without\nNegative Niche Construction'),
                              Label=c('A', 'B', 'C'))
 
 fig2 <- ggplot(data=fig2data, aes(x=Time, y=CooperatorProportion)) +
