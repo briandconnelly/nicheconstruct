@@ -6,17 +6,17 @@ In a process termed the "Hankshaw effect", @HANKSHAW recently demonstrated that 
 While this process does favor cooperation in the short term, it eventually reaches a dead end; when the opportunities for adaptation are exhausted, and cooperators can no longer hitchhike, they face extinction.
 In this work, we have considered whether niche construction can maintain cooperation indefinitely.
 
-When niche construction occurs, cooperation can indeed persist ([Figure 2A](#fig2)).
+When niche construction occurs, cooperation can indeed persist ([Figure 3A](#fig3)).
 In our model, niche construction introduces additional selective effects that could influence the evolutionary process, leading to a more pronounced Hankshaw effect.
-However, simply raising the selective benefits provided by adaptations does not prolong cooperation ([Figure 2B](#fig2)), and indicates that niche construction plays an important role.
+However, simply raising the selective benefits provided by adaptations does not prolong cooperation ([Figure 3B](#fig3)), and indicates that niche construction plays an important role.
 
 We find that cooperator success is due to niche construction.
-Further, we find that it is specifically negative niche construction that maintains cooperation ([Figure 2C](#fig2)).
+Further, we find that it is specifically negative niche construction that maintains cooperation ([Figure 3C](#fig3)).
 Without adaptive opportunities, adaptation eventually slows.
 Once this occurs, cooperators face the threat of invasion by defectors that arise de novo through mutation.
 Since these defectors are equally adapted but do not bear the cost of cooperation, they are favored by selection, and quickly drive cooperators to extinction.
 By reducing fitness, negative niche construction creates adaptive opportunities.
-These opportunities can allow cooperators to resist invasion by defectors, even when defectors are equally adapted ([Figure 3B](#fig3)).
+These opportunities can allow cooperators to resist invasion by defectors, even when defectors are equally adapted ([Figure 4B](#fig4)).
 Here we observe another facet of the Hankshaw effect: because populations of cooperators are larger, they are better able to respond to the adaptive opportunities that result from negative niche construction.
 
 TODO: diversity results
