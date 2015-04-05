@@ -29,3 +29,16 @@ TODO: snapshots of cooperators adapting to thwart defector invasion
 ## Figure 5 {#fig5}
 
 TODO: A: defector invading diverse C population, B: Adapted cooperators cannot spread to resist defector invasion.
+
+
+\clearpage
+
+\renewcommand{\thefigure}{S\arabic{figure}}
+\setcounter{figure}{0}
+
+## Supplemental Figure 1 {#figS1}
+
+![**Defector Invasion with Mutations.** With mutations occurring both at the adaptive loci and the cooperation locus ($Z$), cooperation remains the dominant strategy in 58 replicate simulations. Curves trace the proportion of cooperators present in the population for the duration of 160 replicate simulations ($T=1000$)](../figures/FigureS1.png)
+
+\clearpage
+
