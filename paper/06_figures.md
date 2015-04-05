@@ -4,7 +4,7 @@
 
 ## Figure 1 {#fig1}
 
-TODO: diagram of model
+![Negative niche construction is illustrated for the case of five adaptive loci ($L=5$) and six alleles ($A=6$). The adaptive loci are wrapped into a circle, where niche construction at each locus influences selection at the next locus in the clockwise direction. Suppose we start with a population fixed for the genotype on the far left, [1,2,3,4,5]. There is a mismatch in this genotype (highlighted by the red arc), because the niche constructed by allele 5 favors allele 6 (not 1) at its immediate clockwise neighbor. If the fitter mutant [6,2,3,4,5] arises (see next genotype to the right), it will fix (we not that the strength of selection will drop as its frequency increases). However, now there is a new mismatch in the genotype (highlighted again with a red arc). Thus, we see that correcting one mismatch generates a new mismatch. Thus, this system will never escape these mismatches---the red arc just moves clockwise around the genome. Indeed, after six (or $A$) rounds of mismatch correction/generation, we have ended back where we started with the original genotype turned clockwise by one locus. Here, the adaptation to previous niche construction generates further niche construction that leads to novel adaptation.](../figures/Figure1.pdf)
 
 \clearpage
 
@@ -24,13 +24,16 @@ TODO: diagram of model
 
 ## Figure 4 {#fig4}
 
-![**Niche Construction and Invasion.** Curves trace the proportion of cooperators present in the population for the duration of 160 replicate simulations ($T=1000$). These experiments examine whether a rare cooperator or defector strategy can invade when initiated at a single population in the center of the metapopulation lattice ($N^{2}=121$). Unless otherwise noted, mutations ($\mu_{a}=0, \mu_{c}=0$) are disabled in these ecological simulations to focus on the dynamics of invasion. This limitation is removed in the results shown in Figure SX. (**A**) When cooperators and defectors are matched (i.e., genotypes [1,2,3,4,5]) and adaptation cannot occur, rare defectors quickly invade and drive cooperators to extinction due to the cost of cooperation. Defectors were stochastically eliminated in 2 replicate populations. (**B**)
+![**Niche Construction and Invasion.** Curves trace the proportion of cooperators present in the population for the duration of 160 replicate simulations ($T=1000$). These experiments examine whether a rare cooperator or defector strategy can invade when initiated at a single population in the center of the metapopulation lattice ($N^{2}=121$). Unless otherwise noted, mutations ($\mu_{a}=0, \mu_{c}=0$) are disabled in these ecological simulations to focus on the dynamics of invasion. Figure S1 shows results from simulations where this limitation is removed. (**A**) When cooperators and defectors are matched (i.e., genotypes [1,2,3,4,5]) and adaptation cannot occur, rare defectors quickly invade and drive cooperators to extinction due to the cost of cooperation. Defectors were stochastically eliminated in 2 replicate populations. (**B**)
 However, the adaptive opportunities produced by negative niche construction can allow cooperators to resist invasion by initially-matching defectors. Here, cooperation persisted in the majority of populations ($\mu_{a}=0.00005$, the base mutation rate). (**C**) Here we demonstrate that these adaptations can enable an adapted cooperator (genotype [1,2,3,4,*6*]) to displace a population of defectors when defectors cannot arise or adapt via mutation.](../figures/Figure4.png)
 
+\clearpage
 
 ## Figure 5 {#fig5}
 
-TODO: snapshots of cooperators adapting to thwart defector invasion
+![**Defector Invasion Stopped by Cooperator Adaptation.** Here we depict the distribution of dominant genotypes among populations over time for one representative simulation in which matched defectors arise. For clarity, mutations occurred at the adaptive loci, but not at the cooperation locus ($\mu_{c}=0$) during this ecological simulation. A time $t=0$ (leftmost panel), a single matched defector population (red) is placed among cooperator populations (blue). Because it does not bear the costs of cooperation, it spreads ($t=272$, second panel). However, one cooperator population gains an adaptation giving it a fitness advantage over defectors (purple, lower left). At $t=325$ (third panel), defectors continue to invade cooperator populations. However, the adapted cooperator genotype, which can invade both defector populations and ancestral cooperator populations, can spread more quickly as populations with that genotype reach greater densities. Eventually, this strategy spreads and fixes in all populations (rightmost panel).](../figures/Figure5.pdf)
+
+\clearpage
 
 ## Figure 6 {#fig6}
 
