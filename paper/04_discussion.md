@@ -31,7 +31,7 @@ Cooperation, especially in competition against equally-adapted defectors, can be
 Arguably, this can be viewed as another instance of hitchhiking: the maladaptive form of cooperation is maintained by association with the adaptive form. However, negative niche construction then reverses these roles and perpetuates the cycle.
 
 By their very nature, public goods benefit populations by making their environment more hospitable [@west2007social].
-For example, bacteria produce a host of extracellular products that find soluble iron [@griffin2004cooperation], digest large proteins [@darch2012density; @diggle2007cooperation], and reduce the risk of predation [@cosson2002pseudomonas].
+For example, bacteria produce a host of extracellular products that scavage soluble iron [@griffin2004cooperation], digest large proteins [@darch2012density; @diggle2007cooperation], and reduce the risk of predation [@cosson2002pseudomonas].
 While many studies have explored how the environment affects the evolution of cooperative behaviors such as the production of these public goods, relatively few have examined how the resulting selective feedbacks influence evolution as public goods modify the environment.
 In these instances, the timescale at which the environment is likely to be decoupled from the timescale at which reproduction occurs.
 These differences can have profound effects.

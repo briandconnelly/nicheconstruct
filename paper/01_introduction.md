@@ -8,7 +8,7 @@ Each instance of cooperation presents an evolutionary challenge: How can individ
 Several factors can prevent this *tragedy of the commons* [@hamilton1964geneticalboth; @nowak2006five; @west2007evolutionary].
 One such factor involves non-random social interaction, in which cooperators benefit more from the cooperative act than defectors.
 This can occur when cooperators are clustered together in spatially-structured populations [@kudzalfick2011high; @fletcher2009simple; @nadell2010emergence] or when cooperators use communication [@darch2012density; @brown2001cooperation] or other cues [@gardner2010greenbeards; @sinervo2006selfrecognition; @veelders2010structural] to cooperate conditionally with kin.
-Cooperation can also be bolstered by pleiotropic connections to personal benefits [@dandekar2012bacterial; @foster2004pleiotropy] or association with alleles encoding self-benefitting traits [@asfahl2015nonsocial].
+Cooperation can also be bolstered by pleiotropic connections to personal benefits [@dandekar2012bacterial; @foster2004pleiotropy] or through association with alleles encoding self-benefitting traits [@asfahl2015nonsocial].
 In the latter case, the alleles may provide private benefits that are completely independent from the public benefits of cooperation.
 In an asexual population of cooperators and defectors, this sets the stage for an "adaptive race" in which both types vie for the first highly beneficial adaptation [@waite2012adaptation; @morgan2012selection].
 The tragedy of the commons can be deferred if a cooperator, by chance, wins the adaptive race.
@@ -26,7 +26,7 @@ Through their activities, their interactions with others, and even their deaths,
 These changes can produce evolutionary feedback loops in which environmental change alters selection, which, in turn, alters the distribution of phenotypes and their corresponding influence on the environment [@odling2003niche].
 Because of these feedback loops, populations may find themselves continually chasing beneficial mutations as their adaptive landscape perpetually shifts beneath them.
 
-Here, we explore whether the selective feedbacks that arise niche construction can prolong cooperation.
+Here, we explore whether the selective feedbacks that result from niche construction can prolong cooperation.
 We build upon the model presented by @HANKSHAW to allow populations to modify their local environments in ways that affect fitness.
 We first use this model to address whether niche construction can extend the Hankshaw effect, allowing cooperation to keep hitchhiking as populations continually adapt.
 We then focus on how niche construction influences outcomes when isolated cooperator populations encounter populations of defectors, either through migration or through mutations that inevitably produce defectors that share the same adaptations.
