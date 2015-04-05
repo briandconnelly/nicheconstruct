@@ -13,7 +13,7 @@ Here, we explore how niche construction affects the evolution of cooperation in 
 ## Cooperation Persists with Niche Construction
 
 Without any opportunity for adaptation ($L=0$), cooperators are swiftly eliminated in competition with defectors ([Figure 1A](#fig1)).
-Despite an initial lift due to increased productivity, the cost of cooperation becomes disadvantageous as migration mixes the initially isolated populations.
+Despite an initial lift in cooperator abundance due to increased productivity, the cost of cooperation becomes disadvantageous as migration mixes the initially isolated populations.
 When there are opportunities for adaptation ($L=5$) but no niche construction ($\epsilon=0$), cooperators are maintained transiently ([Figure 1B](#fig1)).
 Here, larger cooperator populations can more quickly adapt to their environment.
 As previously described by @HANKSHAW, however, cooperation is subsequently lost once populations become fully adapted to their environment.
@@ -24,8 +24,8 @@ However, when niche construction creates selective feedbacks, cooperation persis
 ## Fitness Increases Alone do not Support Persisting Cooperation
 
 In the model, both adaptation and niche construction contribute to an individual's fitness.
-To determine whether cooperation is maintained solely because to the larger selective values, we performed simulations in which the selective contributions of niche construction were removed ($\epsilon=0$), and we instead increased the fitness benefits conferred by adaptation ($\delta=0.6)$.
-In doing so, we conservatively represent the selective effects of niche construction, as fitness benefits of this magnitude would only be given for sequential allelic states that are fixed in full populations. We find that simply increasing selective values does not allow cooperators to persist ([Figure 2B](#fig2)).
+To determine whether cooperation is maintained solely due to the larger selective values that result from the contributions of niche construction ($\epsilon$), we performed simulations in which these contributions were removed ($\epsilon=0$), and we instead increased the fitness benefits conferred by adaptation ($\delta=0.6)$.
+In doing so, we conservatively mimic the selective effects of niche construction, as fitness benefits of this magnitude would only be given for sequential allelic states that are fixed in full populations. We find that simply increasing selective values does not allow cooperators to persist ([Figure 2B](#fig2)).
 
 
 ## Negative Niche Construction is Critical to Cooperator Persistence
@@ -33,16 +33,21 @@ In doing so, we conservatively represent the selective effects of niche construc
 Negative niche construction can occur in our model due to the selection for sequentially-increasing allelic states and the circular arrangement of these alleles.
 When this occurs, adaptations at one locus reduce the selective effects at another locus, and thus negatively affect fitness.
 This occurs when when the genome length ($L$) is not evenly divided by the number of adaptive alleles ($A$), which makes it impossible to evolve sequentially increasing allelic states.
-When negative niche construction is removed ($L=5$, $A=5$), cooperators are again driven to extinction after an initial lift in abundance ([Figure 2C](#fig2)).
+This allelic conflict exists with our base parameter values ([Table 1](#tables)), where $L=5$ and $A=6$.
+Here, a mutation that produces genotype $[1,2,3,4,6]$ is beneficial in a population where $[1,2,3,4,5]$ has fixed, as a 6 at the last locus precedes the 1 at the first locus.
+However, once $[1,2,3,4,6]$ fixes, genotype $[1,2,3,5,6]$ will be favored, and so on.
+When we remove negative niche construction ($L=5$, $A=5$), cooperators are again driven to extinction after an initial lift in abundance ([Figure 2C](#fig2)).
+Here we observe that because niche construction presents additional opportunities for hitchhiking, the Hankshaw effect extends the initial lift in cooperation.
+However, once a genotype with sequential allelic states fixes, cooperation...
 
 
 ## Selective Feedbacks Limit Defector Invasion
 
 The adaptation resulting from selective feedbacks can limit invasion by defectors, which arise either through immigration from neighboring patches or through mutation from a cooperator ancestor.
-The latter pose a particularly challenging threat, as they are equally adapted, yet do not incur the cost of cooperation.
-When homologous defectors (i.e., defectors with identical stress loci) are introduced as a single population in the center of an $11x11$ metapopulation of cooperators, they quickly spread ([Figure 3A](#fig3)).
+The challenge is particularly threatening, as they are equally adapted, yet do not incur the cost of cooperation.
+When homologous defectors (i.e., defectors with identical adaptive loci) are introduced as a single population in the center of an $11x11$ metapopulation of cooperators, they quickly spread ([Figure 3A](#fig3)).
 However, when resident cooperators can adapt and respond to defector invasion, the situation improves dramatically, allowing
-cooperation to evade defector invasion in 91 of 160 replicate populations ([Figure 3B](#fig3)).
+cooperation to evade defector invasion in 91 of 160 replicate simulations (57%; [Figure 3B](#fig3)).
 [Figure 4](#fig4) depicts one such instance where cooperators gained an adaptation that stopped and eliminated invading defectors.
 We further highlight this process in [Figure 3C](#fig3), where an adapted cooperator genotype can rapidly invade a population of defectors.
 

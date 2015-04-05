@@ -10,7 +10,8 @@ When niche construction occurs, cooperation can indeed persist ([Figure 2A](#fig
 In our model, niche construction introduces additional selective effects that could influence the evolutionary process, leading to a more pronounced Hankshaw effect.
 However, simply raising the selective benefits provided by adaptations does not prolong cooperation ([Figure 2B](#fig2)), and indicates that niche construction plays an important role.
 
-We find that cooperator success is due to negative niche construction.
+We find that cooperator success is due to niche construction.
+Further, we find that it is specifically negative niche construction that maintains cooperation ([Figure 2C](#fig2)).
 Without adaptive opportunities, adaptation eventually slows.
 Once this occurs, cooperators face the threat of invasion by defectors that arise de novo through mutation.
 Since these defectors are equally adapted but do not bear the cost of cooperation, they are favored by selection, and quickly drive cooperators to extinction.
@@ -33,19 +34,19 @@ Arguably, this can be viewed as another instance of hitchhiking: the maladaptive
 By their very nature, public goods benefit populations by making their environment more hospitable [@west2007social].
 For example, bacteria produce a host of extracellular products that scavage soluble iron [@griffin2004cooperation], digest large proteins [@darch2012density; @diggle2007cooperation], and reduce the risk of predation [@cosson2002pseudomonas].
 While many studies have explored how the environment affects the evolution of cooperative behaviors such as the production of these public goods, relatively few have examined how the resulting selective feedbacks influence evolution as public goods modify the environment.
-In these instances, the timescale at which the environment is likely to be decoupled from the timescale at which reproduction occurs.
+In these instances, environmental changes are likely to occur on different timescales than reproduction.
 These differences can have profound effects.
 For example, a multitude of factors including protein durability [@brown2007durability; @kummerli2010molecular], diffusion [@driscoll2010theory; @allison2005cheaters], and resource availability [@zhang2013exploring; @ghoul2014experimental] influence both the rate and the degree to which public goods alter the environment.
 @lehmann2007evolution demonstrated that cooperative, niche constructing behaviors can be favored when they affect selection for future generations.
 When this occurs, conflict among contemporary kin is reduced.
 The evolutionary inertia that this creates, however, may ultimately work against cooperators.
-When public good accumulates in the environment, cooperators must decrease production to remain competitive [@kummerli2010molecular; @dumas2012cost].
+When public goods accumulate in the environment, cooperators must decrease production to remain competitive [@kummerli2010molecular; @dumas2012cost].
 This favors cooperation that occurs facultatively, perhaps by sensing the abiotic [@koestler2014bile; @bernier2011modulation] or biotic environment [@darch2012density; @brown2001cooperation].
 
 In many instances of cooperation, the environment is itself a biological entity, which can produce additional evolutionary feedbacks.
 As the host population changes, so too does selection on their symbiont populations.
 Here, evolutionary outcomes depend greatly on the degree of shared interest between the host and symbiont.
-For example, the cooperative production of virulence factors by the human pathogen *P. aeruginosa* in lung infections is harmful to those with cystic fibrosis [@harrison2007microbial].
+For example, the cooperative production of virulence factors by the human pathogen *P. aeruginosa* in lung infections is harmful to hosts with cystic fibrosis [@harrison2007microbial].
 Conversely, cooperative light production by *A. fischeri* is vital for the survival of its host, the Hawaiian bobtail squid [@ruby1996lessons].
 It was recently argued that incorporating the effects of niche construction is critical for improving our understanding of viral evolution [@hamblin2014viral] and evolution in co-infecting parasites [@hafer2015when].
 Incorporating host dynamics, co-evolution, and the feedbacks that they produce into models is likely to be equally important for gaining an understanding of how cooperative behaviors evolve in these host-symbiont settings.

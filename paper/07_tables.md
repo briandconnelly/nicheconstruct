@@ -21,5 +21,5 @@ Table: Model parameters and their value
 | $p_0$      | Initial cooperator proportion                  | 0.5           |
 | $\mu_{t}$  | Mutation rate (tolerance to new environment)   | $10^{-5}$     |
 | $d$        | Population dilution factor                     | 0.1           |
-| $T$        | Number of simulation cycles                    | 1000          |
+| $T$        | Number of simulation cycles                    | 3000          |
 

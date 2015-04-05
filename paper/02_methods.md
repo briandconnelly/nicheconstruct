@@ -7,7 +7,7 @@ Migration among neighboring populations allows more successful lineages to sprea
 
 We expand upon the model described by @HANKSHAW to allow populations to modify their local environment.
 As this process occurs, environmental changes feed back to affect selection.
-We perform simulations using this model to explore how niche construction affects this adaptation process, and whether selective feedbacks allow cooperation to be maintained.
+We perform simulations using this model to explore how niche construction affects this adaptation process and whether selective feedbacks allow cooperation to be maintained.
 
 
 ## Model Description
@@ -31,7 +31,7 @@ Individual fitness is also affected by the current state of the local environmen
 Here, we represent the "niche" implicitly based on the allelic states present in the population.
 As allelic states change, populations alter their environment in different ways, creating a unique niche.
 
-We use a form of density dependent selection to favors individuals that better match their niche.
+We use a form of density dependent selection to favor individuals that better match their niche.
 Specifically, the selective value of adaptive allele $a$ at locus $l$ increases with the number of individuals in the population that have allele $a+1$ at locus $l+1$.
 As a consequence, genotypes with sequentially increasing allelic states will tend to evolve.
 We treat both adaptive loci and allelic states as "circular": the selective value of an allele at locus $L$ is affected by the allelic composition of the population at locus 1.
@@ -41,8 +41,8 @@ This circularity is represented by the function $\beta(x,X)$, which gives the in
 $$ \beta(x, X) = \bmod_{X}(x) + 1 $$ {#eq:beta}
 
 Here, $\bmod_{X}(x)$ is the integer remainder when dividing $x$ by $X$.
-Thus, the selective value of adaptive allele $a$ at locus $l$ increases with the number of individuals that have allele $\beta(a,A)$ at locus $\beta(l, L)$.
-The slope of this increase is $\epsilon$, which specifies the intensity of niche construction.
+The selective value of adaptive allele $a$ at locus $l$ is increased by $\epsilon$ for each individual in the population that has allele $\beta(a,A)$ at locus $\beta(l, L)$.
+Thus, $\epsilon$ specifies the intensity of niche construction.
 
 Consider a genotype $g$ with the allelic state at locus $l$ given by $a_{g,l}$; the fitness of an individual with this genotype is defined as:
 
@@ -74,7 +74,7 @@ $$ S(p) = S_{min} + p (S_{max} - S_{min}) $$ {#eq:popsize}
 
 During growth, individuals compete for inclusion in the resulting population.
 Each individual's probability of success is determined by its fitness.
-The composition of a population with size $P$ and cooperator proportion $p$ after growth is multinomial with parameters and $S(p)$ and $\{\pi_1, \pi_2, \ldots, \pi_{P}\}$, where:
+The composition of a population with size $P$ and cooperator proportion $p$ after growth is multinomial with parameters $S(p)$ and $\{\pi_1, \pi_2, \ldots, \pi_{P}\}$, where:
 
 $$ \pi_i = \frac{W_{\gamma(i)}}{\sum_{j=1}^{P} W_{\gamma(j)}} $$ {#eq:prob_repr}
 
@@ -98,15 +98,15 @@ These mutations flip the allelic state, causing cooperators to become defectors 
 Our simulated environment consists of $N^2$ patches arranged as an $N \times N$ lattice, where each patch can support a population.
 After mutation, individuals emigrate to an adjacent patch at rate $m$.
 During each migration event, a single destination patch is randomly chosen with uniform probability from each source patch's Moore neighborhood, which is composed of the nearest 8 patches on the lattice.
-Because the metapopulation lattice has boundaries, patches located on an edge have smaller neighborhoods.
+Because the metapopulation lattice has boundaries, patches located on the periphery have smaller neighborhoods.
 
 
 ### Metapopulation Initialization and Simulation
 
 Metapopulations are initiated in a state that follows an environmental change, which leaves most patches empty.
 First, populations are seeded at all patches with cooperator proportion $p_{0}$ and grown to density $S(p_{0})$.
-An environmental challenge is then introduced, which subjects the population to a bottleneck.
-For each individual, the probability of survival is $\mu_{t}$, which represents the likelihood that tolerance arises via mutation.
+An environmental challenge is then introduced, which subjects all populations to a bottleneck.
+For each individual, the probability of survival is $\mu_{t}$, which represents the likelihood that tolerance to the new environmental conditions arises via mutation.
 Because individuals have not yet adapted to this new environment, the allelic state of each individual's genotype is $0$ at each adaptive locus.
 Following initialization, simulations are run for $T$ cycles, where each discrete cycle consists of population growth, mutation, and migration.
 At the end of each cycle, populations are thinned to allow for growth in the next cycle.
