@@ -17,7 +17,7 @@
 
 ## Figure 3 {#fig3}
 
-![**Niche Construction and the Evolution of Cooperation.** The proportion of cooperators present in the population is shown for the duration of simulations. Curves show the average among replicate populations, and shaded areas indicate 95% confidence intervals. (**A**) Niche construction enables cooperation to be maintained indefinitely. In the majority of populations (13/18), cooperation remained the dominant strategy. (**B**) When niche construction is removed and the fitness benefit of adaptation is increased to compensate ($\epsilon=0$, $\delta=0.6$), adapted defectors arise and drive cooperators to extinction. (**C**) Without negative niche construction, cooperation is not maintained ($A=5$).](../figures/Figure3.png)
+![**Niche Construction and the Evolution of Cooperation.** The proportion of cooperators present in each replicate population is shown for the duration of simulations. (**A**) Niche construction enables cooperation to be maintained indefinitely in 14 of 18 populations. (**B**) When niche construction is removed and the fitness benefit of adaptation is increased to compensate ($\epsilon=0$, $\delta=0.6$), adapted defectors arise and drive cooperators to extinction. (**C**) Without negative niche construction, cooperation is not maintained ($A=5$).](../figures/Figure3.png)
 
 \clearpage
 
