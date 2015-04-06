@@ -35,7 +35,7 @@ Niche construction therefore plays an important role here.
 Negative niche construction can occur in our model due to the selection for sequentially-increasing allelic states and the circular arrangement of these alleles.
 This occurs when the number of adaptive alleles ($A$) does not divide evenly into the number of adaptive loci ($L$).
 In such a case, any sequence of integers on the circular genome will always contain a break in the sequence; that is, one locus with an allele that is not one less than the allele at the next locus (see [Figure 1](#fig1)).
-Given this unavoidable mismatch, any genotype that has fixed will always favor selection for a new genotype.
+Given this unavoidable mismatch, any type that has fixed will always favor selection for a new type.
 However, if this negative niche construction is removed (by setting $L=5$, $A=5$), cooperators are again driven extinct after an initial lift in abundance ([Figure 3C](#fig3)).
 
 
@@ -46,7 +46,7 @@ The challenge is particularly threatening, as they are equally adapted, yet do n
 When isogenic defectors (i.e., defectors with identical adaptive loci) are introduced at a single patch in the center of an $11 \times 11$ population of cooperator subpopulations, they quickly spread if no mutations are allowed ([Figure 4A](#fig4)).
 However, when resident cooperators can adapt (mutations occur at adaptive loci), cooperators evade defector invasion in over half of the replicate populations ([Figure 4B](#fig4)).
 [Figure 5](#fig5) depicts one such instance where cooperators gained an adaptation that stopped and eliminated invading defectors.
-We further highlight this process in [Figure 4C](#fig4), where an adapted cooperator genotype can rapidly invade a population of defectors.
+We further highlight this process in [Figure 4C](#fig4), where an adapted cooperator can rapidly invade a population of defectors.
 
 
 ## The Rate of Niche Construction Matters
