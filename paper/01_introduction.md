@@ -21,7 +21,7 @@ As soon as the opportunities for adaptation are exhausted, cooperators are once 
 However, @HANKSHAW demonstrated that cooperation can be maintained indefinitely when frequent environmental changes produce a steady stream of new adaptive opportunities.
 Although organisms typically find themselves in dynamic environments, the nature and frequency of these changes might not ensure long-term cooperator survival.
 
-Importantly, however, organisms do not simply play passive roles in environmental change and in evolution.
+Importantly, however, organisms do more than simply experience changing environments passively.
 Through their activities, their interactions with others, and even their death, organisms constantly modify their environment.
 These changes can produce evolutionary feedback loops in which environmental change alters selection, which, in turn, alters the distribution of phenotypes and their corresponding influence on the environment [@odling2003niche].
 Because of these feedback loops, populations may find themselves continually chasing beneficial mutations as their adaptive landscape perpetually shifts beneath them.
@@ -32,4 +32,8 @@ We first use this model to address whether niche construction can extend the Han
 We then focus on how niche construction influences outcomes when isolated cooperator populations encounter populations of defectors, either through migration or through mutations that inevitably produce defectors that share the same adaptations.
 Finally, niche construction has frequently been shown to increase diversity [@TODO].
 We explore whether this diversity helps or hinders the evolution of cooperation.
+
+We find that niche construction can promote and sustain cooperation indefinitely.
+However, the niche construction must have a negative component.
+Furthermore, we show that the level of diversity promoted by this negative feedback must be sufficiently low to favor the evolution of cooperation.
 

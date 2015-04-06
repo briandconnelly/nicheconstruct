@@ -18,8 +18,8 @@ Table: Model parameters and their value
 | $\mu_{c}$  | Mutation rate (cooperation)                    | $10^{-5}$     |
 | $N^2$      | Number of metapopulation sites                 | 625           |
 | $m$        | Migration rate                                 | 0.05          |
+| $d$        | Population dilution factor                     | 0.1           |
 | $p_0$      | Initial cooperator proportion                  | 0.5           |
 | $\mu_{t}$  | Mutation rate (tolerance to new environment)   | $10^{-5}$     |
-| $d$        | Population dilution factor                     | 0.1           |
 | $T$        | Number of simulation cycles                    | 3000          |
 
