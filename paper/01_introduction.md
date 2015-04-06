@@ -24,12 +24,16 @@ Although organisms typically find themselves in dynamic environments, the nature
 Importantly, however, organisms do more than simply experience changing environments passively.
 Through their activities, their interactions with others, and even their death, organisms constantly modify their environment.
 These changes can produce evolutionary feedback loops in which environmental change alters selection, which, in turn, alters the distribution of phenotypes and their corresponding influence on the environment [@odling2003niche].
-Because of these feedback loops, populations may find themselves continually chasing beneficial mutations as their adaptive landscape perpetually shifts beneath them.
+The nature of this feedback can have dramatic evolutionary consequences.
+One critical distinction is whether the constructing phenotypetype or some other phenotype is most adapted in the constructed environment.
+Under positive niche construction, selection favoring the constructor is reinforced, and evolution eventually stagnates.
+Under negative niche construction, the constructed environment favors a different phenotype than the constructor.
+In this latter case, populations find themselves continually chasing beneficial mutations as their adaptive landscape perpetually shifts.
 
 Here, we explore whether the selective feedbacks that result from niche construction can prolong cooperation.
 We build upon the model presented by @HANKSHAW to allow populations to modify their local environments in ways that affect fitness.
-We first use this model to address whether niche construction can extend the Hankshaw effect, allowing cooperation to continue to hitchhike as populations continually adapt.
-We then focus on how niche construction influences outcomes when isolated cooperator populations encounter populations of defectors, either through migration or through mutations that inevitably produce defectors that share the same adaptations.
+We use this model to address whether niche construction can extend the Hankshaw effect, allowing cooperation to continue to hitchhike as populations continually adapt.
+As part of this, we focus on how niche construction influences local interactions when isolated cooperator populations encounter populations of defectors, either through migration or through mutations that inevitably produce defectors that share the same adaptations.
 Finally, niche construction has frequently been shown to increase diversity [@TODO].
 We explore whether this diversity helps or hinders the evolution of cooperation.
 
