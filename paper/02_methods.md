@@ -20,9 +20,9 @@ A binary allele at the first locus (here, locus zero) determines whether that in
 Cooperation is independent from adaptation to the environment.
 The first $L$ loci are *adaptive loci*, and are each occupied by $0$ or a value from the set $\{1, 2, \ldots, A\}$.
 Allele $0$ represents a lack of adaptation, while a non-zero allele represents one of the $A$ possible adaptations at that locus.
+These non-zero alleles signify adaptations to the external environment, which are not affected by other individuals or the local niche (see below).
 Adaptations confer a fitness benefit $\delta$, regardless of which non-zero allele is present.
 We assume $\delta > c$, which allows a minimally adapted cooperator to recoup the cost of cooperation and gain a fitness advantage.
-The benefits that these adaptations engender are purely exogenous, and are not affected by the other individuals or the state of the environment.
 
 
 ### Niche Construction and Selective Feedbacks
@@ -58,7 +58,7 @@ I(a) =
 \end{cases}
 $$ {#eq:IA}
 
-Thus, an individual's fitness is determined both exogenously by adaptation ($\delta$) and endogenously by its niche ($\epsilon$).
+Thus, an individual's fitness is determined both by adaptations to the external environment ($\delta$) and adaptations to its constructed environment ($\epsilon$).
 
 Because mutations occur randomly (see below), each subpopulation will evolve different consecutive sequences.
 These different sequences represent the unique niches constructed by subpopulations.
