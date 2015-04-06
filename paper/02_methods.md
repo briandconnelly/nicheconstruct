@@ -7,7 +7,7 @@ Migration among neighboring populations allows more successful lineages to sprea
 
 In our expanded model, populations modify their local environment.
 As this process occurs, environmental changes feed back to affect selection.
-We perform simulations using this model to explore how niche construction affects this adaptation process and whether selective feedbacks allow cooperation to be maintained.
+We perform simulations using this model to explore how niche construction affects this adaptation process and whether selective feedbacks enable cooperation to be maintained.
 
 
 ## Model Description
@@ -66,7 +66,7 @@ These different sequences represent the unique niches constructed by populations
 
 ### Population Growth and the Benefit of Cooperation
 
-Cooperation benefits a population by allowing it to reach greater density.
+Cooperation benefits a population by enabling it to reach greater density.
 This benefit affects all individuals equally and accumulates linearly with the proportion of cooperators in the population.
 If $p$ is the proportion of cooperators in a population at the beginning of a growth cycle, then that population reaches the following size:
 

@@ -2,7 +2,7 @@
 # Discussion
 
 Despite their negative effects, deleterious traits can rise in abundance due to genetic linkage with other traits that are strongly favored by selection [@maynardsmith1974hitch].
-In a process termed the "Hankshaw effect", @HANKSHAW recently demonstrated that cooperative behaviors can prolong their existence by increasing their likelihood of hitchhiking with a beneficial trait.
+In a process termed the "Hankshaw effect", @HANKSHAW recently demonstrated that cooperation can prolong its existence by increasing the likelihood of hitchhiking with a beneficial trait.
 While this process does favor cooperation in the short term, it eventually reaches a dead end; when the opportunities for adaptation are exhausted, and cooperators can no longer hitchhike, they face extinction.
 In this work, we have considered whether niche construction might serve to perpetually generate new adaptive opportunities, and thus favor cooperation indefinitely.
 
@@ -14,7 +14,7 @@ We find that cooperator success is due to niche construction.
 Further, we find that it is specifically negative niche construction that maintains cooperation ([Figure 3C](#fig3)).
 Without adaptive opportunities, adaptation eventually grinds to a halt.
 Once this occurs, cooperators face the threat of invasion by defectors that arise de novo through mutation.
-Since these defectors are equally adapted but do not bear the cost of cooperation, they are favored by selection, and quickly drive cooperators to extinction.
+Since these defectors are equally adapted but do not bear the cost of cooperation, they quickly drive cooperators to extinction.
 Because every genotype constructs an environment in which a different genotype is more fit, negative niche construction creates continual adaptive opportunities.
 These opportunities can allow cooperators to resist invasion by defectors, even when defectors are equally adapted ([Figure 4B](#fig4)).
 Here we observe another facet of the Hankshaw effect: because populations of cooperators are larger, they are better able to respond to the adaptive opportunities that result from negative niche construction.
@@ -33,7 +33,7 @@ Arguably, this can be viewed as another instance of hitchhiking: the maladaptive
 
 By their very nature, public goods benefit populations by making their environment more hospitable [@west2007social].
 For example, bacteria produce a host of extracellular products that scavage soluble iron [@griffin2004cooperation], digest large proteins [@darch2012density; @diggle2007cooperation], and reduce the risk of predation [@cosson2002pseudomonas].
-While many studies have explored how the environment affects the evolution of cooperative behaviors such as the production of these public goods, relatively few have examined how the resulting selective feedbacks influence evolution as public goods modify the environment.
+While many studies have focused on how the environment affects the evolution of cooperative behaviors such as the production of these public goods, relatively few have examined how the resulting selective feedbacks influence evolution as public goods modify the environment.
 In these instances, environmental changes are likely to occur on different timescales than reproduction.
 These differences can have profound effects.
 For example, a multitude of factors including protein durability [@brown2007durability; @kummerli2010molecular], diffusion [@driscoll2010theory; @allison2005cheaters], and resource availability [@zhang2013exploring; @ghoul2014experimental] influence both the rate and the degree to which public goods alter the environment.
@@ -43,7 +43,7 @@ The evolutionary inertia that this creates, however, may ultimately work against
 When public goods accumulate in the environment, cooperators must decrease production to remain competitive [@kummerli2010molecular; @dumas2012cost].
 This favors cooperation that occurs facultatively, perhaps by sensing the abiotic [@koestler2014bile; @bernier2011modulation] or biotic environment [@darch2012density; @brown2001cooperation].
 
-In many instances of cooperation, the environment is itself a biological entity, which can produce additional evolutionary feedbacks.
+In many instances where cooperation occurs, the environment is itself a biological entity, which can introduce additional evolutionary feedbacks.
 As the host population changes, so too does selection on their symbiont populations.
 Here, evolutionary outcomes depend greatly on the degree of shared interest between the host and symbiont.
 For example, the cooperative production of virulence factors by the human pathogen *P. aeruginosa* in lung infections is harmful to hosts with cystic fibrosis [@harrison2007microbial].

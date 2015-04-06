@@ -15,7 +15,7 @@ The tragedy of the commons can be deferred if a cooperator, by chance, wins the 
 
 @HANKSHAW recently demonstrated that in spatially-structured populations, the "Hankshaw effect" can give cooperators a substantial leg up on defectors in an adaptive race.
 When cooperation increases local population density, the likelihood of acquiring beneficial mutations is also increased.
-The cooperative trait can rise in abundance by hitchhiking along with these adaptations.
+The cooperative trait can then rise in abundance by hitchhiking along with these adaptations.
 Nevertheless, this advantage is fleeting.
 As soon as the opportunities for adaptation are exhausted, cooperators are once again at a selective disadvantage against equally-adapted defectors that arise via mutation.
 However, @HANKSHAW demonstrated that cooperation can be maintained indefinitely when frequent environmental changes produce a steady stream of new adaptive opportunities.
@@ -32,7 +32,7 @@ In this latter case, populations find themselves continually chasing beneficial 
 
 Here, we explore whether the selective feedbacks that result from niche construction can prolong cooperation.
 We build upon the model presented by @HANKSHAW to allow populations to modify their local environments in ways that affect fitness.
-We use this model to address whether niche construction can extend the Hankshaw effect, allowing cooperation to continue to hitchhike as populations continually adapt.
+We use this model to address whether niche construction can extend the Hankshaw effect, enabling cooperation to continue to hitchhike as populations continually adapt.
 As part of this, we focus on how niche construction influences local interactions when isolated cooperator populations encounter populations of defectors, either through migration or through mutations that inevitably produce defectors that share the same adaptations.
 Finally, niche construction has frequently been shown to increase diversity [@TODO].
 We explore whether this diversity helps or hinders the evolution of cooperation.
