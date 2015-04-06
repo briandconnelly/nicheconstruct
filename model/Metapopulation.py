@@ -278,18 +278,12 @@ def assign_fitness(M, Lmin, Lmax, num_stress_alleles, base_fitness,
                                                   axis=0, arr=stress_alleles)
                 allele_dist[0] = np.zeros(allele_dist.shape[1])
 
-                # Add gamma times the number of individuals with matching first allele
-                # TODO: remove this. Benefit of first allelic state is number at last locus that is 1 less.
-                #Px.Fitness += allele_dist[stress_alleles[stress_columns[0]], 0] * benefit_ordered
-
-                # Add gamma times the number of individuals with increasing allele value
-                #stress_alleles_next = (1 + (stress_alleles % num_stress_alleles)).values[:,:-1]
-                #allele_dist_next = allele_dist[:,1:]
-                #Px.Fitness += allele_dist_next[stress_alleles_next, range(Lmax-1)].sum(axis=1) * benefit_ordered
-
+                # Get the next allelic state for everything and the distribution of alleles at the next locus (here we "roll" the matrix representing the allelic states in the population)
                 stress_alleles_next = (1 + (stress_alleles % num_stress_alleles)).values
                 allele_dist_next = np.roll(a=allele_dist, shift=-1, axis=1)
 
+                # Here, the fitness at each allele is proportional to the number of individuals with allele a+1 at the next locus.
+                # NOTE: this is slightly different than described in the text, where this relationship is described as the fitness of an allele increases with the number of individuals with allele a-1 at the previous locus
                 Px.Fitness += allele_dist_next[stress_alleles_next, range(Lmax)].sum(axis=1) * benefit_ordered
 
         M.loc[M.Population==popid, 'Fitness'] = Px.Fitness

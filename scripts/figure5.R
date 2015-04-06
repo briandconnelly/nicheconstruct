@@ -8,6 +8,7 @@ library(ggplot2bdc)
 source('formatting.R')
 
 target_frames <- c(0,272,325,500)
+color_cadapt <- '#1F77B4'
 
 genotype_colors <- c('C: [1 2 3 4 5]'= color_cooperator,
                      'C: [1 2 3 4 6]'= color_cadapt,
@@ -22,6 +23,8 @@ genotype_colors <- c('C: [1 2 3 4 5]'= '#1f78b4',
                      'D: [1 2 3 4 5]'= '#b2df8a')
 
 # a6cee3
+
+# 6DCCDA # 1F77B4
 
 fig5data <- read.csv('../data/defector_invade_matched_sample.csv.bz2') %>% filter(Time %in% target_frames)
 fig5data$Cooperator <- fig5data$Cooperator == 'True'
@@ -39,7 +42,7 @@ fig5 <- ggplot(data=fig5data, aes(x=X, y=Y, color=FullGenotype, fill=FullGenotyp
     scale_fill_manual(guide=FALSE, values=genotype_colors) +
     theme_bdc_lattice_population() +
     theme(strip.background = element_blank()) +
-    theme(strip.text = element_text(size=rel(0.6), vjust=0.2, color='grey30')) +
+    theme(strip.text = element_text(size=rel(0.8), vjust=0.2, color='grey30')) +
     theme(panel.margin = grid::unit(0.25, 'lines')) +
     theme(panel.border = element_rect(fill='transparent', color=NA))
 fig5 <- rescale_square(plot=fig5)
