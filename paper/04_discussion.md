@@ -6,7 +6,7 @@ In a process termed the "Hankshaw effect", @HANKSHAW recently demonstrated that 
 While this process does favor cooperation in the short term, it eventually reaches a dead end; when the opportunities for adaptation are exhausted, and cooperators can no longer hitchhike, they face extinction.
 In this work, we have considered whether niche construction might serve to perpetually generate new adaptive opportunities, and thus favor cooperation indefinitely.
 
-When niche construction occurs, cooperation can indeed persist ([Figure 3A](#fig3)).
+When niche construction occurs, cooperation can indeed persist ([Figure 2C](#fig2)).
 In our model, niche construction introduces additional selective effects that could influence the evolutionary process, leading to a more pronounced Hankshaw effect.
 However, simply raising the selective benefits provided by adaptations does not prolong cooperation ([Figure 3B](#fig3)), and indicates that niche construction plays an important role.
 

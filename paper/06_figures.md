@@ -10,7 +10,7 @@
 
 ## Figure 2 {#fig2}
 
-![**Adaptation, Hitchhiking, and the Evolution of Cooperation.** The proportion of cooperators present in the population is shown for the duration of simulations. Curves show the average among replicate populations, and shaded areas indicate 95% confidence intervals. Unless otherwise noted, parameter values are listed in [Table 1](#tables). (**A**) Without any opportunity to adapt ($L$, the number of adaptive loci, is zero), cooperation is quickly lost. (**B**) When adaptation can occur ($L=5$), but populations do not alter their environment ($\epsilon$, the intensity of niche construction, is zero), cooperation hitchhikes along with adaptions, allowing cooperators to temporarily rise in abundance before eventually going extinct.](../figures/Figure2.png)
+![**Adaptation, Hitchhiking, and the Evolution of Cooperation.** The proportion of cooperators present in the population is shown for the duration of simulations. Curves show the average among replicate populations, and shaded areas indicate 95% confidence intervals. Unless otherwise noted, parameter values are listed in [Table 1](#tables). (**A**) Without any opportunity to adapt ($L$, the number of adaptive loci, is zero), cooperation is quickly lost. (**B**) When adaptation can occur ($L=5$), but populations do not alter their environment ($\epsilon$, the intensity of niche construction, is zero), cooperation hitchhikes along with adaptions, allowing cooperators to temporarily rise in abundance before eventually going extinct. (**C**) Niche construction enables cooperation to be maintained indefinitely. In the majority of populations (13/18), cooperation remained the dominant strategy. Individual populations are shown in Figure 3A.](../figures/Figure2.png)
 
 \clearpage
 

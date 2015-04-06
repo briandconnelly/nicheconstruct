@@ -18,7 +18,7 @@ When there are opportunities for adaptation ($L=5$) but no niche construction ($
 Here, larger cooperator subpopulations can more quickly adapt to their environment as before.
 As previously described by @HANKSHAW, however, cooperation is subsequently lost once populations become fully adapted to their environment.
 Once this has occurred, adapted defectors that arise via mutation at the cooperation locus have a selective advantage and displace cooperators.
-However, when niche construction creates selective feedbacks, cooperation persists in over 2/3 of the replicate populations ([Figure 3A](#fig3)).
+However, when niche construction creates selective feedbacks, cooperation persists in over 2/3 of the replicate populations ([Figure 2C](#fig2)).
 
 
 ## Fitness Increases Alone do not Support Persisting Cooperation
