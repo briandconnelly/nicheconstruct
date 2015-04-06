@@ -19,6 +19,7 @@ Here, larger cooperator subpopulations can more quickly adapt to their environme
 As previously described by @HANKSHAW, however, cooperation is subsequently lost once populations become fully adapted to their environment.
 Once this has occurred, adapted defectors that arise via mutation at the cooperation locus have a selective advantage and displace cooperators.
 However, when niche construction creates selective feedbacks, cooperation persists in over 2/3 of the replicate populations ([Figure 2C](#fig2)).
+We see in [Figure 3A](#fig3) that despite oscillations, cooperation is maintained at high levels in these populations.
 
 
 ## Fitness Increases Alone do not Support Persisting Cooperation
@@ -42,7 +43,7 @@ However, if this negative niche construction is removed (by setting $L=5$, $A=5$
 
 The adaptation resulting from selective feedbacks can limit invasion by defectors, which arise either through immigration from neighboring patches or through mutation from a cooperator ancestor.
 The challenge is particularly threatening, as they are equally adapted, yet do not incur the cost of cooperation.
-When homologous defectors (i.e., defectors with identical adaptive loci) are introduced at a single patch in the center of an $11 \times 11$ population of cooperator subpopulations, they quickly spread if no mutations are allowed ([Figure 4A](#fig4)).
+When isogenic defectors (i.e., defectors with identical adaptive loci) are introduced at a single patch in the center of an $11 \times 11$ population of cooperator subpopulations, they quickly spread if no mutations are allowed ([Figure 4A](#fig4)).
 However, when resident cooperators can adapt (mutations occur at adaptive loci), cooperators evade defector invasion in over half of the replicate populations ([Figure 4B](#fig4)).
 [Figure 5](#fig5) depicts one such instance where cooperators gained an adaptation that stopped and eliminated invading defectors.
 We further highlight this process in [Figure 4C](#fig4), where an adapted cooperator genotype can rapidly invade a population of defectors.
@@ -50,5 +51,5 @@ We further highlight this process in [Figure 4C](#fig4), where an adapted cooper
 
 ## The Rate of Niche Construction Matters
 
-TODO: defector can invade a diverse population of cooperators, while adaptation to a matching defector can't spread to stop invasion.
+TODO: defector can invade a diverse population of cooperators, while adaptation to an isogenic defector can't spread to stop invasion.
 

@@ -17,7 +17,9 @@ Once this occurs, cooperators face the threat of invasion by defectors that aris
 Since these defectors are equally adapted but do not bear the cost of cooperation, they quickly drive cooperators to extinction.
 Because every genotype constructs an environment in which a different genotype is more fit, negative niche construction creates continual adaptive opportunities.
 These opportunities can allow cooperators to resist invasion by defectors, even when defectors are equally adapted ([Figure 4B](#fig4)).
+It is these recurring cycles of invasion and adaptation that underlie the oscillations in cooperator populations that we see in [Figure 3A](#fig3).
 Here we observe another facet of the Hankshaw effect: because populations of cooperators are larger, they are better able to respond to the adaptive opportunities that result from negative niche construction.
+When cooperators are not able to stochastically gain adaptations, defectors invade, and the cycle is broken.
 
 TODO: diversity results
 TODO: references about diversity
