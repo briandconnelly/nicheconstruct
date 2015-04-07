@@ -10,17 +10,17 @@ One such factor involves non-random social interaction, in which cooperators ben
 This can occur when cooperators are clustered together in spatially-structured populations [@kudzalfick2011high; @fletcher2009simple; @nadell2010emergence] or when cooperators use communication [@darch2012density; @brown2001cooperation] or other cues [@gardner2010greenbeards; @sinervo2006selfrecognition; @veelders2010structural] to cooperate conditionally with kin.
 Cooperation can also be bolstered by pleiotropic connections to personal benefits [@dandekar2012bacterial; @foster2004pleiotropy] or through association with alleles encoding self-benefitting traits [@asfahl2015nonsocial].
 In these cases, the alleles may provide private benefits that are completely independent from the public benefits of cooperation.
-In an asexual population of cooperators and defectors, this sets the stage for an "adaptive race" in which both types vie for the first highly beneficial adaptation [@waite2012adaptation; @morgan2012selection].
+In asexual populations of cooperators and defectors, this sets the stage for an "adaptive race" in which both types vie for the first highly beneficial adaptation [@waite2012adaptation; @morgan2012selection].
 The tragedy of the commons can be deferred if a cooperator, by chance, wins the adaptive race.
 
-@HANKSHAW recently demonstrated that in spatially-structured populations, the "Hankshaw effect" can give cooperators a substantial leg up on defectors in an adaptive race.
+@HANKSHAW recently showed that in spatially-structured populations, the "Hankshaw effect" can give cooperators a substantial leg up on defectors in an adaptive race.
 This advantage is reminiscent of Sissy Hankshaw, a fictional character in Tom Robbins' *Even Cowgirls Get the Blues*, whose oversized thumbs---which were otherwise an impairment---made her a prolific hitchhiker.
 Similarly, cooperation is costly, but it increases local population density.
 As a result, cooperators are more likely to acquire beneficial mutations.
 By hitchhiking along with these adaptations, cooperation can then rise in abundance.
 Nevertheless, this advantage is fleeting.
 As soon as the opportunities for adaptation are exhausted, cooperators are once again at a selective disadvantage against equally-adapted defectors that arise via mutation.
-However, @HANKSHAW demonstrated that cooperation can be maintained indefinitely when frequent environmental changes produce a steady stream of new adaptive opportunities.
+However, @HANKSHAW also demonstrated that cooperation can be maintained indefinitely when frequent environmental changes produce a steady stream of new adaptive opportunities.
 Although organisms typically find themselves in dynamic environments, the nature and frequency of these changes might not ensure long-term cooperator survival.
 
 Importantly, however, organisms do more than simply experience changing environments passively.
@@ -28,12 +28,12 @@ Through their activities, their interactions with others, and even their deaths,
 These changes can produce evolutionary feedback loops in which environmental change alters selection, which, in turn, alters the distribution of types and their corresponding influence on the environment [@odling2003niche].
 The nature of this feedback can have dramatic evolutionary consequences.
 One critical distinction is whether the constructing type or some other type is most adapted in the resulting environment.
-Under positive niche construction, selection favors the constructor, and evolution stagnates.
+Under positive niche construction, selection favors the constructor, and evolution stagnates as this type fixes.
 Under negative niche construction, selection favors a type other than the constructor.
 In this latter case, populations find themselves continually chasing beneficial mutations as their adaptive landscape perpetually shifts.
 
 Here, we show that the selective feedbacks that result from niche construction can maintain cooperation indefinitely.
 We find that it is specifically negative niche construction that is responsible for this result because of the adaptive opportunities that it produces.
 Furthermore, we show that the rate at which niche construction occurs is also crucial.
-These results indicate that cooperators can ensure their survival when they play an active role in the evolutionary process.
+These results indicate that cooperators can ensure their survival when they play an active role in their own evolution.
 

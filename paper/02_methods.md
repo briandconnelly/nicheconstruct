@@ -64,7 +64,7 @@ Thus, an individual's fitness is determined both by adaptations to the external 
 
 ### Population Growth and the Benefit of Cooperation
 
-Cooperation benefits a subpopulation by enabling it to reach greater density.
+Cooperation enables a subpopulation to reach a greater density.
 This benefit affects all individuals equally and accumulates linearly with the proportion of cooperators in the subpopulation.
 If $p$ is the proportion of cooperators present at the beginning of a growth cycle, then that subpopulation reaches the following size:
 
