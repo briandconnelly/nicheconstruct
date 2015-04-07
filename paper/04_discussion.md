@@ -22,25 +22,38 @@ When stochastic mutations do not confer these adaptations, defectors invade, and
 
 **TODO: the rate of niche construction is crucial** 
 
-In our model, cooperation and niche construction are orthogonal, which allows us to focus on hitchhiking.
-However, the form of cooperation used in this model could itself be seen as a niche constructing behavior.
-Explicitly modeling this cooperative behavior, which is akin to the production of public goods, would likely yield additional insights into the relationship between cooperation and niche construction.
-For example, previous work has shown that niche construction can favor deleterious alleles [@laland1999evolutionary; @laland1996evolutionary].
-Cooperation, especially in competition against equally-adapted defectors, can be considered deleterious, so introducing selective feedbacks from cooperation could further bolster cooperation.
-@vandyken2012origins showed that when two cooperative behaviors co-evolve and niche construction feedbacks benefit the other type, niche construction can increasingly favor these traits, which were otherwise disfavored when alone.
-Arguably, this can be viewed as another instance of hitchhiking: the maladaptive form of cooperation is maintained by association with the adaptive form. However, negative niche construction then reverses these roles and perpetuates the cycle.
 
-By their very nature, public goods benefit populations by making their environment more hospitable [@west2007social].
+## NC As cooperation
+
+In our model, cooperation is orthogonal to niche construction, which allows us to focus on hitchhiking.
+However, by increasing the size of the local patch, this form of cooperation could itself be seen as a niche constructing behavior.
+Previous studies have more directly explored how niche construction and cooperation interact.
+@lehmann2007evolution showed that cooperation can be favored when niche construction decoupled kin competition from kin selection in spatially-structured populations.
+Perhaps more similar our work, @vandyken2012origins demonstrated that when two negative niche constructing cooperative behaviors co-evolve, selection can increasingly favor these traits, which were otherwise disfavored when alone. 
+In that model, "reciprocal niche construction" occurred when the negative feedback created by one strategy positively influenced selection on the other, creating a perpetual cycle that maintained these two forms of cooperation.
+Arguably, this can be viewed as an instance of hitchhiking: the currently-maladaptive form of cooperation is maintained by association with the adaptive form.
+Outside of the context of cooperation, a few studies have shown that niche construction can allow deleterious alleles to be maintained [@laland1999evolutionary; @laland1996evolutionary].
+However, cooperation, especially in competition against equally-adapted defectors, can be considered deleterious.
+
+
+## Timescales
+
+In the model presented by @lehmann2007evolution, the selective feedbacks produced by the cooperative, niche-constructing behavior only affected future generations.
+Because of this, kin competition was reduced, and cooperation instead benefitted descendants.
+Other studies, while not focusing on cooperation, have similarly shown that the timescales on which niche construction feedbacks occur can strongly influence evolutionary outcomes [@laland1999evolutionary; @laland1996evolutionary].
+This perspective is likely to be crucial for understanding the evolution of cooperative behaviors like the production of public goods.
+
 For example, bacteria produce a host of extracellular products that scavage soluble iron [@griffin2004cooperation], digest large proteins [@darch2012density; @diggle2007cooperation], and reduce the risk of predation [@cosson2002pseudomonas].
 While many studies have focused on how the environment affects the evolution of cooperative behaviors such as the production of these public goods, relatively few have examined how the resulting selective feedbacks influence evolution as public goods modify the environment.
 In these instances, environmental changes are likely to occur on different timescales than reproduction.
 These differences can have profound effects.
 For example, a multitude of factors including protein durability [@brown2007durability; @kummerli2010molecular], diffusion [@driscoll2010theory; @allison2005cheaters], and resource availability [@zhang2013exploring; @ghoul2014experimental] influence both the rate and the degree to which public goods alter the environment.
-@lehmann2007evolution demonstrated that cooperative, niche constructing behaviors can be favored when they affect selection for future generations.
-When this occurs, conflict among contemporary kin is reduced.
-The evolutionary inertia that this creates, however, may ultimately work against cooperators.
-When public goods accumulate in the environment, cooperators must decrease production to remain competitive [@kummerli2010molecular; @dumas2012cost].
+While @lehmann2007evolution showed that cooperation was favored when selective feedbacks act over longer timescales, niche construction may hinder cooperation when selection is more quickly altered.
+For example, when public goods accumulate in the environment, cooperators must decrease production to remain competitive [@kummerli2010molecular; @dumas2012cost].
 This favors cooperation that occurs facultatively, perhaps by sensing the abiotic [@koestler2014bile; @bernier2011modulation] or biotic environment [@darch2012density; @brown2001cooperation].
+
+
+## Host Symbiont
 
 In many instances where cooperation occurs, the environment is itself a biological entity, which can introduce additional evolutionary feedbacks.
 As the host population changes, so too does selection on their symbiont populations.

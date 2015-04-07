@@ -88,6 +88,7 @@ At the binary cooperation locus, mutations occur at rate $\mu_{c}$.
 These mutations flip the allelic state, causing cooperators to become defectors and vice versa.
 Mutations occur at rate $\mu_{a}$ at each adaptive locus.
 These mutations replace the existing allele with a random selection from the set $\{0\} \cup \{1, 2, \ldots, A\}$.
+Because mutations are stochastic, the allelic sequences that evolve depend on which allele arises first and at which locus.
 
 
 ### Migration
