@@ -24,22 +24,16 @@ However, @HANKSHAW demonstrated that cooperation can be maintained indefinitely 
 Although organisms typically find themselves in dynamic environments, the nature and frequency of these changes might not ensure long-term cooperator survival.
 
 Importantly, however, organisms do more than simply experience changing environments passively.
-Through their activities, their interactions with others, and even their death, organisms constantly modify their environment.
+Through their activities, their interactions with others, and even their deaths, organisms constantly modify their environment.
 These changes can produce evolutionary feedback loops in which environmental change alters selection, which, in turn, alters the distribution of types and their corresponding influence on the environment [@odling2003niche].
 The nature of this feedback can have dramatic evolutionary consequences.
-One critical distinction is whether the constructing type or some other type is most adapted in the constructed environment.
-Under positive niche construction, selection favoring the constructor is reinforced, and evolution eventually stagnates.
-Under negative niche construction, the constructed environment favors a different type than the constructor.
+One critical distinction is whether the constructing type or some other type is most adapted in the resulting environment.
+Under positive niche construction, selection favors the constructor, and evolution stagnates.
+Under negative niche construction, selection favors a type other than the constructor.
 In this latter case, populations find themselves continually chasing beneficial mutations as their adaptive landscape perpetually shifts.
 
-Here, we explore whether the selective feedbacks that result from niche construction can prolong cooperation.
-We build upon the model presented by @HANKSHAW to allow populations to modify their local environments in ways that affect fitness.
-We use this model to address whether niche construction can extend the Hankshaw effect, enabling cooperation to continue to hitchhike as populations continually adapt.
-As part of this, we focus on how niche construction influences local interactions when isolated cooperator populations encounter populations of defectors, either through migration or through mutations that inevitably produce defectors that share the same adaptations.
-Finally, niche construction has frequently been shown to increase diversity [@TODO].
-We explore whether this diversity helps or hinders the evolution of cooperation.
-
-We find that niche construction can promote and sustain cooperation indefinitely.
-However, the niche construction must have a negative component.
-Furthermore, we show that the level of diversity promoted by this negative feedback must be sufficiently low to favor the evolution of cooperation.
+Here, we show that the selective feedbacks that result from niche construction can maintain cooperation indefinitely.
+We find that it is specifically negative niche construction that is responsible for this result because of the adaptive opportunities that it produces.
+Furthermore, we show that the rate at which niche construction occurs is also crucial.
+These results indicate that cooperators can ensure their survival when they play an active role in the evolutionary process.
 

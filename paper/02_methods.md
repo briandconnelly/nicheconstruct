@@ -5,9 +5,9 @@ Building upon @HANKSHAW, we develop an individual-based model in which cooperato
 Through mutations, individuals gain adaptations to their environment, which increase reproductive fitness, and allow those lineages to rise in abundance.
 Migration among neighboring subpopulations allows more successful lineages to spread.
 
-In our expanded model, subpopulations modify their local environment.
+In our expanded model, subpopulations additionally modify their local environment.
 As this process occurs, environmental changes feed back to affect selection.
-We perform simulations using this model to explore how niche construction affects this adaptation process and whether selective feedbacks enable cooperation to be maintained.
+We explore how niche construction affects this process of adaptation and whether cooperation can be maintained because of selective feedbacks.
 
 
 ## Model Description
@@ -18,9 +18,9 @@ Each individual has a haploid genome with $L + 1$ loci (see [Table 1](#tables) f
 Different alleles at each locus are represented by different integers.
 A binary allele at the first locus (here, locus zero) determines whether that individual is a cooperator ($1$), which carries fitness cost $c$, or a defector ($0$).
 Cooperation is independent from adaptation to the environment.
-The first $L$ loci are *adaptive loci*, and are each occupied by $0$ or a value from the set $\{1, 2, \ldots, A\}$.
+The remaining $L$ loci are *adaptive loci*, and are each occupied by $0$ or a value from the set $\{1, 2, \ldots, A\}$.
 Allele $0$ represents a lack of adaptation, while a non-zero allele represents one of the $A$ possible adaptations at that locus.
-These non-zero alleles signify adaptations to the external environment, which are not affected by other individuals or the local niche (see below).
+These non-zero alleles signify adaptations to the external environment that are not affected by other individuals or the local niche.
 Adaptations confer a fitness benefit $\delta$, regardless of which non-zero allele is present.
 We assume $\delta > c$, which allows a minimally adapted cooperator to recoup the cost of cooperation and gain a fitness advantage.
 
@@ -31,7 +31,7 @@ Individual fitness is also affected by the current state of the local environmen
 Here, we represent the "niche" implicitly based on the allelic states present in the subpopulation.
 As allelic states change, subpopulations alter aspects of their environment, creating a unique niche.
 
-We use a form of density dependent selection to favor individuals that better match their niche.
+Niche construction takes the form of density dependent selection, and individuals evolve to better match their niche by a second form of adaptation.
 Specifically, the selective value of adaptive allele $a$ at locus $l$ increases with the number of individuals in the subpopulation that have allele $a-1$ at locus $l-1$.
 As a consequence, genotypes with sequentially increasing allelic states will tend to evolve.
 We treat both adaptive loci and allelic states as "circular": the selective value of an allele at locus 1 is affected by the allelic composition of the subpopulation at locus $L$.
@@ -46,7 +46,7 @@ Thus, $\epsilon$ specifies the intensity of niche construction.
 
 Consider a genotype $g$ with the allelic state at locus $l$ given by $a_{g,l}$; the fitness of an individual with this genotype is defined as:
 
-$$ W_{g} = z - \underbrace{c a_{g,0}}_{\text{cooperation}} + \underbrace{\delta \sum_{l=1}^{L} I(a_{g,l})}_{\text{adaptation to external env.}} + \underbrace{\epsilon \sum_{l=1}^{L} n(\beta(a_{g,l}, A), \beta(l, L))}_{\text{adaptation to constructed env.}} $$ {#eq:fitness}
+$$ W_{g} = z - \underbrace{c a_{g,0}}_{{\substack{\text{cost of} \\ \text{cooperation}}}} + \underbrace{\delta \sum_{l=1}^{L} I(a_{g,l})}_{\substack{\text{adaptation to} \\ \text{external environment}}} + \underbrace{\epsilon \sum_{l=1}^{L} n(\beta(a_{g,l}, A), \beta(l, L))}_{\substack{\text{adaptation to} \\ \text{constructed environment}}} $$ {#eq:fitness}
 
 where $z$ is a baseline fitness and $I(a)$ indicates whether a given adaptive allele is non-zero:
 
@@ -59,9 +59,7 @@ I(a) =
 $$ {#eq:IA}
 
 Thus, an individual's fitness is determined both by adaptations to the external environment ($\delta$) and adaptations to its constructed environment ($\epsilon$).
-
-Because mutations occur randomly (see below), each subpopulation will evolve different consecutive sequences.
-These different sequences represent the unique niches constructed by subpopulations.
+[Figure 1](#fig1) illustrates the effects of these two components.
 
 
 ### Population Growth and the Benefit of Cooperation
