@@ -6,7 +6,7 @@ In a process termed the "Hankshaw effect", @HANKSHAW recently demonstrated that 
 While this process does favor cooperation in the short term, it eventually reaches a dead end; when the opportunities for adaptation are exhausted, and cooperators can no longer hitchhike, they face extinction.
 In this work, we have considered whether niche construction might serve to perpetually generate new adaptive opportunities, and thus favor cooperation indefinitely.
 
-When niche construction occurs, cooperation can indeed persist ([Figure 2C](#fig2)).
+When niche construction occurs, cooperation can indeed persist (Figures [2C](#fig2) and [3A](#fig3)).
 In our model, niche construction introduces additional selective effects that could influence the evolutionary process, leading to a more pronounced Hankshaw effect.
 However, simply raising the fitness benefits conferred by adaptations does not prolong cooperation ([Figure 3B](#fig3)), which indicates that niche construction and the selective feedbacks that it produces play a crucial role.
 
@@ -39,7 +39,7 @@ Because of this, kin competition was reduced, and cooperation instead benefitted
 Other studies, while not focusing on cooperation, have similarly shown that the timescales at which niche construction feedbacks occur can strongly influence evolutionary outcomes [@laland1999evolutionary; @laland1996evolutionary].
 This perspective is likely to be crucial for understanding the evolution of cooperative behaviors like the production of public goods.
 
-For example, bacteria produce a host of extracellular products that scavage soluble iron [@griffin2004cooperation], digest large proteins [@darch2012density; @diggle2007cooperation], and reduce the risk of predation [@cosson2002pseudomonas].
+For example, bacteria produce a host of extracellular products that scavenge soluble iron [@griffin2004cooperation], digest large proteins [@darch2012density; @diggle2007cooperation], and reduce the risk of predation [@cosson2002pseudomonas].
 While many studies have focused on how the environment affects the evolution of these cooperative public goods, relatively few have addressed how the environmental changes created by public goods feed back to influence evolution.
 In these instances, environmental changes are likely to occur on different timescales than reproduction, which can have profound effects.
 For example, a multitude of factors including protein durability [@brown2007durability; @kummerli2010molecular], diffusion [@driscoll2010theory; @allison2005cheaters], and resource availability [@zhang2013exploring; @ghoul2014experimental] influence both the rate and the degree to which public goods alter the environment.

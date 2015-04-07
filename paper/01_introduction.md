@@ -25,7 +25,7 @@ Although organisms typically find themselves in dynamic environments, the nature
 
 Importantly, however, organisms do more than simply experience changing environments passively.
 Through their activities, their interactions with others, and even their deaths, organisms constantly modify their environment.
-These changes can produce evolutionary feedback loops in which environmental change alters selection, which, in turn, alters the distribution of types and their corresponding influence on the environment [@odling2003niche].
+This niche construction process can produce evolutionary feedback loops in which environmental change alters selection, which, in turn, alters the distribution of types and their corresponding influence on the environment [@odling2003niche].
 The nature of this feedback can have dramatic evolutionary consequences.
 One critical distinction is whether the constructing type or some other type is most adapted in the resulting environment.
 Under positive niche construction, selection favors the constructor, and evolution stagnates as this type fixes.

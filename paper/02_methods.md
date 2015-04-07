@@ -5,7 +5,7 @@ Building upon @HANKSHAW, we develop an individual-based model in which cooperato
 Through mutations, individuals gain adaptations to their environment, which increase reproductive fitness, and allow those lineages to rise in abundance.
 Migration among neighboring subpopulations allows more successful lineages to spread.
 
-In our expanded model, subpopulations additionally modify their local environment.
+In this expanded model, subpopulations additionally modify their local environment.
 As this process occurs, environmental changes feed back to affect selection.
 We explore how niche construction affects this process of adaptation and whether cooperation can be maintained because of selective feedbacks.
 
@@ -28,11 +28,13 @@ We assume $\delta > c$, which allows a minimally adapted cooperator to recoup th
 ### Niche Construction and Selective Feedbacks
 
 Individual fitness is also affected by the current state of the local environment.
-Here, we represent the "niche" implicitly based on the allelic states present in the subpopulation.
+We represent the "niche" implicitly based on the specific allelic states present in the subpopulation.
+Here, the specific alleles that are present at each locus matter.
 As allelic states change, subpopulations alter aspects of their environment, creating a unique niche.
 
 Niche construction takes the form of density dependent selection, and individuals evolve to better match their niche by a second form of adaptation.
 Specifically, the selective value of adaptive allele $a$ at locus $l$ increases with the number of individuals in the subpopulation that have allele $a-1$ at locus $l-1$.
+Once allele $a$ has fixed in the subpopulation at locus $l$, allele $a+1$ becomes the only allele that confers fitness benefits at locus $l+1$.
 As a consequence, genotypes with sequentially increasing allelic states will tend to evolve.
 We treat both adaptive loci and allelic states as "circular": the selective value of an allele at locus 1 is affected by the allelic composition of the subpopulation at locus $L$.
 Similarly, the selective value of allele 1 at any locus increases with the number of individuals carrying allele $A$ at the previous locus.
@@ -42,13 +44,13 @@ $$ \beta(x, X) = \bmod_{X}(x - 2 + X) + 1 $$ {#eq:beta}
 
 Here, $\bmod_{X}(x)$ is the integer remainder when dividing $x$ by $X$.
 The selective value of adaptive allele $a$ at locus $l$ is increased by $\epsilon$ for each individual in the subpopulation that has allele $\beta(a,A)$ at locus $\beta(l, L)$.
-Thus, $\epsilon$ specifies the intensity of niche construction.
+Thus, $\epsilon$ specifies the intensity of selection due to niche construction.
 
 Consider a genotype $g$ with the allelic state at locus $l$ given by $a_{g,l}$; the fitness of an individual with this genotype is defined as:
 
 $$ W_{g} = z - \underbrace{c a_{g,0}}_{{\substack{\text{cost of} \\ \text{cooperation}}}} + \underbrace{\delta \sum_{l=1}^{L} I(a_{g,l})}_{\substack{\text{adaptation to} \\ \text{external environment}}} + \underbrace{\epsilon \sum_{l=1}^{L} n(\beta(a_{g,l}, A), \beta(l, L))}_{\substack{\text{adaptation to} \\ \text{constructed environment}}} $$ {#eq:fitness}
 
-where $z$ is a baseline fitness and $I(a)$ indicates whether a given adaptive allele is non-zero:
+where $z$ is a baseline fitness, $n(a,l)$ is the number of individuals with allele $a$ at locus $l$, and $I(a)$ indicates whether a given adaptive allele is non-zero:
 
 $$
 I(a) =
