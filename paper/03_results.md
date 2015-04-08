@@ -2,10 +2,10 @@
 # Results
 
 Using the model described in the previous section, we perform simulations that follow the evolution of cooperation in a population consisting of subpopulations that are connected by spatially-limited migration.
-Individuals compete in these subpopulations by gaining a limited number of adaptations that confer fitness benefits.
-While cooperation does not directly affect the selective value of these adaptations, cooperation can have indirect effects on the adaptive process.
+Individuals increase their competitiveness by gaining a limited number of adaptations.
+While cooperation does not directly affect the fitness benefits of these adaptations, cooperation has indirect effects on the adaptive process.
 Specifically, cooperation increases subpopulation density. As a result, larger subpopulations of cooperators experience more mutational opportunities to gain adaptations. 
-Cooperation can hitchhike along with these adaptations, which compensate for the cost of cooperation.
+Cooperation can rise in abundance by hitchhiking along with these adaptations, which compensate for the cost of cooperation.
 During this process, subpopulations alter their local environments, which feeds back to influence selection.
 Here, we explore how niche construction affects the evolution of cooperation in the simulation environment defined by the parameter values listed in [Table 1](#tables).
 
@@ -16,8 +16,8 @@ Without any opportunity for adaptation ($L=0$), cooperators are swiftly eliminat
 Despite an initial lift in cooperator abundance due to increased productivity, the cost of cooperation becomes disadvantageous as migration mixes the initially isolated subpopulations.
 When populations can adapt to the external environment ($L=5$), but niche construction is absent ($\epsilon=0$), cooperators are maintained only transiently ([Figure 2B](#fig2)).
 Here, larger cooperator subpopulations can more quickly adapt to their external environment as before.
-As previously described by @HANKSHAW, however, cooperation is subsequently lost once populations become fully adapted to their environment.
-Once this has occurred, isogenic defectors (i.e., defectors with identical adaptive loci) arise via mutation and displace cooperation due to their selective advantage.
+However, as previously described by @HANKSHAW, cooperation is subsequently lost once populations become fully adapted to their environment.
+This occurs because isogenic defectors (i.e., defectors with identical adaptive loci) arise via mutation and displace cooperation due to their selective advantage.
 However, when niche construction creates selective feedbacks, cooperation persists in over 2/3 of the replicate populations ([Figure 2C](#fig2)).
 We see in [Figure 3A](#fig3) that despite oscillations, cooperation is maintained at high levels in these populations.
 
@@ -47,7 +47,11 @@ The adaptation resulting from selective feedbacks can limit invasion by defector
 The latter challenge is particularly threatening, as these isogenic defectors are equally adapted, yet do not incur the cost of cooperation.
 As demonstrated in [Figure 4A](#fig4), these isogenic defectors rapidly spread when introduced at a single patch in the center of an $11 \times 11$ population of cooperators if mutations do not occur.
 However, when resident cooperators can gain adaptations via mutation, cooperators evade defector invasion in over half of the replicate populations ([Figure 4B](#fig4)).
-[Figure 5](#fig5) depicts one such instance where cooperation survived. In that population, defectors quickly began to spread. However, an adaptation arose at a neighboring cooperator population that was more fit. This type spread more quickly, halting defectors and eventually driving them to extinction. Because this adaption occurred in a cooperator population, cooperation was able to hitchhike to safety.
+[Figure 5](#fig5) depicts one such instance where cooperation survived.
+In that population, defectors quickly began to spread.
+However, an adaptation arose in a neighboring cooperator population that was more fit.
+This type spread more quickly, halting defectors and eventually driving them to extinction.
+Because this adaption occurred in a cooperator population, cooperation was able to hitchhike to safety.
 [Figure 4C](#fig4) shows how quickly an adapted cooperator type can invade a population of defectors.
 
 

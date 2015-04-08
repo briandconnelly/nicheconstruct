@@ -17,14 +17,14 @@
 
 ## Figure 3 {#fig3}
 
-![**Niche Construction and the Evolution of Cooperation.** The proportion of cooperators present in each replicate population is shown for the duration of simulations. (**A**) Despite some oscillations, cooperation is maintained in 14 of 18 populations when niche construction affects selection. (**B**) When the selective effects of niche construction ($\epsilon$) are removed, and the selective benefit of adaptation to the external environment ($\delta$) is increased to compensate, cooperators are driven to extinction by isogenic defectors that arise by mutation ($\epsilon=0$, $\delta=0.6$). Note that cooperation was not present after initialization in one replicate population. (**C**) Cooperators are also driven to extinction without negative niche construction ($A=5$).](../figures/Figure3.png)
+![**Niche Construction and the Evolution of Cooperation.** The proportion of cooperators present in each replicate population is shown for the duration of simulations. (**A**) Despite some oscillations, cooperation remains dominant in 13 of 18 populations when niche construction affects selection. (**B**) When the selective effects of niche construction ($\epsilon$) are removed, and the selective benefit of adaptation to the external environment ($\delta$) is increased to compensate, cooperators are driven to extinction by isogenic defectors that arise by mutation ($\epsilon=0$, $\delta=0.6$). Note that cooperation was not present after initialization in one replicate population. (**C**) Cooperators are also driven to extinction without negative niche construction ($A=5$).](../figures/Figure3.png)
 
 \clearpage
 
 
 ## Figure 4 {#fig4}
 
-![**Niche Construction and Invasion.** Curves trace the proportion of cooperators present in each replicate population for the duration of simulations ($T=1000$). In each simulation, a rare type was initiated at a single patch in the center of the population lattice ($N^{2}=121$). Unless otherwise noted, mutations are disabled in these ecological simulations to highlight the dynamics of invasion ($\mu_{a}=0, \mu_{c}=0$). Results from simulations where this limitation is removed are shown in Figure S1. (**A**) When cooperators and defectors are isogenic (i.e., both types have stress alleles [1,2,3,4,5]), rare defectors quickly invade and drive cooperators to extinction due to the cost of cooperation. Defectors were stochastically eliminated in 2 replicate populations. (**B**) However, negative niche construction creates adaptive opportunities that enable cooperators to resist invasion by isogenic defectors. Here, cooperation remained the dominant strategy in 91 of 160 populations ($\mu_{a}=0.00005$). (**C**) In fact, an adapted cooperator type (stress alleles [6,2,3,4,5], see Figure 1) can swiftly displace defectors when isogenic defectors cannot arise or adapt via mutation.](../figures/Figure4.png)
+![**Niche Construction and Invasion.** Curves trace the proportion of cooperators present in each replicate population for the duration of simulations ($T=1000$). In each simulation, a rare type was initiated at a single patch in the center of the population lattice ($N^{2}=121$). Unless otherwise noted, mutations are disabled in these ecological simulations to highlight the dynamics of invasion ($\mu_{a}=0, \mu_{c}=0$). Results from simulations where this limitation is removed are shown in Figure S1. (**A**) When cooperators and defectors are isogenic (i.e., both types have stress alleles [1,2,3,4,5]), rare defectors quickly invade and drive cooperators to extinction due to the cost of cooperation. Defectors were stochastically eliminated in 2 replicate populations. (**B**) However, negative niche construction creates adaptive opportunities that enable cooperators to resist invasion by isogenic defectors. Here, cooperation remained the dominant in 91 of 160 populations ($\mu_{a}=0.00005$). (**C**) In fact, an adapted cooperator type (stress alleles [6,2,3,4,5], see Figure 1) can swiftly displace defectors when isogenic defectors cannot arise or adapt via mutation.](../figures/Figure4.png)
 
 \clearpage
 
@@ -45,7 +45,7 @@
 
 ## Supplemental Figure 1 {#figS1}
 
-![**Defector Invasion with Mutations.** With mutations occurring both at the adaptive loci and the cooperation locus ($\mu_{a}=\mu{c}=0.00005$), cooperation remains the dominant strategy in 58 replicate simulations. Curves trace the proportion of cooperators present in the population for the duration of 160 replicate simulations ($T=1000$)](../figures/FigureS1.png)
+![**Defector Invasion with Mutations.** The proportion of cooperators present in each replicate population is shown for the duration of simulations ($T=1000$). When mutations occur both at the adaptive loci and the cooperation locus ($\mu_{a}=\mu{c}=0.00005$), cooperation remains dominant in 58 of 160 replicate populations.](../figures/FigureS1.png)
 
 \clearpage
 

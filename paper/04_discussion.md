@@ -2,9 +2,9 @@
 # Discussion
 
 Despite their negative effects, deleterious traits can rise in abundance due to genetic linkage with other traits that are strongly favored by selection [@maynardsmith1974hitch].
-In a process termed the "Hankshaw effect", @HANKSHAW recently demonstrated that cooperation can prolong its existence by increasing the likelihood of hitchhiking with a beneficial trait.
-While this process does favor cooperation in the short term, it eventually reaches a dead end; when the opportunities for adaptation are exhausted, and cooperators can no longer hitchhike, they face extinction.
-In this work, we have considered whether niche construction might serve to perpetually generate new adaptive opportunities, and thus favor cooperation indefinitely.
+In a process termed the "Hankshaw effect", @HANKSHAW recently demonstrated that cooperation can actively prolong its existence by increasing its likelihood of hitchhiking with a beneficial trait.
+While this process does favor cooperation in the short term, it eventually reaches a dead end; when the opportunities for adaptation are exhausted and cooperators can no longer hitchhike, they face extinction.
+In this work, we have considered whether niche construction might serve to perpetually generate new adaptive opportunities and thus favor cooperation indefinitely.
 
 When niche construction occurs, cooperation can indeed persist (Figures [2C](#fig2) and [3A](#fig3)).
 In our model, niche construction introduces additional selective effects that could influence the evolutionary process, leading to a more pronounced Hankshaw effect.
@@ -39,19 +39,19 @@ As we see in [Figure 5](#fig5), when an adapted type emerges in a more homogeneo
 In our model, cooperation is orthogonal to niche construction, which allows us to focus on hitchhiking.
 However, by increasing the size of the local patch, this form of cooperation could itself be seen as a niche constructing behavior.
 Previous studies have more directly explored how niche construction and cooperation interact.
-@lehmann2007evolution showed that cooperation can be favored when niche construction decoupled kin competition from kin selection in spatially-structured populations.
+@lehmann2007evolution showed that cooperation can be favored when niche construction acted to decouple kin competition from kin selection in spatially-structured populations.
 Perhaps most similar our work, @vandyken2012origins demonstrated that when two negative niche constructing cooperative behaviors co-evolve, selection can increasingly favor these traits, which were disfavored when alone. 
 In that model, "reciprocal niche construction" occurred when the negative feedback created by one strategy positively influenced selection on the other, creating a perpetual cycle that maintained both forms of cooperation.
 Arguably, this can be viewed as an instance of hitchhiking: the currently-maladaptive form of cooperation is maintained by association with the adaptive form.
-Outside of the context of cooperation, studies have shown that niche construction can allow deleterious alleles to be maintained [@laland1999evolutionary; @laland1996evolutionary].
-However, cooperation, especially in competition against equally-adapted defectors, can be considered deleterious.
+Outside of the context of cooperation, Laland, Odling-Smee, and Feldman have shown that niche construction can allow deleterious alleles to be maintained [-@laland1999evolutionary; -@laland1996evolutionary].
+Indeed, cooperation, especially in competition against equally-adapted defectors, can be considered deleterious.
 
 
 ## Evolution at Multiple Timescales
 
 In the model described by @lehmann2007evolution, the selective feedbacks produced by the cooperative, niche-constructing behavior only affected future generations.
-Because of this, kin competition was reduced, and cooperation instead benefitted descendants.
-Other studies, while not focusing on cooperation, have similarly shown that the timescales at which niche construction feedbacks occur can strongly influence evolutionary outcomes [@laland1999evolutionary; @laland1996evolutionary].
+Kin competition thereby was reduced, and cooperation instead benefitted descendants.
+Other studies, while not focused on cooperation, have similarly shown that the timescales at which niche construction feedbacks occur can strongly influence evolutionary outcomes [@laland1999evolutionary; @laland1996evolutionary].
 This perspective is likely to be crucial for understanding the evolution of cooperative behaviors like the production of public goods.
 
 For example, bacteria produce a host of extracellular products that scavenge soluble iron [@griffin2004cooperation], digest large proteins [@darch2012density; @diggle2007cooperation], and reduce the risk of predation [@cosson2002pseudomonas].

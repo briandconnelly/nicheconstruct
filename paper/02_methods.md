@@ -29,12 +29,13 @@ We assume $\delta > c$, which allows a minimally adapted cooperator to recoup th
 
 Individual fitness is also affected by the current state of the local environment.
 We represent the "niche" implicitly based on the specific allelic states present in the subpopulation.
-Here, the specific alleles that are present at each locus matter.
 As allelic states change, subpopulations alter aspects of their environment, creating a unique niche.
+As described below, the specific alleles that are present at each locus matter.
 
-Niche construction takes the form of density dependent selection, and individuals evolve to better match their niche by a second form of adaptation.
+Niche construction takes the form of density dependent selection, and individuals evolve to better match their niche by an additional form of adaptation.
+The niche is defined by the distribution of alleles in the subpopulation at each locus.
+Non-zero alleles that are more common will improve fitness by a larger selective value (beyond $\delta$).
 Specifically, the selective value of adaptive allele $a$ at locus $l$ increases with the number of individuals in the subpopulation that have allele $a-1$ at locus $l-1$.
-Once allele $a$ has fixed in the subpopulation at locus $l$, allele $a+1$ becomes the only allele that confers fitness benefits at locus $l+1$.
 As a consequence, genotypes with sequentially increasing allelic states will tend to evolve.
 We treat both adaptive loci and allelic states as "circular": the selective value of an allele at locus 1 is affected by the allelic composition of the subpopulation at locus $L$.
 Similarly, the selective value of allele 1 at any locus increases with the number of individuals carrying allele $A$ at the previous locus.
@@ -90,7 +91,7 @@ Because mutations are stochastic, the allelic sequences that evolve depend on wh
 
 ### Migration
 
-Populations are composed by $N^2$ patches arranged as an $N \times N$ lattice, where each patch can support a subpopulation.
+Populations are composed of $N^2$ patches arranged as an $N \times N$ lattice, where each patch can support a subpopulation.
 After mutation, individuals emigrate to an adjacent patch with probability $m$.
 During each migration event, a single destination patch is randomly chosen with uniform probability from each source patch's Moore neighborhood, which is composed of the nearest 8 patches on the lattice.
 Because the population lattice has boundaries, patches located on the periphery have smaller neighborhoods.
@@ -102,7 +103,7 @@ Following @HANKSHAW, we begin simulations with sparse populations.
 Subpopulations are first seeded at all patches with size $S(p_{0})$ and cooperator proportion $p_{0}$.
 The population is then thinned to create empty patches.
 Each individual survives this bottleneck with probability $\sigma$.
-Starting from this state, simulations then proceed for $T$ cycles, where each discrete cycle consists of subpopulation growth, mutation, migration, and dilution.
+Starting from this initial state, simulations then proceed for $T$ cycles, where each discrete cycle consists of subpopulation growth, mutation, migration, and dilution.
 Dilution thins the population to support growth in the next cycle.
 Each individual remains with probability $d$, regardless of allelic state.
 
@@ -114,5 +115,5 @@ Simulations used Python 3.4, NumPy 1.9.1, Pandas 0.15.2 [@mckinney2010data], and
 Data analyses were performed with R 3.1.3 [@rproject].
 Reported confidence intervals were estimated by bootstrapping with 1000 resamples.
 
-[^1]: These materials will be made public at the time of publication, and a reference will be placed here.
+[^1]: These materials will be made public prior to publication.
 

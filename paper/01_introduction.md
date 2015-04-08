@@ -33,7 +33,6 @@ Under negative niche construction, selection favors a type other than the constr
 In this latter case, populations find themselves continually chasing beneficial mutations as their adaptive landscape perpetually shifts.
 
 Here, we show that the selective feedbacks that result from niche construction can maintain cooperation indefinitely.
-We find that it is specifically negative niche construction that is responsible for this result because of the adaptive opportunities that it produces.
-Furthermore, we show that the rate at which niche construction occurs is also crucial.
+We find that it is specifically negative niche construction that is responsible for this result because of the endless opportunities for adaptation that it produces.
 These results indicate that cooperators can ensure their survival when they play an active role in their own evolution.
 
