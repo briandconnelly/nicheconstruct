@@ -17,17 +17,17 @@ The tragedy of the commons can be deferred if a cooperator, by chance, wins the 
 This advantage is reminiscent of Sissy Hankshaw, a fictional character in Tom Robbins' *Even Cowgirls Get the Blues*, whose oversized thumbs---which were otherwise an impairment---made her a prolific hitchhiker.
 Similarly, cooperation is costly, but it increases local population density.
 As a result, cooperators are more likely to acquire beneficial mutations.
-By hitchhiking along with these adaptations, cooperation can then rise in abundance.
+By hitchhiking along with these adaptations, cooperation can rise in abundance.
 Nevertheless, this advantage is fleeting.
 As soon as the opportunities for adaptation are exhausted, cooperators are once again at a selective disadvantage against equally-adapted defectors that arise via mutation.
-However, @HANKSHAW also demonstrated that cooperation can be maintained indefinitely when frequent environmental changes produce a steady stream of new adaptive opportunities.
+However, @HANKSHAW also demonstrated that cooperation can be maintained when frequent environmental changes produce a steady stream of new adaptive opportunities.
 Although organisms typically find themselves in dynamic environments, the nature and frequency of these changes might not ensure long-term cooperator survival.
 
 Importantly, however, organisms do more than simply experience changing environments passively.
 Through their activities, their interactions with others, and even their deaths, organisms constantly modify their environment.
 This niche construction process can produce evolutionary feedback loops in which environmental change alters selection, which, in turn, alters the distribution of types and their corresponding influence on the environment [@odling2003niche].
 The nature of this feedback can have dramatic evolutionary consequences.
-One critical distinction is whether the constructing type or some other type is most adapted in the resulting environment.
+One critical distinction is whether the contstucting type is favored in the resulting environment.
 Under positive niche construction, selection favors the constructor, and evolution stagnates as this type fixes.
 Under negative niche construction, selection favors a type other than the constructor.
 In this latter case, populations find themselves continually chasing beneficial mutations as their adaptive landscape perpetually shifts.

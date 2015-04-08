@@ -1,13 +1,13 @@
 
 # Methods
 
-Building upon @HANKSHAW, we develop an individual-based model in which cooperators and defectors evolve and compete in a population of subpopulations (i.e., a metapopulation).
+Building upon @HANKSHAW, we describe an individual-based model in which cooperators and defectors evolve and compete in a population of subpopulations (i.e., a metapopulation).
 Through mutations, individuals gain adaptations to their environment, which increase reproductive fitness, and allow those lineages to rise in abundance.
 More successful lineages spread to neighboring subpopulations by migration.
 
 In this expanded model, subpopulations additionally modify their local environment.
 As this process occurs, environmental changes feed back to affect selection.
-We explore how niche construction affects this process of adaptation and whether cooperation can be maintained because of selective feedbacks.
+We explore how niche construction affects this process hitchhiking along with adaptations, and whether cooperation can be maintained by selective feedbacks.
 
 
 ## Model Description
@@ -20,8 +20,10 @@ A binary allele at the first locus (here, locus zero) determines whether that in
 Cooperation is independent from adaptation to the environment.
 The remaining $L$ loci are *adaptive loci*, and are each occupied by $0$ or a value from the set $\{1, 2, \ldots, A\}$.
 Allele $0$ represents a lack of adaptation, while a non-zero allele represents one of the $A$ possible adaptations at that locus.
-These non-zero alleles signify adaptations to the external environment that are not affected by other individuals or the local niche.
-Adaptations confer a fitness benefit $\delta$, regardless of which non-zero allele is present.
+
+These non-zero alleles signify two types of adaptations, both of which increase fitness.
+First, adaptations to the external environment confer a fitness benefit $\delta$.
+This selective value is the same regardless of which non-zero allele is present and is not affected by other individuals or the local niche.
 We assume $\delta > c$, which allows a minimally adapted cooperator to recoup the cost of cooperation and gain a fitness advantage.
 
 
@@ -33,9 +35,9 @@ As allelic states change, subpopulations alter aspects of their environment, cre
 As described below, the specific alleles that are present at each locus matter.
 
 Niche construction takes the form of density dependent selection, and individuals evolve to better match their niche by an additional form of adaptation.
-The niche is defined by the distribution of alleles in the subpopulation at each locus.
+The niche is defined by the distribution of alleles at each locus.
 Non-zero alleles that are more common will improve fitness by a larger selective value (beyond $\delta$).
-Specifically, the selective value of adaptive allele $a$ at locus $l$ increases with the number of individuals in the subpopulation that have allele $a-1$ at locus $l-1$.
+Specifically, the selective value of adaptive allele $a$ at locus $l$, and consequently the fitness of an individual carrying that allele, increases with the number of individuals in the subpopulation that have allele $a-1$ at locus $l-1$.
 As a consequence, genotypes with sequentially increasing allelic states will tend to evolve.
 We treat both adaptive loci and allelic states as "circular": the selective value of an allele at locus 1 is affected by the allelic composition of the subpopulation at locus $L$.
 Similarly, the selective value of allele 1 at any locus increases with the number of individuals carrying allele $A$ at the previous locus.
@@ -44,14 +46,14 @@ This circularity is represented by the function $\beta(x,X)$, which gives the in
 $$ \beta(x, X) = \bmod_{X}(x - 2 + X) + 1 $$ {#eq:beta}
 
 Here, $\bmod_{X}(x)$ is the integer remainder when dividing $x$ by $X$.
-The selective value of adaptive allele $a$ at locus $l$ is increased by $\epsilon$ for each individual in the subpopulation that has allele $\beta(a,A)$ at locus $\beta(l, L)$.
+Using this function, the selective value of adaptive allele $a$ at locus $l$ is increased by $\epsilon$ for each individual in the subpopulation that has allele $\beta(a,A)$ at locus $\beta(l, L)$.
 Thus, $\epsilon$ specifies the intensity of selection due to niche construction.
 
-Consider a genotype $g$ with the allelic state at locus $l$ given by $a_{g,l}$; the fitness of an individual with this genotype is defined as:
+Consider a genotype $g$ with allelic state $a_{g,l}$ at locus $l$; the fitness of an individual with this genotype is defined as:
 
 $$ W_{g} = z - \underbrace{c a_{g,0}}_{{\substack{\text{cost of} \\ \text{cooperation}}}} + \underbrace{\delta \sum_{l=1}^{L} I(a_{g,l})}_{\substack{\text{adaptation to} \\ \text{external environment}}} + \underbrace{\epsilon \sum_{l=1}^{L} n(\beta(a_{g,l}, A), \beta(l, L))}_{\substack{\text{adaptation to} \\ \text{constructed environment}}} $$ {#eq:fitness}
 
-where $z$ is a baseline fitness, $n(a,l)$ is the number of individuals with allele $a$ at locus $l$, and $I(a)$ indicates whether a given adaptive allele is non-zero:
+where $z$ is a baseline fitness, $n(a,l)$ is the number of individuals in the subpopulation with allele $a$ at locus $l$, and $I(a)$ indicates whether a given adaptive allele is non-zero:
 
 $$
 I(a) =
@@ -61,7 +63,7 @@ I(a) =
 \end{cases}
 $$ {#eq:IA}
 
-Thus, an individual's fitness is determined both by adaptations to the external environment ($\delta$) and adaptations to its constructed environment ($\epsilon$).
+Thus, an individual's fitness is determined both by adaptations to the external environment ($\delta$) and by adaptations to its constructed environment ($\epsilon$).
 [Figure 1](#fig1) illustrates the effects of these two components.
 
 
@@ -75,7 +77,7 @@ $$ S(p) = S_{min} + p (S_{max} - S_{min}) $$ {#eq:popsize}
 
 During growth, individuals compete through differential reproduction.
 Each individual's probability of success is determined by its fitness.
-The composition of a subpopulation with size $P$ and cooperator proportion $p$ after growth is multinomial with parameters $S(p)$ and $\{\pi_1, \pi_2, \ldots, \pi_{P}\}$, where $\pi_{i}$ represents an individual's reproductive fitness relative to others in the subpopulation.
+The composition of a subpopulation with size $P$ and cooperator proportion $p$ after growth is multinomial with parameters $S(p)$ and $\{\pi_1, \pi_2, \ldots, \pi_{P}\}$, where $\pi_{i}$ represents individual $i$'s reproductive fitness relative to others in the subpopulation.
 
 
 ### Mutation
@@ -93,7 +95,7 @@ Because mutations are stochastic, the allelic sequences that evolve depend on wh
 
 Populations are composed of $N^2$ patches arranged as an $N \times N$ lattice, where each patch can support a subpopulation.
 After mutation, individuals emigrate to an adjacent patch with probability $m$.
-During each migration event, a single destination patch is randomly chosen with uniform probability from each source patch's Moore neighborhood, which is composed of the nearest 8 patches on the lattice.
+During each migration event, a single destination patch is randomly chosen from each source patch's Moore neighborhood, which is composed of the nearest 8 patches on the lattice.
 Because the population lattice has boundaries, patches located on the periphery have smaller neighborhoods.
 
 
