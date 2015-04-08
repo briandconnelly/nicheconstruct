@@ -20,7 +20,18 @@ These opportunities can allow cooperators to resist invasion by defectors, even 
 It is these recurring cycles of invasion and adaptation that underlie the oscillations in cooperator populations that we see in [Figure 3A](#fig3).
 When stochastic mutations do not engender these adaptations, defectors invade, and the cycle is broken.
 
-**TODO: the rate of niche construction is crucial** 
+While negative niche construction is necessary, we find that making the selective effects of niche construction more negative is more disruptive to cooperation than helpful ([Figure 6A](#fig6)).
+Instead, it is the rate at which cooperators gain adaptations that allow them to escape invasion.
+When the mutation rate at adaptive loci was increased, cooperation was maintained in more populations, despite the increased opportunity for gaining deleterious mutations ([Figure 6B](#fig6)).
+Taken together, these results indicate that cooperators are better able to escape defector invasion when adaptation has a clear path.
+
+When the selective effects of niche construction are more negative, populations become more diverse.
+This diversity could potentially mean that when a defector arises, the type that outcompetes it may already be present in the population.
+But diversity is a double edged sword.
+Because a neighboring patch in a diverse population is also more likely to have constructed a different niche.
+This can greatly limit how quickly an adapted type can spread, as that type is likely to have evolved in a different niche, making it less fit in neighboring environments.
+Instead, when a cooperator population is homogeneous, the evolutionary trajectories of its subpopulations are more aligned.
+As we see in [Figure 5](#fig5), when an adapted type emerges in a more homogeneous population, that type can quickly spread throughout the population, thwarting invasion by isogenic defector types.
 
 
 ## Niche Construction and the Evolution of Cooperation

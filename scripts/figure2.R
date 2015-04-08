@@ -33,6 +33,6 @@ fig2 <- ggplot(data=fig2_data, aes(x=Time, y=CooperatorProportion)) +
     labs(x=label_time, y=label_cooperator_proportion) +
     theme_bdc_grey() +
     theme(strip.background = element_blank()) +
-    theme(strip.text = element_text(size=rel(1.0), face='bold'))
+    theme(strip.text = element_text(size=rel(1.0), vjust=0.2, face='bold'))
 fig2 <- rescale_plot(plot=fig2, ratio=1/1.2)
 ggsave(filename='../figures/Figure2.png', plot=fig2, dpi=300)

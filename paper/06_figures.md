@@ -10,36 +10,33 @@
 
 ## Figure 2 {#fig2}
 
-![**Adaptation, Hitchhiking, and the Evolution of Cooperation.** The proportion of cooperators present in the population is shown for the duration of simulations. Curves show the average among replicate populations, and shaded areas indicate 95% confidence intervals. Unless otherwise noted, parameter values are listed in [Table 1](#tables). (**A**) Without any opportunity to adapt ($L$, the number of adaptive loci, is zero), cooperation is quickly lost. (**B**) When adaptation can occur ($L=5$), but populations do not alter their environment ($\epsilon$, the intensity of niche construction, is zero), cooperation hitchhikes along with adaptions, allowing cooperators to temporarily rise in abundance before eventually going extinct. (**C**) Niche construction enables cooperation to be maintained indefinitely. In the majority of populations, cooperation remained the dominant strategy. Individual populations are shown in Figure 3A.](../figures/Figure2.png)
+![**Adaptation, Hitchhiking, and the Evolution of Cooperation.** The proportion of cooperators present in the population is shown for the duration of simulations. Curves show the average among replicate populations, and shaded areas indicate 95% confidence intervals. Unless otherwise noted, parameter values are listed in [Table 1](#tables). (**A**) Without any opportunity to adapt ($L=0$), cooperation is quickly lost. (**B**) When adaptation can occur ($L=5$), but niche construction does not affect selection ($\epsilon=0$), cooperators rise in abundance by hitchhiking along with adaptions to the external environment. Nevertheless, this effect is transient, and cooperators eventually become extinct. (**C**) Niche construction enables cooperation to be maintained indefinitely. In the majority of populations, cooperation remained the dominant strategy. The trajectories of individual populations are shown in Figure 3A.](../figures/Figure2.png)
 
 \clearpage
 
 
 ## Figure 3 {#fig3}
 
-![**Niche Construction and the Evolution of Cooperation.** The proportion of cooperators present in each replicate population is shown for the duration of simulations. (**A**) Despite some oscillations, niche construction enables cooperation to be maintained indefinitely in 14 of 18 populations. (**B**) When niche construction is removed and the fitness benefit of adaptation is increased to compensate ($\epsilon=0$, $\delta=0.6$), adapted defectors arise and drive cooperators to extinction. (**C**) Without negative niche construction, cooperation is not maintained ($A=5$).](../figures/Figure3.png)
+![**Niche Construction and the Evolution of Cooperation.** The proportion of cooperators present in each replicate population is shown for the duration of simulations. (**A**) Despite some oscillations, cooperation is maintained in 14 of 18 populations when niche construction affects selection. (**B**) When the selective effects of niche construction ($\epsilon$) are removed, and the selective benefit of adaptation to the external environment ($\delta$) is increased to compensate, cooperators are driven to extinction by isogenic defectors that arise by mutation ($\epsilon=0$, $\delta=0.6$). Note that cooperation was not present after initialization in one replicate population. (**C**) Cooperators are also driven to extinction without negative niche construction ($A=5$).](../figures/Figure3.png)
 
 \clearpage
 
 
 ## Figure 4 {#fig4}
 
-![**Niche Construction and Invasion.** Curves trace the proportion of cooperators present in the population for the duration of 160 replicate simulations ($T=1000$). These experiments examine whether a rare cooperator or defector strategy can invade when initiated at a single patch in the center of the population lattice ($N^{2}=121$). Unless otherwise noted, mutations ($\mu_{a}=0, \mu_{c}=0$) are disabled in these ecological simulations to highlight the dynamics of invasion. The results from simulations where this limitation is removed are shown in Figure S1. (**A**) When cooperators and defectors are isogenic (i.e., both types have stress alleles [1,2,3,4,5]) and mutation cannot occur, rare defectors quickly invade and drive cooperators to extinction due to the cost of cooperation. Defectors were stochastically eliminated in 2 replicate populations. (**B**) However, the adaptive opportunities produced by negative niche construction can allow cooperators to resist invasion by isogenic defectors. Here, cooperation persisted in the majority of populations ($\mu_{a}=0.00005$, the base mutation rate). (**C**) We demonstrate that adaptations such as these can enable a cooperator (stress alleles [6,2,3,4,5], see Figure 1) to displace a population of defectors when defectors cannot arise or adapt via mutation.](../figures/Figure4.png)
+![**Niche Construction and Invasion.** Curves trace the proportion of cooperators present in each replicate population for the duration of simulations ($T=1000$). In each simulation, a rare type was initiated at a single patch in the center of the population lattice ($N^{2}=121$). Unless otherwise noted, mutations are disabled in these ecological simulations to highlight the dynamics of invasion ($\mu_{a}=0, \mu_{c}=0$). Results from simulations where this limitation is removed are shown in Figure S1. (**A**) When cooperators and defectors are isogenic (i.e., both types have stress alleles [1,2,3,4,5]), rare defectors quickly invade and drive cooperators to extinction due to the cost of cooperation. Defectors were stochastically eliminated in 2 replicate populations. (**B**) However, negative niche construction creates adaptive opportunities that enable cooperators to resist invasion by isogenic defectors. Here, cooperation remained the dominant strategy in 91 of 160 populations ($\mu_{a}=0.00005$). (**C**) In fact, an adapted cooperator type (stress alleles [6,2,3,4,5], see Figure 1) can swiftly displace defectors when isogenic defectors cannot arise or adapt via mutation.](../figures/Figure4.png)
 
 \clearpage
 
 ## Figure 5 {#fig5}
 
-![**Defector Invasion Stopped by Cooperator Adaptation.** Here we depict the distribution of dominant types among populations over time for one representative simulation in which isogenic defectors arise. For clarity, mutations occurred at the adaptive loci, but not at the cooperation locus ($\mu_{c}=0$) during this ecological simulation. A time $t=0$ (leftmost panel), a single matched defector population (red) is placed among cooperator populations (light blue). Because these defectors do not bear the costs of cooperation, they spread ($t=272$). However, cooperators in a single population gain an adaptation that give them a fitness advantage over defectors (dark blue, lower left). At $t=325$, defectors continue to invade cooperator populations. However, the adapted cooperator type, which can invade both defector populations and ancestral cooperator populations, can spread more quickly due to its greater fitness ($t=390$), and eventually fixes in the population ($t=500$). TODO 690, 812, 900.](../figures/Figure5.pdf)
+![**Cooperator Adaptation Prevents Defector Invasion.** Here we depict the distribution of dominant types among subpopulations over time for one representative simulation in which isogenic defectors arise. To highlight the effects of adaptation, mutations did not occur at the cooperation locus ($\mu_{c}=0$). At time $t=0$ (upper left panel), a single isogenic defector population (red) is placed among cooperator populations (light blue). Because these defectors do not bear the costs of cooperation, they spread ($t=272$). However, cooperators in one population gain an adaptation that gives them a fitness advantage over defectors (second panel, dark blue, lower left). At $t=325$, defectors continue to invade cooperator populations. However, the adapted cooperator type spreads more quickly due to its fitness advantage, invading both defector populations and ancestral cooperator populations ($t=390$), until it eventually fixes in the population ($t=500$). At $t=690$, a new cooperator type emerges that is favored due to negative niche construction (orange). This new type spreads rapidly ($t=812$) until reaching fixation ($t=900$). At this point, it becomes susceptible to invasion by the next "adapted" cooperator type, and the cycle continues.](../figures/Figure5.pdf)
 
 \clearpage
 
 ## Figure 6 {#fig6}
 
-**Not All Niches are Created Equally.** (**A**) TODO: All negative niche construction (**B**) TODO: Increased mutation rate
-
-Coming soon...
-
+![**Negative Niche Construction and Adaptive Paths.** The proportion of cooperators present in each replicate population is shown for the duration of simulations. (**A**) When the negative effects of niche construction are magnified, cooperators are eliminated from all replicate populations (n=10). (**B**) Instead, when the mutation rate at adaptive loci is increased 100-fold, cooperators remain dominant in TODO of TODO replicate populations ($\mu_{a}=0.001$).](../figures/Figure6.png)
 
 \clearpage
 
@@ -51,4 +48,8 @@ Coming soon...
 ![**Defector Invasion with Mutations.** With mutations occurring both at the adaptive loci and the cooperation locus ($\mu_{a}=\mu{c}=0.00005$), cooperation remains the dominant strategy in 58 replicate simulations. Curves trace the proportion of cooperators present in the population for the duration of 160 replicate simulations ($T=1000$)](../figures/FigureS1.png)
 
 \clearpage
+
+## Supplemental Figure 2 {#figS2}
+
+![**TODO Diversity something.** TODO. Also explain Shannon (**A**) TODO. (n=TODO) (**B**) TODO. (n=TODO)](../figures/FigureS2.png)
 

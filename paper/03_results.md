@@ -36,7 +36,7 @@ Niche construction, therefore, plays a decisive role here.
 Negative niche construction can occur in our model due to the selection for sequentially-increasing allelic states and the circular arrangement of these alleles (see [Figure 1](#fig1)).
 This occurs when the number of adaptive alleles ($A$) does not divide evenly into the number of adaptive loci ($L$).
 In such a case, any sequence of integers on the circular genome will always contain a break in the sequence; that is, one locus with an allele that is not one less than the allele at the next locus.
-Given this unavoidable mismatch, any type that has fixed will always favor selection for a new type.
+Given this unavoidable mismatch, any type that has fixed will always construct a niche that favors selection for a new type.
 However, if this negative niche construction is removed (by setting $L=5$, $A=5$), cooperators are again driven extinct after an initial lift in abundance ([Figure 3C](#fig3)).
 These results indicate that the type of niche construction matters. Specifically, negative niche construction is crucial for maintaining cooperation.
 
@@ -53,5 +53,14 @@ However, when resident cooperators can gain adaptations via mutation, cooperator
 
 ## Negative Niche Construction Must Follow a Path
 
-**TODO**: Sorry, results will be here for the morning meeting!
+We have seen that negative niche construction plays a critical role in maintaining cooperation by creating adaptive "escape routes" for cooperators to resist invasion by defectors.
+But in some cases, cooperator populations were not able to gain these adaptations quickly enough, which led to extinction ([Figure 3A](#fig3)).
+To see whether stronger negative feedbacks from niche construction would increase the rate at which cooperator populations gained the adaptations needed to escape defector invasion, we performed simulations in which niche construction by one type more strongly favored a completely different type.
+This was accomplished in the model by removing selection for sequential allelic states.
+Instead, the selective value of an allele at each locus increased with the number of individuals in the population that had the next allelic state at that *same* locus.
+For example, selection would favor a type with $[2,5,1,4,4]$ in a niche constructed by $[1,4,6,3,3]$ ($L=5$, $A=6$).
+However, this strongly negative niche construction does not better enable cooperators to stave off defection. In fact, cooperation is quickly lost under these conditions ([Figure 6A](#fig6)).
+
+We then performed simulations to determine whether it is the rate of adaptation in response to negative niche construction that is important, not the strength of its feedback.
+When the mutation rate at adaptive loci is raised 100-fold ($\mu_{a}=0.001$), cooperation is maintained at higher levels and in more replicate populations ([Figure 6B](#fig6)).
 
