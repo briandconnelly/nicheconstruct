@@ -19,7 +19,7 @@ Table: Model parameters and their value
 | $N^2$      | Number of patches                              | 625           |
 | $m$        | Migration rate                                 | 0.05          |
 | $p_0$      | Initial cooperator proportion                  | 0.5           |
-| $\mu_{t}$  | Mutation rate (tolerance to new environment)   | $10^{-5}$     |
+| $\sigma$   | Survival rate at population initialization     | $10^{-5}$     |
 | $T$        | Number of simulation cycles                    | 3000          |
 | $d$        | Subpopulation dilution factor                  | 0.1           |
 

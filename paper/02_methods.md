@@ -3,7 +3,7 @@
 
 Building upon @HANKSHAW, we develop an individual-based model in which cooperators and defectors evolve and compete in a population of subpopulations (i.e., a metapopulation).
 Through mutations, individuals gain adaptations to their environment, which increase reproductive fitness, and allow those lineages to rise in abundance.
-Migration among neighboring subpopulations allows more successful lineages to spread.
+More successful lineages spread to neighboring subpopulations by migration.
 
 In this expanded model, subpopulations additionally modify their local environment.
 As this process occurs, environmental changes feed back to affect selection.
@@ -74,12 +74,7 @@ $$ S(p) = S_{min} + p (S_{max} - S_{min}) $$ {#eq:popsize}
 
 During growth, individuals compete through differential reproduction.
 Each individual's probability of success is determined by its fitness.
-The composition of a subpopulation with size $P$ and cooperator proportion $p$ after growth is multinomial with parameters $S(p)$ and $\{\pi_1, \pi_2, \ldots, \pi_{P}\}$, where:
-
-$$ \pi_i = \frac{W_{\gamma(i)}}{\sum_{j=1}^{P} W_{\gamma(j)}} $$ {#eq:prob_repr}
-
-Here, $W_{\gamma(i)}$ is the fitness of an individual $i$ with genotype $\gamma(i)$ (see Equation @eq:fitness).
-The value $\pi_{i}$ represents an individual's reproductive fitness relative to others in the subpopulation.
+The composition of a subpopulation with size $P$ and cooperator proportion $p$ after growth is multinomial with parameters $S(p)$ and $\{\pi_1, \pi_2, \ldots, \pi_{P}\}$, where $\pi_{i}$ represents an individual's reproductive fitness relative to others in the subpopulation.
 
 
 ### Mutation
@@ -103,11 +98,11 @@ Because the population lattice has boundaries, patches located on the periphery 
 
 ### Population Initialization and Simulation
 
-At the beginning of each simulation, subpopulations are seeded at all patches with cooperator proportion $p_{0}$ and grown to density $S(p_{0})$.
-An environmental challenge is then introduced, which subjects all subpopulations to a bottleneck.
-For each individual, the probability of survival is $\mu_{t}$, which represents the likelihood that tolerance arises via mutation.
-Because individuals have not yet adapted to this new environment, the allelic state of each individual's genotype is $0$ at each adaptive locus.
-Following initialization, simulations are run for $T$ cycles, where each discrete cycle consists of subpopulation growth, mutation, migration, and dilution.
+Following @HANKSHAW, we begin simulations with sparse populations.
+Subpopulations are first seeded at all patches with size $S(p_{0})$ and cooperator proportion $p_{0}$.
+The population is then thinned to create empty patches.
+Each individual survives this bottleneck with probability $\sigma$.
+Starting from this state, simulations then proceed for $T$ cycles, where each discrete cycle consists of subpopulation growth, mutation, migration, and dilution.
 Dilution thins the population to support growth in the next cycle.
 Each individual remains with probability $d$, regardless of allelic state.
 

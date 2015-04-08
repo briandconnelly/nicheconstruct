@@ -24,7 +24,7 @@ We see in [Figure 3A](#fig3) that despite oscillations, cooperation is maintaine
 
 ## Fitness Increases Alone do not Support Persisting Cooperation
 
-In the model, both adaptation and niche construction contribute to an individual's fitness.
+In the model, adaptations to both the external environment and the constructed environment contribute to an individual's fitness.
 To determine whether cooperation is maintained solely due to the larger selective values that result from the contributions of niche construction ($\epsilon$), we performed simulations in which these contributions were removed ($\epsilon=0$), and we instead increased the fitness benefits conferred by adaptation to the external, non-constructed environment ($\delta=0.6)$.
 In doing so, we conservatively estimate the selective effects of niche construction by supplementing the selective benefits of adaptations to the external environment by the maximum possible selective benefit that results from niche construction.
 Nevertheless, we find that simply increasing selective values does not enable cooperators to persist ([Figure 3B](#fig3)).
