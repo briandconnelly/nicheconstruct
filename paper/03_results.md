@@ -51,7 +51,7 @@ However, when resident cooperators can gain adaptations via mutation, cooperator
 [Figure 4C](#fig4) shows how quickly an adapted cooperator type can invade a population of defectors.
 
 
-## The Rate of Niche Construction Matters
+## Negative Niche Construction Must Follow a Path
 
-**TODO**: Sorry, results coming soon!
+**TODO**: Sorry, results will be here for the morning meeting!
 

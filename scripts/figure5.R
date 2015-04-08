@@ -7,8 +7,7 @@ library(ggplot2bdc)
 
 source('formatting.R')
 
-target_frames <- c(0,272,325,500)
-color_cadapt <- '#1F77B4'
+target_frames <- c(0,272,325,390,500,690,812,900)
 
 genotype_colors <- c('C: [1 2 3 4 5]'= color_cooperator,
                      'C: [1 2 3 4 6]'= color_cadapt,
@@ -16,17 +15,8 @@ genotype_colors <- c('C: [1 2 3 4 5]'= color_cooperator,
                      'D: [1 2 3 4 3]'= color_misc,
                      'D: [1 2 3 4 5]'= color_defector)
 
-genotype_colors <- c('C: [1 2 3 4 5]'= '#1f78b4',
-                     'C: [1 2 3 4 6]'= '#6DCCDA',
-                     'C: [1 2 3 5 6]'= 'yellow',
-                     'D: [1 2 3 4 3]'= 'yellow',
-                     'D: [1 2 3 4 5]'= '#b2df8a')
-
-# a6cee3
-
-# 6DCCDA # 1F77B4
-
-fig5data <- read.csv('../data/defector_invade_matched_sample.csv.bz2') %>% filter(Time %in% target_frames)
+fig5data <- read.csv('../data/defector_invade_matched_sample.csv.bz2') %>%
+    filter(Time %in% target_frames)
 fig5data$Cooperator <- fig5data$Cooperator == 'True'
 fig5data$Genotype <- as.factor(fig5data$Genotype)
 fig5data$FullGenotype <- factor(sprintf("%s: %s", ifelse(fig5data$Cooperator, 'C', 'D'), fig5data$Genotype))
@@ -34,7 +24,8 @@ fig5data$TimeStr <- factor(sprintf("t=%d", fig5data$Time))
 
 
 fig5 <- ggplot(data=fig5data, aes(x=X, y=Y, color=FullGenotype, fill=FullGenotype)) +
-    facet_grid(. ~ TimeStr) +
+    #facet_grid(. ~ TimeStr) +
+    facet_wrap(~ TimeStr, ncol=4) +
     geom_point(shape=22, size=4) +
     scale_x_continuous(limits=c(0, max(fig5data$X))) +
     scale_y_continuous(limits=c(0, max(fig5data$Y))) +

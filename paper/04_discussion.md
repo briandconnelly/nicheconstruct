@@ -23,6 +23,8 @@ When stochastic mutations do not engender these adaptations, defectors invade, a
 **TODO: the rate of niche construction is crucial** 
 
 
+## Niche Construction and the Evolution of Cooperation
+
 In our model, cooperation is orthogonal to niche construction, which allows us to focus on hitchhiking.
 However, by increasing the size of the local patch, this form of cooperation could itself be seen as a niche constructing behavior.
 Previous studies have more directly explored how niche construction and cooperation interact.
@@ -33,6 +35,8 @@ Arguably, this can be viewed as an instance of hitchhiking: the currently-malada
 Outside of the context of cooperation, studies have shown that niche construction can allow deleterious alleles to be maintained [@laland1999evolutionary; @laland1996evolutionary].
 However, cooperation, especially in competition against equally-adapted defectors, can be considered deleterious.
 
+
+## Evolution at Multiple Timescales
 
 In the model described by @lehmann2007evolution, the selective feedbacks produced by the cooperative, niche-constructing behavior only affected future generations.
 Because of this, kin competition was reduced, and cooperation instead benefitted descendants.
@@ -47,6 +51,8 @@ While @lehmann2007evolution showed that cooperation was favored when selective f
 For example, when public goods accumulate in the environment, cooperators must decrease production to remain competitive [@kummerli2010molecular; @dumas2012cost].
 This favors cooperation that occurs facultatively, perhaps by sensing the abiotic [@koestler2014bile; @bernier2011modulation] or biotic environment [@darch2012density; @brown2001cooperation].
 
+
+## Cooperation and Niche Construction in Host-Symbiont Co-Evolution
 
 In many instances where cooperation occurs, the environment is itself a biological entity, which can introduce additional evolutionary feedbacks.
 As the host population changes, so too does selection on their symbiont populations.

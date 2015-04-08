@@ -8,8 +8,8 @@ label_tolerance <- 'Survival Rate, Initial Environmental Change'
 
 color_cooperator <- '#729ECE'
 color_defector <- '#ED665D'
-color_cadapt <- '#AD8BC9'
-color_cadapt2 <- 'orange'
+color_cadapt <- '#1F77B4'
+color_cadapt2 <- '#FFC156'
 color_misc <- 'green'
 
 ribbon_alpha <- 0.2

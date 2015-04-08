@@ -30,13 +30,15 @@
 
 ## Figure 5 {#fig5}
 
-![**Defector Invasion Stopped by Cooperator Adaptation.** Here we depict the distribution of dominant types among populations over time for one representative simulation in which isogenic defectors arise. For clarity, mutations occurred at the adaptive loci, but not at the cooperation locus ($\mu_{c}=0$) during this ecological simulation. A time $t=0$ (leftmost panel), a single matched defector population (red) is placed among cooperator populations (light blue). Because these defectors do not bear the costs of cooperation, they spread ($t=272$, second panel). However, cooperators in a single population gain an adaptation that give them a fitness advantage over defectors (dark blue, lower left). At $t=325$ (third panel), defectors continue to invade cooperator populations. However, the adapted cooperator type, which can invade both defector populations and ancestral cooperator populations, can spread more quickly due to its greater fitness. Eventually, this strategy spreads and fixes in all populations (rightmost panel) until this strategy itself is replaced by the next adaptation.](../figures/Figure5.pdf)
+![**Defector Invasion Stopped by Cooperator Adaptation.** Here we depict the distribution of dominant types among populations over time for one representative simulation in which isogenic defectors arise. For clarity, mutations occurred at the adaptive loci, but not at the cooperation locus ($\mu_{c}=0$) during this ecological simulation. A time $t=0$ (leftmost panel), a single matched defector population (red) is placed among cooperator populations (light blue). Because these defectors do not bear the costs of cooperation, they spread ($t=272$). However, cooperators in a single population gain an adaptation that give them a fitness advantage over defectors (dark blue, lower left). At $t=325$, defectors continue to invade cooperator populations. However, the adapted cooperator type, which can invade both defector populations and ancestral cooperator populations, can spread more quickly due to its greater fitness ($t=390$), and eventually fixes in the population ($t=500$). TODO 690, 812, 900.](../figures/Figure5.pdf)
 
 \clearpage
 
 ## Figure 6 {#fig6}
 
-**TODO** Yep. Almost ready.
+**Not All Niches are Created Equally.** (**A**) TODO: All negative niche construction (**B**) TODO: Increased mutation rate
+
+Coming soon...
 
 
 \clearpage
