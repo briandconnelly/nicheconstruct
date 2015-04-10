@@ -7,34 +7,51 @@ library(ggplot2bdc)
 
 source('formatting.R')
 
-target_frames <- c(0,272,325,390,500,690,812,900)
+# Read in the data sets and select the important columns that match
+allneg_data <- read.csv('../data/L05_A06_1xDelta_1xEpsilon_NEGNC.csv') %>%
+    select(Time, PopulationSize, CooperatorProportion, ShannonIndex, Treatment, Replicate)
+highmu_data_raw <- read.csv('../data/L05_A06_1xDelta_1xEpsilon_HighMutation.csv.bz2')
+highmu_data_raw$Treatment <- 'L05_A06_1xDelta_1xEpsilon_HighMutation'
+highmu_data <- highmu_data_raw %>%
+    select(Time, PopulationSize, CooperatorProportion, ShannonIndex, Treatment, Replicate) %>%
+    filter(Replicate < 10)
 
-genotype_colors <- c('C: [1 2 3 4 5]'= color_cooperator,
-                     'C: [1 2 3 4 6]'= color_cadapt,
-                     'C: [1 2 3 5 6]'= color_cadapt2,
-                     'D: [1 2 3 4 3]'= color_misc,
-                     'D: [1 2 3 4 5]'= color_defector)
+fig6data <- bind_rows(allneg_data, highmu_data)
+fig6data$Replicate <- as.factor(fig6data$Replicate)
+fig6data$Treatment <- factor(fig6data$Treatment,
+                             levels=c('L05_A06_1xDelta_1xEpsilon_NEGNC',
+                                      'L05_A06_1xDelta_1xEpsilon_HighMutation'),
+                             labels=c('A', 'B'))
 
-fig5data <- read.csv('../data/defector_invade_matched_sample.csv.bz2') %>%
-    filter(Time %in% target_frames)
-fig5data$Cooperator <- fig5data$Cooperator == 'True'
-fig5data$Genotype <- as.factor(fig5data$Genotype)
-fig5data$FullGenotype <- factor(sprintf("%s: %s", ifelse(fig5data$Cooperator, 'C', 'D'), fig5data$Genotype))
-fig5data$TimeStr <- factor(sprintf("t=%d", fig5data$Time))
+# fig6data %>% group_by(Treatment) %>% summarise(num_replicates=length(unique(Replicate)))
+# fig6data %>%
+#     filter(Time==max(fig6data$Time)) %>% 
+#     filter(CooperatorProportion > 0.1) %>%
+#     group_by(Treatment) %>%
+#     summarise(num_dominant=n())
 
-
-fig5 <- ggplot(data=fig5data, aes(x=X, y=Y, color=FullGenotype, fill=FullGenotype)) +
-    #facet_grid(. ~ TimeStr) +
-    facet_wrap(~ TimeStr, ncol=4) +
-    geom_point(shape=22, size=4) +
-    scale_x_continuous(limits=c(0, max(fig5data$X))) +
-    scale_y_continuous(limits=c(0, max(fig5data$Y))) +
-    scale_color_manual(guide=FALSE, values=genotype_colors) +
-    scale_fill_manual(guide=FALSE, values=genotype_colors) +
-    theme_bdc_lattice_population() +
+fig6 <- ggplot(data=fig6data, aes(x=Time, y=CooperatorProportion,
+                                  group=Replicate)) +
+    facet_grid(. ~ Treatment) +
+    geom_hline(aes(yintercept=0.5), linetype='dotted', color='grey70') +        
+    geom_line(aes(group=Replicate), alpha=0.4, color=color_cooperator) +
+    scale_y_continuous(breaks=seq(from=0, to=1, by=0.25), limits=c(0,1)) +
+    labs(x=label_time, y=label_cooperator_proportion) +
+    theme_bdc_grey() +
+    
     theme(strip.background = element_blank()) +
-    theme(strip.text = element_text(size=rel(0.8), vjust=0.2, color='grey30')) +
-    theme(panel.margin = grid::unit(0.25, 'lines')) +
-    theme(panel.border = element_rect(fill='transparent', color=NA))
-fig5 <- rescale_square(plot=fig5)
-ggsave(filename='../figures/Figure5.pdf', plot=fig5)
+    theme(strip.text = element_text(size=rel(1.0), face='bold'))
+fig6 <- rescale_plot(plot=fig6, ratio=1/1.2)
+ggsave(filename='../figures/Figure6.png', plot=fig6, dpi=300)
+
+
+figS2 <- ggplot(data=fig6data, aes(x=Time, y=ShannonIndex, group=Replicate)) +
+    facet_grid(. ~ Treatment) +
+    geom_line(aes(group=Replicate), alpha=0.4, color=color_diversity) +
+    scale_y_continuous(limits=c(0, NA)) +
+    labs(x=label_time, y=label_diversity) +
+    theme_bdc_grey(grid.y=TRUE) +
+    theme(strip.background = element_blank()) +
+    theme(strip.text = element_text(size=rel(1.0), face='bold'))
+figS2 <- rescale_plot(plot=figS2, ratio=1/1.2)
+ggsave(filename='../figures/FigureS2.png', plot=figS2, dpi=300)
