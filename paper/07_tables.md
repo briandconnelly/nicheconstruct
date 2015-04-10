@@ -9,8 +9,8 @@ Table: Model parameters and their value
 | $L$        | Number of adaptive loci                        | 5             |
 | $c$        | Fitness cost of cooperation                    | 0.1           |
 | $A$        | Number of alleles                              | 6             |
-| $\delta$   | Fitness benefit, nonzero alleles               | 0.3           |
-| $\epsilon$ | Fitness benefit, sequential alleles            | 0.00015       |
+| $\delta$   | Fitness benefit, adaptation to external environment           | 0.3           |
+| $\epsilon$ | Fitness benefit, adaptation to constructed environment        | 0.00015       |
 | $z$        | Baseline fitness                               | 1             |
 | $S_{min}$  | Minimum subpopulation size                     | 800           |
 | $S_{max}$  | Maximum subpopulation size                     | 2000          |

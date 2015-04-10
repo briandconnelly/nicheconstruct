@@ -34,11 +34,6 @@
 
 \clearpage
 
-## Figure 6 {#fig6}
-
-![**Negative Niche Construction and Adaptive Paths.** The proportion of cooperators present in each replicate population is shown for the duration of simulations. (**A**) When the effects of negative niche construction are magnified, cooperators are eliminated from all replicate populations (n=10). (**B**) Instead, when the mutation rate at adaptive loci is increased 100-fold, cooperators remain dominant in TODO of TODO replicate populations ($\mu_{a}=0.001$).](../figures/Figure6.png)
-
-\clearpage
 
 \renewcommand{\thefigure}{S\arabic{figure}}
 \setcounter{figure}{0}
@@ -48,8 +43,4 @@
 ![**Defector Invasion with Mutations.** The proportion of cooperators present in each replicate population is shown for the duration of simulations ($T=1000$). When mutations occur both at the adaptive loci and the cooperation locus ($\mu_{a}=\mu{c}=0.00005$), cooperation remains dominant in 58 of 160 replicate populations.](../figures/FigureS1.png)
 
 \clearpage
-
-## Supplemental Figure 2 {#figS2}
-
-![**TODO Diversity something.** TODO. Also explain Shannon (**A**) TODO. (n=TODO) (**B**) TODO. (n=TODO)](../figures/FigureS2.png)
 

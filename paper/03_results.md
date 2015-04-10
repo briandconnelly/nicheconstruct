@@ -2,23 +2,24 @@
 # Results
 
 Using the model described in the previous section, we perform simulations that follow the evolution of cooperation in a population consisting of subpopulations that are connected by spatially-limited migration.
-Individuals increase their competitiveness by gaining a limited number of adaptations.
+Individuals increase their competitiveness by gaining adaptations.
 While cooperation does not directly affect the fitness benefits that these adaptations confer, cooperation has indirect effects on the adaptive process.
-Specifically, cooperation increases subpopulation density. As a result, larger subpopulations of cooperators experience more mutational opportunities to gain adaptations. 
-Cooperation can rise in abundance by hitchhiking along with these adaptations, which compensate for the cost of cooperation.
-During this process, subpopulations alter their local environments, which feeds back to influence selection.
-Here, we explore how niche construction affects the evolution of cooperation.
+Specifically, cooperation increases subpopulation density.
+As a result, larger subpopulations of cooperators experience more mutational opportunities. 
+Cooperation can rise in abundance by hitchhiking along with beneficial mutations, which compensate for the cost of cooperation.
+Importantly, subpopulations alter their local environments, which feeds back to influence selection.
+Here, we explore how such niche construction affects the evolution of cooperation.
 
 
 ## Cooperation Persists with Niche Construction
 
 Without any opportunity for adaptation ($L=0$), cooperators are swiftly eliminated in competition with defectors ([Figure 2A](#fig2)).
 Despite an initial lift in cooperator abundance due to increased productivity, the cost of cooperation becomes disadvantageous as migration mixes the initially isolated subpopulations.
-When populations can adapt to the external environment ($L=5$), but niche construction is absent ($\epsilon=0$), cooperators are maintained only transiently ([Figure 2B](#fig2)).
-Here, larger cooperator subpopulations can more quickly adapt to their external environment as before.
+When populations can adapt to the external environment ($L=5$ and $\delta > 0$), but niche construction is absent ($\epsilon=0$), cooperators are maintained only transiently ([Figure 2B](#fig2)).
+Here, larger cooperator subpopulations can more quickly adapt to their external environment.
 However, as previously described by @HANKSHAW, cooperation is subsequently lost once populations become fully adapted to their environment.
-This occurs when isogenic defectors (i.e., defectors with identical adaptive loci) arise via mutation and displace cooperation due to their selective advantage.
-However, when niche construction feeds back to influence selection, cooperation persists in over 2/3 of the replicate populations ([Figure 2C](#fig2)).
+This occurs when isogenic defectors (i.e., defectors with identical adaptive loci) arise via mutation and displace cooperators due to their selective advantage.
+However, when niche construction feeds back to influence selection ($\epsilon > 0$), cooperation persists in the majority of the replicate populations ([Figure 2C](#fig2)).
 We see in [Figure 3A](#fig3) that despite oscillations in the proportion of cooperators, cooperation is maintained at high levels in these populations.
 
 
@@ -33,7 +34,8 @@ Niche construction, therefore, plays a decisive role here.
 
 ## Negative Niche Construction is Critical to Cooperator Persistence
 
-Adaptations can negatively effect fitness in our model due to selection for sequentially-increasing allelic states and the circular arrangement of these alleles (see [Figure 1](#fig1)).
+In our model, an adaptation to a constructed aspect of the environment initiates a new instance of niche construction, leading to sequentially increasing allelic states across the adaptive loci.
+Under certain conditions, this construction always makes the constructor suboptimal for the niche it creates (see Box 1).
 This negative niche construction occurs when the number of adaptive alleles ($A$) does not divide evenly into the number of adaptive loci ($L$).
 In such a case, any sequence of integers on the circular genome will always contain a break in the sequence; that is, one locus with an allele that is not one less than the allele at the next locus.
 Given this unavoidable mismatch, any type that has fixed will always construct a niche that favors selection for a new type.
@@ -46,25 +48,15 @@ These results indicate that the type of niche construction matters. Specifically
 The adaptation resulting from selective feedbacks can limit invasion by defectors, which arise either through immigration from neighboring patches or through mutation from a cooperator ancestor.
 The latter challenge is particularly threatening, as these isogenic defectors are equally adapted, yet do not incur the cost of cooperation.
 As demonstrated in [Figure 4A](#fig4), isogenic defectors rapidly spread when introduced at a single patch in the center of a population of cooperators if mutations do not occur.
-However, when resident cooperators can gain adaptations via mutation, cooperators resist defector invasion in over half of the replicate populations ([Figure 4B](#fig4)).
-[Figure 5](#fig5) depicts one such instance where cooperation survived.
+However, when cooperators can gain adaptations via mutation, cooperators resist defector invasion in over half of the replicate populations ([Figure 4B](#fig4)).
+[Figure 5](#fig5) depicts one such instance.
 In that population, defectors quickly began to spread.
 However, an adaptation arose in a neighboring cooperator population.
-This type spread more quickly, halting defectors and eventually driving them to extinction.
+This type spreads more quickly, stopping the spread of defectors and eventually driving them to extinction.
 Because this adaption occurred in a cooperator population, cooperation was able to hitchhike to safety.
+Importantly, this new cooperator was favored because of the niche that its ancestor created.
+Here, cooperators can find safety in numbers---because their larger populations have more mutational opportunities, they are more likely to gain adaptations that rescue them from invasion.
+Further, the larger number of cooperators more strongly construct their niche, and thus more strongly favors an adapted type.
+This allows that type to appear and to spread more quickly in the population.
 [Figure 4C](#fig4) shows how quickly an adapted cooperator type can invade a population of defectors.
-
-
-## Negative Niche Construction Must Follow a Path
-
-We have seen that negative niche construction plays a critical role in maintaining cooperation by creating adaptive "escape routes" for cooperators.
-But in some cases, cooperator populations were not able to gain these adaptations quickly enough, which led to extinction ([Figure 3A](#fig3)).
-To determine whether stronger negative feedbacks from niche construction would increase the rate at which cooperator populations gained the adaptations needed to escape defector invasion, we performed simulations in which the allelic state at each locus was always mismatched.
-This was accomplished in the model by removing selection for sequential allelic states.
-Instead, the selective value of an allele at each locus increased with the number of individuals in the population that had the next allelic state at that *same* locus.
-For example, selection in this modified model would favor a type with $[2,5,1,4,4]$ in a niche constructed by $[1,4,6,3,3]$ ($L=5$, $A=6$).
-However, this strongly negative niche construction does not better enable cooperators to stave off defection. In fact, cooperation is quickly lost under these conditions ([Figure 6A](#fig6)).
-
-We then performed simulations to determine whether it is the rate of adaptation in response to negative niche construction that is important, not the strength of its feedback.
-When the mutation rate at adaptive loci is raised 100-fold ($\mu_{a}=0.001$), cooperation is maintained at higher levels and in more replicate populations ([Figure 6B](#fig6)).
 
