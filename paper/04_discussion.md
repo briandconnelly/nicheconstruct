@@ -7,21 +7,21 @@ Because of this, these cooperator populations experience more mutations and are 
 While this process does favor cooperation in the short term, it eventually reaches a dead end; when the opportunities for adaptation are exhausted and cooperators can no longer hitchhike, they face extinction.
 In our current model, we have considered whether niche construction might serve to perpetually generate new adaptive opportunities and thus favor cooperation indefinitely.
 
-When niche construction occurs, cooperation can indeed persist (Figures [2C](#fig2) and [3A](#fig3)).
+When niche construction occurs, cooperation can indeed persist (Figures [1C](#fig1) and [2A](#fig2)).
 In our model, niche construction introduces additional selective effects that influence the evolutionary process, leading to a more pronounced Hankshaw effect.
-However, simply raising the fitness benefits conferred by adaptations does not maintain cooperators at high proportion ([Figure 3B](#fig3)).
+However, simply raising the fitness benefits conferred by adaptations does not maintain cooperators at high proportion ([Figure 2B](#fig2)).
 This indicates that niche construction does play a crucial role.
 
-Further, we find that it is specifically *negative* niche construction that maintains cooperation ([Figure 3C](#fig3)).
+Further, we find that it is specifically *negative* niche construction that maintains cooperation ([Figure 2C](#fig2)).
 As cooperator and defector types gain adaptations, they change the environment in a way that favors other types.
 In this way, negative niche construction serves as a perpetual source of adaptation.
 Here we observe another facet of the Hankshaw effect: because populations of cooperators are larger, they are better able to respond to the adaptive opportunities that result from negative niche construction.
-These opportunities can allow cooperators to resist invasion by defectors ([Figure 4B](#fig4)).
+These opportunities can allow cooperators to resist invasion by defectors ([Figure 3B](#fig3)).
 Although defectors initially have an advantage by saving on the cost of cooperation, subpopulations of cooperators can quickly gain an advantage because they are larger.
 Even after defector invasion, subpopulations of cooperators are more likely to produce the next adapted mutant, which can then displace the slower evolving defectors.
-It is these recurring cycles of defector invasion and cooperator adaptation that underlie the oscillations in cooperator proportion that we see in [Figure 3A](#fig3).
+It is these recurring cycles of defector invasion and cooperator adaptation that underlie the oscillations in cooperator proportion that we see in [Figure 2A](#fig2).
 When an adaptation to the constructed environment does not occur in the cooperator background before the defector dominates, the defector can drive the cooperator to extinction.
-This is something that we see occur stochastically in Figures [3A](#fig3) and [4B](#fig4).
+This is something that we see occur stochastically in Figures [2A](#fig2) and [3B](#fig3).
 
 
 ## Cooperation as Niche Construction

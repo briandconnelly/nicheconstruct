@@ -63,7 +63,7 @@ I(a) =
 $$ {#eq:IA}
 
 Thus, an individual's fitness is determined both by adaptations to the external environment and by adaptations to its constructed environment.
-[Figure 1](#fig1) illustrates the effects of these two components.
+[Box 1](#box1) illustrates the effects of these two components.
 While cooperation is costly, we assume its effects are independent of the external and constructed components of the environment.
 
 
