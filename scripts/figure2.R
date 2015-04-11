@@ -13,15 +13,15 @@ nonc_data <- read.csv('../data/L05_A06_2xDelta_0xEpsilon.csv')
 noneg_data <- read.csv('../data/L05_A05_1xDelta_1xEpsilon.csv')
 
 # Combine the data sets
-fig3data <- bind_rows(base_data, nonc_data, noneg_data)
-fig3data$Replicate <- as.factor(fig3data$Replicate)
-fig3data$Treatment <- factor(fig3data$Treatment,
+fig2data <- bind_rows(base_data, nonc_data, noneg_data)
+fig2data$Replicate <- as.factor(fig2data$Replicate)
+fig2data$Treatment <- factor(fig2data$Treatment,
                              levels=c('L05_A06_1xDelta_1xEpsilon',
                                       'L05_A06_2xDelta_0xEpsilon',
                                       'L05_A05_1xDelta_1xEpsilon'),
                              labels=c('A', 'B', 'C'))
 
-fig3 <- ggplot(data=fig3data, aes(x=Time, y=CooperatorProportion)) +
+fig2 <- ggplot(data=fig2data, aes(x=Time, y=CooperatorProportion)) +
     facet_grid(. ~ Treatment) +
     geom_hline(aes(yintercept=0.5), linetype='dotted', color='grey70') +        
     geom_line(aes(group=Replicate), alpha=0.4, color=color_cooperator) +
@@ -30,5 +30,6 @@ fig3 <- ggplot(data=fig3data, aes(x=Time, y=CooperatorProportion)) +
     theme_bdc_grey() +
     theme(strip.background = element_blank()) +
     theme(strip.text = element_text(size=rel(1.0), vjust=0.2, face='bold'))
-fig3 <- rescale_plot(plot=fig3, ratio=1/1.2)
-ggsave(filename='../figures/Figure3.png', plot=fig3, dpi=300)
+fig2 <- rescale_plot(plot=fig2, ratio=1/1.2)
+ggsave(filename='../figures/Figure2.png', plot=fig2, dpi=300)
+

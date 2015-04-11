@@ -9,13 +9,13 @@ library(Hmisc)
 source('formatting.R')
 source('figsummary.R')
 
-fig2A_data <- read.csv('../data/L00.csv')
-fig2B_data <- read.csv('../data/L05_A06_1xDelta_0xEpsilon.csv') 
-fig2C_data <- read.csv('../data/L05_A06_1xDelta_1xEpsilon.csv')
+fig1A_data <- read.csv('../data/L00.csv')
+fig1B_data <- read.csv('../data/L05_A06_1xDelta_0xEpsilon.csv') 
+fig1C_data <- read.csv('../data/L05_A06_1xDelta_1xEpsilon.csv')
 
-fig2_data <- bind_rows(fig2A_data, fig2B_data, fig2C_data)
-fig2_data$Replicate <- as.factor(fig2_data$Replicate)
-fig2_data$Treatment <- factor(fig2_data$Treatment,
+fig1_data <- bind_rows(fig1A_data, fig1B_data, fig1C_data)
+fig1_data$Replicate <- as.factor(fig1_data$Replicate)
+fig1_data$Treatment <- factor(fig1_data$Treatment,
                               levels=c('L00',
                                        'L05_A06_1xDelta_0xEpsilon',
                                        'L05_A06_1xDelta_1xEpsilon'),
@@ -23,7 +23,7 @@ fig2_data$Treatment <- factor(fig2_data$Treatment,
                                        'L05_A06_1xDelta_0xEpsilon'='B',
                                        'L05_A06_1xDelta_1xEpsilon'='C'))
 
-fig2 <- ggplot(data=fig2_data, aes(x=Time, y=CooperatorProportion)) +
+fig1 <- ggplot(data=fig1_data, aes(x=Time, y=CooperatorProportion)) +
     geom_hline(aes(yintercept=0.5), linetype='dotted', color='grey70') +        
     stat_summary(fun.data='figsummary', geom='ribbon', color=NA,
                  fill=color_cooperator, alpha=ribbon_alpha) +
@@ -34,5 +34,6 @@ fig2 <- ggplot(data=fig2_data, aes(x=Time, y=CooperatorProportion)) +
     theme_bdc_grey() +
     theme(strip.background = element_blank()) +
     theme(strip.text = element_text(size=rel(1.0), vjust=0.2, face='bold'))
-fig2 <- rescale_plot(plot=fig2, ratio=1/1.2)
-ggsave(filename='../figures/Figure2.png', plot=fig2, dpi=300)
+fig1 <- rescale_plot(plot=fig1, ratio=1/1.2)
+ggsave(filename='../figures/Figure1.png', plot=fig1, dpi=300)
+

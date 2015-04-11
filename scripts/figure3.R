@@ -16,13 +16,13 @@ c_coop_invade <- read.csv(bzfile('../data/cooperator_invade_cheat_noadapt.csv.bz
 c_coop_invade$Treatment <- 'C'
 
 # Combine the data
-fig4data <- bind_rows(a_defect_invade_matched, b_defect_invade_block, c_coop_invade)
-fig4data$Replicate <- as.factor(fig4data$Replicate)
-fig4data$Treatment <- factor(fig4data$Treatment, levels=c('A','B','C'),
+fig3data <- bind_rows(a_defect_invade_matched, b_defect_invade_block, c_coop_invade)
+fig3data$Replicate <- as.factor(fig3data$Replicate)
+fig3data$Treatment <- factor(fig3data$Treatment, levels=c('A','B','C'),
                              labels=c('A','B','C'))
 
 # Make the plot
-fig4 <- ggplot(data=fig4data, aes(x=Time, y=CooperatorProportion)) +
+fig3 <- ggplot(data=fig3data, aes(x=Time, y=CooperatorProportion)) +
     facet_grid(. ~ Treatment, drop=FALSE) +
     geom_hline(aes(yintercept=0.5), linetype='dotted', color='grey70') + 
     geom_line(aes(group=Replicate), alpha=0.08, color=color_cooperator) +
@@ -31,6 +31,6 @@ fig4 <- ggplot(data=fig4data, aes(x=Time, y=CooperatorProportion)) +
     theme_bdc_grey() +
     theme(strip.background = element_blank()) +
     theme(strip.text = element_text(size=rel(1.0), vjust=0.2, face='bold'))
-fig4 <- rescale_plot(plot=fig4, ratio=1/1.2)
-ggsave(filename='../figures/Figure4.png', plot=fig4, dpi=300)
+fig3 <- rescale_plot(plot=fig3, ratio=1/1.2)
+ggsave(filename='../figures/Figure3.png', plot=fig3, dpi=300)
 
