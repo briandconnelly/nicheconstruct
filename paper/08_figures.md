@@ -28,23 +28,23 @@
 
 \clearpage
 
-# Box 1 Figures
+## Box 1 Figures
 \renewcommand{\thefigure}{B\arabic{figure}}
 \setcounter{figure}{0}
 
-## Figure B1 {#figB1}
+### Figure B1 {#figB1}
 
 ![Figure for Box 1](../figures/FigureB1.pdf)
 
 \clearpage
 
 
-# Supplemental Figures
+## Supplemental Figures
 
 \renewcommand{\thefigure}{S\arabic{figure}}
 \setcounter{figure}{0}
 
-## Supplemental Figure 1 {#figS1}
+### Supplemental Figure 1 {#figS1}
 
 ![**Defector Invasion with Mutations.** The proportion of cooperators present in each replicate population is shown for the duration of simulations ($T=1000$). When mutations occur both at the adaptive loci and the cooperation locus ($\mu_{a}=\mu{c}=0.00005$), cooperation remains dominant in 58 of 160 replicate populations.](../figures/FigureS1.png)
 
