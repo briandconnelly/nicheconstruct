@@ -28,6 +28,18 @@
 
 \clearpage
 
+# Box 1 Figures
+\renewcommand{\thefigure}{B\arabic{figure}}
+\setcounter{figure}{0}
+
+## Figure B1 {#figB1}
+
+![Figure for Box 1](../figures/FigureB1.pdf)
+
+\clearpage
+
+
+# Supplemental Figures
 
 \renewcommand{\thefigure}{S\arabic{figure}}
 \setcounter{figure}{0}
