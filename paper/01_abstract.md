@@ -2,7 +2,7 @@
 
 # Abstract
 
-By benefitting others at a cost to themselves, cooperative individuals face an unrelenting threat from defectors, or individuals that avail themselves of the cooperative benefit without contributing.
+By benefitting others at a cost to themselves, cooperators face an unrelenting threat from defectors, or individuals that avail themselves of the cooperative benefit without contributing.
 A longstanding challenge to evolutionary biology is to understand the mechanisms that support the vast displays of cooperation that nevertheless exist.
 Hammarlund et al. recently demonstrated that cooperation can persist by hitchhiking along with beneficial non-social adaptations.
 Importantly, cooperators play an active role in this process.

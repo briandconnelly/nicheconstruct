@@ -4,8 +4,8 @@ Despite their negative effects, deleterious traits can rise in abundance due to 
 In a process termed the "Hankshaw effect", @HANKSHAW recently demonstrated that cooperation can actively prolong its existence by increasing its likelihood of hitchhiking with a beneficial trait.
 In that work and in ours, populations of cooperators grow to a higher density than those of defectors.
 Because of this, these cooperator populations experience more mutations and are therefore more likely to gain adaptations.
-While this process does favor cooperation in the short term, it eventually reaches a dead end; when the opportunities for adaptation are exhausted and cooperators can no longer hitchhike, they face extinction.
-In our current model, we have considered whether niche construction might serve to perpetually generate new adaptive opportunities and thus favor cooperation indefinitely.
+While this process does favor cooperation in the short term, it eventually reaches a dead end; when the opportunities for adaptation are exhausted, and cooperators can no longer hitchhike, they face extinction.
+Here, we have considered whether niche construction might serve to perpetually generate new adaptive opportunities and thus favor cooperation indefinitely.
 
 When niche construction occurs, cooperation can indeed persist (Figures [1C](#fig1) and [2A](#fig2)).
 In our model, niche construction introduces additional selective effects that influence the evolutionary process, leading to a more pronounced Hankshaw effect.
@@ -13,8 +13,8 @@ However, simply raising the fitness benefits conferred by adaptations does not m
 This indicates that niche construction does play a crucial role.
 
 Further, we find that it is specifically *negative* niche construction that maintains cooperation ([Figure 2C](#fig2)).
-As cooperator and defector types gain adaptations, they change the environment in a way that favors other types.
-In this way, negative niche construction serves as a perpetual source of adaptation.
+As cooperator and defector types gain adaptations, they change the environment ways that favor other types.
+Because of this, negative niche construction serves as a perpetual source of adaptation.
 Here we observe another facet of the Hankshaw effect: because populations of cooperators are larger, they are better able to respond to the adaptive opportunities that result from negative niche construction.
 These opportunities can allow cooperators to resist invasion by defectors ([Figure 3B](#fig3)).
 Although defectors initially have an advantage by saving on the cost of cooperation, subpopulations of cooperators can quickly gain an advantage because they are larger.

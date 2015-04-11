@@ -7,7 +7,7 @@ More successful lineages spread to neighboring subpopulations by migration.
 
 In this expanded model, subpopulations additionally modify their local environment.
 As this process occurs, environmental changes feed back to affect selection.
-We explore how niche construction affects the evolution of cooperation; specifically, how cooperative behavior can hitchhike with adaptive mutations to modified environments.
+We explore how niche construction affects the evolution of cooperation; specifically, how cooperative behavior can hitchhike with adaptive mutations to modified environments. Box 1 provides additional information about the model.
 
 
 ## Model Description
@@ -29,14 +29,14 @@ We assume $\delta > c$, which allows a minimally adapted cooperator to recoup th
 ### Niche Construction and Selective Feedbacks
 
 Individual fitness is also affected by aspects of the local environment that are affected by organisms.
-We represent this constructed "niche" implicitly based on the specific allelic states present in the subpopulation.
+We implicitly represent this constructed "niche" based on the specific allelic states present in the subpopulation.
 As allelic states change, the subpopulation alters its environment, creating a unique niche.
 As described below, the specific alleles that are present at each locus matter.
 
 In our model, the feedback from niche construction takes the form of density dependent selection, and individuals evolve to better match their niche.
 Specifically, the selective value of non-zero allele $a$ at adaptive locus $l$---and consequently the fitness of an individual carrying that allele---increases with the number of individuals in the subpopulation that have allele $a-1$ at locus $l-1$.
 For example, when $L=5$ and $A=6$, and allele $4$ has fixed at locus $2$, a genotype with allele $5$ at locus $3$ is favored.
-And once allele $5$ has fixed at locus $3$, the niche that this population constructs will favor allele $6$ at locus $4$.
+And once allele $5$ has fixed at locus $3$, the niche that this population constructs will favor allele $6$ at locus $4$ (see Box 1).
 As a consequence, genotypes with sequentially increasing allelic states will tend to evolve.
 We treat both adaptive loci and their non-zero allelic states as "circular": the selective value of an allele at locus 1 is affected by the allelic composition of the subpopulation at locus $L$.
 Similarly, the selective value of allele 1 at any locus increases with the number of individuals carrying allele $A$ at the previous locus.
@@ -63,7 +63,7 @@ I(a) =
 $$ {#eq:IA}
 
 Thus, an individual's fitness is determined both by adaptations to the external environment and by adaptations to its constructed environment.
-[Box 1](#box1) illustrates the effects of these two components.
+[Box 1](#box1) illustrates the process of adaptation to the constructed environment.
 While cooperation is costly, we assume its effects are independent of the external and constructed components of the environment.
 
 
