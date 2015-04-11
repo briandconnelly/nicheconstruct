@@ -15,20 +15,19 @@ genotype_colors <- c('C: [1 2 3 4 5]'= color_cooperator,
                      'D: [1 2 3 4 3]'= color_misc,
                      'D: [1 2 3 4 5]'= color_defector)
 
-fig5data <- read.csv('../data/defector_invade_matched_sample.csv.bz2') %>%
+fig4data <- read.csv('../data/defector_invade_matched_sample.csv.bz2') %>%
     filter(Time %in% target_frames)
-fig5data$Cooperator <- fig5data$Cooperator == 'True'
-fig5data$Genotype <- as.factor(fig5data$Genotype)
-fig5data$FullGenotype <- factor(sprintf("%s: %s", ifelse(fig5data$Cooperator, 'C', 'D'), fig5data$Genotype))
-fig5data$TimeStr <- factor(sprintf("t=%d", fig5data$Time))
+fig4data$Cooperator <- fig4data$Cooperator == 'True'
+fig4data$Genotype <- as.factor(fig4data$Genotype)
+fig4data$FullGenotype <- factor(sprintf("%s: %s", ifelse(fig4data$Cooperator, 'C', 'D'), fig4data$Genotype))
+fig4data$TimeStr <- factor(sprintf("t=%d", fig4data$Time))
 
 
-fig5 <- ggplot(data=fig5data, aes(x=X, y=Y, color=FullGenotype, fill=FullGenotype)) +
-    #facet_grid(. ~ TimeStr) +
+fig4 <- ggplot(data=fig4data, aes(x=X, y=Y, color=FullGenotype, fill=FullGenotype)) +
     facet_wrap(~ TimeStr, ncol=4) +
     geom_point(shape=22, size=4) +
-    scale_x_continuous(limits=c(0, max(fig5data$X))) +
-    scale_y_continuous(limits=c(0, max(fig5data$Y))) +
+    scale_x_continuous(limits=c(0, max(fig4data$X))) +
+    scale_y_continuous(limits=c(0, max(fig4data$Y))) +
     scale_color_manual(guide=FALSE, values=genotype_colors) +
     scale_fill_manual(guide=FALSE, values=genotype_colors) +
     theme_bdc_lattice_population() +
@@ -36,5 +35,5 @@ fig5 <- ggplot(data=fig5data, aes(x=X, y=Y, color=FullGenotype, fill=FullGenotyp
     theme(strip.text = element_text(size=rel(0.8), vjust=0.2, color='grey30')) +
     theme(panel.margin = grid::unit(0.25, 'lines')) +
     theme(panel.border = element_rect(fill='transparent', color=NA))
-fig5 <- rescale_square(plot=fig5)
-ggsave(filename='../figures/Figure5.pdf', plot=fig5)
+fig4 <- rescale_square(plot=fig4)
+ggsave(filename='../figures/Figure4.png', plot=fig4)

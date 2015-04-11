@@ -22,29 +22,31 @@
 
 \clearpage
 
+
 ## Figure 4 {#fig4}
 
-![**Cooperator Adaptation Prevents Defector Invasion.** Here we depict the distribution of dominant types among subpopulations over time for one representative simulation in which isogenic defectors arise. To highlight the effects of adaptation, mutations did not occur at the cooperation locus ($\mu_{c}=0$). At time $t=0$ (upper left panel), a single isogenic defector population (red) is placed among cooperator populations (light blue). Because these defectors do not bear the costs of cooperation, they spread ($t=272$). However, cooperators in one population gain an adaptation that gives them a fitness advantage over defectors (second panel, dark blue, lower left). At $t=325$, defectors continue to invade cooperator populations. However, the adapted cooperator type spreads more quickly due to its fitness advantage, invading both defector populations and ancestral cooperator populations ($t=390$), until it eventually fixes in the population ($t=500$). At $t=690$, a new cooperator type emerges that is favored due to negative niche construction (orange). This new type spreads rapidly ($t=812$) until reaching fixation ($t=900$). At this point, it becomes susceptible to invasion by the next "adapted" cooperator type, and the cycle continues.](../figures/Figure4.pdf)
+![**Cooperator Adaptation Prevents Defector Invasion.** Here we depict the distribution of dominant types among subpopulations over time for one representative simulation in which isogenic defectors arise. To highlight the effects of adaptation, mutations did not occur at the cooperation locus ($\mu_{c}=0$). At time $t=0$ (upper left panel), a single isogenic defector population (red) is placed among cooperator populations (light blue). Because these defectors do not bear the costs of cooperation, they spread ($t=272$). However, cooperators in one population gain an adaptation that gives them a fitness advantage over defectors (second panel, dark blue, lower left). At $t=325$, defectors continue to invade cooperator populations. However, the adapted cooperator type spreads more quickly due to its fitness advantage, invading both defector populations and ancestral cooperator populations ($t=390$), until it eventually fixes in the population ($t=500$). At $t=690$, a new cooperator type emerges that is favored due to negative niche construction (orange). This new type spreads rapidly ($t=812$) until reaching fixation ($t=900$). At this point, it becomes susceptible to invasion by the next "adapted" cooperator type, and the cycle continues.](../figures/Figure4.png)
 
 \clearpage
 
-## Box 1 Figures
+
+# Box 1 Figures
 \renewcommand{\thefigure}{B\arabic{figure}}
 \setcounter{figure}{0}
 
-### Figure B1 {#figB1}
+## Figure B1 {#figB1}
 
 ![Figure for Box 1](../figures/FigureB1.pdf)
 
 \clearpage
 
 
-## Supplemental Figures
+# Supplemental Figures
 
 \renewcommand{\thefigure}{S\arabic{figure}}
 \setcounter{figure}{0}
 
-### Supplemental Figure 1 {#figS1}
+## Figure S1 {#figS1}
 
 ![**Defector Invasion with Mutations.** The proportion of cooperators present in each replicate population is shown for the duration of simulations ($T=1000$). When mutations occur both at the adaptive loci and the cooperation locus ($\mu_{a}=\mu{c}=0.00005$), cooperation remains dominant in 58 of 160 replicate populations.](../figures/FigureS1.png)
 
