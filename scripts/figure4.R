@@ -9,6 +9,13 @@ source('formatting.R')
 
 target_frames <- c(0,272,325,390,500,690,812,900)
 
+color_cooperator <- '#AEC7E8'
+color_defector <- '#FF9896'
+color_cadapt <- '#729ECE'
+color_cadapt2 <- '#1F77B4'
+color_misc <- 'green'
+color_diversity <- '#67BF5C'
+
 genotype_colors <- c('C: [1 2 3 4 5]'= color_cooperator,
                      'C: [1 2 3 4 6]'= color_cadapt,
                      'C: [1 2 3 5 6]'= color_cadapt2,

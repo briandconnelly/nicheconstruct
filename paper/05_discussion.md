@@ -49,10 +49,10 @@ Any changes in the subpopulation, therefore, produce immediate effects on the co
 However, timescales in our model could be de-coupled in two ways.
 First, cooperators modify their niche by enabling their subpopulation to reach larger density (Equation 4).
 These increased subpopulation sizes play a critical role by effectively increasing the rate of evolution in these subpopulations.
-Because of the importance of this process, it would be very informative to explore how sensitive our results are to the rate at which cooperators increase population sizes and the rate at which this benefit decays in the absence of cooperators.
+Because of the importance of this process, it would be very informative to explore how sensitive our results are to the rate at which cooperators increase subpopulation sizes and the rate at which this benefit decays in the absence of cooperators.
 Similarly, our results could be substantially affected by alterations in the rate at which the constructed environment changes in response to changes in the subpopulation.
-First, such changes in timescale would affect the selective values of alleles as the population changed.
-Changes in timescale would also influence whether or not populations were able to evolve adapted types and if so, how well those adapted types can propagate through the population to address the threat of a defector.
+First, such changes in timescale would affect the selective values of alleles as the subpopulation changed.
+Changes in timescale would also influence whether or not subpopulations were able to evolve adapted types and if so, how well those adapted types can propagate through the population to address the threat of a defector.
 
 Other studies, while not focused on cooperation, have similarly shown that the timescales at which niche construction feedbacks occur can strongly influence evolutionary outcomes [@laland1999evolutionary; @laland1996evolutionary].
 This perspective is likely to be crucial for understanding the evolution of cooperative behaviors like the production of public goods.
@@ -79,7 +79,7 @@ For example, the cooperative production of virulence factors by the human pathog
 Following what we have shown in this work, these antagonistic, negative niche constructing behaviors may work to maintain these infections.
 If these populations do indeed benefit from adaptations that are created by niche construction, a case could perhaps be made for developing treatments that target the selective feedback loop that provides adaptive opportunities in these spatial environments.
 While the idea of removing negative selective feedbacks and supporting stability may seem counterintuitive, if it leaves the infecting population more susceptible, then perhaps pairing such a treatment with the introduction of defector mutants (see e.g., @rumbaugh2009quorum), could significantly improve host fitness.
-Expanding models such as ours to address the additional dynamics present in host-symbiont systems such as these could be quite productive.
+Expanding models such as ours to address the additional dynamics present in host-symbiont systems such as these could offer important new perspectives.
 
 It was recently argued that incorporating the effects of niche construction is critical for improving our understanding of viral evolution [@hamblin2014viral] and evolution in co-infecting parasites [@hafer2015when].
 Incorporating host dynamics, co-evolution, and the feedbacks that they produce is likely to be equally important for gaining a greater understanding of how cooperative behaviors evolve in these host-symbiont settings.
