@@ -15,7 +15,7 @@ Here, we explore how such niche construction affects the evolution of cooperatio
 
 Without any opportunity for adaptation ($L=0$), cooperators are swiftly eliminated from populations ([Figure 1A](#fig1)).
 Despite an initial lift in cooperator abundance due to increased productivity, the cost of cooperation becomes disadvantageous as migration mixes the initially isolated subpopulations.
-When populations can adapt to the external environment ($L=5$ and $\delta > 0$), but niche construction is absent ($\epsilon=0$), cooperators are maintained only transiently ([Figure 1B](#fig1)).
+When populations can adapt to the external environment ($L > 0$ and $\delta > 0$), but niche construction is absent ($\epsilon=0$), cooperators are maintained only transiently ([Figure 1B](#fig1)).
 Here, larger cooperator subpopulations can more quickly adapt to their external environment.
 However, as previously described by @HANKSHAW, cooperation is subsequently lost once populations become fully adapted.
 This occurs when isogenic defectors (i.e., defectors with identical adaptive loci) arise via mutation and displace cooperators due to their selective advantage.
@@ -36,7 +36,7 @@ Niche construction, therefore, plays a decisive role here.
 ## Negative Niche Construction is Critical to Cooperator Persistence
 
 In our model, an adaptation to a constructed aspect of the environment initiates a new instance of niche construction, leading to sequentially increasing allelic states across the adaptive loci.
-Under certain conditions, this construction always makes the constructor suboptimal for the niche it creates (see Box 1).
+Under certain conditions, this construction always makes the constructor sub-optimal for the niche it creates (see Box 1).
 This negative niche construction occurs when the number of adaptive alleles ($A$) does not divide evenly into the number of adaptive loci ($L$).
 In such a case, any sequence of integers on the circular genome will always contain a break in the sequence; that is, one locus will will have an allele that is not one less than the allele at the next locus.
 Given this unavoidable mismatch, any type that has fixed will always construct a niche that favors selection for a new type.
@@ -51,13 +51,15 @@ The latter challenge is particularly threatening, as these isogenic defectors ar
 As demonstrated in [Figure 3A](#fig3), isogenic defectors rapidly spread when introduced at a single patch in the center of a population of cooperators if mutations do not occur.
 However, when cooperators can gain adaptations via mutation, cooperators resist defector invasion in over half of the replicate populations ([Figure 3B](#fig3)).
 [Figure 4](#fig4) depicts one such instance.
-In that population, defectors begin to spread.
+In that population, isogenic defectors are seeded at a single patch in an otherwise all-cooperator population.
+These defectors quickly begin to spread.
 However, a neighboring cooperator population gains an adaptation, which increases its fitness above that of the defector.
 This type spreads more quickly, stopping the spread of defectors and eventually driving them to extinction.
 Because this adaption occurs in a cooperator population, cooperation is able to hitchhike to safety.
 Importantly, this new cooperator is favored because of the niche that its ancestral type created.
 Here, cooperators can find safety in numbers---because their larger populations have more mutational opportunities, they are more likely to gain adaptations that rescue them from invasion.
-Further, the larger number of cooperators more strongly construct their niche, which increases selection for an adapted type.
+Further, these larger cooperators exert a greater influence on their niche, which increases selection for an adapted type.
 This allows that type to appear and to spread more quickly in the population.
 [Figure 3C](#fig3) shows how quickly an adapted cooperator type can invade a population of defectors.
+Importantly, this cooperator type is adapted to the niche constructed by the defector.
 

@@ -7,7 +7,7 @@ More successful lineages spread to neighboring subpopulations by migration.
 
 In this expanded model, subpopulations additionally modify their local environment.
 As this process occurs, environmental changes feed back to affect selection.
-We explore how niche construction affects the evolution of cooperation; specifically, how cooperative behavior can hitchhike with adaptive mutations to modified environments. Box 1 provides additional information about the model.
+We explore how niche construction affects the evolution of cooperation; specifically, how cooperative behavior can hitchhike along with adaptations to modified environments. Box 1 provides additional information about the model.
 
 
 ## Model Description
@@ -16,7 +16,7 @@ We explore how niche construction affects the evolution of cooperation; specific
 
 Each individual has a haploid genome with $L + 1$ loci (see [Table 1](#tables) for model parameters and their values).
 Different alleles at each locus are represented by different integers.
-A binary allele at the first locus (here, locus zero) determines whether that individual is a cooperator ($1$), which carries fitness cost $c$, or a defector ($0$).
+A binary allele at the *cooperation locus* (locus zero) determines whether that individual is a cooperator ($1$), which carries fitness cost $c$, or a defector ($0$).
 The remaining $L$ loci are *adaptive loci*, and are each occupied by $0$ or a value from the set $\{1, 2, \ldots, A\}$.
 Allele $0$ represents a lack of adaptation, while a non-zero allele represents one of the $A$ possible adaptations at that locus.
 
@@ -35,8 +35,8 @@ As described below, the specific alleles that are present at each locus matter.
 
 In our model, the feedback from niche construction takes the form of density dependent selection, and individuals evolve to better match their niche.
 Specifically, the selective value of non-zero allele $a$ at adaptive locus $l$---and consequently the fitness of an individual carrying that allele---increases with the number of individuals in the subpopulation that have allele $a-1$ at locus $l-1$.
-For example, when $L=5$ and $A=6$, and allele $4$ has fixed at locus $2$, a genotype with allele $5$ at locus $3$ is favored.
-And once allele $5$ has fixed at locus $3$, the niche that this population constructs will favor allele $6$ at locus $4$ (see Box 1).
+For example, if $L=5$ and $A=6$, and allele $4$ has fixed at locus $2$, then a genotype with allele $5$ at locus $3$ is favored.
+And as allele $5$ fixes at locus $3$, the niche that this population constructs will favor allele $6$ at locus $4$ (see Box 1).
 As a consequence, genotypes with sequentially increasing allelic states will tend to evolve.
 We treat both adaptive loci and their non-zero allelic states as "circular": the selective value of an allele at locus 1 is affected by the allelic composition of the subpopulation at locus $L$.
 Similarly, the selective value of allele 1 at any locus increases with the number of individuals carrying allele $A$ at the previous locus.
@@ -67,7 +67,7 @@ Thus, an individual's fitness is determined both by adaptations to the external 
 While cooperation is costly, we assume its effects are independent of the external and constructed components of the environment.
 
 
-### Population Growth and the Benefit of Cooperation
+### Subpopulation Growth and the Benefit of Cooperation
 
 Cooperation enables a subpopulation to reach a greater density.
 This benefit affects all individuals equally and accumulates linearly with the proportion of cooperators in the subpopulation.
@@ -106,7 +106,7 @@ Subpopulations are first seeded at all patches with size $S(p_{0})$ and cooperat
 The population is then thinned.
 Each individual survives this bottleneck with probability $\sigma$.
 Starting from this initial state, simulations then proceed for $T$ cycles, where each discrete cycle consists of subpopulation growth, mutation, migration, and dilution.
-Dilution reduces the population to support growth in the next cycle.
+Dilution reduces each subpopulation to support growth in the next cycle.
 Each individual remains with probability $d$, regardless of its genotype.
 
 
