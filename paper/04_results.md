@@ -35,7 +35,7 @@ Niche construction, therefore, plays a decisive role here.
 
 ## Negative Niche Construction is Critical to Cooperator Persistence
 
-In our model, an adaptation to a constructed aspect of the environment initiates a new instance of niche construction, leading to sequentially increasing allelic states across the adaptive loci.
+In our model, an adaptation to the constructed environment initiates a new instance of niche construction, leading to sequentially increasing allelic states across the adaptive loci.
 Under certain conditions, this construction always makes the constructor sub-optimal for the niche it creates (see Box 1).
 This negative niche construction occurs when the number of adaptive alleles ($A$) does not divide evenly into the number of adaptive loci ($L$).
 In such a case, any sequence of integers on the circular genome will always contain a break in the sequence; that is, one locus will will have an allele that is not one less than the allele at the next locus.

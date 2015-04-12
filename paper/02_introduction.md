@@ -9,7 +9,7 @@ Several factors can prevent this *tragedy of the commons* [@hamilton1964genetica
 One such factor involves non-random social interaction, in which cooperators benefit more from the cooperative act than defectors.
 This can occur when cooperators are clustered together in spatially-structured populations [@kudzalfick2011high; @fletcher2009simple; @nadell2010emergence] or when cooperators use communication [@darch2012density; @brown2001cooperation] or other cues [@gardner2010greenbeards; @sinervo2006selfrecognition; @veelders2010structural] to cooperate conditionally with kin.
 Cooperation can also be bolstered by pleiotropic connections to personal benefits [@dandekar2012bacterial; @foster2004pleiotropy] or through association with alleles encoding self-benefitting traits [@asfahl2015nonsocial].
-In these cases, the alleles may provide private benefits that are completely independent from the public benefits of cooperation.
+In the latter case, the associated alleles may provide private benefits that are completely independent from the public benefits of cooperation.
 In asexual populations of cooperators and defectors, this sets the stage for an "adaptive race" in which both types vie for the first highly beneficial adaptation [@waite2012adaptation; @morgan2012selection].
 The tragedy of the commons can be deferred if a cooperator, by chance, wins the adaptive race.
 
@@ -19,7 +19,7 @@ Similarly, cooperation is costly, but it increases local population density.
 As a result, cooperators are more likely to acquire beneficial mutations.
 By hitchhiking along with these adaptations, cooperation can rise in abundance.
 Nevertheless, this advantage is fleeting.
-As soon as the opportunities for adaptation are exhausted, cooperators are once again at a selective disadvantage against equally-adapted defectors that arise via mutation.
+As soon as the opportunities for adaptation are exhausted, cooperators are once again at a selective disadvantage against adapted defectors that arise via mutation.
 However, @HANKSHAW also demonstrated that cooperation can be maintained when frequent environmental changes produce a steady stream of new adaptive opportunities.
 Although organisms typically find themselves in dynamic environments, the nature and frequency of these changes might not ensure long-term cooperator survival.
 

@@ -33,7 +33,7 @@ We implicitly represent this constructed "niche" based on the specific allelic s
 As allelic states change, the subpopulation alters its environment, creating a unique niche.
 As described below, the specific alleles that are present at each locus matter.
 
-In our model, the feedback from niche construction takes the form of density dependent selection, and individuals evolve to better match their niche.
+In our model, the feedback from niche construction takes the form of density dependent selection, and individuals evolve to better match their constructed niche.
 Specifically, the selective value of non-zero allele $a$ at adaptive locus $l$---and consequently the fitness of an individual carrying that allele---increases with the number of individuals in the subpopulation that have allele $a-1$ at locus $l-1$.
 For example, if $L=5$ and $A=6$, and allele $4$ has fixed at locus $2$, then a genotype with allele $5$ at locus $3$ is favored.
 And as allele $5$ fixes at locus $3$, the niche that this population constructs will favor allele $6$ at locus $4$ (see Box 1).
@@ -77,7 +77,7 @@ $$ S(p) = S_{min} + p (S_{max} - S_{min}) $$ {#eq:popsize}
 
 During subpopulation growth, individuals compete through differential reproduction.
 Each individual's probability of success is determined by its fitness.
-The composition of a subpopulation with size $P$ and cooperator proportion $p$ after growth is multinomial with parameters $S(p)$ and $\{\pi_1, \pi_2, \ldots, \pi_{P}\}$, where $\pi_{i}$ represents individual $i$'s reproductive fitness relative to others in the subpopulation (using Equation 2).
+The composition of a subpopulation with size $P$ and cooperator proportion $p$ after growth is multinomial with parameters $S(p)$ and $\{\pi_1, \pi_2, \ldots, \pi_{P}\}$, where $\pi_{i}$ represents the reproductive fitness of individual $i$ relative to others in the subpopulation (using Equation 2).
 
 
 ### Mutation
