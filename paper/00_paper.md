@@ -14,7 +14,5 @@ Brian D. Connelly\textsuperscript{1,3}, Katherine J. Dickinson\textsuperscript{1
 
 \textsuperscript{2}Current Address: Department of Zoology, University of Oxford, Oxford OX1 3PS, United Kingdom
 
-\vspace{3em}
-
 \textsuperscript{3}E-mail: bdcx@uw.edu and kerrb@uw.edu
 \end{center}
