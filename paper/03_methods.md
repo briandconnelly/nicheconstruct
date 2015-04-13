@@ -2,7 +2,7 @@
 # Methods
 
 Building upon @HANKSHAW, we describe an individual-based model in which cooperators and defectors evolve and compete in a population of subpopulations (i.e., a metapopulation).
-Through mutations, individuals gain adaptations to their environment, which increase reproductive fitness, and allow those lineages to rise in abundance.
+Through mutations, individuals gain adaptations to their environment, which increase reproductive fitness and allow those lineages to rise in abundance.
 More successful lineages spread to neighboring subpopulations by migration.
 
 In this expanded model, subpopulations additionally modify their local environment.
@@ -29,12 +29,12 @@ We assume $\delta > c$, which allows a minimally adapted cooperator to recoup th
 
 ### Niche Construction and Selective Feedbacks
 
-Individual fitness is also affected by aspects of the local environment that are affected by organisms.
+Individual fitness is also affected by aspects of the local environment that are modified by organisms.
 We implicitly represent this constructed "niche" based on the specific allelic states present in the subpopulation.
 As allelic states change, the subpopulation alters its environment, creating a unique niche.
-As described below, the specific alleles that are present at each locus matter.
+As described below, the specific alleles that are present at each locus become important.
 
-In our model, the feedback from niche construction takes the form of density dependent selection, and individuals evolve to better match their constructed niche.
+In our model, the feedback that results from niche construction takes the form of density dependent selection, and individuals evolve to better match their constructed niche.
 Specifically, the selective value of non-zero allele $a$ at adaptive locus $l$---and consequently the fitness of an individual carrying that allele---increases with the number of individuals in the subpopulation that have allele $a-1$ at locus $l-1$.
 For example, if $L=5$ and $A=6$, and allele $4$ has fixed at locus $2$, then a genotype with allele $5$ at locus $3$ is favored.
 And as allele $5$ fixes at locus $3$, the niche that this population constructs will favor allele $6$ at locus $4$ (see [Box 1](#box1)).
