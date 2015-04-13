@@ -68,7 +68,7 @@ In order to study how regulatory traits such as these evolve, we could instead r
 
 In many biological systems, the environments modified by organisms are other organisms.
 In these instances, the "niche" becomes a biological entity with its own evolutionary process.
-A logical extention to our model, would be to treat the environment as a biological entity.
+A logical extension to our model, would be to treat the environment as a biological entity.
 As the host population changes, either in response to symbiont cooperation or other factors, so too does selection on their symbiont populations.
 Here, evolutionary outcomes depend greatly on the degree of shared interest between the host and symbiont.
 Future models could explicitly capture the environment as a biological entity to explore the rich co-evolutionary dynamics that these systems might offer.

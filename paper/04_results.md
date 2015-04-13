@@ -56,7 +56,7 @@ These defectors quickly begin to spread.
 However, a neighboring cooperator population gains an adaptation, which increases its fitness above that of the defector.
 This type spreads more quickly, stopping the spread of defectors and eventually driving them to extinction.
 Because this adaption occurs in a cooperator population, cooperation is able to hitchhike to safety.
-Importantly, this new cooperator is favored because of the niche that its ancestral type created.
+Importantly, this new cooperator is favored because of the niche that its ancestral type---and therefore the defector---constructed.
 Here, cooperators can find safety in numbers---because their larger subpopulations have more mutational opportunities, they are more likely to gain adaptations that rescue them from invasion.
 Further, these larger cooperator subpopulations exert greater influence on their niches, which increases selection for an adapted type.
 This allows that type to appear and to spread more quickly in the population.

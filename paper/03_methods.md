@@ -7,7 +7,8 @@ More successful lineages spread to neighboring subpopulations by migration.
 
 In this expanded model, subpopulations additionally modify their local environment.
 As this process occurs, environmental changes feed back to affect selection.
-We explore how niche construction affects the evolution of cooperation; specifically, how cooperative behavior can hitchhike along with adaptations to modified environments. Box 1 provides additional information about the model.
+Several aspects of this model are illustrated in [Box 1](#box1).
+We explore how niche construction affects the evolution of cooperation; specifically, how cooperative behavior can hitchhike along with adaptations to modified environments.
 
 
 ## Model Description
@@ -36,7 +37,7 @@ As described below, the specific alleles that are present at each locus matter.
 In our model, the feedback from niche construction takes the form of density dependent selection, and individuals evolve to better match their constructed niche.
 Specifically, the selective value of non-zero allele $a$ at adaptive locus $l$---and consequently the fitness of an individual carrying that allele---increases with the number of individuals in the subpopulation that have allele $a-1$ at locus $l-1$.
 For example, if $L=5$ and $A=6$, and allele $4$ has fixed at locus $2$, then a genotype with allele $5$ at locus $3$ is favored.
-And as allele $5$ fixes at locus $3$, the niche that this population constructs will favor allele $6$ at locus $4$ (see Box 1).
+And as allele $5$ fixes at locus $3$, the niche that this population constructs will favor allele $6$ at locus $4$ (see [Box 1](#box1)).
 As a consequence, genotypes with sequentially increasing allelic states will tend to evolve.
 We treat both adaptive loci and their non-zero allelic states as "circular": the selective value of an allele at locus 1 is affected by the allelic composition of the subpopulation at locus $L$.
 Similarly, the selective value of allele 1 at any locus increases with the number of individuals carrying allele $A$ at the previous locus.

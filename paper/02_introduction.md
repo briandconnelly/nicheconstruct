@@ -23,7 +23,7 @@ As soon as the opportunities for adaptation are exhausted, cooperators are once 
 However, @HANKSHAW also demonstrated that cooperation can be maintained when frequent environmental changes produce a steady stream of new adaptive opportunities.
 Although organisms typically find themselves in dynamic environments, the nature and frequency of these changes might not ensure long-term cooperator survival.
 
-However, organisms do more than passivly experience changing environments.
+However, organisms do more than passively experience changing environments.
 Through their activities, their interactions with others, and even their deaths, organisms constantly modify their environment.
 This *niche construction* process can produce evolutionary feedback loops in which environmental change alters selection, which, in turn, alters the distribution of types and their corresponding influence on the environment [@odling2003niche].
 The nature of this feedback can have dramatic evolutionary consequences.
