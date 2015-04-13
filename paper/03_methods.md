@@ -5,9 +5,8 @@ Building upon @HANKSHAW, we describe an individual-based model in which cooperat
 Through mutations, individuals gain adaptations to their environment, which increase reproductive fitness and allow those lineages to rise in abundance.
 More successful lineages spread to neighboring subpopulations by migration.
 
-In this expanded model, subpopulations additionally modify their local environment.
+In the expanded model here, subpopulations additionally modify their local environment.
 As this process occurs, environmental changes feed back to affect selection.
-Several aspects of this model are illustrated in [Box 1](#box1).
 We explore how niche construction affects the evolution of cooperation; specifically, how cooperative behavior can hitchhike along with adaptations to modified environments.
 
 
@@ -17,7 +16,7 @@ We explore how niche construction affects the evolution of cooperation; specific
 
 Each individual has a haploid genome with $L + 1$ loci (see [Table 1](#tables) for model parameters and their values).
 Different alleles at each locus are represented by different integers.
-A binary allele at the *cooperation locus* (locus zero) determines whether that individual is a cooperator ($1$), which carries fitness cost $c$, or a defector ($0$).
+An allele at the *cooperation locus* (locus zero) determines whether that individual is a cooperator (allele $1$), which carries fitness cost $c$, or a defector (allele $0$).
 The remaining $L$ loci are *adaptive loci*, and are each occupied by $0$ or a value from the set $\{1, 2, \ldots, A\}$.
 Allele $0$ represents a lack of adaptation, while a non-zero allele represents one of the $A$ possible adaptations at that locus.
 
@@ -30,11 +29,12 @@ We assume $\delta > c$, which allows a minimally adapted cooperator to recoup th
 ### Niche Construction and Selective Feedbacks
 
 Individual fitness is also affected by aspects of the local environment that are modified by organisms.
-We implicitly represent this constructed "niche" based on the specific allelic states present in the subpopulation.
+This constructed "niche" depends on the specific allelic states present in the subpopulation.
 As allelic states change, the subpopulation alters its environment, creating a unique niche.
 As described below, the specific alleles that are present at each locus become important.
 
 In our model, the feedback that results from niche construction takes the form of density dependent selection, and individuals evolve to better match their constructed niche.
+We do not represent this niche explicitly, but rather allow the allelic composition of the subpopulation to feed back to affect selection.
 Specifically, the selective value of non-zero allele $a$ at adaptive locus $l$---and consequently the fitness of an individual carrying that allele---increases with the number of individuals in the subpopulation that have allele $a-1$ at locus $l-1$.
 For example, if $L=5$ and $A=6$, and allele $4$ has fixed at locus $2$, then a genotype with allele $5$ at locus $3$ is favored.
 And as allele $5$ fixes at locus $3$, the niche that this population constructs will favor allele $6$ at locus $4$ (see [Box 1](#box1)).
@@ -48,6 +48,9 @@ $$ \beta(x, X) = \bmod_{X}(x - 2 + X) + 1 $$ {#eq:beta}
 Here, $\bmod_{X}(x)$ is the integer remainder when dividing $x$ by $X$.
 Using this function, the selective value of allele $a$ at adaptive locus $l$ is increased by $\epsilon$ for each individual in the subpopulation that has allele $\beta(a,A)$ at locus $\beta(l, L)$.
 Thus, $\epsilon$ specifies the intensity of selection due to niche construction.
+
+
+### Individual Fitness
 
 Consider a genotype $g$ with allelic state $a_{g,l}$ at locus $l$; the fitness of an individual with this genotype is defined as:
 
@@ -89,7 +92,6 @@ At the binary cooperation locus, mutations occur at rate $\mu_{c}$.
 These mutations flip the allelic state, causing cooperators to become defectors and vice versa.
 Mutations occur at rate $\mu_{a}$ at each adaptive locus.
 These mutations replace the existing allele with a value randomly sampled from the set $\{0\} \cup \{1, 2, \ldots, A\}$.
-Because mutations are stochastic, the allelic sequences that evolve depend on which allele arises first and at which locus.
 
 
 ### Migration
@@ -118,5 +120,5 @@ Simulations used Python 3.4, NumPy 1.9.1, Pandas 0.15.2 [@mckinney2010data], and
 Data analyses were performed with R 3.1.3 [@rproject].
 Reported confidence intervals were estimated by bootstrapping with 1000 resamples.
 
-[^1]: These materials will be made public prior to publication.
+[^1]: These materials are temporarily available at https://github.com/briandconnelly/nicheconstruct/ and will be moved to a long-term repository shortly
 
