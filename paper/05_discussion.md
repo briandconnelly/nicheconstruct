@@ -72,10 +72,10 @@ In our model, each patch could become hosts with their own genotypes, and death 
 Here, evolutionary outcomes depend greatly on the degree of shared interest between the host and symbiont.
 
 Of particular importance are cases where the interests of host and symbiont are in conflict.
-By selecting for new, more resistant host genotypes or by provoking a specific immune response, pathogens can be seen as potent negative niche constructors.
+By selecting for new, more resistant host genotypes or by provoking a specific immune response, pathogens make their host environment less hospitable and can therefore be seen as potent negative niche constructors.
 The results that we have presented here suggest that such negative niche construction can favor cooperative behavior among these symbiont pathogens.
 This may be especially relevant when infection is mediated by cooperative behaviors.
-For example, the cooperative production of virulence factors by *P. aeruginosa* facilitates infection in hosts with cystic fibrosis [@harrison2007microbial].
+For example, the cooperative production several public goods by *P. aeruginosa* facilitate infection in hosts with cystic fibrosis [@harrison2007microbial].
 Models such as what we have described may permit exploration into how cooperation and niche construction intersect here and in other medically-relevant instances.
 
 More generally, it was recently argued that incorporating the effects of niche construction is critical for improving our understanding of viral evolution [@hamblin2014viral] and evolution in co-infecting parasites [@hafer2015when].
