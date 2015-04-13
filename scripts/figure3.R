@@ -1,6 +1,5 @@
 #!/usr/bin/env Rscript
 
-library(magrittr)
 library(dplyr)
 library(ggplot2)
 library(ggplot2bdc)
@@ -27,10 +26,6 @@ fig3 <- ggplot(data=fig3data, aes(x=Time, y=CooperatorProportion)) +
     geom_hline(aes(yintercept=0.5), linetype='dotted', color='grey70') + 
     geom_line(aes(group=Replicate), alpha=0.08, color=color_cooperator) +
     scale_y_continuous(limits=c(0,1)) +
-    labs(x=label_time, y=label_cooperator_proportion) +
-    theme_bdc_grey() +
-    theme(strip.background = element_blank()) +
-    theme(strip.text = element_text(size=rel(1.0), vjust=0.2, face='bold'))
+    labs(x=label_time, y=label_cooperator_proportion)
 fig3 <- rescale_plot(plot=fig3, ratio=1/1.2)
 ggsave(filename='../figures/Figure3.png', plot=fig3, dpi=300)
-

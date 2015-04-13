@@ -1,10 +1,8 @@
 #!/usr/bin/env Rscript
 
-library(magrittr)
 library(dplyr)
 library(ggplot2)
 library(ggplot2bdc)
-library(Hmisc)
 
 source('formatting.R')
 source('figsummary.R')
@@ -30,10 +28,6 @@ fig1 <- ggplot(data=fig1_data, aes(x=Time, y=CooperatorProportion)) +
     stat_summary(fun.y='mean', geom='line', color=color_cooperator) +
     scale_y_continuous(breaks=seq(from=0, to=1, by=0.25), limits=c(0,1)) +
     facet_grid(. ~ Treatment) +
-    labs(x=label_time, y=label_cooperator_proportion) +
-    theme_bdc_grey() +
-    theme(strip.background = element_blank()) +
-    theme(strip.text = element_text(size=rel(1.0), vjust=0.2, face='bold'))
+    labs(x=label_time, y=label_cooperator_proportion)
 fig1 <- rescale_plot(plot=fig1, ratio=1/1.2)
 ggsave(filename='../figures/Figure1.png', plot=fig1, dpi=300)
-
