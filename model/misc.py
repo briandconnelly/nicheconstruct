@@ -31,7 +31,7 @@ def pct_cooperators(population):
     return population['Coop'].sum()/population.shape[0]
 
 
-def stress_colnames(L=None):
+def adaptive_colnames(L=None):
     """TODO"""
     return ["S{0:02d}".format(i) for i in range(1, L + 1)]
 

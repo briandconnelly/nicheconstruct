@@ -17,7 +17,7 @@ from Metapopulation import *
 from misc import *
 from Topology import *
 
-__version__ = '0.3.1'
+__version__ = '0.3.2'
 
 
 def parse_arguments():
@@ -190,31 +190,19 @@ def main():
         metapop = bottleneck(population=metapop,
                              survival_pct=config['Population']['dilution_factor'])
 
-    # Keep track of the cumulative densities of each population
-    densities = np.zeros(len(topology), dtype=np.int)
-
-    try:
-        environment_change = config['Simulation']['environment_change']
-    except KeyError:
-        environment_change = None
-
 
     # Keep track of how often the metapopulation should be mixed
     mix_frequency = config['Metapopulation']['mix_frequency']
 
-    # Keep track of the number of stress loci that affect fitness for each
-    # population
-    genome_lengths = np.repeat(config['Population']['genome_length_min'],
-                               len(topology))
-
-    stress_columns = stress_colnames(L=config['Population']['genome_length_max'])
+    genome_length = config['Population']['genome_length']
+    adaptive_columns = adaptive_colnames(L=genome_length)
 
     # Iterate through each cycle of the simulation
     for cycle in range(config['Simulation']['num_cycles']):
         if not args.quiet:
-            if len(stress_columns) > 0:
-                c1 = (metapop.loc[metapop.Coop==1, stress_columns] > 0).sum(axis=1).max()
-                d1 = (metapop.loc[metapop.Coop==0, stress_columns] > 0).sum(axis=1).max()
+            if len(adaptive_columns) > 0:
+                c1 = (metapop.loc[metapop.Coop==1, adaptive_columns] > 0).sum(axis=1).max()
+                d1 = (metapop.loc[metapop.Coop==0, adaptive_columns] > 0).sum(axis=1).max()
             else:
                 c1 = d1 = 'NA'
 
@@ -237,7 +225,7 @@ def main():
 
         # Grow the population to carrying capacity, potentially mutating
         # offspring
-        metapop = grow(M=metapop, genome_lengths=genome_lengths, config=config)
+        metapop = grow(M=metapop, genome_length=genome_length, config=config)
 
         # Migrate individuals among subpopulations
         metapop = migrate(M=metapop, topology=topology,
@@ -246,23 +234,6 @@ def main():
         # Mix the metapopulation (if configured)
         if mix_frequency > 0 and cycle > 0 and (cycle % mix_frequency == 0):
             metapop = mix(M=metapop, topology=topology)
-
-        # Handle density based environmental change
-        for popid, groupfitness in metapop.groupby('Population').Fitness:
-            densities[popid] += groupfitness.count()
-
-        if environment_change == 'Metapopulation':
-            if densities.sum() >= config['Metapopulation']['density_threshold']:
-                metapop = reset_stress_loci(M=metapop, Lmax=config['Population']['genome_length_max'])
-                metapop = assign_fitness(P=metapop, config=config)
-                densities = np.zeros(len(topology), dtype=np.int)
-                env_changed = True
-
-        elif environment_change == 'Population':
-            for p in np.where(densities > config['Population']['density_threshold']):
-                genome_lengths[p] = min(config['Population']['genome_length_max'],
-                                        genome_lengths[p] + 1)
-                densities[p] = 0
 
         # Dilution
         if not env_changed:
@@ -285,3 +256,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

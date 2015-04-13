@@ -5,15 +5,15 @@
 import numpy as np
 import pandas as pd
 
-from misc import stress_colnames
+from misc import adaptive_colnames
 
 def write_metapop_data(writer, metapop, topology, cycle, config):
     """Write information about the metapopulation to a CSV writer"""
 
-    # Here, diversity is only calculated based on stress loci. To add cooperation locus, use ['Coop'] + stress_columns
-    if config['Population']['genome_length_max'] > 0:
-        stress_columns = stress_colnames(L=config['Population']['genome_length_max'])
-        genotype_props = np.array([group.shape[0]/metapop.shape[0] for genotype, group in metapop.groupby(stress_columns)])
+    # Here, diversity is only calculated based on adaptive loci. To add cooperation locus, use ['Coop'] + adaptive_columns
+    if config['Population']['genome_length'] > 0:
+        adaptive_columns = adaptive_colnames(L=config['Population']['genome_length'])
+        genotype_props = np.array([group.shape[0]/metapop.shape[0] for genotype, group in metapop.groupby(adaptive_columns)])
         shannon = (genotype_props * np.log(genotype_props)).sum() * -1
         simpson = np.power(genotype_props, 2).sum()
     else:
@@ -37,8 +37,8 @@ def write_metapop_data(writer, metapop, topology, cycle, config):
 def write_population_data(writer, metapop, topology, cycle, config):
     """Write information about each population in the metapopulation to a CSV writer"""
 
-    Lmax = config['Population']['genome_length_max']
-    stress_columns = stress_colnames(L=Lmax)
+    genome_length = config['Population']['genome_length']
+    adaptive_columns = adaptive_colnames(L=genome_length)
 
     for popid, subpop in metapop.groupby('Population'):
         try:
@@ -48,8 +48,8 @@ def write_population_data(writer, metapop, topology, cycle, config):
         except KeyError:
             pos_x = pos_y = np.nan
 
-        if Lmax > 0:
-            genotype_props = np.array([group.shape[0]/subpop.shape[0] for genotype, group in subpop.groupby(stress_columns)])
+        if genome_length > 0:
+            genotype_props = np.array([group.shape[0]/subpop.shape[0] for genotype, group in subpop.groupby(adaptive_columns)])
             shannon = (genotype_props * np.log(genotype_props)).sum() * -1
             simpson = np.power(genotype_props, 2).sum()
         else:
@@ -76,8 +76,8 @@ def write_population_data(writer, metapop, topology, cycle, config):
 def write_population_genotypes(writer, metapop, topology, cycle, config):
     """Write information about each population in the metapopulation to a CSV writer"""
 
-    Lmax = config['Population']['genome_length_max']
-    stress_columns = stress_colnames(L=Lmax)
+    genome_length = config['Population']['genome_length']
+    adaptive_columns = adaptive_colnames(L=genome_length)
 
     for popid, subpop in metapop.groupby('Population'):
         try:
@@ -87,10 +87,10 @@ def write_population_genotypes(writer, metapop, topology, cycle, config):
         except KeyError:
             pos_x = pos_y = np.nan
 
-        if Lmax > 0:
+        if genome_length > 0:
             # TODO: get most dominant.
-            genotype_props = np.array([group.shape[0]/subpop.shape[0] for genotype, group in subpop.groupby(stress_columns)])
-            x = pd.DataFrame(subpop.groupby(stress_columns, sort=False).size(), columns=['abundance'])
+            genotype_props = np.array([group.shape[0]/subpop.shape[0] for genotype, group in subpop.groupby(adaptive_columns)])
+            x = pd.DataFrame(subpop.groupby(adaptive_columns, sort=False).size(), columns=['abundance'])
             genotype_str = str(x[x.abundance==max(x.abundance)][0:1].reset_index().as_matrix()[0,0:-1])
             
             pop_data = {'Time': cycle,
