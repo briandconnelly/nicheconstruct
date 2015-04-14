@@ -21,10 +21,8 @@ def create_metapopulation(config, topology, initial_state='populated'):
     assert capacity_min <= capacity_max
 
     initial_cooperator_proportion = config['Population']['initial_cooperator_proportion']
-
     genome_length = config['Population']['genome_length']
     adaptive_columns = adaptive_colnames(L=genome_length)
-
     num_adaptive_alleles = config['Population']['adaptive_alleles']
 
     if initial_state == 'populated':
@@ -38,7 +36,7 @@ def create_metapopulation(config, topology, initial_state='populated'):
         data.update({sc: np.zeros(size * initial_popsize, dtype=np.int).tolist() for sc in adaptive_columns})
 
         M = pd.DataFrame(data,
-                         columns=['Time', 'Population', 'Coop'] + ["S{0:02d}".format(i) for i in np.arange(1,genome_length+1)] + ['Fitness'])
+                         columns=['Time', 'Population', 'Coop'] + ["A{0:02d}".format(i) for i in np.arange(1,genome_length+1)] + ['Fitness'])
 
     elif initial_state == 'cooperator_invade':
         coop_popid = int(size/2)
@@ -54,7 +52,7 @@ def create_metapopulation(config, topology, initial_state='populated'):
         data.update({sc: np.zeros(len(data['Population']), dtype=np.int).tolist() for sc in adaptive_columns})
 
         M = pd.DataFrame(data,
-                         columns=['Time', 'Population', 'Coop'] + ["S{0:02d}".format(i) for i in np.arange(1,genome_length+1)] + ['Fitness'])
+                         columns=['Time', 'Population', 'Coop'] + ["A{0:02d}".format(i) for i in np.arange(1,genome_length+1)] + ['Fitness'])
 
         # Set fully-adapted genotypes for both types
         cgenotype = np.tile(np.arange(num_adaptive_alleles)+1, np.ceil(genome_length/num_adaptive_alleles))[:genome_length]
@@ -82,7 +80,7 @@ def create_metapopulation(config, topology, initial_state='populated'):
         data.update({sc: np.zeros(len(data['Population']), dtype=np.int).tolist() for sc in adaptive_columns})
 
         M = pd.DataFrame(data,
-                         columns=['Time', 'Population', 'Coop'] + ["S{0:02d}".format(i) for i in np.arange(1,genome_length+1)] + ['Fitness'])
+                         columns=['Time', 'Population', 'Coop'] + ["A{0:02d}".format(i) for i in np.arange(1,genome_length+1)] + ['Fitness'])
 
         # Set fully-adapted genotypes for both types
         # Here, genotypes are matched

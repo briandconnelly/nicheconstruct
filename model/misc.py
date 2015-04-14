@@ -33,7 +33,7 @@ def pct_cooperators(population):
 
 def adaptive_colnames(L=None):
     """TODO"""
-    return ["S{0:02d}".format(i) for i in range(1, L + 1)]
+    return ["A{0:02d}".format(i) for i in range(1, L + 1)]
 
 
 def write_run_information(filename, config):
