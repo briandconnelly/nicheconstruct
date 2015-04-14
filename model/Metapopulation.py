@@ -13,7 +13,6 @@ from Topology import random_neighbor
 
 def create_metapopulation(config, topology, initial_state='populated'):
     """Create a metapopulation"""
-
     size = len(topology)
     assert size > 0
 
@@ -25,7 +24,8 @@ def create_metapopulation(config, topology, initial_state='populated'):
 
     genome_length = config['Population']['genome_length']
     adaptive_columns = adaptive_colnames(L=genome_length)
-    adaptive_alleles = config['Population']['adaptive_alleles']
+
+    num_adaptive_alleles = config['Population']['adaptive_alleles']
 
     if initial_state == 'populated':
         initial_popsize = capacity_min + \
@@ -35,7 +35,7 @@ def create_metapopulation(config, topology, initial_state='populated'):
                 'Population': np.repeat(np.arange(size), initial_popsize).tolist(),
                 'Coop': (binomial(1, initial_cooperator_proportion, size * initial_popsize) == 1).tolist(),
                 'Fitness': 0}
-        data.update({ac: np.zeros(size * initial_popsize, dtype=np.int).tolist() for ac in adaptive_columns})
+        data.update({sc: np.zeros(size * initial_popsize, dtype=np.int).tolist() for sc in adaptive_columns})
 
         M = pd.DataFrame(data,
                          columns=['Time', 'Population', 'Coop'] + ["S{0:02d}".format(i) for i in np.arange(1,genome_length+1)] + ['Fitness'])
@@ -51,17 +51,19 @@ def create_metapopulation(config, topology, initial_state='populated'):
                 'Population': np.append(defector_pops, cooperator_pop).tolist(),
                 'Coop': np.append(np.zeros(len(defector_pops))==1, np.ones(len(cooperator_pop))==1).tolist(),
                 'Fitness': 0}
-        data.update({ac: np.zeros(len(data['Population']), dtype=np.int).tolist() for ac in adaptive_columns})
+        data.update({sc: np.zeros(len(data['Population']), dtype=np.int).tolist() for sc in adaptive_columns})
 
         M = pd.DataFrame(data,
                          columns=['Time', 'Population', 'Coop'] + ["S{0:02d}".format(i) for i in np.arange(1,genome_length+1)] + ['Fitness'])
 
         # Set fully-adapted genotypes for both types
-        cgenotype = np.tile(np.arange(adaptive_alleles)+1, np.ceil(genome_length/adaptive_alleles))[:genome_length]
+        cgenotype = np.tile(np.arange(num_adaptive_alleles)+1, np.ceil(genome_length/num_adaptive_alleles))[:genome_length]
         # But change the allelic state of defectors so that there is mismatch
         dgenotype = np.roll(cgenotype, 1)
         cgenotype = np.array([1,2,3,4,6])
         dgenotype = np.array([1,2,3,4,5])
+        print('C: {c}, D: {d}'.format(c=cgenotype, d=dgenotype))
+        #dgenotype = cgenotype
         defector_genotypes = np.repeat([dgenotype], len(defector_pops), axis=0)
         cooperator_genotypes = np.repeat([cgenotype], len(cooperator_pop), axis=0)
         M[adaptive_columns] = np.append(defector_genotypes, cooperator_genotypes, axis=0)
@@ -77,14 +79,14 @@ def create_metapopulation(config, topology, initial_state='populated'):
                 'Population': np.append(defector_pop, cooperator_pop).tolist(),
                 'Coop': np.append(np.zeros(len(defector_pop))==1, np.ones(len(cooperator_pop))==1).tolist(),
                 'Fitness': 0}
-        data.update({ac: np.zeros(len(data['Population']), dtype=np.int).tolist() for ac in adaptive_columns})
+        data.update({sc: np.zeros(len(data['Population']), dtype=np.int).tolist() for sc in adaptive_columns})
 
         M = pd.DataFrame(data,
                          columns=['Time', 'Population', 'Coop'] + ["S{0:02d}".format(i) for i in np.arange(1,genome_length+1)] + ['Fitness'])
 
         # Set fully-adapted genotypes for both types
         # Here, genotypes are matched
-        cgenotype = np.tile(np.arange(adaptive_alleles)+1, np.ceil(genome_length/adaptive_alleles))[:genome_length]
+        cgenotype = np.tile(np.arange(num_adaptive_alleles)+1, np.ceil(genome_length/num_adaptive_alleles))[:genome_length]
         dgenotype = cgenotype
         defector_genotypes = np.repeat([dgenotype], len(defector_pop), axis=0)
         cooperator_genotypes = np.repeat([cgenotype], len(cooperator_pop), axis=0)
@@ -171,6 +173,8 @@ def mutate(M, mu_adaptation, mu_cooperation, genome_length, num_adaptive_alleles
                                                   size=Mcopy.Coop.shape))==1
 
     # Mutations at adaptive loci
+    # Alleles to mutate are chosen from a binomial distrubution, and these
+    # alleles are modified by adding a random amount
     if genome_length > 0:
         s = adaptive_colnames(L=genome_length)
         if num_adaptive_alleles == 1:
@@ -185,6 +189,7 @@ def mutate(M, mu_adaptation, mu_cooperation, genome_length, num_adaptive_alleles
             astates[mutants] = new_alleles[mutants]
             Mcopy[s] = astates
 
+
     Mcopy = assign_fitness(M=Mcopy,
                            genome_length=config['Population']['genome_length'],
                            num_adaptive_alleles=config['Population']['adaptive_alleles'],
@@ -196,7 +201,7 @@ def mutate(M, mu_adaptation, mu_cooperation, genome_length, num_adaptive_alleles
     return Mcopy
 
 
-def grow(M, genome_length, config):
+def grow(M, config):
     """Grow the population"""
 
     smin = config['Population']['capacity_min']
@@ -241,9 +246,6 @@ def grow(M, genome_length, config):
 def assign_fitness(M, genome_length, num_adaptive_alleles, base_fitness,
                    cost_cooperation, benefit_nonzero, benefit_ordered):
 
-    """Assign fitness values to each individual in the given population"""
-
-    assert genome_length >= 0
     assert num_adaptive_alleles > 0
 
     adaptive_columns = adaptive_colnames(L=genome_length)
@@ -269,7 +271,7 @@ def assign_fitness(M, genome_length, num_adaptive_alleles, base_fitness,
                 allele_dist[0] = np.zeros(allele_dist.shape[1])
 
                 # Get the next allelic state for everything and the distribution of alleles at the next locus (here we "roll" the matrix representing the allelic states in the population)
-                adaptive_alleles_next = (1 + (adaptive_alleles % num_adaptive_alleles)).values
+                adaptive_alleles_next = (1 + (adaptive_alleles  % num_adaptive_alleles)).values
                 allele_dist_next = np.roll(a=allele_dist, shift=-1, axis=1)
 
                 # Here, the fitness at each allele is proportional to the number of individuals with allele a+1 at the next locus.

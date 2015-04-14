@@ -17,7 +17,7 @@ from Metapopulation import *
 from misc import *
 from Topology import *
 
-__version__ = '0.3.2'
+__version__ = '0.3.1'
 
 
 def parse_arguments():
@@ -194,8 +194,7 @@ def main():
     # Keep track of how often the metapopulation should be mixed
     mix_frequency = config['Metapopulation']['mix_frequency']
 
-    genome_length = config['Population']['genome_length']
-    adaptive_columns = adaptive_colnames(L=genome_length)
+    adaptive_columns = adaptive_colnames(L=config['Population']['genome_length'])
 
     # Iterate through each cycle of the simulation
     for cycle in range(config['Simulation']['num_cycles']):
@@ -225,7 +224,7 @@ def main():
 
         # Grow the population to carrying capacity, potentially mutating
         # offspring
-        metapop = grow(M=metapop, genome_length=genome_length, config=config)
+        metapop = grow(M=metapop, config=config)
 
         # Migrate individuals among subpopulations
         metapop = migrate(M=metapop, topology=topology,
@@ -256,4 +255,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
