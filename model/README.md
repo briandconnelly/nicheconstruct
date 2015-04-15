@@ -1,4 +1,4 @@
-# Niche Construction Model
+# The Model
 
 ## Dependiencies
 
@@ -16,12 +16,14 @@ These dependencies can be installed in a modern Python environment using:
 pip3 install numpy==1.9.1 pandas==0.15.2 networkx==1.9.1 configobj==5.0.6
 ```
 
+Or using the included [requirements.txt](requirements.txt) file:
+
+```sh
+pip3 install -r requirements.txt
+```
+
 The model also must be run on a machine with a 64-bit processor and operating system.
 
-
-## Virtual Environment
-
-TODO
 
 ## Running the Model
 
@@ -73,9 +75,48 @@ python ncsimulate.py --param Simulation num_cycles 10
 
 ### The Configuration File
 
-TODO
+By default, the model uses the configuration specified in `run.cfg`. Alternate
+configuration files can be specified with the `--config` option.
+
+In the configuration file, parameters are separated into sections based on what
+they affect.
+
+| Section        | Description                                                                            |
+|:---------------|:---------------------------------------------------------------------------------------|
+| Simulation     | Properties of the simulation (e.g., length, data directory)                            |
+| Metapopulation | Metapopulation properties including how patches are arranged and migration rate        |
+| Population     | Population-level properties including mutation rates, patch sizes, and fitness effects |
+
+Aside from these three main sections, additional sections contain parameters
+for the specific metapopulation topology used and output files.
+
+| Section            | Description                                                                            |
+|:-------------------|:---------------------------------------------------------------------------------------|
+| MooreTopology      | Configuration for lattice topologies with 8 neighboring patches                        |
+| VonNeumannTopology | Configuration for lattice topologies with 4 neighboring patches                        |
+| SmallWorldTopology | Configuration for topologies arranged as a small world network                         |
+| CompleteTopology   | Configuration for topologies arranged as a complete graph (all patches connected)      |
+| RegularTopology    | Configuration for topologies arranged as an R-regular graph (all patches have R neighbors) |
+
+
+| Section            | Description                                                                            |
+|:-------------------|:---------------------------------------------------------------------------------------|
+| MetapopulationLog  | Configure how metapopulation-level data are recorded                                   |
+| PopulationLog      | Configure how population-level data are recorded                                       |
+| GenotypeLog        | Configure how data about the dominant genotypes in each population are recorded        |
+
 
 ## Result Data
 
-TODO
+Unless otherwise specified using the `--data_dir` argument or in the configuration file, data are written in the `data` directory.
+
+
+| Data File            | Description                                             | Configuration              | 
+|:---------------------|:--------------------------------------------------------|---------------------------:| 
+| `run_info.txt`       | Information about where and when the simulation was run | Always Created             | 
+| `configuration.cfg`  | A configuration file allowing this run to be reproduced | Always Created             | 
+| `topology.gml`       | The topology of the metapopulation                      | Simulation/export_topology |
+| `metapopulation.csv` | Metapopulation-level information (e.g., fitness)        | MetapopulationLog Section  |
+| `population.csv`     | Population-level information                            | PopulationLog Section      |
+| `genotypes.csv`      | Dominant genotypes in each population                   | GenotypeLog section        |
 
