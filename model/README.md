@@ -31,7 +31,7 @@ Simulations run using the `ncsimulate.py` script. To see which options can be
 provided to `ncsimulate.py`, run it with the `--help` argument:
 
 ```sh
-python ncsimulate.py --help
+python3 ncsimulate.py --help
 ```
 ```
 usage: ncsimulate.ph [-h] [--config FILE] [--data_dir DIR]
