@@ -1,18 +1,11 @@
 # Model, Data, and Scripts for *Negative Niche Construction Favors the Evolution of Cooperation*
 
-## Paper
+## Contents
 
-### Figures
-* [Figure 1](figures/Figure1.png)
-* [Figure 2](figures/Figure2.png)
-* [Figure 3](figures/Figure3.png)
-* [Figure 4](figures/Figure4.png)
-* [Figure B1](figures/FigureB1.pdf)
-* [Figure S1](figures/FigureS1.png)
-
-## Model
-
-## Data
-
-## Analysis
+* [configuration](configuration): Configuration files for reported simulations
+* [data](data): Result data sets
+* [figures](figures): Figures
+* [model](model): Model source code
+* [paper](paper): Source for the manuscript
+* [scripts](scripts): Scripts for analyzing and plotting the result data
 
