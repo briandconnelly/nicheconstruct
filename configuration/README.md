@@ -1,6 +1,6 @@
 # Model Configuration Files
 
-Simulations described in the paper can be re-run using these configuration
+Simulations described in the paper can be re-created using these configuration
 files.  The configuration file can be specified using the `--config` argument
 to `ncsimulate.py`:
 
