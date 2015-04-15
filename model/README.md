@@ -27,9 +27,8 @@ The model also must be run on a machine with a 64-bit processor and operating sy
 
 ## Running the Model
 
-Simulations using this model are run using the `ncsimulate.py` script. To see
-what options can be provided to `ncsimulate.py`, run it with the `--help`
-argument:
+Simulations run using the `ncsimulate.py` script. To see which options can be
+provided to `ncsimulate.py`, run it with the `--help` argument:
 
 ```sh
 python ncsimulate.py --help
@@ -55,6 +54,7 @@ Set a parameter value
 
 ```
 
+
 ## Configuring the Model
 
 The parameters for the model are specified in the `run.cfg` file. Alternate
@@ -73,6 +73,7 @@ set the simulation to run for 10 cycles:
 python ncsimulate.py --param Simulation num_cycles 10
 ```
 
+
 ### The Configuration File
 
 By default, the model uses the configuration specified in `run.cfg`. Alternate
@@ -80,6 +81,9 @@ configuration files can be specified with the `--config` option.
 
 In the configuration file, parameters are separated into sections based on what
 they affect.
+
+
+#### Main Sections
 
 | Section        | Description                                                                            |
 |:---------------|:---------------------------------------------------------------------------------------|
@@ -90,6 +94,9 @@ they affect.
 Aside from these three main sections, additional sections contain parameters
 for the specific metapopulation topology used and output files.
 
+
+#### Configuring the Metapopulation Topology
+
 | Section            | Description                                                                            |
 |:-------------------|:---------------------------------------------------------------------------------------|
 | MooreTopology      | Configuration for lattice topologies with 8 neighboring patches                        |
@@ -98,6 +105,8 @@ for the specific metapopulation topology used and output files.
 | CompleteTopology   | Configuration for topologies arranged as a complete graph (all patches connected)      |
 | RegularTopology    | Configuration for topologies arranged as an R-regular graph (all patches have R neighbors) |
 
+
+#### Configuring Output Data
 
 | Section            | Description                                                                            |
 |:-------------------|:---------------------------------------------------------------------------------------|
@@ -108,7 +117,8 @@ for the specific metapopulation topology used and output files.
 
 ## Result Data
 
-Unless otherwise specified using the `--data_dir` argument or in the configuration file, data are written in the `data` directory.
+Unless otherwise specified using the `--data_dir` argument or in the
+configuration file, data are written in the `data` directory.
 
 
 | Data File            | Description                                             | Configuration              | 
