@@ -1,6 +1,7 @@
 # Simulation Data
 
-In most cases, each data file contains data from multiple replicate simulations.
+In most cases, each data file contains data from multiple replicate simulations. 
+Configuration files used to generate these data sets are available in [configuration](../configuration).
 
 Files ending with `.csv.bz2` are compressed with bzip2.
 
@@ -9,7 +10,7 @@ Files ending with `.csv.bz2` are compressed with bzip2.
 
 | File Name      | Description                                                |
 |:---------------|:-----------------------------------------------------------|
-| [L00.csv](L00.csv) | Combined data from simulations where no adaptation was possible (see [Figure 1A](../figures/Figure1.png) |
+| [L00.csv](L00.csv) | Combined data from simulations where no adaptation was possible (see [Figure 1A](../figures/Figure1.png)) |
 | [L05_A06_1xDelta_0xEpsilon.csv](L05_A06_1xDelta_0xEpsilon) | Combined data from simulations where populations could adapt to external environment, but niche construction was not possible (see [Figure 1B](../figures/Figure1.png)) |
 | [L05_A06_1xDelta_1xEpsilon.csv](L05_A06_1xDelta_1xEpsilon) | Combined data from simulations where adaptation to external and constructed environments possible (see [Figure 1C](../figures/Figure1.png), [Figure 2A](../figures/Figure2.png)) |
 | [L05_A06_2xDelta_0xEpsilon.csv](L05_A06_2xDelta_0xEpsilon.csv) | Combined data from simulations where the benefits of adaptations to the external environment were doubled, and niche construction was removed (see [Figure 2B](../figures/Figure2.png)) |
