@@ -18,7 +18,7 @@ def bottleneck(population, survival_pct):
     """Submit the population to a bottleneck"""
     assert 0 <= survival_pct <= 1
     return population.drop(population.index[where(binomial(1, survival_pct,
-                                                           population.index.shape[0]) == 0)])
+                                                           population.shape[0]) == 0)])
 
 
 def num_cooperators(population):

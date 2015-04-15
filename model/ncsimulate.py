@@ -17,7 +17,7 @@ from Metapopulation import *
 from misc import *
 from Topology import *
 
-__version__ = '0.3.1'
+__version__ = '0.9.0'
 
 
 def parse_arguments():
@@ -87,7 +87,6 @@ def main():
     # supplied configuration file, create one.
     if args.seed:
         config['Simulation']['seed'] = args.seed
-    #elif not config.has_option(section='Simulation', option='seed'):
     elif 'seed' not in config['Simulation'] or config['Simulation']['seed']==None:
         seed = np.random.randint(low=0, high=np.iinfo(np.uint32).max)           
         config['Simulation']['seed'] = seed
@@ -114,6 +113,7 @@ def main():
         config['Simulation']['data_dir'] = newname
 
     os.mkdir(config['Simulation']['data_dir'])
+
 
     # Write information about the run
     infofile = os.path.join(config['Simulation']['data_dir'], 'run_info.txt')
@@ -220,7 +220,6 @@ def main():
                                        topology=topology, cycle=cycle,
                                        config=config)
 
-        env_changed = False
 
         # Grow the population to carrying capacity, potentially mutating
         # offspring
@@ -235,9 +234,8 @@ def main():
             metapop = mix(M=metapop, topology=topology)
 
         # Dilution
-        if not env_changed:
-            metapop = bottleneck(population=metapop,
-                                 survival_pct=config['Population']['dilution_factor'])
+        metapop = bottleneck(population=metapop,
+                             survival_pct=config['Population']['dilution_factor'])
 
         if config['Simulation']['stop_when_empty'] and \
                 metapop.shape[0] == 0:
@@ -255,3 +253,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
