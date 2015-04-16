@@ -32,7 +32,7 @@ def pct_cooperators(population):
 
 
 def adaptive_colnames(L=None):
-    """TODO"""
+    """Get a list of the columns that specify adaptive loci"""
     return ["A{0:02d}".format(i) for i in range(1, L + 1)]
 
 

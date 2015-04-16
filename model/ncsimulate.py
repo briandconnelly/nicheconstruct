@@ -17,7 +17,7 @@ from Metapopulation import *
 from misc import *
 from Topology import *
 
-__version__ = '0.9.0'
+__version__ = '1.0.0'
 
 
 def parse_arguments():

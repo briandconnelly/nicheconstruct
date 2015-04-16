@@ -88,7 +88,6 @@ def write_population_genotypes(writer, metapop, topology, cycle, config):
             pos_x = pos_y = np.nan
 
         if genome_length > 0:
-            # TODO: get most dominant.
             genotype_props = np.array([group.shape[0]/subpop.shape[0] for genotype, group in subpop.groupby(adaptive_columns)])
             x = pd.DataFrame(subpop.groupby(adaptive_columns, sort=False).size(), columns=['abundance'])
             genotype_str = str(x[x.abundance==max(x.abundance)][0:1].reset_index().as_matrix()[0,0:-1])
@@ -100,3 +99,4 @@ def write_population_genotypes(writer, metapop, topology, cycle, config):
                         'Genotype': genotype_str}
 
             writer.writerow(pop_data)
+

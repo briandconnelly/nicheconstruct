@@ -25,6 +25,8 @@ def create_metapopulation(config, topology, initial_state='populated'):
     adaptive_columns = adaptive_colnames(L=genome_length)
     num_adaptive_alleles = config['Population']['adaptive_alleles']
 
+    # Start with a fully populated metapopulation, where each population is
+    # filled with the configured initial_cooperator_proportion
     if initial_state == 'populated':
         initial_popsize = capacity_min + \
                       (initial_cooperator_proportion * (capacity_max - capacity_min))
@@ -38,6 +40,8 @@ def create_metapopulation(config, topology, initial_state='populated'):
         M = pd.DataFrame(data,
                          columns=['Time', 'Population', 'Coop'] + ["A{0:02d}".format(i) for i in np.arange(1,genome_length+1)] + ['Fitness'])
 
+    # Start with a population of isogenic defector populations, where a single
+    # patch contains an adapted cooperator population
     elif initial_state == 'cooperator_invade':
         coop_popid = int(size/2)
 
@@ -55,17 +59,16 @@ def create_metapopulation(config, topology, initial_state='populated'):
                          columns=['Time', 'Population', 'Coop'] + ["A{0:02d}".format(i) for i in np.arange(1,genome_length+1)] + ['Fitness'])
 
         # Set fully-adapted genotypes for both types
-        cgenotype = np.tile(np.arange(num_adaptive_alleles)+1, np.ceil(genome_length/num_adaptive_alleles))[:genome_length]
-        # But change the allelic state of defectors so that there is mismatch
-        dgenotype = np.roll(cgenotype, 1)
-        cgenotype = np.array([1,2,3,4,6])
-        dgenotype = np.array([1,2,3,4,5])
-        print('C: {c}, D: {d}'.format(c=cgenotype, d=dgenotype))
-        #dgenotype = cgenotype
+        dgenotype = np.tile(np.arange(num_adaptive_alleles)+1, np.ceil(genome_length/num_adaptive_alleles))[:genome_length]
+        cgenotype = np.copy(dgenotype)
+        cgenotype[-1] += 1
+
         defector_genotypes = np.repeat([dgenotype], len(defector_pops), axis=0)
         cooperator_genotypes = np.repeat([cgenotype], len(cooperator_pop), axis=0)
         M[adaptive_columns] = np.append(defector_genotypes, cooperator_genotypes, axis=0)
 
+    # Start with a population of isogenic cooperator populations, where a single
+    # patch contains defectors
     elif initial_state == 'defector_invade':
         rare_popid = int(size/2)
 
@@ -85,24 +88,11 @@ def create_metapopulation(config, topology, initial_state='populated'):
         # Set fully-adapted genotypes for both types
         # Here, genotypes are matched
         cgenotype = np.tile(np.arange(num_adaptive_alleles)+1, np.ceil(genome_length/num_adaptive_alleles))[:genome_length]
-        dgenotype = cgenotype
+        dgenotype = np.copy(cgenotype)
+
         defector_genotypes = np.repeat([dgenotype], len(defector_pop), axis=0)
         cooperator_genotypes = np.repeat([cgenotype], len(cooperator_pop), axis=0)
-
-        # Randomize individual cooperator genotypes
-        #cooperator_genotypes = np.array([cgenotype])
-        #shifts = np.random.binomial(1, 0.1, len(cooperator_pop)-1)
-        #for i in range(len(cooperator_pop)-1):
-        #    print('looping',i/448000.0)
-        #    cooperator_genotypes = np.vstack((cooperator_genotypes, np.roll(cgenotype, shifts[i])))
-
         M[adaptive_columns] = np.append(defector_genotypes, cooperator_genotypes, axis=0)
-
-        # Randomize cooperator population genotypes
-        #for p in M.loc[M.Coop==True].Population.unique():
-        #    print('setting thing for pop', p)
-        #    do_roll = np.random.binomial(1, 0.60)
-        #    M.loc[M.Population==p, adaptive_columns] = np.roll(M.loc[M.Population==p, adaptive_columns], do_roll, axis=1)
 
 
     M = assign_fitness(M=M, genome_length=config['Population']['genome_length'],
