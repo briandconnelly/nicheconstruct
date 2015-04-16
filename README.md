@@ -8,6 +8,5 @@ When relevant, these subdirectories contain more information
 * [data](data): Result data sets
 * [figures](figures): Figures
 * [model](model): Model source code
-* [paper](paper): Source for the manuscript
 * [scripts](scripts): Scripts for analyzing and plotting the result data
 
