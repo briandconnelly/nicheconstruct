@@ -15,6 +15,6 @@ When relevant, these subdirectories contain more information
 
 ## License
 
-All software and data are released to the public domain under the [Creative
-Commons CC0](http://creativecommons.org/publicdomain/zero/1.0/) license.
+This work is released to the public domain under the [Creative Commons
+CC0](http://creativecommons.org/publicdomain/zero/1.0/) license.
 
