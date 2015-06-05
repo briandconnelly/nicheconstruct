@@ -26,5 +26,6 @@ fig2 <- ggplot(data=fig2data, aes(x=Time, y=CooperatorProportion)) +
     geom_line(aes(group=Replicate), alpha=0.4, color=color_cooperator) +
     scale_y_continuous(breaks=seq(from=0, to=1, by=0.25), limits=c(0,1)) +
     labs(x=label_time, y=label_cooperator_proportion)
-fig2 <- rescale_plot(plot=fig2, ratio=1/1.2)
+fig2 <- rescale_plot(plot=fig2, ratio=1/0.8)
 ggsave(filename='../figures/Figure2.png', plot=fig2, dpi=300)
+ggsave(filename='../figures/Figure2-ba.pdf', plot=fig2)

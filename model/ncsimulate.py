@@ -5,6 +5,7 @@ import argparse
 import csv
 import datetime
 import os
+import signal
 import sys
 import uuid
 from warnings import warn
@@ -17,7 +18,7 @@ from Metapopulation import *
 from misc import *
 from Topology import *
 
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 
 def parse_arguments():
@@ -47,6 +48,15 @@ def parse_arguments():
 
 def main():
     """Run a simulation"""
+
+    def handle_siginfo(signum, frame):
+        try:
+            print("Cycle {c}".format(c=cycle))
+        except NameError:
+            print("Simulation has not yet begun")
+
+    if hasattr(signal, 'SIGINFO'):
+        signal.signal(signal.SIGINFO, handle_siginfo)
 
     # Get the command line arguments
     args = parse_arguments()
