@@ -49,6 +49,7 @@ def parse_arguments():
 def main():
     """Run a simulation"""
 
+    # Print a message when SIGINFO is received (ctrl-T) on BSD and OS X
     def handle_siginfo(signum, frame):
         try:
             print("Cycle {c}".format(c=cycle))
