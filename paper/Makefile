@@ -31,6 +31,9 @@ box: 07_box1.md
 figures: 08_figures.md
 	cat 08_figures.md newpage.sty | pandoc -H draft.sty $(FLAGS) --output draft_figures_$(shell date +'%Y%m%d').pdf
 
+tables: 09_tables.md
+	cat 09_tables.md newpage.sty | pandoc -H draft.sty $(FLAGS) --output draft_tables_$(shell date +'%Y%m%d').pdf
+
 tex:
 	cat [0-1]*md | pandoc $(FLAGS) -s --output draft_$(FNAME)_$(shell date +'%Y%m%d').tex
 

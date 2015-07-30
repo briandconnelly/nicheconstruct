@@ -52,9 +52,9 @@ Thus, $\epsilon$ specifies the intensity of selection due to niche construction.
 
 ### Individual Fitness
 
-Consider a genotype $g$ with allelic state $a_{g,l}$ at locus $l$; the fitness of an individual with this genotype is defined as:
+Consider a genotype $g$ with allelic state $a_{l}$ at locus $l$; the fitness of an individual with this genotype is defined as:
 
-$$ W_{g} = z - \underbrace{c a_{g,0}}_{{\substack{\text{cost of} \\ \text{cooperation}}}} + \underbrace{\delta \sum_{l=1}^{L} I(a_{g,l})}_{\substack{\text{adaptation to} \\ \text{external environment}}} + \underbrace{\epsilon \sum_{l=1}^{L} n(\beta(a_{g,l}, A), \beta(l, L))}_{\substack{\text{adaptation to} \\ \text{constructed environment}}} $$ {#eq:fitness}
+$$ W_{g} = z - \underbrace{c a_{0}}_{{\substack{\text{cost of} \\ \text{cooperation}}}} + \underbrace{\delta \sum_{l=1}^{L} I(a_{l})}_{\substack{\text{adaptation to} \\ \text{external environment}}} + \underbrace{\epsilon \sum_{l=1}^{L} n(\beta(a_{l}, A), \beta(l, L))}_{\substack{\text{adaptation to} \\ \text{constructed environment}}} $$ {#eq:fitness}
 
 where $z$ is a baseline fitness, $n(a,l)$ is the number of individuals in the subpopulation with allele $a$ at locus $l$, and $I(a)$ indicates whether a given allele is non-zero:
 
@@ -91,7 +91,7 @@ Mutations occur independently at each locus and cause an allelic state change.
 At the binary cooperation locus, mutations occur at rate $\mu_{c}$.
 These mutations flip the allelic state, causing cooperators to become defectors and vice versa.
 Mutations occur at rate $\mu_{a}$ at each adaptive locus.
-These mutations replace the existing allele with a value randomly sampled from the set $\{0\} \cup \{1, 2, \ldots, A\}$.
+These mutations replace the existing allele with a value randomly sampled from the set $\{0, 1, \ldots, A\}$.
 
 
 ### Migration

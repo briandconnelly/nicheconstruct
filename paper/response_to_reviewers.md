@@ -77,7 +77,7 @@ TODO
 
 > L157 Why is the subscript 'g' needed here? I can't see where this is ever summed over in the subsequent equations, so the notation might be overcomplicated here.
 
-TODO
+We have removed the 'g' subscript from all instances where allelic states are represented.
 
 > L172 / Eq 4 The costs and benefits of cooperation are always crucial in models like this, but while the costs are clear, the benefits are spread out using this equation. I feel like this should be clarified a little more - can the effects of this equation be reproduced in equation 2 such that both the costs and benefits of cooperation are explicitly expressed through effects on individual fitness?
 
@@ -85,11 +85,11 @@ TODO
 
 > L185 Just a point of clarification - mutation can result in "no adaptation" right? Is there a reasons for the {0}U{1,2,3…} notation rather than the simpler {0,1,2,3,…} - the union operator doesn't seem to serve any purpose here?
 
-TODO
+We have removed the union operation in favor of the simplified set {0, 1, ..., A}.
 
 > L192 why use boundaries rather than toroid?
 
-TODO
+While we realize that using a bounded lattice may introduce effects at the edges, we chose to not use a torus primarily to maintain consistency with the Hammarlund et al. paper. For that work, our primary motivations for having boundaries were to simplify both the description and visualization of space (and distances), particularly for those not accustomed to thinking about toroidal surfaces. We did not find significant differences between a bounded lattice and one with periodic boundaries during exploratory simulations for that work.
 
 > L202 Is this right? - if each individual remains with probability d  then with d=0.1 as per Table 1, then the population is reduced to < Smin (800) even when at its maximum size (0.1*Smax = 200) - why parameterise in this case, rather than just choosing Smin individuals at random?
 
@@ -109,7 +109,7 @@ TODO
 
 > L410-411 - this doesn't appear to be a proper sentence.
 
-TODO
+This has been addressed in the current manuscript by the addition of an "of" to identify what is being produced.
 
 > Table 1 - aswell as base values, it would be useful to show which further values were explored for each parameter, to judge where parameters space has been explored.
 
