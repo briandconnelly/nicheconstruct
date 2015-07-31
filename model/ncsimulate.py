@@ -47,18 +47,20 @@ def parse_arguments():
     return parser.parse_args()
 
 
-def main():
+def ncsimulate():
     """Run a simulation"""
 
     start_time = time()
 
-    # Print a message when SIGINFO is received (ctrl-T) on BSD and OS X
+    # Print a status message when SIGINFO (ctrl-T) is received on BSD or
+    # OS X systems or SIGUSR1 is received on POSIX systems
     def handle_siginfo(signum, frame):
         try:
             print("Cycle {c}".format(c=cycle))
         except NameError:
             print("Simulation has not yet begun")
 
+    signal.signal(signal.SIGUSR1, handle_siginfo)
     if hasattr(signal, 'SIGINFO'):
         signal.signal(signal.SIGINFO, handle_siginfo)
 
@@ -269,5 +271,5 @@ def main():
 #-------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    main()
+    ncsimulate()
 

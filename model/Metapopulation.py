@@ -195,6 +195,7 @@ def grow(M, config):
     smin = config['Population']['capacity_min']
     smax = config['Population']['capacity_max']
     assert smin <= smax
+    gamma = config['Population']['capacity_shape']
 
     # Keep track of the indices of offspring
     offspring_ix = np.array([], dtype=np.int)
@@ -202,7 +203,8 @@ def grow(M, config):
     # Get a list of parent individual indices
     for popid, subpop in M.groupby('Population'):
         # Get the number of offspring to produce (carrying capacity - current)
-        num_offspring = smin + round(subpop.Coop.mean() * (smax - smin)) - len(subpop)
+        prop_coop = subpop.Coop.mean()**gamma 
+        num_offspring = smin + round(prop_coop * (smax - smin)) - len(subpop)
 
         # Select the number of offspring to produce for each parent
         parent_num_offspring = multinomial(n=num_offspring,
