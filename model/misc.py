@@ -53,3 +53,9 @@ def write_run_information(filename, config):
         infofile.write('Random Seed: {seed}\n'.format(seed=config['Simulation']['seed']))
         infofile.write('UUID: {uuid}\n'.format(uuid=config['Simulation']['UUID']))
 
+def append_run_information(filename, string):
+    """ Add additional information about the run and software environment """
+
+    with open(filename, 'a') as infofile:
+        infofile.write(string)
+

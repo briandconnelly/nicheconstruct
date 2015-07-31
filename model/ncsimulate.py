@@ -7,6 +7,7 @@ import datetime
 import os
 import signal
 import sys
+from time import time
 import uuid
 from warnings import warn
 
@@ -18,7 +19,7 @@ from Metapopulation import *
 from misc import *
 from Topology import *
 
-__version__ = '1.0.1'
+__version__ = '1.0.2'
 
 
 def parse_arguments():
@@ -48,6 +49,8 @@ def parse_arguments():
 
 def main():
     """Run a simulation"""
+
+    start_time = time()
 
     # Print a message when SIGINFO is received (ctrl-T) on BSD and OS X
     def handle_siginfo(signum, frame):
@@ -259,6 +262,9 @@ def main():
     if log_population:
         write_population_data(writer=writerp, metapop=metapop,
                               topology=topology, cycle=cycle, config=config)
+
+    rt_string = 'Run Time: {t}'.format(t=datetime.timedelta(seconds=time()-start_time))
+    append_run_information(filename=infofile, string=rt_string)
 
 #-------------------------------------------------------------------------
 
