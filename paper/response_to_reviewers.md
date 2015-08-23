@@ -87,7 +87,7 @@ TODO
 
 > L185 Just a point of clarification - mutation can result in "no adaptation" right? Is there a reasons for the {0}U{1,2,3…} notation rather than the simpler {0,1,2,3,…} - the union operator doesn't seem to serve any purpose here?
 
-We have removed the union operation in favor of the simplified set {0, 1, ..., A}.
+We have removed the union operation in favor of the simplified set $\{0, 1, \ldots, A\}$.
 
 > L192 why use boundaries rather than toroid?
 
@@ -153,7 +153,8 @@ TODO
 
 > Line 196-197. Why not just seed the environment with sigma*S(P_0) individuals rather than the two step process described here?
 
-TODO
+This is a valid point that highlights an additional source of complexity in the model and its analysis. We have chosen to include this two-step process for initiating populations to maintain consistency with the Hammarlund et al. paper. The overall inclusion of this additional stochastic element allows us to compare both models with ongoing microbial experimental evolution experiments. **TODO (BDC): should this detail be included in either paper?**
+
 
 > Line 261. Does this only happen when a type has fixed in the subpopulation?
 
