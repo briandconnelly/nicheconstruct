@@ -38,7 +38,9 @@ TODO
 
 > Does that fact that p is set to 0.5 at the start of the simulations make this paper really about the persistence of cooperation rather than its evolution? To show the latter, would the authors not consider testing their model with an initial p of 1/800 i.e. a single mutation? In how many such runs does cooperation then persist?
 
-TODO
+This is a very important point that should have been addressed in the original manuscript. To address this omission, we have conducted further simulations in which the initial proportion of cooperators were widely varied. The results of these simulations are included in the revised manuscript. **TODO: specific location of results and figures**. **TODO: brief description of the results**.
+
+Due to the thinning that occurs stochastically at the onset of each simulation (to maintain similarity with the Hammarlund paper), we have not performed simulations in which p0=1/800, which is a very interesting suggestion. (**TODO: should we add the ability to conduct a simulation starting with one cooperator?**). However, we have included results of simulations in which cooperators were entirely absent from the starting population. **TODO: summary of results and where we've discussed/shown them**.
 
 > Is this really negative niche-construction - "niche-constructing acts that, on average decrease the fitness of the niche-constructing organisms" - in the model, the niche-construction shifts the optimum value in the environment, but does not directly reduce fitness of the niche-constructors - instead it makes a higher relative fitness possible for others.
 
@@ -103,13 +105,13 @@ TODO
 
 TODO
 
-> L386-388 I think this point about representing the niche, or environment, explicitly, is more important than the attention it is given here…
+> L386-388 I think this point about representing the niche, or environment, explicitly, is more important than the attention it is given here...
 
 TODO
 
 > L410-411 - this doesn't appear to be a proper sentence.
 
-This has been addressed in the current manuscript by the addition of an "of" to identify what is being produced.
+This has been addressed in the current manuscript with the addition of an "of" to identify what is being produced.
 
 > Table 1 - aswell as base values, it would be useful to show which further values were explored for each parameter, to judge where parameters space has been explored.
 
