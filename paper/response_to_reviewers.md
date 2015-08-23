@@ -158,7 +158,10 @@ This is a valid point that highlights an additional source of complexity in the 
 
 > Line 261. Does this only happen when a type has fixed in the subpopulation?
 
-TODO
+No, all types contribute to the constructed environment proportional to their abundances.
+
+We have updated the manuscript to clarify this point and not give the impression that types only construct their niche when fixed. In the instance noted by the reviewer, types are no longer described as having fixed.
+
 
 > Line 265. Without qualification this sentence might be overstating things a bit!
 
