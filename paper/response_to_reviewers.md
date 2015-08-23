@@ -40,7 +40,7 @@ TODO
 
 This is a very important point that should have been addressed in the original manuscript. To address this omission, we have conducted further simulations in which the initial proportion of cooperators were widely varied. The results of these simulations are included in the revised manuscript. **TODO: specific location of results and figures**. **TODO: brief description of the results**.
 
-Due to the thinning that occurs stochastically at the onset of each simulation (to maintain similarity with the Hammarlund paper), we have not performed simulations in which p0=1/800, which is a very interesting suggestion. (**TODO: should we add the ability to conduct a simulation starting with one cooperator?**). However, we have included results of simulations in which cooperators were entirely absent from the starting population. **TODO: summary of results and where we've discussed/shown them**.
+Due to the thinning that occurs stochastically at the onset of each simulation (to maintain consistency with the Hammarlund et al. paper), we have not performed simulations in which p0=1/800, which is a very interesting suggestion. (**TODO: should we add the ability to conduct a simulation starting with one cooperator?**). However, we have included results of simulations in which cooperators were entirely absent from the starting population. **TODO: summary of results and where we've discussed/shown them**.
 
 > Is this really negative niche-construction - "niche-constructing acts that, on average decrease the fitness of the niche-constructing organisms" - in the model, the niche-construction shifts the optimum value in the environment, but does not directly reduce fitness of the niche-constructors - instead it makes a higher relative fitness possible for others.
 
@@ -132,7 +132,10 @@ TODO
 
 > Could 'adaptation to external environment' be rolled in to baseline fitness? It seems that 0 alleles (except at the cooperation locus, of course) are always selected against and should drop out of the population quite quickly. What would change if the third term in equation (2) were omitted?
 
-TODO
+This is a keen insight into the model and the evolutionary dynamics that it is likely to exhibit. It is indeed unlikely that non-zero alleles would be maintained for very long, so we agree with the reviewer on this point---incorporating this form of adaptation into baseline fitness would be appropriate. Doing so would also simplify the model, which we would welcome.
+
+However, to maintain consistency with our earlier model described in the Hammarlund et al. paper, we have opted to keep this additional component of fitness. We believe that doing so allows us to clearly differentiate our results---thus directly highlighting the effects of niche construction---from this previous work.
+
 
 > Migration could be explained in a bit more detail. For example, does migration occur symmetrically in order to avoid some subpopulations stochastically exceeding S_max? If not, how is this avoided? The text on the bottom of page 6 and the top of page 7 suggests that the rate of migration depends on success or fitness. Is this reflecting frequency dependence only or some other mechanism?
 
