@@ -41,7 +41,9 @@ This negative niche construction occurs when the number of adaptive alleles ($A$
 In such a case, any sequence of integers on the circular genome will always contain a break in the sequence; that is, one locus will have an allele that is not one less than the allele at the next locus (see [Box 1](#box1)).
 Given this unavoidable mismatch, types will always construct a niche in which selection for a different type is increased.
 When negative niche construction is removed (by setting $L=5$, $A=5$), cooperators are again driven extinct after an initial lift in abundance ([Figure 2C](#fig2)).
-These results indicate that the type of niche construction matters. Specifically, negative niche construction is crucial for maintaining cooperation.
+These results indicate that the type of niche construction matters.
+Specifically, negative niche construction is crucial for maintaining cooperation by the Hankshaw effect.
+Here, cooperators escape invasion by hitchhiking along with adaptations to the constructed environment.
 
 
 ## Selective Feedbacks Limit Defector Invasion

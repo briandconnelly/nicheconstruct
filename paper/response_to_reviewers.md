@@ -165,7 +165,8 @@ We have updated the manuscript to clarify this point and not give the impression
 
 > Line 265. Without qualification this sentence might be overstating things a bit!
 
-TODO
+This statement was indeed overgeneralized and failed to place our results in the proper context. We have appended an additional sentence that clarifies that negative niche construction is an important factor in the maintenance of cooperation by the Hankshaw Effect and that it does so by creating adaptive opportunities on which cooperation can hitchhike.
+
 
 > Line 271 and others. At times the term 'population' used rather than subpopulation or metapopulation. This should be specified each time.
 
