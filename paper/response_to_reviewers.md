@@ -153,7 +153,7 @@ TODO
 
 > Line 196-197. Why not just seed the environment with sigma*S(P_0) individuals rather than the two step process described here?
 
-This is a valid point that highlights an additional source of complexity in the model and its analysis. We have chosen to include this two-step process for initiating populations to maintain consistency with the Hammarlund et al. paper. The overall inclusion of this additional stochastic element allows us to compare both models with ongoing microbial experimental evolution experiments. **TODO (BDC): should this detail be included in either paper?**
+This is a valid point that highlights an additional source of complexity in the model and its analysis. We have chosen to include this two-step process for initiating populations to maintain consistency with the Hammarlund et al. paper. The overall inclusion of this additional stochastic element allows us to compare both models with ongoing microbial experimental evolution experiments. **TODO (BDC): should this detail be included in either paper?** We note that because of this additional stochasticity, we report the *actual* initial cooperator proportions rather than the *expected* proportions where appropriate.
 
 
 > Line 261. Does this only happen when a type has fixed in the subpopulation?
