@@ -1,3 +1,18 @@
+---
+geometry: margin=1in
+---
+Dear Dr. Endler and two Anonymous Reviewers,
+
+We are extremely grateful to you and the two anonymous reviewers for the thorough and thoughtful evaluation of our manuscript "Negative niche construction favors the evolution of cooperation". The comments provided were very helpful and prompted changes that have greatly improved the manuscript. In response to reviewer feedback, we have:
+
+- Rewritten portions of the abstract, main text, figures, and table
+- Performed simulations to elucidate the influence of additional key parameters
+- Included additional results as supplementary information
+
+Below, we address each of the comments individually. Each comment is shown **TODO formatting details**, and our response are shown immediately below **TODO formatting details**.
+
+\rule{\textwidth}{1pt}
+
 
 ## Editor
 
@@ -175,4 +190,19 @@ TODO
 > A concluding paragraph that discusses the topic more generally might be more fitting than ending on a discussion of host-symbiont interactions.
 
 TODO
+
+
+\rule{\textwidth}{1pt}
+
+Once again, we deeply appreciate time time and effort that you and the two reviewers have dedicated to our research and the constructive comments provided. We hope you'll find that this manuscript has benefitted tremendously from them. Please do not hesitate to contact us if we can clarify any of our comments above.
+
+Thank you for your continued consideration of our manuscript. 
+
+
+
+Sincerely,
+
+
+
+Brian Connelly, Katie Dickinson, Sarah Hammarlund, and Ben Kerr
 
