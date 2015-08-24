@@ -46,6 +46,7 @@ This circularity is represented by the function $\beta(x,X)$, which gives the in
 $$ \beta(x, X) = \bmod_{X}(x - 2 + X) + 1 $$ {#eq:beta}
 
 Here, $\bmod_{X}(x)$ is the integer remainder when dividing $x$ by $X$.
+For example, $\beta(3, 5)$ returns 2, while $\beta(1, 5)$ returns 5.
 Using this function, the selective value of allele $a$ at adaptive locus $l$ is increased by $\epsilon$ for each individual in the subpopulation that has allele $\beta(a,A)$ at locus $\beta(l, L)$.
 Thus, $\epsilon$ specifies the intensity of selection due to niche construction.
 

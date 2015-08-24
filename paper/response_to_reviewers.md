@@ -95,7 +95,8 @@ TODO
 
 > L151 Eq (1) - I think a one sentence explanation of what this equation does would save readers some effort in understanding here.
 
-TODO
+This is an excellent suggestion. We have added two examples to the manuscript that we hope will help clarifying how this function works and how it relates to the two "circular" sets used in the model.
+
 
 > L157 Why is the subscript 'g' needed here? I can't see where this is ever summed over in the subsequent equations, so the notation might be overcomplicated here.
 
