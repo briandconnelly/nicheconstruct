@@ -1,6 +1,7 @@
 ---
 geometry: margin=1in
 ---
+
 Dear Dr. Endler and two Anonymous Reviewers,
 
 We are extremely grateful to you and the two anonymous reviewers for the thorough and thoughtful evaluation of our manuscript "Negative niche construction favors the evolution of cooperation". The comments provided were very helpful and prompted changes that have greatly improved the manuscript. In response to reviewer feedback, we have:
@@ -57,9 +58,13 @@ This is a very important point that should have been addressed in the original m
 
 Due to the thinning that occurs stochastically at the onset of each simulation (to maintain consistency with the Hammarlund et al. paper), we have not performed simulations in which p0=1/800, which is a very interesting suggestion. (**TODO: should we add the ability to conduct a simulation starting with one cooperator?**). However, we have included results of simulations in which cooperators were entirely absent from the starting population. **TODO: summary of results and where we've discussed/shown them**.
 
+
 > Is this really negative niche-construction - "niche-constructing acts that, on average decrease the fitness of the niche-constructing organisms" - in the model, the niche-construction shifts the optimum value in the environment, but does not directly reduce fitness of the niche-constructors - instead it makes a higher relative fitness possible for others.
 
-TODO
+This interpretation of our model is correct. The niche constructing behavior does not reduce a type's absolute fitness. Rather, niche construction increases the absolute fitness of another type, thus decreasing the *relative* fitness of the niche constructing type. Selection acts on relative fitness in our model. Subpopulations grow to the same size, regardless of absolute fitness. However, by constructing an environment that favors another type, the niche constructing type decreases its relative abundance in the subpopulation, which we believe is indeed a form of negative niche construction.
+
+The distinction between absolute and relative fitness and how they relate to niche construction has previously been discussed. In his review of Odling-Smee, Laland, and Feldman's *Niche Construction: The Neglected Process in Evolution*, Samir Okasha noted that the authors did not explicitly state whether positive and negative niche construction affected absolute or relative fitness (doi: [10.1007/s10539-005-0431-3](http://dx.doi.org/10.1007/s10539-005-0431-3)). Laland, Odling-Smee, and Feldman responded: "In all cases in our models we are referring to relative fitness which is natural since we make standard population genetic assumptions, such as infinite population size" (doi: [10.1007/s10539-004-6834-8](http://dx.doi.org/10.1007/s10539-004-6834-8)). Given the large impact of the models discussed in this exchange, we believe our classification of negative niche construction is consistent with the field.
+
 
 > There is a separation in the model between the "external" environment and the "constructed" environment, neither of which are modelled independently; rather they are implied from the way that the genetic makeup of organisms affects their fitness. This seems like a weak point of the model given that this separation is clearly an artificial construct - it would help the paper if the authors could give some thought to justifying this distinction - why doesn't niche construction affect the "external" environment. For example, is this a way that host/parasite interactions have been previously modelled? Further to this point, adaptation is usually associated with some degree of genetic load - i.e. the difference between optimal and actual genotypes in a given environment (e.g. L255). Can the authors say anything about whether an assumption of no genetic load is critical to their findings, or whether they think it is implicitly accounted for in their model in some way I have
 missed?
@@ -164,7 +169,10 @@ TODO
 
 > The labelling is a bit difficult to follow at times. I would suggest representing the alleles with letters and the loci with numbers (or vice versa) if possible.
 
-TODO
+This is true---having two sets of integers can at times be difficult to follow. While we did consider the excellent suggestion to use letters and numbers to differentiate between these sets, we felt that the tradeoff of doing so would further complicate the mathematical description (e.g. Equation 2).
+
+We have taken the following steps to minimize the possibility of confusion. Where specific numbers are used in the manuscript, we have made sure that these values are always properly prefixed so that their role is clear. In the detailed description of the model given in Box 1, we italicized the integers used to represent loci (and always prefixed them with a description). **TODO: should we italicize loci in the main text?**
+
 
 > Line 196-197. Why not just seed the environment with sigma*S(P_0) individuals rather than the two step process described here?
 
