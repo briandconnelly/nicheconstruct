@@ -185,7 +185,8 @@ This statement was indeed overgeneralized and failed to place our results in the
 
 > Line 271 and others. At times the term 'population' used rather than subpopulation or metapopulation. This should be specified each time.
 
-TODO
+This is a distinction that we have given much consideration. For this manuscript, we chose to use *population* to refer to a collection of independent *subpopulations*. This is instead of referring to a collection of *populations* as a *metapopulation*. We have checked several additional times to make sure our usage is consistent throughout the manuscript. In addition, there were a few places, such as the sentence referred to here, where the distinction was not immediately clear. We have edited these instances to be more explicit.
+
 
 > A concluding paragraph that discusses the topic more generally might be more fitting than ending on a discussion of host-symbiont interactions.
 

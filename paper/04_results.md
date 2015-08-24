@@ -50,7 +50,7 @@ Here, cooperators escape invasion by hitchhiking along with adaptations to the c
 
 The adaptation resulting from selective feedbacks can limit invasion by defectors, which arise either through migration from neighboring patches or through mutation at the cooperation locus.
 This latter challenge is particularly threatening, as these isogenic defectors are equally adapted, yet do not incur the cost of cooperation.
-As demonstrated in [Figure 3A](#fig3), isogenic defectors rapidly spread when introduced at a single patch in the center of a population of cooperators if mutations do not occur.
+As demonstrated in [Figure 3A](#fig3), isogenic defectors rapidly spread when introduced as a single subpopulation in the center of a population of otherwise all-cooperator subpopulations.
 However, cooperators resist defector invasion in over half of the replicate populations when adaptations can arise via mutation ([Figure 3B](#fig3)).
 [Figure 4](#fig4) depicts one such instance.
 In that population, isogenic defectors are seeded at a single patch in an otherwise all-cooperator population.
