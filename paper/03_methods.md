@@ -3,7 +3,7 @@
 
 Building upon @HANKSHAW, we describe an individual-based model in which cooperators and defectors evolve and compete in a population of subpopulations (i.e., a metapopulation).
 Through mutation, individuals gain adaptations to their environment, which increase reproductive fitness and allow those lineages to rise in abundance.
-More successful lineages spread to neighboring subpopulations by migration.
+These lineages then spread throughout the population by migration to neighboring subpopulations.
 
 In the expanded model here, subpopulations additionally modify their local environment.
 As this process occurs, environmental changes feed back to affect selection.
@@ -97,9 +97,12 @@ These mutations replace the existing allele with a value randomly sampled from t
 ### Migration
 
 Populations consist of $N^2$ patches arranged as an $N \times N$ lattice, where each patch can support a subpopulation.
-After mutation, individuals emigrate to an adjacent patch with probability $m$.
-During each migration event, a single destination patch is randomly chosen from each source patch's Moore neighborhood, which is composed of the nearest 8 patches on the lattice.
+After mutation, individuals emigrate to an adjacent patch.
+For each source subpopulation, a single destination patch is randomly chosen from the source patch's Moore neighborhood, which is composed of the nearest 8 patches on the lattice.
 Because the population lattice has boundaries, patches located on the periphery have smaller neighborhoods.
+Individuals emigrate with probability $m$, which means larger subpopulations produce more emigrants.
+Through immigration, subpopulations can exceed $S_{max}$ individuals.
+As described below, however, this increase in population size is temporary.
 
 
 ### Population Initialization and Simulation

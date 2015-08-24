@@ -159,7 +159,12 @@ However, to maintain consistency with our earlier model described in the Hammarl
 
 > Migration could be explained in a bit more detail. For example, does migration occur symmetrically in order to avoid some subpopulations stochastically exceeding S_max? If not, how is this avoided? The text on the bottom of page 6 and the top of page 7 suggests that the rate of migration depends on success or fitness. Is this reflecting frequency dependence only or some other mechanism?
 
-TODO
+We agree with the reviewer's comment: migration was not defined clearly enough in the manuscript. We have made changes that directly address both of the questions raised.
+
+First, we have stated in the Methods section that subpopulations can exceed S_max individuals immediately following the migration stage. We add that this is temporary, as dilution immediately follows, which reduces the population size.
+
+As for the second point, our original wording in the model overview could easily mislead readers, giving the impression that migration was affected by adaptation or fitness, which is not true.We have updated this to simply state that migration occurs and can allow a type to spread in the population.
+
 
 > Finally, if I understand correctly, the force maintaining cooperation is a constant opportunity to adapt and maintain the benefit of having a large local population to generate useful adaptations. Is there a fundamental difference between the way in which this is modelled here (as a feature of the niche constructing genotypes of the individual agents) and modelling this as a straightforward variable or fluctuating environment?
 
