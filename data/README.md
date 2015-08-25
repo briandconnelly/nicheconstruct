@@ -3,7 +3,7 @@
 In most cases, each data file contains data from multiple replicate simulations. 
 Configuration files used to generate these data sets are available in [configuration](../configuration).
 
-Files ending with `.csv.bz2` are compressed with bzip2.
+Files ending with `.bz2` are compressed with bzip2.
 
 
 ## Description of Included Data Sets
@@ -20,4 +20,4 @@ Files ending with `.csv.bz2` are compressed with bzip2.
 | [cooperator_invade_cheat_noadapt.csv.bz2](cooperator_invade_cheat_noadapt.csv.bz2) | Combined data from simulations where a rare adapted cooperator invaded defector population, no mutations ([Figure 3C](../figures/Figure3.png)) |
 | [defector_invade_matched_sample.csv.bz2](defector_invade_matched_sample.csv.bz2) | Data from a single representative replicate simulation in which a rare defector invaded an isogenic cooperator population, adaptive mutations ([Figure 4](../figures/Figure4.png)) |
 | [defector_invade_matched_muboth.csv.bz2](defector_invade_matched_muboth.csv.bz2) | Combined data from simulations where a rare defector invaded isogenic cooperator population, mutations at all loci ([Figure S1](../figures/FigureS1.png)) |
-
+| [sweep_dilution.csv.bz2](sweep_dilution.csv.bz2) | Combined data from simulations using different dilution factors, which altered how severely subpopulations were thinned at each simulation cycle (see [Figure S2](../figures/FigureS2.png)) |
