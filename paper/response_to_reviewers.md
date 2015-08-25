@@ -56,24 +56,25 @@ TODO
 
 This is a very important point that should have been addressed in the original manuscript. To address this omission, we have conducted further simulations in which the initial proportion of cooperators were widely varied. The results of these simulations are included in the revised manuscript. **TODO: specific location of results and figures**. **TODO: brief description of the results**.
 
-Due to the thinning that occurs stochastically at the onset of each simulation (to maintain consistency with the Hammarlund et al. paper), we have not performed simulations in which p0=1/800, which is a very interesting suggestion. (**TODO: should we add the ability to conduct a simulation starting with one cooperator?**). However, we have included results of simulations in which cooperators were entirely absent from the starting population. **TODO: summary of results and where we've discussed/shown them**.
+Due to the thinning that occurs stochastically at the onset of each simulation (to maintain consistency with the Hammarlund et al. paper), we have not performed simulations in which p0=1/800, which is a very interesting suggestion. (**TODO: should we add the ability to conduct a simulation starting with one cooperator?**). However, we have included results of simulations in which cooperators were entirely absent from the starting population but could arise via mutation. **TODO: summary of results and where we've discussed/shown them**.
 
 
 > Is this really negative niche-construction - "niche-constructing acts that, on average decrease the fitness of the niche-constructing organisms" - in the model, the niche-construction shifts the optimum value in the environment, but does not directly reduce fitness of the niche-constructors - instead it makes a higher relative fitness possible for others.
 
 This interpretation of our model is correct. The niche constructing behavior does not reduce a type's absolute fitness. Rather, niche construction increases the absolute fitness of another type, thus decreasing the *relative* fitness of the niche constructing type. Selection acts on relative fitness in our model. Subpopulations grow to the same size, regardless of absolute fitness. However, by constructing an environment that favors another type, the niche constructing type decreases its relative abundance in the subpopulation, which we believe is indeed a form of negative niche construction.
 
-The distinction between absolute and relative fitness and how they relate to niche construction has previously been discussed. In his review of Odling-Smee, Laland, and Feldman's *Niche Construction: The Neglected Process in Evolution*, Okasha noted that the authors did not explicitly state whether positive and negative niche construction affected absolute or relative fitness (doi: [10.1007/s10539-005-0431-3](http://dx.doi.org/10.1007/s10539-005-0431-3)). Laland, Odling-Smee, and Feldman responded: "In all cases in our models we are referring to relative fitness which is natural since we make standard population genetic assumptions, such as infinite population size" (doi: [10.1007/s10539-004-6834-8](http://dx.doi.org/10.1007/s10539-004-6834-8)). Given the large impact of the models discussed in this exchange, we believe our classification of negative niche construction is consistent with the field.
+The distinction between absolute and relative fitness and how they relate to niche construction has previously been discussed. In his review of Odling-Smee, Laland, and Feldman's *Niche Construction: The Neglected Process in Evolution*, Okasha noted that the authors did not explicitly state whether positive and negative niche construction affected absolute or relative fitness (doi: [10.1007/s10539-005-0431-3](http://dx.doi.org/10.1007/s10539-005-0431-3)). Laland, Odling-Smee, and Feldman responded: "In all cases in our models we are referring to relative fitness which is natural since we make standard population genetic assumptions, such as infinite population size" (doi: [10.1007/s10539-004-6834-8](http://dx.doi.org/10.1007/s10539-004-6834-8)).
 
 
-> There is a separation in the model between the "external" environment and the "constructed" environment, neither of which are modelled independently; rather they are implied from the way that the genetic makeup of organisms affects their fitness. This seems like a weak point of the model given that this separation is clearly an artificial construct - it would help the paper if the authors could give some thought to justifying this distinction - why doesn't niche construction affect the "external" environment. For example, is this a way that host/parasite interactions have been previously modelled? Further to this point, adaptation is usually associated with some degree of genetic load - i.e. the difference between optimal and actual genotypes in a given environment (e.g. L255). Can the authors say anything about whether an assumption of no genetic load is critical to their findings, or whether they think it is implicitly accounted for in their model in some way I have
-missed?
+> There is a separation in the model between the "external" environment and the "constructed" environment, neither of which are modelled independently; rather they are implied from the way that the genetic makeup of organisms affects their fitness. This seems like a weak point of the model given that this separation is clearly an artificial construct - it would help the paper if the authors could give some thought to justifying this distinction - why doesn't niche construction affect the "external" environment. For example, is this a way that host/parasite interactions have been previously modelled? Further to this point, adaptation is usually associated with some degree of genetic load - i.e. the difference between optimal and actual genotypes in a given environment (e.g. L255). Can the authors say anything about whether an assumption of no genetic load is critical to their findings, or whether they think it is implicitly accounted for in their model in some way I have missed?
 
 TODO
+
 
 > The setup of the circular chromosome and circular fitness implications is mathematically neat - however, it seems like a very specific set of assumptions about gene/environment interactions (for example, only when the modulus of L/A is non-zero) and one always worries about the generality of insights based on such a specific system. Can the authors provide any more information about where these assumptions might be met in nature, and/or what range of conditions or assumptions are needed for their insights to hold.
 
-TODO
+While we would not claim that our implementation represents any particular trait in nature, it does allow us to extend adaptaptation to an extreme, similar to an unending co-evolutionary arms race. Alternate implementations, such as explicitly modeling adaptation using ever-increasing numbers of loci, would be extremely costly---likely prohibitively so---from a computational perspective. This model is our meager attempt to capture the potentially never-ending co-evolution of organisms and their environment in a tractable manner.
+
 
 > Increased population density has only positive effects here - but density can also bring costs - this is ignored in the linear population growth of Eq 4; is it possible to say anything about how much cost can be borne before the effect disappears?
 
@@ -112,7 +113,8 @@ We have removed the union operation in favor of the simplified set $\{0, 1, \ldo
 
 > L192 why use boundaries rather than toroid?
 
-While we realize that using a bounded lattice may introduce effects at the edges, we chose to not use a torus primarily to maintain consistency with the Hammarlund et al. paper. For that work, our primary motivations for having boundaries were to simplify both the description and visualization of space (and distances), particularly for those not accustomed to thinking about toroidal surfaces. We did not find significant differences between a bounded lattice and one with periodic boundaries during exploratory simulations for that work.
+While we realize that using a bounded lattice may introduce effects at the edges, we chose to not use a torus primarily to maintain consistency with the Hammarlund et al. paper. For that work, we did not find significant differences between a bounded lattice and one with periodic boundaries during exploratory simulations. Our primary motivations for having boundaries were to simplify both the description and visualization of space (and distances), particularly for those not accustomed to thinking about toroidal surfaces.
+
 
 > L202 Is this right? - if each individual remains with probability d  then with d=0.1 as per Table 1, then the population is reduced to < Smin (800) even when at its maximum size (0.1*Smax = 200) - why parameterise in this case, rather than just choosing Smin individuals at random?
 
@@ -149,7 +151,9 @@ TODO
 
 > The definition of cooperation used here appears to be that cooperation is a costly behaviour that increases local population density. The authors do briefly mention the negative aspects of high local population density in terms of increased competition on pages 18/19 but this discussion does not extend to the model. In fact, the authors avoid this issue by diluting the population 'to allow growth in the next generation'. More robust justification for imposing a ~90% death rate on each subpopulation every generation may be needed as it could favour the cooperative allele substantially. What would the authors expect to see if local competition was explicitly modelled?
 
-TODO
+TODO - definition of cooperation
+TODO - negative aspects of density.
+TODO - discussion of dilution factor, figure, changes made in manuscript
 
 > Could 'adaptation to external environment' be rolled in to baseline fitness? It seems that 0 alleles (except at the cooperation locus, of course) are always selected against and should drop out of the population quite quickly. What would change if the third term in equation (2) were omitted?
 
@@ -209,7 +213,7 @@ TODO
 
 \rule{\textwidth}{1pt}
 
-Once again, we deeply appreciate time time and effort that you and the two reviewers have dedicated to our research and the constructive comments provided. We hope you'll find that this manuscript has benefitted tremendously from them. Please do not hesitate to contact us if we can clarify any of our comments above.
+Once again, we deeply appreciate time and effort that you and the two reviewers have dedicated to our research and the constructive comments provided. We hope you'll find that this manuscript has benefitted tremendously from them. Please do not hesitate to contact us if we can clarify any of our comments above.
 
 Thank you for your continued consideration of our manuscript. 
 
