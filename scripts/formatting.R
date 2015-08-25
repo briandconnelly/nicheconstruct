@@ -1,12 +1,15 @@
 label_time <- 'Time'
 label_cooperator_proportion <- 'Cooperator Proportion'
+label_cooperator_presence <- 'Cooperator Presence'
 label_mean_fitness <- 'Mean Fitness'
 label_tolerance <- 'Survival Rate, Initial Environmental Change'
+label_dilutionfactor <- 'Dilution Factor'
 
 color_cooperator <- '#729ECE'
 color_defector <- '#ED665D'
 
 ribbon_alpha <- 0.2
+replicate_alpha <- 0.1
 
 theme_negniche <- function()
 {
