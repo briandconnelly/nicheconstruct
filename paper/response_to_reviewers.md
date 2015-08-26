@@ -153,7 +153,11 @@ TODO
 
 TODO - definition of cooperation
 TODO - negative aspects of density.
-TODO - discussion of dilution factor, figure, changes made in manuscript
+
+We are extremely grateful to the reviewer for drawing our attention to the lack of justification or clarification of the 90% death rate used in the original manuscript. Our primary motivation for selecting this rate was to maintain consistency with and allow comparison to the model and results presented in the Hammarlund et al. work (and ongoing microbial experiments). To address this, we have performed further simulations in which a wide range of dilution factors were used. Our results, shown below, have been added to the manuscript. While a 90% dilution may be a more severe bottleneck than some natural populations, it is not necessarily so for others. For example, 95-99% of the *Vibrio harveyi* residing in the bobtail squid's light organ are expelled daily (Lee and Ruby, 1994).
+
+![**Effect of Subpopulation Dilution.**](../figures/FigureS2-small.png)
+
 
 > Could 'adaptation to external environment' be rolled in to baseline fitness? It seems that 0 alleles (except at the cooperation locus, of course) are always selected against and should drop out of the population quite quickly. What would change if the third term in equation (2) were omitted?
 
@@ -173,7 +177,7 @@ As for the second point, our original wording in the model overview could easily
 
 > Finally, if I understand correctly, the force maintaining cooperation is a constant opportunity to adapt and maintain the benefit of having a large local population to generate useful adaptations. Is there a fundamental difference between the way in which this is modelled here (as a feature of the niche constructing genotypes of the individual agents) and modelling this as a straightforward variable or fluctuating environment?
 
-This summary is correct---cooperation can be maintained when two features are present: there must be adaptive opportunities, and cooperators must be more likely to gain these adaptations. In our previous work (Hammarlund et al. 2015), we demonstrated that cooperation can be maintained when environmental change occurred periodically. But timing is critical. Change must occur more quickly than a population becomes fully adapted. Otherwise, adapted defectors will invade. This is an entirely passive process, and the rate and variation of environmental change were critically important in determining cooperator success. For this work, we have sought to address how this process is affected when populations play an *active* role in creating these adaptive opportunities through niche construction.
+This summary is correct---cooperation can be maintained when two features are present: there must be adaptive opportunities, and cooperators must be more likely to gain these adaptations. In our previous work (Hammarlund et al., 2015), we demonstrated that cooperation can be maintained when environmental change occurred periodically. But timing is critical. Change must occur more quickly than a population becomes fully adapted. Otherwise, adapted defectors will invade. This is an entirely passive process, and the rate and variation of environmental change were critically important in determining cooperator success. For this work, we have sought to address how this process is affected when populations play an *active* role in creating these adaptive opportunities through niche construction.
 
 TODO: discuss niche diversity?
 
@@ -211,7 +215,8 @@ This is a distinction that we have given much consideration. For this manuscript
 
 > A concluding paragraph that discusses the topic more generally might be more fitting than ending on a discussion of host-symbiont interactions.
 
-TODO
+We are grateful to the reviewer for this helpful comment. We believe that doing so places this work in a larger context and makes it accessible to a wider audience. A more general conclusion has been added.
+
 
 
 \rule{\textwidth}{1pt}
