@@ -173,7 +173,10 @@ As for the second point, our original wording in the model overview could easily
 
 > Finally, if I understand correctly, the force maintaining cooperation is a constant opportunity to adapt and maintain the benefit of having a large local population to generate useful adaptations. Is there a fundamental difference between the way in which this is modelled here (as a feature of the niche constructing genotypes of the individual agents) and modelling this as a straightforward variable or fluctuating environment?
 
-TODO
+This summary is correct---cooperation can be maintained when two features are present: there must be adaptive opportunities, and cooperators must be more likely to gain these adaptations. In our previous work (Hammarlund et al. 2015), we demonstrated that cooperation can be maintained when environmental change occurred periodically. But timing is critical. Change must occur more quickly than a population becomes fully adapted. Otherwise, adapted defectors will invade. This is an entirely passive process, and the rate and variation of environmental change were critically important in determining cooperator success. For this work, we have sought to address how this process is affected when populations play an *active* role in creating these adaptive opportunities through niche construction.
+
+TODO: discuss niche diversity?
+
 
 ### Minor Issues
 
