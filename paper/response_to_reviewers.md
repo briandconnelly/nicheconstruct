@@ -25,14 +25,17 @@ spread of cooperation, which would be the case if the frequency increased from a
 
 TODO
 
+
 > Here is another statement by this reviewer which I don't agree with: "Is this really negative niche-construction - "niche-constructing acts that, on average decrease the fitness of the niche-constructing organisms" - in the model, the niche-construction shifts the optimum value in the environment, but does not directly reduce fitness of the niche-constructors - instead it makes a higher relative fitness possible for others."  Evolution is about relative fitness, not absolute fitness (his comments are about absolute fitness), so, given that you have shown increased fitness of others but unchanged for the target, it's relative fitness (relative to the others)
 HAS declined and you DO have negative niche construction.  Maybe just make this more explicit.
 
 TODO
 
+
 > Please give more thought and discussion about the external and the constructed environments, they are not necessarily coupled, in fact in some ways this is the entire point of niche construction.
 
 TODO
+
 
 > As reviewer 2 says, "More robust justification for imposing a ~90% death rate on each subpopulation every generation" is badly needed!  This is rather unrealistic, and makes the entire model rather dubious, unless you can show the same effects with a more realistic death rate (say 30%).
 
@@ -51,6 +54,7 @@ TODO
 > An important question for me is whether this mechanism really stabilises cooperation or merely slows its decline. I look at Figure 1C and I see that while p is still non zero by T=3000, it is clearly declining. Would it eventually hit zero again or is an equilibrium achieved? Is the use of 'indefinitely' on L305 justified? Perhaps this is more of a presentation thing, because in Figure 2A it is clear that there are many populations with high levels of cooperation, albeit with a lot of oscillation - for me this begs the question of how big the metapopulation needs to be to buffer effectively against this degree of stochasticity…
 
 TODO
+
 
 > Does that fact that p is set to 0.5 at the start of the simulations make this paper really about the persistence of cooperation rather than its evolution? To show the latter, would the authors not consider testing their model with an initial p of 1/800 i.e. a single mutation? In how many such runs does cooperation then persist?
 
@@ -80,19 +84,23 @@ While we would not claim that our implementation represents any particular trait
 
 TODO
 
+
 ### Minor Issues
 
 > L16 I thought the description of the Hammerlund paper was too long for the abstract.
 
 TODO
 
+
 > L41 I think cooperation should be precisely defined here, with respect to the distinction between cooperation for mutual benefit (albeit with risk of defection), and altruism, whereby altruists always 'lose out' in the short term by their behaviour.  Which precisely do the authors think they are describing - it seems to me that it partly depends on the model parameters, but it is a bit difficult to tease out with the collective benefits conferred by Equation 4, but it seems more like altruism to me, and that's what the authors seem to suggest ('sacrificing their wellbeing to help others')?
 
 TODO
 
+
 > L69 Personally I find the Tom Robbins analogy a bit of a stretch and while I know the literature in question many will not so it's kind of unclear what's added here; it's also potentially confusing - Sissy's thumbs help her hitchhike as much as anyone else, so it's not clearly paying a cost to help others.
 
-TODO
+We can certainly understand this perspective and have worked to clarify the comparison to Sissy Hankshaw. In the novel, her oversized thumbs were described as a hindrance to everyday activities, such as putting on clothing, and a limitation to her career choices. While not cooperative, we believe this trait shares several key properties---it is costly to its individual, but it does increase that individual's ability to (genetically) hitchhike.
+
 
 > L151 Eq (1) - I think a one sentence explanation of what this equation does would save readers some effort in understanding here.
 
@@ -107,9 +115,11 @@ We have removed the 'g' subscript from all instances where allelic states are re
 
 TODO
 
+
 > L185 Just a point of clarification - mutation can result in "no adaptation" right? Is there a reasons for the {0}U{1,2,3…} notation rather than the simpler {0,1,2,3,…} - the union operator doesn't seem to serve any purpose here?
 
 We have removed the union operation in favor of the simplified set $\{0, 1, \ldots, A\}$.
+
 
 > L192 why use boundaries rather than toroid?
 
@@ -125,17 +135,21 @@ This is correct---the bottleneck introduced at the end of each cycle reduces eac
 
 TODO
 
+
 > L262 The authors state that setting L=A changes the niche construction from positive to negative. I am afraid I completely missed the reasoning here and I think the paper would be improved if it were spelled out more clearly why this parameter setting induces positive niche construction (i.e. an increase in constructor fitness by their construction activity).
 
 TODO
+
 
 > L386-388 I think this point about representing the niche, or environment, explicitly, is more important than the attention it is given here...
 
 TODO
 
+
 > L410-411 - this doesn't appear to be a proper sentence.
 
 This has been addressed in the current manuscript with the addition of an "of" to identify what is being produced.
+
 
 > Table 1 - aswell as base values, it would be useful to show which further values were explored for each parameter, to judge where parameters space has been explored.
 
