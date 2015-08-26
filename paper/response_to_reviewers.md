@@ -118,7 +118,8 @@ While we realize that using a bounded lattice may introduce effects at the edges
 
 > L202 Is this right? - if each individual remains with probability d  then with d=0.1 as per Table 1, then the population is reduced to < Smin (800) even when at its maximum size (0.1*Smax = 200) - why parameterise in this case, rather than just choosing Smin individuals at random?
 
-TODO
+This is correct---the bottleneck introduced at the end of each cycle reduces each subpopulation to fewer than $S_{min}$ individuals. In the next cycle, a subpopulation then grows to its carrying capacity. During growth, mutations are introduced, and growth rate depends on fitness. If we simply chose $S_{min}$ individuals at random, all-defector subpopulations would experience no growth, and therefore acquire no mutations/adaptations. This would put defectors at a severe disadvantage, and possibly muddy the benefits of cooperation and niche construction that cooperators experience.
+
 
 > L210 "performED" and I would argue results should be past tense throughout.
 
