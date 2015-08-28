@@ -133,7 +133,7 @@ This is correct---the bottleneck introduced at the end of each cycle reduces eac
 
 > L210 "performED" and I would argue results should be past tense throughout.
 
-TODO
+We made the stylistic choice to use present tense in the results section with the belief that it is more inviting to the reader, including them in the discovery process. There is some precedent for using the present tense in this journal, particularly when describing simulation results (e.g., 10.1007/s10682-015-9775-6). However, if this stylistic choice is a hindrance, we would be willing to change tense.
 
 
 > L262 The authors state that setting L=A changes the niche construction from positive to negative. I am afraid I completely missed the reasoning here and I think the paper would be improved if it were spelled out more clearly why this parameter setting induces positive niche construction (i.e. an increase in constructor fitness by their construction activity).
