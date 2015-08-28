@@ -40,7 +40,9 @@ Under certain conditions, this construction always makes the constructor sub-opt
 This negative niche construction occurs when the number of adaptive alleles ($A$) does not divide evenly into the number of adaptive loci ($L$).
 In such a case, any sequence of integers on the circular genome will always contain a break in the sequence; that is, one locus will have an allele that is not one less than the allele at the next locus (see [Box 1](#box1)).
 Given this unavoidable mismatch, types will always construct a niche in which selection for a different type is increased.
-When negative niche construction is removed (by setting $L=5$, $A=5$), cooperators are again driven extinct after an initial lift in abundance ([Figure 2C](#fig2)).
+When negative niche construction is removed (by setting $L=5$, $A=5$, [Box 1, Part C](#box1)), cooperators are again driven extinct after an initial lift in abundance ([Figure 2C](#fig2)).
+Here, a fully-adapted type constructs a niche that favors itself.
+When this occurs, a fully-adapted cooperator is at a selective disadvantage against fully-adapted defectors, which do not incur the cost of cooperation.
 These results indicate that the type of niche construction matters.
 Specifically, negative niche construction is crucial for maintaining cooperation by the Hankshaw effect.
 Here, cooperators escape invasion by hitchhiking along with adaptations to the constructed environment.

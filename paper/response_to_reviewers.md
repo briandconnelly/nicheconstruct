@@ -138,7 +138,7 @@ TODO
 
 > L262 The authors state that setting L=A changes the niche construction from positive to negative. I am afraid I completely missed the reasoning here and I think the paper would be improved if it were spelled out more clearly why this parameter setting induces positive niche construction (i.e. an increase in constructor fitness by their construction activity).
 
-TODO
+Our description may have been somewhat misleading here, and we have updated the text to add clarity and prevent misunderstanding. We now describe how changing this value alters niche construction by fully-adapted types as well as reference Box 1, Part C, which illustrates this scenario.
 
 
 > L386-388 I think this point about representing the niche, or environment, explicitly, is more important than the attention it is given here...
