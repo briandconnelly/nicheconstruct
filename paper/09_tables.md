@@ -18,7 +18,7 @@ Table: Model parameters and their values
 | $\mu_{c}$  | Mutation rate at cooperation locus             | $10^{-5}$     | 0                |
 | $N^2$      | Number of patches                              | 625           | 625              |
 | $m$        | Migration rate                                 | 0.05          |                  |
-| $p_0$      | Initial cooperator proportion                  | 0.5           | TODO             |
+| $p_0$      | Initial cooperator proportion                  | 0.5           | 0, 0.01, 0.1, 0.2, 0.3 |
 | $\sigma$   | Survival rate at population initialization     | $10^{-5}$     |                  |
 | $T$        | Number of simulation cycles                    | 3000          | 1000             |
 | $d$        | Subpopulation dilution factor                  | 0.1           | 0.03, 0.09, 0.30, 0.5, 0.7, 0.91, 0.97 |

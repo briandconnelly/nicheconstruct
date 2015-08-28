@@ -153,7 +153,7 @@ This has been addressed in the current manuscript with the addition of an "of" t
 
 > Table 1 - aswell as base values, it would be useful to show which further values were explored for each parameter, to judge where parameters space has been explored.
 
-TODO
+Table 1 has been given an additional column listing the additional parameter values tested. We thank the reviewer for the nice suggestion.
 
 
 ## Reviewer 2
@@ -171,7 +171,7 @@ TODO - negative aspects of density.
 
 We are extremely grateful to the reviewer for drawing our attention to the lack of justification or clarification of the 90% death rate used in the original manuscript. Our primary motivation for selecting this rate was to maintain consistency with and allow comparison to the model and results presented in the Hammarlund et al. work (and ongoing microbial experiments). To address this, we have performed further simulations in which a wide range of dilution factors were used. Our results, shown below, have been added to the manuscript. While a 90% dilution may be a more severe bottleneck than some natural populations, it is not necessarily so for others. For example, 95-99% of the *Vibrio harveyi* residing in the bobtail squid's light organ are expelled daily (Lee and Ruby, 1994).
 
-![**Effect of Subpopulation Dilution.**](../figures/FigureS2-small.png)
+![**Effect of Subpopulation Dilution**](../figures/FigureS2-small.png)
 
 
 > Could 'adaptation to external environment' be rolled in to baseline fitness? It seems that 0 alleles (except at the cooperation locus, of course) are always selected against and should drop out of the population quite quickly. What would change if the third term in equation (2) were omitted?
