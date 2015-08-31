@@ -2,7 +2,7 @@
 geometry: margin=1in
 ---
 
-Dear Dr. Endler and two Anonymous Reviewers,
+Dear Dr. Endler,
 
 We are extremely grateful to you and the two anonymous reviewers for the thorough and thoughtful evaluation of our manuscript "Negative niche construction favors the evolution of cooperation". The comments provided were very helpful and prompted changes that have greatly improved the manuscript. In response to reviewer feedback, we have:
 
@@ -60,7 +60,7 @@ TODO
 
 This is a very important point that should have been addressed in the original manuscript. To address this omission, we have conducted further simulations in which the initial proportion of cooperators were widely varied. The results of these simulations are included in the revised manuscript. **TODO: specific location of results and figures**. **TODO: brief description of the results**.
 
-Due to the thinning that occurs stochastically at the onset of each simulation (to maintain consistency with the Hammarlund et al. paper), we have not performed simulations in which p0=1/800, which is a very interesting suggestion. (**TODO: should we add the ability to conduct a simulation starting with one cooperator?**). However, we have included results of simulations in which cooperators were entirely absent from the starting population but could arise via mutation. **TODO: summary of results and where we've discussed/shown them**.
+Due to the thinning that occurs stochastically at the onset of each simulation (to maintain consistency with the Hammarlund et al. paper), we have not performed simulations in which p0=1/800. However, we have included results of simulations in which cooperators were entirely absent from the starting population but could arise via mutation. **TODO: summary of results and where we've discussed/shown them**.
 
 
 > Is this really negative niche-construction - "niche-constructing acts that, on average decrease the fitness of the niche-constructing organisms" - in the model, the niche-construction shifts the optimum value in the environment, but does not directly reduce fitness of the niche-constructors - instead it makes a higher relative fitness possible for others.
@@ -77,7 +77,7 @@ TODO
 
 > The setup of the circular chromosome and circular fitness implications is mathematically neat - however, it seems like a very specific set of assumptions about gene/environment interactions (for example, only when the modulus of L/A is non-zero) and one always worries about the generality of insights based on such a specific system. Can the authors provide any more information about where these assumptions might be met in nature, and/or what range of conditions or assumptions are needed for their insights to hold.
 
-While we would not claim that our implementation represents any particular trait in nature, it does allow us to extend adaptaptation to an extreme, similar to an unending co-evolutionary arms race. Alternate implementations, such as explicitly modeling adaptation using ever-increasing numbers of loci, would be extremely costly---likely prohibitively so---from a computational perspective. This model is our meager attempt to capture the potentially never-ending co-evolution of organisms and their environment in a tractable manner.
+While we would not claim that our implementation represents any particular trait in nature, it does allow adaptation to proceed in an unlimited manner, similar to an unending co-evolutionary arms race. Alternate implementations, such as explicitly modeling adaptation using ever-increasing numbers of loci, would be extremely costly---likely prohibitively so---from a computational perspective. This model is our compact attempt to capture the potentially never-ending co-evolution of organisms and their environment in a tractable manner.
 
 
 > Increased population density has only positive effects here - but density can also bring costs - this is ignored in the linear population growth of Eq 4; is it possible to say anything about how much cost can be borne before the effect disappears?
@@ -99,12 +99,12 @@ TODO
 
 > L69 Personally I find the Tom Robbins analogy a bit of a stretch and while I know the literature in question many will not so it's kind of unclear what's added here; it's also potentially confusing - Sissy's thumbs help her hitchhike as much as anyone else, so it's not clearly paying a cost to help others.
 
-We can certainly understand this perspective and have worked to clarify the comparison to Sissy Hankshaw. In the novel, her oversized thumbs were described as a hindrance to everyday activities, such as putting on clothing, and a limitation to her career choices. While not cooperative, we believe this trait shares several key properties---it is costly to its individual, but it does increase that individual's ability to (genetically) hitchhike.
+We have worked to clarify the Hankshaw effect terminology. In the novel, her oversized thumbs were described as a hindrance to everyday activities, such as putting on clothing, and a limitation to her career choices. While not cooperative, we believe this trait shares several key properties---it is costly to its individual, but it does increase that individual's ability to (genetically) hitchhike.
 
 
 > L151 Eq (1) - I think a one sentence explanation of what this equation does would save readers some effort in understanding here.
 
-This is an excellent suggestion. We have added two examples to the manuscript that we hope will help clarifying how this function works and how it relates to the two "circular" sets used in the model.
+This is an excellent suggestion. We have added two examples to the manuscript that we hope will help clarifying how this function works and how it relates to the two "circular" sets used in the model. **TODO: Line numbers**
 
 
 > L157 Why is the subscript 'g' needed here? I can't see where this is ever summed over in the subsequent equations, so the notation might be overcomplicated here.
@@ -169,7 +169,7 @@ Table 1 has been given an additional column listing the additional parameter val
 TODO - definition of cooperation
 TODO - negative aspects of density.
 
-We are extremely grateful to the reviewer for drawing our attention to the lack of justification or clarification of the 90% death rate used in the original manuscript. Our primary motivation for selecting this rate was to maintain consistency with and allow comparison to the model and results presented in the Hammarlund et al. work (and ongoing microbial experiments). To address this, we have performed further simulations in which a wide range of dilution factors were used. Our results, shown below, have been added to the manuscript. While a 90% dilution may be a more severe bottleneck than some natural populations, it is not necessarily so for others. For example, 95-99% of the *Vibrio harveyi* residing in the bobtail squid's light organ are expelled daily (Lee and Ruby, 1994).
+We are extremely grateful to the reviewer for drawing our attention to the lack of justification or clarification of the 90% death rate used in the original manuscript. Our primary motivation for selecting this rate was to maintain consistency with and allow comparison to the model and results presented in the Hammarlund et al. work (and ongoing microbial experiments). To address the reviewer's concern, we have performed further simulations in which a wide range of dilution factors were used. Our results, shown below, have been added to the manuscript. While a 90% dilution may be excessive for some natural populations, it is not necessarily so for others. For example, 95-99% of the *Vibrio harveyi* residing in the bobtail squid's light organ are expelled daily (Lee and Ruby, 1994).
 
 ![**Effect of Subpopulation Dilution**](../figures/FigureS2-small.png)
 
@@ -192,7 +192,7 @@ As for the second point, our original wording in the model overview could easily
 
 > Finally, if I understand correctly, the force maintaining cooperation is a constant opportunity to adapt and maintain the benefit of having a large local population to generate useful adaptations. Is there a fundamental difference between the way in which this is modelled here (as a feature of the niche constructing genotypes of the individual agents) and modelling this as a straightforward variable or fluctuating environment?
 
-This summary is correct---cooperation can be maintained when two features are present: there must be adaptive opportunities, and cooperators must be more likely to gain these adaptations. In our previous work (Hammarlund et al., 2015), we demonstrated that cooperation can be maintained when environmental change occurred periodically. But timing is critical. Change must occur more quickly than a population becomes fully adapted. Otherwise, adapted defectors will invade. This is an entirely passive process, and the rate and variation of environmental change were critically important in determining cooperator success. For this work, we have sought to address how this process is affected when populations play an *active* role in creating these adaptive opportunities through niche construction.
+This summary is correct---cooperation can be maintained when two features are present: there must be adaptive opportunities, and cooperators must be more likely to gain these adaptations. In our previous work (Hammarlund et al., 2015), we demonstrated that cooperation can be maintained when environmental change occurred periodically. But timing is critical. The period between changes in the environment must not exceed the time for the population to fully adapt.  Otherwise cooperation goes to low proportions as fully adapted defectors dominate. This is an entirely passive process, and the rate and variation of environmental change were critically important in determining cooperator success. For this work, we have sought to address how this process is affected when populations play an *active* role in creating these adaptive opportunities through niche construction.
 
 TODO: discuss niche diversity?
 
@@ -201,9 +201,9 @@ TODO: discuss niche diversity?
 
 > The labelling is a bit difficult to follow at times. I would suggest representing the alleles with letters and the loci with numbers (or vice versa) if possible.
 
-This is true---having two sets of integers can at times be difficult to follow. While we did consider the excellent suggestion to use letters and numbers to differentiate between these sets, we felt that the tradeoff of doing so would further complicate the mathematical description (e.g., Equation 2).
+This is true---having two sets of integers can at times be difficult to follow. While we did consider the well-justified suggestion to use letters and numbers to differentiate between these sets, we believe that the tradeoff of doing so would further complicate the mathematical description, particularly due to our reliance on modular arithmetic (see e.g., Equation 1).
 
-We have taken the following steps to minimize the possibility of confusion. Where specific numbers are used in the manuscript, we have made sure that these values are always properly prefixed so that their role is clear. In the detailed description of the model given in Box 1, we italicized the integers used to represent loci (and always prefixed them with a description). **TODO: should we italicize loci in the main text?**
+We have taken the following steps to minimize the possibility of confusion. Where specific numbers are used in the manuscript, we have made sure that these values are always properly prefixed so that their role is clear. In the detailed description of the model given in Box 1, we italicized the integers used to represent loci (and always prefixed them with a description).
 
 
 > Line 196-197. Why not just seed the environment with sigma*S(P_0) individuals rather than the two step process described here?
@@ -215,7 +215,7 @@ This is a valid point that highlights an additional source of complexity in the 
 
 No, all types contribute to the constructed environment proportional to their abundances.
 
-We have updated the manuscript to clarify this point and not give the impression that types only construct their niche when fixed. In the instance noted by the reviewer, types are no longer described as having fixed.
+We have updated the manuscript to clarify this point. In the instance noted by the reviewer, types are no longer described as having fixed.
 
 
 > Line 265. Without qualification this sentence might be overstating things a bit!
@@ -236,7 +236,7 @@ We are grateful to the reviewer for this helpful comment. We believe that doing 
 
 \rule{\textwidth}{1pt}
 
-Once again, we deeply appreciate time and effort that you and the two reviewers have dedicated to our research and the constructive comments provided. We hope you'll find that this manuscript has benefitted tremendously from them. Please do not hesitate to contact us if we can clarify any of our comments above.
+Once again, we deeply appreciate time and effort that you and the two reviewers have dedicated to our research and the constructive comments provided. We hope you'll find that this manuscript has improved through our efforts to address these comments. Please do not hesitate to contact us if we can clarify any of our response above.
 
 Thank you for your continued consideration of our manuscript. 
 
