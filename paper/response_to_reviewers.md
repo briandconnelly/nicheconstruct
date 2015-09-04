@@ -65,7 +65,7 @@ Due to the thinning that occurs stochastically at the onset of each simulation (
 
 > Is this really negative niche-construction - "niche-constructing acts that, on average decrease the fitness of the niche-constructing organisms" - in the model, the niche-construction shifts the optimum value in the environment, but does not directly reduce fitness of the niche-constructors - instead it makes a higher relative fitness possible for others.
 
-This interpretation of our model is correct. The niche constructing behavior does not reduce a type's absolute fitness. Rather, niche construction increases the absolute fitness of another type, thus decreasing the *relative* fitness of the niche constructing type. Selection acts on relative fitness in our model. Subpopulations grow to the same size, regardless of absolute fitness. However, by constructing an environment that favors another type, the niche constructing type decreases its relative abundance in the subpopulation, which we believe is indeed a form of negative niche construction.
+This interpretation of our model is correct. Niche construction increases the absolute fitness of another type, thus decreasing the *relative* fitness of the niche constructing type. Selection acts on relative fitness in our model. If the social locus is fixed, subpopulations grow to the same size, regardless of absolute fitness. However, by constructing an environment that favors another type, the niche constructing type puts itself at a selective disadvantage if a favored type arises by mutation. Thus, even if the sole effect of niche construction is to raise the absolute fitness of another type relative to the focal constructor, this would qualify as a case of "negative niche construction" due to a lowered relative fitness.
 
 The distinction between absolute and relative fitness and how they relate to niche construction has previously been discussed. In his review of Odling-Smee, Laland, and Feldman's *Niche Construction: The Neglected Process in Evolution*, Okasha noted that the authors did not explicitly state whether positive and negative niche construction affected absolute or relative fitness (doi: [10.1007/s10539-005-0431-3](http://dx.doi.org/10.1007/s10539-005-0431-3)). Laland, Odling-Smee, and Feldman responded: "In all cases in our models we are referring to relative fitness which is natural since we make standard population genetic assumptions, such as infinite population size" (doi: [10.1007/s10539-004-6834-8](http://dx.doi.org/10.1007/s10539-004-6834-8)).
 
@@ -77,7 +77,7 @@ TODO
 
 > The setup of the circular chromosome and circular fitness implications is mathematically neat - however, it seems like a very specific set of assumptions about gene/environment interactions (for example, only when the modulus of L/A is non-zero) and one always worries about the generality of insights based on such a specific system. Can the authors provide any more information about where these assumptions might be met in nature, and/or what range of conditions or assumptions are needed for their insights to hold.
 
-While we would not claim that our implementation represents any particular trait in nature, it does allow adaptation to proceed in an unlimited manner, similar to an unending co-evolutionary arms race. Alternate implementations, such as explicitly modeling adaptation using ever-increasing numbers of loci, would be extremely costly---likely prohibitively so---from a computational perspective. This model is our compact attempt to capture the potentially never-ending co-evolution of organisms and their environment in a tractable manner.
+While we would not claim that our implementation represents any particular trait in nature, it does allow adaptation to proceed in an unlimited manner, similar to an unending co-evolutionary arms race. Alternate implementations, such as explicitly modeling adaptation using ever-increasing numbers of loci, would be computationally costly, likely prohibitively so. This model is our compact attempt to capture the potentially never-ending co-evolution of organisms and their environment in a computationally tractable manner.
 
 
 > Increased population density has only positive effects here - but density can also bring costs - this is ignored in the linear population growth of Eq 4; is it possible to say anything about how much cost can be borne before the effect disappears?
@@ -109,7 +109,7 @@ This is an excellent suggestion. We have added two examples to the manuscript th
 
 > L157 Why is the subscript 'g' needed here? I can't see where this is ever summed over in the subsequent equations, so the notation might be overcomplicated here.
 
-We have removed the 'g' subscript from all instances where allelic states are represented.
+We have removed the 'g' subscript from all instances where allelic states are represented. **TODO: line numbers?**
 
 > L172 / Eq 4 The costs and benefits of cooperation are always crucial in models like this, but while the costs are clear, the benefits are spread out using this equation. I feel like this should be clarified a little more - can the effects of this equation be reproduced in equation 2 such that both the costs and benefits of cooperation are explicitly expressed through effects on individual fitness?
 
@@ -128,17 +128,17 @@ While we realize that using a bounded lattice may introduce effects at the edges
 
 > L202 Is this right? - if each individual remains with probability d  then with d=0.1 as per Table 1, then the population is reduced to < Smin (800) even when at its maximum size (0.1*Smax = 200) - why parameterise in this case, rather than just choosing Smin individuals at random?
 
-This is correct---the bottleneck introduced at the end of each cycle reduces each subpopulation to fewer than $S_{min}$ individuals. In the next cycle, a subpopulation then grows to its carrying capacity. During growth, mutations are introduced, and growth rate depends on fitness. If we simply chose $S_{min}$ individuals at random, all-defector subpopulations would experience no growth, and therefore acquire no mutations/adaptations. This would put defectors at a severe disadvantage, and possibly muddy the benefits of cooperation and niche construction that cooperators experience.
+This is correct---the bottleneck introduced at the end of each cycle reduces each subpopulation to fewer than $S_{min}$ individuals. In the next cycle, a subpopulation then grows to its carrying capacity. During growth, mutations are introduced, and growth rate depends on fitness. This approach is more conservative. If we instead chose $S_{min}$ individuals at random, we anticipate two outcomes. First, the evolutionary process would be slowed down, as mutations would occur less frequently due to reduced growth. Second, defector populations would be especially burdened by this, so the Hankshaw effect would be exaggerated.
 
 
 > L210 "performED" and I would argue results should be past tense throughout.
 
-We made the stylistic choice to use present tense in the results section with the belief that it is more inviting to the reader, including them in the discovery process. There is some precedent for using the present tense in this journal, particularly when describing simulation results (e.g., 10.1007/s10682-015-9775-6). However, if this stylistic choice is a hindrance, we would be willing to change tense.
+We made the stylistic choice to use present tense in the results section with the belief that it is more inviting to the reader, including them in the discovery process. There is some precedent for using the present tense in this journal, particularly when describing simulation results (e.g., [Antonovics et al. (2015)](http://dx.doi.org/10.1007/s10682-015-9775-6)). However, if this stylistic choice is a hindrance, we would be willing to change tense.
 
 
 > L262 The authors state that setting L=A changes the niche construction from positive to negative. I am afraid I completely missed the reasoning here and I think the paper would be improved if it were spelled out more clearly why this parameter setting induces positive niche construction (i.e. an increase in constructor fitness by their construction activity).
 
-Our description may have been somewhat misleading here, and we have updated the text to add clarity and prevent misunderstanding. We now describe how changing this value alters niche construction by fully-adapted types as well as reference Box 1, Part C, which illustrates this scenario.
+We have updated the text to add clarity. We now describe how changing this value alters niche construction by fully-adapted types as well as reference Box 1, Part C, which illustrates this scenario (we do note that setting $L=A$ changes niche construction from negative to positive).
 
 
 > L386-388 I think this point about representing the niche, or environment, explicitly, is more important than the attention it is given here...
@@ -180,6 +180,12 @@ This is a keen insight into the model and the evolutionary dynamics that it is l
 
 However, to maintain consistency with our earlier model described in the Hammarlund et al. paper, we have opted to keep this additional component of fitness. We believe that doing so allows us to clearly differentiate our results---thus directly highlighting the effects of niche construction---from this previous work.
 
+We know that adaptation to the external environment is important in this model. As shown in the figure below, cooperation is quickly lost without this fitness component. This is likely because the fitness effects of adaptation to the external environment are direct, while the fitness effects associated with niche construction are density dependent. The fitness advantage displayed by an adapted type helps to jumpstart the maintenance of cooperation by niche construction.
+
+![**Effect of External Adaptation.** For these simulations, the benefit of adaptation to the external environment was removed ($\delta=0$), and the benefits of adaptation to the constructed environment ($\epsilon$) were either remained (1x) or doubled (2x) as compensation.](../figures/nodelta-cooperators-time.png)
+
+One possibility to achieve this effect without the third term in Equation two might be to introduce adapted types at the onset of simulations, but we have not explored this.
+
 
 > Migration could be explained in a bit more detail. For example, does migration occur symmetrically in order to avoid some subpopulations stochastically exceeding S_max? If not, how is this avoided? The text on the bottom of page 6 and the top of page 7 suggests that the rate of migration depends on success or fitness. Is this reflecting frequency dependence only or some other mechanism?
 
@@ -201,14 +207,14 @@ TODO: discuss niche diversity?
 
 > The labelling is a bit difficult to follow at times. I would suggest representing the alleles with letters and the loci with numbers (or vice versa) if possible.
 
-This is true---having two sets of integers can at times be difficult to follow. While we did consider the well-justified suggestion to use letters and numbers to differentiate between these sets, we believe that the tradeoff of doing so would further complicate the mathematical description, particularly due to our reliance on modular arithmetic (see e.g., Equation 1).
+This is true---having two sets of integers can at times be difficult to follow. While we did consider the well-justified suggestion to use letters and numbers to differentiate between these sets, we believe that doing so would further complicate the mathematical description. This is due to our use on modular arithmetic for both alleles and loci (see e.g., Equation 1).
 
 We have taken the following steps to minimize the possibility of confusion. Where specific numbers are used in the manuscript, we have made sure that these values are always properly prefixed so that their role is clear. In the detailed description of the model given in Box 1, we italicized the integers used to represent loci (and always prefixed them with a description).
 
 
 > Line 196-197. Why not just seed the environment with sigma*S(P_0) individuals rather than the two step process described here?
 
-This is a valid point that highlights an additional source of complexity in the model and its analysis. We have chosen to include this two-step process for initiating populations to maintain consistency with the Hammarlund et al. paper. The overall inclusion of this additional stochastic element allows us to compare both models with ongoing microbial experimental evolution experiments. **TODO (BDC): should this detail be included in either paper?** We note that because of this additional stochasticity, we report the *actual* initial cooperator proportions rather than the *expected* proportions where appropriate.
+This is a valid point that highlights an additional source of complexity in the model and its analysis. We have chosen to include this two-step process for initiating populations to maintain consistency with the Hammarlund et al. paper. The overall inclusion of this additional stochastic element allows us to compare both models with ongoing microbial experimental evolution experiments. We note that because of this additional stochasticity, we report the *actual* initial cooperator proportions rather than the *expected* proportions where appropriate.
 
 
 > Line 261. Does this only happen when a type has fixed in the subpopulation?
@@ -236,7 +242,7 @@ We are grateful to the reviewer for this helpful comment. We believe that doing 
 
 \rule{\textwidth}{1pt}
 
-Once again, we deeply appreciate time and effort that you and the two reviewers have dedicated to our research and the constructive comments provided. We hope you'll find that this manuscript has improved through our efforts to address these comments. Please do not hesitate to contact us if we can clarify any of our response above.
+Once again, we deeply appreciate time and effort that you and the two reviewers have dedicated to our research and the constructive comments provided. We hope you'll find that this manuscript has improved through our efforts to address these comments. Please do not hesitate to contact us if we can clarify any of our responses above.
 
 Thank you for your continued consideration of our manuscript. 
 
