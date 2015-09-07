@@ -56,7 +56,7 @@ def ncsimulate():
     # OS X systems or SIGUSR1 is received on POSIX systems
     def handle_siginfo(signum, frame):
         try:
-            print("Cycle {c}".format(c=cycle))
+            print("Cycle {c}: Size {ps}, {pc:.0%} cooperators".format(c=cycle, ps=metapop.shape[0], pc=metapop.Coop.mean()))
         except NameError:
             print("Simulation has not yet begun")
 
