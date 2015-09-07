@@ -19,7 +19,7 @@ from Metapopulation import *
 from misc import *
 from Topology import *
 
-__version__ = '1.0.2'
+__version__ = '1.0.3'
 
 
 def parse_arguments():
@@ -63,6 +63,21 @@ def ncsimulate():
     signal.signal(signal.SIGUSR1, handle_siginfo)
     if hasattr(signal, 'SIGINFO'):
         signal.signal(signal.SIGINFO, handle_siginfo)
+
+    # Some scheduling systems send SIGTERM before killing a job. If SIGTERM
+    # is received, flush all of the log files
+    def handle_sigterm(signum, frame):
+        try:
+            if log_metapopulation:
+                outfilemp.flush()
+            if log_population:
+                outfilep.flush()
+            if log_genotypes:
+                outfileg.flush()
+        except NameError:
+            pass
+    signal.signal(signal.SIGTERM, handle_sigterm)
+
 
     # Get the command line arguments
     args = parse_arguments()
@@ -153,9 +168,10 @@ def ncsimulate():
                       'MeanCooperatorFitness', 'MinDefectorFitness',
                       'MaxDefectorFitness', 'MeanDefectorFitness',
                       'ShannonIndex', 'SimpsonIndex']
-        writermp = csv.DictWriter(open(os.path.join(config['Simulation']['data_dir'],
-                                       config['MetapopulationLog']['filename']), 'w'),
-                                       fieldnames=fieldnames)
+
+        outfilemp = open(os.path.join(config['Simulation']['data_dir'],
+                         config['MetapopulationLog']['filename']), 'w')
+        writermp = csv.DictWriter(outfilemp, fieldnames=fieldnames)
         writermp.writeheader()
 
 
@@ -170,18 +186,20 @@ def ncsimulate():
                       'MaxCooperatorFitness', 'MeanCooperatorFitness',
                       'MinDefectorFitness', 'MaxDefectorFitness',
                       'MeanDefectorFitness', 'ShannonIndex', 'SimpsonIndex']
-        writerp = csv.DictWriter(open(os.path.join(config['Simulation']['data_dir'],
-                                      config['PopulationLog']['filename']), 'w'),
-                                      fieldnames=fieldnames)
+
+        outfilep = open(os.path.join(config['Simulation']['data_dir'],
+                        config['PopulationLog']['filename']), 'w')
+        writerp = csv.DictWriter(outfilep, fieldnames=fieldnames)
         writerp.writeheader()
 
     log_genotypes = config['GenotypeLog']['enabled']
     if log_genotypes:
         log_genotypes_freq = config['GenotypeLog']['frequency']
         fieldnames = ['Time', 'Population', 'X', 'Y', 'Genotype']
-        writerg = csv.DictWriter(open(os.path.join(config['Simulation']['data_dir'],
-                                      config['GenotypeLog']['filename']), 'w'),
-                                      fieldnames=fieldnames)
+
+        outfileg = open(os.path.join(config['Simulation']['data_dir'],
+                        config['GenotypeLog']['filename']), 'w')
+        writerg = csv.DictWriter(outfileg, fieldnames=fieldnames)
         writerg.writeheader()
 
 
