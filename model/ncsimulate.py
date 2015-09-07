@@ -67,15 +67,21 @@ def ncsimulate():
     # Some scheduling systems send SIGTERM before killing a job. If SIGTERM
     # is received, flush all of the log files
     def handle_sigterm(signum, frame):
-        try:
-            if log_metapopulation:
+        if log_metapopulation:
+            try:
                 outfilemp.flush()
-            if log_population:
+            except NameError:
+                pass
+        if log_population:
+            try:
                 outfilep.flush()
-            if log_genotypes:
+            except NameError:
+                pass
+        if log_genotypes:
+            try:
                 outfileg.flush()
-        except NameError:
-            pass
+            except NameError:
+                pass
     signal.signal(signal.SIGTERM, handle_sigterm)
 
 
