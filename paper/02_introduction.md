@@ -3,7 +3,8 @@
 
 Cooperative behaviors are common across all branches of the tree of life.
 Insects divide labor within their colonies, plants and soil bacteria exchange essential nutrients, birds care for others' young, and the trillions of cells in the human body coordinate to provide vital functions.
-Each instance of cooperation presents an evolutionary challenge: How can individuals that sacrifice their own well-being to help others avoid subversion by those that do not? Over time, we would expect these *defectors* to rise in abundance at the expense of others, eventually driving cooperators---and perhaps the entire population---to extinction.
+Each instance of cooperation presents an evolutionary challenge: How can individuals that sacrifice their own well-being to help others avoid subversion by those that do not?
+Over time, we would expect these *defectors* to rise in abundance at the expense of others, eventually driving cooperators---and perhaps the entire population---to extinction (note that some refer to these costly social bahaviors as "altruism" [@west2007socialB; @kerr2004what]).
 
 Several factors can prevent this *tragedy of the commons* [@hamilton1964geneticalboth; @nowak2006five; @west2007evolutionary].
 One such factor involves non-random social interaction, in which cooperators benefit more from the cooperative act than defectors.
@@ -32,7 +33,7 @@ Under *positive niche construction*, selection favors the constructor, and evolu
 Whereas under *negative niche construction*, selection favors a type other than the constructor, which creates an opportunity for novel adaptation.
 If the resulting adapted type also engages in negative niche construction, cycles of construction and adaptation can ensue, such that populations find themselves continually chasing beneficial mutations as their adaptive landscape perpetually shifts.
 
-Here, we show that the selective feedbacks that result from niche construction can maintain cooperation indefinitely.
+Here, we show that the selective feedbacks that result from niche construction can maintain cooperation indefinitely (note that some refer to these behaviors as "altruism").
 Further, we find that it is specifically negative niche construction that is responsible for this result due to the endless opportunities for adaptation that it produces.
 These results suggest that by playing an active role in their own evolution, cooperators can ensure their survival.
 

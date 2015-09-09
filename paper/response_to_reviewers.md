@@ -55,6 +55,8 @@ TODO
 
 TODO
 
+NOW - metapopulation size
+
 
 > Does that fact that p is set to 0.5 at the start of the simulations make this paper really about the persistence of cooperation rather than its evolution? To show the latter, would the authors not consider testing their model with an initial p of 1/800 i.e. a single mutation? In how many such runs does cooperation then persist?
 
@@ -74,6 +76,12 @@ The distinction between absolute and relative fitness and how they relate to nic
 
 TODO
 
+NOW - explain
+- we have direct feedback
+- external adaptation, doesn't have an effect on NC
+- but there is something that does have an effect. other paper ONLY looked at that, so a first step would be to layer in a pure nc component.
+- Future: interesting to make explicit the external environment,
+
 
 > The setup of the circular chromosome and circular fitness implications is mathematically neat - however, it seems like a very specific set of assumptions about gene/environment interactions (for example, only when the modulus of L/A is non-zero) and one always worries about the generality of insights based on such a specific system. Can the authors provide any more information about where these assumptions might be met in nature, and/or what range of conditions or assumptions are needed for their insights to hold.
 
@@ -83,6 +91,9 @@ While we would not claim that our implementation represents any particular trait
 > Increased population density has only positive effects here - but density can also bring costs - this is ignored in the linear population growth of Eq 4; is it possible to say anything about how much cost can be borne before the effect disappears?
 
 TODO
+- NOW
+- Gamma sweep
+    - Gamma not in table, equation in supp, mention supp in methods
 
 
 ### Minor Issues
@@ -90,16 +101,21 @@ TODO
 > L16 I thought the description of the Hammerlund paper was too long for the abstract.
 
 TODO
+Ben takes a stab at this
 
 
 > L41 I think cooperation should be precisely defined here, with respect to the distinction between cooperation for mutual benefit (albeit with risk of defection), and altruism, whereby altruists always 'lose out' in the short term by their behaviour.  Which precisely do the authors think they are describing - it seems to me that it partly depends on the model parameters, but it is a bit difficult to tease out with the collective benefits conferred by Equation 4, but it seems more like altruism to me, and that's what the authors seem to suggest ('sacrificing their wellbeing to help others')?
 
-TODO
+Because, as the reviewer points out, the effects of the behavior on the actor are context dependent in our model, we have opted to use the term cooperation to refer to the behavior that we model.
+We have added a note to the manuscript and refer the reader to works where the distinction between cooperation and altruism is more thoroughly discussed.
+
 
 
 > L69 Personally I find the Tom Robbins analogy a bit of a stretch and while I know the literature in question many will not so it's kind of unclear what's added here; it's also potentially confusing - Sissy's thumbs help her hitchhike as much as anyone else, so it's not clearly paying a cost to help others.
 
 We have worked to clarify the Hankshaw effect terminology. In the novel, her oversized thumbs were described as a hindrance to everyday activities, such as putting on clothing, and a limitation to her career choices. While not cooperative, we believe this trait shares several key properties---it is costly to its individual, but it does increase that individual's ability to (genetically) hitchhike.
+
+TODO: in manuscript, change description of hankshaw
 
 
 > L151 Eq (1) - I think a one sentence explanation of what this equation does would save readers some effort in understanding here.
@@ -111,9 +127,13 @@ This is an excellent suggestion. We have added two examples to the manuscript th
 
 We have removed the 'g' subscript from all instances where allelic states are represented. **TODO: line numbers?**
 
+TODO: if we use g in supp, add a note here
+
+
 > L172 / Eq 4 The costs and benefits of cooperation are always crucial in models like this, but while the costs are clear, the benefits are spread out using this equation. I feel like this should be clarified a little more - can the effects of this equation be reproduced in equation 2 such that both the costs and benefits of cooperation are explicitly expressed through effects on individual fitness?
 
 TODO
+TODO paste in Ben's previous email in supplement?
 
 
 > L185 Just a point of clarification - mutation can result in "no adaptation" right? Is there a reasons for the {0}U{1,2,3…} notation rather than the simpler {0,1,2,3,…} - the union operator doesn't seem to serve any purpose here?
@@ -143,7 +163,7 @@ We have updated the text to add clarity. We now describe how changing this value
 
 > L386-388 I think this point about representing the niche, or environment, explicitly, is more important than the attention it is given here...
 
-TODO
+TODO Beef up the text, add that it allows aspects of environment to be affected BOTH by individuals' activities and the environment
 
 
 > L410-411 - this doesn't appear to be a proper sentence.
@@ -173,6 +193,9 @@ We are extremely grateful to the reviewer for drawing our attention to the lack 
 
 ![**Effect of Subpopulation Dilution**](../figures/FigureS2-small.png)
 
+TODO: re-do with new data
+TODO: maybe mention in text, but say that hankshaw effect doesn't change (show new data)
+
 
 > Could 'adaptation to external environment' be rolled in to baseline fitness? It seems that 0 alleles (except at the cooperation locus, of course) are always selected against and should drop out of the population quite quickly. What would change if the third term in equation (2) were omitted?
 
@@ -191,7 +214,7 @@ One possibility to achieve this effect without the third term in Equation two mi
 
 We agree with the reviewer's comment: migration was not defined clearly enough in the manuscript. We have made changes that directly address both of the questions raised.
 
-First, we have stated in the Methods section that subpopulations can exceed S_max individuals immediately following the migration stage. We add that this is temporary, as dilution immediately follows, which reduces the population size.
+First, we have stated in the Methods section that subpopulations can exceed $S_{max}$ individuals immediately following the migration stage. We add that this is temporary, as dilution immediately follows, which reduces the population size.
 
 As for the second point, our original wording in the model overview could easily mislead readers, giving the impression that migration was affected by adaptation or fitness, which is not true.We have updated this to simply state that migration occurs and can allow a type to spread in the population.
 
@@ -201,6 +224,8 @@ As for the second point, our original wording in the model overview could easily
 This summary is correct---cooperation can be maintained when two features are present: there must be adaptive opportunities, and cooperators must be more likely to gain these adaptations. In our previous work (Hammarlund et al., 2015), we demonstrated that cooperation can be maintained when environmental change occurred periodically. But timing is critical. The period between changes in the environment must not exceed the time for the population to fully adapt.  Otherwise cooperation goes to low proportions as fully adapted defectors dominate. This is an entirely passive process, and the rate and variation of environmental change were critically important in determining cooperator success. For this work, we have sought to address how this process is affected when populations play an *active* role in creating these adaptive opportunities through niche construction.
 
 TODO: discuss niche diversity?
+TODO: circumstances that allow for invasion are present in NC, but not in Hankshaw....
+   - what about rapidly-changing environments
 
 
 ### Minor Issues
@@ -238,7 +263,7 @@ This is a distinction that we have given much consideration. For this manuscript
 
 We are grateful to the reviewer for this helpful comment. We believe that doing so places this work in a larger context and makes it accessible to a wider audience. A more general conclusion has been added.
 
-
+TODO: add this to the manuscript
 
 \rule{\textwidth}{1pt}
 
