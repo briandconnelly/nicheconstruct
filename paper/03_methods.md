@@ -69,16 +69,19 @@ $$ {#eq:IA}
 
 Thus, an individual's fitness is determined both by adaptations to the external environment and by adaptations to its constructed environment.
 [Box 1](#box1) illustrates the process of adaptation to the constructed environment.
+While the separation between exogenous and endogenous environmental change may not be so disjointed in natural systems, it allows us to directly explore the effects of niche construction.
 
 
 ### Subpopulation Growth and the Benefit of Cooperation
 
 While cooperation is costly, its effects are independent of the external and constructed components of the environment.
 Cooperation enables a subpopulation to reach a greater density.
-This benefit affects all individuals equally and accumulates linearly with the proportion of cooperators in the subpopulation.
 If $p$ is the proportion of cooperators present at the beginning of a growth cycle, then that subpopulation reaches the following size:
 
 $$ S(p) = S_{min} + p (S_{max} - S_{min}) $$ {#eq:popsize}
+
+This benefit affects all individuals equally and accumulates linearly with the proportion of cooperators in the subpopulation.
+We further explore how the rate at which cooperators increase population density in the Supporting Information.
 
 During growth, individuals compete through differential reproduction.
 Each individual's probability of success is proportional to its fitness.
