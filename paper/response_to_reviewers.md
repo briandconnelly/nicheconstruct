@@ -53,9 +53,20 @@ TODO
 
 > An important question for me is whether this mechanism really stabilises cooperation or merely slows its decline. I look at Figure 1C and I see that while p is still non zero by T=3000, it is clearly declining. Would it eventually hit zero again or is an equilibrium achieved? Is the use of 'indefinitely' on L305 justified? Perhaps this is more of a presentation thing, because in Figure 2A it is clear that there are many populations with high levels of cooperation, albeit with a lot of oscillation - for me this begs the question of how big the metapopulation needs to be to buffer effectively against this degree of stochasticity…
 
-TODO
+Because this mechanism depends on gaining adaptations to the environment via mutation, it is inherently stochastic.
+We see this in Figure 2A, where cooperators were driven to extinction in four replicate populations.
+In these cases, defectors gained adaptations faster than defectors, and quickly spread to fixation.
+These results drive the decrease in average cooperator proportion across replicate populations that we see in Figure 1C (which motivated us to show data for individual replicates in all subsequent figures).
 
-NOW - metapopulation size
+Because negative niche construction creates a never-ending "adaptive race", the possibility of cooperator loss through defector adaptation is also never ending.
+However when cooperators maintain numerical dominance, a critical factor for the Hankshaw effect, they are more likely to be the first to adapt.
+This is how cooperation was maintained in the majority of replicate populations shown in Figure 2A.
+
+We feel that "indefinitely" is an appropriate description that captures both the cooperator persistence that we observe and the lingering potential for collapse, should defectors stochastically win the "adaptive race".
+
+**TODO - sweep of metapopulation size**
+
+**TODO - invasion?**
 
 
 > Does that fact that p is set to 0.5 at the start of the simulations make this paper really about the persistence of cooperation rather than its evolution? To show the latter, would the authors not consider testing their model with an initial p of 1/800 i.e. a single mutation? In how many such runs does cooperation then persist?
