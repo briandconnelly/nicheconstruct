@@ -26,8 +26,8 @@ We see in [Figure 2A](#fig2) that despite some oscillations, cooperation is main
 ## Fitness Increases Alone do not Support Persisting Cooperation
 
 An individual's fitness is affected in this model by adaptations to both the external environment and to the constructed environment.
-Here, we determine whether cooperation is maintained solely due to the larger selective values that result from the contributions of niche construction.
-We performed simulations in which these contributions were transferred to supplement the benefits conferred by adaptation to the external, non-constructed environment (replacing $\epsilon=0.3$, $\delta=0.3$ with $\epsilon=0$, $\delta=0.6$).
+Here, we determine whether cooperation is maintained as we see in [Figure 2A](#fig2) solely due to the larger selective values that result from the contributions of niche construction.
+We performed simulations in which these contributions were transferred to supplement the benefits conferred by adaptation to the external, non-constructed environment (i.e., replacing $\epsilon=0.3$, $\delta=0.3$ with $\epsilon=0$, $\delta=0.6$).
 In doing so, we conservatively estimate the selective effects of niche construction.
 Nevertheless, we find that simply increasing selective values does not enable cooperators to persist ([Figure 2B](#fig2)).
 Niche construction, therefore, plays a decisive role here.
@@ -40,7 +40,7 @@ Under certain conditions, this construction always makes the constructor sub-opt
 This negative niche construction occurs when the number of adaptive alleles ($A$) does not divide evenly into the number of adaptive loci ($L$).
 In such a case, any sequence of integers on the circular genome will always contain a break in the sequence; that is, one locus will have an allele that is not one less than the allele at the next locus (see [Box 1](#box1)).
 Given this unavoidable mismatch, types will always construct a niche in which selection for a different type is increased.
-When negative niche construction is removed (by setting $L=5$, $A=5$, [Box 1, Part C](#box1)), cooperators are again driven extinct after an initial lift in abundance ([Figure 2C](#fig2)).
+When negative niche construction is removed (by setting $L=5$, $A=5$, [Box 1, Part C](#box1)), cooperators are again driven to extinction after an initial lift in abundance ([Figure 2C](#fig2)).
 Here, a fully-adapted type constructs a niche that favors itself.
 When this occurs, a fully-adapted cooperator is at a selective disadvantage against fully-adapted defectors, which do not incur the cost of cooperation.
 These results indicate that the type of niche construction matters.
@@ -60,7 +60,7 @@ These defectors quickly begin to spread.
 However, a neighboring cooperator population gains an adaptation, which increases its fitness above that of the defector.
 This type spreads more quickly, stopping the spread of defectors and eventually driving them to extinction.
 Because this adaption occurs in a cooperator population, cooperation is able to hitchhike to safety.
-Importantly, this new cooperator is favored because of the niche that its ancestral type---and therefore also the defector---constructed.
+Importantly, this new cooperator type is favored because of the niche that its ancestral type---and therefore also the defector---constructed.
 Here, cooperators can find safety in numbers---because their larger subpopulations have more mutational opportunities, they are more likely to gain adaptations that rescue them from invasion.
 Further, these larger cooperator subpopulations exert greater influence on their niches, which increases selection for an adapted type.
 This allows that type to appear and to spread more quickly in the population.

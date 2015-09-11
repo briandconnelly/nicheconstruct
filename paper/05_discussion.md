@@ -4,7 +4,7 @@ Despite their negative effects, deleterious traits can rise in abundance through
 In a process termed the "Hankshaw effect", @HANKSHAW recently demonstrated that cooperation can actively prolong its existence by increasing its likelihood of hitchhiking with a beneficial trait.
 In that work and here, subpopulations of cooperators grow to a higher density than those of defectors.
 These larger cooperator subpopulations therefore experience more mutations and are consequently more likely to gain adaptations.
-While this process does favor cooperation in the short term, it eventually reaches a dead end: When the opportunities for adaptation are exhausted, and cooperators can no longer hitchhike, they face extinction.
+Although this process favors cooperation in the short term, it eventually reaches a dead end: When the opportunities for adaptation are exhausted, and cooperators can no longer hitchhike, they face extinction.
 Here, we have investigated whether niche construction might serve to perpetually generate new adaptive opportunities and thus favor cooperation indefinitely.
 
 When niche construction occurs, cooperation can indeed persist (Figures [1C](#fig1) and [2A](#fig2)).
@@ -17,7 +17,7 @@ As cooperator and defector types gain adaptations, they alter their environment 
 Thus, negative niche construction serves as a perpetual source of adaptation.
 Here we observe another facet of the Hankshaw effect: Because subpopulations of cooperators are larger, they are better able to respond to the adaptive opportunities that are created by negative niche construction.
 By gaining adaptations more quickly, cooperators resist invasion by defectors ([Figure 3B](#fig3)).
-Even in the presence of an isogenic defector type, cooperator subpopulations are more likely to produce the mutant most adapted to the current niche, which can then displace the slower-adapting defectors.
+Even in the presence of an isogenic defector type, cooperator subpopulations are more likely to produce the mutant most adapted to the current constructed niche, which can then displace the slower-adapting defectors.
 These recurring cycles of defector invasion and cooperator adaptation underlie the oscillations in cooperator proportion seen in [Figure 2A](#fig2).
 When mutations do not confer these adaptations, cooperators lose the adaptive race and are driven to extinction.
 This is something that we see occur stochastically in Figures [2A](#fig2) and [3B](#fig3).
@@ -26,13 +26,14 @@ This is something that we see occur stochastically in Figures [2A](#fig2) and [3
 ## Cooperation as Niche Construction
 
 In our model, niche construction and adaptation are independent of cooperation, which allows us to focus on hitchhiking.
-However, individuals often cooperate in ways that alter the environment. These cooperative behaviors, therefore, can be seen as niche construction.
+However, individuals often cooperate in ways that alter the environment.
+These cooperative behaviors, therefore, can themselves be seen as niche construction.
 For example, bacteria produce a host of extracellular products that scavenge soluble iron [@griffin2004cooperation], digest large proteins [@darch2012density; @diggle2007cooperation], and reduce the risk of predation [@cosson2002pseudomonas], among many others [@west2007social].
 As in our model, these forms of cooperation are likely to increase local subpopulation density.
 While many studies have focused on how the environment affects the evolution of these cooperative traits, relatively few have addressed how the environmental changes created by these products feed back to influence evolution.
 
 Perhaps most similar to this study, @vandyken2012origins demonstrated that when two negative niche constructing, cooperative behaviors co-evolve, selection can increasingly favor these traits, which are otherwise disfavored when alone. 
-In that model, "reciprocal niche construction" occurred when the negative feedback resulting from one strategy positively influenced selection for the other, creating a perpetual cycle that maintained both forms of cooperation.
+In that model, "reciprocal niche construction" occurred when the negative feedback resulting from one strategy positively influenced selection for the other, creating a perpetually oscillating cycle that maintained both forms of cooperation.
 Arguably, this can be seen as an instance of hitchhiking: the currently-maladaptive form of cooperation is maintained by association with the adaptive form.
 
 When dispersal is limited, competition among kin can undermine cooperation. 
@@ -52,7 +53,7 @@ Because of the importance of this process, it would be very informative to explo
 Similarly, our results could be substantially affected by alterations in the rate at which the constructed environment changes in response to changes in the subpopulation.
 
 Other studies, while not focused on cooperation, have similarly shown that the timescales at which niche construction feedbacks occur can strongly influence evolutionary outcomes [@laland1999evolutionary; @laland1996evolutionary].
-This perspective is likely to be crucial for understanding the evolution of cooperative behaviors like the production of public goods.
+This perspective may be crucial for understanding the evolution of cooperative behaviors like the production of public goods.
 In these instances, environmental changes are likely to occur on different timescales than growth, which can have profound effects.
 For example, a multitude of factors, including protein durability [@brown2007durability; @kummerli2010molecular], diffusion [@driscoll2010theory; @allison2005cheaters], and resource availability [@zhang2013exploring; @ghoul2014experimental] influence both the rate and the degree to which public goods alter the environment.
 While @lehmann2007evolution showed that cooperation was favored when selective feedbacks act over longer timescales, niche construction may in fact hinder cooperation when selection is more quickly altered.
@@ -63,7 +64,7 @@ To study how regulatory traits such as these evolve, we could instead represent 
 
 ## Cooperation and Niche Construction in Host-Symbiont Co-Evolution
 
-In many biological systems, the environments modified by organisms are other organisms.
+In many biological systems, the environments modified by organisms are themselves other organisms.
 In these instances, the "niche" becomes a biological entity with its own evolutionary process.
 A logical extension to our model would be to treat the environment as an organism.
 Such a model could be used to explore the evolution of cooperation in host-symbiont systems, where cooperation among symbionts affects host fitness.
@@ -79,5 +80,5 @@ For example, the cooperative production of several public goods by *P. aeruginos
 Models such as what we have described may permit exploration into how cooperation and niche construction intersect here and in other medically-relevant instances.
 
 More generally, it was recently argued that incorporating the effects of niche construction is critical for improving our understanding of viral evolution [@hamblin2014viral] and evolution in co-infecting parasites [@hafer2015when].
-Incorporating host dynamics, co-evolution, and the feedbacks that they produce is likely to be equally important for gaining a greater understanding of how cooperative behaviors evolve in these host-symbiont settings.
+Incorporating host dynamics, transmission, co-evolution, and the feedbacks that they produce is likely to be equally important for gaining a greater understanding of how cooperative behaviors evolve in these host-symbiont settings.
 

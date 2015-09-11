@@ -10,7 +10,7 @@ Several factors can prevent this *tragedy of the commons* [@hamilton1964genetica
 One such factor involves non-random social interaction, in which cooperators benefit more from the cooperative act than defectors.
 This can occur when cooperators are clustered together in spatially-structured populations [@kudzalfick2011high; @fletcher2009simple; @nadell2010emergence] or when cooperators use communication [@darch2012density; @brown2001cooperation] or other cues [@gardner2010greenbeards; @sinervo2006selfrecognition; @veelders2010structural] to cooperate conditionally with kin.
 Cooperation can also be bolstered by pleiotropic connections to personal benefits [@dandekar2012bacterial; @foster2004pleiotropy] or through association with alleles encoding self-benefitting traits [@asfahl2015nonsocial].
-In the latter case, the associated alleles may provide private benefits that are completely independent from the public benefits of cooperation.
+In the latter case, the associated alleles may provide private benefits that are entirely independent from the public benefits of cooperation.
 In asexual populations of cooperators and defectors, this sets the stage for an "adaptive race" in which both types vie for the first highly beneficial adaptation [@waite2012adaptation; @morgan2012selection].
 The tragedy of the commons can be deferred if a cooperator, by chance, wins the adaptive race.
 
@@ -22,18 +22,18 @@ By hitchhiking along with these adaptations, cooperation can rise in abundance.
 Nevertheless, this advantage is fleeting.
 As soon as the opportunities for adaptation are exhausted, cooperators are once again at a selective disadvantage against adapted defectors that arise via mutation.
 However, cooperation can be maintained when frequent environmental changes produce a steady stream of new adaptive opportunities [@HANKSHAW].
-Although organisms typically find themselves in dynamic environments, the nature and frequency of these changes might not ensure long-term cooperator survival.
+Although organisms typically find themselves in dynamic environments, the frequency and regularity of these changes might not ensure long-term cooperator survival.
 
 Importantly, organisms do more than passively experience changing environments.
-Through their activities, their interactions with others, and even their deaths, organisms constantly modify their environment.
+Through their activities, their interactions with others, and even their deaths, organisms continually modify their environment.
 This *niche construction* process can produce evolutionary feedback loops in which environmental modification alters selection, which, in turn, alters the distribution of types and their corresponding influence on the environment [@odling2003niche].
 The nature of this feedback can have dramatic evolutionary consequences.
 One critical distinction is whether the constructing type is favored in the environment that it constructs.
 Under *positive niche construction*, selection favors the constructor, and evolution stagnates as this type fixes.
 Whereas under *negative niche construction*, selection favors a type other than the constructor, which creates an opportunity for novel adaptation.
-If the resulting adapted type also engages in negative niche construction, cycles of construction and adaptation can ensue, such that populations find themselves continually chasing beneficial mutations as their adaptive landscape perpetually shifts.
+If the adapted type arises and also engages in negative niche construction, cycles of construction and adaptation can ensue, such that populations find themselves continually chasing beneficial mutations as their adaptive landscape perpetually shifts.
 
-Here, we show that the selective feedbacks that result from niche construction can maintain cooperation indefinitely (note that some refer to these behaviors as "altruism").
+Here, we show that the selective feedbacks that result from niche construction can maintain cooperation indefinitely.
 Further, we find that it is specifically negative niche construction that is responsible for this result due to the endless opportunities for adaptation that it produces.
 These results suggest that by playing an active role in their own evolution, cooperators can ensure their survival.
 

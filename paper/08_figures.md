@@ -11,7 +11,7 @@
 
 ## Figure 2 {#fig2}
 
-![**Niche Construction and the Evolution of Cooperation.** The proportion of cooperators present in each replicate population is shown for the duration of simulations. (**A**) Despite some oscillations, cooperators dominate in 13 of 18 populations when niche construction affects selection. (**B**) When the selective effects of niche construction are transferred to supplement the benefits conferred by adaptation to the external, non-constructed environment, cooperators are driven to extinction by defectors (replacing $\epsilon=0.3$, $\delta=0.3$ with $\epsilon=0$, $\delta=0.6$). Note that cooperation was not present after initialization in one replicate population. (**C**) Cooperators are also driven to extinction without negative niche construction ($A=5$).](../figures/Figure2.png)
+![**Niche Construction and the Evolution of Cooperation.** The proportion of cooperators present in each replicate population is shown for the duration of simulations. (**A**) Despite some oscillation, cooperators dominate in 13 of 18 populations when niche construction affects selection. (**B**) When the selective effects of niche construction are transferred to supplement the benefits conferred by adaptation to the external, non-constructed environment, cooperators are driven to extinction by defectors (replacing $\epsilon=0.3$, $\delta=0.3$ with $\epsilon=0$, $\delta=0.6$). Note that cooperation was not present after initialization in one replicate population. (**C**) Cooperators are also driven to extinction without negative niche construction ($A=5$).](../figures/Figure2.png)
 
 \clearpage
 
