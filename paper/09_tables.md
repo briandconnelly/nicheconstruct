@@ -22,4 +22,6 @@ Table: Model parameters and their values
 | $\sigma$   | Survival rate at population initialization     | $10^{-5}$     |                  |
 | $T$        | Number of simulation cycles                    | 3000          | 1000             |
 | $d$        | Subpopulation dilution factor                  | 0.1           | 0.03, 0.09, 0.30, 0.5, 0.7, 0.91, 0.97 |
+| $\gamma$   | Slope of cooperative benefit*                  | 1.0           | 0.25, 0.5, 1.5, 2, 4 |
 
+\* See Supporting Information

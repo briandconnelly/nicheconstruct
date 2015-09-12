@@ -52,9 +52,9 @@ Thus, $\epsilon$ specifies the intensity of selection due to niche construction.
 
 ### Individual Fitness
 
-Consider a genotype $g$ with allelic state $a_{l}$ at locus $l$; the fitness of an individual with this genotype is defined as:
+For an individual with allelic state $a_{l}$ at locus $l$, fitness is defined as:
 
-$$ W_{g} = z - \underbrace{c a_{0}}_{{\substack{\text{cost of} \\ \text{cooperation}}}} + \underbrace{\delta \sum_{l=1}^{L} I(a_{l})}_{\substack{\text{adaptation to} \\ \text{external environment}}} + \underbrace{\epsilon \sum_{l=1}^{L} n(\beta(a_{l}, A), \beta(l, L))}_{\substack{\text{adaptation to} \\ \text{constructed environment}}} $$ {#eq:fitness}
+$$ W = z - \underbrace{c a_{0}}_{{\substack{\text{cost of} \\ \text{cooperation}}}} + \underbrace{\delta \sum_{l=1}^{L} I(a_{l})}_{\substack{\text{adaptation to} \\ \text{external environment}}} + \underbrace{\epsilon \sum_{l=1}^{L} n(\beta(a_{l}, A), \beta(l, L))}_{\substack{\text{adaptation to} \\ \text{constructed environment}}} $$ {#eq:fitness}
 
 where $z$ is a baseline fitness, $n(a,l)$ is the number of individuals in the subpopulation with allele $a$ at locus $l$, and $I(a)$ indicates whether a given allele is non-zero:
 

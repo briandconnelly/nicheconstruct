@@ -87,7 +87,7 @@ The distinction between absolute and relative fitness and how they relate to nic
 
 In natural settings, environmental change is often brought about by exogenous factors (e.g., changing seasons) as well as endogenous factors (e.g., niche constructing behaviors). Many of its proponents argue that niche construction can substantially influence the evolutionary process, and this model is our first attempt at identifying how niche construction might play a role in cooperation. The distinction that we make in the model between external and constructed environments allows us to directly address the effects of niche construction by comparison with a previous model in which only exogenous factors played a role.
 
-As described in the discussion, we realize that implicitly modeling the niche's state can dampen the effect of niche construction.
+As described in the discussion, we realize that implicitly modeling the niche's state can dampen the effects of some aspects of niche construction.
 An explicit representation of the environment would certainly enrich a model such as ours and could permit investigation into host/parasite interactions or other systems where evolutionary dynamics occur on multiple scales.
 
 TODO: Load.
@@ -95,15 +95,16 @@ TODO: Load.
 
 > The setup of the circular chromosome and circular fitness implications is mathematically neat - however, it seems like a very specific set of assumptions about gene/environment interactions (for example, only when the modulus of L/A is non-zero) and one always worries about the generality of insights based on such a specific system. Can the authors provide any more information about where these assumptions might be met in nature, and/or what range of conditions or assumptions are needed for their insights to hold.
 
-While we would not claim that our implementation represents any particular trait in nature, it does allow adaptation to proceed in an unlimited manner, similar to an unending co-evolutionary arms race. Alternate implementations, such as explicitly modeling adaptation using ever-increasing numbers of loci, would be computationally costly, likely prohibitively so. This model is our compact attempt to capture the potentially never-ending co-evolution of organisms and their environment in a computationally tractable manner.
+While we would not claim that our implementation represents any specific trait in nature, it does allow adaptation to proceed in an unlimited manner, similar to an unending co-evolutionary arms race. Alternate implementations, such as explicitly modeling adaptation using ever-increasing numbers of loci, would be computationally costly---likely prohibitively so. This model is our compact attempt to capture the potentially never-ending co-evolution of organisms and their environment in a computationally tractable manner.
 
 
 > Increased population density has only positive effects here - but density can also bring costs - this is ignored in the linear population growth of Eq 4; is it possible to say anything about how much cost can be borne before the effect disappears?
 
-TODO
-- NOW
-- Gamma sweep
-    - Gamma not in table, equation in supp, mention supp in methods
+This is a very important point. We have expanded our model to address this issue and explore how the rate at which population sizes increase with cooperator proportion. As detailed in the Supporting Information, we added an additional parameter to Equation 4, $\gamma$, to control whether the increases in population size accelerate ($\gamma > 1$) or decelerate ($\gamma < 1$) as cooperators become more abundant.
+
+The following figure shows how these different forms of density-dependent benefits affect evolutionary trajectories in comparison to our baseline conditions ($\gamma = 1$). Accelerating benefits tend to dampen oscillations and increase the proportion of cooperators in the replicate populations over time, while decelerating benefits tend to increase the magnitude of oscillations, allowing defectors to dominate. Interestingly, these large oscillations also allow cooperators to rapidly increase in frequency in a number of instances, even when rare.
+
+![**Non-Linear Benefits of Cooperation**](../figures/popsize_returns.png)
 
 
 ### Minor Issues
@@ -116,7 +117,7 @@ Ben takes a stab at this
 
 > L41 I think cooperation should be precisely defined here, with respect to the distinction between cooperation for mutual benefit (albeit with risk of defection), and altruism, whereby altruists always 'lose out' in the short term by their behaviour.  Which precisely do the authors think they are describing - it seems to me that it partly depends on the model parameters, but it is a bit difficult to tease out with the collective benefits conferred by Equation 4, but it seems more like altruism to me, and that's what the authors seem to suggest ('sacrificing their wellbeing to help others')?
 
-Because, as the reviewer points out, the effects of the behavior on the actor are context dependent in our model, we have opted to use the term cooperation to refer to the behavior that we model.
+Because, as the reviewer points out, the effects of the behavior on the actor are context dependent in our model, we have opted to use the more inclusive term *cooperation* to refer to the behavior that we model.
 We have added a note to the manuscript and refer the reader to works where the distinction between cooperation and altruism is more thoroughly discussed.
 
 
@@ -134,9 +135,9 @@ This is an excellent suggestion. We have added two examples to the manuscript th
 
 > L157 Why is the subscript 'g' needed here? I can't see where this is ever summed over in the subsequent equations, so the notation might be overcomplicated here.
 
-We have removed the 'g' subscript from all instances where allelic states are represented. **TODO: line numbers?**
+We have removed the 'g' subscript from all instances where allelic states are represented.
 
-TODO: if we use g in supp, add a note here
+**TODO: if we use g in supp, add a note here or add it back to the Methods**
 
 
 > L172 / Eq 4 The costs and benefits of cooperation are always crucial in models like this, but while the costs are clear, the benefits are spread out using this equation. I feel like this should be clarified a little more - can the effects of this equation be reproduced in equation 2 such that both the costs and benefits of cooperation are explicitly expressed through effects on individual fitness?
@@ -196,14 +197,13 @@ Table 1 has been given an additional column listing the additional parameter val
 > The definition of cooperation used here appears to be that cooperation is a costly behaviour that increases local population density. The authors do briefly mention the negative aspects of high local population density in terms of increased competition on pages 18/19 but this discussion does not extend to the model. In fact, the authors avoid this issue by diluting the population 'to allow growth in the next generation'. More robust justification for imposing a ~90% death rate on each subpopulation every generation may be needed as it could favour the cooperative allele substantially. What would the authors expect to see if local competition was explicitly modelled?
 
 TODO - definition of cooperation
-TODO - negative aspects of density.
+TODO - negative aspects of density (gamma?).
 
 We are grateful to the reviewer for drawing our attention to the lack of justification or clarification of the 90% death rate used in the original manuscript. Our primary motivation for selecting this rate was to maintain consistency with and allow comparison to the model and results presented in the Hammarlund et al. work (and ongoing microbial experiments). To address the reviewer's concern, we have performed further simulations in which a wide range of dilution factors were used. Our results, shown below, have been added to the manuscript. While a 90% dilution may be excessive for some natural populations, it is not necessarily so for others. For example, 95-99% of the *Vibrio harveyi* residing in the bobtail squid's light organ are expelled daily (Lee and Ruby, 1994).
 
 ![**Effect of Subpopulation Dilution**](../figures/FigureS2-small.png)
 
 TODO: re-do with new data
-TODO: maybe mention in text, but say that hankshaw effect doesn't change (show new data)
 
 
 > Could 'adaptation to external environment' be rolled in to baseline fitness? It seems that 0 alleles (except at the cooperation locus, of course) are always selected against and should drop out of the population quite quickly. What would change if the third term in equation (2) were omitted?
