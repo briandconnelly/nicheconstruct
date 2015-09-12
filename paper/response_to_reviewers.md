@@ -92,6 +92,7 @@ An explicit representation of the environment would certainly enrich a model suc
 
 TODO: Load.
 
+
 > The setup of the circular chromosome and circular fitness implications is mathematically neat - however, it seems like a very specific set of assumptions about gene/environment interactions (for example, only when the modulus of L/A is non-zero) and one always worries about the generality of insights based on such a specific system. Can the authors provide any more information about where these assumptions might be met in nature, and/or what range of conditions or assumptions are needed for their insights to hold.
 
 While we would not claim that our implementation represents any particular trait in nature, it does allow adaptation to proceed in an unlimited manner, similar to an unending co-evolutionary arms race. Alternate implementations, such as explicitly modeling adaptation using ever-increasing numbers of loci, would be computationally costly, likely prohibitively so. This model is our compact attempt to capture the potentially never-ending co-evolution of organisms and their environment in a computationally tractable manner.
@@ -117,7 +118,6 @@ Ben takes a stab at this
 
 Because, as the reviewer points out, the effects of the behavior on the actor are context dependent in our model, we have opted to use the term cooperation to refer to the behavior that we model.
 We have added a note to the manuscript and refer the reader to works where the distinction between cooperation and altruism is more thoroughly discussed.
-
 
 
 > L69 Personally I find the Tom Robbins analogy a bit of a stretch and while I know the literature in question many will not so it's kind of unclear what's added here; it's also potentially confusing - Sissy's thumbs help her hitchhike as much as anyone else, so it's not clearly paying a cost to help others.
@@ -147,12 +147,12 @@ TODO paste in Ben's previous email in supplement?
 
 > L185 Just a point of clarification - mutation can result in "no adaptation" right? Is there a reasons for the {0}U{1,2,3…} notation rather than the simpler {0,1,2,3,…} - the union operator doesn't seem to serve any purpose here?
 
-We have removed the union operation in favor of the simplified set $\{0, 1, \ldots, A\}$.
+We have removed the union operation in favor of the simplified set $\{0, 1, \ldots, A\}$. The original intent was to highlight that mutation could result in a $0$ allele, which would be a loss of function.
 
 
 > L192 why use boundaries rather than toroid?
 
-While we realize that using a bounded lattice may introduce effects at the edges, we chose to not use a torus primarily to maintain consistency with the Hammarlund et al. paper. For that work, we did not find significant differences between a bounded lattice and one with periodic boundaries during exploratory simulations. Our primary motivations for having boundaries were to simplify both the description and visualization of space (and distances), particularly for those not accustomed to thinking about toroidal surfaces.
+While we realize that using a bounded lattice may introduce effects at the edges, we chose to not use a torus primarily to maintain consistency with the Hammarlund et al. paper. When exploring the model parameters for that work, we did not find significant differences between a bounded lattice and one with periodic boundaries for the population sizes used in both projects. Our primary motivations for having boundaries were to simplify both the description and visualization of space (and distances), particularly for those not accustomed to thinking about toroidal surfaces.
 
 
 > L202 Is this right? - if each individual remains with probability d  then with d=0.1 as per Table 1, then the population is reduced to < Smin (800) even when at its maximum size (0.1*Smax = 200) - why parameterise in this case, rather than just choosing Smin individuals at random?
@@ -198,7 +198,7 @@ Table 1 has been given an additional column listing the additional parameter val
 TODO - definition of cooperation
 TODO - negative aspects of density.
 
-We are extremely grateful to the reviewer for drawing our attention to the lack of justification or clarification of the 90% death rate used in the original manuscript. Our primary motivation for selecting this rate was to maintain consistency with and allow comparison to the model and results presented in the Hammarlund et al. work (and ongoing microbial experiments). To address the reviewer's concern, we have performed further simulations in which a wide range of dilution factors were used. Our results, shown below, have been added to the manuscript. While a 90% dilution may be excessive for some natural populations, it is not necessarily so for others. For example, 95-99% of the *Vibrio harveyi* residing in the bobtail squid's light organ are expelled daily (Lee and Ruby, 1994).
+We are grateful to the reviewer for drawing our attention to the lack of justification or clarification of the 90% death rate used in the original manuscript. Our primary motivation for selecting this rate was to maintain consistency with and allow comparison to the model and results presented in the Hammarlund et al. work (and ongoing microbial experiments). To address the reviewer's concern, we have performed further simulations in which a wide range of dilution factors were used. Our results, shown below, have been added to the manuscript. While a 90% dilution may be excessive for some natural populations, it is not necessarily so for others. For example, 95-99% of the *Vibrio harveyi* residing in the bobtail squid's light organ are expelled daily (Lee and Ruby, 1994).
 
 ![**Effect of Subpopulation Dilution**](../figures/FigureS2-small.png)
 
@@ -214,18 +214,20 @@ However, to maintain consistency with our earlier model described in the Hammarl
 
 We know that adaptation to the external environment is important in this model. As shown in the figure below, cooperation is quickly lost without this fitness component. This is likely because the fitness effects of adaptation to the external environment are direct, while the fitness effects associated with niche construction are density dependent. The fitness advantage displayed by an adapted type helps to jumpstart the maintenance of cooperation by niche construction.
 
-![**Effect of External Adaptation.** For these simulations, the benefit of adaptation to the external environment was removed ($\delta=0$), and the benefits of adaptation to the constructed environment ($\epsilon$) were either remained (1x) or doubled (2x) as compensation.](../figures/nodelta-cooperators-time.png)
+![**Effect of External Adaptation.** For these simulations, the benefit of adaptation to the external environment was removed ($\delta=0$), and the benefits of adaptation to the constructed environment ($\epsilon$) were either remained at base value (1x) or doubled (2x) as compensation. Here, populations followed similar evolutionary trajectories to those shown in Figure 1A, where populations could not adapt to either the external or the constructed environment.](../figures/nodelta-cooperators-time.png)
 
-One possibility to achieve this effect without the third term in Equation two might be to introduce adapted types at the onset of simulations, but we have not explored this.
+It might be possible to achieve this effect without the third term in Equation 2 by introducing adapted types at the onset of simulations and "jump-starting" niche construction and adaptation, but we have not explored this.
 
 
 > Migration could be explained in a bit more detail. For example, does migration occur symmetrically in order to avoid some subpopulations stochastically exceeding S_max? If not, how is this avoided? The text on the bottom of page 6 and the top of page 7 suggests that the rate of migration depends on success or fitness. Is this reflecting frequency dependence only or some other mechanism?
 
 We agree with the reviewer's comment: migration was not defined clearly enough in the manuscript. We have made changes that directly address both of the questions raised.
 
-First, we have stated in the Methods section that subpopulations can exceed $S_{max}$ individuals immediately following the migration stage. We add that this is temporary, as dilution immediately follows, which reduces the population size.
+First, we have stated in the Methods section that subpopulations can exceed $S_{max}$ individuals immediately following the migration stage. We then add that this is temporary, as dilution immediately follows, which reduces the population size.
 
-As for the second point, our original wording in the model overview could easily mislead readers, giving the impression that migration was affected by adaptation or fitness, which is not true.We have updated this to simply state that migration occurs and can allow a type to spread in the population.
+As for the second point, our original wording in the model overview could have easily misled readers, giving the impression that migration was affected by adaptation or fitness, which is not true. We have updated this to simply state that migration occurs and can allow a type to spread in the population.
+
+**TODO (BDC): Add Line numbers**
 
 
 > Finally, if I understand correctly, the force maintaining cooperation is a constant opportunity to adapt and maintain the benefit of having a large local population to generate useful adaptations. Is there a fundamental difference between the way in which this is modelled here (as a feature of the niche constructing genotypes of the individual agents) and modelling this as a straightforward variable or fluctuating environment?
@@ -241,7 +243,7 @@ TODO: circumstances that allow for invasion are present in NC, but not in Hanksh
 
 > The labelling is a bit difficult to follow at times. I would suggest representing the alleles with letters and the loci with numbers (or vice versa) if possible.
 
-This is true---having two sets of integers can at times be difficult to follow. While we did consider the well-justified suggestion to use letters and numbers to differentiate between these sets, we believe that doing so would further complicate the mathematical description. This is due to our use on modular arithmetic for both alleles and loci (see e.g., Equation 1).
+This is true---having two sets of integers can at times be difficult to follow. While we did consider the well-justified suggestion to use letters and numbers to differentiate between these sets, we believe that doing so would further complicate the mathematical description. This is due to our use of modular arithmetic for both alleles and loci (see e.g., Equation 1).
 
 We have taken the following steps to minimize the possibility of confusion. Where specific numbers are used in the manuscript, we have made sure that these values are always properly prefixed so that their role is clear. In the detailed description of the model given in Box 1, we italicized the integers used to represent loci (and always prefixed them with a description).
 
@@ -257,15 +259,21 @@ No, all types contribute to the constructed environment proportional to their ab
 
 We have updated the manuscript to clarify this point. In the instance noted by the reviewer, types are no longer described as having fixed.
 
+**TODO (BDC): Line numbers**
+
 
 > Line 265. Without qualification this sentence might be overstating things a bit!
 
-This statement was indeed overgeneralized and failed to place our results in the proper context. We have appended an additional sentence that clarifies that negative niche construction is an important factor in the maintenance of cooperation by the Hankshaw Effect and that it does so by creating adaptive opportunities on which cooperation can hitchhike.
+This statement was indeed overgeneralized and failed to place our results in the proper context. We have appended an additional sentence that clarifies that negative niche construction is an important factor in the maintenance of cooperation by the Hankshaw effect and that it does so by creating adaptive opportunities on which cooperation can hitchhike.
+
+**TODO (BDC): Line numbers**
 
 
 > Line 271 and others. At times the term 'population' used rather than subpopulation or metapopulation. This should be specified each time.
 
 This is a distinction that we have given much consideration. For this manuscript, we chose to use *population* to refer to a collection of independent *subpopulations*. This is instead of referring to a collection of *populations* as a *metapopulation*. We have checked several additional times to make sure our usage is consistent throughout the manuscript. In addition, there were a few places, such as the sentence referred to here, where the distinction was not immediately clear. We have edited these instances to be more explicit.
+
+**TODO (BDC): Line numbers**
 
 
 > A concluding paragraph that discusses the topic more generally might be more fitting than ending on a discussion of host-symbiont interactions.
@@ -273,6 +281,8 @@ This is a distinction that we have given much consideration. For this manuscript
 We are grateful to the reviewer for this helpful comment. We believe that doing so places this work in a larger context and makes it accessible to a wider audience. A more general conclusion has been added.
 
 TODO: add this to the manuscript
+**TODO (BDC): Line numbers**
+
 
 \rule{\textwidth}{1pt}
 
