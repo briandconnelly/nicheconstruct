@@ -118,6 +118,7 @@ Each individual survives this bottleneck with probability $\sigma$.
 Starting from this initial state, simulations then proceed for $T$ cycles, where each discrete cycle consists of subpopulation growth, mutation, migration, and dilution.
 Dilution reduces each subpopulation to support growth in the next cycle.
 Each individual remains with probability $d$, regardless of its genotype.
+Dilution remained the same for each of the simulations described, however we further explore its effects in the Supporting Information.
 
 
 ## Simulation Source Code and Software Dependencies

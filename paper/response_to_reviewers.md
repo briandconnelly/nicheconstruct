@@ -158,7 +158,7 @@ While we realize that using a bounded lattice may introduce effects at the edges
 
 > L202 Is this right? - if each individual remains with probability d  then with d=0.1 as per Table 1, then the population is reduced to < Smin (800) even when at its maximum size (0.1*Smax = 200) - why parameterise in this case, rather than just choosing Smin individuals at random?
 
-This is correct---the bottleneck introduced at the end of each cycle reduces each subpopulation to fewer than $S_{min}$ individuals. In the next cycle, a subpopulation then grows to its carrying capacity. During growth, mutations are introduced, and growth rate depends on fitness. This approach is more conservative. If we instead chose $S_{min}$ individuals at random, we anticipate two outcomes. First, the evolutionary process would be slowed down, as mutations would occur less frequently due to reduced growth. Second, defector populations would be especially burdened by this, so the Hankshaw effect would be exaggerated.
+This is correct---the bottleneck introduced at the end of each cycle reduces each subpopulation to fewer than $S_{min}$ individuals. In the next cycle, each subpopulation then grows to its carrying capacity. During growth, mutations are introduced, and growth rate depends on fitness. This approach is more conservative than what the reviewer suggests. If we instead chose $S_{min}$ individuals at random, we anticipate two outcomes. First, the evolutionary process would be slowed down, as mutations would occur less frequently due to reduced growth. Second, defector populations would be especially burdened by this, so the Hankshaw effect would be exaggerated.
 
 
 > L210 "performED" and I would argue results should be past tense throughout.
@@ -196,14 +196,19 @@ Table 1 has been given an additional column listing the additional parameter val
 
 > The definition of cooperation used here appears to be that cooperation is a costly behaviour that increases local population density. The authors do briefly mention the negative aspects of high local population density in terms of increased competition on pages 18/19 but this discussion does not extend to the model. In fact, the authors avoid this issue by diluting the population 'to allow growth in the next generation'. More robust justification for imposing a ~90% death rate on each subpopulation every generation may be needed as it could favour the cooperative allele substantially. What would the authors expect to see if local competition was explicitly modelled?
 
-TODO - definition of cooperation
-TODO - negative aspects of density (gamma?).
+We are grateful to the reviewer for drawing our attention to the lack of justification or clarification of the 90% death rate used in the original manuscript. Our primary motivation for selecting this rate was to maintain consistency with, and allow comparison to, the model and results presented in the Hammarlund et al. work (and ongoing microbial experiments).
 
-We are grateful to the reviewer for drawing our attention to the lack of justification or clarification of the 90% death rate used in the original manuscript. Our primary motivation for selecting this rate was to maintain consistency with and allow comparison to the model and results presented in the Hammarlund et al. work (and ongoing microbial experiments). To address the reviewer's concern, we have performed further simulations in which a wide range of dilution factors were used. Our results, shown below, have been added to the manuscript. While a 90% dilution may be excessive for some natural populations, it is not necessarily so for others. For example, 95-99% of the *Vibrio harveyi* residing in the bobtail squid's light organ are expelled daily (Lee and Ruby, 1994).
+To address the reviewer's concern, we have performed additional simulations in which a wide range of dilution factors were used. Our results, shown below, have been added as Supporting Information. While a 90% dilution may be excessive for some natural populations, it is not necessarily so for others. For example, 95-99% of the *Vibrio harveyi* residing in the bobtail squid's light organ are expelled daily (Lee and Ruby, 1994).
 
-![**Effect of Subpopulation Dilution**](../figures/FigureS2-small.png)
+![**Effect of Subpopulation Dilution**](../figures/dilution.png)
 
-TODO: re-do with new data
+As shown in the Figure, cooperator survival diminishes as more individuals survive the perdiodic dilution. These results confirm the reviewer's prediction that dilution often does favor the cooperative allele and align with previous work (e.g., [Brockhurst (2007), doi: 10.1371/journal.pone.0000634](http://dx.doi.org/10.1371/journal.pone.0000634)).
+
+We have also extended our model to address the negative aspects of increasing subpopulation density. As detailed in the Supporting Information, we added an additional parameter to Equation 4, $\gamma$, to control whether the increases in population size accelerate ($\gamma > 1$) or decelerate ($\gamma < 1$) as cooperators become more abundant. The following figure shows how these different forms of density-dependent benefits affect evolutionary trajectories in comparison to our baseline conditions ($\gamma = 1$). Accelerating benefits tend to dampen oscillations and increase the proportion of cooperators in the replicate populations over time, while decelerating benefits tend to increase the magnitude of oscillations, allowing defectors to dominate. Interestingly, these large oscillations also allow cooperators to rapidly increase in frequency in a number of instances, even when rare.
+
+![**Non-Linear Benefits of Cooperation**](../figures/popsize_returns.png)
+
+**TODO: @evokerr, is it ok that I pasted parts of the response about gamma verbatim from an earlier response?**
 
 
 > Could 'adaptation to external environment' be rolled in to baseline fitness? It seems that 0 alleles (except at the cooperation locus, of course) are always selected against and should drop out of the population quite quickly. What would change if the third term in equation (2) were omitted?
