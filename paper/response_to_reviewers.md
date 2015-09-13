@@ -71,9 +71,9 @@ We feel that "indefinitely" is an appropriate description that captures both the
 
 > Does that fact that p is set to 0.5 at the start of the simulations make this paper really about the persistence of cooperation rather than its evolution? To show the latter, would the authors not consider testing their model with an initial p of 1/800 i.e. a single mutation? In how many such runs does cooperation then persist?
 
-This is a very important point that should have been addressed in the original manuscript. To address this omission, we have conducted further simulations in which the initial proportion of cooperators were widely varied. The results of these simulations are included in the revised manuscript. **TODO: specific location of results and figures**. **TODO: brief description of the results**.
+This is a very important point that should have been addressed in the original manuscript. To better understand this parameter, we have run additional simulations in which the initial proportion of cooperators were widely varied. The results of these simulations are included as Supporting Information. **TODO: specific location of results and figures**. **TODO: brief description of the results**.
 
-Due to the thinning that occurs stochastically at the onset of each simulation (to maintain consistency with the Hammarlund et al. paper), we have not performed simulations in which p0=1/800. However, we have included results of simulations in which cooperators were entirely absent from the starting population but could arise via mutation. **TODO: summary of results and where we've discussed/shown them**.
+Due to the thinning that occurs stochastically at the onset of each simulation (to maintain consistency with the Hammarlund et al. paper), it would be difficuly to perform simulations in which p0=1/800. However, we have included simulations in which cooperators were entirely absent from the starting population but could arise via mutation. **TODO: summary of results and where we've discussed/shown them**.
 
 
 > Is this really negative niche-construction - "niche-constructing acts that, on average decrease the fitness of the niche-constructing organisms" - in the model, the niche-construction shifts the optimum value in the environment, but does not directly reduce fitness of the niche-constructors - instead it makes a higher relative fitness possible for others.
@@ -85,7 +85,7 @@ The distinction between absolute and relative fitness and how they relate to nic
 
 > There is a separation in the model between the "external" environment and the "constructed" environment, neither of which are modelled independently; rather they are implied from the way that the genetic makeup of organisms affects their fitness. This seems like a weak point of the model given that this separation is clearly an artificial construct - it would help the paper if the authors could give some thought to justifying this distinction - why doesn't niche construction affect the "external" environment. For example, is this a way that host/parasite interactions have been previously modelled? Further to this point, adaptation is usually associated with some degree of genetic load - i.e. the difference between optimal and actual genotypes in a given environment (e.g. L255). Can the authors say anything about whether an assumption of no genetic load is critical to their findings, or whether they think it is implicitly accounted for in their model in some way I have missed?
 
-In natural settings, environmental change is often brought about by exogenous factors (e.g., changing seasons) as well as endogenous factors (e.g., niche constructing behaviors). Many of its proponents argue that niche construction can substantially influence the evolutionary process, and this model is our first attempt at identifying how niche construction might play a role in cooperation. The distinction that we make in the model between external and constructed environments allows us to directly address the effects of niche construction by comparison with a previous model in which only exogenous factors played a role.
+In natural settings, environmental change is often brought about by exogenous factors (e.g., changing seasons) as well as endogenous factors (e.g., niche constructing behaviors). Many of its proponents argue that niche construction can substantially influence the evolutionary process, and this model is our first attempt at identifying how niche construction might play a role in cooperation. The distinction that we make in the model between external and constructed environments allows us to directly address the effects of niche construction by comparison with a previous model in which only exogenous factors played a role. We see this as a distinct advantage, as identifying and quantifying the selective feedbacks that niche construction introduces could be challenging.
 
 As described in the discussion, we realize that implicitly modeling the niche's state can dampen the effects of some aspects of niche construction.
 An explicit representation of the environment would certainly enrich a model such as ours and could permit investigation into host/parasite interactions or other systems where evolutionary dynamics occur on multiple scales.
@@ -123,9 +123,13 @@ We have added a note to the manuscript and refer the reader to works where the d
 
 > L69 Personally I find the Tom Robbins analogy a bit of a stretch and while I know the literature in question many will not so it's kind of unclear what's added here; it's also potentially confusing - Sissy's thumbs help her hitchhike as much as anyone else, so it's not clearly paying a cost to help others.
 
-We have worked to clarify the Hankshaw effect terminology. In the novel, her oversized thumbs were described as a hindrance to everyday activities, such as putting on clothing, and a limitation to her career choices. While not cooperative, we believe this trait shares several key properties---it is costly to its individual, but it does increase that individual's ability to (genetically) hitchhike.
+In the novel, her oversized thumbs were described as a hindrance to everyday activities, such as putting on clothing, and a limitation to her career choices.
+The reviewer is correct in stating that relating Hankshaw's oversized thumbs to cooperation might be a bit of a stretch.
 
-TODO: in manuscript, change description of hankshaw
+We have worked to clarify the description of the Hankshaw effect, highlighting that any trait---not just cooperation---can prolong its survival by increasing the opportunity to hitchhike.
+This includes traits such as increased mutation rate and spite, which reduces opponents' mutational opportunities.
+
+**TODO: add line numbers**
 
 
 > L151 Eq (1) - I think a one sentence explanation of what this equation does would save readers some effort in understanding here.

@@ -15,7 +15,9 @@ In asexual populations of cooperators and defectors, this sets the stage for an 
 The tragedy of the commons can be deferred if a cooperator, by chance, wins the adaptive race.
 
 @HANKSHAW recently showed that in spatially-structured populations, the "Hankshaw effect" can give cooperators a substantial leg up on defectors in an adaptive race.
-This advantage is reminiscent of Sissy Hankshaw, a fictional character in Tom Robbins' *Even Cowgirls Get the Blues*, whose oversized thumbs---which were otherwise an impairment---made her a prolific hitchhiker.
+Inspired by a fictional character in Tom Robbins' *Even Cowgirls Get the Blues*, the Hankshaw effect describes how costly traits can be maintained by actively creating opportunities to hitchhike along with highly beneficial traits.
+Sissy Hankshaw was born with extremely oversized thumbs.
+Although her thumbs were an impairment to everyday activities, they made her a prolific hitchhiker.
 Similarly, cooperation is costly, but it increases local population density.
 As a result, cooperators are more likely to acquire beneficial mutations.
 By hitchhiking along with these adaptations, cooperation can rise in abundance.

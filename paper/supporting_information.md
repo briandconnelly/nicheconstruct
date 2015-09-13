@@ -5,6 +5,7 @@ fontsize: 12pt
 
 # TODO - Add figure S1
 # TODO: change "dilution factor"
+# TODO: update references to Figure S1
 ...
 
 \renewcommand{\thefigure}{S\arabic{figure}}
@@ -39,3 +40,7 @@ When $\gamma > 1$, accelerate.
 
 ![**Effect of Benefits Slope.** TODO Description](../figures/popsize_returns.png)
 
+
+## Misc
+
+![**Defector Invasion with Mutations.** The proportion of cooperators present in each replicate population is shown for the duration of simulations ($T=1000$). When mutations occur both at the adaptive loci and the cooperation locus ($\mu_{a}=\mu_{c}=0.00005$), cooperation remains dominant in 58 of 160 replicate populations.](../figures/FigureS1.png)

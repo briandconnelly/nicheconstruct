@@ -1,7 +1,7 @@
 # Discussion
 
 Despite their negative effects, deleterious traits can rise in abundance through genetic linkage with other traits that are strongly favored by selection [@maynardsmith1974hitch].
-In a process termed the "Hankshaw effect", @HANKSHAW recently demonstrated that cooperation can actively prolong its existence by increasing its likelihood of hitchhiking with a beneficial trait.
+In a process termed the "Hankshaw effect", @HANKSHAW recently demonstrated that traits such as cooperation and spite can actively prolong their existence by increasing their likelihood of hitchhiking with a beneficial trait.
 In that work and here, subpopulations of cooperators grow to a higher density than those of defectors.
 These larger cooperator subpopulations therefore experience more mutations and are consequently more likely to gain adaptations.
 Although this process favors cooperation in the short term, it eventually reaches a dead end: When the opportunities for adaptation are exhausted, and cooperators can no longer hitchhike, they face extinction.
