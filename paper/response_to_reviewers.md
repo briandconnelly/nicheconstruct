@@ -140,14 +140,17 @@ This is an excellent suggestion. We have added two examples to the manuscript th
 > L157 Why is the subscript 'g' needed here? I can't see where this is ever summed over in the subsequent equations, so the notation might be overcomplicated here.
 
 We have removed the 'g' subscript from all instances where allelic states are represented.
+However, we continue to use the 'g' subscript in the Supporting Information to indicate a particular genotype as before.
 
-**TODO: if we use g in supp, add a note here or add it back to the Methods**
+**TODO: Put the g back in the main text? I didn't think it added any confusion**
 
 
 > L172 / Eq 4 The costs and benefits of cooperation are always crucial in models like this, but while the costs are clear, the benefits are spread out using this equation. I feel like this should be clarified a little more - can the effects of this equation be reproduced in equation 2 such that both the costs and benefits of cooperation are explicitly expressed through effects on individual fitness?
 
-TODO
-TODO paste in Ben's previous email in supplement?
+A number of factors make incorporating the benefits of cooperation directly into Equation 2 difficult. For example, **TODO: I could use some thoughts about how to best make this sound awful**
+
+Despite some of these complications, we have added a measure of expected absolute fitness for genotypes within a subpopulation to the Supporting Information as a first step in this direction.
+Note that this derivation does not incorporate mutation, which can affect absolute fitness within subpopulations.
 
 
 > L185 Just a point of clarification - mutation can result in "no adaptation" right? Is there a reasons for the {0}U{1,2,3…} notation rather than the simpler {0,1,2,3,…} - the union operator doesn't seem to serve any purpose here?
@@ -243,7 +246,6 @@ As for the second point, our original wording in the model overview could have e
 
 This summary is correct---cooperation can be maintained when two features are present: there must be adaptive opportunities, and cooperators must be more likely to gain these adaptations. In our previous work (Hammarlund et al., 2015), we demonstrated that cooperation can be maintained when environmental change occurred periodically. But timing is critical. The period between changes in the environment must not exceed the time for the population to fully adapt.  Otherwise cooperation goes to low proportions as fully adapted defectors dominate. This is an entirely passive process, and the rate and variation of environmental change were critically important in determining cooperator success. For this work, we have sought to address how this process is affected when populations play an *active* role in creating these adaptive opportunities through niche construction.
 
-TODO: discuss niche diversity?
 TODO: circumstances that allow for invasion are present in NC, but not in Hankshaw....
    - what about rapidly-changing environments
 
