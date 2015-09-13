@@ -50,10 +50,3 @@
 
 ![**Defector Invasion with Mutations.** The proportion of cooperators present in each replicate population is shown for the duration of simulations ($T=1000$). When mutations occur both at the adaptive loci and the cooperation locus ($\mu_{a}=\mu_{c}=0.00005$), cooperation remains dominant in 58 of 160 replicate populations.](../figures/FigureS1.png)
 
-\clearpage
-
-
-## Figure S2 {#figS2}
-
-![**Effect of Subpopulation Dilution.** Simulations were run with dilution factors 0.03, 0.09, 0.30, 0.5, 0.7, 0.91, 0.97. The dilution factor represents the probability that an individual in the population survives. Lower values represent a more severe bottleneck. *Cooperator Presence* represents the area under the the cooperator proportion curve over 3000 simulation cycles. This integral increases as cooperators spend more time at high proportions, thus a value of 1.0 represents a population in which cooperators remained as the only type in the population for the duration of the simulation. Cooperators are most successful when subpopulation thinning was most severe, while defectors dominate in environments with intermediate thinning. When thinning is less severe, cooperators again fare better, however much more variation exists among replicate populations.](../figures/FigureS2.png)
-
