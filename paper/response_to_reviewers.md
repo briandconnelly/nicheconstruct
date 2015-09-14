@@ -118,10 +118,17 @@ Many of its proponents argue that niche construction can substantially influence
 The distinction that we make in the model between external and constructed environments allows us to directly address the effects of niche construction by comparison with a previous model in which only exogenous factors played a role.
 We see this as a distinct advantage, as identifying and quantifying the selective feedbacks that niche construction introduces could be challenging.
 
-As described in the discussion, we realize that implicitly modeling the niche's state can dampen the effects of some aspects of niche construction.
-An explicit representation of the environment would certainly enrich a model such as ours and could permit investigation into host/parasite interactions or other systems where evolutionary dynamics occur on multiple scales.
+**TODO: Monday**
 
-TODO: Load.
+As described in the discussion, we realize that implicitly modeling niche construction and external selection pressures through the genetic determination of fitness has certain limitations.
+One of the principal limitations is the lack of a rich interplay between exogenous and endogenous influences on the environment.
+An explicit representation of the environment (e.g., as a dynamic resource or a coevolving partner) would certainly enrich a model such as ours and could permit exploration of abiotic states or host/parasite interactions.
+We have added some text to our Discussion to make these extensions clearer.
+
+In some sense, genetic load is an inherent part of our model.
+We note that there will be a constant presence of deleterious mutations (e.g., mutations that introduce allele 0 back to any locus or mutations that introduce a non-zero allele that is inappropriate for the niche constructed by the population), which will make the actual genotypes non-optimal.
+However, more importantly, the negative niche construction scenario is contributing to a continual mismatch between the actual constructing genotypes and the genotype that would best respond to the constructed niche.
+This mismatch is the engine that keeps the adaptive opportunities omnipresent, thus allowing for perpetual evolution by the Hankshaw effect.
 
 
 > The setup of the circular chromosome and circular fitness implications is mathematically neat - however, it seems like a very specific set of assumptions about gene/environment interactions (for example, only when the modulus of L/A is non-zero) and one always worries about the generality of insights based on such a specific system. Can the authors provide any more information about where these assumptions might be met in nature, and/or what range of conditions or assumptions are needed for their insights to hold.
@@ -161,7 +168,9 @@ In response, to the reviewer’s comment on L172 / Eq 4 below, we have added to 
 Using this expression, we can connect our form of cooperation to multilevel altruism.
 The following is included in the Supplement:
 
->There have been several different definitions of altruism, with complicated connections between them (see @kerr2004what).
+**TODO format this box**
+
+>**Altruism** There have been several different definitions of altruism, with complicated connections between them (see @kerr2004what).
 In our model, we have a form of "multilevel altruism", which requires altruists have lower fitness within a subpopulation, but subpopulation productivity increases with altruist proportion.
 To see this, consider a subpopulation with only two genotypes $g_c$ and $g_d$, where $a_{0,g_c} = 1$, $a_{0,g_d} = 0$, and $a_{l,g_c} = a_{l,g_d}$ for all $l \in \{1, 2, \ldots, L\}$.
 Specifically, genotype $g_c$ refers to a cooperator, genotype $g_d$ refers to a defector, and otherwise the two genotypes are identical.
@@ -174,8 +183,6 @@ However, to keep things general, we have not assumed these constraints.
 To avoid confusion between these different forms of altruism, we have opted to use the more general term “cooperation” in our manuscript.
 
 We have added a note to the main text to refer the reader to the Supplement for this discussion of the connection to altruism.
-
-**TODO: add this text to the main document**
 
 
 > L69 Personally I find the Tom Robbins analogy a bit of a stretch and while I know the literature in question many will not so it's kind of unclear what's added here; it's also potentially confusing - Sissy's thumbs help her hitchhike as much as anyone else, so it's not clearly paying a cost to help others.
@@ -209,11 +216,53 @@ However, we continue to use the 'g' subscript in the Supporting Information to i
 
 > L172 / Eq 4 The costs and benefits of cooperation are always crucial in models like this, but while the costs are clear, the benefits are spread out using this equation. I feel like this should be clarified a little more - can the effects of this equation be reproduced in equation 2 such that both the costs and benefits of cooperation are explicitly expressed through effects on individual fitness?
 
-A number of factors make incorporating the benefits of cooperation directly into Equation 2 difficult.
-For example, **TODO: I could use some thoughts about how to best make this sound awful**
+This is a good point, and motivated us to derive a measure of expected absolute fitness of a genotype within a subpopulation that incorporates both costs and benefits.
+We have now added the following information to the Supplement:
 
-Despite some of these complications, we have added a measure of expected absolute fitness for genotypes within a subpopulation to the Supporting Information as a first step in this direction.
-Note that this derivation does not incorporate mutation, which can affect absolute fitness within subpopulations.
+**TODO: format this box**
+
+**A Measure of Expected Absolute Fitness within a Subpopulation**
+
+For the following description, we ignore mutation and focus on selection in our model. We define fitness of genotype $g$ within a subpopulation to be:
+
+$$ W_g = z - c a_{0,g} + \delta \sum_{l=1}^{L} I(a_{l,g}) + \epsilon \sum_{l=1}^{L} n(\beta(a_{l,g}, A), \beta(l, L)) $$ {#eq:absfitness}
+
+where $a_{l,g}$ is the allelic state at locus $l$ of genotype $g$, and all other terms are described in the main text.
+We let $N_g$ be the number of individuals in the subpopulation with genotype $g$.
+After selection, the expected fraction of the subpopulation that has genotype $g$ is:
+
+$$ F_{g} = \frac{N_g W_g}{\sum_{i \in \mathbf{G}}^{} N_i W_i} $$
+
+where $\mathbf{G}$ is the set of all genotypes in the subpopulation of interest.
+Total subpopulation size after selection is
+
+$$ S = S_{min} + \frac{\sum_{i \in \mathbf{G}}^{} N_i a_{0,i}}{\sum_{i \in \mathbf{G}}^{} N_i} (S_{max} - S_{min}) $$
+
+where the proportion of cooperators is $p = (\sum_{i \in \mathbf{G}}^{} N_i a_{0,i})/(\sum_{i \in \mathbf{G}}^{} N_i)$.
+Thus, if $X_g$ is a random variable giving the number of individuals after selection with genotype $g$, then
+
+$$ \text{Pr}\{X_g = x\} = \binom{S}{x} (F_g)^x (1-F_g)^{S-x} $$
+
+where $x \in {0,1,2,\ldots,S}$. The expected number of individuals of genotype $g$ after selection is:
+
+$$ E[X_g] = F_g S $$
+
+The quantity
+
+$$ \omega_g = \frac{E[X_g]}{N_g} $$
+
+serves as the (expected) absolute fitness of genotype $g$ in the subpopulation of interest.
+We note that this absolute fitness value only depends on the genotypic composition of the subpopulation (the members of the set $\mathbf{G}$ and their numbers in the subpopulation) and the parameters of the model ($z$, $c$, $\delta$, $\epsilon$, $S_{min}$, $S_{max}$).
+By summing $E[X_g]$ over all the subpopulations (which can differ in genotypic composition), and dividing by the sum of $N_g$ over all subpopulations, we can arrive at the expected absolute fitness of genotype $g$ at the scale of the entire metapopulation.
+
+We note that mutation will complicate this derivation because a fraction of the individuals with genotype $g$ after selection will mutate into another genotype, while a fraction of other genotypes may mutate into genotype $g$.
+At a metapopulation scale, migration does not change the absolute fitnesses of genotypes, however, it can alter genotypic composition of subpopulations and therefore affect the absolute fitnesses of genotypes in the next generation.
+
+**TODO: end formatting**
+
+We now refer the reader to this Supplement in the main text.
+
+**TODO: Add reference**
 
 
 > L185 Just a point of clarification - mutation can result in "no adaptation" right? Is there a reasons for the {0}U{1,2,3…} notation rather than the simpler {0,1,2,3,…} - the union operator doesn't seem to serve any purpose here?
