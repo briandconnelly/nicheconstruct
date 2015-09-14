@@ -155,8 +155,7 @@ Interestingly, these large oscillations also allow cooperators to rapidly increa
 
 > L16 I thought the description of the Hammerlund paper was too long for the abstract.
 
-TODO
-Ben takes a stab at this
+**TODO update the abstract**
 
 
 > L41 I think cooperation should be precisely defined here, with respect to the distinction between cooperation for mutual benefit (albeit with risk of defection), and altruism, whereby altruists always 'lose out' in the short term by their behaviour.  Which precisely do the authors think they are describing - it seems to me that it partly depends on the model parameters, but it is a bit difficult to tease out with the collective benefits conferred by Equation 4, but it seems more like altruism to me, and that's what the authors seem to suggest ('sacrificing their wellbeing to help others')?

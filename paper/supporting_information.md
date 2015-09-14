@@ -31,6 +31,8 @@ TODO: more description? See Figure @fig:dilutionsweep
 
 ![**Effect of Subpopulation Dilution.** Each panel shows the proportion of cooperators present in populations for a different dilution factor ($d$), which represents the proportion of individuals that survive the thinning that occurs during each simulation cycle. Because thinning affects the number of offspring produced during each cycle, and hence the number of mutational opportunities to gain adaptations, simulations proceeded until populations had reached $2.82\times 10^9$ births, which was the average number of births that occurred in simulations with baseline parameter values. TODO description of results](../figures/dilution.png) {#fig:dilutionsweep}
 
+TODO: integral?
+
 
 # Effect of Benefits Slope
 
