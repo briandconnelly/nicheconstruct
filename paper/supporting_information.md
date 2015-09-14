@@ -16,14 +16,20 @@ fontsize: 12pt
 
 ## Effect of Initial Cooperator Proportion
 
-![**Effect of Initial Cooperator Proportion.** Each panel shows the proportion of cooperators present in populations that started with a different initial cooperator proportion ($p_0$).](../figures/p0sweep_time.png)
+TODO: more description?
 
-![**The Effect of Initial Cooperator Proportion on Cooperator Presence.** To compare how abundant cooperators are for the duration of simulations, we use the area under the cooperator proportion curves. As cooperators spend more time at high proportions, this metric increases. Here, we show how this "Cooperator Presence" is influenced by the actual initial proportion of cooperators (after thinning, see Methods). Points represent Cooperator Presence for the simulations shown above, and the solid line is a Loess curve fitted to these values with 95% confidence interval.](../figures/p0sweep_presence.png)
+Time series Figure @fig:p0sweeptime, integral Figure @fig:p0sweepintegral
+
+![**Effect of Initial Cooperator Proportion.** Each panel shows the proportion of cooperators present in populations that started with a different initial cooperator proportion ($p_0$).](../figures/p0sweep_time.png) {#fig:p0sweeptime}
+
+![**The Effect of Initial Cooperator Proportion on Cooperator Presence.** To compare how abundant cooperators are for the duration of simulations, we use the area under the cooperator proportion curves. As cooperators spend more time at high proportions, this metric increases. Here, we show how this "Cooperator Presence" is influenced by the actual initial proportion of cooperators (after thinning, see Methods). Points represent Cooperator Presence for the simulations shown above, and the solid line is a Loess curve fitted to these values with 95% confidence interval.](../figures/p0sweep_presence.png) {#fig:p0sweepintegral}
 
 
 ## Effect of Dilution Factor
 
-![**Effect of Subpopulation Dilution.** Each panel shows the proportion of cooperators present in populations for a different dilution factor ($d$), which represents the proportion of individuals that survive the thinning that occurs during each simulation cycle. Because thinning affects the number of offspring produced during each cycle, and hence the number of mutational opportunities to gain adaptations, simulations proceeded until populations had reached $2.82\times 10^9$ births, which was the average number of births that occurred in simulations with baseline parameter values. TODO description of results](../figures/dilution.png)
+TODO: more description? See Figure @fig:dilutionsweep
+
+![**Effect of Subpopulation Dilution.** Each panel shows the proportion of cooperators present in populations for a different dilution factor ($d$), which represents the proportion of individuals that survive the thinning that occurs during each simulation cycle. Because thinning affects the number of offspring produced during each cycle, and hence the number of mutational opportunities to gain adaptations, simulations proceeded until populations had reached $2.82\times 10^9$ births, which was the average number of births that occurred in simulations with baseline parameter values. TODO description of results](../figures/dilution.png) {#fig:dilutionsweep}
 
 
 ## Effect of Benefits Slope
@@ -32,13 +38,15 @@ In our main simulations, the carrying capacity at each patch increased linearly 
 
 $$ S(p) = S_{min} + p^{\gamma} (S_{max} - S_{min}) $$ {#eq:popsizegamma}
 
-Blah @eq:popsizegamma Blah
+When $\gamma < 1$, ...
+When $\gamma > 1$, ...
 
-When $\gamma < 1$, decelerate.
-When $\gamma > 1$, accelerate.
+TODO.
+
+See Figure @fig:gammasweep
 
 
-![**Effect of Benefits Slope.** TODO Description](../figures/popsize_returns.png)
+![**Effect of Benefits Slope.** TODO Description](../figures/popsize_returns.png) {#fig:gammasweep}
 
 
 ## A Measure of Expected Absolute Fitness within a Subpopulation
@@ -97,5 +105,5 @@ In this sense, we treat the niche construction as "negative", as the more indivi
 
 ## Misc
 
-![**Defector Invasion with Mutations.** The proportion of cooperators present in each replicate population is shown for the duration of simulations ($T=1000$). When mutations occur both at the adaptive loci and the cooperation locus ($\mu_{a}=\mu_{c}=0.00005$), cooperation remains dominant in 58 of 160 replicate populations.](../figures/FigureS1.png)
+![**Defector Invasion with Mutations.** The proportion of cooperators present in each replicate population is shown for the duration of simulations ($T=1000$). When mutations occur both at the adaptive loci and the cooperation locus ($\mu_{a}=\mu_{c}=0.00005$), cooperation remains dominant in 58 of 160 replicate populations.](../figures/FigureS1.png) {#fig:dinvade2}
 

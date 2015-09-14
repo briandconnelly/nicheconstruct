@@ -4,7 +4,7 @@
 
 ## Figure 1 {#fig1}
 
-![**Adaptation and the Evolution of Cooperation.** The average cooperator proportion among replicate populations for the duration of simulations are shown as curves, and shaded areas indicate 95% confidence intervals. (**A**) Without any opportunity to adapt ($L=0$), cooperation is quickly lost. (**B**) When adaptation can occur ($L=5$, $\delta=0.3$), but niche construction does not affect selection ($\epsilon=0$), cooperators rise in abundance by hitchhiking along with adaptions to the external environment. Nevertheless, this effect is transient, and cooperators eventually become extinct. (**C**) Niche construction ($\epsilon=0.00015$) enables cooperation to be maintained indefinitely in the majority of populations. The trajectories of individual populations are shown in Figure 2A.](../figures/Figure1.png)
+![**Adaptation and the Evolution of Cooperation.** The average cooperator proportion among replicate populations for the duration of simulations are shown as curves, and shaded areas indicate 95% confidence intervals. (**A**) Without any opportunity to adapt ($L=0$), cooperation is quickly lost. (**B**) When adaptation can occur ($L=5$, $\delta=0.3$), but niche construction does not affect selection ($\epsilon=0$), cooperators rise in abundance by hitchhiking along with adaptions to the external environment. Nevertheless, this effect is transient, and cooperators eventually become extinct. (**C**) Niche construction ($\epsilon=0.00015$) enables cooperation to be maintained in the majority of populations. The trajectories of individual populations are shown in Figure 2A.](../figures/Figure1.png)
 
 \clearpage
 

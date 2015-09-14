@@ -102,6 +102,7 @@ These mutations replace the existing allele with a value randomly sampled from t
 
 Populations consist of $N^2$ patches arranged as an $N \times N$ lattice, where each patch can support a subpopulation.
 After mutation, individuals emigrate to an adjacent patch.
+This process is unaffected by fitness.
 For each source subpopulation, a single destination patch is randomly chosen from the source patch's Moore neighborhood, which is composed of the nearest 8 patches on the lattice.
 Because the population lattice has boundaries, patches located on the periphery have smaller neighborhoods.
 Individuals emigrate with probability $m$, which means larger subpopulations produce more emigrants.
