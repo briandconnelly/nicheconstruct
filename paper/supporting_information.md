@@ -14,7 +14,7 @@ fontsize: 12pt
 \setcounter{equation}{0}
 
 
-## Effect of Initial Cooperator Proportion
+# Effect of Initial Cooperator Proportion
 
 TODO: more description?
 
@@ -25,14 +25,14 @@ Time series Figure @fig:p0sweeptime, integral Figure @fig:p0sweepintegral
 ![**The Effect of Initial Cooperator Proportion on Cooperator Presence.** To compare how abundant cooperators are for the duration of simulations, we use the area under the cooperator proportion curves. As cooperators spend more time at high proportions, this metric increases. Here, we show how this "Cooperator Presence" is influenced by the actual initial proportion of cooperators (after thinning, see Methods). Points represent Cooperator Presence for the simulations shown above, and the solid line is a Loess curve fitted to these values with 95% confidence interval.](../figures/p0sweep_presence.png) {#fig:p0sweepintegral}
 
 
-## Effect of Dilution Factor
+# Effect of Dilution Factor
 
 TODO: more description? See Figure @fig:dilutionsweep
 
 ![**Effect of Subpopulation Dilution.** Each panel shows the proportion of cooperators present in populations for a different dilution factor ($d$), which represents the proportion of individuals that survive the thinning that occurs during each simulation cycle. Because thinning affects the number of offspring produced during each cycle, and hence the number of mutational opportunities to gain adaptations, simulations proceeded until populations had reached $2.82\times 10^9$ births, which was the average number of births that occurred in simulations with baseline parameter values. TODO description of results](../figures/dilution.png) {#fig:dilutionsweep}
 
 
-## Effect of Benefits Slope
+# Effect of Benefits Slope
 
 In our main simulations, the carrying capacity at each patch increased linearly with the proportion of cooperators.
 
@@ -49,7 +49,7 @@ See Figure @fig:gammasweep
 ![**Effect of Benefits Slope.** TODO Description](../figures/popsize_returns.png) {#fig:gammasweep}
 
 
-## A Measure of Expected Absolute Fitness within a Subpopulation
+# A Measure of Expected Absolute Fitness within a Subpopulation
 
 For the following description, we ignore mutation and focus on selection in our model. We define fitness of genotype $g$ within a subpopulation to be:
 
@@ -87,7 +87,22 @@ We note that mutation will complicate this derivation because a fraction of the 
 At a metapopulation scale, migration does not change the absolute fitnesses of genotypes, however, it can alter genotypic composition of subpopulations and therefore affect the absolute fitnesses of genotypes in the next generation.
 
 
-## Relative Versus Absolute Fitness
+# Altruism
+
+There have been several different definitions of altruism, with complicated connections between them (see @kerr2004what).
+In our model, we have a form of "multilevel altruism", which requires altruists have lower fitness within a subpopulation, but subpopulation productivity increases with altruist proportion.
+To see this, consider a subpopulation with only two genotypes $g_c$ and $g_d$, where $a_{0,g_c} = 1$, $a_{0,g_d} = 0$, and $a_{l,g_c} = a_{l,g_d}$ for all $l \in \{1, 2, \ldots, L\}$.
+Specifically, genotype $g_c$ refers to a cooperator, genotype $g_d$ refers to a defector, and otherwise the two genotypes are identical.
+By Equation [S.1] **TODO crossref**, $W_{g_{c}} < W_{g_{d}}$, which implies $\omega_{g_{c}} < \omega_{g_{d}}$.
+That is, the cooperator always has fewer expected number of offspring than an isogenic defector within its subpopulation.
+However, Equation [S.2] **TODO crossref** guarantees that the productivity of the subpopulation increases with the proportion of cooperators.
+Thus, cooperators qualify as multilevel altruists.
+With additional constraints on the parameters, cooperation could also satisfy other definitions of altruism (e.g., "individual-centered altruism" or "focal-complement altruism", see @kerr2004what).
+However, to keep things general, we have not assumed these constraints.
+To avoid confusion between these different forms of altruism, we have opted to use the more general term “cooperation” in our manuscript.
+
+
+# Relative Versus Absolute Fitness
 
 Consider a subpopulation fixed for genotype [1,2,3,4,5] where $A=6$ (our "negative niche construction" scheme).
 Now, imagine a mutant genotype [6,2,3,4,5] arises.
@@ -103,7 +118,11 @@ In general, as any genotype starts to dominate, it raises the relative fitness o
 In this sense, we treat the niche construction as "negative", as the more individuals of a given genotype are constructing the environment, the lower the fitness of these constructors relative to the new favored mutant genotype.
 
 
-## Misc
+# Misc
 
 ![**Defector Invasion with Mutations.** The proportion of cooperators present in each replicate population is shown for the duration of simulations ($T=1000$). When mutations occur both at the adaptive loci and the cooperation locus ($\mu_{a}=\mu_{c}=0.00005$), cooperation remains dominant in 58 of 160 replicate populations.](../figures/FigureS1.png) {#fig:dinvade2}
 
+
+\clearpage
+
+# References

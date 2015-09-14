@@ -27,23 +27,35 @@ Each comment is shown **TODO formatting details**, and our response is shown imm
 There is a bit of a terminology mess here.  By "evolution" he means the origin and
 spread of cooperation, which would be the case if the frequency increased from a very small value (as he said).  You started at 0.5 which might mean it is indeed more about maintainance than spread from a small value.  Regardless of what you call it, you actually cannot say that you are showing a mechanisms of stabilization unless you start at BOTH a small and a large value.  Stabilisation means that there is some kind of stable equilibrium. You cannot tell from only starting at 0.5, as you will see from any population genetics textbook.  Please fix this by starting at both a low and a high initial frequency.   This is the main reason I'm calling this a major revison.  Easy to do and report on but it will take more time than just rewriting.
 
-TODO
+**TODO Monday**
 
 
 > Here is another statement by this reviewer which I don't agree with: "Is this really negative niche-construction - "niche-constructing acts that, on average decrease the fitness of the niche-constructing organisms" - in the model, the niche-construction shifts the optimum value in the environment, but does not directly reduce fitness of the niche-constructors - instead it makes a higher relative fitness possible for others."  Evolution is about relative fitness, not absolute fitness (his comments are about absolute fitness), so, given that you have shown increased fitness of others but unchanged for the target, it's relative fitness (relative to the others)
 HAS declined and you DO have negative niche construction.  Maybe just make this more explicit.
 
-TODO
+We thank the editor for the clarifying comment.
+We have now emphasized the role of relative fitness in our definition of negative niche construction.
+
+**TODO Monday**
 
 
 > Please give more thought and discussion about the external and the constructed environments, they are not necessarily coupled, in fact in some ways this is the entire point of niche construction.
 
-TODO
+Our intention was to frame these "environments" as separate for this simple model.
+This way the role of exogenous and endogenous forces could be easily distinguished.
+Both environments are not explicitly modeled as dynamic variables here (but rather wrapped into the selection of different alleles).
+In a future model, we would like to model the environment explicitly (e.g., as a resource), where both constructive activities and external forces could change its state.
+We have elaborated this future extension in our Discussion.
+
+**TODO Monday**
 
 
 > As reviewer 2 says, "More robust justification for imposing a ~90% death rate on each subpopulation every generation" is badly needed!  This is rather unrealistic, and makes the entire model rather dubious, unless you can show the same effects with a more realistic death rate (say 30%).
 
-TODO
+We have now swept through a number of death rates and showed that, while the bottleneck size can affect the success of cooperation, the initial lift in cooperator proportion is somewhat robust to the level of dilution.
+We have added a section in the Supplement to discuss dilution more fully.
+
+**TODO Tuesday**
 
 
 ## Reviewer 1
@@ -88,11 +100,9 @@ However, we have included simulations in which cooperators were entirely absent 
 
 > Is this really negative niche-construction - "niche-constructing acts that, on average decrease the fitness of the niche-constructing organisms" - in the model, the niche-construction shifts the optimum value in the environment, but does not directly reduce fitness of the niche-constructors - instead it makes a higher relative fitness possible for others.
 
-This interpretation of our model is correct.
+The effect of niche construction is to lower the relative fitness of the constructor (rather than its absolute fitness).
 Niche construction increases the absolute fitness of another type, thus decreasing the *relative* fitness of the niche constructing type.
-Selection acts on relative fitness in our model.
-If the social locus is fixed, subpopulations grow to the same size, regardless of absolute fitness.
-However, by constructing an environment that favors another type, the niche constructing type puts itself at a selective disadvantage if a favored type arises by mutation.
+By constructing an environment that favors another type, the niche constructing type puts itself at a selective disadvantage if a favored type arises by mutation.
 Thus, even if the sole effect of niche construction is to raise the absolute fitness of another type relative to the focal constructor, this would qualify as a case of "negative niche construction" due to a lowered relative fitness.
 
 The distinction between absolute and relative fitness and how they relate to niche construction has previously been discussed.
@@ -151,7 +161,17 @@ In response, to the reviewer’s comment on L172 / Eq 4 below, we have added to 
 Using this expression, we can connect our form of cooperation to multilevel altruism.
 The following is included in the Supplement:
 
-**TODO: copy in Ben's altruism text**
+>There have been several different definitions of altruism, with complicated connections between them (see @kerr2004what).
+In our model, we have a form of "multilevel altruism", which requires altruists have lower fitness within a subpopulation, but subpopulation productivity increases with altruist proportion.
+To see this, consider a subpopulation with only two genotypes $g_c$ and $g_d$, where $a_{0,g_c} = 1$, $a_{0,g_d} = 0$, and $a_{l,g_c} = a_{l,g_d}$ for all $l \in \{1, 2, \ldots, L\}$.
+Specifically, genotype $g_c$ refers to a cooperator, genotype $g_d$ refers to a defector, and otherwise the two genotypes are identical.
+By Equation [S.1] **TODO crossref**, $W_{g_{c}} < W_{g_{d}}$, which implies $\omega_{g_{c}} < \omega_{g_{d}}$.
+That is, the cooperator always has fewer expected number of offspring than an isogenic defector within its subpopulation.
+However, Equation [S.2] **TODO crossref** guarantees that the productivity of the subpopulation increases with the proportion of cooperators.
+Thus, cooperators qualify as multilevel altruists.
+With additional constraints on the parameters, cooperation could also satisfy other definitions of altruism (e.g., "individual-centered altruism" or "focal-complement altruism", see @kerr2004what).
+However, to keep things general, we have not assumed these constraints.
+To avoid confusion between these different forms of altruism, we have opted to use the more general term “cooperation” in our manuscript.
 
 We have added a note to the main text to refer the reader to the Supplement for this discussion of the connection to altruism.
 
