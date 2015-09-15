@@ -24,4 +24,4 @@ Table: Model parameters and their values
 | $\sigma_d$ | Survival after dilution                        | 0.1           | 0.01, 0.3, 0.5, 0.7, 0.9* |
 | $\gamma$   | Slope of cooperative benefit*                  | 1.0           | 0.25, 0.5, 1.5, 2, 4 |
 
-\* See Supporting Information
+\* See Supplementary Material

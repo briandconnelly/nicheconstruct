@@ -54,7 +54,7 @@ We have elaborated this future extension in our Discussion:
 > As reviewer 2 says, "More robust justification for imposing a ~90% death rate on each subpopulation every generation" is badly needed!  This is rather unrealistic, and makes the entire model rather dubious, unless you can show the same effects with a more realistic death rate (say 30%).
 
 We have now swept through a number of death rates and showed that, while the bottleneck size can affect the success of cooperation, the initial lift in cooperator proportion is somewhat robust to the level of dilution.
-We have added a section in the Supplement to discuss dilution more fully.
+We have added a section in the Supplementary Material to discuss dilution more fully.
 
 **TODO Tuesday DILUTION**
 
@@ -90,7 +90,7 @@ We feel that "indefinitely" is an appropriate description that captures both the
 
 This is a very important point that should have been addressed in the original manuscript.
 To better understand this parameter, we have run additional simulations in which the initial proportion of cooperators were widely varied.
-The results of these simulations are included as Supporting Information.
+The results of these simulations are included as Supplementary Material.
 
 **TODO: specific location of results and figures**. **TODO: brief description of the results**.
 
@@ -152,7 +152,7 @@ This model is our compact attempt to capture the potentially never-ending co-evo
 
 This is an important point.
 We have expanded our model to explore different forms of population size increase as a function of cooperator proportion.
-As detailed in the Supporting Information, we added an additional parameter to Equation 4, $\gamma$, to control whether the increases in population size accelerate ($\gamma > 1$) or decelerate ($\gamma < 1$) as cooperators become more abundant.
+As detailed in the Supplementary Material, we added an additional parameter to Equation 4, $\gamma$, to control whether the increases in population size accelerate ($\gamma > 1$) or decelerate ($\gamma < 1$) as cooperators become more abundant.
 
 The following figure shows how these different forms of density-dependent benefits affect evolutionary trajectories in comparison to our baseline conditions ($\gamma = 1$).
 Accelerating benefits tend to dampen oscillations and increase the proportion of cooperators in the replicate populations over time, while decelerating benefits tend to increase the magnitude of oscillations, allowing defectors to dominate.
@@ -175,7 +175,7 @@ Our form of cooperation satisfies one definition of altruism (traditionally used
 With additional constraints, this type of altruism is related to other types of altruism (e.g., traditionally used in the inclusive fitness theory literature).
 In response, to the reviewer’s comment on L172 / Eq 4 below, we have added to the Supplement a derivation of an expression for the expected absolute fitness for a genotype within a subpopulation of a certain genetic composition.
 Using this expression, we can connect our form of cooperation to multilevel altruism.
-The following is included in the Supplement:
+The following is included in the Supplementary Material:
 
 **TODO format this box**
 
@@ -193,7 +193,7 @@ To avoid confusion between these different forms of altruism, we have opted to u
 
 We have added a note to the Methods main text to refer the reader to the Supplement for this discussion of the connection to altruism:
 "Because cooperators improve group productivity (Equation @eq:popsize) but drop in proportion within mixed groups, this form of cooperation would also qual
-ify as "multi-level altruism" (see Supporting Information and @kerr2004what)."
+ify as "multi-level altruism" (see Supplementary Material and @kerr2004what)."
 
 **TODO: format quote**
 
@@ -240,7 +240,7 @@ We have added two examples to the manuscript that we hope will help clarifying h
 > L157 Why is the subscript 'g' needed here? I can't see where this is ever summed over in the subsequent equations, so the notation might be overcomplicated here.
 
 We have removed the 'g' subscript from the main text.
-However, we continue to use the 'g' subscript in the Supporting Information to indicate a particular genotype as before.
+However, we continue to use the 'g' subscript in the Supplementary Material to indicate a particular genotype as before.
 
 
 > L172 / Eq 4 The costs and benefits of cooperation are always crucial in models like this, but while the costs are clear, the benefits are spread out using this equation. I feel like this should be clarified a little more - can the effects of this equation be reproduced in equation 2 such that both the costs and benefits of cooperation are explicitly expressed through effects on individual fitness?
@@ -372,7 +372,7 @@ While a 90% dilution may be excessive for some natural populations, it is not ne
 For example, 95-99% of the *Vibrio harveyi* residing in the bobtail squid's light organ are expelled daily (Lee and Ruby, 1994).
 
 To address the reviewer's concern, we have performed additional simulations in which a wide range of dilution factors were used.
-Our results, shown below, have been added as Supporting Information.
+Our results, shown below, have been added as Supplementary Material.
 Note that dilution affects the amount of growth, and therefore the number of mutational opportunities, experienced during each simulation cycle.
 To compensate, we have rescaled Time in this figure to show how cooperator proportions change as individuals are "born" in different dilution treatments.
 
@@ -382,7 +382,7 @@ As shown in the Figure, cooperator survival diminishes as more individuals survi
 These results confirm the reviewer's prediction that dilution often does favor the cooperative allele and align with previous work (e.g., [Brockhurst (2007), doi: 10.1371/journal.pone.0000634](http://dx.doi.org/10.1371/journal.pone.0000634)).
 
 We have also extended our model to address the negative aspects of increasing subpopulation density.
-As detailed in the Supporting Information, we added an additional parameter to Equation 4, $\gamma$, to control whether the increases in population size accelerate ($\gamma > 1$) or decelerate ($\gamma < 1$) as cooperators become more abundant.
+As detailed in the Supplementary Material, we added an additional parameter to Equation 4, $\gamma$, to control whether the increases in population size accelerate ($\gamma > 1$) or decelerate ($\gamma < 1$) as cooperators become more abundant.
 The following figure shows how these different forms of density-dependent benefits affect evolutionary trajectories in comparison to our baseline conditions ($\gamma = 1$).
 Accelerating benefits tend to dampen oscillations and increase the proportion of cooperators in the replicate populations over time, while decelerating benefits tend to increase the magnitude of oscillations, allowing defectors to dominate.
 

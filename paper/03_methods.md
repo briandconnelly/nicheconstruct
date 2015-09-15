@@ -81,8 +81,8 @@ $$ S(p) = S_{min} + p (S_{max} - S_{min}) $$ {#eq:popsize}
 
 where $S_{min}$ and $S_{max}$ define the sizes reached by all-defector and all-cooperator subpopulations, respectively.
 This benefit affects all individuals equally and accumulates linearly with the proportion of cooperators in the subpopulation.
-We also explore non-linear benefit accumulation in the Supporting Information.
-Because cooperators improve group productivity (Equation @eq:popsize) but drop in proportion within mixed groups, this form of cooperation would also qualify as "multi-level altruism" (see Supporting Information and @kerr2004what).
+We also explore non-linear benefit accumulation in the Supplementary Material.
+Because cooperators improve group productivity (Equation @eq:popsize) but drop in proportion within mixed groups, this form of cooperation would also qualify as "multi-level altruism" (see Supplementary Material and @kerr2004what).
 
 During growth, individuals compete through differential reproduction.
 Each individual's probability of success is proportional to its fitness.
@@ -120,7 +120,7 @@ Each individual survives this bottleneck with probability $\sigma_{i}$.
 Starting from this initial state, simulations then proceed for $T$ cycles, where each discrete cycle consists of subpopulation growth, mutation, migration, and dilution.
 Dilution reduces each subpopulation to support growth in the next cycle.
 Each individual remains with probability $\sigma_{d}$, regardless of its genotype.
-Dilution remained the same for each of the simulations described, however we further explore its effects in the Supporting Information.
+Dilution remained the same for each of the simulations described, however we further explore its effects in the Supplementary Material.
 
 
 ## Simulation Source Code and Software Dependencies

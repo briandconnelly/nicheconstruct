@@ -1,5 +1,5 @@
 ---
-title: Supporting Information for "Negative Niche Construction Favors the Evolution of Cooperation"
+title: Supplementary Material for "Negative Niche Construction Favors the Evolution of Cooperation"
 geometry: margin=1.50in
 fontsize: 12pt
 
