@@ -18,7 +18,7 @@ integrals <- dilutiondata %>%
 figs2 <- ggplot(data=integrals, aes(x=DilutionFactor, y=Integral)) +
     geom_point(shape=1, alpha=replicate_alpha) +
     stat_summary(fun.data='figsummary') +
-    scale_y_continuous(lim=c(0,1)) +
-    labs(x=label_dilutionfactor, y=label_cooperator_presence)
+    scale_y_continuous(limits=c(0,1)) +
+    labs(x=label_dilutionsurvival, y=label_cooperator_presence)
 figs2 <- rescale_golden(plot=figs2)
 ggsave_golden(filename='../figures/FigureS2.png', plot=figs2, dpi=300)

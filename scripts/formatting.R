@@ -6,6 +6,7 @@ label_cooperator_presence_scaled <- 'Scaled Cooperator Presence'
 label_mean_fitness <- 'Mean Fitness'
 label_tolerance <- 'Survival Rate, Initial Environmental Change'
 label_dilutionsurvival <- 'Dilution Survival Rate'
+label_benefit_slope <- 'Slope of Cooperative Benefit'
 
 color_cooperator <- '#729ECE'
 color_defector <- '#ED665D'
