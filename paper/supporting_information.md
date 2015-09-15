@@ -6,6 +6,7 @@ fontsize: 12pt
 # TODO - Add figure S1
 # TODO: change "dilution factor"
 # TODO: update references to Figure S1
+# TODO: metapopulation size
 ...
 
 \renewcommand{\thefigure}{S\arabic{figure}}
@@ -32,23 +33,25 @@ TODO: more description? See Figure @fig:dilutionsweep
 ![**Effect of Subpopulation Dilution.** Each panel shows the proportion of cooperators present in populations for a different dilution factor ($d$), which represents the proportion of individuals that survive the thinning that occurs during each simulation cycle. Because thinning affects the number of offspring produced during each cycle, and hence the number of mutational opportunities to gain adaptations, simulations proceeded until populations had reached $2.82\times 10^9$ births, which was the average number of births that occurred in simulations with baseline parameter values. TODO description of results](../figures/dilution.png) {#fig:dilutionsweep}
 
 TODO: integral?
+TODO: figure with Time
+TODO: figure with Births
 
 
-# Effect of Benefits Slope
+# Non-Linear Benefits of Cooperation
 
 In our main simulations, the carrying capacity at each patch increased linearly with the proportion of cooperators.
+Here, we allow for non-linear shapes by expanding Equation {TODO} in the following way:
 
 $$ S(p) = S_{min} + p^{\gamma} (S_{max} - S_{min}) $$ {#eq:popsizegamma}
 
-When $\gamma < 1$, ...
-When $\gamma > 1$, ...
+We note that Equation {T} had $\gamma = 1$.
+When $\gamma < 1$, there are diminishing returns of subpopulation productivity as cooperator proportion increases.
+When $\gamma > 1$, there are accelerating returns.
 
-TODO.
+Figure @fig:gammasweep shows the cooperator proportion over time for different values of gamma.
+While diminishing returns are detrimental to cooperation, accelerating returns tend to promote cooperation.
 
-See Figure @fig:gammasweep
-
-
-![**Effect of Benefits Slope.** TODO Description](../figures/popsize_returns.png) {#fig:gammasweep}
+![**Exploration of Non-Linear Benefits.** Here we use Equation TODO along with baseline parameters used in Table TODO. Cooperator proportion is shown over time, and the number to the right indicates gamma.](../figures/popsize_returns.png) {#fig:gammasweep}
 
 
 # A Measure of Expected Absolute Fitness within a Subpopulation
@@ -120,7 +123,7 @@ In general, as any genotype starts to dominate, it raises the relative fitness o
 In this sense, we treat the niche construction as "negative", as the more individuals of a given genotype are constructing the environment, the lower the fitness of these constructors relative to the new favored mutant genotype.
 
 
-# Misc
+# Defector Invasion with Mutations
 
 ![**Defector Invasion with Mutations.** The proportion of cooperators present in each replicate population is shown for the duration of simulations ($T=1000$). When mutations occur both at the adaptive loci and the cooperation locus ($\mu_{a}=\mu_{c}=0.00005$), cooperation remains dominant in 58 of 160 replicate populations.](../figures/FigureS1.png) {#fig:dinvade2}
 

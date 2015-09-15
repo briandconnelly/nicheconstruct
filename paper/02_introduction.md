@@ -4,7 +4,7 @@
 Cooperative behaviors are common across all branches of the tree of life.
 Insects divide labor within their colonies, plants and soil bacteria exchange essential nutrients, birds care for others' young, and the trillions of cells in the human body coordinate to provide vital functions.
 Each instance of cooperation presents an evolutionary challenge: How can individuals that sacrifice their own well-being to help others avoid subversion by those that do not?
-Over time, we would expect these *defectors* to rise in abundance at the expense of others, eventually driving cooperators---and perhaps the entire population---to extinction (note that some refer to these costly social bahaviors as "altruism" [@west2007socialB; @kerr2004what]).
+Over time, we would expect these *defectors* to rise in abundance at the expense of others, eventually driving cooperators---and perhaps the entire population---to extinction.
 
 Several factors can prevent this *tragedy of the commons* [@hamilton1964geneticalboth; @nowak2006five; @west2007evolutionary].
 One such factor involves non-random social interaction, in which cooperators benefit more from the cooperative act than defectors.
@@ -15,11 +15,11 @@ In asexual populations of cooperators and defectors, this sets the stage for an 
 The tragedy of the commons can be deferred if a cooperator, by chance, wins the adaptive race.
 
 @HANKSHAW recently showed that in spatially-structured populations, the "Hankshaw effect" can give cooperators a substantial leg up on defectors in an adaptive race.
-Inspired by a fictional character in Tom Robbins' *Even Cowgirls Get the Blues*, the Hankshaw effect describes how costly traits can be maintained by actively creating opportunities to hitchhike along with highly beneficial traits.
+Inspired by a fictional character in Tom Robbins' *Even Cowgirls Get the Blues*, the Hankshaw effect describes how a trait can proliferate by actively creating opportunities to hitchhike along with other highly beneficial traits.
 Sissy Hankshaw was born with extremely oversized thumbs.
 Although her thumbs were an impairment to everyday activities, they made her a prolific hitchhiker.
-Similarly, cooperation is costly, but it increases local population density.
-As a result, cooperators are more likely to acquire beneficial mutations.
+Similarly, although cooperation is costly, cooperators can enjoy increased opportunities to hitchhike.
+Specifically, cooperators increase their local population density, making them more likely to acquire beneficial mutations.
 By hitchhiking along with these adaptations, cooperation can rise in abundance.
 Nevertheless, this advantage is fleeting.
 As soon as the opportunities for adaptation are exhausted, cooperators are once again at a selective disadvantage against adapted defectors that arise via mutation.

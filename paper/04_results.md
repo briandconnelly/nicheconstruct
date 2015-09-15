@@ -44,7 +44,7 @@ When negative niche construction is removed (by setting $L=5$, $A=5$, [Box 1, Pa
 Here, a fully-adapted type constructs a niche that favors itself.
 When this occurs, a fully-adapted cooperator is at a selective disadvantage against fully-adapted defectors, which do not incur the cost of cooperation.
 These results indicate that the type of niche construction matters.
-Specifically, negative niche construction is crucial for maintaining cooperation by the Hankshaw effect.
+Specifically, negative niche construction is key for maintaining cooperation by the Hankshaw effect.
 Here, cooperators escape invasion by hitchhiking along with adaptations to the constructed environment.
 
 

@@ -60,6 +60,7 @@ While @lehmann2007evolution showed that cooperation was favored when selective f
 For example, when public goods accumulate in the environment, cooperators must decrease production to remain competitive [@kummerli2010molecular; @dumas2012cost].
 This favors cooperation that occurs facultatively, perhaps by sensing the abiotic [@koestler2014bile; @bernier2011modulation] or biotic environment [@darch2012density; @brown2001cooperation].
 To study how regulatory traits such as these evolve, we could instead represent the niche explicitly, allowing it to have its own dynamics.
+A representation in which the "niche" is simultaneously influenced by external forces and the actions of organisms would more closely resemble many natural systems.
 
 
 ## Cooperation and Niche Construction in Host-Symbiont Co-Evolution

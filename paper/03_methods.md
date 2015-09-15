@@ -45,7 +45,7 @@ This circularity is represented by the function $\beta(x,X)$, which gives the in
 $$ \beta(x, X) = \bmod_{X}(x - 2 + X) + 1 $$ {#eq:beta}
 
 Here, $\bmod_{X}(x)$ is the integer remainder when dividing $x$ by $X$.
-For example, $\beta(3, 5)$ returns 2, while $\beta(1, 5)$ returns 5.
+For example, $\beta(3, 5)$ is 2, while $\beta(1, 5)$ is 5.
 Using this function, the selective value of allele $a$ at adaptive locus $l$ increases by $\epsilon$ for each individual in the subpopulation that has allele $\beta(a,A)$ at locus $\beta(l, L)$.
 Thus, $\epsilon$ specifies the intensity of selection due to niche construction.
 
@@ -81,7 +81,8 @@ $$ S(p) = S_{min} + p (S_{max} - S_{min}) $$ {#eq:popsize}
 
 where $S_{min}$ and $S_{max}$ define the sizes reached by all-defector and all-cooperator subpopulations, respectively.
 This benefit affects all individuals equally and accumulates linearly with the proportion of cooperators in the subpopulation.
-We further explore how the rate at which cooperators increase population density in the Supporting Information.
+We also explore non-linear benefit accumulation in the Supporting Information.
+Because cooperators improve group productivity (Equation @eq:popsize) but drop in proportion within mixed groups, this form of cooperation would also qualify as "multi-level altruism" (see Supporting Information and @kerr2004what).
 
 During growth, individuals compete through differential reproduction.
 Each individual's probability of success is proportional to its fitness.
@@ -115,10 +116,10 @@ As described below, however, this increase in population size is temporary.
 Following @HANKSHAW, we begin simulations with sparse populations.
 Subpopulations are first seeded at all patches with cooperator proportion $p_{0}$ and size $S(p_{0})$.
 The population is then thinned.
-Each individual survives this bottleneck with probability $\sigma$.
+Each individual survives this bottleneck with probability $\sigma_{i}$.
 Starting from this initial state, simulations then proceed for $T$ cycles, where each discrete cycle consists of subpopulation growth, mutation, migration, and dilution.
 Dilution reduces each subpopulation to support growth in the next cycle.
-Each individual remains with probability $d$, regardless of its genotype.
+Each individual remains with probability $\sigma_{d}$, regardless of its genotype.
 Dilution remained the same for each of the simulations described, however we further explore its effects in the Supporting Information.
 
 
