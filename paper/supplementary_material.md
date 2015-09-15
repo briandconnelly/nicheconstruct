@@ -17,7 +17,14 @@ fontsize: 12pt
 
 # Effect of Initial Cooperator Proportion
 
-TODO: more description?
+Most of the simulations in the paper began with cooperators at proportion 0.5.
+Here, we vary that initial proportion.
+In figure @fig:p0sweeptime, we see that in Figure Xa, as the initial cooperator proportion decreases, cooperators fare worse.
+Figure Xb summarizes these data, by plotting the integral under the proportion curves.
+
+**A: timeseries**
+**B: Integral**
+
 
 Time series Figure @fig:p0sweeptime, integral Figure @fig:p0sweepintegral
 
@@ -54,6 +61,13 @@ While diminishing returns are detrimental to cooperation, accelerating returns t
 ![**Exploration of Non-Linear Benefits.** Here we use Equation TODO along with baseline parameters used in Table TODO. Cooperator proportion is shown over time, and the number to the right indicates gamma.](../figures/nonlinear_benefits.png) {#fig:gammasweep}
 
 ![**TODO**](../figures/nonlinear_benefits-integral.png) {#fig:gammasweepint}
+
+**TODO: include plot of different curves for these gamma values for reference?**
+
+
+# Effect of Metapopulation Size
+
+**TODO: include this**
 
 
 # A Measure of Expected Absolute Fitness within a Subpopulation

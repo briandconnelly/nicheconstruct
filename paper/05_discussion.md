@@ -12,7 +12,7 @@ In our model, niche construction introduces additional selective effects that in
 However, these fitness benefits alone do not maintain cooperation ([Figure 2B](#fig2)).
 Niche construction and the selective feedbacks that it produces play a crucial role.
 
-We find that it is specifically *negative* niche construction that maintains cooperation ([Figure 2C](#fig2)).
+We find that it is specifically *negative* niche construction that maintains cooperation ([Figure 2C](#fig2)) and even can promote its invasion ([Figure 5A](#fig5)).
 As cooperator and defector types gain adaptations, they alter their environment in ways that favor other types.
 Thus, negative niche construction serves as a perpetual source of adaptation.
 Here we observe another facet of the Hankshaw effect: Because subpopulations of cooperators are larger, they are better able to respond to the adaptive opportunities that are created by negative niche construction.
@@ -21,6 +21,8 @@ Even in the presence of an isogenic defector type, cooperator subpopulations are
 These recurring cycles of defector invasion and cooperator adaptation underlie the oscillations in cooperator proportion seen in [Figure 2A](#fig2).
 When mutations do not confer these adaptations, cooperators lose the adaptive race and are driven to extinction.
 This is something that we see occur stochastically in Figures [2A](#fig2) and [3B](#fig3).
+However, under other parameter settings within our model, it is possible for cooperaors at extremely low abundances to later re-emerge and invade ([Figure 5A](#fig5)).
+In these instances, negitive niche construction provides continual opportunities for cooperators to dominate.
 
 
 ## Cooperation as Niche Construction

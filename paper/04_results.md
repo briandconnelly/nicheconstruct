@@ -66,3 +66,16 @@ Further, these larger cooperator subpopulations exert greater influence on their
 This allows that type to appear and to spread more quickly in the population.
 [Figure 3C](#fig3) shows how quickly an adapted cooperator type can invade a population of defectors.
 
+
+## Negative Niche Construction can Promote Cooperator Invasion
+
+The majority of the results shown above have focused on the maintenance of cooperation.
+Specifically, cooperators have started at---and maintained---reasonably high proportions in the populations.
+In the previous section, we considered cooperator invasion; however, the cooperators began in their own single subpopulation without defectors.
+It remains to be seen whether cooperators can invade from extreme rarity.
+In a population in which cooperators are initially absent, can cooperators that arise by mutations increase in frequency?
+With baseline parameters (Table 1), cooperators tend not to invade over 3000 cycles when the initial cooperator proportion is low (see Supplemental Materials).
+However, when the benefits of cooperation are increased ($S_{max}=8000$), cooperators can readily invade and reach high proportions (Figure Xa).
+This result depends on the presence of niche construction.
+Without the selective effects introduced by negative niche construction, cooperators can not invade (Figure Xb).
+
