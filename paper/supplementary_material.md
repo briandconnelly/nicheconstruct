@@ -51,7 +51,9 @@ When $\gamma > 1$, there are accelerating returns.
 Figure @fig:gammasweep shows the cooperator proportion over time for different values of gamma.
 While diminishing returns are detrimental to cooperation, accelerating returns tend to promote cooperation.
 
-![**Exploration of Non-Linear Benefits.** Here we use Equation TODO along with baseline parameters used in Table TODO. Cooperator proportion is shown over time, and the number to the right indicates gamma.](../figures/popsize_returns.png) {#fig:gammasweep}
+![**Exploration of Non-Linear Benefits.** Here we use Equation TODO along with baseline parameters used in Table TODO. Cooperator proportion is shown over time, and the number to the right indicates gamma.](../figures/nonlinear_benefits.png) {#fig:gammasweep}
+
+![**TODO**](../figures/nonlinear_benefits-integral.png) {#fig:gammasweepint}
 
 
 # A Measure of Expected Absolute Fitness within a Subpopulation
