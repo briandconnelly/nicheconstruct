@@ -5,6 +5,7 @@ library(magrittr)
 library(ggplot2)
 library(ggplot2bdc)
 
+source('figsummary.R')
 source('formatting.R')
 
 # Read the data sets
@@ -36,7 +37,7 @@ presence <- benefitdata %>%
 
 figXb <- ggplot(data=presence, aes(x=Shape, y=Integral)) +
     geom_point(shape=1, alpha=replicate_alpha) +
-    stat_summary(fun.data='mean_cl_boot') +
+    stat_summary(fun.data='figsummary') +
     scale_y_continuous(limits=c(0,1)) +
     scale_x_continuous(limits=c(0,NA)) +
     labs(x=label_benefit_slope, y=label_cooperator_presence)

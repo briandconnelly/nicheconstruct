@@ -37,7 +37,7 @@ presence <- dilutiondata %>%
 
 figXc <- ggplot(data=presence, aes(x=DilutionSurvival, y=Integral)) +
     geom_point(shape=1, alpha=replicate_alpha) +
-    stat_summary(fun.data='mean_cl_boot') +
+    stat_summary(fun.data='figsummary') +
     scale_y_continuous(limits=c(0,1)) +
     scale_x_continuous(limits=c(0,1)) +
     labs(x=label_dilutionsurvival, y=label_cooperator_presence_scaled)

@@ -22,4 +22,4 @@ python ncsimulate.py --config other_config.cfg
 | [cooperator_invade_cheat_noadapt.cfg](cooperator_invade_cheat_noadapt.cfg) | Rare adapted cooperator invading defector population, no mutations ([Figure 3C](../figures/Figure3.png)) |
 | [defector_invade_matched_sample.cfg](defector_invade_matched_sample.cfg) | Rare defector invading isogenic cooperator population, adaptive mutations ([Figure 4](../figures/Figure4.png)) |
 | [defector_invade_matched_muboth.cfg](defector_invade_matched_muboth.cfg) | Rare defector invading isogenic cooperator population, mutations at all loci ([Figure S1](../figures/FigureS1.png)) |
-
+| [dilution.cfg](dilution.cfg) | Base parameters, run for at least 2822103628 births |
