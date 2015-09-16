@@ -73,3 +73,13 @@ ggsave_golden(filename='../figures/dilution-births-integral.png', plot=figXc,
 #                                                   x=0, hjust=0, vjust=0.5), t=1, l=2)
 # grid.draw(gC)
 # dev.off()
+
+# How many cycles does it take to get to the same number of births?
+# x2 <- dilutiondata %>%
+#     group_by(DilutionSurvival, Replicate) %>%
+#     filter(Births >= 2822103628) %>%
+#     summarise(TimeToThresh=min(Time))
+# ggplot(x2, aes(x=DilutionSurvival, y=TimeToThresh)) +
+#     stat_summary(fun.data='mean_cl_boot', geom='errorbar', width=0) +
+#     stat_summary(fun.y='mean', geom='point') + 
+#     scale_x_continuous(limits=c(0,1))

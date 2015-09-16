@@ -29,17 +29,17 @@ figXa <- ggplot(data=benefitdata,
     scale_y_continuous(limits=c(0,1), breaks=c(0,0.5,1)) +
     scale_color_grey(guide=FALSE) +
     labs(x=label_time, y=label_cooperator_proportion)
-# ggsave(filename='../figures/nonlinear_benefits.png', plot=figXa,
-#        dpi=figure_dpi)
+ggsave(filename='../figures/nonlinear_benefits.png', plot=figXa,
+       dpi=figure_dpi)
 
-png('../figures/nonlinear_benefits.png', width=7.22, height=8.18, units='in',
-    res=figure_dpi)
-gA <- gtable_add_grob(ggplotGrob(figXa), textGrob(expression(bold("A")),
-                                                  gp=gpar(col='black',
-                                                          fontsize=20),
-                                                  x=0, hjust=0, vjust=0.5), t=1, l=2)
-grid.draw(gA)
-dev.off()
+# png('../figures/nonlinear_benefits.png', width=7.22, height=8.18, units='in',
+#     res=figure_dpi)
+# gA <- gtable_add_grob(ggplotGrob(figXa), textGrob(expression(bold("A")),
+#                                                   gp=gpar(col='black',
+#                                                           fontsize=20),
+#                                                   x=0, hjust=0, vjust=0.5), t=1, l=2)
+# grid.draw(gA)
+# dev.off()
 
 
 # Calculate the "Cooperator Presence", the area under the cooperator curve
@@ -54,16 +54,16 @@ figXb <- ggplot(data=presence, aes(x=Shape, y=Integral)) +
     scale_x_continuous(limits=c(0,NA)) +
     labs(x=label_benefit_slope, y=label_cooperator_presence)
 figXb <- rescale_golden(plot=figXb)
-# ggsave_golden(filename='../figures/nonlinear_benefits-integral.png', plot=figXb,
-#               dpi=figure_dpi)
+ggsave_golden(filename='../figures/nonlinear_benefits-integral.png', plot=figXb,
+              dpi=figure_dpi)
 
-png('../figures/nonlinear_benefits-integral.png', width=6, height=3.708204,
-    units='in', res=figure_dpi)
-gB <- gtable_add_grob(ggplotGrob(figXb), textGrob(expression(bold("B")),
-                                                  gp=gpar(col='black', fontsize=20),
-                                                  x=0, hjust=0, vjust=0.5), t=1, l=2)
-grid.draw(gB)
-dev.off()
+# png('../figures/nonlinear_benefits-integral.png', width=6, height=3.708204,
+#     units='in', res=figure_dpi)
+# gB <- gtable_add_grob(ggplotGrob(figXb), textGrob(expression(bold("B")),
+#                                                   gp=gpar(col='black', fontsize=20),
+#                                                   x=0, hjust=0, vjust=0.5), t=1, l=2)
+# grid.draw(gB)
+# dev.off()
 
 # Inset plot of gamma values
 # figXb + annotation_custom(grob=ggplotGrob(p_gamma %>% remove_titles() %>% remove_ticks()), xmin=0.5, xmax=5, ymin=-0.1, ymax=0.75)

@@ -15,40 +15,44 @@ fontsize: 12pt
 \footnotesize
 \tableofcontents
 \normalsize
+\clearpage
 
 
 # Effect of Initial Cooperator Proportion
 
-For most of the simulations described both in the paper and in this supplement, populations are initiated with cooperators at proportion 0.5.
-Here, we explore how this parameter affects the evolution of cooperation in our model by performing simulations with different initial cooperator proportions.
+For most of the simulations described both in the paper and in this supplement, cooperators are at equal abundances as defectors when populations are initiated ($p_0=0.5$).
+Here, we perform simulations with different initial cooperator proportions to explore how this parameter affects the evolution of cooperation in our model.
 When rare, cooperators do not fare well under baseline conditions (Figure @fig:initial_coop_prop).
-As the initial cooperator proportion increases, so do the number of replicate populations in which cooperation dominates.
+As the initial cooperator proportion increases, cooperators dominate in more replicate populations.
 Although cooperators continually arise via mutation, they do not invade when initially absent or very rare.
 
 To quantify cooperator success during simulations, we use the area under the cooperator proportion curves.
 As cooperators spend more time at high proportions, this *cooperator presence* metric increases.
 Figure @fig:initial_coop_prop_int shows that cooperator presence increases as initial cooperator proportions become greater.
+Here, we show the proportion of cooperators after the initial populations are thinned ($\sigma_i$).
 
-![**Effect of Initial Cooperator Proportion.** Each panel shows the proportion of cooperators present in populations initiated with a different initial cooperator proportion ($p_0$). When cooperators are initially absent ($p_0=0$, $N=100$), they arise, but never reach significant abundances under baseline conditions. Cooperation is maintained and dominates in a greater number of replicate populations when the initial cooperator proportion is increased. Here, lines represent replicate populations.](../figures/initial_coop_prop.png) {#fig:initial_coop_prop}
+![**Effect of Initial Cooperator Proportion.** Each panel shows the proportion of cooperators present in populations initiated with a different initial cooperator proportion ($p_0$). When cooperators are initially absent ($p_0=0$), they arise, but never reach significant abundances under baseline conditions ($N=100$). Cooperation is maintained and dominates in a greater number of replicate populations when the initial cooperator proportion increases. Here, lines show the trajectories of replicate populations.](../figures/initial_coop_prop.png) {#fig:initial_coop_prop}
 
-![**The Effect of Initial Cooperator Proportion on Cooperator Presence.** As the initial proportion of cooperators present in the population increases, the cooperator presence, or the area under the cooperator proportion curve, increases. Open circles represent the cooperator presence in replicate populations ($N=232$). The initial cooperator proportion is the proportion of cooperators present after the population is initialized and thinned. The solid line is a Loess curve fitted to these values with 95% confidence interval.](../figures/initial_coop_prop-integral.png) {#fig:initial_coop_prop_int}
+![**The Effect of Initial Cooperator Proportion on Cooperator Presence.** As the proportion of cooperators present in the population after initial thinning increases, the cooperator presence, or the area under the cooperator proportion curve, increases. Open circles represent the cooperator presence in replicate populations ($N=232$). The initial cooperator proportion is the proportion of cooperators present after the population is initialized and thinned. The solid line is a Loess curve fitted to these values with shaded 95% confidence interval.](../figures/initial_coop_prop-integral.png) {#fig:initial_coop_prop_int}
 
 
-# Effect of Dilution Factor
+# Effect of Subpopulation Dilution
 
-In our model, subpopulations are thinned at the end of each time step.
-This allows for growth during the next cycle.
+In our model, subpopulations are thinned at the end of each time step, which allows for growth during the next cycle.
 For the simulations described in the main text, the probability that each individual survived this bottleneck was fixed ($\sigma_d=0.1$).
 To explore how this factor affects the evolution of cooperation in our model, we performed simulations with varying dilution survival probabilities.
-Importantly, because dilution affects the amount of growth that can occur in the next simulation cycle, it directly affects the number of mutational opportunities that populations have.
-When more individuals survive dilution events, growth is reduced, and those populations adapt more slowly.
-To compensate for this effect and ensure equal adaptive opportunities, we calculated the average number of births that occur during simulations with baseline parameter values.
-The simulations described here were then run until populations surpassed this number, or approximately $2.8 \times 10^9$ births.
+Importantly, because dilution determines the amount of growth that can occur in the next simulation cycle, it directly affects the number of mutational opportunities that populations have.
+When more individuals survive dilution events, growth is reduced, and populations adapt more slowly.
+To compensate for this effect and ensure equal adaptive opportunities, we first calculated the average number of births that occur during simulations with baseline parameter values.
+Simulations were then run until populations surpassed this number, or approximately $2.8 \times 10^9$ births.
 
+As more individuals survive periodic dilution, cooperation is more likely to be outcompeted (Figures @fig:dilution_births and @fig:dilution_births_int).
+The makes rare defectors that arise via mutation less likely to be lost through drift.
+Further, defectors that persist have more opportunities to exploit the cooperative benefits.
 
-![**Effect of Subpopulation Dilution.** Each panel shows the proportion of cooperators present for the duration of simulations with different dilution survival probabilities ($\sigma_d$), shown on the right. Because thinning affects the number of offspring produced during each cycle, and hence the number of mutational opportunities to gain adaptations, simulations proceeded until populations had reached $2.8 \times 10^9$ births, which was the average number of births that occurred in simulations with baseline parameter values. As the probability of survival increases, defectors pose a greater threat. Here, lines represent replicate populations.](../figures/dilution-births.png) {#fig:dilution_births}
+![**Effect of Subpopulation Dilution.** Each panel shows the proportion of cooperators present for the duration of simulations with different dilution survival probabilities ($\sigma_d$), shown on the right. Because thinning affects the number of offspring produced during each cycle, and hence the number of mutational opportunities to gain adaptations, simulations proceeded until populations had reached $2.8 \times 10^9$ births, which was the average number of births that occurred in simulations with baseline parameter values. As the probability of survival increases, defectors pose a greater threat. Here, lines show the trajectories of replicate populations.](../figures/dilution-births.png) {#fig:dilution_births}
 
-![**Subpopulation Dilution and Cooperator Presence**. Cooperator presence rapidly decreases as the probability of surviving periodic dilution ($\sigma_d$) increases. Solid points indicate the mean of replicate populations (open circles), and error bars indicate bootstrapped 95% confidence intervals (1000 resamples).](../figures/dilution-births-integral.png) {#fig:dilution_births_int}
+![**Subpopulation Dilution and Cooperator Presence**. Cooperator presence rapidly decreases as the probability of surviving periodic dilution ($\sigma_d$) increases. Solid points indicate the average cooperator presence among replicate populations (open circles), and error bars indicate bootstrapped 95% confidence intervals (1000 resamples).](../figures/dilution-births-integral.png) {#fig:dilution_births_int}
 
 
 
@@ -63,14 +67,14 @@ The additional parameter $\gamma$ affects the *shape* of the function that defin
 As illustrated in Figure @fig:nonlinear_benefits_gamma, subpopulation productivity has diminishing returns when $\gamma < 1$ and accelerating returns when $\gamma > 1$.
 When $\gamma = 1$, Equation @eq:popsizegamma is equivalent to Equation 4, and carrying capacity increases linearly with cooperator proportion.
 
-![**The Effect of $\gamma$ on Carrying Capactiy**](../figures/nonlinear_benefits-gamma.png) {#fig:nonlinear_benefits_gamma}
+![**$\gamma$ and the Shape of Cooperative Benefits**](../figures/nonlinear_benefits-gamma.png) {#fig:nonlinear_benefits_gamma}
 
 Figures @fig:nonlinear_benefits and @fig:nonlinear_benefits_int show how the the shape of the increase in this cooperative benefit affects the evolution of cooperation in our model under baseline conditions (Table 1).
 While diminishing returns are detrimental to cooperation, accelerating returns tend to promote cooperation.
 
-![**Exploration of Non-Linear Cooperative Benefits.** Cooperators rapidly rise in frequency when the benefits have accelerating returns ($\gamma > 1$). When the increases in subpopulation carrying capacity have diminishing returns ($\gamma < 1$), the proportion of cooperators oscillates more frequently, which can allow defectors to fix. Here, each panel shows cooperator proportion for the duration of simulations in which the relationship between cooperation and increases in carrying capacity were varied ($\gamma$, indicated on the right). Lines represent replicate populations.](../figures/nonlinear_benefits.png) {#fig:nonlinear_benefits}
+![**Effect of Non-Linear Cooperative Benefits.** Cooperators rapidly rise in frequency when the benefits have accelerating returns ($\gamma > 1$). When the increases in subpopulation carrying capacity have diminishing returns ($\gamma < 1$), the proportion of cooperators oscillates more frequently, which can allow defectors to fix. Here, each panel shows cooperator proportion for the duration of simulations in which the relationship between cooperation and increases in carrying capacity were varied ($\gamma$, indicated on the right). Lines show the trajectories of replicate populations.](../figures/nonlinear_benefits.png) {#fig:nonlinear_benefits}
 
-![**Non-Linear Cooperative Benefits and Cooperator Proportion.** As the slope of the curve defining the benefits of cooperation becomes more concave, cooperators are maintained at higher abundances and for longer. Cooperator presence represents the area under the cooperator proportion curves shown in Figure @fig:nonlinear_benefits. Solid points indicate the mean of replicate populations (open circles), and error bars indicate bootstrapped 95% confidence intervals (1000 resamples).](../figures/nonlinear_benefits-integral.png) {#fig:nonlinear_benefits_int}
+![**Non-Linear Cooperative Benefits and Cooperator Proportion.** As the slope of the curve defining the benefits of cooperation becomes more concave, cooperators are maintained at higher abundances and for longer. Cooperator presence represents the area under the cooperator proportion curves shown in Figure @fig:nonlinear_benefits. Solid points indicate the average scaled cooperator presence among replicate populations (open circles), and error bars indicate bootstrapped 95% confidence intervals (1000 resamples).](../figures/nonlinear_benefits-integral.png) {#fig:nonlinear_benefits_int}
 
 
 
@@ -149,6 +153,8 @@ In this sense, we treat the niche construction as "negative", as the more indivi
 
 
 # Defector Invasion with Mutations
+
+**TODO: small description**
 
 ![**Defector Invasion with Mutations.** The proportion of cooperators present in each replicate population is shown for the duration of simulations ($T=1000$). When mutations occur both at the adaptive loci and the cooperation locus ($\mu_{a}=\mu_{c}=0.00005$), cooperation remains dominant in 58 of 160 replicate populations.](../figures/FigureS1.png) {#fig:dinvade2}
 
