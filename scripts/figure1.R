@@ -8,7 +8,7 @@ source('formatting.R')
 source('figsummary.R')
 
 fig1A_data <- read.csv('../data/L00.csv')
-fig1B_data <- read.csv('../data/L05_A06_1xDelta_0xEpsilon.csv') 
+fig1B_data <- read.csv('../data/L05_A06_1xDelta_0xEpsilon.csv')
 fig1C_data <- read.csv('../data/L05_A06_1xDelta_1xEpsilon.csv')
 
 fig1_data <- bind_rows(fig1A_data, fig1B_data, fig1C_data)
@@ -22,7 +22,7 @@ fig1_data$Treatment <- factor(fig1_data$Treatment,
                                        'L05_A06_1xDelta_1xEpsilon'='C'))
 
 fig1 <- ggplot(data=fig1_data, aes(x=Time, y=CooperatorProportion)) +
-    geom_hline(aes(yintercept=0.5), linetype='dotted', color='grey70') +        
+    geom_hline(aes(yintercept=0.5), linetype='dotted', color='grey70') +
     stat_summary(fun.data='figsummary', geom='ribbon', color=NA,
                  fill=color_cooperator, alpha=ribbon_alpha) +
     stat_summary(fun.y='mean', geom='line', color=color_cooperator) +

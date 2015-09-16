@@ -23,7 +23,7 @@ fig3data$Treatment <- factor(fig3data$Treatment, levels=c('A','B','C'),
 # Make the plot
 fig3 <- ggplot(data=fig3data, aes(x=Time, y=CooperatorProportion)) +
     facet_grid(. ~ Treatment, drop=FALSE) +
-    geom_hline(aes(yintercept=0.5), linetype='dotted', color='grey70') + 
+    geom_hline(aes(yintercept=0.5), linetype='dotted', color='grey70') +
     geom_line(aes(group=Replicate), alpha=0.08, color=color_cooperator) +
     scale_y_continuous(limits=c(0,1)) +
     labs(x=label_time, y=label_cooperator_proportion)

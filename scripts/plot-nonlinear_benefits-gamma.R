@@ -18,8 +18,9 @@ p_gamma <- ggplot(pdata, aes(x=Time, y=PSize, color=as.factor(Gamma))) +
     scale_color_hue(name=expression(gamma)) +
     scale_y_continuous(limits=c(0,2000), breaks=c(0,s,S),
                        labels=c('0',expression(S['min']),expression(S['max']))) +
-    labs(x='Cooperator Proportion', y='Carrying Capacity') +
+    labs(x=label_cooperator_proportion, y=label_carrying_capacity) +
     theme(legend.position=c(.5, 1.035), legend.justification=c(0.5, 0.5))
 p_gamma <- rescale_golden(plot=p_gamma)
 ggsave_golden(filename='../figures/nonlinear_benefits-gamma.png', plot=p_gamma,
               dpi=figure_dpi)
+

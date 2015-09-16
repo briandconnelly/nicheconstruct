@@ -64,3 +64,6 @@ gB <- gtable_add_grob(ggplotGrob(figXb), textGrob(expression(bold("B")),
                                                   x=0, hjust=0, vjust=0.5), t=1, l=2)
 grid.draw(gB)
 dev.off()
+
+# Inset plot of gamma values
+# figXb + annotation_custom(grob=ggplotGrob(p_gamma %>% remove_titles() %>% remove_ticks()), xmin=0.5, xmax=5, ymin=-0.1, ymax=0.75)

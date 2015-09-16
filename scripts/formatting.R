@@ -9,6 +9,7 @@ label_mean_fitness <- 'Mean Fitness'
 label_tolerance <- 'Survival Rate, Initial Environmental Change'
 label_dilutionsurvival <- 'Dilution Survival Rate'
 label_benefit_slope <- 'Slope of Cooperative Benefit'
+label_carrying_capacity <- 'Subpopulation Carrying Capacity'
 label_initial_cooperator_proportion <- 'Initial Cooperator Proportion'
 
 color_cooperator <- '#729ECE'

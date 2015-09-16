@@ -11,7 +11,7 @@ s1data <- read.csv(bzfile('../data/defector_invade_matched_muboth.csv.bz2'))
 s1data$Replicate <- as.factor(s1data$Replicate)
 
 figS1 <- ggplot(data=s1data, aes(x=Time, y=CooperatorProportion)) +
-    geom_hline(aes(yintercept=0.5), linetype='dotted', color='grey70') + 
+    geom_hline(aes(yintercept=0.5), linetype='dotted', color='grey70') +
     geom_line(aes(group=Replicate), alpha=0.08, color=color_cooperator) +
     scale_y_continuous(limits=c(0,1)) +
     labs(x=label_time, y=label_cooperator_proportion)
