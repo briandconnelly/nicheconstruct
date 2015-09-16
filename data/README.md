@@ -22,3 +22,4 @@ Files ending with `.bz2` are compressed with bzip2.
 | [defector_invade_matched_muboth.csv.bz2](defector_invade_matched_muboth.csv.bz2) | Combined data from simulations where a rare defector invaded isogenic cooperator population, mutations at all loci ([Figure S1](../figures/FigureS1.png)) |
 | [dilution.csv.bz2](dilution.csv.bz2) | Combined data from simulations using different dilution factors, which altered how severely subpopulations were thinned at each simulation cycle |
 | [nonlinear_benefits.csv.bz2](nonlinear_benefits.csv.bz2) | Combined data from simulations using different functions for the benefit of cooperation |
+| [initial_coop_prop.csv.bz2](initial_coop_prop.csv.bz2) | Combined data from simulations using different initial cooperator proportions |
