@@ -1,11 +1,8 @@
 ---
 title: Supplementary Material for "Negative Niche Construction Favors the Evolution of Cooperation"
-geometry: margin=1.50in
+geometry: margin=1.0in
 fontsize: 12pt
 
-# TODO - Add figure S1
-# TODO: change "dilution factor"
-# TODO: update references to Figure S1
 # TODO: metapopulation size
 ...
 
@@ -17,31 +14,31 @@ fontsize: 12pt
 
 # Effect of Initial Cooperator Proportion
 
-Most of the simulations in the paper began with cooperators at proportion 0.5.
-Here, we vary that initial proportion.
-In figure @fig:p0sweeptime, we see that in Figure Xa, as the initial cooperator proportion decreases, cooperators fare worse.
-Figure Xb summarizes these data, by plotting the integral under the proportion curves.
+For most of the simulations described both in the paper and in this supplement, populations are initiated with cooperators at proportion 0.5.
+Here, we explore how this parameter affects the evolution of cooperation in our model by performing simulations with different initial cooperator proportions.
+When rare, cooperators do not fare well under baseline conditions (Figure @fig:initial_coop_prop).
+As the initial cooperator proportion increases, so do the number of replicate populations in which cooperation dominates.
+Although cooperators continually arise via mutation, they do not invade when initially absent or very rare.
 
-**A: timeseries**
-**B: Integral**
+To quantify cooperator success during simulations, we use the area under the cooperator proportion curves.
+As cooperators spend more time at high proportions, this *cooperator presence* metric increases.
+Figure @fig:initial_coop_prop_int shows that cooperator presence increases as initial cooperator proportions become greater.
 
+![**Effect of Initial Cooperator Proportion.** Each panel shows the proportion of cooperators present in populations initiated with a different initial cooperator proportion ($p_0$). When cooperators are initially absent ($p_0=0$, $N=100$), they arise, but never reach significant abundances under baseline conditions. Cooperation is maintained and dominates in a greater number of replicate populations when the initial cooperator proportion is increased. Here, lines represent replicate populations.](../figures/initial_coop_prop.png) {#fig:initial_coop_prop}
 
-Time series Figure @fig:p0sweeptime, integral Figure @fig:p0sweepintegral
-
-![**Effect of Initial Cooperator Proportion.** Each panel shows the proportion of cooperators present in populations that started with a different initial cooperator proportion ($p_0$).](../figures/p0sweep_time.png) {#fig:p0sweeptime}
-
-![**The Effect of Initial Cooperator Proportion on Cooperator Presence.** To compare how abundant cooperators are for the duration of simulations, we use the area under the cooperator proportion curves. As cooperators spend more time at high proportions, this metric increases. Here, we show how this "Cooperator Presence" is influenced by the actual initial proportion of cooperators (after thinning, see Methods). Points represent Cooperator Presence for the simulations shown above, and the solid line is a Loess curve fitted to these values with 95% confidence interval.](../figures/p0sweep_presence.png) {#fig:p0sweepintegral}
+![**The Effect of Initial Cooperator Proportion on Cooperator Presence.** As the initial proportion of cooperators present in the population increases, the cooperator presence, or the area under the cooperator proportion curve, increases. Points represent the cooperator presence in replicate populations ($N=232$). The initial cooperator proportion is the proportion of cooperators present after the population is initialized and thinned. The solid line is a Loess curve fitted to these values with 95% confidence interval.](../figures/initial_coop_prop-integral.png) {#fig:initial_coop_prop_int}
 
 
 # Effect of Dilution Factor
 
-TODO: more description? See Figure @fig:dilutionsweep
+TODO: more description? See Figure @fig:dilution_births
 
-![**Effect of Subpopulation Dilution.** Each panel shows the proportion of cooperators present in populations for a different dilution factor ($d$), which represents the proportion of individuals that survive the thinning that occurs during each simulation cycle. Because thinning affects the number of offspring produced during each cycle, and hence the number of mutational opportunities to gain adaptations, simulations proceeded until populations had reached $2.82\times 10^9$ births, which was the average number of births that occurred in simulations with baseline parameter values. TODO description of results](../figures/dilution.png) {#fig:dilutionsweep}
+![**Effect of Subpopulation Dilution.** Each panel shows the proportion of cooperators present in populations for a different dilution factor ($d$), which represents the proportion of individuals that survive the thinning that occurs during each simulation cycle. Because thinning affects the number of offspring produced during each cycle, and hence the number of mutational opportunities to gain adaptations, simulations proceeded until populations had reached $2.82\times 10^9$ births, which was the average number of births that occurred in simulations with baseline parameter values. TODO description of results](../figures/dilution-births.png) {#fig:dilution_births}
 
-TODO: integral?
-TODO: figure with Time
-TODO: figure with Births
+![**TODO**. TODO](../figures/dilution-time.png) {#fig:dilution_time}
+
+![**TODO**. TODO](../figures/dilution-births-integral.png) {#fig:dilution_births_int}
+
 
 
 # Non-Linear Benefits of Cooperation
@@ -55,19 +52,20 @@ We note that Equation {T} had $\gamma = 1$.
 When $\gamma < 1$, there are diminishing returns of subpopulation productivity as cooperator proportion increases.
 When $\gamma > 1$, there are accelerating returns.
 
-Figure @fig:gammasweep shows the cooperator proportion over time for different values of gamma.
+Figure @fig:nonlinear_benefits shows the cooperator proportion over time for different values of gamma.
 While diminishing returns are detrimental to cooperation, accelerating returns tend to promote cooperation.
 
-![**Exploration of Non-Linear Benefits.** Here we use Equation TODO along with baseline parameters used in Table TODO. Cooperator proportion is shown over time, and the number to the right indicates gamma.](../figures/nonlinear_benefits.png) {#fig:gammasweep}
 
-![**TODO**](../figures/nonlinear_benefits-integral.png) {#fig:gammasweepint}
+![**Exploration of Non-Linear Benefits.** Here we use Equation TODO along with baseline parameters used in Table TODO. Cooperator proportion is shown over time, and the number to the right indicates gamma.](../figures/nonlinear_benefits.png) {#fig:nonlinear_benefits}
+
+![**TODO**](../figures/nonlinear_benefits-integral.png) {#fig:nonlinear_benefits_int}
 
 **TODO: include plot of different curves for these gamma values for reference?**
 
 
 # Effect of Metapopulation Size
 
-**TODO: include this**
+**TODO: include this if runs complete**
 
 
 # A Measure of Expected Absolute Fitness within a Subpopulation

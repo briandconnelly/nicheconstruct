@@ -85,7 +85,7 @@ However when cooperators maintain numerical dominance, a critical factor for the
 This is how cooperation was maintained in the majority of replicate populations shown in Figure 2A.
 
 We have removed "indefinitely" in the places where they originally appeared in the manuscript.
-But we note that under parameter settings that allow cooperators to invade (see our response to the following point below), our use of the term may be justified.
+However, we do note that under parameter settings that allow cooperators to invade (see our response to the following point below), our use of the term may be justified.
 
 **TODO - sweep of metapopulation size**
 
@@ -167,7 +167,7 @@ The following figure shows how these different forms of density-dependent benefi
 Accelerating benefits tend to dampen oscillations and increase the proportion of cooperators in the replicate populations over time, while decelerating benefits tend to increase the magnitude of oscillations, allowing defectors to dominate.
 Interestingly, these large oscillations also allow cooperators to rapidly increase in frequency in a number of instances, even when rare.
 
-![**Non-Linear Benefits of Cooperation**](../figures/popsize_returns.png)
+![**Non-Linear Benefits of Cooperation**](../figures/nonlinear_benefits-integral.png)
 
 
 ### Minor Issues
@@ -395,7 +395,7 @@ As detailed in the Supplementary Material, we added an additional parameter to E
 The following figure shows how these different forms of density-dependent benefits affect evolutionary trajectories in comparison to our baseline conditions ($\gamma = 1$).
 Accelerating benefits tend to dampen oscillations and increase the proportion of cooperators in the replicate populations over time, while decelerating benefits tend to increase the magnitude of oscillations, allowing defectors to dominate.
 
-![**Non-Linear Benefits of Cooperation**](../figures/popsize_returns.png)
+![**Non-Linear Benefits of Cooperation**](../figures/nonlinear_benefits-integral.png)
 
 
 > Could 'adaptation to external environment' be rolled in to baseline fitness? It seems that 0 alleles (except at the cooperation locus, of course) are always selected against and should drop out of the population quite quickly. What would change if the third term in equation (2) were omitted?
@@ -456,7 +456,7 @@ In the detailed description of the model given in Box 1, we italicized the integ
 This is a valid point that highlights an additional source of complexity in the model and its analysis.
 We have chosen to include this two-step process for initiating populations to maintain consistency with the Hammarlund et al. paper.
 The overall inclusion of this additional stochastic element allows us to compare both models with ongoing microbial experimental evolution experiments.
-We note that because of this additional stochasticity, we report the *actual* initial cooperator proportions rather than the *expected* proportions where appropriate.
+We note that because of this additional stochasticity, we are careful to differentiate between *actual* initial cooperator proportions from *expected* proportions ($p_0$) where appropriate.
 
 
 > Line 261. Does this only happen when a type has fixed in the subpopulation?

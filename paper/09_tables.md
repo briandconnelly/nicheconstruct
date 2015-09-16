@@ -12,8 +12,8 @@ Table: Model parameters and their values
 | $\delta$   | Benefit of adaptation to external environment  | 0.3           | 0, 0.6           |
 | $\epsilon$ | Benefit of adaptation to constructed environment | 0.00015     | 0                |
 | $z$        | Baseline fitness                               | 1             |                  |
-| $S_{min}$  | Minimum subpopulation size                     | 800           | 80               |
-| $S_{max}$  | Maximum subpopulation size                     | 2000          | 200              |
+| $S_{min}$  | Minimum subpopulation size                     | 800           |                  |
+| $S_{max}$  | Maximum subpopulation size                     | 2000          | 8000             |
 | $\mu_{a}$  | Mutation rate at adaptive loci                 | $10^{-5}$     | 0                |
 | $\mu_{c}$  | Mutation rate at cooperation locus             | $10^{-5}$     | 0                |
 | $N^2$      | Number of patches                              | 625           | 625              |

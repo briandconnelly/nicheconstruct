@@ -5,7 +5,7 @@ In a process termed the "Hankshaw effect", @HANKSHAW recently demonstrated that 
 In that work and here, subpopulations of cooperators grow to a higher density than those of defectors.
 These larger cooperator subpopulations therefore experience more mutations and are consequently more likely to gain adaptations.
 Although this process favors cooperation in the short term, it eventually reaches a dead end: When the opportunities for adaptation are exhausted, and cooperators can no longer hitchhike, they face extinction.
-Here, we have investigated whether niche construction might serve to perpetually generate new adaptive opportunities and thus favor cooperation indefinitely.
+Here, we have investigated whether niche construction might serve to perpetually generate new adaptive opportunities and thus favor cooperation.
 
 When niche construction occurs, cooperation can indeed persist (Figures [1C](#fig1) and [2A](#fig2)).
 In our model, niche construction introduces additional selective effects that influence the evolutionary process, leading to a more pronounced Hankshaw effect.

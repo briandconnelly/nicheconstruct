@@ -35,7 +35,7 @@ Under *positive niche construction*, selection favors the constructor, and evolu
 Whereas under *negative niche construction*, selection favors a type other than the constructor, which creates an opportunity for novel adaptation.
 If the adapted type arises and also engages in negative niche construction, cycles of construction and adaptation can ensue, such that populations find themselves continually chasing beneficial mutations as their adaptive landscape perpetually shifts.
 
-Here, we show that the selective feedbacks that result from niche construction can maintain cooperation indefinitely.
+Here, we show that the selective feedbacks that result from niche construction can enable the evolution of cooperation.
 Further, we find that it is specifically negative niche construction that is responsible for this result due to the endless opportunities for adaptation that it produces.
 These results suggest that by playing an active role in their own evolution, cooperators can ensure their survival.
 
