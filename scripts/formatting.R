@@ -19,9 +19,10 @@ replicate_alpha <- 0.1
 
 theme_negniche <- function()
 {
-    ggplot2bdc::theme_bdc_grey(base_size=10) +
-        theme(strip.background = element_blank()) + 
+    ggplot2bdc::theme_bdc_grey(base_size=12) +
+        theme(strip.background = element_blank()) +
         theme(strip.text = element_text(size=rel(1.0), vjust=0.2, face='bold'))
 }
 
 ggplot2::theme_set(theme_negniche())
+

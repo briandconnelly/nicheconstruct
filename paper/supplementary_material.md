@@ -26,7 +26,7 @@ Figure @fig:initial_coop_prop_int shows that cooperator presence increases as in
 
 ![**Effect of Initial Cooperator Proportion.** Each panel shows the proportion of cooperators present in populations initiated with a different initial cooperator proportion ($p_0$). When cooperators are initially absent ($p_0=0$, $N=100$), they arise, but never reach significant abundances under baseline conditions. Cooperation is maintained and dominates in a greater number of replicate populations when the initial cooperator proportion is increased. Here, lines represent replicate populations.](../figures/initial_coop_prop.png) {#fig:initial_coop_prop}
 
-![**The Effect of Initial Cooperator Proportion on Cooperator Presence.** As the initial proportion of cooperators present in the population increases, the cooperator presence, or the area under the cooperator proportion curve, increases. Points represent the cooperator presence in replicate populations ($N=232$). The initial cooperator proportion is the proportion of cooperators present after the population is initialized and thinned. The solid line is a Loess curve fitted to these values with 95% confidence interval.](../figures/initial_coop_prop-integral.png) {#fig:initial_coop_prop_int}
+![**The Effect of Initial Cooperator Proportion on Cooperator Presence.** As the initial proportion of cooperators present in the population increases, the cooperator presence, or the area under the cooperator proportion curve, increases. Open circles represent the cooperator presence in replicate populations ($N=232$). The initial cooperator proportion is the proportion of cooperators present after the population is initialized and thinned. The solid line is a Loess curve fitted to these values with 95% confidence interval.](../figures/initial_coop_prop-integral.png) {#fig:initial_coop_prop_int}
 
 
 # Effect of Dilution Factor
@@ -37,30 +37,30 @@ TODO: more description? See Figure @fig:dilution_births
 
 ![**TODO**. TODO](../figures/dilution-time.png) {#fig:dilution_time}
 
-![**TODO**. TODO](../figures/dilution-births-integral.png) {#fig:dilution_births_int}
+![**TODO**. TODO Solid points indicate the mean of replicate populations (open circles), and error bars indicate bootstrapped 95% confidence intervals (1000 resamples).](../figures/dilution-births-integral.png) {#fig:dilution_births_int}
 
 
 
 # Non-Linear Benefits of Cooperation
 
 In our main simulations, the carrying capacity at each patch increased linearly with the proportion of cooperators.
-Here, we allow for non-linear shapes by expanding Equation {TODO} in the following way:
+We allow this relationship to be non-linear by expanding Equation 4 in the following way:
 
 $$ S(p) = S_{min} + p^{\gamma} (S_{max} - S_{min}) $$ {#eq:popsizegamma}
 
-We note that Equation {T} had $\gamma = 1$.
-When $\gamma < 1$, there are diminishing returns of subpopulation productivity as cooperator proportion increases.
-When $\gamma > 1$, there are accelerating returns.
+The additional parameter $\gamma$ affects the *shape* of the function that defines how the presence of cooperators increases the local carrying capacity.
+As illustrated in Figure @fig:nonlinear_benefits_gamma, subpopulation productivity has diminishing returns when $\gamma < 1$ and accelerating returns when $\gamma > 1$.
+When $\gamma = 1$, Equation @eq:popsizegamma is equivalent to Equation 4, and carrying capacity increases linearly with cooperator proportion.
 
-Figure @fig:nonlinear_benefits shows the cooperator proportion over time for different values of gamma.
+![**The Effect of $\gamma$ on Carrying Capactiy**](../figures/nonlinear_benefits-gamma.png) {#fig:nonlinear_benefits_gamma}
+
+Figures @fig:nonlinear_benefits and @fig:nonlinear_benefits_int show how the the shape of the increase in this cooperative benefit affects the evolution of cooperation in our model under baseline conditions (Table 1).
 While diminishing returns are detrimental to cooperation, accelerating returns tend to promote cooperation.
 
+![**Exploration of Non-Linear Cooperative Benefits.** Cooperators rapidly rise in frequency when the benefits have accelerating returns ($\gamma > 1$). When the increases in subpopulation carrying capacity have diminishing returns ($\gamma < 1$), the proportion of cooperators oscillates more frequently, which can allow defectors to fix. Here, each panel shows cooperator proportion for the duration of simulations in which the relationship between cooperation and increases in carrying capacity were varied ($\gamma$, indicated on the right). Lines represent replicate populations.](../figures/nonlinear_benefits.png) {#fig:nonlinear_benefits}
 
-![**Exploration of Non-Linear Benefits.** Here we use Equation TODO along with baseline parameters used in Table TODO. Cooperator proportion is shown over time, and the number to the right indicates gamma.](../figures/nonlinear_benefits.png) {#fig:nonlinear_benefits}
+![**Non-Linear Cooperative Benefits and Cooperator Proportion.** As the slope of the curve defining the benefits of cooperation becomes more concave, cooperators are maintained at higher abundances and for longer. Cooperator presence represents the area under the cooperator proportion curves shown in Figure @fig:nonlinear_benefits. Solid points indicate the mean of replicate populations (open circles), and error bars indicate bootstrapped 95% confidence intervals (1000 resamples).](../figures/nonlinear_benefits-integral.png) {#fig:nonlinear_benefits_int}
 
-![**TODO**](../figures/nonlinear_benefits-integral.png) {#fig:nonlinear_benefits_int}
-
-**TODO: include plot of different curves for these gamma values for reference?**
 
 
 # Effect of Metapopulation Size
