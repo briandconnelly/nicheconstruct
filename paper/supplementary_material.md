@@ -4,6 +4,7 @@ geometry: margin=1.0in
 fontsize: 12pt
 
 # TODO: metapopulation size
+# TODO: can't cross reference within a figure legend.
 ...
 
 \renewcommand{\thefigure}{S\arabic{figure}}
@@ -83,7 +84,7 @@ $$ F_{g} = \frac{N_g W_g}{\sum_{i \in \mathbf{G}}^{} N_i W_i} $$
 where $\mathbf{G}$ is the set of all genotypes in the subpopulation of interest.
 Total subpopulation size after selection is
 
-$$ S = S_{min} + \frac{\sum_{i \in \mathbf{G}}^{} N_i a_{0,i}}{\sum_{i \in \mathbf{G}}^{} N_i} (S_{max} - S_{min}) $$
+$$ S = S_{min} + \frac{\sum_{i \in \mathbf{G}}^{} N_i a_{0,i}}{\sum_{i \in \mathbf{G}}^{} N_i} (S_{max} - S_{min}) $$ {#eq:popsize2}
 
 where the proportion of cooperators is $p = (\sum_{i \in \mathbf{G}}^{} N_i a_{0,i})/(\sum_{i \in \mathbf{G}}^{} N_i)$.
 Thus, if $X_g$ is a random variable giving the number of individuals after selection with genotype $g$, then
@@ -112,9 +113,9 @@ There have been several different definitions of altruism, with complicated conn
 In our model, we have a form of "multilevel altruism", which requires altruists have lower fitness within a subpopulation, but subpopulation productivity increases with altruist proportion.
 To see this, consider a subpopulation with only two genotypes $g_c$ and $g_d$, where $a_{0,g_c} = 1$, $a_{0,g_d} = 0$, and $a_{l,g_c} = a_{l,g_d}$ for all $l \in \{1, 2, \ldots, L\}$.
 Specifically, genotype $g_c$ refers to a cooperator, genotype $g_d$ refers to a defector, and otherwise the two genotypes are identical.
-By Equation [S.1] **TODO crossref**, $W_{g_{c}} < W_{g_{d}}$, which implies $\omega_{g_{c}} < \omega_{g_{d}}$.
+By Equation @eq:absfitness, $W_{g_{c}} < W_{g_{d}}$, which implies $\omega_{g_{c}} < \omega_{g_{d}}$.
 That is, the cooperator always has fewer expected number of offspring than an isogenic defector within its subpopulation.
-However, Equation [S.2] **TODO crossref** guarantees that the productivity of the subpopulation increases with the proportion of cooperators.
+However, Equation @eq:popsize2 guarantees that the productivity of the subpopulation increases with the proportion of cooperators.
 Thus, cooperators qualify as multilevel altruists.
 With additional constraints on the parameters, cooperation could also satisfy other definitions of altruism (e.g., "individual-centered altruism" or "focal-complement altruism", see @kerr2004what).
 However, to keep things general, we have not assumed these constraints.

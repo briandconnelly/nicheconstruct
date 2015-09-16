@@ -74,8 +74,8 @@ Specifically, cooperators have started at---and maintained---reasonably high pro
 In the previous section, we considered cooperator invasion; however, the cooperators began in their own single subpopulation without defectors.
 It remains to be seen whether cooperators can invade from extreme rarity.
 In a population in which cooperators are initially absent, can cooperators that arise by mutations increase in frequency?
-With baseline parameters (Table 1), cooperators tend not to invade over 3000 cycles when the initial cooperator proportion is low (see Supplemental Materials).
+With baseline parameters ([Table 1](#tables)), cooperators tend not to invade over 3000 cycles when the initial cooperator proportion is low (see Supplemental Materials).
 However, when the benefits of cooperation are increased ($S_{max}=8000$), cooperators can readily invade and reach high proportions (Figure Xa).
 This result depends on the presence of niche construction.
-Without the selective effects introduced by negative niche construction, cooperators can not invade (Figure Xb).
+Without the selective effects introduced by negative niche construction, cooperators can not invade ([Figure 5](#fig5)).
 
