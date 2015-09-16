@@ -1,3 +1,5 @@
+figure_dpi <- 300
+
 label_time <- 'Time'
 label_births <- 'Births'
 label_cooperator_proportion <- 'Cooperator Proportion'

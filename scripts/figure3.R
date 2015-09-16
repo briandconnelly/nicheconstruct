@@ -28,5 +28,5 @@ fig3 <- ggplot(data=fig3data, aes(x=Time, y=CooperatorProportion)) +
     scale_y_continuous(limits=c(0,1)) +
     labs(x=label_time, y=label_cooperator_proportion)
 fig3 <- rescale_plot(plot=fig3, ratio=1/0.8)
-#ggsave(filename='../figures/Figure3.png', plot=fig3, dpi=300)
+#ggsave(filename='../figures/Figure3.png', plot=fig3, dpi=figure_dpi)
 ggsave(filename='../figures/Figure3-ba.pdf', plot=fig3)

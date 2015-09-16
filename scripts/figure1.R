@@ -30,5 +30,5 @@ fig1 <- ggplot(data=fig1_data, aes(x=Time, y=CooperatorProportion)) +
     facet_grid(. ~ Treatment) +
     labs(x=label_time, y=label_cooperator_proportion)
 fig1 <- rescale_plot(plot=fig1, ratio=1/0.8)
-#ggsave(filename='../figures/Figure1.png', plot=fig1, dpi=300)
+#ggsave(filename='../figures/Figure1.png', plot=fig1, dpi=figure_dpi)
 ggsave(filename='../figures/Figure1-ba.pdf', plot=fig1)
