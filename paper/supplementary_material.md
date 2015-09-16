@@ -12,6 +12,10 @@ fontsize: 12pt
 \setcounter{figure}{0}
 \setcounter{equation}{0}
 
+\footnotesize
+\tableofcontents
+\normalsize
+
 
 # Effect of Initial Cooperator Proportion
 
@@ -32,13 +36,19 @@ Figure @fig:initial_coop_prop_int shows that cooperator presence increases as in
 
 # Effect of Dilution Factor
 
-TODO: more description? See Figure @fig:dilution_births
+In our model, subpopulations are thinned at the end of each time step.
+This allows for growth during the next cycle.
+For the simulations described in the main text, the probability that each individual survived this bottleneck was fixed ($\sigma_d=0.1$).
+To explore how this factor affects the evolution of cooperation in our model, we performed simulations with varying dilution survival probabilities.
+Importantly, because dilution affects the amount of growth that can occur in the next simulation cycle, it directly affects the number of mutational opportunities that populations have.
+When more individuals survive dilution events, growth is reduced, and those populations adapt more slowly.
+To compensate for this effect and ensure equal adaptive opportunities, we calculated the average number of births that occur during simulations with baseline parameter values.
+The simulations described here were then run until populations surpassed this number, or approximately $2.8 \times 10^9$ births.
 
-![**Effect of Subpopulation Dilution.** Each panel shows the proportion of cooperators present in populations for a different dilution factor ($d$), which represents the proportion of individuals that survive the thinning that occurs during each simulation cycle. Because thinning affects the number of offspring produced during each cycle, and hence the number of mutational opportunities to gain adaptations, simulations proceeded until populations had reached $2.82\times 10^9$ births, which was the average number of births that occurred in simulations with baseline parameter values. TODO description of results](../figures/dilution-births.png) {#fig:dilution_births}
 
-![**TODO**. TODO](../figures/dilution-time.png) {#fig:dilution_time}
+![**Effect of Subpopulation Dilution.** Each panel shows the proportion of cooperators present for the duration of simulations with different dilution survival probabilities ($\sigma_d$), shown on the right. Because thinning affects the number of offspring produced during each cycle, and hence the number of mutational opportunities to gain adaptations, simulations proceeded until populations had reached $2.8 \times 10^9$ births, which was the average number of births that occurred in simulations with baseline parameter values. As the probability of survival increases, defectors pose a greater threat. Here, lines represent replicate populations.](../figures/dilution-births.png) {#fig:dilution_births}
 
-![**TODO**. TODO Solid points indicate the mean of replicate populations (open circles), and error bars indicate bootstrapped 95% confidence intervals (1000 resamples).](../figures/dilution-births-integral.png) {#fig:dilution_births_int}
+![**Subpopulation Dilution and Cooperator Presence**. Cooperator presence rapidly decreases as the probability of surviving periodic dilution ($\sigma_d$) increases. Solid points indicate the mean of replicate populations (open circles), and error bars indicate bootstrapped 95% confidence intervals (1000 resamples).](../figures/dilution-births-integral.png) {#fig:dilution_births_int}
 
 
 
