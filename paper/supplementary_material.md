@@ -3,8 +3,7 @@ title: Supplementary Material for "Negative Niche Construction Favors the Evolut
 geometry: margin=1.0in
 fontsize: 12pt
 
-# TODO: metapopulation size
-# TODO: can't cross reference within a figure legend.
+# NOTE: can't cross reference within a figure legend.
 ...
 
 \renewcommand{\thefigure}{S\arabic{figure}}
@@ -31,9 +30,9 @@ As cooperators spend more time at high proportions, this *cooperator presence* m
 Figure @fig:initial_coop_prop_int shows that cooperator presence increases as initial cooperator proportions become greater.
 Here, we show the proportion of cooperators after the initial populations are thinned ($\sigma_i$).
 
-![**Effect of Initial Cooperator Proportion.** Each panel shows the proportion of cooperators present in populations initiated with a different initial cooperator proportion ($p_0$). When cooperators are initially absent ($p_0=0$), they arise, but never reach significant abundances under baseline conditions ($N=100$). Cooperation is maintained and dominates in a greater number of replicate populations when the initial cooperator proportion increases. Here, lines show the trajectories of replicate populations.](../figures/initial_coop_prop.png) {#fig:initial_coop_prop}
+![**Effect of Initial Cooperator Proportion.** Each panel shows the proportion of cooperators present in populations initiated with a different initial cooperator proportion ($p_0$). When cooperators are initially absent ($p_0=0$), they arise, but never reach significant abundances under baseline conditions ($N=100$). Cooperation is maintained and dominates in a greater number of replicate populations when the initial cooperator proportion increases ($N=20$ each). Here, lines show the trajectories of replicate populations.](../figures/initial_coop_prop.png) {#fig:initial_coop_prop}
 
-![**The Effect of Initial Cooperator Proportion on Cooperator Presence.** As the proportion of cooperators present in the population after initial thinning increases, the cooperator presence, or the area under the cooperator proportion curve, increases. Open circles represent the cooperator presence in replicate populations ($N=232$). The initial cooperator proportion is the proportion of cooperators present after the population is initialized and thinned. The solid line is a Loess curve fitted to these values with shaded 95% confidence interval.](../figures/initial_coop_prop-integral.png) {#fig:initial_coop_prop_int}
+![**The Effect of Initial Cooperator Proportion on Cooperator Presence.** As the proportion of cooperators present in the population after initial thinning increases, the cooperator presence, or the area under the cooperator proportion curve, increases. Open circles represent the cooperator presence in replicate populations ($N=239$). The initial cooperator proportion is the proportion of cooperators present after the population is initialized and thinned. The solid line is a Loess curve fitted to these values with shaded 95% confidence interval.](../figures/initial_coop_prop-integral.png) {#fig:initial_coop_prop_int}
 
 
 # Effect of Subpopulation Dilution
@@ -144,11 +143,13 @@ In general, as any genotype starts to dominate, it raises the relative fitness o
 In this sense, we treat the niche construction as "negative", as the more individuals of a given genotype are constructing the environment, the lower the fitness of these constructors relative to the new favored mutant genotype.
 
 
-# Defector Invasion with Mutations
+# Defector Invasion with Mutations at the Cooperation Locus
 
-**TODO: small description**
+In the main text, Figures 3b and 4 showed that the adaptive opportunities provided by negative niche construction can allow cooperators to resist invasion by defectors.
+For simplicity, mutations did not occur at the cooperation locus in these simulations, which eliminated the threat of defectors arising from adapted cooperators.
+However, we found that when this challenge is present, and mutations can occur at the cooperation locus ($\mu_{c}=0.00005$), cooperators can still resist invasion ([Figure S8](@fig:dinvade2)).
 
-![**Defector Invasion with Mutations.** The proportion of cooperators present in each replicate population is shown for the duration of simulations ($T=1000$). When mutations occur both at the adaptive loci and the cooperation locus ($\mu_{a}=\mu_{c}=0.00005$), cooperation remains dominant in 58 of 160 replicate populations.](../figures/FigureS1.png) {#fig:dinvade2}
+![**Defector Invasion with Mutations.** The proportion of cooperators present in each replicate population is shown for the duration of simulations ($T=1000$). When mutations occur both at the adaptive loci and the cooperation locus ($\mu_{a}=\mu_{c}=0.00005$), cooperation remains dominant in 58 of 160 replicate populations.](../figures/defector_invasion_mu.png) {#fig:dinvade2}
 
 
 \clearpage

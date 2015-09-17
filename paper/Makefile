@@ -37,6 +37,9 @@ tables: 09_tables.md
 supplement: supplementary_material.md
 	pandoc supplementary_material.md -H draft.sty $(FLAGS) --output draft_supplement_$(shell date +'%Y%m%d').pdf
 
+response: response_to_reviewers.md
+	pandoc response_to_reviewers.md $(FLAGS) --output draft_response_$(shell date +'%Y%m%d').pdf
+
 tex:
 	cat [0-1]*md | pandoc $(FLAGS) -s --output draft_$(FNAME)_$(shell date +'%Y%m%d').tex
 
