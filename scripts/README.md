@@ -26,6 +26,7 @@ devtools::install_github('briandconnelly/ggplot2bdc')
 | [figure2.R](figure2.R) | Create [Figure 2](../figures/Figure2.png)     |
 | [figure3.R](figure3.R) | Create [Figure 3](../figures/Figure3.png)     |
 | [figure4.R](figure4.R) | Create [Figure 4](../figures/Figure4.png)     |
+| [plot-cooperator_invasion.R](plot-cooperator_invasion.R) | Create [Figure 5](../figures/cooperator_invasion.png) |
 | [figureS1.R](figureS1.R) | Create [Figure S1](../figures/FigureS1.png) |
 | [formatting.R](formatting.R) | Define some variables for formatting figures |
 | [figsummary.R](figsummary.R) | Function for calculating statistics shown in [Figure 1](../figures/Figure1.png) |

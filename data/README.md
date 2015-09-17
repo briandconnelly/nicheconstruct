@@ -20,6 +20,7 @@ Files ending with `.bz2` are compressed with bzip2.
 | [cooperator_invade_cheat_noadapt.csv.bz2](cooperator_invade_cheat_noadapt.csv.bz2) | Combined data from simulations where a rare adapted cooperator invaded defector population, no mutations ([Figure 3C](../figures/Figure3.png)) |
 | [defector_invade_matched_sample.csv.bz2](defector_invade_matched_sample.csv.bz2) | Data from a single representative replicate simulation in which a rare defector invaded an isogenic cooperator population, adaptive mutations ([Figure 4](../figures/Figure4.png)) |
 | [defector_invade_matched_muboth.csv.bz2](defector_invade_matched_muboth.csv.bz2) | Combined data from simulations where a rare defector invaded isogenic cooperator population, mutations at all loci ([Figure S1](../figures/FigureS1.png)) |
+| [cooperator_invasion.csv.bz2](cooperator_invasion.csv.bz2) | Combined data from simulations in which the benefit of cooperation was increased, and the initial proportion of cooperators was 0 ([Figure 5](../figures/cooperator_invasion.png) |
 | [dilution.csv.bz2](dilution.csv.bz2) | Combined data from simulations using different dilution factors, which altered how severely subpopulations were thinned at each simulation cycle |
 | [nonlinear_benefits.csv.bz2](nonlinear_benefits.csv.bz2) | Combined data from simulations using different functions for the benefit of cooperation |
 | [initial_coop_prop.csv.bz2](initial_coop_prop.csv.bz2) | Combined data from simulations using different initial cooperator proportions |
