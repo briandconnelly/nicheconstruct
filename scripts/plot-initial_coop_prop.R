@@ -54,7 +54,7 @@ figXb <- ggplot(data=presence, aes(x=Start, y=Integral)) +
     stat_smooth(method='loess') +
     scale_y_continuous(limits=c(0,1)) +
     scale_x_continuous(limits=c(0,1)) +
-    labs(x=label_initial_cooperator_proportion, y=label_cooperator_presence)
+    labs(x=label_initial_cooperator_proportion_actual, y=label_cooperator_presence)
 figXb <- rescale_golden(plot=figXb)
 ggsave_golden(filename='../figures/initial_coop_prop-integral.png', plot=figXb)
 

@@ -11,6 +11,7 @@ label_dilutionsurvival <- 'Dilution Survival Rate'
 label_benefit_slope <- 'Slope of Cooperative Benefit'
 label_carrying_capacity <- 'Subpopulation Carrying Capacity'
 label_initial_cooperator_proportion <- 'Initial Cooperator Proportion'
+label_initial_cooperator_proportion_actual <- 'Cooperator Proportion after Initial Thinning'
 
 color_cooperator <- '#729ECE'
 color_defector <- '#ED665D'

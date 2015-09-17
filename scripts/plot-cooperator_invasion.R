@@ -31,6 +31,6 @@ fig5 <- ggplot(data=cinvasion,
     labs(x=label_time, y=label_cooperator_proportion) +
     theme(strip.text = element_blank())
 fig5 <- rescale_plot(plot=fig5, ratio=3.236)
-ggsave(filename='../figures/cooperator_invasion.png', plot=fig5, dpi=figure_dpi)
-
+ggsave_golden(filename='../figures/cooperator_invasion.png', plot=fig5,
+              dpi=figure_dpi)
 
