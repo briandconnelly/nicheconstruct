@@ -31,7 +31,7 @@
 
 ## Figure 5 {#fig5}
 
-![**Niche Construction and the Invasion of Cooperation.** The proportion of cooperators present in each of 50 replicate populations is shown for the duration of simulations ($T=5000$). Baseline parameters are used, except for $S_{max}=8000$, and the initial proportion of cooperators in each population is zero ($p_0=0$) (but can arise via mutation) (**A**) Cooperators in X replicate populations invade and reach very high proportions. (**B**) Without niche construction ($\epsilon=0$), cooperators do not invade.](../figures/cooperator_invasion.png)
+![**Niche Construction and the Invasion of Cooperation.** The proportion of cooperators present in each of 50 replicate populations is shown for the duration of simulations ($T=5000$). Baseline parameters are used, except for $S_{max}=8000$, and the initial proportion of cooperators in each population is zero ($p_0=0$) (but can arise via mutation) (**A**) Cooperators in TODO/50 replicate populations invade and reach very high proportions. (**B**) Without niche construction ($\epsilon=0$), cooperators do not invade ($N=50$).](../figures/cooperator_invasion.png)
 
 **TODO** Get num replicates >95% coops
 

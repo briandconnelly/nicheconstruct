@@ -19,7 +19,7 @@ Each reviewer comment is shown **TODO formatting details**, and our response is 
 \rule{\textwidth}{1pt}
 
 
-## Editor
+# Editor
 
 *Here are my own comments about what I think are the most important points made by reviewer 1:*
 
@@ -67,14 +67,14 @@ We have added a section to our Supplemental Materials that discuss this paramete
 
 
 
-## Reviewer 1
+# Reviewer 1
 
 *This paper extends an existing agent-based model of the evolution of cooperation through the effect of cooperation producing higher population densities, therefore higher absolute number of mutations and hence higher numbers of beneficial adaptations to what is termed the "external" environment, to incorporate the concept of niche construction and argue that what the authors term 'negative niche construction', but what I feel might be better represented as niche creation or extension, can actually stabilise costly cooperation in metapopulations.*
 
 *I found a lot to like in the paper and I definitely think it should be published. The model is a really neat (in the sense of elegant enough to facilitate real understanding, which is not something you can say about all agent-based models) take on the problem of coming up with tractable models to explore complex evolutionary interactions like niche construction. The main finding is clear, and the whole package is very nicely presented. I thought the analysis of the contrast between ecological (invasion) and evolutionary effects was particularly nice. There is nothing I strongly disagree with, but I do have a series of thoughts and questions about the paper which the authors could reflect on, along with some specific points where I felt presentation could be improved or clarified.*
 
 
-### General Questions
+## General Questions
 
 *An important question for me is whether this mechanism really stabilises cooperation or merely slows its decline. I look at Figure 1C and I see that while p is still non zero by T=3000, it is clearly declining. Would it eventually hit zero again or is an equilibrium achieved? Is the use of 'indefinitely' on L305 justified? Perhaps this is more of a presentation thing, because in Figure 2A it is clear that there are many populations with high levels of cooperation, albeit with a lot of oscillation - for me this begs the question of how big the metapopulation needs to be to buffer effectively against this degree of stochasticity…*
 
@@ -94,7 +94,7 @@ There does indeed seem to be an effect of increasing population size on stabiliz
 We have done some preliminary exploration of this effect (see figure below); however, for larger population sizes, these simulations take quite a while to run, and we would more time to execute a thorough analysis.
 We are happy to pursue this further if the reviewer deems this important
 
-**TODO nsweep figure**
+![**Effect of Population Size.** Each panel shows the proportion of cooperators present for the duration of simulations with different subpopulation sizes ($N^2$), shown on the right. Here, lines show the trajectories of 10 replicate populations.](../figures/metapopsize.png)
 
 \begin{center}\rule{5in}{0.2pt}\end{center}
 
@@ -182,7 +182,7 @@ Interestingly, these large oscillations also allow cooperators to rapidly increa
 ![**Non-Linear Cooperative Benefits and Cooperator Proportion.** As the slope of the curve defining the benefits of cooperation becomes more concave, cooperators are maintained at higher abundances and for longer. Cooperator presence represents the area under the cooperator proportion curves shown in Figure S6. Solid points indicate the average scaled cooperator presence among replicate populations (open circles), and error bars indicate bootstrapped 95% confidence intervals (1000 resamples).](../figures/nonlinear_benefits-integral.png) {#fig:nonlinear_benefits_int}
 
 
-### Minor Issues
+## Minor Issues
 
 *L16 I thought the description of the Hammerlund paper was too long for the abstract.*
 
@@ -400,13 +400,13 @@ Table 1 has been given an additional column listing the additional parameter val
 We thank the reviewer for the nice suggestion.
 
 
-## Reviewer 2
+# Reviewer 2
 
 *This paper shows that negative niche construction can create the opportunity for new adaptation and maintain a costly trait that increases local population density in a population where it would otherwise be driven to extinction.*
 
 *The idea is interesting and I am happy to recommend publication with some minor changes and with some small clarifications.*
 
-### General Questions
+## General Questions
 
 *The definition of cooperation used here appears to be that cooperation is a costly behaviour that increases local population density. The authors do briefly mention the negative aspects of high local population density in terms of increased competition on pages 18/19 but this discussion does not extend to the model. In fact, the authors avoid this issue by diluting the population 'to allow growth in the next generation'. More robust justification for imposing a ~90% death rate on each subpopulation every generation may be needed as it could favour the cooperative allele substantially. What would the authors expect to see if local competition was explicitly modelled?*
 
@@ -477,7 +477,7 @@ Otherwise cooperation goes to low proportions as fully adapted defectors dominat
 Thus, niche construction can be seen as a way to protect cooperation from long periods between changes in the external environment.
 
 
-### Minor Issues
+## Minor Issues
 
 *The labelling is a bit difficult to follow at times. I would suggest representing the alleles with letters and the loci with numbers (or vice versa) if possible.*
 
