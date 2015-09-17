@@ -1,6 +1,7 @@
 # Discussion
 
-Despite their negative effects, deleterious traits can rise in abundance through genetic linkage with other traits that are strongly favored by selection [@maynardsmith1974hitch].
+Despite their negative effects, deleterious traits can rise in abundance through genetic linkage with other traits that are strongly favored by selection [@hartfield2011recombination].
+The role of hitchhiking in the evolution cooperation has been explored experimentally and theoretically [@morgan2012selection; @waite2012adaptation; @asfahl2015nonsocial; @schwilk2002genetic; @santos2008genetic; @wilder2015altruists].
 In a process termed the "Hankshaw effect", @HANKSHAW recently demonstrated that traits such as cooperation and spite can actively prolong their existence by increasing their likelihood of hitchhiking with a beneficial trait.
 In that work and here, subpopulations of cooperators grow to a higher density than those of defectors.
 These larger cooperator subpopulations therefore experience more mutations and are consequently more likely to gain adaptations.
@@ -84,4 +85,14 @@ Models such as what we have described may permit exploration into how cooperatio
 
 More generally, it was recently argued that incorporating the effects of niche construction is critical for improving our understanding of viral evolution [@hamblin2014viral] and evolution in co-infecting parasites [@hafer2015when].
 Incorporating host dynamics, transmission, co-evolution, and the feedbacks that they produce is likely to be equally important for gaining a greater understanding of how cooperative behaviors evolve in these host-symbiont settings.
+
+
+## Summary
+
+We have previously shown that a combination of non-social adaptation and population structure can favor the evolution of cooperation (@HANKSHAW).
+However, this "Hankshaw effect" was transient; without continual opportunities for adaptation (e.g., a changing environment), defectors eventually dominate.
+Here, we explore one source for such continual opportunities: negative niche construction.
+Specifically, the process of adaptation creates opportunities for further adaptation through niche constructive feedback.
+In our model, the active role of the organism is paramount; not only does cooperative behavior make hitchhiking more likely given adaptive opportunities, but
+these adaptive opportunities themselves are continually generated through the effects organisms have on their environment.
 

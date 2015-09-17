@@ -45,14 +45,12 @@ Importantly, because dilution determines the amount of growth that can occur in 
 When more individuals survive dilution events, growth is reduced, and populations adapt more slowly.
 To compensate for this effect and ensure equal adaptive opportunities, we first calculated the average number of births that occur during simulations with baseline parameter values.
 Simulations were then run until populations surpassed this number, or approximately $2.8 \times 10^9$ births.
-
 As more individuals survive periodic dilution, cooperation is more likely to be outcompeted (Figures @fig:dilution_births and @fig:dilution_births_int).
-The makes rare defectors that arise via mutation less likely to be lost through drift.
-Further, defectors that persist have more opportunities to exploit the cooperative benefits.
 
-![**Effect of Subpopulation Dilution.** Each panel shows the proportion of cooperators present for the duration of simulations with different dilution survival probabilities ($\sigma_d$), shown on the right. Because thinning affects the number of offspring produced during each cycle, and hence the number of mutational opportunities to gain adaptations, simulations proceeded until populations had reached $2.8 \times 10^9$ births, which was the average number of births that occurred in simulations with baseline parameter values. As the probability of survival increases, defectors pose a greater threat. Here, lines show the trajectories of replicate populations.](../figures/dilution-births.png) {#fig:dilution_births}
 
-![**Subpopulation Dilution and Cooperator Presence**. Cooperator presence rapidly decreases as the probability of surviving periodic dilution ($\sigma_d$) increases. Solid points indicate the average cooperator presence among replicate populations (open circles), and error bars indicate bootstrapped 95% confidence intervals (1000 resamples).](../figures/dilution-births-integral.png) {#fig:dilution_births_int}
+![**Effect of Subpopulation Dilution.** Each panel shows the proportion of cooperators present for the duration of simulations with different dilution survival probabilities ($\sigma_d$), shown on the right. Because thinning affects the number of offspring produced during each cycle, and hence the number of mutational opportunities to gain adaptations, simulations proceeded until populations had reached $2.8 \times 10^9$ births, which was the average number of births that occurred in simulations with baseline parameter values over 3000 cycles. As the probability of survival increases, defectors pose a greater threat. Here, lines show the trajectories of replicate populations.](../figures/dilution-births.png) {#fig:dilution_births}
+
+![**Subpopulation Dilution and Cooperator Presence**. Cooperator presence rapidly decreases as the probability of surviving periodic dilution ($\sigma_d$) increases. Here, the integration at each dilution survival probability is done over an equivalent number of births instead of Time, as before. Solid points indicate the average cooperator presence among replicate populations (open circles), and error bars indicate bootstrapped 95% confidence intervals (1000 resamples).](../figures/dilution-births-integral.png) {#fig:dilution_births_int}
 
 
 
@@ -75,12 +73,6 @@ While diminishing returns are detrimental to cooperation, accelerating returns t
 ![**Effect of Non-Linear Cooperative Benefits.** Cooperators rapidly rise in frequency when the benefits have accelerating returns ($\gamma > 1$). When the increases in subpopulation carrying capacity have diminishing returns ($\gamma < 1$), the proportion of cooperators oscillates more frequently, which can allow defectors to fix. Here, each panel shows cooperator proportion for the duration of simulations in which the relationship between cooperation and increases in carrying capacity were varied ($\gamma$, indicated on the right). Lines show the trajectories of replicate populations.](../figures/nonlinear_benefits.png) {#fig:nonlinear_benefits}
 
 ![**Non-Linear Cooperative Benefits and Cooperator Proportion.** As the slope of the curve defining the benefits of cooperation becomes more concave, cooperators are maintained at higher abundances and for longer. Cooperator presence represents the area under the cooperator proportion curves shown in Figure @fig:nonlinear_benefits. Solid points indicate the average scaled cooperator presence among replicate populations (open circles), and error bars indicate bootstrapped 95% confidence intervals (1000 resamples).](../figures/nonlinear_benefits-integral.png) {#fig:nonlinear_benefits_int}
-
-
-
-# Effect of Metapopulation Size
-
-**TODO: include this if runs complete**
 
 
 # A Measure of Expected Absolute Fitness within a Subpopulation

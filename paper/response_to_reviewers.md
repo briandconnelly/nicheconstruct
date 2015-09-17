@@ -58,10 +58,10 @@ We have elaborated this future extension in our Discussion:
 
 > As reviewer 2 says, "More robust justification for imposing a ~90% death rate on each subpopulation every generation" is badly needed!  This is rather unrealistic, and makes the entire model rather dubious, unless you can show the same effects with a more realistic death rate (say 30%).
 
-We have now swept through a number of death rates and showed that, while the bottleneck size can affect the success of cooperation, the initial lift in cooperator proportion is somewhat robust to the level of dilution.
-We have added a section in the Supplementary Material to discuss dilution more fully.
+We have now swept through a number of death rates and showed that indeed as survival rates from dilution increase, cooperators fare worse (as predicted by the reviewer).We have tried to justify our baseline dilution survival rates below.
+It is worth mentioning that some initial lift in cooperator population is robust to the level of dilution.
+We have added a section to our Supplemental Materials that discuss this parameter in detail.
 
-**TODO Tuesday DILUTION**
 
 
 ## Reviewer 1
@@ -87,7 +87,11 @@ This is how cooperation was maintained in the majority of replicate populations 
 We have removed "indefinitely" in the places where they originally appeared in the manuscript.
 However, we do note that under parameter settings that allow cooperators to invade (see our response to the following point below), our use of the term may be justified.
 
-**TODO - sweep of metapopulation size**
+There does indeed seem to be an effect of increasing population size on stabilizing cooperation
+We have done some preliminary exploration of this effect (see figure below); however, for larger population sizes, these simulations take quite a while to run, and we would more time to execute a thorough analysis.
+We are happy to pursue this further if the reviewer deems this important
+
+**TODO dilution figure**
 
 
 > Does that fact that p is set to 0.5 at the start of the simulations make this paper really about the persistence of cooperation rather than its evolution? To show the latter, would the authors not consider testing their model with an initial p of 1/800 i.e. a single mutation? In how many such runs does cooperation then persist?
@@ -174,7 +178,22 @@ Interestingly, these large oscillations also allow cooperators to rapidly increa
 
 > L16 I thought the description of the Hammerlund paper was too long for the abstract.
 
-**TODO update the abstract**
+We have now shortened this description in the abstract.
+It now reads as follows:
+
+"By benefitting others at a cost to themselves, cooperators face an ever present threat from defectors---individuals that avail themselves of the cooperative benefit without contributing.
+A longstanding challenge to evolutionary biology is to understand the mechanisms that support the many instances of cooperation that nevertheless exist.
+Hammarlund et al. recently demonstrated that, in spatially-structured environments, clustered cooperator populations reach greater densities, which creates more mutational opportunities to gain beneficial non-social adaptations.
+Cooperation rises in abundance through hitchhiking with these mutations.
+However, once adaptive opportunities have been exhausted, the ride abruptly ends as cooperators are displaced by adapted defectors. 
+Using an agent-based model, we demonstrate that the selective feedback that is created as populations construct their local niches can maintain cooperation indefinitely.
+This cooperator success depends specifically on negative niche construction, which acts as a perpetual source of adaptive opportunities.
+As populations adapt, they alter their environment in ways that reveal additional opportunities for adaptation.
+Despite being independent of niche construction in our model, cooperation feeds this cycle.
+By reaching larger densities, populations of cooperators are better able to adapt to changes in their constructed niche and successfully respond to the constant threat posed by defectors.
+We relate these findings to previous studies from the niche construction literature and discuss how this model could be extended to provide a greater understanding of how cooperation evolves in the complex environments in which it is found."
+
+**TODO format quote**
 
 
 > L41 I think cooperation should be precisely defined here, with respect to the distinction between cooperation for mutual benefit (albeit with risk of defection), and altruism, whereby altruists always 'lose out' in the short term by their behaviour.  Which precisely do the authors think they are describing - it seems to me that it partly depends on the model parameters, but it is a bit difficult to tease out with the collective benefits conferred by Equation 4, but it seems more like altruism to me, and that's what the authors seem to suggest ('sacrificing their wellbeing to help others')?
@@ -383,8 +402,9 @@ For example, 95-99% of the *Vibrio harveyi* residing in the bobtail squid's ligh
 To address the reviewer's concern, we have performed additional simulations in which a wide range of dilution factors were used.
 Our results, shown below, have been added as Supplementary Material.
 Note that dilution affects the amount of growth, and therefore the number of mutational opportunities, experienced during each simulation cycle.
-To compensate, we have rescaled Time in this figure to show how cooperator proportions change as individuals are "born" in different dilution treatments.
+To compensate, we have rescaled Time in this figure to show cooperator proportions for equivalent numbers of births across dilution treatments.
 
+**TODO: update caption **
 ![**Effect of Subpopulation Dilution**](../figures/dilution.png)
 
 As shown in the Figure, cooperator survival diminishes as more individuals survive the perdiodic dilution.
@@ -491,8 +511,16 @@ We have edited these instances to be more explicit.
 We are grateful to the reviewer for this helpful comment.
 We believe that doing so places this work in a larger context and makes it accessible to a wider audience.
 A more general conclusion has been added.
+It reads as follows:
 
-**TODO: add this to the manuscript**
+"We have previously shown that a combination of non-social adaptation and population structure can favor the evolution of cooperation (@HANKSHAW).
+However, this "Hankshaw effect" was transient; without continual opportunities for adaptation (e.g., a changing environment), defectors eventually dominate.
+Here, we explore one source for such continual opportunities: negative niche construction.
+Specifically, the process of adaptation creates opportunities for further adaptation through niche constructive feedback.
+In our model, the active role of the organism is paramount; not only does cooperative behavior make hitchhiking more likely given adaptive opportunities, but
+these adaptive opportunities themselves are continually generated through the effects organisms have on their environment."
+
+**TODO: format this quote**
 
 
 \rule{\textwidth}{1pt}
