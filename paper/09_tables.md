@@ -2,6 +2,8 @@
 
 # Tables {#tables}
 
+\footnotesize
+
 Table: Model parameters and their values
 
 | Parameter  | Description                                    | Base Value    | Alternate Values | 
@@ -25,3 +27,5 @@ Table: Model parameters and their values
 | $\gamma$   | Slope of cooperative benefit*                  | 1.0           | 0.25, 0.5, 1.5, 2, 4 |
 
 \* See Supplementary Material
+
+\normalsize
