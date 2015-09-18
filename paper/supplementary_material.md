@@ -11,9 +11,25 @@ fontsize: 12pt
 \setcounter{figure}{0}
 \setcounter{equation}{0}
 
-\footnotesize
-\tableofcontents
-\normalsize
+\vspace{-5em}
+\begin{center}
+Brian D. Connelly\textsuperscript{1,3}, Katherine J. Dickinson\textsuperscript{1}, Sarah P. Hammarlund\textsuperscript{1,2}, and \mbox{Benjamin Kerr\textsuperscript{1,3}}
+\vspace{3em}
+
+\textsuperscript{1}Department of Biology and BEACON Center for the Study of Evolution in Action, University of Washington, Seattle, Washington, 98195, USA
+
+\textsuperscript{2}Current Address: Department of Zoology, University of Oxford, Oxford OX1 3PS, \mbox{United Kingdom}
+
+\textsuperscript{3}E-mail: bdcx@uw.edu and kerrb@uw.edu
+\end{center}
+
+\vspace{2em}
+\begin{shaded}
+    \footnotesize
+    \tableofcontents
+    \normalsize
+    \vspace{0.5em}
+\end{shaded}
 \clearpage
 
 
@@ -71,7 +87,7 @@ While diminishing returns are detrimental to cooperation, accelerating returns t
 
 ![**Effect of Non-Linear Cooperative Benefits.** Cooperators rapidly rise in frequency when the benefits have accelerating returns ($\gamma > 1$). When the increases in subpopulation carrying capacity have diminishing returns ($\gamma < 1$), the proportion of cooperators oscillates more frequently, which can allow defectors to fix. Here, each panel shows cooperator proportion for the duration of simulations in which the relationship between cooperation and increases in carrying capacity were varied ($\gamma$, indicated on the right). Lines show the trajectories of replicate populations.](../figures/nonlinear_benefits.png) {#fig:nonlinear_benefits}
 
-![**Non-Linear Cooperative Benefits and Cooperator Proportion.** As the slope of the curve defining the benefits of cooperation becomes more concave, cooperators are maintained at higher abundances and for longer. Cooperator presence represents the area under the cooperator proportion curves shown in Figure @fig:nonlinear_benefits. Solid points indicate the average scaled cooperator presence among replicate populations (open circles), and error bars indicate 95% confidence intervals.](../figures/nonlinear_benefits-integral.png) {#fig:nonlinear_benefits_int}
+![**Non-Linear Cooperative Benefits and Cooperator Proportion.** As the slope of the curve defining the benefits of cooperation becomes more concave, cooperators are maintained at higher abundances and for longer. Cooperator presence represents the area under the cooperator proportion curves shown in Figure S6. Solid points indicate the average scaled cooperator presence among replicate populations (open circles), and error bars indicate 95% confidence intervals.](../figures/nonlinear_benefits-integral.png) {#fig:nonlinear_benefits_int}
 
 
 # A Measure of Expected Absolute Fitness within a Subpopulation

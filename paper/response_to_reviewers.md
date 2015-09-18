@@ -14,9 +14,10 @@ In response to reviewer feedback, we have:
 - Included additional results as supplementary information
 
 Below, we address each of the comments individually.
-Each reviewer comment is shown **TODO formatting details**, and our response is shown immediately below **TODO formatting details**.
+Each reviewer comment is shown as *italicized text*, and our response is shown immediately below.
+Text included from the manuscript or supplement is shown with a grey background.
 
-\rule{\textwidth}{1pt}
+\bigrule
 
 
 # Editor
@@ -38,7 +39,7 @@ We think this result greatly strengthens the paper, and we are thankful for the 
 **TODO: should we include the invasion plot here as well?**
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *Here is another statement by this reviewer which I don't agree with: "Is this really negative niche-construction - "niche-constructing acts that, on average decrease the fitness of the niche-constructing organisms" - in the model, the niche-construction shifts the optimum value in the environment, but does not directly reduce fitness of the niche-constructors - instead it makes a higher relative fitness possible for others."  Evolution is about relative fitness, not absolute fitness (his comments are about absolute fitness), so, given that you have shown increased fitness of others but unchanged for the target, it's relative fitness (relative to the others)
 HAS declined and you DO have negative niche construction.  Maybe just make this more explicit.*
@@ -50,7 +51,7 @@ The very end of the Box now reads:
 >We call this negative niche construction, as the actions of constructors increase the fitness of a different genotype and thereby lower their own relative fitness.
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *Please give more thought and discussion about the external and the constructed environments, they are not necessarily coupled, in fact in some ways this is the entire point of niche construction.*
 
@@ -64,7 +65,7 @@ We have elaborated this future extension in our Discussion:
 A representation in which the "niche" is simultaneously influenced by external forces and the actions of organisms would more closely resemble many natural systems.
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *As reviewer 2 says, "More robust justification for imposing a ~90% death rate on each subpopulation every generation" is badly needed!  This is rather unrealistic, and makes the entire model rather dubious, unless you can show the same effects with a more realistic death rate (say 30%).*
 
@@ -73,7 +74,7 @@ It is worth mentioning that some initial lift in cooperator population is robust
 We have added a section to our Supplemental Materials that discuss this parameter in detail.
 
 
-\rule{\textwidth}{1pt}
+\bigrule
 
 # Reviewer 1
 
@@ -104,7 +105,7 @@ We are happy to pursue this further if the reviewer deems this important.
 
 ![**Effect of Population Size.** Each panel shows the proportion of cooperators present for the duration of simulations with different subpopulation sizes ($N^2$), shown on the right. Here, lines show the trajectories of 10 replicate populations.](../figures/metapopsize.png)
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 
 *Does that fact that p is set to 0.5 at the start of the simulations make this paper really about the persistence of cooperation rather than its evolution? To show the latter, would the authors not consider testing their model with an initial p of 1/800 i.e. a single mutation? In how many such runs does cooperation then persist?*
@@ -133,7 +134,7 @@ We found these outcomes so interesting that we have added a new section to the R
 ![**Niche Construction and the Invasion of Cooperation.** The proportion of cooperators present in each of 50 replicate populations is shown for the duration of simulations ($T=5000$). Baseline parameters are used, except for $S_{max}=8000$, and the initial proportion of cooperators in each population is zero ($p_0=0$) (but can arise via mutation) (**A**) Cooperators invade and reach very high proportions when niche construction affects selection ($N=50$). (**B**) Without niche construction ($\epsilon=0$), cooperators do not invade ($N=50$).](../figures/cooperator_invasion.png)
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *Is this really negative niche-construction - "niche-constructing acts that, on average decrease the fitness of the niche-constructing organisms" - in the model, the niche-construction shifts the optimum value in the environment, but does not directly reduce fitness of the niche-constructors - instead it makes a higher relative fitness possible for others.*
 
@@ -150,7 +151,7 @@ At the end of the legend of Box 1, we now say:
 
 >We call this negative niche construction, as the actions of constructors increase the fitness of a different genotype and thereby lower their own relative fitness.
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *There is a separation in the model between the "external" environment and the "constructed" environment, neither of which are modelled independently; rather they are implied from the way that the genetic makeup of organisms affects their fitness. This seems like a weak point of the model given that this separation is clearly an artificial construct - it would help the paper if the authors could give some thought to justifying this distinction - why doesn't niche construction affect the "external" environment. For example, is this a way that host/parasite interactions have been previously modelled? Further to this point, adaptation is usually associated with some degree of genetic load - i.e. the difference between optimal and actual genotypes in a given environment (e.g. L255). Can the authors say anything about whether an assumption of no genetic load is critical to their findings, or whether they think it is implicitly accounted for in their model in some way I have missed?*
 
@@ -177,7 +178,7 @@ However, more importantly, the negative niche construction scenario is contribut
 This mismatch is the engine that keeps the adaptive opportunities omnipresent, thus allowing for perpetual evolution by the Hankshaw effect.
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *The setup of the circular chromosome and circular fitness implications is mathematically neat - however, it seems like a very specific set of assumptions about gene/environment interactions (for example, only when the modulus of L/A is non-zero) and one always worries about the generality of insights based on such a specific system. Can the authors provide any more information about where these assumptions might be met in nature, and/or what range of conditions or assumptions are needed for their insights to hold.*
 
@@ -185,7 +186,7 @@ While we would not claim that our implementation represents any specific system 
 Alternate implementations, such as explicitly modeling adaptation using ever-increasing numbers of loci, would be computationally costly---likely prohibitively so.
 This model is our compact attempt to capture the potentially never-ending co-evolution of organisms and their environment in a computationally tractable manner.
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 
 *Increased population density has only positive effects here - but density can also bring costs - this is ignored in the linear population growth of Eq 4; is it possible to say anything about how much cost can be borne before the effect disappears?*
@@ -220,7 +221,7 @@ Despite being independent of niche construction in our model, cooperation feeds 
 By reaching larger densities, populations of cooperators are better able to adapt to changes in their constructed niche and successfully respond to the constant threat posed by defectors.
 We relate these findings to previous studies from the niche construction literature and discuss how this model could be extended to provide a greater understanding of how cooperation evolves in the complex environments in which it is found.
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 
 *L41 I think cooperation should be precisely defined here, with respect to the distinction between cooperation for mutual benefit (albeit with risk of defection), and altruism, whereby altruists always 'lose out' in the short term by their behaviour.  Which precisely do the authors think they are describing - it seems to me that it partly depends on the model parameters, but it is a bit difficult to tease out with the collective benefits conferred by Equation 4, but it seems more like altruism to me, and that's what the authors seem to suggest ('sacrificing their wellbeing to help others')?*
@@ -249,7 +250,7 @@ In the Methods section of the main text, we now refer the reader to the Suppleme
 >Because cooperators improve group productivity (Equation 4) but drop in proportion within mixed groups, this form of cooperation would also qualify as "multi-level altruism" (see Supplementary Material and [Kerr et al. (2004)](http://dx.doi.org/10.1016/j.tree.2003.10.004)).
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *L69 Personally I find the Tom Robbins analogy a bit of a stretch and while I know the literature in question many will not so it's kind of unclear what's added here; it's also potentially confusing - Sissy's thumbs help her hitchhike as much as anyone else, so it's not clearly paying a cost to help others.*
 
@@ -279,7 +280,7 @@ However, cooperation can be maintained when frequent environmental changes produ
 Although organisms typically find themselves in dynamic environments, the frequency and regularity of these changes might not ensure long-term cooperator survival.
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *L151 Eq (1) - I think a one sentence explanation of what this equation does would save readers some effort in understanding here.*
 
@@ -289,7 +290,7 @@ We have added two examples to the manuscript that we hope will help clarifying h
 >For example, $\beta(3, 5)$ is 2, while $\beta(1, 5)$ is 5.
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *L157 Why is the subscript 'g' needed here? I can't see where this is ever summed over in the subsequent equations, so the notation might be overcomplicated here.*
 
@@ -297,7 +298,7 @@ We have removed the 'g' subscript from the main text.
 However, we continue to use the 'g' subscript in the Supplementary Material to indicate a particular genotype as before.
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *L172 / Eq 4 The costs and benefits of cooperation are always crucial in models like this, but while the costs are clear, the benefits are spread out using this equation. I feel like this should be clarified a little more - can the effects of this equation be reproduced in equation 2 such that both the costs and benefits of cooperation are explicitly expressed through effects on individual fitness?*
 
@@ -343,7 +344,7 @@ We have now added the following information to the Supplement:
 >At a metapopulation scale, migration does not change the absolute fitnesses of genotypes, however, it can alter genotypic composition of subpopulations and therefore affect the absolute fitnesses of genotypes in the next generation.
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 
 *L185 Just a point of clarification - mutation can result in "no adaptation" right? Is there a reasons for the {0}U{1,2,3…} notation rather than the simpler {0,1,2,3,…} - the union operator doesn't seem to serve any purpose here?*
@@ -352,7 +353,7 @@ We have removed the union operation in favor of the simplified set $\{0, 1, \ldo
 The original intent was to highlight that mutation could result in a $0$ allele, which would be a loss of function.
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *L192 why use boundaries rather than toroid?*
 
@@ -361,7 +362,7 @@ When exploring the model parameters for that work, we did not find significant d
 Our primary motivations for having boundaries were to simplify both the description and visualization of space (and distances), particularly for those not accustomed to thinking about toroidal surfaces.
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *L202 Is this right? - if each individual remains with probability $d$ then with $d=0.1$ as per Table 1, then the population is reduced to < Smin (800) even when at its maximum size ($0.1 Smax = 200$) - why parameterise in this case, rather than just choosing Smin individuals at random?*
 
@@ -373,7 +374,7 @@ If we instead chose $S_{min}$ individuals at random, we anticipate two outcomes.
 First, the evolutionary process would be slowed down, as mutations would occur less frequently due to reduced growth.
 Second, defector populations would be especially burdened by this, so the Hankshaw effect would be exaggerated.
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *L210 "performED" and I would argue results should be past tense throughout.*
 
@@ -382,7 +383,7 @@ There is some precedent for using the present tense in this journal, particularl
 However, if this stylistic decision is a hindrance, we would be willing to change tense.
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *L262 The authors state that setting L=A changes the niche construction from positive to negative. I am afraid I completely missed the reasoning here and I think the paper would be improved if it were spelled out more clearly why this parameter setting induces positive niche construction (i.e. an increase in constructor fitness by their construction activity).*
 
@@ -395,7 +396,7 @@ The relevant text now reads:
 >When this occurs, a fully-adapted cooperator is at a selective disadvantage against fully-adapted defectors, which do not incur the cost of cooperation."
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *L386-388 I think this point about representing the niche, or environment, explicitly, is more important than the attention it is given here...*
 
@@ -405,14 +406,14 @@ To address this point as well as one of the points above, we have now added the 
 A representation in which the "niche" is simultaneously influenced by external forces and the actions of organisms would more closely resemble many natural systems.
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *L410-411 - this doesn't appear to be a proper sentence.*
 
 This has been addressed in the current manuscript with the addition of an "of" to identify what is being produced.
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *Table 1 - aswell as base values, it would be useful to show which further values were explored for each parameter, to judge where parameters space has been explored.*
 
@@ -420,7 +421,7 @@ Table 1 has been given an additional column listing the additional parameter val
 We thank the reviewer for the nice suggestion.
 
 
-\rule{\textwidth}{1pt}
+\bigrule
 
 # Reviewer 2
 
@@ -455,7 +456,7 @@ Accelerating benefits tend to dampen oscillations and increase the proportion of
 ![**Effect of Non-Linear Cooperative Benefits.** Cooperators rapidly rise in frequency when the benefits have accelerating returns ($\gamma > 1$). When the increases in subpopulation carrying capacity have diminishing returns ($\gamma < 1$), the proportion of cooperators oscillates more frequently, which can allow defectors to fix. Here, each panel shows cooperator proportion for the duration of simulations in which the relationship between cooperation and increases in carrying capacity were varied ($\gamma$, indicated on the right). Lines show the trajectories of replicate populations.](../figures/nonlinear_benefits.png)
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *Could 'adaptation to external environment' be rolled in to baseline fitness? It seems that 0 alleles (except at the cooperation locus, of course) are always selected against and should drop out of the population quite quickly. What would change if the third term in equation (2) were omitted?*
 
@@ -475,7 +476,7 @@ The fitness advantage displayed by a type adapted to the environment helps to ju
 It might be possible to achieve this effect without the third term in Equation 2 by introducing adapted types at the onset of simulations and "jump-starting" niche construction and adaptation, but we have not explored this.
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *Migration could be explained in a bit more detail. For example, does migration occur symmetrically in order to avoid some subpopulations stochastically exceeding S_max? If not, how is this avoided? The text on the bottom of page 6 and the top of page 7 suggests that the rate of migration depends on success or fitness. Is this reflecting frequency dependence only or some other mechanism?*
 
@@ -489,7 +490,7 @@ As for the second point, our original wording in the model overview could have e
 We have updated this to indicate that migration occurs independent of genotype fitness.
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *Finally, if I understand correctly, the force maintaining cooperation is a constant opportunity to adapt and maintain the benefit of having a large local population to generate useful adaptations. Is there a fundamental difference between the way in which this is modelled here (as a feature of the niche constructing genotypes of the individual agents) and modelling this as a straightforward variable or fluctuating environment?*
 
@@ -514,7 +515,7 @@ Where specific numbers are used in the manuscript, we have made sure that these 
 In the detailed description of the model given in Box 1, we italicized the integers used to represent loci (and always prefixed them with a description).
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *Line 196-197. Why not just seed the environment with sigma\*S(P_0) individuals rather than the two step process described here?*
 
@@ -524,7 +525,7 @@ The overall inclusion of this additional stochastic element allows us to compare
 We note that because of this additional stochasticity, we are careful to differentiate between *actual* initial cooperator proportions from *expected* proportions ($p_0$) where appropriate.
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *Line 261. Does this only happen when a type has fixed in the subpopulation?*
 
@@ -534,7 +535,7 @@ We have updated the manuscript to clarify this point.
 In the instance noted by the reviewer, types are no longer described as having fixed.
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *Line 265. Without qualification this sentence might be overstating things a bit!*
 
@@ -545,7 +546,7 @@ This now reads:
 >Specifically, negative niche construction is key for maintaining cooperation by the Hankshaw effect. Here, cooperators escape invasion by hitchhiking along with adaptations to the constructed environment.
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *Line 271 and others. At times the term 'population' used rather than subpopulation or metapopulation. This should be specified each time.*
 
@@ -557,7 +558,7 @@ In addition, there were a few places, such as the sentence referred to here, whe
 We have edited these instances to be more explicit.
 
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
+\smallrule
 
 *A concluding paragraph that discusses the topic more generally might be more fitting than ending on a discussion of host-symbiont interactions.*
 
@@ -574,7 +575,7 @@ In our model, the active role of the organism is paramount; not only does cooper
 these adaptive opportunities themselves are continually generated through the effects organisms have on their environment.
 
 
-\rule{\textwidth}{1pt}
+\bigrule
 
 Once again, we deeply appreciate time and effort that you and the two reviewers have dedicated to our research and the constructive comments provided.
 We hope you'll find that this manuscript has improved through our efforts to address these comments.

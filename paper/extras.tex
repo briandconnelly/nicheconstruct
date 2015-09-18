@@ -1,0 +1,36 @@
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}                         
+\definecolor{grey10}{gray}{0.1}                                                 
+\definecolor{grey20}{gray}{0.2}                                                 
+\definecolor{grey30}{gray}{0.3}                                                 
+\definecolor{grey40}{gray}{0.4}                                                 
+\definecolor{grey50}{gray}{0.5}                                                 
+\definecolor{grey60}{gray}{0.6}                                                 
+\definecolor{grey70}{gray}{0.7}                                                 
+\definecolor{grey80}{gray}{0.8}                                                 
+\definecolor{grey90}{gray}{0.9}
+
+\usepackage{framed}                                                             
+\colorlet{shadecolor}{gray!15} 
+
+\newcommand{\BDC}[1]{{\Large\color{blue}[{\bf BDC: }{\em #1}]}}
+\newcommand{\TODO}[1]{{\Large\color{red}[{\bf TODO: }{\em #1}]}}
+
+\newcommand{\reviewer}[1]{{\color{Periwinkle}\em #1}}
+
+
+\newlength{\HalfPage}                                                           
+\setlength{\HalfPage}{0.49\textwidth} % <.5, so that we can pack figures side-by-side.
+                                                                                
+\newlength{\TwoThirdsPage}                                                      
+\setlength{\TwoThirdsPage}{0.66\textwidth}   
+
+\newcommand{\bigrule}{\rule{\textwidth}{1.5pt}}
+\newcommand{\smallrule}{{\color{gray!90}\noindent\hfil\rule{0.5\textwidth}{.4pt}\hfil\vspace{1em}}}
+
+\hypersetup{citecolor=Cerulean,urlcolor=Cerulean,linkcolor=Cerulean}
+
+% placeins package can force figures to appear
+% https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions
+
+% adjustwidth can be used for indenting blocks
+% http://tex.stackexchange.com/questions/68855/changing-top-bottom-left-right-margins-on-the-fly

@@ -35,13 +35,17 @@ tables: 09_tables.md
 	cat 09_tables.md newpage.sty | pandoc -H draft.sty $(FLAGS) --output draft_tables_$(shell date +'%Y%m%d').pdf
 
 supplement: supplementary_material.md
-	pandoc supplementary_material.md -H draft.sty $(FLAGS) --output draft_supplement_$(shell date +'%Y%m%d').pdf
+	#pandoc supplementary_material.md -H draft.sty $(FLAGS) --output draft_supplement_$(shell date +'%Y%m%d').pdf
+	pandoc supplementary_material.md -H extras.tex $(FLAGS) --output draft_supplement_$(shell date +'%Y%m%d').pdf
 
 response: response_to_reviewers.md
-	pandoc response_to_reviewers.md $(FLAGS) --output draft_response_$(shell date +'%Y%m%d').pdf
+	pandoc response_to_reviewers.md -H extras.tex $(FLAGS) --output draft_response_$(shell date +'%Y%m%d').pdf
 
 tex:
 	cat [0-1]*md | pandoc $(FLAGS) -s --output draft_$(FNAME)_$(shell date +'%Y%m%d').tex
+
+response_tex: response_to_reviewers.md
+	pandoc response_to_reviewers.md -s -H extras.tex $(FLAGS) --output draft_response_$(shell date +'%Y%m%d').tex
 
 latest:
 	@cat [0-1]*md | pandoc -H draft.sty $(FLAGS) --output $(FNAME)-latest.pdf
@@ -49,4 +53,4 @@ latest:
 
 
 clean:                                                                          
-	    rm -f $(FNAME).pdf $(FNAME).tex $(FNAME).docx draft_*.pdf
+	    rm -f $(FNAME).pdf $(FNAME).tex $(FNAME).docx draft_*.pdf *aux *log *out
