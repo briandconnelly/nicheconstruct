@@ -25,6 +25,7 @@ Brian D. Connelly\textsuperscript{1,3}, Katherine J. Dickinson\textsuperscript{1
 
 \vspace{2em}
 \begin{shaded}
+    \vspace{-1.5em}
     \footnotesize
     \tableofcontents
     \normalsize
@@ -89,6 +90,7 @@ While diminishing returns are detrimental to cooperation, accelerating returns t
 
 ![**Non-Linear Cooperative Benefits and Cooperator Proportion.** As the slope of the curve defining the benefits of cooperation becomes more convex, cooperators are maintained at higher abundances and for longer. Cooperator presence represents the area under the cooperator proportion curves shown in Figure S6. Solid points indicate the average scaled cooperator presence among replicate populations (open circles), and error bars indicate 95% confidence intervals.](../figures/nonlinear_benefits-integral.png) {#fig:nonlinear_benefits_int}
 
+\FloatBarrier
 
 # A Measure of Expected Absolute Fitness within a Subpopulation
 
