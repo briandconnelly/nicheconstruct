@@ -28,11 +28,15 @@ There is a bit of a terminology mess here.  By "evolution" he means the origin a
 spread of cooperation, which would be the case if the frequency increased from a very small value (as he said).  You started at 0.5 which might mean it is indeed more about maintainance than spread from a small value.  Regardless of what you call it, you actually cannot say that you are showing a mechanisms of stabilization unless you start at BOTH a small and a large value.  Stabilisation means that there is some kind of stable equilibrium. You cannot tell from only starting at 0.5, as you will see from any population genetics textbook.  Please fix this by starting at both a low and a high initial frequency.   This is the main reason I'm calling this a major revison.  Easy to do and report on but it will take more time than just rewriting.*
 
 We thank the reviewer and editor for this suggestion, which has stimulated some interesting findings.
-We have addressed this in two ways.
+We have addressed this issue in two ways.
 First, we have run baseline simulations sweeping across initial cooperator proportions, showing that cooperators perform well from many starting proportions, but cannot invade from rarity.
-Second, we ran additional simulations in which the benefit of cooperation was increased, and found reliably that cooperators can invade from initial absence (where these cooperators first arise via mutation).
+Second, we ran additional simulations in which the benefit of cooperation was increased, and found reliably that cooperators can invade from initial absence after first arising via mutation.
 In such cases, cooperators are likely to persist at reasonable proportions indefinitely.
-We think this result makes the paper much stronger, and we again are thankful for the suggestion.
+Here again, negative niche construction is a key ingredient.
+We think this result greatly strengthens the paper, and we are thankful for the suggestion.
+
+**TODO: should we include the invasion plot here as well?**
+
 
 \begin{center}\rule{5in}{0.2pt}\end{center}
 
@@ -64,11 +68,12 @@ A representation in which the "niche" is simultaneously influenced by external f
 
 *As reviewer 2 says, "More robust justification for imposing a ~90% death rate on each subpopulation every generation" is badly needed!  This is rather unrealistic, and makes the entire model rather dubious, unless you can show the same effects with a more realistic death rate (say 30%).*
 
-We have now swept through a number of death rates and showed that indeed as survival rates from dilution increase, cooperators fare worse (as predicted by the reviewer).We have tried to justify our baseline dilution survival rates below.
+We have now swept through a number of death rates and showed that indeed as survival rates from dilution increase, cooperators fare worse (as predicted by the reviewer).We have tried to justify our baseline dilution survival rates in our response below.
 It is worth mentioning that some initial lift in cooperator population is robust to the level of dilution.
 We have added a section to our Supplemental Materials that discuss this parameter in detail.
 
 
+\rule{\textwidth}{1pt}
 
 # Reviewer 1
 
@@ -83,7 +88,7 @@ We have added a section to our Supplemental Materials that discuss this paramete
 
 Because our mechanism depends on adaptation to the environment via mutation, it is inherently stochastic.
 We see this in Figure 2A, where cooperators were driven to extinction in four replicate populations.
-In these cases, happened to adapt fastea than cooperators, and quickly spread to fixation.
+In these cases, defectors happened to adapt faster than cooperators, and quickly spread to fixation.
 As the reviewer notes, these results drive the decrease in average cooperator proportion across replicate populations that we see in Figure 1C (which motivated us to show data for individual replicates in all subsequent figures).
 
 Because negative niche construction creates a never-ending "adaptive race", the possibility of cooperator loss through defector adaptation is also never ending.
@@ -95,7 +100,7 @@ However, we do note that under parameter settings that allow cooperators to inva
 
 There does indeed seem to be an effect of increasing population size on stabilizing cooperation
 We have done some preliminary exploration of this effect (see figure below); however, for larger population sizes, these simulations take quite a while to run, and we would more time to execute a thorough analysis.
-We are happy to pursue this further if the reviewer deems this important
+We are happy to pursue this further if the reviewer deems this important.
 
 ![**Effect of Population Size.** Each panel shows the proportion of cooperators present for the duration of simulations with different subpopulation sizes ($N^2$), shown on the right. Here, lines show the trajectories of 10 replicate populations.](../figures/metapopsize.png)
 
@@ -108,7 +113,7 @@ This is a very important point that should have been addressed in the original m
 To better understand this parameter, we have run additional simulations in which the initial proportion of cooperators were widely varied.
 The results of these simulations are included as Supplementary Material.
 In summary, we do not find that cooperators can invade from rarity over the timescales that we consider, under our original parameters.
-However, one small alteration (lifting $S_{max}$) does allow cooperators to invade from an initial absence (cooperators can, of course, be generated by mutation).
+However, one small alteration (lifting $S_{max}$) does allow cooperators to invade from an initial absence ($p_0=0$) after arising via mutation.
 We found these outcomes so interesting that we have added a new section to the Results (referenced Figure included below):
 
 **TODO: also include figure from sweep of initial cooperator proportion?**
@@ -127,8 +132,8 @@ We found these outcomes so interesting that we have added a new section to the R
 
 ![**Niche Construction and the Invasion of Cooperation.** The proportion of cooperators present in each of 50 replicate populations is shown for the duration of simulations ($T=5000$). Baseline parameters are used, except for $S_{max}=8000$, and the initial proportion of cooperators in each population is zero ($p_0=0$) (but can arise via mutation) (**A**) Cooperators invade and reach very high proportions when niche construction affects selection ($N=50$). (**B**) Without niche construction ($\epsilon=0$), cooperators do not invade ($N=50$).](../figures/cooperator_invasion.png)
 
-\begin{center}\rule{5in}{0.2pt}\end{center}
 
+\begin{center}\rule{5in}{0.2pt}\end{center}
 
 *Is this really negative niche-construction - "niche-constructing acts that, on average decrease the fitness of the niche-constructing organisms" - in the model, the niche-construction shifts the optimum value in the environment, but does not directly reduce fitness of the niche-constructors - instead it makes a higher relative fitness possible for others.*
 
@@ -152,7 +157,7 @@ At the end of the legend of Box 1, we now say:
 In natural settings, environmental change is often brought about by exogenous factors (e.g., changing seasons) as well as endogenous factors (e.g., niche constructing behaviors).
 Many of its proponents argue that niche construction can substantially influence the evolutionary process, and this model is our first attempt at identifying how niche construction might play a role in cooperation.
 The distinction that we make in the model between external and constructed environments allows us to directly address the effects of niche construction by comparison with a previous model in which only exogenous factors played a role.
-We see this as a distinct advantage, as identifying and quantifying the selective feedbacks that niche construction introduces could be challenging.
+We see this as a distinct advantage, as identifying and quantifying the selective feedbacks that niche construction introduces could otherwise be challenging.
 
 We have added a sentence in the Methods to offer motivation for this separation:
 
@@ -223,7 +228,7 @@ We relate these findings to previous studies from the niche construction literat
 The reviewer is asking a good question, and the answer is a bit complicated.
 Our form of cooperation satisfies one definition of altruism (traditionally used in the multi-level selection theory literature).
 With additional constraints, this type of altruism is related to other types of altruism (e.g., traditionally used in the inclusive fitness theory literature).
-In response, to the reviewer’s comment on L172 / Eq 4 below, we have added to the Supplement a derivation of an expression for the expected absolute fitness for a genotype within a subpopulation of a certain genetic composition.
+In response to the reviewer’s comment on L172 / Eq 4 below, we have added to the Supplement a derivation of an expression for the expected absolute fitness for a genotype within a subpopulation of a certain genetic composition.
 Using this expression, we can connect our form of cooperation to multilevel altruism.
 The following is included in the Supplementary Material:
 
@@ -239,7 +244,7 @@ With additional constraints on the parameters, cooperation could also satisfy ot
 However, to keep things general, we have not assumed these constraints.
 To avoid confusion between these different forms of altruism, we have opted to use the more general term “cooperation” in our manuscript.
 
-We have added a note to the Methods main text to refer the reader to the Supplement for this discussion of the connection to altruism:
+In the Methods section of the main text, we now refer the reader to the Supplement for this discussion of the connection to altruism:
 
 >Because cooperators improve group productivity (Equation 4) but drop in proportion within mixed groups, this form of cooperation would also qualify as "multi-level altruism" (see Supplementary Material and [Kerr et al. (2004)](http://dx.doi.org/10.1016/j.tree.2003.10.004)).
 
@@ -358,7 +363,7 @@ Our primary motivations for having boundaries were to simplify both the descript
 
 \begin{center}\rule{5in}{0.2pt}\end{center}
 
-*L202 Is this right? - if each individual remains with probability $d$ then with $d=0.1$ as per Table 1, then the population is reduced to < Smin (800) even when at its maximum size ($0.1\*Smax = 200$) - why parameterise in this case, rather than just choosing Smin individuals at random?*
+*L202 Is this right? - if each individual remains with probability $d$ then with $d=0.1$ as per Table 1, then the population is reduced to < Smin (800) even when at its maximum size ($0.1 Smax = 200$) - why parameterise in this case, rather than just choosing Smin individuals at random?*
 
 This is correct---the bottleneck introduced at the end of each cycle reduces each subpopulation to fewer than $S_{min}$ individuals.
 In the next cycle, each subpopulation then grows to its carrying capacity.
@@ -385,7 +390,7 @@ We have updated the text to add clarity.
 We now describe how changing this value alters niche construction by fully-adapted types as well as reference Box 1, Part C, which illustrates this scenario (we do note that setting $L=A$ changes niche construction from negative to positive).
 The relevant text now reads:
 
->When negative niche construction is removed (by setting $L=5$, $A=5$, [Box 1, Part C](#box1)), cooperators are again driven to extinction after an initial lift in abundance (Figure 2C).
+>When negative niche construction is removed (by setting $L=5$, $A=5$; see Box 1, Part C), cooperators are again driven to extinction after an initial lift in abundance (Figure 2C).
 >Here, a fully-adapted type constructs a niche that favors itself.
 >When this occurs, a fully-adapted cooperator is at a selective disadvantage against fully-adapted defectors, which do not incur the cost of cooperation."
 
@@ -415,6 +420,8 @@ Table 1 has been given an additional column listing the additional parameter val
 We thank the reviewer for the nice suggestion.
 
 
+\rule{\textwidth}{1pt}
+
 # Reviewer 2
 
 *This paper shows that negative niche construction can create the opportunity for new adaptation and maintain a costly trait that increases local population density in a population where it would otherwise be driven to extinction.*
@@ -437,7 +444,7 @@ To compensate, we have rescaled Time in this figure to show cooperator proportio
 
 ![**Effect of Subpopulation Dilution.** Each panel shows the proportion of cooperators present for the duration of simulations with different dilution survival probabilities ($\sigma_d$), shown on the right. Because thinning affects the number of offspring produced during each cycle, and hence the number of mutational opportunities to gain adaptations, simulations proceeded until populations had reached $2.8 \times 10^9$ births, which was the average number of births that occurred in simulations with baseline parameter values over 3000 cycles. As the probability of survival increases, defectors pose a greater threat. Here, lines show the trajectories of replicate populations.](../figures/dilution-births.png)
 
-As shown in the Figure, cooperator survival diminishes as more individuals survive the perdiodic dilution.
+As shown in the Figure, cooperator survival diminishes as more individuals survive the periodic dilution.
 These results confirm the reviewer's prediction that dilution often does favor the cooperative allele and align with previous work (e.g., [Brockhurst (2007)](http://dx.doi.org/10.1371/journal.pone.0000634)).
 
 We have also extended our model to address the negative aspects of increasing subpopulation density.
@@ -461,7 +468,7 @@ We believe that doing so allows us to clearly differentiate our results---thus d
 Additionally, we know that adaptation to the external environment is important in this model.
 As shown in the figure below, cooperation is quickly lost without this fitness component.
 This is likely because the fitness effects of adaptation to the external environment are direct, while the fitness effects associated with niche construction are density dependent.
-The fitness advantage displayed by a type adapted to the environment helps to jumpstart niche construction and thus the maintenance of cooperation by niche construction.
+The fitness advantage displayed by a type adapted to the environment helps to jump start niche construction and thus the maintenance of cooperation by niche construction.
 
 ![**Effect of External Adaptation.** For these simulations, the benefit of adaptation to the external environment was removed ($\delta=0$), and the benefits of adaptation to the constructed environment ($\epsilon$) were either remained at base value (1x) or doubled (2x) as compensation. Here, populations followed similar evolutionary trajectories to those shown in Figure 1A, where populations could not adapt to either the external or the constructed environment.](../figures/nodelta-cooperators-time.png)
 
@@ -481,6 +488,8 @@ We then add that this is temporary, as dilution immediately follows, which reduc
 As for the second point, our original wording in the model overview could have easily misled readers, giving the impression that migration was affected by adaptation or fitness, which is not true.
 We have updated this to indicate that migration occurs independent of genotype fitness.
 
+
+\begin{center}\rule{5in}{0.2pt}\end{center}
 
 *Finally, if I understand correctly, the force maintaining cooperation is a constant opportunity to adapt and maintain the benefit of having a large local population to generate useful adaptations. Is there a fundamental difference between the way in which this is modelled here (as a feature of the niche constructing genotypes of the individual agents) and modelling this as a straightforward variable or fluctuating environment?*
 
