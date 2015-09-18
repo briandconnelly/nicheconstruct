@@ -6,7 +6,7 @@ By benefitting others at a cost to themselves, cooperators face an ever present 
 A longstanding challenge to evolutionary biology is to understand the mechanisms that support the many instances of cooperation that nevertheless exist.
 Hammarlund et al. recently demonstrated that, in spatially-structured environments, clustered cooperator populations reach greater densities, which creates more mutational opportunities to gain beneficial non-social adaptations.
 Cooperation rises in abundance through hitchhiking with these mutations.
-However, once adaptive opportunities have been exhausted, the ride abruptly ends as cooperators are displaced by adapted defectors. 
+However, once adaptive opportunities have been exhausted, the ride abruptly ends as cooperators are displaced by adapted defectors.
 Using an agent-based model, we demonstrate that the selective feedback that is created as populations construct their local niches can maintain cooperation indefinitely.
 This cooperator success depends specifically on negative niche construction, which acts as a perpetual source of adaptive opportunities.
 As populations adapt, they alter their environment in ways that reveal additional opportunities for adaptation.

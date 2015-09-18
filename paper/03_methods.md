@@ -5,8 +5,8 @@ Building upon @HANKSHAW, we describe an individual-based model in which cooperat
 Through mutation, individuals gain adaptations to their environment, which increase reproductive fitness and allow those lineages to rise in abundance.
 These lineages then spread throughout the population by migration to neighboring subpopulations.
 
-In the expanded model described here, subpopulations additionally modify their local environment.
-As this process occurs, environmental changes feed back to affect selection.
+In the expanded model described here, subpopulations also continually modify their local environment.
+These environmental changes feed back to affect selection.
 We use this model to explore how niche construction affects the evolution of cooperation; specifically, how cooperative behavior can hitchhike along with adaptations to modified environments.
 
 
@@ -16,7 +16,7 @@ We use this model to explore how niche construction affects the evolution of coo
 
 Each individual has a haploid genome with $L + 1$ loci, where integers represent different alleles at each locus ([Table 1](#tables) lists all model parameters and their values).
 An allele at the *cooperation locus* (locus zero) determines whether that individual is a cooperator (allele $1$), which carries fitness cost $c$, or a defector (allele $0$).
-The remaining $L$ loci are *adaptive loci*, and are each occupied by a value from the set $\{0, 1, 2, \ldots, A\}$.
+The remaining $L$ loci are *adaptive loci*, and are each occupied by a value from the set $\{0, 1, 2, \ldots, A\}$, where $A$ is the number of different alleles possible at each locus.
 
 Allele $0$ represents a lack of adaptation, while non-zero alleles signify two types of adaptations, both of which increase fitness.
 First, adaptations to the *external environment* confer a fitness benefit $\delta$.
@@ -28,14 +28,14 @@ We assume $\delta > c$, which allows a minimally adapted cooperator to recoup th
 
 Individual fitness is also affected by aspects of the local environment that are modified by organisms.
 This constructed "niche" depends on the specific allelic states present in the subpopulation.
-As allelic states change, the subpopulation alters its environment, creating a unique niche.
+As allelic states change, the subpopulation alters its environment in new ways, creating a unique niche.
 As described below, the specific alleles at each locus become important.
 
 In our model, the feedback that results from niche construction takes the form of density dependent selection, and individuals evolve to better match their constructed niche.
 We do not represent this niche explicitly, but rather allow the allelic composition of the subpopulation to feed back to affect selection.
 Specifically, the selective value of non-zero allele $a$ at adaptive locus $l$---and consequently the fitness of an individual carrying that allele---increases with the number of individuals in the subpopulation that have allele $a-1$ at locus $l-1$.
-For example, if $L=5$, $A=6$, and allele $4$ has fixed at locus $2$, then selection favors a genotype with allele $5$ at locus $3$.
-And as allele $5$ fixes at locus $3$, the niche that this population constructs will favor allele $6$ at locus $4$ (see [Box 1](#box1)).
+For example, if $L=5$, $A=6$, and allele $4$ has fixed at locus $2$, then selection favors genotypes with allele $5$ at locus $3$.
+And as allele $5$ becomes more abundant at locus $3$, the niche that this population constructs will increasingly favor allele $6$ at locus $4$ (see [Box 1](#box1)).
 As a consequence, genotypes with sequentially increasing allelic states will tend to evolve.
 
 We treat both adaptive loci and their non-zero allelic states as "circular": the selective value of an allele at locus 1 is affected by the allelic composition of the subpopulation at locus $L$.
@@ -73,19 +73,19 @@ While the separation between exogenous and endogenous environmental change may n
 
 ### Subpopulation Growth and the Benefit of Cooperation
 
-While cooperation is costly, its effects are independent of the external and constructed components of the environment.
-Cooperation enables a subpopulation to reach a greater density.
-If $p$ is the proportion of cooperators present at the beginning of a growth cycle, then that subpopulation reaches the following size:
+The effects of cooperation are independent of the external and constructed components of the environment and do not provide direct fitness benefits (Equation @eq:fitness).
+Instead, cooperation enables a subpopulation to reach a greater density.
+If $p$ is the proportion of cooperators present at the beginning of a growth cycle, then that subpopulation reaches size $S(p)$, where:
 
 $$ S(p) = S_{min} + p (S_{max} - S_{min}) $$ {#eq:popsize}
 
-where $S_{min}$ and $S_{max}$ define the sizes reached by all-defector and all-cooperator subpopulations, respectively.
+$S_{min}$ and $S_{max}$ define the sizes reached by all-defector and all-cooperator subpopulations, respectively.
 This benefit affects all individuals equally and accumulates linearly with the proportion of cooperators in the subpopulation.
 We also explore non-linear benefit accumulation in the Supplementary Material.
-Because cooperators improve group productivity (Equation @eq:popsize) but drop in proportion within mixed groups, this form of cooperation would also qualify as "multi-level altruism" (see Supplementary Material and @kerr2004what).
+Because cooperators improve group productivity (Equation @eq:popsize) but decrease in proportion within mixed groups, this form of cooperation would also qualify as "multi-level altruism" (see Supplementary Material and @kerr2004what).
 
-During growth, individuals compete through differential reproduction.
-Each individual's probability of success is proportional to its fitness.
+Individuals compete as subpopulations grow.
+Each individual's probability of reproductive success is proportional to its fitness.
 The composition of a subpopulation with size $P$ and cooperator proportion $p$ after growth is multinomial with parameters $S(p)$ and $\{\pi_1, \pi_2, \ldots, \pi_{P}\}$, where $\pi_{i}$ represents the reproductive fitness of individual $i$ relative to others in its subpopulation (Equation @eq:fitness).
 
 
@@ -104,7 +104,7 @@ These mutations replace the existing allele with a value randomly sampled from t
 Populations consist of $N^2$ patches arranged as an $N \times N$ lattice, where each patch can support a subpopulation.
 After mutation, individuals emigrate to an adjacent patch.
 This process is unaffected by fitness.
-For each source subpopulation, a single destination patch is randomly chosen from the source patch's Moore neighborhood, which is composed of the nearest 8 patches on the lattice.
+For each source subpopulation, a single destination patch is randomly chosen from the source patch's Moore neighborhood, which encompasses the nearest 8 patches on the lattice.
 Because the population lattice has boundaries, patches located on the periphery have smaller neighborhoods.
 Individuals emigrate with probability $m$, which means larger subpopulations produce more emigrants.
 Through immigration, subpopulations can exceed $S_{max}$ individuals.
@@ -119,7 +119,7 @@ The population is then thinned.
 Each individual survives this bottleneck with probability $\sigma_{i}$.
 Starting from this initial state, simulations then proceed for $T$ cycles, where each discrete cycle consists of subpopulation growth, mutation, migration, and dilution.
 Dilution reduces each subpopulation to support growth in the next cycle.
-Each individual remains with probability $\sigma_{d}$, regardless of its genotype.
+Each individual remains after dilution with probability $\sigma_{d}$, regardless of its genotype.
 Dilution remained the same for each of the simulations described, however we further explore its effects in the Supplementary Material.
 
 
