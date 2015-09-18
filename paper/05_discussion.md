@@ -31,7 +31,7 @@ In these instances, negitive niche construction provides continual opportunities
 In our model, niche construction and adaptation are independent of cooperation, which allows us to focus on hitchhiking.
 However, individuals often cooperate in ways that alter the environment.
 These cooperative behaviors, therefore, can themselves be seen as niche construction.
-For example, bacteria produce a host of extracellular products that scavenge soluble iron [@griffin2004cooperation], digest large proteins [@darch2012density; @diggle2007cooperation], and reduce the risk of predation [@cosson2002pseudomonas], among many others [@west2007social].
+For example, bacteria produce a multitude of extracellular products that scavenge soluble iron [@griffin2004cooperation], digest large proteins [@darch2012density; @diggle2007cooperation], and reduce the risk of predation [@cosson2002pseudomonas], among many others [@west2007social].
 As in our model, these forms of cooperation are likely to increase local subpopulation density.
 While many studies have focused on how the environment affects the evolution of these cooperative traits, relatively few have addressed how the environmental changes created by these products feed back to influence evolution.
 

@@ -24,13 +24,14 @@
 \newlength{\TwoThirdsPage}                                                      
 \setlength{\TwoThirdsPage}{0.66\textwidth}   
 
-\newcommand{\bigrule}{\rule{\textwidth}{1.5pt}}
-\newcommand{\smallrule}{{\color{gray!90}\noindent\hfil\rule{0.5\textwidth}{.4pt}\hfil\vspace{1em}}}
+\newcommand{\bigrule}{\FloatBarrier\rule{\textwidth}{1.5pt}}
+\newcommand{\smallrule}{\FloatBarrier{\color{gray!90}\noindent\hfil\rule{0.5\textwidth}{.4pt}\hfil\vspace{1em}}}
 
 \hypersetup{citecolor=Cerulean,urlcolor=Cerulean,linkcolor=Cerulean}
 
 % placeins package can force figures to appear
 % https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions
+\usepackage[]{placeins}
 
 % adjustwidth can be used for indenting blocks
 % http://tex.stackexchange.com/questions/68855/changing-top-bottom-left-right-margins-on-the-fly

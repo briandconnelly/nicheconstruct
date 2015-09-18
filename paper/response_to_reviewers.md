@@ -16,6 +16,8 @@ In response to reviewer feedback, we have:
 Below, we address each of the comments individually.
 Each reviewer comment is shown as *italicized text*, and our response is shown immediately below.
 Text included from the manuscript or supplement is shown with a grey background.
+Included figures are given the same numbers as used in the manuscript or supplement (*S* prefix).
+Figures with an *R* prefix are included only in this response.
 
 \bigrule
 
@@ -31,12 +33,15 @@ spread of cooperation, which would be the case if the frequency increased from a
 We thank the reviewer and editor for this suggestion, which has stimulated some interesting findings.
 We have addressed this issue in two ways.
 First, we have run baseline simulations sweeping across initial cooperator proportions, showing that cooperators perform well from many starting proportions, but cannot invade from rarity.
-Second, we ran additional simulations in which the benefit of cooperation was increased, and found reliably that cooperators can invade from initial absence after first arising via mutation.
+Second, we ran additional simulations in which the benefit of cooperation was increased, and found reliably that cooperators can invade from initial absence after first arising via mutation (see Figure @fig:invasion below, now included in the manuscript).
 In such cases, cooperators are likely to persist at reasonable proportions indefinitely.
 Here again, negative niche construction is a key ingredient.
 We think this result greatly strengthens the paper, and we are thankful for the suggestion.
 
-**TODO: should we include the invasion plot here as well?**
+\renewcommand{\thefigure}{\arabic{figure}}
+\setcounter{figure}{4}
+
+![**Niche Construction and the Invasion of Cooperation.** The proportion of cooperators present in each of 50 replicate populations is shown for the duration of simulations ($T=5000$). Baseline parameters are used, except for $S_{max}=8000$, and the initial proportion of cooperators in each population is zero ($p_0=0$), which requires cooperators to arise via mutation. (**A**) Cooperators invade and reach very high proportions when niche construction affects selection (50 replicates shown). (**B**) Without niche construction ($\epsilon=0$), cooperators do not invade (50 replicates shown).](../figures/cooperator_invasion.png) {#fig:invasion}
 
 
 \smallrule
@@ -100,10 +105,13 @@ We have removed "indefinitely" in the places where they originally appeared in t
 However, we do note that under parameter settings that allow cooperators to invade (see our response to the following point below), our use of the term may be justified.
 
 There does indeed seem to be an effect of increasing population size on stabilizing cooperation
-We have done some preliminary exploration of this effect (see figure below); however, for larger population sizes, these simulations take quite a while to run, and we would more time to execute a thorough analysis.
+We have done some preliminary exploration of this effect (see Figure @fig:popsize below); however, for larger population sizes, these simulations take quite a while to run, and we would need more time to execute a thorough analysis.
 We are happy to pursue this further if the reviewer deems this important.
 
-![**Effect of Population Size.** Each panel shows the proportion of cooperators present for the duration of simulations with different subpopulation sizes ($N^2$), shown on the right. Here, lines show the trajectories of 10 replicate populations.](../figures/metapopsize.png)
+\renewcommand{\thefigure}{R\arabic{figure}}
+\setcounter{figure}{0}
+
+![**Effect of Population Size.** Each panel shows the proportion of cooperators present for the duration of simulations with different subpopulation sizes ($N^2$), shown on the right. Here, lines show the trajectories of 10 replicate populations.](../figures/metapopsize.png) {#fig:popsize}
 
 \smallrule
 
@@ -115,23 +123,24 @@ To better understand this parameter, we have run additional simulations in which
 The results of these simulations are included as Supplementary Material.
 In summary, we do not find that cooperators can invade from rarity over the timescales that we consider, under our original parameters.
 However, one small alteration (lifting $S_{max}$) does allow cooperators to invade from an initial absence ($p_0=0$) after arising via mutation.
-We found these outcomes so interesting that we have added a new section to the Results (referenced Figure included below):
-
-**TODO: also include figure from sweep of initial cooperator proportion?**
+We found these outcomes so interesting that we have added a new section to the Results (referenced Figure @fig:invasion2 is included below):
 
 >**Negative Niche Construction can Promote Cooperator Invasion**
 >
 >The majority of the results shown above have focused on the maintenance of cooperation.
->Specifically, cooperators have started at---and maintained---reasonably high proportions in the populations.
+>Specifically, cooperators have started at---and maintained---reasonably high proportions in their populations.
 >In the previous section, we considered cooperator invasion; however, the cooperators began in their own single subpopulation without defectors.
 >It remains to be seen whether cooperators can invade from extreme rarity.
->In a population in which cooperators are initially absent, can cooperators that arise by mutations increase in frequency?
+>In a population in which cooperators are initially absent, can cooperators that arise by mutation increase in frequency?
 >With baseline parameters (Table 1), cooperators tend not to invade over 3000 cycles when the initial cooperator proportion is low (see Supplemental Materials).
 >However, when the benefits of cooperation are increased ($S_{max}=8000$), cooperators can readily invade and reach high proportions (Figure 5A).
 >This result depends on the presence of niche construction.
 >Without the selective effects introduced by negative niche construction, cooperators cannot invade (Figure 5B).
 
-![**Niche Construction and the Invasion of Cooperation.** The proportion of cooperators present in each of 50 replicate populations is shown for the duration of simulations ($T=5000$). Baseline parameters are used, except for $S_{max}=8000$, and the initial proportion of cooperators in each population is zero ($p_0=0$) (but can arise via mutation) (**A**) Cooperators invade and reach very high proportions when niche construction affects selection ($N=50$). (**B**) Without niche construction ($\epsilon=0$), cooperators do not invade ($N=50$).](../figures/cooperator_invasion.png)
+\renewcommand{\thefigure}{\arabic{figure}}
+\setcounter{figure}{4}
+
+![**Niche Construction and the Invasion of Cooperation.** The proportion of cooperators present in each of 50 replicate populations is shown for the duration of simulations ($T=5000$). Baseline parameters are used, except for $S_{max}=8000$, and the initial proportion of cooperators in each population is zero ($p_0=0$), which requires cooperators to arise via mutation. (**A**) Cooperators invade and reach very high proportions when niche construction affects selection (50 replicates shown). (**B**) Without niche construction ($\epsilon=0$), cooperators do not invade (50 replicates shown).](../figures/cooperator_invasion.png) {#fig:invasion2}
 
 
 \smallrule
@@ -195,11 +204,13 @@ This is an important point.
 We have expanded our model to explore different forms of population size increase as a function of cooperator proportion.
 As detailed in the Supplementary Material, we added an additional parameter to Equation 4, $\gamma$, to control whether the increases in population size accelerate ($\gamma > 1$) or decelerate ($\gamma < 1$) as cooperators become more abundant.
 
-The following figure shows how these different forms of density-dependent benefits affect evolutionary trajectories in comparison to our baseline conditions ($\gamma = 1$).
+Figure @fig:nonlinear_benefits_int shows how these different forms of density-dependent benefits affect evolutionary trajectories in comparison to our baseline conditions ($\gamma = 1$).
 Accelerating benefits tend to dampen oscillations and increase the proportion of cooperators in the replicate populations over time, while decelerating benefits tend to increase the magnitude of oscillations, allowing defectors to dominate.
-Interestingly, these large oscillations also allow cooperators to rapidly increase in frequency in a number of instances, even when rare.
 
-![**Non-Linear Cooperative Benefits and Cooperator Proportion.** As the slope of the curve defining the benefits of cooperation becomes more concave, cooperators are maintained at higher abundances and for longer. Cooperator presence represents the area under the cooperator proportion curves shown in Figure S6. Solid points indicate the average scaled cooperator presence among replicate populations (open circles), and error bars indicate 95% confidence intervals.](../figures/nonlinear_benefits-integral.png) {#fig:nonlinear_benefits_int}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\setcounter{figure}{6}
+
+![**Non-Linear Cooperative Benefits and Cooperator Proportion.** As the slope of the curve defining the benefits of cooperation becomes more convex, cooperators are maintained at higher abundances and for longer. Cooperator presence represents the area under the cooperator proportion curves shown in Figure S6. Solid points indicate the average scaled cooperator presence among replicate populations (open circles), and error bars indicate 95% confidence intervals.](../figures/nonlinear_benefits-integral.png) {#fig:nonlinear_benefits_int}
 
 
 ## Minor Issues
@@ -213,8 +224,8 @@ It now reads as follows:
 A longstanding challenge to evolutionary biology is to understand the mechanisms that support the many instances of cooperation that nevertheless exist.
 Hammarlund et al. recently demonstrated that, in spatially-structured environments, clustered cooperator populations reach greater densities, which creates more mutational opportunities to gain beneficial non-social adaptations.
 Cooperation rises in abundance through hitchhiking with these mutations.
-However, once adaptive opportunities have been exhausted, the ride abruptly ends as cooperators are displaced by adapted defectors. 
-Using an agent-based model, we demonstrate that the selective feedback that is created as populations construct their local niches can maintain cooperation indefinitely.
+However, once adaptive opportunities have been exhausted, the ride abruptly ends as cooperators are displaced by adapted defectors.
+Using an agent-based model, we demonstrate that the selective feedback that is created as populations construct their local niches can maintain cooperation at high proportions, and even allow cooperator invasion in some cases.
 This cooperator success depends specifically on negative niche construction, which acts as a perpetual source of adaptive opportunities.
 As populations adapt, they alter their environment in ways that reveal additional opportunities for adaptation.
 Despite being independent of niche construction in our model, cooperation feeds this cycle.
@@ -328,7 +339,7 @@ We have now added the following information to the Supplement:
 >
 >$$ \text{Pr}\{X_g = x\} = \binom{S}{x} (F_g)^x (1-F_g)^{S-x} $$
 >
->where $x \in {0,1,2,\ldots,S}$. The expected number of individuals of genotype $g$ after selection is:
+>where $x \in \{0,1,2,\ldots,S\}$. The expected number of individuals of genotype $g$ after selection is:
 >
 >$$ E[X_g] = F_g S $$
 >
@@ -393,7 +404,7 @@ The relevant text now reads:
 
 >When negative niche construction is removed (by setting $L=5$, $A=5$; see Box 1, Part C), cooperators are again driven to extinction after an initial lift in abundance (Figure 2C).
 >Here, a fully-adapted type constructs a niche that favors itself.
->When this occurs, a fully-adapted cooperator is at a selective disadvantage against fully-adapted defectors, which do not incur the cost of cooperation."
+>When this occurs, a fully-adapted cooperator is at a selective disadvantage against a fully-adapted defector, which does not incur the cost of cooperation."
 
 
 \smallrule
@@ -441,19 +452,25 @@ For example, 95-99% of the *Vibrio harveyi* residing in the bobtail squid's ligh
 To address the reviewer's concern, we have performed additional simulations in which a wide range of dilution factors were used.
 Our results, shown below, have been added as Supplementary Material.
 Note that dilution affects the amount of growth, and therefore the number of mutational opportunities, experienced during each simulation cycle.
-To compensate, we have rescaled Time in this figure to show cooperator proportions for equivalent numbers of births across dilution treatments.
+To compensate, we have rescaled Time in this Figure @fig:dilution to show cooperator proportions for equivalent numbers of births across dilution treatments.
 
-![**Effect of Subpopulation Dilution.** Each panel shows the proportion of cooperators present for the duration of simulations with different dilution survival probabilities ($\sigma_d$), shown on the right. Because thinning affects the number of offspring produced during each cycle, and hence the number of mutational opportunities to gain adaptations, simulations proceeded until populations had reached $2.8 \times 10^9$ births, which was the average number of births that occurred in simulations with baseline parameter values over 3000 cycles. As the probability of survival increases, defectors pose a greater threat. Here, lines show the trajectories of replicate populations.](../figures/dilution-births.png)
+\renewcommand{\thefigure}{S\arabic{figure}}
+\setcounter{figure}{2}
+
+![**Effect of Subpopulation Dilution.** Each panel shows the proportion of cooperators present for the duration of simulations with different dilution survival probabilities ($\sigma_d$), shown on the right. Because thinning affects the number of offspring produced during each cycle, and hence the number of mutational opportunities to gain adaptations, simulations proceeded until populations had reached $2.8 \times 10^9$ births, which was the average number of births that occurred in simulations with baseline parameter values over 3000 cycles. As the probability of survival increases, defectors pose a greater threat. Here, lines show the trajectories of replicate populations.](../figures/dilution-births.png) {#fig:dilution}
 
 As shown in the Figure, cooperator survival diminishes as more individuals survive the periodic dilution.
 These results confirm the reviewer's prediction that dilution often does favor the cooperative allele and align with previous work (e.g., [Brockhurst (2007)](http://dx.doi.org/10.1371/journal.pone.0000634)).
 
 We have also extended our model to address the negative aspects of increasing subpopulation density.
 As detailed in the Supplementary Material, we added an additional parameter to Equation 4, $\gamma$, to control whether the increases in population size accelerate ($\gamma > 1$) or decelerate ($\gamma < 1$) as cooperators become more abundant.
-The following figure shows how these different forms of density-dependent benefits affect evolutionary trajectories in comparison to our baseline conditions ($\gamma = 1$).
+Figure @fig:nonlinear below shows how these different forms of density-dependent benefits affect evolutionary trajectories in comparison to our baseline conditions ($\gamma = 1$).
 Accelerating benefits tend to dampen oscillations and increase the proportion of cooperators in the replicate populations over time, while decelerating benefits tend to increase the magnitude of oscillations, allowing defectors to dominate.
 
-![**Effect of Non-Linear Cooperative Benefits.** Cooperators rapidly rise in frequency when the benefits have accelerating returns ($\gamma > 1$). When the increases in subpopulation carrying capacity have diminishing returns ($\gamma < 1$), the proportion of cooperators oscillates more frequently, which can allow defectors to fix. Here, each panel shows cooperator proportion for the duration of simulations in which the relationship between cooperation and increases in carrying capacity were varied ($\gamma$, indicated on the right). Lines show the trajectories of replicate populations.](../figures/nonlinear_benefits.png)
+\renewcommand{\thefigure}{S\arabic{figure}}
+\setcounter{figure}{5}
+
+![**Effect of Non-Linear Cooperative Benefits.** Cooperators rapidly rise in frequency when the benefits have accelerating returns ($\gamma > 1$). When the increases in subpopulation carrying capacity have diminishing returns ($\gamma < 1$), the proportion of cooperators oscillates more frequently, which can allow defectors to fix. Here, each panel shows cooperator proportion for the duration of simulations in which the relationship between cooperation and increases in carrying capacity were varied ($\gamma$, indicated on the right). Lines show the trajectories of replicate populations.](../figures/nonlinear_benefits.png) {#fig:nonlinear}
 
 
 \smallrule
@@ -467,11 +484,14 @@ However, to maintain consistency with our earlier model described in the Hammarl
 We believe that doing so allows us to clearly differentiate our results---thus directly highlighting the effects of niche construction---from this previous work.
 
 Additionally, we know that adaptation to the external environment is important in this model.
-As shown in the figure below, cooperation is quickly lost without this fitness component.
+As shown in Figure @fig:nodelta below, cooperation is quickly lost without this fitness component.
 This is likely because the fitness effects of adaptation to the external environment are direct, while the fitness effects associated with niche construction are density dependent.
 The fitness advantage displayed by a type adapted to the environment helps to jump start niche construction and thus the maintenance of cooperation by niche construction.
 
-![**Effect of External Adaptation.** For these simulations, the benefit of adaptation to the external environment was removed ($\delta=0$), and the benefits of adaptation to the constructed environment ($\epsilon$) were either remained at base value (1x) or doubled (2x) as compensation. Here, populations followed similar evolutionary trajectories to those shown in Figure 1A, where populations could not adapt to either the external or the constructed environment.](../figures/nodelta-cooperators-time.png)
+\renewcommand{\thefigure}{R\arabic{figure}}
+\setcounter{figure}{1}
+
+![**Effect of External Adaptation.** For these simulations, the benefit of adaptation to the external environment was removed ($\delta=0$), and the benefits of adaptation to the constructed environment ($\epsilon$) were either remained at base value (1x) or doubled (2x) as compensation. Here, populations followed similar evolutionary trajectories to those shown in Figure 1A, where populations could not adapt to either the external or the constructed environment.](../figures/nodelta-cooperators-time.png) {#fig:nodelta}
 
 It might be possible to achieve this effect without the third term in Equation 2 by introducing adapted types at the onset of simulations and "jump-starting" niche construction and adaptation, but we have not explored this.
 
@@ -543,7 +563,7 @@ This statement was indeed overgeneralized and failed to place our results in the
 We have appended an additional sentence that clarifies that negative niche construction is an important factor in the maintenance of cooperation by the Hankshaw effect and that it does so by creating adaptive opportunities upon which cooperation can hitchhike.
 This now reads:
 
->Specifically, negative niche construction is key for maintaining cooperation by the Hankshaw effect. Here, cooperators escape invasion by hitchhiking along with adaptations to the constructed environment.
+>Specifically, negative niche construction is key for maintaining cooperation by the Hankshaw effect. Here, cooperators prevent defector invasion by hitchhiking along with adaptations to the constructed environment.
 
 
 \smallrule
@@ -581,7 +601,7 @@ Once again, we deeply appreciate time and effort that you and the two reviewers 
 We hope you'll find that this manuscript has improved through our efforts to address these comments.
 Please do not hesitate to contact us if we can clarify any of our responses above.
 
-Thank you for your continued consideration of our manuscript. 
+Thank you for your continued consideration of our manuscript.
 
 
 

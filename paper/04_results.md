@@ -39,13 +39,13 @@ In our model, an adaptation to the constructed environment initiates a new insta
 Under certain conditions, this construction always makes the constructor sub-optimal for the niche it creates.
 This form of negative niche construction occurs when the number of adaptive alleles ($A$) does not divide evenly into the number of adaptive loci ($L$).
 In such a case, any sequence of integers on the circular genome will always contain a break in the sequence; that is, one locus will perpetually have an allele that is not one less than the allele at the next locus (see [Box 1, Part D](#box1)).
-Given this unavoidable mismatch, types will always construct a niche in which selection for a different type is increased.
+Given this unavoidable mismatch, types will always construct a niche in which selection for a different type is enhanced.
 When negative niche construction is removed (by setting $L=5$, $A=5$; see [Box 1, Part C](#box1)), cooperators are again driven to extinction after an initial lift in abundance ([Figure 2C](#fig2)).
 Here, a fully-adapted type constructs a niche that favors itself.
-When this occurs, a fully-adapted cooperator is at a selective disadvantage against fully-adapted defectors, which do not incur the cost of cooperation.
+When this occurs, a fully-adapted cooperator is at a selective disadvantage against a fully-adapted defector, which does not incur the cost of cooperation.
 These results indicate that the type of niche construction matters.
 Specifically, negative niche construction is key for maintaining cooperation by the Hankshaw effect.
-Here, cooperators escape invasion by hitchhiking along with adaptations to the constructed environment.
+Here, cooperators prevent defector invasion by hitchhiking along with adaptations to the constructed environment.
 
 
 ## Selective Feedbacks Limit Defector Invasion
@@ -70,10 +70,10 @@ This allows that type to appear and to spread more quickly in the population.
 ## Negative Niche Construction can Promote Cooperator Invasion
 
 The majority of the results shown above have focused on the maintenance of cooperation.
-Specifically, cooperators have started at---and maintained---reasonably high proportions in the populations.
+Specifically, cooperators have started at---and maintained---reasonably high proportions in their populations.
 In the previous section, we considered cooperator invasion; however, cooperators began in their own single subpopulation without defectors.
 It remains to be seen whether cooperators can invade from extreme rarity.
-In a population in which cooperators are initially absent, can cooperators that arise by mutations increase in frequency?
+In a population in which cooperators are initially absent, can cooperators that arise by mutation increase in frequency?
 With baseline parameters ([Table 1](#tables)), cooperators tend not to invade over 3000 cycles when the initial cooperator proportion is low (see Supplemental Materials).
 However, when the benefits of cooperation are increased ($S_{max}=8000$), cooperators can readily invade and reach high proportions ([Figure 5A](#fig5)).
 Despite this large benefit, cooperator success still depends on the presence of niche construction.

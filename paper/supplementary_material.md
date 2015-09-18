@@ -46,9 +46,9 @@ As cooperators spend more time at high proportions, this *cooperator presence* m
 Figure @fig:initial_coop_prop_int shows that cooperator presence increases as initial cooperator proportions become greater.
 Here, we show the proportion of cooperators after the initial populations are thinned ($\sigma_i$).
 
-![**Effect of Initial Cooperator Proportion.** Each panel shows the proportion of cooperators present in populations initiated with a different initial cooperator proportion ($p_0$). When cooperators are initially absent ($p_0=0$), they arise, but never reach significant abundances under baseline conditions ($N=100$). Cooperation is maintained and dominates in a greater number of replicate populations when the initial cooperator proportion increases ($N=20$ each). Here, lines show the trajectories of replicate populations.](../figures/initial_coop_prop.png) {#fig:initial_coop_prop}
+![**Effect of Initial Cooperator Proportion.** Each panel shows the proportion of cooperators present in populations initiated with a different initial cooperator proportion ($p_0$). When cooperators are initially absent ($p_0=0$), they arise, but never reach significant abundances under baseline conditions (here, 100 replicates shown). Cooperation is maintained and dominates in a greater number of replicate populations when the initial cooperator proportion increases (20 replicates each). Here, lines show the trajectories of replicate populations.](../figures/initial_coop_prop.png) {#fig:initial_coop_prop}
 
-![**The Effect of Initial Cooperator Proportion on Cooperator Presence.** As the proportion of cooperators present in the population after initial thinning increases, the cooperator presence, or the area under the cooperator proportion curve, increases. Open circles represent the cooperator presence in replicate populations ($N=240$). The initial cooperator proportion is the proportion of cooperators present after the population is initialized and thinned. The solid line is a Loess curve fitted to these values with shaded 95% confidence interval.](../figures/initial_coop_prop-integral.png) {#fig:initial_coop_prop_int}
+![**The Effect of Initial Cooperator Proportion on Cooperator Presence.** As the proportion of cooperators present in the population after initial thinning increases, the cooperator presence, or the area under the cooperator proportion curve, increases. Open circles represent the cooperator presence in replicate populations. The initial cooperator proportion is the proportion of cooperators present after the population is initialized and thinned. The solid line is a Loess curve fitted to these values with shaded 95% confidence interval.](../figures/initial_coop_prop-integral.png) {#fig:initial_coop_prop_int}
 
 
 # Effect of Subpopulation Dilution
@@ -87,7 +87,7 @@ While diminishing returns are detrimental to cooperation, accelerating returns t
 
 ![**Effect of Non-Linear Cooperative Benefits.** Cooperators rapidly rise in frequency when the benefits have accelerating returns ($\gamma > 1$). When the increases in subpopulation carrying capacity have diminishing returns ($\gamma < 1$), the proportion of cooperators oscillates more frequently, which can allow defectors to fix. Here, each panel shows cooperator proportion for the duration of simulations in which the relationship between cooperation and increases in carrying capacity were varied ($\gamma$, indicated on the right). Lines show the trajectories of replicate populations.](../figures/nonlinear_benefits.png) {#fig:nonlinear_benefits}
 
-![**Non-Linear Cooperative Benefits and Cooperator Proportion.** As the slope of the curve defining the benefits of cooperation becomes more concave, cooperators are maintained at higher abundances and for longer. Cooperator presence represents the area under the cooperator proportion curves shown in Figure S6. Solid points indicate the average scaled cooperator presence among replicate populations (open circles), and error bars indicate 95% confidence intervals.](../figures/nonlinear_benefits-integral.png) {#fig:nonlinear_benefits_int}
+![**Non-Linear Cooperative Benefits and Cooperator Proportion.** As the slope of the curve defining the benefits of cooperation becomes more convex, cooperators are maintained at higher abundances and for longer. Cooperator presence represents the area under the cooperator proportion curves shown in Figure S6. Solid points indicate the average scaled cooperator presence among replicate populations (open circles), and error bars indicate 95% confidence intervals.](../figures/nonlinear_benefits-integral.png) {#fig:nonlinear_benefits_int}
 
 
 # A Measure of Expected Absolute Fitness within a Subpopulation
@@ -112,7 +112,7 @@ Thus, if $X_g$ is a random variable giving the number of individuals after selec
 
 $$ \text{Pr}\{X_g = x\} = \binom{S}{x} (F_g)^x (1-F_g)^{S-x} $$
 
-where $x \in {0,1,2,\ldots,S}$. The expected number of individuals of genotype $g$ after selection is:
+where $x \in \{0,1,2,\ldots,S\}$. The expected number of individuals of genotype $g$ after selection is:
 
 $$ E[X_g] = F_g S $$
 

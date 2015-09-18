@@ -16,7 +16,7 @@ We use this model to explore how niche construction affects the evolution of coo
 
 Each individual has a haploid genome with $L + 1$ loci, where integers represent different alleles at each locus ([Table 1](#tables) lists all model parameters and their values).
 An allele at the *cooperation locus* (locus zero) determines whether that individual is a cooperator (allele $1$), which carries fitness cost $c$, or a defector (allele $0$).
-The remaining $L$ loci are *adaptive loci*, and are each occupied by a value from the set $\{0, 1, 2, \ldots, A\}$, where $A$ is the number of different alleles possible at each locus.
+The remaining $L$ loci are *adaptive loci*, and are each occupied by a value from the set $\{0, 1, 2, \ldots, A\}$, where $A$ is the number of different adaptive alleles possible at each locus.
 
 Allele $0$ represents a lack of adaptation, while non-zero alleles signify two types of adaptations, both of which increase fitness.
 First, adaptations to the *external environment* confer a fitness benefit $\delta$.
@@ -82,7 +82,7 @@ $$ S(p) = S_{min} + p (S_{max} - S_{min}) $$ {#eq:popsize}
 $S_{min}$ and $S_{max}$ define the sizes reached by all-defector and all-cooperator subpopulations, respectively.
 This benefit affects all individuals equally and accumulates linearly with the proportion of cooperators in the subpopulation.
 We also explore non-linear benefit accumulation in the Supplementary Material.
-Because cooperators improve group productivity (Equation @eq:popsize) but decrease in proportion within mixed groups, this form of cooperation would also qualify as "multi-level altruism" (see Supplementary Material and @kerr2004what).
+Because cooperators improve group productivity (Equation @eq:popsize) but decrease in proportion within mixed groups (Equation @eq:fitness), this form of cooperation would also qualify as "multi-level altruism" (see Supplementary Material and @kerr2004what).
 
 Individuals compete as subpopulations grow.
 Each individual's probability of reproductive success is proportional to its fitness.
@@ -119,8 +119,8 @@ The population is then thinned.
 Each individual survives this bottleneck with probability $\sigma_{i}$.
 Starting from this initial state, simulations then proceed for $T$ cycles, where each discrete cycle consists of subpopulation growth, mutation, migration, and dilution.
 Dilution reduces each subpopulation to support growth in the next cycle.
-Each individual remains after dilution with probability $\sigma_{d}$, regardless of its genotype.
-Dilution remained the same for each of the simulations described, however we further explore its effects in the Supplementary Material.
+Each individual survives dilution with probability $\sigma_{d}$, regardless of its genotype.
+Dilution remains the same for each of the simulations described, however we further explore its effects in the Supplementary Material.
 
 
 ## Simulation Source Code and Software Dependencies
