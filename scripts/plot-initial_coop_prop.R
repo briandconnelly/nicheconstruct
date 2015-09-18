@@ -28,7 +28,8 @@ figXa <- ggplot(data=initpropc,
     geom_line() +
     scale_y_continuous(limits=c(0,1), breaks=c(0,0.5,1)) +
     scale_color_grey(guide=FALSE) +
-    labs(x=label_time, y=label_cooperator_proportion)
+    labs(x=label_time, y=label_cooperator_proportion) +
+    theme(strip.text = element_text(size=rel(1.0), vjust=0.2, face='plain'))
 ggsave(filename='../figures/initial_coop_prop.png', plot=figXa, dpi=figure_dpi)
 
 # png('../figures/initial_coop_prop.png', width=7.22, height=8.18, units='in',

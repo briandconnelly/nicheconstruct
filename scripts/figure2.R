@@ -28,4 +28,3 @@ fig2 <- ggplot(data=fig2data, aes(x=Time, y=CooperatorProportion)) +
     labs(x=label_time, y=label_cooperator_proportion)
 fig2 <- rescale_plot(plot=fig2, ratio=1/0.8)
 ggsave(filename='../figures/Figure2.png', plot=fig2, dpi=figure_dpi)
-ggsave(filename='../figures/Figure2-ba.pdf', plot=fig2)
