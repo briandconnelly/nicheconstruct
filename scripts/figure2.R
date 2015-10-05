@@ -7,9 +7,9 @@ library(ggplot2bdc)
 source('formatting.R')
 
 # Read the data sets
-base_data <- read.csv('../data/L05_A06_1xDelta_1xEpsilon.csv')
-nonc_data <- read.csv('../data/L05_A06_2xDelta_0xEpsilon.csv')
-noneg_data <- read.csv('../data/L05_A05_1xDelta_1xEpsilon.csv')
+base_data <- read.csv('../data/L05_A06_1xDelta_1xEpsilon.csv.bz2')
+nonc_data <- read.csv('../data/L05_A06_2xDelta_0xEpsilon.csv.bz2')
+noneg_data <- read.csv('../data/L05_A05_1xDelta_1xEpsilon.csv.bz2')
 
 # Combine the data sets
 fig2data <- bind_rows(base_data, nonc_data, noneg_data)
