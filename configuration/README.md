@@ -12,7 +12,7 @@ python ncsimulate.py --config other_config.cfg
 
 | File               | Description                                                                            |
 |:-------------------|:---------------------------------------------------------------------------------------|
-| [base.cfg](base.cfg) | Configuration using baseline parameters                                              |
+| [base.cfg](base.cfg) | Configuration with baseline parameters (see [Table 1](../paper/09_tables.md))        |
 | [L00.cfg](L00.cfg) | No opportunities for adaptation ([Figure 1a](../figures/Figure1.png))                  |
 | [L05_A06_1xDelta_0xEpsilon.cfg](L05_A06_1xDelta_0xEpsilon.cfg) | Adaptation to external environment, but no niche construction ([Figure 1b](../figures/Figure1.png)) |
 | [L05_A06_1xDelta_1xEpsilon.cfg](L05_A06_1xDelta_1xEpsilon.cfg) | Adaptation to external and constructed environments ([Figure 1c](../figures/Figure1.png), [Figure 2a](../figures/Figure2.png)) |

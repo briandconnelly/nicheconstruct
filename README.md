@@ -8,6 +8,7 @@
 * [data](data): Result data sets
 * [figures](figures): Figures
 * [model](model): Model source code
+* [paper](paper): Source for the paper
 * [scripts](scripts): Scripts for analyzing and plotting the result data
 
 When relevant, these subdirectories contain more information.
