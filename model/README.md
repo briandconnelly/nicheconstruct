@@ -123,10 +123,10 @@ configuration file, data are written in the `data` directory.
 
 | Data File            | Description                                             | Configuration              | 
 |:---------------------|:--------------------------------------------------------|---------------------------:| 
-| `run_info.txt`       | Information about where and when the simulation was run | Always Created             | 
-| `configuration.cfg`  | A configuration file allowing this run to be reproduced | Always Created             | 
+| `run_info.txt`       | Information about where and when the simulation was run | Always created             | 
+| `configuration.cfg`  | A configuration file allowing this run to be reproduced | Always created             | 
 | `topology.gml`       | The topology of the metapopulation                      | Simulation/export_topology |
-| `metapopulation.csv` | Metapopulation-level information (e.g., fitness)        | MetapopulationLog Section  |
-| `population.csv`     | Population-level information                            | PopulationLog Section      |
+| `metapopulation.csv` | Metapopulation-level information (e.g., fitness)        | MetapopulationLog section  |
+| `population.csv`     | Population-level information                            | PopulationLog section      |
 | `genotypes.csv`      | Dominant genotypes in each population                   | GenotypeLog section        |
 

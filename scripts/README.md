@@ -14,8 +14,8 @@ These scripts are used to analyze the [data](../data) and create the
 These packages can be installed in R using the following commands:
 
 ```r
-install.packages(c('magrittr', 'dplyr', 'ggplot2', 'devtools'))
-devtools::install_github('briandconnelly/ggplot2bdc')
+install.packages(c("magrittr", "dplyr", "ggplot2", "devtools"))
+devtools::install_github("briandconnelly/ggplot2bdc")
 ```
 
 ## Contents
@@ -30,8 +30,7 @@ devtools::install_github('briandconnelly/ggplot2bdc')
 | [plot-initial_coop_prop.R](plot-initial_coop_prop.R) | Create Figures [S1](../figures/initial_coop_prop.png) and [S2](../figures/initial_coop_prop-integral.png) |
 | [plot-dilution.R](plot-dilution.R) | Create Figures [S3](../figures/dilution-births.png) and [S4](../figures/dilution-births-integral.png) |
 | [plot-nonlinear_benefits-gamma.R](plot-nonlinear_benefits-gamma.R) | Create [Figure S5](../figures/nonlinear_benefits-gamma.png) |
-| [plot-nonlinear_benefits.R](plot-nonlinear_benefits.R) | Create Figures [S6](../figures/plot-nonlinear_benefits-gamma.R) and [S7](../figures/plot-nonlinear_benefits-gamma.R) |
-
+| [plot-nonlinear_benefits.R](plot-nonlinear_benefits.R) | Create Figures [S6](../figures/nonlinear_benefits.png) and [S7](../figures/nonlinear_benefits-integral.png) |
 | [plot-defector_invasion_mu.R](plot-defector_invasion_mu.R) | Create [Figure S8](../figures/defector_invasion_mu.png) |
 | [formatting.R](formatting.R) | Define some variables for formatting figures |
 | [figsummary.R](figsummary.R) | Function for calculating bounded confidence intervals |
