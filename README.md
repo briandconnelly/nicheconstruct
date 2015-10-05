@@ -1,6 +1,6 @@
-# Model, Data, and Scripts for *Negative Niche Construction Favors the Evolution of Cooperation*
+# Model, Data, and Analysis for *Negative Niche Construction Favors the Evolution of Cooperation*
 
-[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.16914.svg)](http://dx.doi.org/10.5281/zenodo.16914)
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.31838.svg)](https://dx.doi.org/10.5281/zenodo.31838)
 
 ## Contents
 
