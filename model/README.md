@@ -43,7 +43,7 @@ Run a simluation
 optional arguments:
 -h, --help            show this help message and exit
 --config FILE, -c FILE
-Configuration file to use (default: run.cfg)
+Configuration file to use (default: base.cfg)
 --data_dir DIR, -d DIR
 Directory to store data (default: data)
 --param SECTION NAME VALUE, -p SECTION NAME VALUE
@@ -57,7 +57,7 @@ Set a parameter value
 
 ## Configuring the Model
 
-The parameters for the model are specified in the `run.cfg` file. Alternate
+The parameters for the model are specified in the `base.cfg` file. Alternate
 configuration files can be used with the `--config` argument to
 `ncsimulate.py`:
 
@@ -66,7 +66,7 @@ python ncsimulate.py --config other_config.cfg
 ```
 
 Additionally, parameter values can be set from the command line with the
-`--param` argument. For example, to use the configuration `run.cfg`, but
+`--param` argument. For example, to use the configuration `base.cfg`, but
 set the simulation to run for 10 cycles:
 
 ```sh
@@ -76,7 +76,7 @@ python ncsimulate.py --param Simulation num_cycles 10
 
 ### The Configuration File
 
-By default, the model uses the configuration specified in `run.cfg`. Alternate
+By default, the model uses the configuration specified in `base.cfg`. Alternate
 configuration files can be specified with the `--config` option.
 
 In the configuration file, parameters are separated into sections based on what

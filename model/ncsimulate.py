@@ -19,7 +19,7 @@ from Metapopulation import *
 from misc import *
 from Topology import *
 
-__version__ = '1.0.4'
+__version__ = '1.0.5'
 
 
 def parse_arguments():
@@ -28,7 +28,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser(prog='ncsimulate.py',
                                      description='Run a simluation')
     parser.add_argument('--config', '-c', metavar='FILE', help='Configuration '\
-                        'file to use (default: run.cfg)', default='run.cfg',
+                        'file to use (default: base.cfg)', default='base.cfg',
                         dest='configfile')
     parser.add_argument('--checkconfig', '-C', action='store_true',
                         default=False,
