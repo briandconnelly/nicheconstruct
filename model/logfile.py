@@ -21,6 +21,7 @@ def write_metapop_data(writer, metapop, topology, cycle, config):
         simpson = 0
 
     metapop_data = {'Time': cycle,
+                    'Births': config.num_births,
                     'PopulationSize': metapop.shape[0],
                     'CooperatorProportion': metapop.Coop.mean(),
                     'MinCooperatorFitness': metapop[metapop.Coop==1].Fitness.min(),

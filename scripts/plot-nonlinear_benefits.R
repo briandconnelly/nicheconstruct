@@ -4,7 +4,6 @@ library(dplyr)
 library(magrittr)
 library(ggplot2)
 library(ggplot2bdc)
-library(gtable)
 
 source('figsummary.R')
 source('formatting.R')
@@ -20,7 +19,8 @@ base_data$Shape <- 1.0
 benefitdata <- bind_rows(treatment_data, base_data)
 benefitdata$Replicate <- as.factor(benefitdata$Replicate)
 
-# Make the plot
+
+# Plot the trajectories over time for each replicate
 figXa <- ggplot(data=benefitdata,
                aes(x=Time, y=CooperatorProportion, color=Replicate)) +
     facet_grid(Shape ~ .) +
@@ -33,14 +33,6 @@ figXa <- ggplot(data=benefitdata,
 ggsave(filename='../figures/nonlinear_benefits.png', plot=figXa,
        dpi=figure_dpi)
 
-# png('../figures/nonlinear_benefits.png', width=7.22, height=8.18, units='in',
-#     res=figure_dpi)
-# gA <- gtable_add_grob(ggplotGrob(figXa), textGrob(expression(bold("A")),
-#                                                   gp=gpar(col='black',
-#                                                           fontsize=20),
-#                                                   x=0, hjust=0, vjust=0.5), t=1, l=2)
-# grid.draw(gA)
-# dev.off()
 
 
 # Calculate the "Cooperator Presence", the area under the cooperator curve
@@ -58,13 +50,3 @@ figXb <- rescale_golden(plot=figXb)
 ggsave_golden(filename='../figures/nonlinear_benefits-integral.png', plot=figXb,
               dpi=figure_dpi)
 
-# png('../figures/nonlinear_benefits-integral.png', width=6, height=3.708204,
-#     units='in', res=figure_dpi)
-# gB <- gtable_add_grob(ggplotGrob(figXb), textGrob(expression(bold("B")),
-#                                                   gp=gpar(col='black', fontsize=20),
-#                                                   x=0, hjust=0, vjust=0.5), t=1, l=2)
-# grid.draw(gB)
-# dev.off()
-
-# Inset plot of gamma values
-# figXb + annotation_custom(grob=ggplotGrob(p_gamma %>% remove_titles() %>% remove_ticks()), xmin=0.5, xmax=5, ymin=-0.1, ymax=0.75)

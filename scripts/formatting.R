@@ -1,4 +1,5 @@
-figure_dpi <- 300
+figure_dpi <- 600
+replicate_alpha <- 0.2
 
 label_time <- 'Time'
 label_births <- 'Births'
@@ -13,15 +14,10 @@ label_carrying_capacity <- 'Subpopulation Carrying Capacity'
 label_initial_cooperator_proportion <- 'Initial Cooperator Proportion'
 label_initial_cooperator_proportion_actual <- 'Cooperator Proportion after Initial Thinning'
 
-color_cooperator <- '#729ECE'
-color_defector <- '#ED665D'
-
-ribbon_alpha <- 0.2
-replicate_alpha <- 0.1
 
 theme_negniche <- function()
 {
-    ggplot2bdc::theme_bdc_grey(base_size=12) +
+    ggplot2bdc::theme_bdc_grey(base_size=10) +
         theme(strip.background = element_blank()) +
         theme(strip.text = element_text(size=rel(1.0), vjust=0.2, face='bold'))
 }

@@ -5,7 +5,6 @@ library(magrittr)
 library(ggplot2)
 library(ggplot2bdc)
 
-source('figsummary.R')
 source('formatting.R')
 
 cinvasion <- read.csv('../data/cooperator_invasion.csv.bz2')
@@ -15,7 +14,7 @@ cinvasion$NicheConstructionFeedback <- factor(cinvasion$NicheConstructionFeedbac
 
 facet_labels <- data.frame(Time=0, CooperatorProportion=1,
                            NicheConstructionFeedback=c(TRUE, FALSE),
-                           Label=c('A','B'))
+                           Label=c('(a)','(b)'))
 facet_labels$NicheConstructionFeedback <- factor(facet_labels$NicheConstructionFeedback,
                                                  levels=c(TRUE, FALSE))
 
@@ -25,7 +24,7 @@ fig5 <- ggplot(data=cinvasion,
     geom_hline(aes(yintercept=0.5), linetype='dotted', color='grey70') +
     geom_line() +
     geom_text(data=facet_labels, aes(label=Label), vjust=1.2, hjust=1.2,
-              color='black', fontface='bold') +
+              color='black', fontface='bold', size=4) +
     scale_y_continuous(limits=c(0,1)) +
     scale_color_grey(guide=FALSE) +
     labs(x=label_time, y=label_cooperator_proportion) +

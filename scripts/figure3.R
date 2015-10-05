@@ -18,14 +18,17 @@ c_coop_invade$Treatment <- 'C'
 fig3data <- bind_rows(a_defect_invade_matched, b_defect_invade_block, c_coop_invade)
 fig3data$Replicate <- as.factor(fig3data$Replicate)
 fig3data$Treatment <- factor(fig3data$Treatment, levels=c('A','B','C'),
-                             labels=c('A','B','C'))
+                             labels=c('(a)','(b)','(c)'))
 
 # Make the plot
-fig3 <- ggplot(data=fig3data, aes(x=Time, y=CooperatorProportion)) +
+fig3 <- ggplot(data=fig3data, aes(x=Time, y=CooperatorProportion,
+                                  color=Replicate)) +
     facet_grid(. ~ Treatment, drop=FALSE) +
     geom_hline(aes(yintercept=0.5), linetype='dotted', color='grey70') +
-    geom_line(aes(group=Replicate), alpha=0.08, color=color_cooperator) +
+    geom_line() +
+    scale_color_grey(guide=FALSE) +
     scale_y_continuous(limits=c(0,1)) +
     labs(x=label_time, y=label_cooperator_proportion)
 fig3 <- rescale_plot(plot=fig3, ratio=1/0.8)
 ggsave(filename='../figures/Figure3.png', plot=fig3, dpi=figure_dpi)
+

@@ -205,6 +205,7 @@ def grow(M, config):
         # Get the number of offspring to produce (carrying capacity - current)
         prop_coop = subpop.Coop.mean()**gamma 
         num_offspring = smin + round(prop_coop * (smax - smin)) - len(subpop)
+        config.num_births += int(num_offspring)
 
         # Select the number of offspring to produce for each parent
         parent_num_offspring = multinomial(n=num_offspring,

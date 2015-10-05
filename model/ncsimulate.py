@@ -19,7 +19,7 @@ from Metapopulation import *
 from misc import *
 from Topology import *
 
-__version__ = '1.0.3'
+__version__ = '1.0.4'
 
 
 def parse_arguments():
@@ -161,6 +161,7 @@ def ncsimulate():
     config.filename = os.path.join(config['Simulation']['data_dir'],
                                    'configuration.cfg')
     config.write()
+    config.num_births = 0
 
 
     # Create the log file of metapopulation-level data if enabled
@@ -169,7 +170,7 @@ def ncsimulate():
         log_metapopulation_freq = config['MetapopulationLog']['frequency']
 
         # Config options for logging metapopulation. Name, frequency, etc.
-        fieldnames = ['Time', 'PopulationSize', 'CooperatorProportion',
+        fieldnames = ['Time', 'Births', 'PopulationSize', 'CooperatorProportion',
                       'MinCooperatorFitness', 'MaxCooperatorFitness',
                       'MeanCooperatorFitness', 'MinDefectorFitness',
                       'MaxDefectorFitness', 'MeanDefectorFitness',
@@ -264,6 +265,7 @@ def ncsimulate():
         # Grow the population to carrying capacity, potentially mutating
         # offspring
         metapop = grow(M=metapop, config=config)
+        #print("----- Num births: {nb}".format(nb=config.num_births))
 
         # Migrate individuals among subpopulations
         metapop = migrate(M=metapop, topology=topology,
@@ -280,6 +282,8 @@ def ncsimulate():
         if config['Simulation']['stop_when_empty'] and \
                 metapop.shape[0] == 0:
             break
+        elif config['Simulation']['num_births'] and config.num_births > config['Simulation']['num_births']:
+            break
 
 
     if log_metapopulation:
@@ -289,7 +293,7 @@ def ncsimulate():
         write_population_data(writer=writerp, metapop=metapop,
                               topology=topology, cycle=cycle, config=config)
 
-    rt_string = 'Run Time: {t}'.format(t=datetime.timedelta(seconds=time()-start_time))
+    rt_string = 'Run Time: {t}\n'.format(t=datetime.timedelta(seconds=time()-start_time))
     append_run_information(filename=infofile, string=rt_string)
 
 #-------------------------------------------------------------------------

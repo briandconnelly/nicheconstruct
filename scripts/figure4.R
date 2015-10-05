@@ -39,7 +39,7 @@ fig4 <- ggplot(data=fig4data, aes(x=X, y=Y, color=FullGenotype, fill=FullGenotyp
     scale_fill_manual(guide=FALSE, values=genotype_colors) +
     theme_bdc_lattice_population() +
     theme(strip.background = element_blank()) +
-    theme(strip.text = element_text(size=rel(0.8), vjust=0.2, color='grey30')) +
+    theme(strip.text = element_text(size=rel(1.0), vjust=0.2, color='grey30')) +
     theme(panel.margin = grid::unit(0.25, 'lines')) +
     theme(panel.border = element_rect(fill='transparent', color=NA))
 fig4 <- rescale_square(plot=fig4)

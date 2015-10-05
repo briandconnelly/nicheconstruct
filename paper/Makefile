@@ -44,6 +44,9 @@ response: response_to_reviewers.md
 tex:
 	cat [0-1]*md | pandoc $(FLAGS) -s --output draft_$(FNAME)_$(shell date +'%Y%m%d').tex
 
+supptex:
+	pandoc supplementary_material.md -s --output draft_SUPP.tex
+
 response_tex: response_to_reviewers.md
 	pandoc response_to_reviewers.md -s -H extras.tex $(FLAGS) --output draft_response_$(shell date +'%Y%m%d').tex
 
