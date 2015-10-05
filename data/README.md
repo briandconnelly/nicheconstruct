@@ -10,9 +10,9 @@ Files ending with `.bz2` are compressed with bzip2.
 
 | File Name      | Description                                                |
 |:---------------|:-----------------------------------------------------------|
-| [L00.csv](L00.csv) | Combined data from simulations where no adaptation was possible (see [Figure 1A](../figures/Figure1.png)) |
-| [L05_A06_1xDelta_0xEpsilon.csv](L05_A06_1xDelta_0xEpsilon) | Combined data from simulations where populations could adapt to external environment, but niche construction was not possible (see [Figure 1B](../figures/Figure1.png)) |
-| [L05_A06_1xDelta_1xEpsilon.csv](L05_A06_1xDelta_1xEpsilon) | Combined data from simulations where adaptation to external and constructed environments possible (see Figures [1C](../figures/Figure1.png), [2A](../figures/Figure2.png)) |
+| [L00.csv.bz2](L00.csv.bz2) | Combined data from simulations where no adaptation was possible (see [Figure 1A](../figures/Figure1.png)) |
+| [L05_A06_1xDelta_0xEpsilon.csv.bz2](L05_A06_1xDelta_0xEpsilon.csv.bz2) | Combined data from simulations where populations could adapt to external environment, but niche construction was not possible (see [Figure 1B](../figures/Figure1.png)) |
+| [L05_A06_1xDelta_1xEpsilon.csv.bz2](L05_A06_1xDelta_1xEpsilon.csv.bz2) | Combined data from simulations where adaptation to external and constructed environments possible (see Figures [1C](../figures/Figure1.png), [2A](../figures/Figure2.png)) |
 | [L05_A06_2xDelta_0xEpsilon.csv](L05_A06_2xDelta_0xEpsilon.csv) | Combined data from simulations where the benefits of adaptations to the external environment were doubled, and niche construction was removed (see [Figure 2B](../figures/Figure2.png)) |
 | [L05_A05_1xDelta_1xEpsilon.csv](L05_A05_1xDelta_1xEpsilon.csv) | Combined data from simulations where negative niche construction did not occur (see [Figure 2C](../figures/Figure2.png)) |
 | [defector_invade_matched_nomu.csv.bz2](defector_invade_matched_nomu.csv.bz2) | Combined data from simulations where a rare defector invaded isogenic cooperator population, no mutations ([Figure 3A](../figures/Figure3.png)) |

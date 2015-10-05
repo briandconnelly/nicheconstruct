@@ -7,9 +7,9 @@ library(ggplot2bdc)
 source('formatting.R')
 source('figsummary.R')
 
-fig1A_data <- read.csv('../data/L00.csv')
-fig1B_data <- read.csv('../data/L05_A06_1xDelta_0xEpsilon.csv')
-fig1C_data <- read.csv('../data/L05_A06_1xDelta_1xEpsilon.csv')
+fig1A_data <- read.csv('../data/L00.csv.bz2')
+fig1B_data <- read.csv('../data/L05_A06_1xDelta_0xEpsilon.csv.bz2')
+fig1C_data <- read.csv('../data/L05_A06_1xDelta_1xEpsilon.csv.bz2')
 
 fig1_data <- bind_rows(fig1A_data, fig1B_data, fig1C_data)
 fig1_data$Replicate <- as.factor(fig1_data$Replicate)
