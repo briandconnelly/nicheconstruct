@@ -7,7 +7,7 @@ Each instance of cooperation presents an evolutionary challenge: How can individ
 Over time, we would expect these *defectors* to rise in abundance at the expense of others, eventually driving cooperators---and perhaps the entire population---to extinction.
 
 Several factors can prevent this *tragedy of the commons* [@hamilton1964geneticalboth; @nowak2006five; @west2007evolutionary].
-One such factor involves non-random social interaction, in which cooperators benefit more from the cooperative act than defectors.
+One such factor involves non-random social interaction, in which cooperators benefit more from the cooperative act than do defectors.
 This can occur when cooperators are clustered together in spatially-structured populations [@kudzalfick2011high; @fletcher2009simple; @nadell2010emergence], or when cooperators use communication [@darch2012density; @brown2001cooperation] or other cues [@gardner2010greenbeards; @sinervo2006selfrecognition; @veelders2010structural] to cooperate conditionally with kin.
 Cooperation can also be bolstered by pleiotropic connections to personal benefits [@dandekar2012bacterial; @foster2004pleiotropy] or through association with alleles encoding self-benefitting traits [@asfahl2015nonsocial].
 In the latter case, the associated alleles may provide private benefits that are entirely independent from the public benefits of cooperation.
@@ -29,7 +29,7 @@ Although organisms typically find themselves in dynamic environments, the freque
 Importantly, organisms do more than passively experience changing environments.
 Through their activities, their interactions with others, and even their deaths, organisms continually modify their environment.
 This *niche construction* process can produce evolutionary feedback loops in which environmental modification alters selection, which, in turn, alters the distribution of types and their corresponding influence on the environment [@odling2003niche].
-The nature of this feedback can have dramatic evolutionary consequences.
+This feedback can have dramatic evolutionary consequences.
 One critical distinction is whether the constructing type is favored in the environment that it constructs.
 Under *positive niche construction*, selection favors the constructor, and evolution stagnates as this type fixes.
 Whereas under *negative niche construction*, selection favors a type other than the constructor, which creates an opportunity for novel adaptation.

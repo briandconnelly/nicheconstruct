@@ -3,7 +3,7 @@
 
 Building upon @HANKSHAW, we describe an individual-based model in which cooperators and defectors evolve and compete in a population of subpopulations (i.e., a metapopulation).
 Through mutation, individuals gain adaptations to their environment, which increase reproductive fitness and allow those lineages to rise in abundance.
-These lineages then spread throughout the population by migration to neighboring subpopulations.
+Adapted lineages then spread throughout the population by migration to neighboring subpopulations.
 
 In the expanded model described here, subpopulations also continually modify their local environment.
 These environmental changes feed back to affect selection.
@@ -31,7 +31,7 @@ This constructed "niche" depends on the specific allelic states present in the s
 As allelic states change, the subpopulation alters its environment in new ways, creating a unique niche.
 As described below, the specific alleles at each locus become important.
 
-In our model, the feedback that results from niche construction takes the form of density dependent selection, and individuals evolve to better match their constructed niche.
+In our model, the feedback that results from niche construction takes the form of density dependent selection, and populations evolve to better match the constructed niche.
 We do not represent this niche explicitly, but rather allow the allelic composition of the subpopulation to feed back to affect selection.
 Specifically, the selective value of non-zero allele $a$ at adaptive locus $l$---and consequently the fitness of an individual carrying that allele---increases with the number of individuals in the subpopulation that have allele $a-1$ at locus $l-1$.
 For example, if $L=5$, $A=6$, and allele $4$ has fixed at locus $2$, then selection favors genotypes with allele $5$ at locus $3$.
@@ -108,10 +108,10 @@ For each source subpopulation, a single destination patch is randomly chosen fro
 Because the population lattice has boundaries, patches located on the periphery have smaller neighborhoods.
 Individuals emigrate with probability $m$, which means larger subpopulations produce more emigrants.
 Through immigration, subpopulations can exceed $S_{max}$ individuals.
-As described below, however, this increase in population size is temporary.
+As described below, however, this increase in subpopulation size is temporary.
 
 
-### Population Initialization and Simulation
+### Population Initialization, Dilution, and Simulation Cycle
 
 Following @HANKSHAW, we begin simulations with sparse populations.
 Subpopulations are first seeded at all patches with cooperator proportion $p_{0}$ and size $S(p_{0})$.

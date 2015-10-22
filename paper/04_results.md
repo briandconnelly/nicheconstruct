@@ -27,8 +27,8 @@ We see in [Figure 2A](#fig2) that despite some oscillations, cooperation is main
 
 An individual's fitness is affected in this model by adaptations to both the external environment and to the constructed environment.
 Here, we determine whether cooperation is maintained as we see in [Figure 2A](#fig2) solely due to the larger selective values that result from the contributions of niche construction.
-We performed simulations in which these selective contributions were transferred to supplement the benefits conferred by adaptation to the external, non-constructed environment (i.e., replacing $\epsilon=0.3$, $\delta=0.3$ with $\epsilon=0$, $\delta=0.6$).
-In doing so, we conservatively estimate the selective effects of niche construction.
+We performed simulations in which these selective contributions were transferred to supplement the benefits conferred by adaptation to the external, non-constructed environment (i.e., replacing $S_{max} \times \epsilon=0.3$, $\delta=0.3$ with $\epsilon=0$, $\delta=0.6$).
+In doing so, we liberally estimate the selective effects of niche construction.
 Nevertheless, we find that simply increasing selective values extends the maintenance of cooperation, but does not enable cooperators to persist ([Figure 2B](#fig2)).
 Niche construction, therefore, plays a decisive role here.
 
@@ -59,7 +59,7 @@ In that population, isogenic defectors are seeded at a single patch in an otherw
 These defectors quickly begin to spread.
 However, a neighboring cooperator population gains an adaptation, which increases its fitness above that of the defector.
 This type spreads more quickly, stopping the spread of defectors and eventually driving them to extinction.
-Because this adaption arises in a cooperator population, cooperation is able to hitchhike to safety.
+Because this adaption arises in a cooperator subpopulation, cooperation is able to hitchhike to safety.
 Importantly, this new cooperator type is favored because of the niche that its ancestral type---and therefore also the defector---constructed.
 Here, cooperators can find safety in numbers: because their larger subpopulations have more mutational opportunities, they are more likely to gain adaptations that rescue them from invasion.
 Further, these larger cooperator subpopulations exert greater influence on their niches, which increases selection for an adapted type.
@@ -67,7 +67,7 @@ This allows that type to appear and to spread more quickly in the population.
 [Figure 3C](#fig3) shows how quickly an adapted cooperator type can invade a population of defectors.
 
 
-## Negative Niche Construction can Promote Cooperator Invasion
+## Negative Niche Construction Promotes Cooperator Invasion
 
 The majority of the results shown above have focused on the maintenance of cooperation.
 Specifically, cooperators have started at---and maintained---reasonably high proportions in their populations.

@@ -13,7 +13,7 @@ In our model, niche construction introduces additional selective effects that in
 However, these fitness benefits alone do not maintain cooperation ([Figure 2B](#fig2)).
 Niche construction and the selective feedbacks that it produces play a crucial role.
 
-We find that it is specifically *negative* niche construction that maintains cooperation ([Figure 2C](#fig2)) and even can support invasion by cooperators ([Figure 5A](#fig5)).
+We find that it is specifically *negative* niche construction that maintains cooperation ([Figure 2C](#fig2)) and can even support invasion by cooperators ([Figure 5A](#fig5)).
 As cooperator and defector types gain adaptations, they alter their environment in ways that favor other types.
 Thus, negative niche construction serves as a perpetual source of adaptation.
 Here we observe another facet of the Hankshaw effect: Because subpopulations of cooperators are larger, they are better able to respond to the adaptive opportunities that they create through negative niche construction.
@@ -55,7 +55,7 @@ These increased subpopulation sizes play a critical role by effectively increasi
 Because of the importance of this process, it would be very informative to explore how sensitive our results are to the rate at which cooperators increase subpopulation sizes and the rate at which this benefit decays in the absence of cooperators.
 Similarly, our results could be substantially affected by alterations in the rate at which the constructed environment changes in response to changes in the subpopulation.
 
-Other studies, while not focused on cooperation, have similarly shown that the timescales at which niche construction feedbacks occur can strongly influence evolutionary outcomes [@laland1999evolutionary; @laland1996evolutionary].
+Other studies, while not focused on cooperation, have shown that the timescales at which niche construction feedbacks occur can strongly influence evolutionary outcomes [@laland1999evolutionary; @laland1996evolutionary].
 This perspective may be crucial for understanding the evolution of cooperative behaviors like the production of public goods.
 In these instances, environmental changes are likely to occur on different timescales than growth, which can have profound effects.
 For example, a multitude of factors, including protein durability [@brown2007durability; @kummerli2010molecular], diffusion [@driscoll2010theory; @allison2005cheaters], and resource availability [@zhang2013exploring; @ghoul2014experimental] influence both the rate and the degree to which public goods alter the environment.
@@ -73,7 +73,7 @@ In these instances, the "niche" becomes a biological entity with its own evoluti
 A logical extension to our model would be to treat the environment as an organism.
 Such a model could be used to explore the evolution of cooperation in host-symbiont systems, where cooperation among symbionts affects host fitness.
 As the host population changes, either in response to symbiont cooperation or other factors, so too does selection on their symbiont populations.
-In our model, each patch could become hosts with their own genotypes, and death and reproduction at the host level could be defined in ways that are sensitive to both host and symbiont genotypes.
+In our model, each patch could become a host with its own genotypes, and death and reproduction at the host level could be defined in ways that are sensitive to both host and symbiont genotypes.
 Here, evolutionary outcomes depend greatly on the degree of shared interest between the host and symbiont.
 
 Of particular importance are cases where the interests of host and symbiont are in conflict.
@@ -93,6 +93,6 @@ We have previously shown that a combination of non-social adaptation and populat
 However, this "Hankshaw effect" was transient; without continual opportunities for adaptation (e.g., a changing environment), defectors eventually dominate.
 Here, we explore one source for such continual opportunities: negative niche construction.
 Specifically, the process of adaptation creates opportunities for further adaptation through selective feedback.
-In our model, the active role of the organism is paramount; not only does cooperative behavior make hitchhiking more likely, given adaptive opportunities, but
+In our model, the active role of the organism is paramount; not only does cooperative behavior make hitchhiking more likely given adaptive opportunities, but
 these adaptive opportunities themselves are continually generated through the effects organisms have on their environment.
 
